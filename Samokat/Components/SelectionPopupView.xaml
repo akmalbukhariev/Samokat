@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:Samokat.Components"
+             x:Class="Samokat.Components.SelectionPopupView"
+             x:Name="ThisView"
+             IsVisible="False">
+
+    <Grid BackgroundColor="#66000000">
+
+        <!-- tap outside -->
+        <BoxView BackgroundColor="Transparent">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnBackgroundTapped"/>
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <Border BackgroundColor="White"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 28"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                WidthRequest="{Binding PopupWidth, Source={x:Reference ThisView}}"
+                MaximumHeightRequest="{Binding PopupMaxHeight, Source={x:Reference ThisView}}">
+
+            <ScrollView>
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding ItemsSource, Source={x:Reference ThisView}}"
+                                     Spacing="0">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <components:SelectionPopupItemView
+                                Text="{Binding Text}"
+                                LeftImage="{Binding LeftImage}"
+                                RightImage="{Binding RightImage}">
+                                <components:SelectionPopupItemView.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={x:Reference ThisView}, Path=ItemTappedCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </components:SelectionPopupItemView.GestureRecognizers>
+                            </components:SelectionPopupItemView>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </ScrollView>
+        </Border>
+    </Grid>
+</ContentView>
