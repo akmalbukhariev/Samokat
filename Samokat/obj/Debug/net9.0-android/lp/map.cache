@@ -1,5 +1,8 @@
+CommunityToolkit.Maui.Core.dll
+CommunityToolkit.Maui.dll
 GoogleGson.dll
 Jsr305Binding.dll
+Microsoft.Maui.Controls.Compatibility.dll
 Microsoft.Maui.Controls.dll
 Microsoft.Maui.Controls.Xaml.dll
 Microsoft.Maui.dll
@@ -93,6 +96,7 @@ Xamarin.KotlinX.Coroutines.Core.dll
 Xamarin.KotlinX.Coroutines.Core.Jvm.dll
 Xamarin.KotlinX.Serialization.Core.dll
 Xamarin.KotlinX.Serialization.Core.Jvm.dll
+Xe.AcrylicView.dll
 androidx.versionedparcelable.versionedparcelable.aar
 androidx.tracing.tracing.aar
 androidx.startup.startup-runtime.aar
@@ -154,6 +158,7 @@ androidx.exifinterface.exifinterface.aar
 androidx.browser.browser.aar
 GoogleGson.aar
 Jsr305Binding.aar
+Microsoft.Maui.Controls.Compatibility.aar
 Microsoft.Maui.Controls.aar
 maui.aar
 Microsoft.Maui.aar

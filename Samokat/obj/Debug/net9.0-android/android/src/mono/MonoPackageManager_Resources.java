@@ -3,6 +3,9 @@ public class MonoPackageManager_Resources {
 	public static String[] Assemblies = new String[]{
 		/* We need to ensure that "Samokat.dll" comes first in this list. */
 		"Samokat.dll",
+		"Xe.AcrylicView.dll",
+		"CommunityToolkit.Maui.dll",
+		"CommunityToolkit.Maui.Core.dll",
 		"CommunityToolkit.Mvvm.dll",
 		"GoogleGson.dll",
 		"Microsoft.Extensions.Configuration.dll",
@@ -14,6 +17,7 @@ public class MonoPackageManager_Resources {
 		"Microsoft.Extensions.Logging.Debug.dll",
 		"Microsoft.Extensions.Options.dll",
 		"Microsoft.Extensions.Primitives.dll",
+		"Microsoft.Maui.Controls.Compatibility.dll",
 		"Microsoft.Maui.Controls.dll",
 		"Microsoft.Maui.Controls.Xaml.dll",
 		"Microsoft.Maui.dll",

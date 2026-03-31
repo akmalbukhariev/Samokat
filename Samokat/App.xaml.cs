@@ -1,55 +1,66 @@
 ﻿using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Platform;
+using Samokat.Views.Startup;
 
 namespace Samokat;
 
 public partial class App : Application
 {
-	public App()
-	{
-		InitializeComponent();
-		Setting();
-	}
+    public App()
+    {
+        InitializeComponent();
+        
+        RegisterRoutes();
+        Setting();
+    }
 
 	protected override Window CreateWindow(IActivationState? activationState)
 	{
 		return new Window(new AppShell());
 	}
 
+    private void RegisterRoutes()
+    {
+        #region Startup pages
+        Routing.RegisterRoute(nameof(StartPage), typeof(StartPage));
+        Routing.RegisterRoute(nameof(OnboardingPage), typeof(OnboardingPage));
+        #endregion
+    }
+
 	private void Setting()
-        {
+    {
 #if ANDROID
-            Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>
-            {
-                handler.PlatformView.BackgroundTintList =
-                    Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToPlatform());
-            });
+        Microsoft.Maui.Handlers.EntryHandler.Mapper.AppendToMapping(nameof(Entry), (handler, view) =>
+        {
+            handler.PlatformView.BackgroundTintList =
+                Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToPlatform());
+        });
 
-            Microsoft.Maui.Handlers.PickerHandler.Mapper.AppendToMapping(nameof(Picker), (handler, view) =>
-            {
-                handler.PlatformView.BackgroundTintList =
-                    Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToPlatform());
-            });
+        Microsoft.Maui.Handlers.PickerHandler.Mapper.AppendToMapping(nameof(Picker), (handler, view) =>
+        {
+            handler.PlatformView.BackgroundTintList =
+                Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToPlatform());
+        });
 
-            Microsoft.Maui.Handlers.DatePickerHandler.Mapper.AppendToMapping(nameof(DatePicker), (handler, view) =>
-            {
-                handler.PlatformView.BackgroundTintList =
-                    Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToPlatform());
-            });
+        Microsoft.Maui.Handlers.DatePickerHandler.Mapper.AppendToMapping(nameof(DatePicker), (handler, view) =>
+        {
+            handler.PlatformView.BackgroundTintList =
+                Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToPlatform());
+        });
 
-            Microsoft.Maui.Handlers.TimePickerHandler.Mapper.AppendToMapping(nameof(TimePicker), (handler, view) =>
-            {
-                handler.PlatformView.BackgroundTintList =
-                    Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToPlatform());
-            });
+        Microsoft.Maui.Handlers.TimePickerHandler.Mapper.AppendToMapping(nameof(TimePicker), (handler, view) =>
+        {
+            handler.PlatformView.BackgroundTintList =
+                Android.Content.Res.ColorStateList.ValueOf(Colors.Transparent.ToPlatform());
+        });
 
-            EditorHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
+        EditorHandler.Mapper.AppendToMapping("NoUnderline", (handler, view) =>
+        {
+            if (handler.PlatformView is Android.Widget.EditText editText)
             {
-                if (handler.PlatformView is Android.Widget.EditText editText)
-                {
-                    editText.Background = null; // Removes underline
-                }
-            });
+                editText.Background = null; // Removes underline
+            }
+        });
 #endif
 
 #if IOS
@@ -90,5 +101,5 @@ public partial class App : Application
                 textView.BackgroundColor = UIColor.Clear;
             });
 #endif
-        }
+    }
 }

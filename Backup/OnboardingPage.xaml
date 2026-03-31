@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:models="clr-namespace:Samokat.Models.Startup"
+               xmlns:page="clr-namespace:Samokat.Views"
+               xmlns:components="clr-namespace:Samokat.Components"
+               x:Class="Samokat.Views.Startup.OnboardingPage"
+               BackgroundColor="White"
+               NavigationPage.HasNavigationBar="False">
+
+     
+    <Grid RowDefinitions="Auto,*"
+            Padding="0,10,0,24"
+            RowSpacing="0">
+
+            <!-- Skip -->
+            <Grid Grid.Row="0"
+                Padding="0,10,28,0">
+                <Label x:Name="lbSkip" 
+                       Text="O‘tkazib yuborish"
+                        HorizontalOptions="End"
+                        VerticalOptions="Center"
+                        TextColor="#B7B7BC"
+                        FontSize="16"
+                        FontFamily="{StaticResource FontSFRegular}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSkipTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+            <!-- Carousel -->
+            <CarouselView x:Name="OnboardingCarousel"
+                        Grid.Row="1"
+                        Margin="0,0,0,0"
+                        IndicatorView="PageIndicator"
+                        PositionChanged="OnCarouselPositionChanged">
+
+                <CarouselView.ItemTemplate>
+                    <DataTemplate x:DataType="models:OnboardingSlide">
+                        <Grid Padding="16,0">
+
+                            <Border BackgroundColor="White"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 26"
+                                    Padding="16,18,16,0"
+                                    HeightRequest="640"
+                                    VerticalOptions="Center">
+
+                                <VerticalStackLayout Spacing="16">
+
+                                    <!-- Red inner card -->
+                                    <Border StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 24"
+                                            HeightRequest="420">
+
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0"
+                                                                 EndPoint="1,1">
+                                                <GradientStop Color="#FF4747" Offset="0.0" />
+                                                <GradientStop Color="#FF5C56" Offset="1.0" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+
+                                        <Grid RowDefinitions="Auto,Auto,*"
+                                              Padding="18,22,18,18">
+
+                                            <Image Grid.RowSpan="3"
+                                                    Source="{Binding Image}"
+                                                    HeightRequest="185"
+                                                    WidthRequest="185"
+                                                    Aspect="AspectFit"
+                                                    VerticalOptions="End"
+                                                    HorizontalOptions="End"
+                                                    Margin="0,0,0,0" />
+                                            <Label Text="{Binding Title}"
+                                                    TextColor="White"
+                                                    FontSize="20"
+                                                    FontFamily="{StaticResource FontSFBold}"
+                                                    LineBreakMode="WordWrap"
+                                                    MaxLines="5" />
+
+                                            <Label Grid.Row="1"
+                                                    Margin="0,10,0,0"
+                                                    Text="{Binding BigText}"
+                                                    TextColor="White"
+                                                    FontFamily="{StaticResource FontSFBold}"
+                                                    FontSize="52"
+                                                    LineBreakMode="NoWrap" />
+                                        </Grid>
+                                    </Border>
+
+                                    <!-- Indicator -->
+                                    <IndicatorView x:Name="PageIndicator"
+                                                HorizontalOptions="Center"
+                                                IndicatorColor="#D7D7D7"
+                                                SelectedIndicatorColor="#FF5B52"
+                                                IndicatorSize="9"
+                                                Margin="0,2,0,0" />
+
+                                    <!-- Description -->
+                                    <Label Text="{Binding Description}"
+                                            HorizontalTextAlignment="Center"
+                                            TextColor="#B0B0B5"
+                                            FontFamily="{StaticResource FontSFRegular}"
+                                            FontSize="17"
+                                            LineBreakMode="WordWrap"
+                                            MaxLines="3"
+                                            Margin="8,0,8,0" />
+
+                                    <!-- Start button -->
+                                    <components:CustomActionButton ButtonText="Boshlash"
+                                                                   ButtonBackgroundColor="#FF4B4B"
+                                                                   ButtonTextColor="White"
+                                                                   ButtonImageSource="right.png"
+                                                                   TapCommand="{Binding Source={RelativeSource AncestorType={x:Type page:BasePage}}, Path=BindingContext.StartCommand}"
+                                                                   IsVisible="{Binding ShowStartButton}"
+                                                                   Margin="0,6,0,0" />
+
+                                </VerticalStackLayout>
+                            </Border>
+                        </Grid>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+
+        </Grid>
+     
+</page:BasePage>

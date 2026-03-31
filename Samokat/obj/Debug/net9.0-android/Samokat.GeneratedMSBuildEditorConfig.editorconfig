@@ -35,11 +35,23 @@ build_metadata.AdditionalFiles.ManifestResourceName = Samokat.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/CustomActionButton.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.CustomActionButton.xaml
+build_metadata.AdditionalFiles.TargetPath = Components/CustomActionButton.xaml
+build_metadata.AdditionalFiles.RelativePath = Components/CustomActionButton.xaml
+
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/InputView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.InputView.xaml
 build_metadata.AdditionalFiles.TargetPath = Components/InputView.xaml
 build_metadata.AdditionalFiles.RelativePath = Components/InputView.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/SelectionPopup.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.SelectionPopup.xaml
+build_metadata.AdditionalFiles.TargetPath = Components/SelectionPopup.xaml
+build_metadata.AdditionalFiles.RelativePath = Components/SelectionPopup.xaml
 
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/SelectionPopupItemView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -52,6 +64,12 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.SelectionPopupView.xaml
 build_metadata.AdditionalFiles.TargetPath = Components/SelectionPopupView.xaml
 build_metadata.AdditionalFiles.RelativePath = Components/SelectionPopupView.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/SmsCodePopup.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.SmsCodePopup.xaml
+build_metadata.AdditionalFiles.TargetPath = Components/SmsCodePopup.xaml
+build_metadata.AdditionalFiles.RelativePath = Components/SmsCodePopup.xaml
 
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -70,6 +88,18 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources/Styles/Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources/Styles/Styles.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/LoginRegister/LoginPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.LoginRegister.LoginPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/LoginRegister/LoginPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/LoginRegister/LoginPage.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Startup/OnboardingPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Startup.OnboardingPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/Startup/OnboardingPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/Startup/OnboardingPage.xaml
 
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Startup/StartPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

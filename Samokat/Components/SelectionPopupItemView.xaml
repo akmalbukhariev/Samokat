@@ -22,9 +22,10 @@
             <Label Grid.Column="1"
                    Text="{Binding Text, Source={x:Reference ThisView}}"
                    FontSize="17"
+                   FontFamily="{StaticResource FontSFRegular}"
                    TextColor="{StaticResource InputTextColor}"
                    VerticalTextAlignment="Center"
-                   VerticalOptions="Center" />
+                   VerticalOptions="Center"/>
 
             <Image Grid.Column="2"
                    Source="{Binding RightImage, Source={x:Reference ThisView}}"

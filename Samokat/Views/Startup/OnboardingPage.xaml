@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+               xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+               xmlns:models="clr-namespace:Samokat.Models.Startup"
+               xmlns:page="clr-namespace:Samokat.Views"
+               xmlns:components="clr-namespace:Samokat.Components"
+               x:Class="Samokat.Views.Startup.OnboardingPage"
+               BackgroundColor="White"
+               NavigationPage.HasNavigationBar="False">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*"
+          Padding="0,10,0,24"
+          RowSpacing="0">
+
+        <!-- Skip -->
+            <Grid Grid.Row="0"
+                  Padding="0,10,28,0">
+                <Label x:Name="lbSkip" 
+                       Text="O‘tkazib yuborish"
+                       HorizontalOptions="End"
+                       VerticalOptions="Center"
+                       TextColor="#B7B7BC"
+                       FontSize="16"
+                       FontFamily="{StaticResource FontSFRegular}">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSkipTapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+            </Grid>
+
+        <!-- Card carousel only -->
+        <CarouselView x:Name="OnboardingCarousel"
+                      Grid.Row="1"
+                      Margin="0,28,0,0"
+                      IndicatorView="PageIndicator"
+                      PositionChanged="OnCarouselPositionChanged">
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="models:OnboardingSlide">
+                    <Grid Padding="16,0">
+
+                        <Border StrokeThickness="0"
+                                StrokeShape="RoundRectangle 30"
+                                HeightRequest="450"
+                                VerticalOptions="Center">
+
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0"
+                                                     EndPoint="1,1">
+                                    <GradientStop Color="#FF4747" Offset="0.0" />
+                                    <GradientStop Color="#FF5C56" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+
+                            <Grid RowDefinitions="Auto,Auto,*"
+                                  Padding="18,22,18,18">
+
+                                <Image Grid.RowSpan="3"
+                                        Source="{Binding Image}"
+                                        HeightRequest="185"
+                                        WidthRequest="185"
+                                        Aspect="AspectFit"
+                                        VerticalOptions="End"
+                                        HorizontalOptions="End"
+                                        Margin="0,0,20,0" />
+                                <Label Text="{Binding Title}"
+                                        Margin="10,10,0,0"
+                                        TextColor="White"
+                                        FontSize="20"
+                                        FontFamily="{StaticResource FontSFBold}"
+                                        LineBreakMode="WordWrap"/>
+
+                                <Label Grid.Row="1"
+                                        Margin="10,10,0,0"
+                                        Text="{Binding BigText}"
+                                        TextColor="White"
+                                        FontFamily="{StaticResource FontSFBold}"
+                                        FontSize="52"
+                                        LineBreakMode="NoWrap" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <!-- Custom indicator -->
+        <HorizontalStackLayout x:Name="CustomIndicatorLayout"
+                               Grid.Row="2"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"
+                               Spacing="10"
+                               Margin="0,18,0,0" />
+
+        <!-- Description -->
+        <Label Grid.Row="3"
+               Text="{Binding CurrentDescription}"
+               HorizontalTextAlignment="Center"
+               TextColor="#9C9CA3"
+               FontFamily="{StaticResource FontSFRegular}"
+               FontSize="17"
+               LineBreakMode="WordWrap"
+               MaxLines="3"
+               Margin="38,24,38,0" />
+
+        <!-- Start button -->
+        <components:CustomActionButton Grid.Row="4"
+                                       ButtonText="Boshlash"
+                                       ButtonBackgroundColor="#FF4B4B"
+                                       ButtonTextColor="White"
+                                       ButtonImageSource="right.png"
+                                       TapCommand="{Binding StartCommand}"
+                                       IsVisible="{Binding IsLastSlide}"
+                                       Margin="24,24,24,0"
+                                       VerticalOptions="Start" />
+    </Grid>
+</page:BasePage>

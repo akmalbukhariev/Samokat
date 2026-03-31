@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Samokat.Models;
+using Samokat.Models.Startup;
 
 namespace Samokat.Views.Startup;
 
@@ -15,7 +16,7 @@ public partial class StartPage : BasePage
 
     public ICommand RegionSelectedCommand { get; }
     public ICommand LanguageSelectedCommand { get; }
-    
+    public ICommand ContinueCommand { get; }
 
     public StartPage()
     {
@@ -51,9 +52,12 @@ public partial class StartPage : BasePage
         RegionSelectedCommand = new Command<PopupItemModel>(OnRegionSelected);
         LanguageSelectedCommand = new Command<PopupItemModel>(OnLanguageSelected);
 
+        ContinueCommand = new Command(OnContinue);
+
+        statusBarService.SetStatusBarColor(Colors.White.ToArgbHex(), false);
         BindingContext = this;
     }
-    
+
     private void OnRegionSelected(PopupItemModel item)
     {
         foreach (var region in RegionItems)
@@ -82,5 +86,11 @@ public partial class StartPage : BasePage
     private void OnLanguageTapped(object sender, TappedEventArgs e)
     {
         LanguagePopup.IsVisible = true;
+    }
+    
+    private async void OnContinue()
+    {
+        await AnimateElementScaleDown(btnContinue);
+        await AppNavigatorService.NavigateTo(nameof(OnboardingPage));
     }
 }

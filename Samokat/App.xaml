@@ -5,6 +5,11 @@
              x:Class="Samokat.App">
     <Application.Resources>
         <ResourceDictionary>
+            <x:String x:Key="FontSFRegular">SFRegular</x:String>
+            <x:String x:Key="FontSFMedium">SFMedium</x:String>
+            <x:String x:Key="FontSFBold">SFBold</x:String>
+            <x:String x:Key="FontSansitaOne">SansitaOne</x:String>
+            
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />

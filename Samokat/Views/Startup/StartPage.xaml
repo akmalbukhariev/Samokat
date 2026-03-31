@@ -5,8 +5,8 @@
              xmlns:components="clr-namespace:Samokat.Components"
              x:Class="Samokat.Views.Startup.StartPage">
 
-       <Grid RowDefinitions="*,Auto,20,Auto,40,Auto,*,Auto,20"
-              ColumnDefinitions="30,*,30">
+       <Grid RowDefinitions="*,Auto,30,Auto,40,Auto,*,Auto,50"
+             ColumnDefinitions="30,*,30">
 
               <VerticalStackLayout Grid.Column="1"
                                    Grid.Row="1"
@@ -18,6 +18,7 @@
                             Aspect="AspectFit"/>
                      <Label Text="Samokat.uz"
                             FontSize="36"
+                            FontFamily="{StaticResource FontSansitaOne}"
                             TextColor="Red"
                             HorizontalOptions="Center"/>
               </VerticalStackLayout>
@@ -35,43 +36,44 @@
                                           IsReadOnly="True"
                                           TapCommand="{Binding OpenLanguagePopupCommand}"/>
               </VerticalStackLayout>
-
-              <Button Grid.Column="1"
-                     Grid.Row="5"
-                     Text="Davom etish  >>"
-                     FontSize="18"
-                     CornerRadius="40"
-                     BackgroundColor="#FE4646"
-                     TextColor="White"
-                     HeightRequest="64"/>
+              
+              <components:CustomActionButton x:Name="btnContinue"
+                                             Grid.Column="1"
+                                             Grid.Row="5"
+                                             ButtonText="Davom etish"
+                                             ButtonBackgroundColor="#FF4B4B"
+                                             ButtonTextColor="White"
+                                             ButtonImageSource="right.png"
+                                             TapCommand="{Binding ContinueCommand}" />
 
               <Label Grid.Column="1"
                      Grid.Row="7"
                      Text="v. 0.1.0.2"
+                     FontFamily="{StaticResource FontSFRegular}"
                      FontSize="17"
                      TextColor="#96979B"
                      HorizontalOptions="Center"/>
        
               <components:SelectionPopupView x:Name="RegionPopup"
-                               Grid.Row="0"
-                               Grid.Column="0"
-                               Grid.RowSpan="9"
-                               Grid.ColumnSpan="3"
-                               ItemsSource="{Binding RegionItems}"
-                               ItemTappedCommand="{Binding RegionSelectedCommand}"
-                               IsVisible="False"
-                               PopupWidth="320"
-                               PopupMaxHeight="620" />
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Grid.RowSpan="9"
+                                            Grid.ColumnSpan="3"
+                                            ItemsSource="{Binding RegionItems}"
+                                            ItemTappedCommand="{Binding RegionSelectedCommand}"
+                                            IsVisible="False"
+                                            PopupWidth="320"
+                                            PopupMaxHeight="620"/>
 
               <components:SelectionPopupView x:Name="LanguagePopup"
-                               Grid.Row="0"
-                               Grid.Column="0"
-                               Grid.RowSpan="9"
-                               Grid.ColumnSpan="3"
-                               ItemsSource="{Binding LanguageItems}"
-                               ItemTappedCommand="{Binding LanguageSelectedCommand}"
-                               IsVisible="False"
-                               PopupWidth="320"
-                               PopupMaxHeight="240" />
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Grid.RowSpan="9"
+                                            Grid.ColumnSpan="3"
+                                            ItemsSource="{Binding LanguageItems}"
+                                            ItemTappedCommand="{Binding LanguageSelectedCommand}"
+                                            IsVisible="False"
+                                            PopupWidth="320"
+                                            PopupMaxHeight="240"/>
        </Grid>
 </page:BasePage>

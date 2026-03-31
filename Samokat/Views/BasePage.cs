@@ -2,6 +2,7 @@
 
 using Microsoft.Maui.Controls.PlatformConfiguration;
 using Samokat.Services;
+using Samokat.Services.Interface;
 
 namespace Samokat.Views
 {
@@ -9,11 +10,14 @@ namespace Samokat.Views
     {
         protected CancellationTokenSource? cts;
         protected AppControl appControl;
+        protected IStatusBarService statusBarService;
 
         protected BasePage()
         {
             Shell.SetNavBarIsVisible(this, false);
             Shell.SetTabBarIsVisible(this, false);
+
+            statusBarService = AppService.Get<IStatusBarService>();
         }
 
         protected override void OnAppearing()
