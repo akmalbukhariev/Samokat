@@ -47,6 +47,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.InputVi
 build_metadata.AdditionalFiles.TargetPath = Components/InputView.xaml
 build_metadata.AdditionalFiles.RelativePath = Components/InputView.xaml
 
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/PageHeaderView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.PageHeaderView.xaml
+build_metadata.AdditionalFiles.TargetPath = Components/PageHeaderView.xaml
+build_metadata.AdditionalFiles.RelativePath = Components/PageHeaderView.xaml
+
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/SelectionPopup.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.SelectionPopup.xaml

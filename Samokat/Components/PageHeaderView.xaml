@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Samokat.Components.PageHeaderView"
+    x:Name="this">
+
+    <Grid
+        HeightRequest="32"
+        ColumnDefinitions="32,*,32"
+        VerticalOptions="Start"
+        HorizontalOptions="Fill">
+
+        <ImageButton
+            Grid.Column="0"
+            Source="{Binding BackIcon, Source={x:Reference this}}"
+            Command="{Binding BackCommand, Source={x:Reference this}}"
+            BackgroundColor="Transparent"
+            WidthRequest="24"
+            HeightRequest="24"
+            Padding="0"
+            VerticalOptions="Center"
+            HorizontalOptions="Start" />
+
+        <Label
+            Grid.Column="1"
+            Text="{Binding Title, Source={x:Reference this}}"
+            HorizontalTextAlignment="Center"
+            VerticalTextAlignment="Center"
+            TextColor="#22292F"
+            FontSize="24"
+            FontFamily="SF Pro"
+            CharacterSpacing="0.24"
+            HorizontalOptions="Center"
+            VerticalOptions="Center" />
+
+        <!-- Empty view to keep title centered -->
+        <Grid Grid.Column="2" />
+    </Grid>
+</ContentView>
