@@ -7,8 +7,12 @@ obj/Debug/net9.0-android/resizetizer/r/mipmap-hdpi/appicon_round.png
 obj/Debug/net9.0-android/resizetizer/r/mipmap-hdpi/appicon.png
 obj/Debug/net9.0-android/resizetizer/r/mipmap-hdpi/appicon_background.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/check_gray.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_calendar.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_uncheck.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/onboarding_offer.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_user.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/flag_uz.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_location.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/onboarding_discount.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/back_textbox.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_lock.png
@@ -16,11 +20,13 @@ obj/Debug/net9.0-android/resizetizer/r/drawable/backround_blur.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/onboarding_online.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_phone.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/flag_en.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/left_back.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/logo.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_eye_off.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/flag_ru.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_eye_on.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/onboarding_baby.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_check.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/right.png
 obj/Debug/net9.0-android/resizetizer/r/mipmap-xxxhdpi/appicon_foreground.png
 obj/Debug/net9.0-android/resizetizer/r/mipmap-xxxhdpi/appicon_round.png

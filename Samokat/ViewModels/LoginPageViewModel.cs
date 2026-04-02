@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+using System.Windows.Input;
 
-namespace Samokat.ViewModels;
+namespace Samokat.Views.LoginRegister;
 
 public partial class LoginPageViewModel : ObservableObject
 {
@@ -11,23 +11,46 @@ public partial class LoginPageViewModel : ObservableObject
     [ObservableProperty]
     private string password = string.Empty;
 
-    [RelayCommand]
-    private void Login()
+    public ICommand LoginCommand { get; }
+    public ICommand RegisterCommand { get; }
+    public ICommand GuestLoginCommand { get; }
+    public ICommand ForgotPasswordCommand { get; }
+    public ICommand ConfirmSmsCodeCommand { get; }
+
+    public Action? ShowSmsPopupAction { get; set; }
+    public Action? HideSmsPopupAction { get; set; }
+
+    public LoginPageViewModel()
     {
+        LoginCommand = new Command(async () => await OnLogin());
+        RegisterCommand = new Command(async () => await OnRegister());
+        GuestLoginCommand = new Command(async () => await OnGuestLogin());
+        ForgotPasswordCommand = new Command(async () => await OnForgotPassword());
+        ConfirmSmsCodeCommand = new Command<string>(OnConfirmSmsCode);
     }
 
-    [RelayCommand]
-    private void Register()
+    private async Task OnLogin()
     {
+        ShowSmsPopupAction?.Invoke();
     }
 
-    [RelayCommand]
-    private void GuestLogin()
+    private void OnConfirmSmsCode(string code)
     {
+        HideSmsPopupAction?.Invoke();
     }
 
-    [RelayCommand]
-    private void ForgotPassword()
+    private async Task OnRegister()
     {
+        
+    }
+
+    private async Task OnGuestLogin()
+    {
+         
+    }
+
+    private async Task OnForgotPassword()
+    {
+         
     }
 }

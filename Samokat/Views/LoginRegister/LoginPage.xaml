@@ -48,6 +48,7 @@
                         Title="Telefon raqam"
                         LeftIcon="ic_phone.png"
                         Keyboard="Telephone"
+                        ClearButtonVisibility="WhileEditing"
                         Text="{Binding PhoneNumber}" />
 
                     <components:InputView

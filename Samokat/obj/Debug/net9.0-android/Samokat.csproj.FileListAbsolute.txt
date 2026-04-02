@@ -1137,3 +1137,9 @@
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_lock.png
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_phone.png
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_eye_on.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/left_back.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_calendar.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_location.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_user.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_check.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_uncheck.png

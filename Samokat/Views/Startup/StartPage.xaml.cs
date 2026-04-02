@@ -53,8 +53,7 @@ public partial class StartPage : BasePage
         LanguageSelectedCommand = new Command<PopupItemModel>(OnLanguageSelected);
 
         ContinueCommand = new Command(OnContinue);
-
-        statusBarService.SetStatusBarColor(Colors.White.ToArgbHex(), false);
+        
         BindingContext = this;
     }
 

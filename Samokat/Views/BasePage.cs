@@ -18,6 +18,7 @@ namespace Samokat.Views
             Shell.SetTabBarIsVisible(this, false);
 
             statusBarService = AppService.Get<IStatusBarService>();
+            statusBarService.SetStatusBarColor(Colors.White.ToArgbHex(), false);
         }
 
         protected override void OnAppearing()

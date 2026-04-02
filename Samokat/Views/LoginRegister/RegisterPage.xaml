@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Samokat.Views"
+    xmlns:components="clr-namespace:Samokat.Components"
+    x:Class="Samokat.Views.LoginRegister.RegisterPage"
+    BackgroundColor="White">
+
+    <ScrollView>
+        <VerticalStackLayout
+            Padding="20,20,30,50"
+            Spacing="20">
+
+            <components:PageHeaderView
+                Title="Ro’yxatdan o’tish"
+                BackCommand="{Binding BackCommand}" />
+
+            <Label
+                Text="Ushbu mobil ilovaning imkoniyatlaridan to’liq foydalanish uchun kiritayotgan ma’lumotlaringizni to’g’riligiga e’tibor bering"
+                HorizontalTextAlignment="Center"
+                TextColor="#96979B"
+                FontSize="17"
+                FontFamily="{StaticResource FontSFRegular}"
+                CharacterSpacing="0.17" />
+
+            <components:InputView
+                Title="Ism"
+                LeftIcon="ic_user.png"
+                Text="{Binding FirstName}"
+                ClearButtonVisibility="WhileEditing" />
+
+            <components:InputView
+                Title="Familiya"
+                LeftIcon="ic_user.png"
+                Text="{Binding LastName}"
+                ClearButtonVisibility="WhileEditing" />
+
+            <components:InputView
+                Title="Telefon raqam"
+                LeftIcon="ic_phone.png"
+                Keyboard="Telephone"
+                Text="{Binding PhoneNumber}"
+                ClearButtonVisibility="WhileEditing" />
+
+            <components:InputView
+                Title="Hudud"
+                LeftIcon="ic_location.png"
+                Text="{Binding Region}"
+                ClearButtonVisibility="WhileEditing" />
+
+            <components:InputView
+                Title="Parol"
+                LeftIcon="ic_lock.png"
+                IsPassword="True"
+                EnablePasswordToggle="True"
+                PasswordHideIcon="ic_eye_off.png"
+                PasswordShowIcon="ic_eye_on.png"
+                Text="{Binding Password}" />
+
+            <components:InputView
+                Title="Parol takroriy"
+                LeftIcon="ic_lock.png"
+                IsPassword="True"
+                EnablePasswordToggle="True"
+                PasswordHideIcon="ic_eye_off.png"
+                PasswordShowIcon="ic_eye_on.png"
+                Text="{Binding ConfirmPassword}" />
+
+            <Label
+                Text="Farzandlar haqida ma’lumotlar (ixtiyoriy)"
+                TextColor="#96979B"
+                FontSize="17"
+                FontFamily="{StaticResource FontSFMedium}"
+                CharacterSpacing="0.17"
+                HorizontalOptions="Center" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Padding="20,0">
+                <components:CustomRadioButtonView
+                    Grid.Column="0"
+                    Text="O’g’il"
+                    IsSelected="{Binding IsBoySelected}"
+                    Command="{Binding SelectGenderCommand}"
+                    CommandParameter="boy"
+                    SelectedColor="#21C940"
+                    UnselectedColor="#96979B"
+                    TextColor="#22292F"
+                    FontSize="17"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    HorizontalOptions="Center" />
+
+                <components:CustomRadioButtonView
+                    Grid.Column="1"
+                    Text="Qiz"
+                    IsSelected="{Binding IsGirlSelected}"
+                    Command="{Binding SelectGenderCommand}"
+                    CommandParameter="girl"
+                    SelectedColor="#21C940"
+                    UnselectedColor="#96979B"
+                    TextColor="#22292F"
+                    FontSize="17"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    HorizontalOptions="Center" />
+            </Grid>
+
+            <components:InputView
+                Title="Ismi"
+                LeftIcon="ic_user.png"
+                Text="{Binding ChildFirstName}"
+                ClearButtonVisibility="WhileEditing" />
+
+            <components:InputView
+                Title="Familiyasi"
+                LeftIcon="ic_user.png"
+                Text="{Binding ChildLastName}"
+                ClearButtonVisibility="WhileEditing" />
+
+            <components:InputView
+                Title="Tug’ilgan kuni"
+                LeftIcon="ic_calendar.png"
+                Text="{Binding ChildBirthDate}"
+                ClearButtonVisibility="WhileEditing" />
+
+            <Button
+                Text="+ Qo’shish"
+                TextColor="#FD473C"
+                BackgroundColor="#FFF2F3"
+                CornerRadius="20"
+                HeightRequest="36"
+                FontSize="15"
+                FontFamily="{StaticResource FontSFMedium}"
+                CharacterSpacing="0.15"
+                Command="{Binding AddChildCommand}" />
+
+            <Grid
+                Padding="20,0,0,0"
+                ColumnDefinitions="30,*"
+                ColumnSpacing="12">
+
+                <Image
+                    Grid.Column="0"
+                    WidthRequest="24"
+                    HeightRequest="24"
+                    VerticalOptions="Center">
+
+                    <Image.Triggers>
+                        <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding IsAgreementChecked}"
+                            Value="True">
+                            <Setter Property="Source" Value="ic_check.png" />
+                        </DataTrigger>
+
+                        <DataTrigger
+                            TargetType="Image"
+                            Binding="{Binding IsAgreementChecked}"
+                            Value="False">
+                            <Setter Property="Source" Value="ic_uncheck.png" />
+                        </DataTrigger>
+                    </Image.Triggers>
+                </Image>
+
+                <Label
+                    Grid.Column="1"
+                    Text="Barcha to’ldirilgan ma’lumotlar to’g’riligini kafolatlayman"
+                    TextColor="#22292F"
+                    FontSize="17"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    CharacterSpacing="0.17"
+                    VerticalTextAlignment="Center"
+                    HorizontalOptions="Fill"
+                    LineBreakMode="WordWrap" />
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ToggleAgreementCommand}" />
+                </Grid.GestureRecognizers>
+            </Grid>
+
+            <components:CustomActionButton
+                x:Name="btnRegister"
+                ButtonText="Ro’yxatdan o’tish"
+                ButtonBackgroundColor="#FD473C"
+                ButtonTextColor="White"
+                ButtonImageSource="right.png"
+                TapCommand="{Binding RegisterCommand}" />
+
+            <Label
+                Text="Begonaning ma’lumotlarini kiritish Qonun buzilishi oqibatiga olib kelishi mumkin."
+                HorizontalTextAlignment="Center"
+                TextColor="#96979B"
+                FontSize="17"
+                FontFamily="{StaticResource FontSFRegular}"
+                CharacterSpacing="0.17" />
+
+        </VerticalStackLayout>
+    </ScrollView>
+</page:BasePage>

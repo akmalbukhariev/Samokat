@@ -6,35 +6,38 @@
     x:Name="this">
 
     <Grid
-        HeightRequest="32"
-        ColumnDefinitions="32,*,32"
+        HeightRequest="29"
         VerticalOptions="Start"
         HorizontalOptions="Fill">
 
-        <ImageButton
-            Grid.Column="0"
-            Source="{Binding BackIcon, Source={x:Reference this}}"
-            Command="{Binding BackCommand, Source={x:Reference this}}"
-            BackgroundColor="Transparent"
-            WidthRequest="24"
-            HeightRequest="24"
-            Padding="0"
-            VerticalOptions="Center"
-            HorizontalOptions="Start" />
+        <Grid 
+            WidthRequest="35"
+            HeightRequest="35"
+            VerticalOptions="Center"  
+            HorizontalOptions="Start"
+            Margin="0, 4.44, 0, 0">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1"
+                                      Tapped="Back_Tapped"/>
+            </Grid.GestureRecognizers>
+            <Image x:Name="imBack"
+                    Source="left_back.png"
+                    IsVisible="{Binding ShowBack}"
+                    BackgroundColor="Transparent"
+                    VerticalOptions="Center"
+                    WidthRequest="20"
+                    HeightRequest="20"/>
+        </Grid> 
 
         <Label
-            Grid.Column="1"
             Text="{Binding Title, Source={x:Reference this}}"
             HorizontalTextAlignment="Center"
             VerticalTextAlignment="Center"
             TextColor="#22292F"
             FontSize="24"
-            FontFamily="SF Pro"
+            FontFamily="{StaticResource FontSFMedium}"
             CharacterSpacing="0.24"
             HorizontalOptions="Center"
             VerticalOptions="Center" />
-
-        <!-- Empty view to keep title centered -->
-        <Grid Grid.Column="2" />
     </Grid>
 </ContentView>

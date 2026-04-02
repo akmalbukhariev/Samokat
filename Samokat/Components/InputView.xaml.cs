@@ -145,6 +145,19 @@ public partial class InputView : ContentView
             typeof(InputView),
             ReturnType.Done);
 
+    public static readonly BindableProperty ClearButtonVisibilityProperty =
+    BindableProperty.Create(
+        nameof(ClearButtonVisibility),
+        typeof(ClearButtonVisibility),
+        typeof(InputView),
+        ClearButtonVisibility.Never);
+
+    public ClearButtonVisibility ClearButtonVisibility
+    {
+        get => (ClearButtonVisibility)GetValue(ClearButtonVisibilityProperty);
+        set => SetValue(ClearButtonVisibilityProperty, value);
+    }
+
     public string Title
     {
         get => (string)GetValue(TitleProperty);

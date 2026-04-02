@@ -41,6 +41,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.CustomA
 build_metadata.AdditionalFiles.TargetPath = Components/CustomActionButton.xaml
 build_metadata.AdditionalFiles.RelativePath = Components/CustomActionButton.xaml
 
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/CustomRadioButtonView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.CustomRadioButtonView.xaml
+build_metadata.AdditionalFiles.TargetPath = Components/CustomRadioButtonView.xaml
+build_metadata.AdditionalFiles.RelativePath = Components/CustomRadioButtonView.xaml
+
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/InputView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.InputView.xaml
@@ -95,11 +101,23 @@ build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Resources.Styles.S
 build_metadata.AdditionalFiles.TargetPath = Resources/Styles/Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources/Styles/Styles.xaml
 
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/LoginRegister/ForgotPasswordPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.LoginRegister.ForgotPasswordPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/LoginRegister/ForgotPasswordPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/LoginRegister/ForgotPasswordPage.xaml
+
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/LoginRegister/LoginPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.LoginRegister.LoginPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views/LoginRegister/LoginPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/LoginRegister/LoginPage.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/LoginRegister/RegisterPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.LoginRegister.RegisterPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/LoginRegister/RegisterPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/LoginRegister/RegisterPage.xaml
 
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Startup/OnboardingPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

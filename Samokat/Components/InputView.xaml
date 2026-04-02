@@ -33,7 +33,7 @@
             <Grid
                 Grid.Column="1"
                 ColumnDefinitions="Auto,Auto,*"
-                ColumnSpacing="8"
+                ColumnSpacing="0"
                 VerticalOptions="Center">
 
                 <!-- Title -->
@@ -51,7 +51,7 @@
                     Grid.Column="1"
                     Source="{Binding MiddleImage, Source={x:Reference ThisView}}"
                     HeightRequest="14"
-                    WidthRequest="22"
+                    WidthRequest="20"
                     VerticalOptions="Center"
                     Aspect="AspectFit"
                     Margin="0,0,2,0"
@@ -73,6 +73,7 @@
                     IsPassword="{Binding CurrentIsPassword, Source={x:Reference ThisView}}"
                     Keyboard="{Binding Keyboard, Source={x:Reference ThisView}}"
                     ReturnType="{Binding ReturnType, Source={x:Reference ThisView}}"
+                    ClearButtonVisibility="{Binding ClearButtonVisibility, Source={x:Reference ThisView}}"
                     VerticalOptions="Center"
                     Focused="OnEntryFocused"
                     Unfocused="OnEntryUnfocused"

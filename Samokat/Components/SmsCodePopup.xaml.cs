@@ -80,12 +80,10 @@ public partial class SmsCodePopup : ContentView
         Hide();
     }
 
-    private async void OnConfirmTapped()
+    private void OnConfirmTapped()
     {
         if (_smsCode.Length != 4)
             return;
-
-        await AnimateElementScaleDown(btnConfirmCode);
 
         if (ConfirmCommand?.CanExecute(_smsCode) == true)
             ConfirmCommand.Execute(_smsCode);

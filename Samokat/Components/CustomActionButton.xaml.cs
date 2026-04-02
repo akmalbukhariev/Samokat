@@ -4,6 +4,8 @@ namespace Samokat.Components;
 
 public partial class CustomActionButton : ContentView
 {
+    private bool _isAnimating;
+
     public CustomActionButton()
     {
         InitializeComponent();
@@ -85,5 +87,42 @@ public partial class CustomActionButton : ContentView
     {
         get => GetValue(TapCommandParameterProperty);
         set => SetValue(TapCommandParameterProperty, value);
+    }
+
+    public static readonly BindableProperty EnableTapAnimationProperty =
+        BindableProperty.Create(
+            nameof(EnableTapAnimation),
+            typeof(bool),
+            typeof(CustomActionButton),
+            true);
+
+    public bool EnableTapAnimation
+    {
+        get => (bool)GetValue(EnableTapAnimationProperty);
+        set => SetValue(EnableTapAnimationProperty, value);
+    }
+
+    private async void OnTapped(object sender, TappedEventArgs e)
+    {
+        if (_isAnimating)
+            return;
+
+        if (EnableTapAnimation)
+        {
+            try
+            {
+                _isAnimating = true;
+
+                await RootBorder.ScaleTo(0.96, 100, Easing.CubicOut);
+                await RootBorder.ScaleTo(1.0, 100, Easing.CubicIn);
+            }
+            finally
+            {
+                _isAnimating = false;
+            }
+        }
+
+        if (TapCommand?.CanExecute(TapCommandParameter) == true)
+            TapCommand.Execute(TapCommandParameter);
     }
 }

@@ -5,6 +5,7 @@
              x:Name="ThisView">
 
     <Border
+        x:Name="RootBorder"
         BackgroundColor="{Binding ButtonBackgroundColor, Source={x:Reference ThisView}}"
         StrokeThickness="0"
         HeightRequest="62"
@@ -32,9 +33,7 @@
         </HorizontalStackLayout>
 
         <Border.GestureRecognizers>
-            <TapGestureRecognizer
-                Command="{Binding TapCommand, Source={x:Reference ThisView}}"
-                CommandParameter="{Binding TapCommandParameter, Source={x:Reference ThisView}}" />
+            <TapGestureRecognizer Tapped="OnTapped" />
         </Border.GestureRecognizers>
 
     </Border>

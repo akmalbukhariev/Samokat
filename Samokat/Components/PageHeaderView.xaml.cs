@@ -23,11 +23,10 @@ public partial class PageHeaderView : ContentView
     }
 
     public static readonly BindableProperty BackCommandProperty =
-        BindableProperty.Create(
-            nameof(BackCommand),
-            typeof(ICommand),
-            typeof(PageHeaderView),
-            default(ICommand));
+    BindableProperty.Create(
+        nameof(BackCommand),
+        typeof(ICommand),
+        typeof(PageHeaderView));
 
     public ICommand BackCommand
     {
@@ -35,16 +34,35 @@ public partial class PageHeaderView : ContentView
         set => SetValue(BackCommandProperty, value);
     }
 
-    public static readonly BindableProperty BackIconProperty =
-        BindableProperty.Create(
-            nameof(BackIcon),
-            typeof(string),
-            typeof(PageHeaderView),
-            "back.png");
-
-    public string BackIcon
+    public static readonly BindableProperty ShowBackProperty =
+      BindableProperty.Create(nameof(ShowBack), typeof(bool), typeof(PageHeaderView), true, propertyChanged: OnShowBackChanged);
+    
+    public bool ShowBack
     {
-        get => (string)GetValue(BackIconProperty);
-        set => SetValue(BackIconProperty, value);
+        get => (bool)GetValue(ShowBackProperty);
+        set => SetValue(ShowBackProperty, value);
     }
+    
+    private static void OnShowBackChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var control = (PageHeaderView)bindable;
+        control.imBack.IsVisible = (bool)newValue;
+    }
+
+    private async void Back_Tapped(object sender, TappedEventArgs e)
+    {
+        await AnimateElementScaleDown(imBack);
+
+        if (BackCommand?.CanExecute(null) == true)
+            BackCommand.Execute(null);
+    }
+
+    protected Task AnimateElementScaleDown(VisualElement element)
+        {
+            return Task.Run(async () =>
+            {
+                await element.ScaleTo(0.9, 100, Easing.CubicOut);
+                await element.ScaleTo(1.0, 100, Easing.CubicIn);
+            });
+        }
 }
