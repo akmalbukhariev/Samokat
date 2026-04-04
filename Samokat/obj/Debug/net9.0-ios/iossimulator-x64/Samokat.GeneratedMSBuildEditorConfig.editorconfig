@@ -119,6 +119,48 @@ build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.LoginRegiste
 build_metadata.AdditionalFiles.TargetPath = Views/LoginRegister/RegisterPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/LoginRegister/RegisterPage.xaml
 
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Main/Components/AdBannerView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Main.Components.AdBannerView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/Main/Components/AdBannerView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/Main/Components/AdBannerView.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Main/Components/MainHeaderView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Main.Components.MainHeaderView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/Main/Components/MainHeaderView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/Main/Components/MainHeaderView.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Main/Components/OrderProcessView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Main.Components.OrderProcessView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/Main/Components/OrderProcessView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/Main/Components/OrderProcessView.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Main/Components/ProductItemView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Main.Components.ProductItemView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/Main/Components/ProductItemView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/Main/Components/ProductItemView.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Main/Components/SearchBarView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Main.Components.SearchBarView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/Main/Components/SearchBarView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/Main/Components/SearchBarView.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Main/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Main.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/Main/MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/Main/MainPage.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Main/MenuPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Main.MenuPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/Main/MenuPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/Main/MenuPage.xaml
+
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Startup/OnboardingPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Startup.OnboardingPage.xaml

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Samokat.ViewModels"
+    x:Class="Samokat.Views.Main.Components.AdBannerView"
+    x:DataType="vm:MainPageViewModel">
+
+    <Grid HeightRequest="220">
+        <Border
+            BackgroundColor="#FE4A4A"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 30" />
+
+        <Grid Padding="22,18" ColumnDefinitions="*,Auto">
+            <VerticalStackLayout Spacing="14">
+                <Label
+                    Text="Huggies Elite Soft 1&#10;tagliklari uchun&#10;maxsus chegirma"
+                    FontSize="22"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    LineBreakMode="WordWrap" />
+
+                <Button
+                    Text="Sotib olish"
+                    Command="{Binding BuyNowCommand}"
+                    WidthRequest="140"
+                    HeightRequest="44"
+                    CornerRadius="22"
+                    BackgroundColor="White"
+                    TextColor="#22292F"
+                    FontAttributes="Bold" />
+            </VerticalStackLayout>
+
+            <Image
+                Grid.Column="1"
+                Source="huggies_elite_soft.png"
+                WidthRequest="170"
+                HeightRequest="170"
+                Aspect="AspectFit"
+                VerticalOptions="Center" />
+        </Grid>
+    </Grid>
+</ContentView>

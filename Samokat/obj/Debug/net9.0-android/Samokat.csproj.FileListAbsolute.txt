@@ -1143,3 +1143,12 @@
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_user.png
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_check.png
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_uncheck.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_notification.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_filter.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_serach.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_dot_line.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_empty_circle.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_fill_circle.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_solid_line.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_arrow_down.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_arrow_up.png

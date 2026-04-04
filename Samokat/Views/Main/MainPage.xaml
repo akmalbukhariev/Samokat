@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Samokat.Views"
+    xmlns:components="clr-namespace:Samokat.Views.Main.Components"
+    x:Class="Samokat.Views.Main.MainPage"
+    BackgroundColor="White">
+
+    <Grid 
+        RowDefinitions="Auto,24,Auto,24,Auto,Auto,*"
+        Margin="10,10,10,0">
+        <components:MainHeaderView/>
+        <components:SearchBarView Grid.Row="2"/>
+        <components:OrderProcessView Grid.Row="4" CurrentStep="Preparing"/>
+    </Grid>
+
+</page:BasePage>

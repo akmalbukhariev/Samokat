@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Samokat.Models.Main"
+    x:Class="Samokat.Views.Main.Components.ProductItemView"
+    x:DataType="vm:ProductItemModel"
+    x:Name="ThisView">
+
+    <VerticalStackLayout
+        Spacing="6"
+        Margin="5,0">
+
+        <Grid HeightRequest="260">
+            <Border
+                BackgroundColor="#EEF4F8"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 14" />
+
+            <Image
+                Source="{Binding ProductImage}"
+                Margin="12"
+                Aspect="AspectFit" />
+
+            <Border
+                BackgroundColor="#80FFFFFF"
+                WidthRequest="44"
+                HeightRequest="44"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 22"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                Margin="0,10,10,0">
+
+                <Label
+                    Text="♥"
+                    TextColor="#EB1212"
+                    FontSize="18"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center" />
+            </Border>
+        </Grid>
+
+        <VerticalStackLayout
+            Spacing="5"
+            Padding="4,0,4,0">
+
+            <Label
+                Text="{Binding OldPrice}"
+                FontSize="16"
+                FontAttributes="Bold"
+                TextColor="#FD473C"
+                TextDecorations="Strikethrough" />
+
+            <Border
+                BackgroundColor="#FD473C"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 16"
+                Padding="8,2"
+                HorizontalOptions="Start">
+                <Label
+                    Text="{Binding NewPrice}"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    TextColor="White" />
+            </Border>
+
+            <Label
+                Text="{Binding ProductName}"
+                FontSize="14"
+                TextColor="#22292F"
+                MaxLines="2"
+                LineBreakMode="TailTruncation" />
+
+            <Label
+                Text="{Binding Rating}"
+                FontSize="14"
+                TextColor="#96979B" />
+
+            <Button
+                Text="Ertaga"
+                Command="{Binding Source={x:Reference ThisView}, Path=AddToCartCommand}"
+                CommandParameter="{Binding .}"
+                BackgroundColor="#FFF2F3"
+                TextColor="#FD473C"
+                CornerRadius="18"
+                HeightRequest="36" />
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentView>

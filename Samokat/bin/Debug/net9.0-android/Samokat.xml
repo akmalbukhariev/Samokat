@@ -4,6 +4,24 @@
         <name>Samokat</name>
     </assembly>
     <members>
+        <member name="T:Samokat.Models.Main.ProductItemModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:Samokat.Models.Main.ProductItemModel.ProductImage">
+            <inheritdoc cref="F:Samokat.Models.Main.ProductItemModel.productImage"/>
+        </member>
+        <member name="P:Samokat.Models.Main.ProductItemModel.NewPrice">
+            <inheritdoc cref="F:Samokat.Models.Main.ProductItemModel.newPrice"/>
+        </member>
+        <member name="P:Samokat.Models.Main.ProductItemModel.OldPrice">
+            <inheritdoc cref="F:Samokat.Models.Main.ProductItemModel.oldPrice"/>
+        </member>
+        <member name="P:Samokat.Models.Main.ProductItemModel.ProductName">
+            <inheritdoc cref="F:Samokat.Models.Main.ProductItemModel.productName"/>
+        </member>
+        <member name="P:Samokat.Models.Main.ProductItemModel.Rating">
+            <inheritdoc cref="F:Samokat.Models.Main.ProductItemModel.rating"/>
+        </member>
         <member name="T:Samokat.Models.Startup.PopupItemModel">
             <inheritdoc/>
         </member>
@@ -16,16 +34,28 @@
         <member name="P:Samokat.Models.Startup.PopupItemModel.RightImage">
             <inheritdoc cref="F:Samokat.Models.Startup.PopupItemModel.rightImage"/>
         </member>
-        <member name="T:Samokat.Views.LoginRegister.LoginPageViewModel">
+        <member name="T:Samokat.ViewModels.LoginPageViewModel">
             <inheritdoc/>
         </member>
-        <member name="P:Samokat.Views.LoginRegister.LoginPageViewModel.PhoneNumber">
-            <inheritdoc cref="F:Samokat.Views.LoginRegister.LoginPageViewModel.phoneNumber"/>
+        <member name="P:Samokat.ViewModels.LoginPageViewModel.PhoneNumber">
+            <inheritdoc cref="F:Samokat.ViewModels.LoginPageViewModel.phoneNumber"/>
         </member>
-        <member name="P:Samokat.Views.LoginRegister.LoginPageViewModel.Password">
-            <inheritdoc cref="F:Samokat.Views.LoginRegister.LoginPageViewModel.password"/>
+        <member name="P:Samokat.ViewModels.LoginPageViewModel.Password">
+            <inheritdoc cref="F:Samokat.ViewModels.LoginPageViewModel.password"/>
         </member>
-        <member name="T:Samokat.ViewModels.LoginRegister.RegisterPageViewModel">
+        <member name="T:Samokat.ViewModels.MainPageViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:Samokat.ViewModels.MainPageViewModel.NotificationTapCommand">
+            <inheritdoc cref="F:Samokat.ViewModels.MainPageViewModel.notificationTapCommand"/>
+        </member>
+        <member name="P:Samokat.ViewModels.MainPageViewModel.BuyNowCommand">
+            <inheritdoc cref="F:Samokat.ViewModels.MainPageViewModel.buyNowCommand"/>
+        </member>
+        <member name="P:Samokat.ViewModels.MainPageViewModel.MenuCommand">
+            <inheritdoc cref="F:Samokat.ViewModels.MainPageViewModel.menuCommand"/>
+        </member>
+        <member name="T:Samokat.ViewModels.RegisterPageViewModel">
             <inheritdoc/>
             <inheritdoc/>
             <inheritdoc/>
@@ -33,71 +63,71 @@
             <inheritdoc/>
             <inheritdoc/>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.FirstName">
-            <inheritdoc cref="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.firstName"/>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.FirstName">
+            <inheritdoc cref="F:Samokat.ViewModels.RegisterPageViewModel.firstName"/>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.LastName">
-            <inheritdoc cref="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.lastName"/>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.LastName">
+            <inheritdoc cref="F:Samokat.ViewModels.RegisterPageViewModel.lastName"/>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.PhoneNumber">
-            <inheritdoc cref="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.phoneNumber"/>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.PhoneNumber">
+            <inheritdoc cref="F:Samokat.ViewModels.RegisterPageViewModel.phoneNumber"/>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.Region">
-            <inheritdoc cref="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.region"/>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.Region">
+            <inheritdoc cref="F:Samokat.ViewModels.RegisterPageViewModel.region"/>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.Password">
-            <inheritdoc cref="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.password"/>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.Password">
+            <inheritdoc cref="F:Samokat.ViewModels.RegisterPageViewModel.password"/>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.ConfirmPassword">
-            <inheritdoc cref="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.confirmPassword"/>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.ConfirmPassword">
+            <inheritdoc cref="F:Samokat.ViewModels.RegisterPageViewModel.confirmPassword"/>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.ChildFirstName">
-            <inheritdoc cref="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.childFirstName"/>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.ChildFirstName">
+            <inheritdoc cref="F:Samokat.ViewModels.RegisterPageViewModel.childFirstName"/>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.ChildLastName">
-            <inheritdoc cref="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.childLastName"/>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.ChildLastName">
+            <inheritdoc cref="F:Samokat.ViewModels.RegisterPageViewModel.childLastName"/>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.ChildBirthDate">
-            <inheritdoc cref="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.childBirthDate"/>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.ChildBirthDate">
+            <inheritdoc cref="F:Samokat.ViewModels.RegisterPageViewModel.childBirthDate"/>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.IsBoySelected">
-            <inheritdoc cref="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.isBoySelected"/>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.IsBoySelected">
+            <inheritdoc cref="F:Samokat.ViewModels.RegisterPageViewModel.isBoySelected"/>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.IsGirlSelected">
-            <inheritdoc cref="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.isGirlSelected"/>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.IsGirlSelected">
+            <inheritdoc cref="F:Samokat.ViewModels.RegisterPageViewModel.isGirlSelected"/>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.IsAgreementChecked">
-            <inheritdoc cref="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.isAgreementChecked"/>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.IsAgreementChecked">
+            <inheritdoc cref="F:Samokat.ViewModels.RegisterPageViewModel.isAgreementChecked"/>
         </member>
-        <member name="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.backCommand">
-            <summary>The backing field for <see cref="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.BackCommand"/>.</summary>
+        <member name="F:Samokat.ViewModels.RegisterPageViewModel.backCommand">
+            <summary>The backing field for <see cref="P:Samokat.ViewModels.RegisterPageViewModel.BackCommand"/>.</summary>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.BackCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.Back"/>.</summary>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.BackCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:Samokat.ViewModels.RegisterPageViewModel.Back"/>.</summary>
         </member>
-        <member name="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.selectGenderCommand">
-            <summary>The backing field for <see cref="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.SelectGenderCommand"/>.</summary>
+        <member name="F:Samokat.ViewModels.RegisterPageViewModel.selectGenderCommand">
+            <summary>The backing field for <see cref="P:Samokat.ViewModels.RegisterPageViewModel.SelectGenderCommand"/>.</summary>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.SelectGenderCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.SelectGender(System.String)"/>.</summary>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.SelectGenderCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:Samokat.ViewModels.RegisterPageViewModel.SelectGender(System.String)"/>.</summary>
         </member>
-        <member name="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.addChildCommand">
-            <summary>The backing field for <see cref="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.AddChildCommand"/>.</summary>
+        <member name="F:Samokat.ViewModels.RegisterPageViewModel.addChildCommand">
+            <summary>The backing field for <see cref="P:Samokat.ViewModels.RegisterPageViewModel.AddChildCommand"/>.</summary>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.AddChildCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.AddChild"/>.</summary>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.AddChildCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:Samokat.ViewModels.RegisterPageViewModel.AddChild"/>.</summary>
         </member>
-        <member name="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.registerCommand">
-            <summary>The backing field for <see cref="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.RegisterCommand"/>.</summary>
+        <member name="F:Samokat.ViewModels.RegisterPageViewModel.registerCommand">
+            <summary>The backing field for <see cref="P:Samokat.ViewModels.RegisterPageViewModel.RegisterCommand"/>.</summary>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.RegisterCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.Register"/>.</summary>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.RegisterCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:Samokat.ViewModels.RegisterPageViewModel.Register"/>.</summary>
         </member>
-        <member name="F:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.toggleAgreementCommand">
-            <summary>The backing field for <see cref="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.ToggleAgreementCommand"/>.</summary>
+        <member name="F:Samokat.ViewModels.RegisterPageViewModel.toggleAgreementCommand">
+            <summary>The backing field for <see cref="P:Samokat.ViewModels.RegisterPageViewModel.ToggleAgreementCommand"/>.</summary>
         </member>
-        <member name="P:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.ToggleAgreementCommand">
-            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:Samokat.ViewModels.LoginRegister.RegisterPageViewModel.ToggleAgreement"/>.</summary>
+        <member name="P:Samokat.ViewModels.RegisterPageViewModel.ToggleAgreementCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:Samokat.ViewModels.RegisterPageViewModel.ToggleAgreement"/>.</summary>
         </member>
         <member name="T:Samokat.Resource">
             <summary>
@@ -231,6 +261,21 @@
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ProductImage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ProductImage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NewPrice">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NewPrice" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.OldPrice">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "OldPrice" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ProductName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ProductName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Rating">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Rating" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Text">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Text" generated properties.</summary>
         </member>
@@ -245,6 +290,15 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Password">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Password" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.NotificationTapCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "NotificationTapCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.BuyNowCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "BuyNowCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MenuCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MenuCommand" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.FirstName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "FirstName" generated properties.</summary>
@@ -282,6 +336,21 @@
             for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
             </summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ProductImage">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ProductImage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NewPrice">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NewPrice" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.OldPrice">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "OldPrice" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ProductName">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ProductName" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Rating">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Rating" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Text">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Text" generated properties.</summary>
         </member>
@@ -296,6 +365,15 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Password">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Password" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.NotificationTapCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "NotificationTapCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.BuyNowCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "BuyNowCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MenuCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MenuCommand" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.FirstName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "FirstName" generated properties.</summary>

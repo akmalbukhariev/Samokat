@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:vm="clr-namespace:Samokat.ViewModels"
+    x:Class="Samokat.Views.Main.Components.MainHeaderView"
+    x:DataType="vm:MainPageViewModel">
+
+    <Grid
+        ColumnDefinitions="Auto,*,Auto"
+        VerticalOptions="Center">
+
+        <!-- Location icon -->
+        <Image
+            Grid.Column="0"
+            Source="ic_location.png"
+            WidthRequest="28"
+            HeightRequest="28"
+            VerticalOptions="Center"
+            HorizontalOptions="Start" />
+
+        <!-- Text section -->
+        <VerticalStackLayout
+            Grid.Column="1"
+            Margin="10,0,0,0"
+            Spacing="-2"
+            VerticalOptions="Center">
+
+            <Label
+                Text="Hudud"
+                FontSize="14"
+                FontFamily="{StaticResource FontSFMedium}"
+                TextColor="#96979B"
+                LineBreakMode="TailTruncation" />
+
+            <Label
+                Text="Qashqadaryo"
+                FontSize="18"
+                FontFamily="{StaticResource FontSFMedium}"
+                TextColor="#1B2735"
+                LineBreakMode="TailTruncation" />
+        </VerticalStackLayout>
+
+        <!-- Notification clickable area -->
+        <Grid
+            Grid.Column="2"
+            WidthRequest="58"
+            HeightRequest="58"
+            HorizontalOptions="End"
+            VerticalOptions="Center">
+
+            <Border
+                BackgroundColor="#F8EEEE"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 29" />
+
+            <ImageButton
+                Source="ic_notification.png"
+                WidthRequest="24"
+                HeightRequest="24"
+                BackgroundColor="Transparent"
+                Padding="0"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                Command="{Binding NotificationTapCommand}" />
+
+            <!-- Badge -->
+            <Border
+                WidthRequest="24"
+                HeightRequest="24"
+                BackgroundColor="#8DBB1E"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 12"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                TranslationX="4"
+                TranslationY="-4">
+
+                <Label
+                    Text="2"
+                    FontSize="13"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center" />
+            </Border>
+        </Grid>
+    </Grid>
+</ContentView>

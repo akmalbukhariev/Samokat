@@ -26,8 +26,8 @@
 
             <Image
                 Source="{Binding ButtonImageSource, Source={x:Reference ThisView}}"
-                HeightRequest="12"
-                WidthRequest="14"
+                HeightRequest="24"
+                WidthRequest="24"
                 VerticalOptions="Center" />
 
         </HorizontalStackLayout>

@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 
-namespace Samokat.ViewModels.LoginRegister;
+namespace Samokat.ViewModels;
 
 public partial class RegisterPageViewModel : ObservableObject
 {

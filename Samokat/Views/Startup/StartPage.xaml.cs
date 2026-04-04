@@ -89,7 +89,6 @@ public partial class StartPage : BasePage
     
     private async void OnContinue()
     {
-        await AnimateElementScaleDown(btnContinue);
         await AppNavigatorService.NavigateTo(nameof(OnboardingPage));
     }
 }

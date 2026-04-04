@@ -1,4 +1,4 @@
-using Samokat.ViewModels.LoginRegister;
+using Samokat.ViewModels;
 
 namespace Samokat.Views.LoginRegister;
 
