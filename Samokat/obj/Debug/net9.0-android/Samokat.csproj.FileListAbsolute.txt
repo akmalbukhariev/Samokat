@@ -1152,3 +1152,12 @@
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_solid_line.png
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_arrow_down.png
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_arrow_up.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/huggiest.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/product_1.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/product_2.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/lightning.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/liked.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/star.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/unliked.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/user_green.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/user_white.png

@@ -131,6 +131,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Main.Compone
 build_metadata.AdditionalFiles.TargetPath = Views/Main/Components/MainHeaderView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/Main/Components/MainHeaderView.xaml
 
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Main/Components/MainProductCardView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Main.Components.MainProductCardView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/Main/Components/MainProductCardView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/Main/Components/MainProductCardView.xaml
+
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Main/Components/OrderProcessView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Main.Components.OrderProcessView.xaml

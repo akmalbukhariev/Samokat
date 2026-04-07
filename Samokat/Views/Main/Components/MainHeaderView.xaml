@@ -47,7 +47,8 @@
             WidthRequest="58"
             HeightRequest="58"
             HorizontalOptions="End"
-            VerticalOptions="Center">
+            VerticalOptions="Center"
+            Margin="0,0,5,0">
 
             <Border
                 BackgroundColor="#F8EEEE"
@@ -73,16 +74,17 @@
                 StrokeShape="RoundRectangle 12"
                 HorizontalOptions="End"
                 VerticalOptions="Start"
+                Margin="0,5,5,0"
                 TranslationX="4"
                 TranslationY="-4">
 
                 <Label
                     Text="2"
-                    FontSize="13"
-                    FontAttributes="Bold"
+                    FontSize="11"
+                    FontFamily="{StaticResource FontSFBold}"
                     TextColor="White"
                     HorizontalTextAlignment="Center"
-                    VerticalTextAlignment="Center" />
+                    VerticalTextAlignment="Center"/>
             </Border>
         </Grid>
     </Grid>
