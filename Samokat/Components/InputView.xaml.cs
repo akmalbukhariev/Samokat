@@ -36,6 +36,18 @@ public partial class InputView : ContentView
         set => SetValue(CompletedCommandProperty, value);
     }
 
+    public static readonly BindableProperty RightIconCommandProperty =
+    BindableProperty.Create(
+        nameof(RightIconCommand),
+        typeof(ICommand),
+        typeof(InputView));
+
+    public ICommand RightIconCommand
+    {
+        get => (ICommand)GetValue(RightIconCommandProperty);
+        set => SetValue(RightIconCommandProperty, value);
+    }
+
     public static readonly BindableProperty TitleProperty =
         BindableProperty.Create(
             nameof(Title),
@@ -151,6 +163,32 @@ public partial class InputView : ContentView
         typeof(ClearButtonVisibility),
         typeof(InputView),
         ClearButtonVisibility.Never);
+
+    public static readonly BindableProperty LeftIconSizeProperty =
+    BindableProperty.Create(
+        nameof(LeftIconSize),
+        typeof(double),
+        typeof(InputView),
+        28.0);
+
+    public double LeftIconSize
+    {
+        get => (double)GetValue(LeftIconSizeProperty);
+        set => SetValue(LeftIconSizeProperty, value);
+    }
+
+    public static readonly BindableProperty RightIconSizeProperty =
+        BindableProperty.Create(
+            nameof(RightIconSize),
+            typeof(double),
+            typeof(InputView),
+            24.0);
+
+    public double RightIconSize
+    {
+        get => (double)GetValue(RightIconSizeProperty);
+        set => SetValue(RightIconSizeProperty, value);
+    }
 
     public ClearButtonVisibility ClearButtonVisibility
     {
@@ -324,8 +362,15 @@ public partial class InputView : ContentView
             TapCommand.Execute(null);
     }
 
-    private void OnRightIconTapped(object sender, TappedEventArgs e)
+    private async void OnRightIconTapped(object sender, TappedEventArgs e)
     {
+        if (sender is Image img)
+        {
+            await img.ScaleTo(0.96, 100, Easing.CubicOut);
+            await img.ScaleTo(1.0, 100, Easing.CubicIn);
+        }
+
+        // 1. Internal behavior (password toggle)
         if (EnablePasswordToggle && IsPassword)
         {
             _isPasswordHidden = !_isPasswordHidden;
@@ -334,12 +379,20 @@ public partial class InputView : ContentView
 
             if (!IsReadOnly)
                 PART_Entry.Focus();
+        }
 
+        // 2. Specific command for right icon
+        if (RightIconCommand?.CanExecute(null) == true)
+        {
+            RightIconCommand.Execute(null);
             return;
         }
 
+        // 3. Fallback (optional but useful)
         if (TapCommand?.CanExecute(null) == true)
+        {
             TapCommand.Execute(null);
+        }
     }
 
     private void OnEntryFocused(object sender, FocusEventArgs e)

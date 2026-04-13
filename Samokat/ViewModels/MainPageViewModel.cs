@@ -9,7 +9,7 @@ public partial class MainPageViewModel : ObservableObject
 {
     [ObservableProperty] private ICommand notificationTapCommand;
     [ObservableProperty] private ICommand buyNowCommand;
-    [ObservableProperty] private ICommand menuCommand;
+    [ObservableProperty] private ICommand menuCommand; 
     [ObservableProperty] private ObservableCollection<AdBannerItem> adBanners;
     [ObservableProperty] private ICommand purchaseBannerCommand;
     [ObservableProperty] private ObservableCollection<MainProductCardItem> products;

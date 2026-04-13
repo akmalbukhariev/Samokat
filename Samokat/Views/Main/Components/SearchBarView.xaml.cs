@@ -6,4 +6,9 @@ public partial class SearchBarView : ContentView
     {
         InitializeComponent();
     }
+
+    private void LeftMenu_Clicked(object sender, EventArgs e)
+    {
+        
+    }
 }

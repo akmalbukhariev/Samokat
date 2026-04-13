@@ -67,6 +67,41 @@
         <member name="P:Samokat.Models.Main.ProductItemModel.Rating">
             <inheritdoc cref="F:Samokat.Models.Main.ProductItemModel.rating"/>
         </member>
+        <member name="T:Samokat.Models.Menu.MenuCategoryModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:Samokat.Models.Menu.MenuCategoryModel.Title">
+            <inheritdoc cref="F:Samokat.Models.Menu.MenuCategoryModel.title"/>
+        </member>
+        <member name="P:Samokat.Models.Menu.MenuCategoryModel.Icon">
+            <inheritdoc cref="F:Samokat.Models.Menu.MenuCategoryModel.icon"/>
+        </member>
+        <member name="P:Samokat.Models.Menu.MenuCategoryModel.IsExpanded">
+            <inheritdoc cref="F:Samokat.Models.Menu.MenuCategoryModel.isExpanded"/>
+        </member>
+        <member name="M:Samokat.Models.Menu.MenuCategoryModel.OnIsExpandedChanged(System.Boolean)">
+            <summary>Executes the logic for when <see cref="P:Samokat.Models.Menu.MenuCategoryModel.IsExpanded"/> just changed.</summary>
+            <param name="value">The new property value that was set.</param>
+            <remarks>This method is invoked right after the value of <see cref="P:Samokat.Models.Menu.MenuCategoryModel.IsExpanded"/> is changed.</remarks>
+        </member>
+        <member name="T:Samokat.Models.Menu.MenuSubItemModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:Samokat.Models.Menu.MenuSubItemModel.Title">
+            <inheritdoc cref="F:Samokat.Models.Menu.MenuSubItemModel.title"/>
+        </member>
+        <member name="P:Samokat.Models.Menu.MenuSubItemModel.IsSelected">
+            <inheritdoc cref="F:Samokat.Models.Menu.MenuSubItemModel.isSelected"/>
+        </member>
+        <member name="T:Samokat.Models.ProductImageDetailInfo">
+            <inheritdoc/>
+        </member>
+        <member name="P:Samokat.Models.ProductImageDetailInfo.Image">
+            <inheritdoc cref="F:Samokat.Models.ProductImageDetailInfo.image"/>
+        </member>
+        <member name="P:Samokat.Models.ProductImageDetailInfo.IsSelected">
+            <inheritdoc cref="F:Samokat.Models.ProductImageDetailInfo.isSelected"/>
+        </member>
         <member name="T:Samokat.Models.Startup.PopupItemModel">
             <inheritdoc/>
         </member>
@@ -78,6 +113,51 @@
         </member>
         <member name="P:Samokat.Models.Startup.PopupItemModel.RightImage">
             <inheritdoc cref="F:Samokat.Models.Startup.PopupItemModel.rightImage"/>
+        </member>
+        <member name="T:Samokat.ViewModels.DetailProductPageViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.SimilarProducts">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.similarProducts"/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.ProductImages">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.productImages"/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.CurrentImageIndex">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.currentImageIndex"/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.ProductTitle">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.productTitle"/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.StockText">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.stockText"/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.Rating">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.rating"/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.ReviewText">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.reviewText"/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.SubscriptionPrice">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.subscriptionPrice"/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.RegularPrice">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.regularPrice"/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.DeliveryLabel">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.deliveryLabel"/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.SubscriptionDeliveryText">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.subscriptionDeliveryText"/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.RegularDeliveryText">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.regularDeliveryText"/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.Description">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.description"/>
+        </member>
+        <member name="P:Samokat.ViewModels.DetailProductPageViewModel.Quantity">
+            <inheritdoc cref="F:Samokat.ViewModels.DetailProductPageViewModel.quantity"/>
         </member>
         <member name="T:Samokat.ViewModels.LoginPageViewModel">
             <inheritdoc/>
@@ -108,6 +188,26 @@
         </member>
         <member name="P:Samokat.ViewModels.MainPageViewModel.Products">
             <inheritdoc cref="F:Samokat.ViewModels.MainPageViewModel.products"/>
+        </member>
+        <member name="T:Samokat.ViewModels.MenuPageViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:Samokat.ViewModels.MenuPageViewModel.Categories">
+            <inheritdoc cref="F:Samokat.ViewModels.MenuPageViewModel.categories"/>
+        </member>
+        <member name="F:Samokat.ViewModels.MenuPageViewModel.toggleCategoryCommand">
+            <summary>The backing field for <see cref="P:Samokat.ViewModels.MenuPageViewModel.ToggleCategoryCommand"/>.</summary>
+        </member>
+        <member name="P:Samokat.ViewModels.MenuPageViewModel.ToggleCategoryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:Samokat.ViewModels.MenuPageViewModel.ToggleCategory(Samokat.Models.Menu.MenuCategoryModel)"/>.</summary>
+        </member>
+        <member name="F:Samokat.ViewModels.MenuPageViewModel.selectSubItemCommand">
+            <summary>The backing field for <see cref="P:Samokat.ViewModels.MenuPageViewModel.SelectSubItemCommand"/>.</summary>
+        </member>
+        <member name="P:Samokat.ViewModels.MenuPageViewModel.SelectSubItemCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:Samokat.ViewModels.MenuPageViewModel.SelectSubItem(Samokat.Models.Menu.MenuSubItemModel)"/>.</summary>
         </member>
         <member name="T:Samokat.ViewModels.RegisterPageViewModel">
             <inheritdoc/>
@@ -182,6 +282,39 @@
         </member>
         <member name="P:Samokat.ViewModels.RegisterPageViewModel.ToggleAgreementCommand">
             <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand"/> instance wrapping <see cref="M:Samokat.ViewModels.RegisterPageViewModel.ToggleAgreement"/>.</summary>
+        </member>
+        <member name="T:Samokat.ViewModels.SearchPageViewModel">
+            <inheritdoc/>
+        </member>
+        <member name="P:Samokat.ViewModels.SearchPageViewModel.FilterTapCommand">
+            <inheritdoc cref="F:Samokat.ViewModels.SearchPageViewModel.filterTapCommand"/>
+        </member>
+        <member name="P:Samokat.ViewModels.SearchPageViewModel.ApplyFilterCommand">
+            <inheritdoc cref="F:Samokat.ViewModels.SearchPageViewModel.applyFilterCommand"/>
+        </member>
+        <member name="P:Samokat.ViewModels.SearchPageViewModel.SelectSortCommand">
+            <inheritdoc cref="F:Samokat.ViewModels.SearchPageViewModel.selectSortCommand"/>
+        </member>
+        <member name="P:Samokat.ViewModels.SearchPageViewModel.Products">
+            <inheritdoc cref="F:Samokat.ViewModels.SearchPageViewModel.products"/>
+        </member>
+        <member name="P:Samokat.ViewModels.SearchPageViewModel.MinPrice">
+            <inheritdoc cref="F:Samokat.ViewModels.SearchPageViewModel.minPrice"/>
+        </member>
+        <member name="P:Samokat.ViewModels.SearchPageViewModel.MaxPrice">
+            <inheritdoc cref="F:Samokat.ViewModels.SearchPageViewModel.maxPrice"/>
+        </member>
+        <member name="P:Samokat.ViewModels.SearchPageViewModel.IsSortCheapFirst">
+            <inheritdoc cref="F:Samokat.ViewModels.SearchPageViewModel.isSortCheapFirst"/>
+        </member>
+        <member name="P:Samokat.ViewModels.SearchPageViewModel.IsSortExpensiveFirst">
+            <inheritdoc cref="F:Samokat.ViewModels.SearchPageViewModel.isSortExpensiveFirst"/>
+        </member>
+        <member name="P:Samokat.ViewModels.SearchPageViewModel.IsSortNewestFirst">
+            <inheritdoc cref="F:Samokat.ViewModels.SearchPageViewModel.isSortNewestFirst"/>
+        </member>
+        <member name="P:Samokat.ViewModels.SearchPageViewModel.IsSortOldestFirst">
+            <inheritdoc cref="F:Samokat.ViewModels.SearchPageViewModel.isSortOldestFirst"/>
         </member>
         <member name="T:Samokat.Resource">
             <summary>
@@ -354,6 +487,15 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ProductName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ProductName" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Icon">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Icon" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsExpanded">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsExpanded" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsSelected" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Text">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Text" generated properties.</summary>
         </member>
@@ -362,6 +504,45 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RightImage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RightImage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SimilarProducts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SimilarProducts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ProductImages">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ProductImages" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.CurrentImageIndex">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "CurrentImageIndex" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ProductTitle">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ProductTitle" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StockText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StockText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ReviewText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ReviewText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SubscriptionPrice">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SubscriptionPrice" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RegularPrice">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RegularPrice" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DeliveryLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DeliveryLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SubscriptionDeliveryText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SubscriptionDeliveryText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RegularDeliveryText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RegularDeliveryText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Description">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Description" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Quantity">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Quantity" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PhoneNumber">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PhoneNumber" generated properties.</summary>
@@ -386,6 +567,9 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Products">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Products" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Categories">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Categories" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.FirstName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "FirstName" generated properties.</summary>
@@ -416,6 +600,33 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsAgreementChecked">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsAgreementChecked" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.FilterTapCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "FilterTapCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.ApplyFilterCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "ApplyFilterCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectSortCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectSortCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MinPrice">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MinPrice" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.MaxPrice">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "MaxPrice" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsSortCheapFirst">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsSortCheapFirst" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsSortExpensiveFirst">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsSortExpensiveFirst" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsSortNewestFirst">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsSortNewestFirst" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsSortOldestFirst">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsSortOldestFirst" generated properties.</summary>
         </member>
         <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
             <summary>
@@ -462,6 +673,15 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ProductName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ProductName" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Icon">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Icon" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsExpanded">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsExpanded" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsSelected">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsSelected" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Text">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Text" generated properties.</summary>
         </member>
@@ -470,6 +690,45 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RightImage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RightImage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SimilarProducts">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SimilarProducts" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ProductImages">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ProductImages" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.CurrentImageIndex">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "CurrentImageIndex" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ProductTitle">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ProductTitle" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StockText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StockText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ReviewText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ReviewText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SubscriptionPrice">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SubscriptionPrice" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RegularPrice">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RegularPrice" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DeliveryLabel">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DeliveryLabel" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SubscriptionDeliveryText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SubscriptionDeliveryText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RegularDeliveryText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RegularDeliveryText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Description">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Description" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Quantity">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Quantity" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PhoneNumber">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PhoneNumber" generated properties.</summary>
@@ -494,6 +753,9 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Products">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Products" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Categories">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Categories" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.FirstName">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "FirstName" generated properties.</summary>
@@ -524,6 +786,33 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsAgreementChecked">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsAgreementChecked" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.FilterTapCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "FilterTapCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.ApplyFilterCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "ApplyFilterCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectSortCommand">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectSortCommand" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MinPrice">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MinPrice" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.MaxPrice">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "MaxPrice" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsSortCheapFirst">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsSortCheapFirst" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsSortExpensiveFirst">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsSortExpensiveFirst" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsSortNewestFirst">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsSortNewestFirst" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsSortOldestFirst">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsSortOldestFirst" generated properties.</summary>
         </member>
     </members>
 </doc>

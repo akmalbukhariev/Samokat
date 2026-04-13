@@ -18,7 +18,8 @@
             Padding="0"
             Text="☰"
             FontSize="22"
-            TextColor="#22292F" />
+            TextColor="#22292F"
+            Clicked="LeftMenu_Clicked"/>
 
         <Grid Grid.Column="1">
             <Border

@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:Samokat.Converters"
              x:Class="Samokat.Components.CustomActionButton"
              x:Name="ThisView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:NullToBoolConverter x:Key="NullToBoolConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
 
     <Border
         x:Name="RootBorder"
@@ -28,7 +35,8 @@
                 Source="{Binding ButtonImageSource, Source={x:Reference ThisView}}"
                 HeightRequest="24"
                 WidthRequest="24"
-                VerticalOptions="Center" />
+                VerticalOptions="Center" 
+                IsVisible="{Binding ButtonImageSource, Source={x:Reference ThisView}, Converter={StaticResource NullToBoolConverter}}" />
 
         </HorizontalStackLayout>
 

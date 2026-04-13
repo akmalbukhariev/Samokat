@@ -228,4 +228,11 @@ public partial class MainProductCardView : ContentView
             CustomIndicatorLayout.Children.Add(indicator);
         }
     }
+
+    private async void Like_Tapped(object sender, TappedEventArgs e)
+    {
+        Image image = sender as Image;
+        await image.ScaleTo(0.96, 100, Easing.CubicOut);
+        await image.ScaleTo(1.0, 100, Easing.CubicIn);
+    }
 }

@@ -6,7 +6,7 @@ using Samokat.Models.Startup;
 
 namespace Samokat.Views.Startup;
 
-public partial class OnboardingPage : BasePage, INotifyPropertyChanged
+public partial class OnboardingPage : BasePage
 {
     public ICommand StartCommand { get; }
 
@@ -78,12 +78,11 @@ public partial class OnboardingPage : BasePage, INotifyPropertyChanged
         OnboardingCarousel.ItemsSource = _slides;
 
         UpdateBottomSection(0);
-    }
+    } 
 
     private async void OnSkipTapped(object sender, TappedEventArgs e)
     {
         await AnimateElementScaleDown(lbSkip);
-        // await Navigation.PushAsync(new StartPage());
     }
 
     private void OnCarouselPositionChanged(object sender, PositionChangedEventArgs e)

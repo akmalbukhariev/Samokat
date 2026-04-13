@@ -61,7 +61,13 @@
                             WidthRequest="20"
                             HeightRequest="20"
                             HorizontalOptions="Center"
-                            VerticalOptions="Center" />
+                            VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    NumberOfTapsRequired="1"
+                                    Tapped="Like_Tapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
                     </Border>
                 </Grid>
             </Border>

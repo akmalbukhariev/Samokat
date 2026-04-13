@@ -7,11 +7,11 @@ public partial class MainPage : BasePage
     private readonly MainPageViewModel viewModel;
     private bool _isStickyVisible = false;
 
-    public MainPage()
+    public MainPage(MainPageViewModel vm)
     {
         InitializeComponent();
 
-        viewModel = new MainPageViewModel();
+        viewModel = vm;
         BindingContext = viewModel;
     }
 

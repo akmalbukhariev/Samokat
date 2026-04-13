@@ -3,6 +3,10 @@ using CommunityToolkit.Maui;
 using Samokat.Services;
 using Samokat.Services.Interface;
 using Xe.AcrylicView;
+using Samokat.ViewModels;
+using Samokat.Views.Main;
+using Samokat.Views.Search;
+using Samokat.Views.DetailProduct;
 
 
 #if ANDROID
@@ -38,6 +42,7 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 		RegisterSingleton(builder);
+		RegisterTransient(builder);
 
 		var mauiApp = builder.Build();
 		AppService.Init(mauiApp.Services);
@@ -51,14 +56,27 @@ public static class MauiProgram
 		builder.Services.AddSingleton<AppControl>();
 
 #if ANDROID
-            builder.Services.AddSingleton<IStatusBarService, Samokat.Platforms.Android.StatusBarService>();
-            //builder.Services.AddSingleton<INotificationService, NotificationService>();
-            //builder.Services.AddSingleton<IKeyboardHelper, KeyboardHelper>();
+		builder.Services.AddSingleton<IStatusBarService, Samokat.Platforms.Android.StatusBarService>();
+		//builder.Services.AddSingleton<INotificationService, NotificationService>();
+		//builder.Services.AddSingleton<IKeyboardHelper, KeyboardHelper>();
 #endif
 
 #if IOS
 		builder.Services.AddSingleton<IStatusBarService, Samokat.Platforms.iOS.StatusBarService>();
 		//builder.Services.AddSingleton<IKeyboardHelper, EcoPlatesMobile.Platforms.iOS.KeyboardHelper>();
 #endif
+	}
+
+	private static void RegisterTransient(MauiAppBuilder builder)
+	{
+		builder.Services.AddTransient<MainPage>();
+		builder.Services.AddTransient<MenuPage>();
+		builder.Services.AddTransient<SearchPage>();
+		builder.Services.AddTransient<DetailProductPage>();
+
+		builder.Services.AddTransient<MainPageViewModel>();
+		builder.Services.AddTransient<MenuPageViewModel>();
+		builder.Services.AddTransient<SearchPageViewModel>();
+		builder.Services.AddTransient<DetailProductPageViewModel>();
 	}
 }

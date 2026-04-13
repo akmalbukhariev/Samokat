@@ -24,8 +24,8 @@
             <Image
                 Grid.Column="0"
                 Source="{Binding LeftIcon, Source={x:Reference ThisView}}"
-                HeightRequest="28"
-                WidthRequest="28"
+                HeightRequest="{Binding LeftIconSize, Source={x:Reference ThisView}}"
+                WidthRequest="{Binding LeftIconSize, Source={x:Reference ThisView}}"
                 VerticalOptions="Center"
                 IsVisible="{Binding HasLeftIcon, Source={x:Reference ThisView}}" />
 
@@ -84,8 +84,8 @@
             <Image
                 Grid.Column="2"
                 Source="{Binding CurrentRightIcon, Source={x:Reference ThisView}}"
-                HeightRequest="24"
-                WidthRequest="24"
+                HeightRequest="{Binding RightIconSize, Source={x:Reference ThisView}}"
+                WidthRequest="{Binding RightIconSize, Source={x:Reference ThisView}}"
                 VerticalOptions="Center"
                 IsVisible="{Binding HasRightIcon, Source={x:Reference ThisView}}">
                 <Image.GestureRecognizers>

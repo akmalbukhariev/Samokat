@@ -59,6 +59,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.PageHea
 build_metadata.AdditionalFiles.TargetPath = Components/PageHeaderView.xaml
 build_metadata.AdditionalFiles.RelativePath = Components/PageHeaderView.xaml
 
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/QuestionBannerView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.QuestionBannerView.xaml
+build_metadata.AdditionalFiles.TargetPath = Components/QuestionBannerView.xaml
+build_metadata.AdditionalFiles.RelativePath = Components/QuestionBannerView.xaml
+
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/SelectionPopup.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.SelectionPopup.xaml
@@ -83,12 +89,6 @@ build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.SmsCode
 build_metadata.AdditionalFiles.TargetPath = Components/SmsCodePopup.xaml
 build_metadata.AdditionalFiles.RelativePath = Components/SmsCodePopup.xaml
 
-[/Users/akmalbukhariev/Projects/Samokat/Samokat/MainPage.xaml]
-build_metadata.AdditionalFiles.GenKind = Xaml
-build_metadata.AdditionalFiles.ManifestResourceName = Samokat.MainPage.xaml
-build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
-build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
-
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Resources/Styles/Colors.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Resources.Styles.Colors.xaml
@@ -100,6 +100,12 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Resources.Styles.Styles.xaml
 build_metadata.AdditionalFiles.TargetPath = Resources/Styles/Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources/Styles/Styles.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/DetailProduct/DetailProductPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.DetailProduct.DetailProductPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/DetailProduct/DetailProductPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/DetailProduct/DetailProductPage.xaml
 
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/LoginRegister/ForgotPasswordPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -166,6 +172,18 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Main.MenuPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views/Main/MenuPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/Main/MenuPage.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Search/SearchFilterBottomSheet.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Search.SearchFilterBottomSheet.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/Search/SearchFilterBottomSheet.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/Search/SearchFilterBottomSheet.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Search/SearchPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Search.SearchPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/Search/SearchPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/Search/SearchPage.xaml
 
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Startup/OnboardingPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
