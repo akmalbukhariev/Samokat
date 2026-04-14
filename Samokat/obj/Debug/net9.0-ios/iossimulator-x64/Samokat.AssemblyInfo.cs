@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Samokat")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+0e5fbae2b546986926d8fe3c6d61374be135685a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+d9b871c11e088e403036078a43c97cda063749fb")]
 [assembly: System.Reflection.AssemblyProductAttribute("Samokat")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Samokat")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

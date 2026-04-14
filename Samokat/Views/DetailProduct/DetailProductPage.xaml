@@ -59,7 +59,11 @@
                                                         Aspect="AspectFit"
                                                         Margin="20,20,20,30"
                                                         HorizontalOptions="Center"
-                                                        VerticalOptions="Center" />
+                                                        VerticalOptions="Center">
+                                                        <Image.GestureRecognizers>
+                                                            <TapGestureRecognizer Tapped="OnSmallImageTapped" />
+                                                        </Image.GestureRecognizers>
+                                                    </Image>
                                                 </Grid>
                                             </DataTemplate>
                                         </CarouselView.ItemTemplate>
@@ -577,5 +581,9 @@
 
             </Grid>
         </Grid>
+        
+        <components:ImagePreviewView 
+            x:Name="ImagePreview"
+            Grid.RowSpan="3"/>
     </Grid>
 </page:BasePage>

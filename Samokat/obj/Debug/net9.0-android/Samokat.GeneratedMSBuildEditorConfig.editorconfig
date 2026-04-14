@@ -47,6 +47,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.CustomR
 build_metadata.AdditionalFiles.TargetPath = Components/CustomRadioButtonView.xaml
 build_metadata.AdditionalFiles.RelativePath = Components/CustomRadioButtonView.xaml
 
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/ImagePreviewView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.ImagePreviewView.xaml
+build_metadata.AdditionalFiles.TargetPath = Components/ImagePreviewView.xaml
+build_metadata.AdditionalFiles.RelativePath = Components/ImagePreviewView.xaml
+
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/InputView.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.InputView.xaml

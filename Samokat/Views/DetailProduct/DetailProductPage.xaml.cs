@@ -47,6 +47,16 @@ public partial class DetailProductPage : BasePage
         UpdateUi(index);
     }
 
+    private async void OnSmallImageTapped(object sender, TappedEventArgs e)
+    {
+        var tappedImage = sender as Image;
+
+        if (tappedImage?.Source != null)
+        {
+            await ImagePreview.ShowAsync(tappedImage.Source);
+        }
+    }
+
     private void OnThumbnailTapped(object? sender, TappedEventArgs e)
     {
         if (viewModel == null || e.Parameter is not ProductImageDetailInfo tappedItem)
