@@ -113,6 +113,24 @@ build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.DetailProduc
 build_metadata.AdditionalFiles.TargetPath = Views/DetailProduct/DetailProductPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/DetailProduct/DetailProductPage.xaml
 
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/DetailProduct/LeaveCommentPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.DetailProduct.LeaveCommentPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/DetailProduct/LeaveCommentPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/DetailProduct/LeaveCommentPage.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/DetailProduct/ProductReviews.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.DetailProduct.ProductReviews.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/DetailProduct/ProductReviews.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/DetailProduct/ProductReviews.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/DetailProduct/ProductReviewsFilterBottomSheet.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.DetailProduct.ProductReviewsFilterBottomSheet.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/DetailProduct/ProductReviewsFilterBottomSheet.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/DetailProduct/ProductReviewsFilterBottomSheet.xaml
+
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/LoginRegister/ForgotPasswordPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.LoginRegister.ForgotPasswordPage.xaml

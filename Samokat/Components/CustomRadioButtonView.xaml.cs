@@ -131,7 +131,7 @@ public partial class CustomRadioButtonView : ContentView
             nameof(FontFamily),
             typeof(string),
             typeof(CustomRadioButtonView),
-            "SF Pro");
+            "SFRegular");
 
     public string FontFamily
     {

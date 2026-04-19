@@ -73,10 +73,12 @@ public static class MauiProgram
 		builder.Services.AddTransient<MenuPage>();
 		builder.Services.AddTransient<SearchPage>();
 		builder.Services.AddTransient<DetailProductPage>();
+		builder.Services.AddTransient<ProductReviews>();
 
 		builder.Services.AddTransient<MainPageViewModel>();
 		builder.Services.AddTransient<MenuPageViewModel>();
 		builder.Services.AddTransient<SearchPageViewModel>();
 		builder.Services.AddTransient<DetailProductPageViewModel>();
+		builder.Services.AddTransient<ProductReviewsViewModel>();
 	}
 }

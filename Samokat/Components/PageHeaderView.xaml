@@ -10,25 +10,30 @@
         VerticalOptions="Start"
         HorizontalOptions="Fill">
 
-        <Grid 
+        <!-- Left back button -->
+        <Grid
             WidthRequest="35"
             HeightRequest="35"
-            VerticalOptions="Center"  
+            VerticalOptions="Center"
             HorizontalOptions="Start"
-            Margin="0, 4.44, 0, 0">
+            Margin="0,4.44,0,0">
             <Grid.GestureRecognizers>
-                <TapGestureRecognizer NumberOfTapsRequired="1"
-                                      Tapped="Back_Tapped"/>
+                <TapGestureRecognizer
+                    NumberOfTapsRequired="1"
+                    Tapped="Back_Tapped" />
             </Grid.GestureRecognizers>
-            <Image x:Name="imBack"
-                    Source="left_back.png"
-                    IsVisible="{Binding ShowBack}"
-                    BackgroundColor="Transparent"
-                    VerticalOptions="Center"
-                    WidthRequest="20"
-                    HeightRequest="20"/>
-        </Grid> 
 
+            <Image
+                x:Name="imBack"
+                Source="left_back.png"
+                IsVisible="{Binding ShowBack, Source={x:Reference this}}"
+                BackgroundColor="Transparent"
+                VerticalOptions="Center"
+                WidthRequest="20"
+                HeightRequest="20" />
+        </Grid>
+        
+        <!-- Title -->
         <Label
             Text="{Binding Title, Source={x:Reference this}}"
             HorizontalTextAlignment="Center"
@@ -39,5 +44,28 @@
             CharacterSpacing="0.24"
             HorizontalOptions="Center"
             VerticalOptions="Center" />
+
+        <!-- Right icon -->
+        <Grid
+            WidthRequest="35"
+            HeightRequest="35"
+            VerticalOptions="Center"
+            HorizontalOptions="End"
+            Margin="0,4.44,0,0">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer
+                    NumberOfTapsRequired="1"
+                    Tapped="RightImage_Tapped" />
+            </Grid.GestureRecognizers>
+
+            <Image
+                x:Name="imRightImage"
+                Source="{Binding RightImage, Source={x:Reference this}}"
+                IsVisible="{Binding ShowRightIcon, Source={x:Reference this}}"
+                BackgroundColor="Transparent"
+                VerticalOptions="Center"
+                WidthRequest="20"
+                HeightRequest="20" />
+        </Grid>
     </Grid>
 </ContentView>

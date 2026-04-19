@@ -8,6 +8,7 @@ obj/Debug/net9.0-android/resizetizer/r/mipmap-hdpi/appicon.png
 obj/Debug/net9.0-android/resizetizer/r/mipmap-hdpi/appicon_background.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/plus.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_arrow_right.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/star_gray.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/check_gray.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_calendar.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_notification.png
@@ -54,12 +55,18 @@ obj/Debug/net9.0-android/resizetizer/r/drawable/ic_question.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_chat.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_baby.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_eye_on.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/review2.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/onboarding_baby.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/review3.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_arrow_down.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_check.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/star.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_filter1.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/review1.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_hygiene.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_dot_line.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/review4.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/review5.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/right.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_fill_circle.png
 obj/Debug/net9.0-android/resizetizer/r/mipmap-xxxhdpi/appicon_foreground.png

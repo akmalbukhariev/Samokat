@@ -1177,3 +1177,10 @@
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_arrow_right_red.png
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/minus.png
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/plus.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/star_gray.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/review1.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/review2.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/review3.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/review4.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/review5.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_filter1.png

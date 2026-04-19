@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Samokat.Views"
+    xmlns:components="clr-namespace:Samokat.Components"
+    xmlns:main_components="clr-namespace:Samokat.Views.Main.Components"
+    xmlns:models="clr-namespace:Samokat.Models.Main"
+    xmlns:local="clr-namespace:Samokat.Views.DetailProduct"
+    x:Class="Samokat.Views.DetailProduct.LeaveCommentPage"
+    x:Name="ThisPage"
+    BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,24,*">
+
+        <components:PageHeaderView
+            Title="Sharh qoldirish"
+            Grid.Row="0" />
+
+        <ScrollView Grid.Row="2">
+            <VerticalStackLayout Padding="20,0,20,30" Spacing="20">
+                    
+                <!-- Product info -->
+                <Frame
+                    Padding="14,12"
+                    CornerRadius="10"
+                    HasShadow="False"
+                    BackgroundColor="#FBEFF1"
+                    BorderColor="Transparent">
+                    <Label
+                        Text="Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik, 12+ oy, 800 g"
+                        FontSize="18"
+                        FontFamily="{StaticResource FontSFMedium}"
+                        LineBreakMode="WordWrap"
+                        TextColor="#333333" />
+                </Frame>
+
+                <!-- Rating title -->
+                <Label
+                    Text="Yulduzchalar orqali baho qo’ying"
+                    FontSize="22"
+                    FontFamily="{StaticResource FontSFMedium}"
+                    TextColor="#222222" />
+
+                <!-- Rating stars -->
+                <HorizontalStackLayout Spacing="8">
+                    <Image x:Name="Star1" WidthRequest="32" HeightRequest="32" Source="star_gray.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStar1Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Image x:Name="Star2" WidthRequest="32" HeightRequest="32" Source="star_gray.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStar2Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Image x:Name="Star3" WidthRequest="32" HeightRequest="32" Source="star_gray.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStar3Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Image x:Name="Star4" WidthRequest="32" HeightRequest="32" Source="star_gray.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStar4Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Image x:Name="Star5" WidthRequest="32" HeightRequest="32" Source="star_gray.png">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnStar5Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                </HorizontalStackLayout>
+
+                <!-- Comment title -->
+                <Label
+                    Text="Mahsulot bo’yicha fikringizni yozing"
+                    FontSize="22"
+                    FontFamily="{StaticResource FontSFMedium}"
+                    TextColor="#222222" />
+
+                <!-- Comment editor -->
+                <Frame
+                    Padding="0"
+                    CornerRadius="10"
+                    HasShadow="False"
+                    BackgroundColor="#F5F6F8"
+                    BorderColor="Transparent">
+                    <Editor
+                        x:Name="CommentEditor"
+                        HeightRequest="130"
+                        BackgroundColor="Transparent"
+                        Placeholder="Sharh yozing"
+                        FontFamily="{StaticResource FontSFRegular}"
+                        FontSize="15"
+                        TextColor="#333333"
+                        Margin="12,10" />
+                </Frame>
+
+                <!-- Photo title -->
+                <Label
+                    Text="Mahsulot bo’yicha fotosurat joylang"
+                    FontSize="22"
+                    FontFamily="{StaticResource FontSFMedium}"
+                    TextColor="#222222" />
+
+                <!-- Photo upload area -->
+                <Frame
+                    Padding="12"
+                    CornerRadius="10"
+                    HasShadow="False"
+                    BorderColor="#D9D9D9"
+                    BackgroundColor="White">
+
+                    <HorizontalStackLayout Spacing="12">
+
+                        <!-- Existing image -->
+                        <Frame
+                            WidthRequest="84"
+                            HeightRequest="84"
+                            Padding="0"
+                            CornerRadius="8"
+                            HasShadow="False"
+                            BorderColor="Transparent"
+                            BackgroundColor="#F3F3F3">
+                            <Image
+                                Source="sample_product_review.png"
+                                Aspect="AspectFill" />
+                        </Frame>
+
+                        <!-- Add image -->
+                        <Frame
+                            WidthRequest="84"
+                            HeightRequest="84"
+                            Padding="0"
+                            CornerRadius="8"
+                            HasShadow="False"
+                            BorderColor="#D9D9D9"
+                            BackgroundColor="#F8F8F8">
+
+                            <Grid>
+                                <Label
+                                    Text="🖼"
+                                    FontSize="30"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    TextColor="#A0A0A0" />
+                            </Grid>
+                        </Frame>
+
+                    </HorizontalStackLayout>
+                </Frame>
+
+                <!-- Submit button -->
+                <Button
+                    x:Name="SubmitButton"
+                    Text="Yuborish"
+                    HeightRequest="58"
+                    CornerRadius="12"
+                    BackgroundColor="#84BC13"
+                    TextColor="White"
+                    FontSize="20"
+                    FontFamily="{StaticResource FontSFMedium}"
+                    Margin="0,20,0,0"
+                    Clicked="OnSubmitClicked" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    </Grid>
+</page:BasePage>

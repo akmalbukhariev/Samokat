@@ -23,10 +23,10 @@ public partial class PageHeaderView : ContentView
     }
 
     public static readonly BindableProperty BackCommandProperty =
-    BindableProperty.Create(
-        nameof(BackCommand),
-        typeof(ICommand),
-        typeof(PageHeaderView));
+        BindableProperty.Create(
+            nameof(BackCommand),
+            typeof(ICommand),
+            typeof(PageHeaderView));
 
     public ICommand BackCommand
     {
@@ -35,18 +35,54 @@ public partial class PageHeaderView : ContentView
     }
 
     public static readonly BindableProperty ShowBackProperty =
-      BindableProperty.Create(nameof(ShowBack), typeof(bool), typeof(PageHeaderView), true, propertyChanged: OnShowBackChanged);
-    
+        BindableProperty.Create(
+            nameof(ShowBack),
+            typeof(bool),
+            typeof(PageHeaderView),
+            true);
+
     public bool ShowBack
     {
         get => (bool)GetValue(ShowBackProperty);
         set => SetValue(ShowBackProperty, value);
     }
-    
-    private static void OnShowBackChanged(BindableObject bindable, object oldValue, object newValue)
+
+    public static readonly BindableProperty RightImageProperty =
+        BindableProperty.Create(
+            nameof(RightImage),
+            typeof(ImageSource),
+            typeof(PageHeaderView),
+            default(ImageSource));
+
+    public ImageSource RightImage
     {
-        var control = (PageHeaderView)bindable;
-        control.imBack.IsVisible = (bool)newValue;
+        get => (ImageSource)GetValue(RightImageProperty);
+        set => SetValue(RightImageProperty, value);
+    }
+
+    public static readonly BindableProperty ShowRightIconProperty =
+        BindableProperty.Create(
+            nameof(ShowRightIcon),
+            typeof(bool),
+            typeof(PageHeaderView),
+            false);
+
+    public bool ShowRightIcon
+    {
+        get => (bool)GetValue(ShowRightIconProperty);
+        set => SetValue(ShowRightIconProperty, value);
+    }
+
+    public static readonly BindableProperty RightImageCommandProperty =
+        BindableProperty.Create(
+            nameof(RightImageCommand),
+            typeof(ICommand),
+            typeof(PageHeaderView));
+
+    public ICommand RightImageCommand
+    {
+        get => (ICommand)GetValue(RightImageCommandProperty);
+        set => SetValue(RightImageCommandProperty, value);
     }
 
     private async void Back_Tapped(object sender, TappedEventArgs e)
@@ -57,12 +93,23 @@ public partial class PageHeaderView : ContentView
             BackCommand.Execute(null);
     }
 
+    private async void RightImage_Tapped(object sender, TappedEventArgs e)
+    {
+        await AnimateElementScaleDown(imRightImage);
+
+        if (RightImageCommand?.CanExecute(null) == true)
+            RightImageCommand.Execute(null);
+    }
+
     protected Task AnimateElementScaleDown(VisualElement element)
+    {
+        return Task.Run(async () =>
         {
-            return Task.Run(async () =>
+            await MainThread.InvokeOnMainThreadAsync(async () =>
             {
                 await element.ScaleTo(0.9, 100, Easing.CubicOut);
                 await element.ScaleTo(1.0, 100, Easing.CubicIn);
             });
-        }
+        });
+    }
 }

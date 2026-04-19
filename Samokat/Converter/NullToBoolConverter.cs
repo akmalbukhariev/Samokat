@@ -1,4 +1,5 @@
 using System.Globalization;
+using Microsoft.Maui.Controls;
 
 namespace Samokat.Converters;
 
@@ -6,7 +7,15 @@ public class NullToBoolConverter : IValueConverter
 {
     public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
     {
-        return value != null;
+        // Handle binding failures
+        if (value == null || value == BindableProperty.UnsetValue)
+            return false;
+
+        // Ensure correct target type
+        if (targetType != typeof(bool))
+            return false;
+
+        return true;
     }
 
     public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
