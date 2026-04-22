@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Samokat.Views.BasketProduct"
+    x:Class="Samokat.Views.BasketProduct.BasketCartItemView"
+    x:Name="RootView">
+
+    <Border
+        Padding="18"
+        BackgroundColor="White"
+        Stroke="#D3D3D3"
+        StrokeThickness="1"
+        StrokeShape="RoundRectangle 16">
+
+        <Grid
+            ColumnDefinitions="114,*"
+            ColumnSpacing="18">
+
+            <!-- Left image -->
+            <Border
+                WidthRequest="114"
+                HeightRequest="144"
+                BackgroundColor="#EEF3F7"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 10"
+                VerticalOptions="Start">
+
+                <Image
+                    Source="{Binding ProductImageSource, Source={x:Reference RootView}}"
+                    Aspect="AspectFit"
+                    WidthRequest="90"
+                    HeightRequest="120"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+            </Border>
+
+            <!-- Right content -->
+            <VerticalStackLayout
+                Grid.Column="1"
+                Spacing="10">
+
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+
+                    <VerticalStackLayout Spacing="4">
+
+                        <!-- Old price -->
+                        <HorizontalStackLayout Spacing="4">
+                            <Image
+                                Source="user_green.png"
+                                WidthRequest="16"
+                                HeightRequest="16"
+                                VerticalOptions="Center" />
+
+                            <Label
+                                Text="{Binding OldPrice, Source={x:Reference RootView}}"
+                                FontSize="16"
+                                FontFamily="{StaticResource FontSFBold}"
+                                TextColor="#FD473C"
+                                VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+
+                        <!-- New price -->
+                        <Border
+                            BackgroundColor="#FD473C"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 16"
+                            Padding="8,3"
+                            HorizontalOptions="Start">
+
+                            <HorizontalStackLayout Spacing="4">
+                                <Image
+                                    Source="user_white.png"
+                                    WidthRequest="16"
+                                    HeightRequest="16"
+                                    VerticalOptions="Center" />
+
+                                <Image
+                                    Source="lightning.png"
+                                    WidthRequest="14"
+                                    HeightRequest="14"
+                                    VerticalOptions="Center" />
+
+                                <Label
+                                    Text="{Binding NewPrice, Source={x:Reference RootView}}"
+                                    TextColor="White"
+                                    FontSize="16"
+                                    FontFamily="{StaticResource FontSFBold}"
+                                    VerticalOptions="Center" />
+                            </HorizontalStackLayout>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Indicator -->
+                    <Image
+                        Grid.Column="1"
+                        Source="{Binding CheckIconSource, Source={x:Reference RootView}}"
+                        WidthRequest="24"
+                        HeightRequest="24"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ToggleCheckedCommand, Source={x:Reference RootView}}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+
+                <Label
+                    Text="{Binding Title, Source={x:Reference RootView}}"
+                    TextColor="#22292F"
+                    FontSize="14"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    LineBreakMode="WordWrap"
+                    MaxLines="2" />
+
+                <local:QuantitySelectorView
+                    Quantity="{Binding Quantity, Source={x:Reference RootView}, Mode=TwoWay}"
+                    QuantityChangedCommand="{Binding QuantityChangedCommand, Source={x:Reference RootView}}" />
+            </VerticalStackLayout>
+        </Grid>
+    </Border>
+</ContentView>

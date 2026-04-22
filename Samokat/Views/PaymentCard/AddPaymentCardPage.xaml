@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Samokat.Views"
+    xmlns:components="clr-namespace:Samokat.Components"
+    xmlns:converter="clr-namespace:Samokat.Converter"
+    x:Class="Samokat.Views.PaymentCard.AddPaymentCardPage"
+    x:Name="ThisPage"
+    BackgroundColor="White">
+
+    <page:BasePage.Resources>
+        <ResourceDictionary>
+            <converter:BoolToImageConverter x:Key="BoolToImageConverter"/>    
+        </ResourceDictionary>
+    </page:BasePage.Resources>
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- Scrollable content -->
+        <ScrollView Grid.Row="0">
+            <VerticalStackLayout Padding="16,0,16,20" Spacing="24">
+
+                <components:PageHeaderView Title="Yangi karta qo’shish" />
+
+                <Border
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 20"
+                    HeightRequest="264">
+
+                    <Border.Background>
+                        <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                            <GradientStop Color="#32D994" Offset="0.0" />
+                            <GradientStop Color="#107096" Offset="1.0" />
+                        </LinearGradientBrush>
+                    </Border.Background>
+
+                    <VerticalStackLayout
+                        Padding="20"
+                        VerticalOptions="Center"
+                        Spacing="24">
+
+                        <VerticalStackLayout Spacing="4">
+                            <Label
+                                Text="Karta raqami"
+                                FontFamily="{StaticResource FontSFRegular}"
+                                FontSize="15"
+                                TextColor="White" />
+
+                            <Entry
+                                Text="{Binding CardNumber}"
+                                BackgroundColor="Transparent"
+                                TextColor="White"
+                                FontFamily="{StaticResource FontSFMedium}"
+                                FontSize="24"
+                                Keyboard="Numeric"
+                                MaxLength="19"
+                                Placeholder="8600 1204 2881 8500"
+                                PlaceholderColor="#CCFFFFFF" />
+                        </VerticalStackLayout>
+
+                        <HorizontalStackLayout
+                            HorizontalOptions="Center"
+                            Spacing="24">
+
+                            <Border
+                                WidthRequest="160"
+                                Padding="16,10"
+                                BackgroundColor="#33FFFFFF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 10">
+
+                                <VerticalStackLayout Spacing="4">
+                                    <Label
+                                        Text="Amal qilishi"
+                                        FontFamily="{StaticResource FontSFRegular}"
+                                        FontSize="15"
+                                        TextColor="White" />
+
+                                    <HorizontalStackLayout Spacing="0">
+                                        <Entry
+                                            x:Name="MonthEntry"
+                                            Text="{Binding ExpireMonth}"
+                                            WidthRequest="50"
+                                            MaxLength="2"
+                                            Keyboard="Numeric"
+                                            BackgroundColor="Transparent"
+                                            TextColor="White"
+                                            FontFamily="{StaticResource FontSFMedium}"
+                                            FontSize="24"
+                                            HorizontalTextAlignment="Center"
+                                            Placeholder="01"
+                                            PlaceholderColor="#CCFFFFFF" />
+
+                                        <Label
+                                            Text="/"
+                                            TextColor="White"
+                                            FontFamily="{StaticResource FontSFMedium}"
+                                            FontSize="24"
+                                            VerticalTextAlignment="Center" />
+
+                                        <Entry
+                                            x:Name="YearEntry"
+                                            Text="{Binding ExpireYear}"
+                                            WidthRequest="50"
+                                            MaxLength="2"
+                                            Keyboard="Numeric"
+                                            BackgroundColor="Transparent"
+                                            TextColor="White"
+                                            FontFamily="{StaticResource FontSFMedium}"
+                                            FontSize="24"
+                                            HorizontalTextAlignment="Center"
+                                            Placeholder="28"
+                                            PlaceholderColor="#CCFFFFFF" />
+                                    </HorizontalStackLayout>
+                                </VerticalStackLayout>
+                            </Border>
+
+                            <Border
+                                WidthRequest="110"
+                                Padding="16,10"
+                                BackgroundColor="#33FFFFFF"
+                                StrokeThickness="0"
+                                StrokeShape="RoundRectangle 10">
+
+                                <VerticalStackLayout Spacing="4">
+                                    <Label
+                                        Text="CVV"
+                                        FontFamily="{StaticResource FontSFRegular}"
+                                        FontSize="15"
+                                        TextColor="White" />
+
+                                    <Entry
+                                        Text="{Binding Cvv}"
+                                        BackgroundColor="Transparent"
+                                        TextColor="White"
+                                        FontFamily="{StaticResource FontSFMedium}"
+                                        FontSize="24"
+                                        Keyboard="Numeric"
+                                        MaxLength="3"
+                                        IsPassword="True"
+                                        Placeholder="***"
+                                        PlaceholderColor="#CCFFFFFF" />
+                                </VerticalStackLayout>
+                            </Border>
+                        </HorizontalStackLayout>
+
+                    </VerticalStackLayout>
+                </Border>
+
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                    <VerticalStackLayout Spacing="2">
+                        <Label
+                            Text="Kartani eslab qolish"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            FontSize="17"
+                            TextColor="#22292F" />
+
+                        <Label
+                            Text="Men axborotlarimni saqlash shartlariga roziman"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            FontSize="13"
+                            TextColor="#96979B" />
+                    </VerticalStackLayout>
+
+                    <Image
+                        Grid.Column="1"
+                        Source="{Binding RememberCard, Converter={StaticResource BoolToImageConverter}}"
+                        WidthRequest="40"
+                        HeightRequest="24"
+                        VerticalOptions="Center">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ToggleRememberCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+
+                <Label
+                    Text="Unutmang, ma’lumotlari kiritilayotgan karta o’zingizga tegishli bo’lishi kerak. Agar siz begonaning to’lov kartasidan ruxsatisiz foydalanayotgan bo’lsangiz qonun oldida javobgar bo’lishingiz mumkin."
+                    FontFamily="{StaticResource FontSFRegular}"
+                    FontSize="13"
+                    TextColor="#96979B"
+                    LineBreakMode="WordWrap" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Fixed bottom button -->
+        <Border
+            Grid.Row="1"
+            Margin="16,0,16,20"
+            BackgroundColor="#7CB518"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 40"
+            HeightRequest="56">
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding SaveCardCommand}" />
+            </Border.GestureRecognizers>
+
+            <Grid>
+                <Label
+                    Text="Saqlash"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    FontFamily="{StaticResource FontSFMedium}"
+                    FontSize="18"
+                    TextColor="White" />
+            </Grid>
+        </Border>
+
+    </Grid>
+</page:BasePage>

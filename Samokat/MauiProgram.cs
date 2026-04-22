@@ -7,6 +7,12 @@ using Samokat.ViewModels;
 using Samokat.Views.Main;
 using Samokat.Views.Search;
 using Samokat.Views.DetailProduct;
+using Samokat.Views.FavoriteProduct;
+using Samokat.Views.BasketProduct;
+using Samokat.Views.Formalization;
+using Samokat.Views.PaymentCard;
+
+
 
 
 #if ANDROID
@@ -74,11 +80,17 @@ public static class MauiProgram
 		builder.Services.AddTransient<SearchPage>();
 		builder.Services.AddTransient<DetailProductPage>();
 		builder.Services.AddTransient<ProductReviews>();
+		builder.Services.AddTransient<FavoritePage>();
+		builder.Services.AddTransient<BasketProductPage>();
+		builder.Services.AddTransient<FormalizationPage>();
+		builder.Services.AddTransient<PaymentCardPage>();
 
 		builder.Services.AddTransient<MainPageViewModel>();
 		builder.Services.AddTransient<MenuPageViewModel>();
 		builder.Services.AddTransient<SearchPageViewModel>();
 		builder.Services.AddTransient<DetailProductPageViewModel>();
 		builder.Services.AddTransient<ProductReviewsViewModel>();
+		builder.Services.AddTransient<FavoritePageViewModel>(); 
+		builder.Services.AddTransient<BasketProductPageViewModel>();
 	}
 }

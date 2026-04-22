@@ -107,6 +107,24 @@ build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Resources.Styles.S
 build_metadata.AdditionalFiles.TargetPath = Resources/Styles/Styles.xaml
 build_metadata.AdditionalFiles.RelativePath = Resources/Styles/Styles.xaml
 
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/BasketProduct/BasketCartItemView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.BasketProduct.BasketCartItemView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/BasketProduct/BasketCartItemView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/BasketProduct/BasketCartItemView.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/BasketProduct/BasketProductPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.BasketProduct.BasketProductPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/BasketProduct/BasketProductPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/BasketProduct/BasketProductPage.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/BasketProduct/QuantitySelectorView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.BasketProduct.QuantitySelectorView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/BasketProduct/QuantitySelectorView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/BasketProduct/QuantitySelectorView.xaml
+
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/DetailProduct/DetailProductPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.DetailProduct.DetailProductPage.xaml
@@ -130,6 +148,18 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.DetailProduct.ProductReviewsFilterBottomSheet.xaml
 build_metadata.AdditionalFiles.TargetPath = Views/DetailProduct/ProductReviewsFilterBottomSheet.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/DetailProduct/ProductReviewsFilterBottomSheet.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/FavoriteProduct/FavoritePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.FavoriteProduct.FavoritePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/FavoriteProduct/FavoritePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/FavoriteProduct/FavoritePage.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Formalization/FormalizationPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Formalization.FormalizationPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/Formalization/FormalizationPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/Formalization/FormalizationPage.xaml
 
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/LoginRegister/ForgotPasswordPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -196,6 +226,18 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Main.MenuPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views/Main/MenuPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/Main/MenuPage.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/PaymentCard/AddPaymentCardPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.PaymentCard.AddPaymentCardPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/PaymentCard/AddPaymentCardPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/PaymentCard/AddPaymentCardPage.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/PaymentCard/PaymentCardPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.PaymentCard.PaymentCardPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/PaymentCard/PaymentCardPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/PaymentCard/PaymentCardPage.xaml
 
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Search/SearchFilterBottomSheet.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
