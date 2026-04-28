@@ -145,6 +145,42 @@
         <member name="P:Samokat.Models.Startup.PopupItemModel.RightImage">
             <inheritdoc cref="F:Samokat.Models.Startup.PopupItemModel.rightImage"/>
         </member>
+        <member name="T:Samokat.Models.Tariff.TariffItem">
+            <inheritdoc/>
+        </member>
+        <member name="P:Samokat.Models.Tariff.TariffItem.Plan">
+            <inheritdoc cref="F:Samokat.Models.Tariff.TariffItem.plan"/>
+        </member>
+        <member name="P:Samokat.Models.Tariff.TariffItem.StartDate">
+            <inheritdoc cref="F:Samokat.Models.Tariff.TariffItem.startDate"/>
+        </member>
+        <member name="P:Samokat.Models.Tariff.TariffItem.EndDate">
+            <inheritdoc cref="F:Samokat.Models.Tariff.TariffItem.endDate"/>
+        </member>
+        <member name="P:Samokat.Models.Tariff.TariffItem.Price">
+            <inheritdoc cref="F:Samokat.Models.Tariff.TariffItem.price"/>
+        </member>
+        <member name="T:Samokat.Models.Tariff.TariffPlan">
+            <inheritdoc/>
+        </member>
+        <member name="P:Samokat.Models.Tariff.TariffPlan.Name">
+            <inheritdoc cref="F:Samokat.Models.Tariff.TariffPlan.name"/>
+        </member>
+        <member name="P:Samokat.Models.Tariff.TariffPlan.Price">
+            <inheritdoc cref="F:Samokat.Models.Tariff.TariffPlan.price"/>
+        </member>
+        <member name="P:Samokat.Models.Tariff.TariffPlan.Color">
+            <inheritdoc cref="F:Samokat.Models.Tariff.TariffPlan.color"/>
+        </member>
+        <member name="P:Samokat.Models.Tariff.TariffPlan.DeliveryText">
+            <inheritdoc cref="F:Samokat.Models.Tariff.TariffPlan.deliveryText"/>
+        </member>
+        <member name="P:Samokat.Models.Tariff.TariffPlan.PartnerIcon">
+            <inheritdoc cref="F:Samokat.Models.Tariff.TariffPlan.partnerIcon"/>
+        </member>
+        <member name="P:Samokat.Models.Tariff.TariffPlan.PartnerIconColor">
+            <inheritdoc cref="F:Samokat.Models.Tariff.TariffPlan.partnerIconColor"/>
+        </member>
         <member name="T:Samokat.ViewModels.BasketProductPageViewModel">
             <inheritdoc/>
             <inheritdoc/>
@@ -646,6 +682,33 @@
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.RightImage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "RightImage" generated properties.</summary>
         </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Plan">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Plan" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.StartDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "StartDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.EndDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "EndDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Price">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Price" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Name">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Name" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Color">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Color" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.DeliveryText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "DeliveryText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PartnerIcon">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PartnerIcon" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.PartnerIconColor">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "PartnerIconColor" generated properties.</summary>
+        </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.SelectAllIcon">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "SelectAllIcon" generated properties.</summary>
         </member>
@@ -873,6 +936,33 @@
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.RightImage">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "RightImage" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Plan">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Plan" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.StartDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "StartDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.EndDate">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "EndDate" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Price">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Price" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Name">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Name" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Color">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Color" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.DeliveryText">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "DeliveryText" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PartnerIcon">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PartnerIcon" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.PartnerIconColor">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "PartnerIconColor" generated properties.</summary>
         </member>
         <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.SelectAllIcon">
             <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "SelectAllIcon" generated properties.</summary>

@@ -1189,3 +1189,11 @@
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/card_uncheck_radibutton.png
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/swape_off.png
 /Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/swape_on.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_comment.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_logout.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_message.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_notification1.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_order.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_payment_card.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_setting.png
+/Users/akmalbukhariev/Projects/Samokat/Samokat/obj/Debug/net9.0-android/resizetizer/r/drawable/ic_uncheck_circle.png

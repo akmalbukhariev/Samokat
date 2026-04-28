@@ -4,12 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Samokat"
-    xmlns:view="clr-namespace:Samokat.Views.PaymentCard"
+    xmlns:view="clr-namespace:Samokat.Views.MyTariff"
     Title="Samokat">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate view:AddPaymentCardPage}"
+        ContentTemplate="{DataTemplate view:TariffsPage}"
         Route="StartPage" />
 
 </Shell>

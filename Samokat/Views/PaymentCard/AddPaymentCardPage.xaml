@@ -15,14 +15,14 @@
         </ResourceDictionary>
     </page:BasePage.Resources>
 
-    <Grid RowDefinitions="*,Auto">
+    <Grid RowDefinitions="Auto,*">
+
+        <components:PageHeaderView Title="Yangi karta qo’shish" />
 
         <!-- Scrollable content -->
-        <ScrollView Grid.Row="0">
+        <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="16,0,16,20" Spacing="24">
-
-                <components:PageHeaderView Title="Yangi karta qo’shish" />
-
+  
                 <Border
                     StrokeThickness="0"
                     StrokeShape="RoundRectangle 20"
@@ -81,10 +81,10 @@
                                         <Entry
                                             x:Name="MonthEntry"
                                             Text="{Binding ExpireMonth}"
-                                            WidthRequest="50"
+                                            WidthRequest="24"
                                             MaxLength="2"
                                             Keyboard="Numeric"
-                                            BackgroundColor="Transparent"
+                                            BackgroundColor="Red"
                                             TextColor="White"
                                             FontFamily="{StaticResource FontSFMedium}"
                                             FontSize="24"
@@ -102,7 +102,7 @@
                                         <Entry
                                             x:Name="YearEntry"
                                             Text="{Binding ExpireYear}"
-                                            WidthRequest="50"
+                                            WidthRequest="24"
                                             MaxLength="2"
                                             Keyboard="Numeric"
                                             BackgroundColor="Transparent"

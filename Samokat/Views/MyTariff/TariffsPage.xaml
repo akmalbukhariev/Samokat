@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Samokat.Views"
+    xmlns:components="clr-namespace:Samokat.Components"
+    xmlns:models="clr-namespace:Samokat.Models.Tariff"
+    x:Class="Samokat.Views.MyTariff.TariffsPage"
+    BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*"
+          Padding="0,10,0,0">
+
+        <components:PageHeaderView
+            Grid.Row="0"
+            Title="Tariflar" />
+
+        <CarouselView
+            x:Name="TariffCarousel"
+            Grid.Row="1"
+            ItemsSource="{Binding Tariffs}"
+            PeekAreaInsets="42"
+            PositionChanged="OnTariffPositionChanged"
+            Margin="0,24,0,0"
+            HeightRequest="585">
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="models:TariffPlan">
+
+                    <Grid Padding="8,0">
+
+                        <Border
+                            WidthRequest="292"
+                            HeightRequest="570"
+                            Stroke="{Binding Color}"
+                            StrokeThickness="3"
+                            BackgroundColor="White"
+                            StrokeShape="RoundRectangle 30"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+
+                            <Grid RowDefinitions="95,*">
+
+                                <Border
+                                    Grid.Row="0"
+                                    BackgroundColor="{Binding Color}"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 27,27,0,0">
+
+                                    <Label
+                                        Text="{Binding Name}"
+                                        TextColor="White"
+                                        FontSize="32"
+                                        FontFamily="{StaticResource FontSFRegular}"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center" />
+                                </Border>
+
+                                <Grid
+                                    Grid.Row="1"
+                                    RowDefinitions="Auto,*,Auto"
+                                    Padding="10,10,28,24">
+
+                                    <Grid RowDefinitions="Auto, Auto,Auto">
+
+                                        <Label
+                                            Text="bir oy uchun"
+                                            TextColor="#20262E"
+                                            FontSize="15"
+                                            FontFamily="{StaticResource FontSFRegular}" />
+ 
+                                        <Label
+                                            Grid.Row="1"
+                                            Text="{Binding Price}"
+                                            TextColor="#20262E"
+                                            FontSize="54"
+                                            FontFamily="{StaticResource FontSFBold}"
+                                            LineBreakMode="NoWrap" />
+
+                                        <Label
+                                            Grid.Row="2"
+                                            Text="so‘m"
+                                            TextColor="#20262E"
+                                            FontSize="22"
+                                            FontFamily="{StaticResource FontSFBold}"
+                                            VerticalOptions="End"
+                                            HorizontalTextAlignment="End"
+                                            Margin="0,0,0,8" />
+                                    </Grid>
+                                   
+                                    <VerticalStackLayout
+                                        Grid.Row="1"
+                                        Spacing="15"
+                                        Margin="0,0,0,0">
+
+                                        <Grid ColumnDefinitions="32,*" ColumnSpacing="14">
+                                            <Image
+                                                Source="ic_check_circle.png"
+                                                WidthRequest="22"
+                                                HeightRequest="22"
+                                                VerticalOptions="Start"
+                                                Margin="0,3,0,0" />
+
+                                            <Label
+                                                Grid.Column="1"
+                                                Text="Bepul yetkazish"
+                                                TextColor="#20262E"
+                                                FontSize="17"
+                                                FontFamily="{StaticResource FontSFRegular}" />
+                                        </Grid>
+
+                                        <Grid ColumnDefinitions="32,*" ColumnSpacing="14">
+                                            <Image
+                                                Source="ic_check_circle.png"
+                                                WidthRequest="22"
+                                                HeightRequest="22"
+                                                VerticalOptions="Start"
+                                                Margin="0,3,0,0" />
+
+                                            <Label
+                                                Grid.Column="1"
+                                                Text="{Binding DeliveryText}"
+                                                TextColor="#20262E"
+                                                FontSize="17"
+                                                FontFamily="{StaticResource FontSFRegular}"
+                                                LineBreakMode="WordWrap" />
+                                        </Grid>
+
+                                        <Grid ColumnDefinitions="32,*" ColumnSpacing="14">
+                                            <Image
+                                                Source="ic_check_circle.png"
+                                                WidthRequest="22"
+                                                HeightRequest="22"
+                                                VerticalOptions="Start"
+                                                Margin="0,3,0,0" />
+
+                                            <Label
+                                                Grid.Column="1"
+                                                Text="Hamkorlarimiz xizmatidan chegirmalar"
+                                                TextColor="#20262E"
+                                                FontSize="17"
+                                                FontFamily="{StaticResource FontSFRegular}"
+                                                LineBreakMode="WordWrap" />
+                                        </Grid>
+
+                                        <Grid ColumnDefinitions="32,*" ColumnSpacing="14">
+                                            <Image
+                                                Source="{Binding PartnerIcon}"
+                                                WidthRequest="22"
+                                                HeightRequest="22"
+                                                VerticalOptions="Start"
+                                                Margin="0,3,0,0" />
+
+                                            <Label
+                                                Grid.Column="1"
+                                                Text="Xamkorlarimizdan xizmat *"
+                                                TextColor="#20262E"
+                                                FontSize="17"
+                                                FontFamily="{StaticResource FontSFRegular}"
+                                                LineBreakMode="WordWrap" />
+                                        </Grid>
+
+                                    </VerticalStackLayout>
+
+                                    <Button
+                                        Grid.Row="2"
+                                        Text="Sotib olish"
+                                        BackgroundColor="{Binding Color}"
+                                        TextColor="White"
+                                        FontSize="20"
+                                        FontFamily="{StaticResource FontSFBold}"
+                                        CornerRadius="28"
+                                        HeightRequest="58"
+                                        Margin="0,10,0,0" />
+
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <HorizontalStackLayout
+            x:Name="CustomIndicatorLayout"
+            Grid.Row="2"
+            HorizontalOptions="Center"
+            Spacing="10"
+            Margin="0,12,0,0" />
+
+        <Label
+            Grid.Row="3"
+            Text="* Bizning hamkorlarimiz dorixonalar va savdo do‘konlari. Siz ulardan maxsus chegirmalar va bepul xizmatlar olishingiz mumkin."
+            TextColor="#9C9CA3"
+            FontSize="14"
+            FontFamily="{StaticResource FontSFMedium}"
+            LineBreakMode="WordWrap"
+            Margin="38,12,38,0" />
+
+    </Grid>
+</page:BasePage>

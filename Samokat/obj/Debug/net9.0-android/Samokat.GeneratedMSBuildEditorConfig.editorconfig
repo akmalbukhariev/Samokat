@@ -71,6 +71,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.Questio
 build_metadata.AdditionalFiles.TargetPath = Components/QuestionBannerView.xaml
 build_metadata.AdditionalFiles.RelativePath = Components/QuestionBannerView.xaml
 
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/QuestionPopupView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.QuestionPopupView.xaml
+build_metadata.AdditionalFiles.TargetPath = Components/QuestionPopupView.xaml
+build_metadata.AdditionalFiles.RelativePath = Components/QuestionPopupView.xaml
+
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Components/SelectionPopup.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Components.SelectionPopup.xaml
@@ -124,6 +130,18 @@ build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.BasketProduct.QuantitySelectorView.xaml
 build_metadata.AdditionalFiles.TargetPath = Views/BasketProduct/QuantitySelectorView.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/BasketProduct/QuantitySelectorView.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/ChangePassword/ChangePasswordPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.ChangePassword.ChangePasswordPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/ChangePassword/ChangePasswordPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/ChangePassword/ChangePasswordPage.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/ChangePhoneNumber/ChangePhoneNumberPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.ChangePhoneNumber.ChangePhoneNumberPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/ChangePhoneNumber/ChangePhoneNumberPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/ChangePhoneNumber/ChangePhoneNumberPage.xaml
 
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/DetailProduct/DetailProductPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
@@ -227,17 +245,47 @@ build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Main.MenuPag
 build_metadata.AdditionalFiles.TargetPath = Views/Main/MenuPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/Main/MenuPage.xaml
 
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/MyTariff/MyTariffPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.MyTariff.MyTariffPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/MyTariff/MyTariffPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/MyTariff/MyTariffPage.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/MyTariff/TariffsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.MyTariff.TariffsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/MyTariff/TariffsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/MyTariff/TariffsPage.xaml
+
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/PaymentCard/AddPaymentCardPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.PaymentCard.AddPaymentCardPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views/PaymentCard/AddPaymentCardPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/PaymentCard/AddPaymentCardPage.xaml
 
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/PaymentCard/CancelOrderPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.PaymentCard.CancelOrderPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/PaymentCard/CancelOrderPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/PaymentCard/CancelOrderPage.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/PaymentCard/CancelOrderPopupView.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.PaymentCard.CancelOrderPopupView.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/PaymentCard/CancelOrderPopupView.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/PaymentCard/CancelOrderPopupView.xaml
+
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/PaymentCard/PaymentCardPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.PaymentCard.PaymentCardPage.xaml
 build_metadata.AdditionalFiles.TargetPath = Views/PaymentCard/PaymentCardPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views/PaymentCard/PaymentCardPage.xaml
+
+[/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Profile/MyProfilePage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Samokat.Views.Profile.MyProfilePage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views/Profile/MyProfilePage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views/Profile/MyProfilePage.xaml
 
 [/Users/akmalbukhariev/Projects/Samokat/Samokat/Views/Search/SearchFilterBottomSheet.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml

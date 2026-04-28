@@ -7,6 +7,7 @@ obj/Debug/net9.0-android/resizetizer/r/mipmap-hdpi/appicon_round.png
 obj/Debug/net9.0-android/resizetizer/r/mipmap-hdpi/appicon.png
 obj/Debug/net9.0-android/resizetizer/r/mipmap-hdpi/appicon_background.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/plus.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_notification1.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_arrow_right.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/star_gray.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/card_check_radibutton.png
@@ -17,6 +18,8 @@ obj/Debug/net9.0-android/resizetizer/r/drawable/ic_uncheck.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/user_green.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/onboarding_offer.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/swape_on.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_message.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_setting.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_check_circle.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_user.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/flag_uz.png
@@ -27,12 +30,14 @@ obj/Debug/net9.0-android/resizetizer/r/drawable/back_textbox.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/product_2.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/lightning_gray.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_basket.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_uncheck_circle.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/user_white.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_lock.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_delete.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_nutrition.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/backround_blur.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_im_comments.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_comment.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_filter.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/onboarding_online.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_share.png
@@ -41,9 +46,11 @@ obj/Debug/net9.0-android/resizetizer/r/drawable/lightning.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_phone.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_user_white.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/unliked.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_logout.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_empty_circle.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/flag_en.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/minus.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_payment_card.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_solid_line.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/huggiest.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_arrow_up.png
@@ -73,6 +80,7 @@ obj/Debug/net9.0-android/resizetizer/r/drawable/ic_dot_line.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/review4.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/review5.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/right.png
+obj/Debug/net9.0-android/resizetizer/r/drawable/ic_order.png
 obj/Debug/net9.0-android/resizetizer/r/drawable/ic_fill_circle.png
 obj/Debug/net9.0-android/resizetizer/r/mipmap-xxxhdpi/appicon_foreground.png
 obj/Debug/net9.0-android/resizetizer/r/mipmap-xxxhdpi/appicon_round.png

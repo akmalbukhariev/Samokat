@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:ui="clr-namespace:Xe.AcrylicView;assembly=Xe.AcrylicView"
+    x:Class="Samokat.Components.QuestionPopupView"
+    x:Name="ThisView"
+    IsVisible="False">
+
+    <Grid>
+        <ui:AcrylicView
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            EffectStyle="Light"
+            TintColor="White"
+            TintOpacity="0.12" />
+
+        <Grid BackgroundColor="#66000000" />
+
+        <Border
+            WidthRequest="310"
+            Padding="10"
+            BackgroundColor="#CCFFFFFF"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 30"
+            HorizontalOptions="Center"
+            VerticalOptions="Center">
+
+            <VerticalStackLayout Spacing="14">
+
+                <VerticalStackLayout
+                    Padding="20,10,20,0"
+                    Spacing="10"
+                    HorizontalOptions="Center">
+
+                    <!-- Question icon -->
+                    <Grid
+                        IsVisible="{Binding IsSuccess, Source={x:Reference ThisView}, Converter={StaticResource InverseBoolConverter}}"
+                        WidthRequest="140"
+                        HeightRequest="140">
+
+                        <Ellipse
+                            Stroke="#96979B"
+                            StrokeThickness="2.5"
+                            WidthRequest="100"
+                            HeightRequest="100"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+
+                        <Label
+                            Text="?"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            FontSize="58"
+                            TextColor="#96979B"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+                    </Grid>
+
+                    <!-- Success icon -->
+                    <Grid
+                        IsVisible="{Binding IsSuccess, Source={x:Reference ThisView}}"
+                        WidthRequest="140"
+                        HeightRequest="140">
+
+                        <Ellipse
+                            Stroke="#96979B"
+                            StrokeThickness="2.5"
+                            WidthRequest="100"
+                            HeightRequest="100"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+
+                        <Label
+                            Text="✓"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            FontSize="54"
+                            TextColor="#96979B"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center" />
+                    </Grid>
+
+                    <!-- Question text -->
+                    <Label
+                        IsVisible="{Binding IsSuccess, Source={x:Reference ThisView}, Converter={StaticResource InverseBoolConverter}}"
+                        Text="{Binding QuestionTitle, Source={x:Reference ThisView}}"
+                        FontFamily="{StaticResource FontSFRegular}"
+                        FontSize="17"
+                        TextColor="#22292F"
+                        WidthRequest="260"
+                        HorizontalTextAlignment="Center" />
+
+                    <!-- Success text -->
+                    <VerticalStackLayout
+                        Spacing="12"
+                        IsVisible="{Binding IsSuccess, Source={x:Reference ThisView}}">
+
+                        <Label
+                            Text="{Binding SuccessTitle, Source={x:Reference ThisView}}"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            FontSize="17"
+                            TextColor="#22292F"
+                            WidthRequest="260"
+                            HorizontalTextAlignment="Center" />
+
+                        <Label
+                            Text="{Binding SuccessMessage, Source={x:Reference ThisView}}"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            FontSize="17"
+                            TextColor="#96979B"
+                            WidthRequest="260"
+                            HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+
+                </VerticalStackLayout>
+
+                <!-- Yes / No buttons -->
+                <VerticalStackLayout
+                    Spacing="14"
+                    IsVisible="{Binding IsSuccess, Source={x:Reference ThisView}, Converter={StaticResource InverseBoolConverter}}">
+
+                    <Button
+                        Text="{Binding YesText, Source={x:Reference ThisView}}"
+                        HeightRequest="56"
+                        CornerRadius="40"
+                        BackgroundColor="#DADADA"
+                        TextColor="#22292F"
+                        FontFamily="{StaticResource FontSFMedium}"
+                        FontSize="18"
+                        Clicked="OnYesClicked" />
+
+                    <Button
+                        Text="{Binding NoText, Source={x:Reference ThisView}}"
+                        HeightRequest="56"
+                        CornerRadius="40"
+                        BackgroundColor="#FD473C"
+                        TextColor="White"
+                        FontFamily="{StaticResource FontSFMedium}"
+                        FontSize="18"
+                        Clicked="OnNoClicked" />
+
+                </VerticalStackLayout>
+
+                <!-- OK button -->
+                <Button
+                    IsVisible="{Binding IsSuccess, Source={x:Reference ThisView}}"
+                    Text="{Binding OkText, Source={x:Reference ThisView}}"
+                    HeightRequest="56"
+                    CornerRadius="40"
+                    BackgroundColor="#FD473C"
+                    TextColor="White"
+                    FontFamily="{StaticResource FontSFMedium}"
+                    FontSize="18"
+                    Clicked="OnOkClicked" />
+
+            </VerticalStackLayout>
+        </Border>
+    </Grid>
+</ContentView>
