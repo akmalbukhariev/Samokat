@@ -11,6 +11,7 @@ using Samokat.Views.FavoriteProduct;
 using Samokat.Views.BasketProduct;
 using Samokat.Views.Formalization;
 using Samokat.Views.PaymentCard;
+using Samokat.Views.Children;
 
 
 
@@ -84,7 +85,9 @@ public static class MauiProgram
 		builder.Services.AddTransient<BasketProductPage>();
 		builder.Services.AddTransient<FormalizationPage>();
 		builder.Services.AddTransient<PaymentCardPage>();
-
+		builder.Services.AddTransient<ChildrenPage>();
+		builder.Services.AddTransient<ChildInfoPage>();
+		
 		builder.Services.AddTransient<MainPageViewModel>();
 		builder.Services.AddTransient<MenuPageViewModel>();
 		builder.Services.AddTransient<SearchPageViewModel>();

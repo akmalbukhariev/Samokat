@@ -4,12 +4,58 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Samokat"
-    xmlns:view="clr-namespace:Samokat.Views.MyTariff"
+    xmlns:view="clr-namespace:Samokat.Views.Children"
     Title="Samokat">
 
     <ShellContent
         Title="Home"
-        ContentTemplate="{DataTemplate view:TariffsPage}"
+        ContentTemplate="{DataTemplate view:ChildrenPage}"
         Route="StartPage" />
+    
+     <TabBar>
+          <Tab Title="Uy">
+               <Tab.Icon>
+                    <OnPlatform x:TypeArguments="FileImageSource">
+                         <On Platform="Android" Value="ic_home.png" />
+                         <On Platform="iOS" Value="ic_home.png" />
+                    </OnPlatform>
+               </Tab.Icon>
+               <ShellContent ContentTemplate="{DataTemplate companyPages:ActiveProductPage}"
+                              Shell.NavBarIsVisible="False" />
+          </Tab>
+
+          <Tab Title="Sevimli">
+               <Tab.Icon>
+                    <OnPlatform x:TypeArguments="FileImageSource">
+                         <On Platform="Android" Value="ic_favorite.png" />
+                         <On Platform="iOS" Value="ic_favorite.png" />
+                    </OnPlatform>
+               </Tab.Icon>
+               <ShellContent ContentTemplate="{DataTemplate companyPages:InActiveProductPage}"
+                              Shell.NavBarIsVisible="False" />
+          </Tab>
+
+          <Tab Title="Savatcha">
+               <Tab.Icon>
+                    <OnPlatform x:TypeArguments="FileImageSource">
+                         <On Platform="Android" Value="ic_basket.png" />
+                         <On Platform="iOS" Value="ic_basket.png" />
+                    </OnPlatform>
+               </Tab.Icon>
+               <ShellContent ContentTemplate="{DataTemplate companyPages:PendingProductPage}"
+                              Shell.NavBarIsVisible="False" />
+          </Tab>
+
+          <Tab Title="Profil">
+               <Tab.Icon>
+                    <OnPlatform x:TypeArguments="FileImageSource">
+                         <On Platform="Android" Value="ic_user.png" />
+                         <On Platform="iOS" Value="ic_user.png" />
+                    </OnPlatform>
+               </Tab.Icon>
+               <ShellContent ContentTemplate="{DataTemplate companyPages:CompanyProfilePage}"
+                              Shell.NavBarIsVisible="False" />
+          </Tab>
+     </TabBar>
 
 </Shell>

@@ -91,6 +91,8 @@ public partial class PageHeaderView : ContentView
 
         if (BackCommand?.CanExecute(null) == true)
             BackCommand.Execute(null);
+
+        await AppNavigatorService.NavigateTo("..");
     }
 
     private async void RightImage_Tapped(object sender, TappedEventArgs e)
