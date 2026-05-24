@@ -1,7 +1,7 @@
 using System;
 using Microsoft.Maui.Controls;
 
-namespace Samokat.Views.DetailProduct
+namespace Ninimum.Views.DetailProduct
 {
     public partial class LeaveCommentPage : BasePage
     {
@@ -109,7 +109,7 @@ namespace Samokat.Views.DetailProduct
 
             if (CommentEditor != null)
             {
-                CommentEditor.Text = "Mahsulotga gap yo’q, zo’r ekan. Menga juda yoqdi. Endi faqat Samokat.uz dan sotib olaman.";
+                CommentEditor.Text = "Mahsulotga gap yo’q, zo’r ekan. Menga juda yoqdi. Endi faqat Ninimum.uz dan sotib olaman.";
             }
         }
     }

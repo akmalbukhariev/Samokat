@@ -1,7 +1,7 @@
 ﻿using Android.App;
 using Android.Runtime;
 
-namespace Samokat;
+namespace Ninimum;
 
 [Application]
 public class MainApplication : MauiApplication

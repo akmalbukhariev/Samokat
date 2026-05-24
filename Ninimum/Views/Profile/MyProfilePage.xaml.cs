@@ -1,10 +1,10 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Samokat.Services;
-using Samokat.Views.PaymentCard;
+using Ninimum.Services;
+using Ninimum.Views.PaymentCard;
 
-namespace Samokat.Views.Profile;
+namespace Ninimum.Views.Profile;
 
 public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 {

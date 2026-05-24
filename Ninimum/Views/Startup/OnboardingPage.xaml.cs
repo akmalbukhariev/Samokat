@@ -2,10 +2,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Microsoft.Maui.Controls.Shapes;
-using Samokat.Models.Startup;
-using Samokat.Views.LoginRegister;
+using Ninimum.Models.Startup;
+using Ninimum.Views.LoginRegister;
 
-namespace Samokat.Views.Startup;
+namespace Ninimum.Views.Startup;
 
 public partial class OnboardingPage : BasePage
 {

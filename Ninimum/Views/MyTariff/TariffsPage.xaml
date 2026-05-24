@@ -2,10 +2,10 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:page="clr-namespace:Samokat.Views"
-    xmlns:components="clr-namespace:Samokat.Components"
-    xmlns:models="clr-namespace:Samokat.Models.Tariff"
-    x:Class="Samokat.Views.MyTariff.TariffsPage"
+    xmlns:page="clr-namespace:Ninimum.Views"
+    xmlns:components="clr-namespace:Ninimum.Components"
+    xmlns:models="clr-namespace:Ninimum.Models.Tariff"
+    x:Class="Ninimum.Views.MyTariff.TariffsPage"
     BackgroundColor="White">
 
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*"

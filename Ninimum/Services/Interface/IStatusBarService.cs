@@ -1,5 +1,5 @@
 
-namespace Samokat.Services.Interface
+namespace Ninimum.Services.Interface
 {
     public interface IStatusBarService
     {

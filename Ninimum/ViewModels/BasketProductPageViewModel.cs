@@ -1,10 +1,10 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Samokat.Models;
-using Samokat.Models.Main;
+using Ninimum.Models;
+using Ninimum.Models.Main;
 using System.Collections.ObjectModel;
 
-namespace Samokat.ViewModels;
+namespace Ninimum.ViewModels;
 
 public partial class BasketProductPageViewModel : ObservableObject
 {

@@ -1,4 +1,4 @@
-namespace Samokat.Components;
+namespace Ninimum.Components;
 
 public partial class QuestionPopupView : ContentView
 {

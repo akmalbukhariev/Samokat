@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
-namespace Samokat.Views.PaymentCard;
+namespace Ninimum.Views.PaymentCard;
 
 public partial class CancelOrderPage : BasePage, INotifyPropertyChanged
 {

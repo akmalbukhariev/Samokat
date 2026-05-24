@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Samokat.Models.Startup;
+namespace Ninimum.Models.Startup;
 
 public partial class PopupItemModel : ObservableObject
 {

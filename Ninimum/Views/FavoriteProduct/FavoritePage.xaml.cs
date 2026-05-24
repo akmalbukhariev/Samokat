@@ -1,7 +1,7 @@
 
-using Samokat.ViewModels;
+using Ninimum.ViewModels;
 
-namespace Samokat.Views.FavoriteProduct;
+namespace Ninimum.Views.FavoriteProduct;
 
 public partial class FavoritePage : BasePage
 {

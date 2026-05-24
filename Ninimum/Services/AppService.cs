@@ -1,4 +1,4 @@
-namespace Samokat.Services
+namespace Ninimum.Services
 {
     public static class AppService
     {

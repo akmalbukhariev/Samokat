@@ -1,10 +1,10 @@
-using Samokat.Platforms.iOS;
+using Ninimum.Platforms.iOS;
 using UIKit;
 using CoreGraphics;
-using Samokat.Services.Interface;
+using Ninimum.Services.Interface;
 
 [assembly: Dependency(typeof(StatusBarService))]
-namespace Samokat.Platforms.iOS
+namespace Ninimum.Platforms.iOS
 {
     public class StatusBarService : IStatusBarService
     {

@@ -1,14 +1,14 @@
 ﻿using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Platform;
-using Samokat.Views.DetailProduct;
-using Samokat.Views.Formalization;
-using Samokat.Views.LoginRegister;
-using Samokat.Views.Main;
-using Samokat.Views.PaymentCard;
-using Samokat.Views.Search;
-using Samokat.Views.Startup;
+using Ninimum.Views.DetailProduct;
+using Ninimum.Views.Formalization;
+using Ninimum.Views.LoginRegister;
+using Ninimum.Views.Main;
+using Ninimum.Views.PaymentCard;
+using Ninimum.Views.Search;
+using Ninimum.Views.Startup;
 
-namespace Samokat;
+namespace Ninimum;
 
 public partial class App : Application
 {

@@ -2,8 +2,8 @@
 <ContentView
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:models="clr-namespace:Samokat.Models.Main"
-    x:Class="Samokat.Views.Main.Components.MainProductCardView"
+    xmlns:models="clr-namespace:Ninimum.Models.Main"
+    x:Class="Ninimum.Views.Main.Components.MainProductCardView"
     x:Name="RootView">
  
     <VerticalStackLayout 

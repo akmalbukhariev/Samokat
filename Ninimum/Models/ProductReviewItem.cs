@@ -1,6 +1,6 @@
 using System.Collections.ObjectModel;
 
-namespace Samokat.Models;
+namespace Ninimum.Models;
 
 public class ProductReviewItem
 {

@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
-namespace Samokat.Views.LoginRegister;
+namespace Ninimum.Views.LoginRegister;
 
 public partial class ForgotPasswordPage : BasePage, INotifyPropertyChanged
 {

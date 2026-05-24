@@ -2,10 +2,10 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Samokat.Models;
-using Samokat.Models.Tariff;
+using Ninimum.Models;
+using Ninimum.Models.Tariff;
 
-namespace Samokat.Views.MyTariff;
+namespace Ninimum.Views.MyTariff;
 
 public partial class MyTariffPage : BasePage, INotifyPropertyChanged
 {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Windows.Input;
 
-namespace Samokat.Components;
+namespace Ninimum.Components;
 
 public partial class SelectionPopupView : ContentView
 {

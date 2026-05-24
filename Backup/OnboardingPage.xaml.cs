@@ -1,7 +1,7 @@
 using System.Windows.Input;
-using Samokat.Models.Startup;
+using Ninimum.Models.Startup;
 
-namespace Samokat.Views.Startup;
+namespace Ninimum.Views.Startup;
 
 public partial class OnboardingPage : BasePage
 {

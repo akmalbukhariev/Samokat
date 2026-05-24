@@ -1,7 +1,7 @@
 
-using Samokat.ViewModels;
+using Ninimum.ViewModels;
 
-namespace Samokat.Views.Search;
+namespace Ninimum.Views.Search;
 
 public partial class SearchPage : BasePage
 {

@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Samokat.Models;
+namespace Ninimum.Models;
 
 public partial class ChildrenInfo : ObservableObject
 {

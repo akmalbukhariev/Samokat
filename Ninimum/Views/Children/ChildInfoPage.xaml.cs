@@ -2,9 +2,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
-using Samokat.Models;
+using Ninimum.Models;
 
-namespace Samokat.Views.Children;
+namespace Ninimum.Views.Children;
 
 public partial class ChildInfoPage : BasePage, INotifyPropertyChanged
 {

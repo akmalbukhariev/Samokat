@@ -1,6 +1,6 @@
-using Samokat.ViewModels;
+using Ninimum.ViewModels;
 
-namespace Samokat.Views.Main;
+namespace Ninimum.Views.Main;
 
 public partial class MenuPage : BasePage
 {

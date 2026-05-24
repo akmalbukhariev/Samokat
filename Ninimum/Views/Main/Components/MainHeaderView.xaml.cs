@@ -1,4 +1,4 @@
-namespace Samokat.Views.Main.Components;
+namespace Ninimum.Views.Main.Components;
 
 public partial class MainHeaderView : ContentView
 {

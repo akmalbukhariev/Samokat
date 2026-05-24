@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
-using Samokat.Models;
+using Ninimum.Models;
 
-namespace Samokat.Views.Children;
+namespace Ninimum.Views.Children;
 
 public partial class ChildrenPage : BasePage
 {

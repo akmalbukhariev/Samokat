@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Specialized;
 using System.Windows.Input;
 using Microsoft.Maui.Controls.Shapes;
-using Samokat.Models.Main;
+using Ninimum.Models.Main;
 
-namespace Samokat.Views.Main.Components;
+namespace Ninimum.Views.Main.Components;
 
 public partial class MainProductCardView : ContentView
 {

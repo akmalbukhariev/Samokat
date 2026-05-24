@@ -2,8 +2,8 @@
 <ContentView
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Samokat.Views.BasketProduct"
-    x:Class="Samokat.Views.BasketProduct.BasketCartItemView"
+    xmlns:local="clr-namespace:Ninimum.Views.BasketProduct"
+    x:Class="Ninimum.Views.BasketProduct.BasketCartItemView"
     x:Name="RootView">
 
     <Border

@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
-namespace Samokat.Views.ChangePassword;
+namespace Ninimum.Views.ChangePassword;
 
 public partial class ChangePasswordPage : BasePage, INotifyPropertyChanged
 {

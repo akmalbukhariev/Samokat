@@ -1,4 +1,4 @@
-namespace Samokat.Views.PaymentCard;
+namespace Ninimum.Views.PaymentCard;
 
 public partial class CancelOrderPopupView : ContentView
 {

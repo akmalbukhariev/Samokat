@@ -1,6 +1,6 @@
 ﻿using Foundation;
 
-namespace Samokat;
+namespace Ninimum;
 
 [Register("AppDelegate")]
 public class AppDelegate : MauiUIApplicationDelegate

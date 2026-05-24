@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace Samokat.Views.Main.Components;
+namespace Ninimum.Views.Main.Components;
 
 public partial class ProductItemView : ContentView
 {

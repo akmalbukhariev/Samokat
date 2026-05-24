@@ -2,8 +2,8 @@
 <ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:ui="clr-namespace:Xe.AcrylicView;assembly=Xe.AcrylicView"
-             xmlns:components="clr-namespace:Samokat.Components"
-             x:Class="Samokat.Components.SmsCodePopup"
+             xmlns:components="clr-namespace:Ninimum.Components"
+             x:Class="Ninimum.Components.SmsCodePopup"
              x:Name="ThisPopup"
              IsVisible="False">
 

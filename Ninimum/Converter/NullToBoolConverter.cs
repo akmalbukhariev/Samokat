@@ -1,7 +1,7 @@
 using System.Globalization;
 using Microsoft.Maui.Controls;
 
-namespace Samokat.Converters;
+namespace Ninimum.Converters;
 
 public class NullToBoolConverter : IValueConverter
 {

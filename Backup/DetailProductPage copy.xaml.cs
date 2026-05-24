@@ -3,10 +3,10 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Microsoft.Maui.Controls.Shapes;
-using Samokat.Models.Startup;
-using Samokat.ViewModels;
+using Ninimum.Models.Startup;
+using Ninimum.ViewModels;
 
-namespace Samokat.Views.DetailProduct;
+namespace Ninimum.Views.DetailProduct;
 
 public class TestImage
 {

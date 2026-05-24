@@ -1,10 +1,10 @@
-﻿using Samokat.Platforms.Android;
+﻿using Ninimum.Platforms.Android;
 using Color = Android.Graphics.Color;
 using AndroidX.Core.View;
-using Samokat.Services.Interface;
+using Ninimum.Services.Interface;
 
 [assembly: Dependency(typeof(StatusBarService))]
-namespace Samokat.Platforms.Android
+namespace Ninimum.Platforms.Android
 {
     public class StatusBarService : IStatusBarService
     {

@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Samokat.Converter;
+namespace Ninimum.Converter;
 
 public class InverseBoolConverter : IValueConverter
 {

@@ -1,20 +1,20 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
-using Samokat.Services;
-using Samokat.Services.Interface;
+using Ninimum.Services;
+using Ninimum.Services.Interface;
 using Xe.AcrylicView;
-using Samokat.ViewModels;
-using Samokat.Views.Main;
-using Samokat.Views.Search;
-using Samokat.Views.DetailProduct;
-using Samokat.Views.FavoriteProduct;
-using Samokat.Views.BasketProduct;
-using Samokat.Views.Formalization;
-using Samokat.Views.PaymentCard;
-using Samokat.Views.Children;
-using Samokat.Views.Profile;
+using Ninimum.ViewModels;
+using Ninimum.Views.Main;
+using Ninimum.Views.Search;
+using Ninimum.Views.DetailProduct;
+using Ninimum.Views.FavoriteProduct;
+using Ninimum.Views.BasketProduct;
+using Ninimum.Views.Formalization;
+using Ninimum.Views.PaymentCard;
+using Ninimum.Views.Children;
+using Ninimum.Views.Profile;
 using Api.Services;
-using Samokat.Views.LoginRegister;
+using Ninimum.Views.LoginRegister;
 using RestSharp;
 using Utils;
 
@@ -25,7 +25,7 @@ using UIKit;
 using Foundation;
 #endif
 
-namespace Samokat;
+namespace Ninimum;
 
 public static class MauiProgram
 {
@@ -73,13 +73,13 @@ public static class MauiProgram
                 }));
 
 #if ANDROID
-		builder.Services.AddSingleton<IStatusBarService, Samokat.Platforms.Android.StatusBarService>();
+		builder.Services.AddSingleton<IStatusBarService, Ninimum.Platforms.Android.StatusBarService>();
 		//builder.Services.AddSingleton<INotificationService, NotificationService>();
 		//builder.Services.AddSingleton<IKeyboardHelper, KeyboardHelper>();
 #endif
 
 #if IOS
-		builder.Services.AddSingleton<IStatusBarService, Samokat.Platforms.iOS.StatusBarService>();
+		builder.Services.AddSingleton<IStatusBarService, Ninimum.Platforms.iOS.StatusBarService>();
 		//builder.Services.AddSingleton<IKeyboardHelper, EcoPlatesMobile.Platforms.iOS.KeyboardHelper>();
 #endif
 	}

@@ -1,7 +1,7 @@
 using System.Collections.ObjectModel;
-using Samokat.Views.PaymentCard;
+using Ninimum.Views.PaymentCard;
 
-namespace Samokat.Views.Formalization;
+namespace Ninimum.Views.Formalization;
 
 public partial class FormalizationPage : BasePage
 {

@@ -7,7 +7,7 @@ using Models.Requests;
 using Models.Responses;
 using Utils;
 
-namespace Samokat.ViewModels;
+namespace Ninimum.ViewModels;
 
 public partial class RegisterPageViewModel : ObservableObject
 {

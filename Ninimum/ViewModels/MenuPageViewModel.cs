@@ -1,9 +1,9 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using Samokat.Models.Menu;
+using Ninimum.Models.Menu;
 using System.Collections.ObjectModel;
 
-namespace Samokat.ViewModels;
+namespace Ninimum.ViewModels;
 
 public partial class MenuPageViewModel : ObservableObject
 {

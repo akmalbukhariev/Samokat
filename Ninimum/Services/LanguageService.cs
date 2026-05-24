@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Utils;
 
-namespace Samokat.Services
+namespace Ninimum.Services
 {
     public class LanguageService
     {

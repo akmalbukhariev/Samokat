@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace Samokat.Models;
+namespace Ninimum.Models;
 
 public class PaymentCardModel
 {

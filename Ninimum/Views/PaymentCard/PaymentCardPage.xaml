@@ -2,10 +2,10 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:page="clr-namespace:Samokat.Views"
-    xmlns:components="clr-namespace:Samokat.Components"
-    xmlns:converter="clr-namespace:Samokat.Converter"
-    x:Class="Samokat.Views.PaymentCard.PaymentCardPage"
+    xmlns:page="clr-namespace:Ninimum.Views"
+    xmlns:components="clr-namespace:Ninimum.Components"
+    xmlns:converter="clr-namespace:Ninimum.Converter"
+    x:Class="Ninimum.Views.PaymentCard.PaymentCardPage"
     x:Name="ThisPage"
     BackgroundColor="White">
 

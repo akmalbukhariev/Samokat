@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Samokat.Models.Tariff;
+namespace Ninimum.Models.Tariff;
 
 public partial class TariffPlan : ObservableObject
 {

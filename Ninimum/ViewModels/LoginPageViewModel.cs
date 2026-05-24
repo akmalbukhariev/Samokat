@@ -2,11 +2,11 @@ using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models.Requests;
 using Models.Responses;
-using Samokat.Views.LoginRegister;
+using Ninimum.Views.LoginRegister;
 using System.Windows.Input;
 using Utils;
 
-namespace Samokat.ViewModels;
+namespace Ninimum.ViewModels;
 
 public partial class LoginPageViewModel : ObservableObject
 {

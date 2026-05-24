@@ -1,9 +1,9 @@
 using CommunityToolkit.Maui.Views;
 using System.Collections;
-using Samokat.Models;
-using Samokat.Models.Startup;
+using Ninimum.Models;
+using Ninimum.Models.Startup;
 
-namespace Samokat.Components;
+namespace Ninimum.Components;
 
 public partial class SelectionPopup : Popup
 {

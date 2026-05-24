@@ -1,7 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 
-namespace Samokat.Models.Menu;
+namespace Ninimum.Models.Menu;
 
 public partial class MenuSubItemModel : ObservableObject
 {

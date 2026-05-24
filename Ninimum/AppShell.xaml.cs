@@ -1,4 +1,4 @@
-﻿namespace Samokat;
+﻿namespace Ninimum;
 
 public partial class AppShell : Shell
 {

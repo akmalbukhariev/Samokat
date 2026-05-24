@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Samokat.Models.Main;
+namespace Ninimum.Models.Main;
  
 public partial class ProductItemModel : ObservableObject
 {

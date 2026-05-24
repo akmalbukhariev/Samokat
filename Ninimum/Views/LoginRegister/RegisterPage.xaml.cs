@@ -1,6 +1,6 @@
-using Samokat.ViewModels;
+using Ninimum.ViewModels;
 
-namespace Samokat.Views.LoginRegister;
+namespace Ninimum.Views.LoginRegister;
 
 public partial class RegisterPage : BasePage
 {

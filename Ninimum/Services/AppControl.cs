@@ -2,7 +2,7 @@
 using System.Text.RegularExpressions;
 using Utils;
 
-namespace Samokat.Services
+namespace Ninimum.Services
 {
     public class AppControl
     {

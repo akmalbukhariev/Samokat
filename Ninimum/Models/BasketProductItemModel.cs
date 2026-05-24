@@ -2,7 +2,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using System.Windows.Input;
 
-namespace Samokat.Models;
+namespace Ninimum.Models;
 
 public partial class BasketProductItemModel : ObservableObject
 {

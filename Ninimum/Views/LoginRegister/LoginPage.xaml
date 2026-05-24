@@ -2,9 +2,9 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:page="clr-namespace:Samokat.Views"
-    xmlns:components="clr-namespace:Samokat.Components"
-    x:Class="Samokat.Views.LoginRegister.LoginPage"
+    xmlns:page="clr-namespace:Ninimum.Views"
+    xmlns:components="clr-namespace:Ninimum.Components"
+    x:Class="Ninimum.Views.LoginRegister.LoginPage"
     BackgroundColor="White"
     x:Name="RootPage">
     
@@ -30,7 +30,7 @@
                     <Label HorizontalOptions="Center">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="Samokat" TextColor="#FD473C" FontFamily="SansitaOne" FontSize="36" />
+                                <Span Text="Ninimum" TextColor="#FD473C" FontFamily="SansitaOne" FontSize="36" />
                                 <Span Text="." TextColor="#22292F" FontFamily="SansitaOne" FontSize="36" />
                                 <Span Text="uz" TextColor="#FD473C" FontFamily="SansitaOne" FontSize="36" />
                             </FormattedString>

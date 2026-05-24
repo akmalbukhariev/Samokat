@@ -1,6 +1,6 @@
-using Samokat.ViewModels;
+using Ninimum.ViewModels;
 
-namespace Samokat.Views.DetailProduct;
+namespace Ninimum.Views.DetailProduct;
 
 public partial class ProductReviews : BasePage
 {

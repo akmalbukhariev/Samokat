@@ -1,7 +1,7 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Samokat.Models.Startup;
+namespace Ninimum.Models.Startup;
 
 public class OnboardingSlide : INotifyPropertyChanged
 {

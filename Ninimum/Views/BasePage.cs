@@ -1,10 +1,10 @@
 ﻿using System.Runtime.CompilerServices;
 
 using Microsoft.Maui.Controls.PlatformConfiguration;
-using Samokat.Services;
-using Samokat.Services.Interface;
+using Ninimum.Services;
+using Ninimum.Services.Interface;
 
-namespace Samokat.Views
+namespace Ninimum.Views
 {
     public abstract class BasePage : ContentPage
     {

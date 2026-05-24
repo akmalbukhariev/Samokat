@@ -1,9 +1,9 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Samokat.Models.Main;
+using Ninimum.Models.Main;
 
-namespace Samokat.ViewModels;
+namespace Ninimum.ViewModels;
 
 public partial class SearchPageViewModel : ObservableObject
 {

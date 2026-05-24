@@ -1,8 +1,8 @@
-using Samokat.Services;
-using Samokat.Views.LoginRegister;
-using Samokat.Views.Startup;
+using Ninimum.Services;
+using Ninimum.Views.LoginRegister;
+using Ninimum.Views.Startup;
 
-namespace Samokat
+namespace Ninimum
 {
     public partial class AppEntryShell : Shell
     {

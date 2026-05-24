@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace Samokat.Components;
+namespace Ninimum.Components;
 
 public partial class PageHeaderView : ContentView
 {

@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace Samokat.Views.BasketProduct;
+namespace Ninimum.Views.BasketProduct;
 
 public partial class QuantitySelectorView : ContentView
 {

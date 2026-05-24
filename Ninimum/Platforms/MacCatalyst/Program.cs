@@ -1,7 +1,7 @@
 ﻿using ObjCRuntime;
 using UIKit;
 
-namespace Samokat;
+namespace Ninimum;
 
 public class Program
 {

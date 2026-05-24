@@ -2,11 +2,11 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Microsoft.Maui.Controls;
-using Samokat.Services;
-using Samokat.ViewModels;
-using Samokat.Views.Main;
+using Ninimum.Services;
+using Ninimum.ViewModels;
+using Ninimum.Views.Main;
 
-namespace Samokat.Views.LoginRegister;
+namespace Ninimum.Views.LoginRegister;
 
 public partial class LoginPage : BasePage
 {

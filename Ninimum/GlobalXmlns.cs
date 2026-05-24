@@ -1,2 +1,2 @@
-[assembly: XmlnsDefinition("http://schemas.microsoft.com/dotnet/maui/global", "Samokat")]
-[assembly: XmlnsDefinition("http://schemas.microsoft.com/dotnet/maui/global", "Samokat.Pages")]
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/dotnet/maui/global", "Ninimum")]
+[assembly: XmlnsDefinition("http://schemas.microsoft.com/dotnet/maui/global", "Ninimum.Pages")]

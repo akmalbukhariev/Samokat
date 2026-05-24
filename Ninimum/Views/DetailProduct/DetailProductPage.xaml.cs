@@ -1,8 +1,8 @@
 using Microsoft.Maui.Controls.Shapes;
-using Samokat.Models;
-using Samokat.ViewModels;
+using Ninimum.Models;
+using Ninimum.ViewModels;
 
-namespace Samokat.Views.DetailProduct;
+namespace Ninimum.Views.DetailProduct;
 
 public partial class DetailProductPage : BasePage
 {

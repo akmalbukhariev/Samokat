@@ -2,7 +2,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
-namespace Samokat.Views.ChangePhoneNumber;
+namespace Ninimum.Views.ChangePhoneNumber;
 
 public partial class ChangePhoneNumberPage : BasePage, INotifyPropertyChanged
 {

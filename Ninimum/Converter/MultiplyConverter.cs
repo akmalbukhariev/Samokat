@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Samokat.Converters;
+namespace Ninimum.Converters;
 
 public class MultiplyConverter : IValueConverter
 {

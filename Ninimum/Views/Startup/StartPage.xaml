@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <page:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:page="clr-namespace:Samokat.Views"
-             xmlns:components="clr-namespace:Samokat.Components"
+             xmlns:page="clr-namespace:Ninimum.Views"
+             xmlns:components="clr-namespace:Ninimum.Components"
              BackgroundColor="White"
-             x:Class="Samokat.Views.Startup.StartPage">
+             x:Class="Ninimum.Views.Startup.StartPage">
 
        <Grid RowDefinitions="*,Auto,30,Auto,40,Auto,*,Auto,50"
              ColumnDefinitions="30,*,30">
@@ -17,7 +17,7 @@
                             WidthRequest="130"
                             HeightRequest="130"
                             Aspect="AspectFit"/>
-                     <Label Text="Samokat.uz"
+                     <Label Text="Ninimum.uz"
                             FontSize="36"
                             FontFamily="{StaticResource FontSansitaOne}"
                             TextColor="Red"

@@ -1,7 +1,7 @@
 using Microsoft.Maui.Storage;
 using System.Text.Json;
 
-namespace Samokat.Services
+namespace Ninimum.Services
 {
     public class AppStoreService
     {

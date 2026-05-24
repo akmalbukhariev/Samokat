@@ -2,9 +2,9 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:page="clr-namespace:Samokat.Views"
-    xmlns:components="clr-namespace:Samokat.Components"
-    x:Class="Samokat.Views.Formalization.FormalizationPage"
+    xmlns:page="clr-namespace:Ninimum.Views"
+    xmlns:components="clr-namespace:Ninimum.Components"
+    x:Class="Ninimum.Views.Formalization.FormalizationPage"
     x:Name="ThisPage"
     BackgroundColor="White">
 

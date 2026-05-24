@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <Shell
-    x:Class="Samokat.AppShell"
+    x:Class="Ninimum.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:Samokat"
-    xmlns:view="clr-namespace:Samokat.Views.Children"
-    xmlns:main="clr-namespace:Samokat.Views.Main"
-    xmlns:favorite="clr-namespace:Samokat.Views.FavoriteProduct"
-    xmlns:basket="clr-namespace:Samokat.Views.BasketProduct"
-    xmlns:profile="clr-namespace:Samokat.Views.Profile"
+    xmlns:local="clr-namespace:Ninimum"
+    xmlns:view="clr-namespace:Ninimum.Views.Children"
+    xmlns:main="clr-namespace:Ninimum.Views.Main"
+    xmlns:favorite="clr-namespace:Ninimum.Views.FavoriteProduct"
+    xmlns:basket="clr-namespace:Ninimum.Views.BasketProduct"
+    xmlns:profile="clr-namespace:Ninimum.Views.Profile"
     Shell.FlyoutBehavior="Disabled"
     Shell.TabBarBackgroundColor="White"
     Shell.TabBarUnselectedColor="Gray"
     Shell.TabBarForegroundColor="Red"
     Shell.TabBarTitleColor="Red"
-    Title="Samokat">
+    Title="Ninimum">
     
     <!--
     <ShellContent

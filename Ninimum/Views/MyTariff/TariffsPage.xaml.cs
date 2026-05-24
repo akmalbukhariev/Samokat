@@ -1,8 +1,8 @@
 using System.Collections.ObjectModel;
 using Microsoft.Maui.Controls.Shapes;
-using Samokat.Models.Tariff;
+using Ninimum.Models.Tariff;
 
-namespace Samokat.Views.MyTariff;
+namespace Ninimum.Views.MyTariff;
 
 public partial class TariffsPage : BasePage
 {

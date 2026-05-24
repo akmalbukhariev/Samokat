@@ -2,12 +2,12 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:page="clr-namespace:Samokat.Views"
-    xmlns:components="clr-namespace:Samokat.Components"
-    xmlns:main_components="clr-namespace:Samokat.Views.Main.Components"
-    xmlns:models="clr-namespace:Samokat.Models.Main"
-    xmlns:local="clr-namespace:Samokat.Views.DetailProduct"
-    x:Class="Samokat.Views.DetailProduct.DetailProductPage"
+    xmlns:page="clr-namespace:Ninimum.Views"
+    xmlns:components="clr-namespace:Ninimum.Components"
+    xmlns:main_components="clr-namespace:Ninimum.Views.Main.Components"
+    xmlns:models="clr-namespace:Ninimum.Models.Main"
+    xmlns:local="clr-namespace:Ninimum.Views.DetailProduct"
+    x:Class="Ninimum.Views.DetailProduct.DetailProductPage"
     x:Name="ThisPage"
     BackgroundColor="White">
 

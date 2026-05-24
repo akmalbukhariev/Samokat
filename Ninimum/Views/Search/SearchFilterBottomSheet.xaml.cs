@@ -1,4 +1,4 @@
-namespace Samokat.Views.Search;
+namespace Ninimum.Views.Search;
 
 public partial class SearchFilterBottomSheet : ContentView
 {

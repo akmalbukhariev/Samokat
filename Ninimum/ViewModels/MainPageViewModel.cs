@@ -1,11 +1,11 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Samokat.Models.Main;
-using Samokat.Views.DetailProduct;
-using Samokat.Views.Formalization;
+using Ninimum.Models.Main;
+using Ninimum.Views.DetailProduct;
+using Ninimum.Views.Formalization;
 
-namespace Samokat.ViewModels;
+namespace Ninimum.ViewModels;
 
 public partial class MainPageViewModel : ObservableObject
 {

@@ -1,9 +1,9 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using Samokat.Models;
+using Ninimum.Models;
 
-namespace Samokat.ViewModels;
+namespace Ninimum.ViewModels;
 
 public partial class ProductReviewsViewModel : ObservableObject
 {
@@ -118,7 +118,7 @@ public partial class ProductReviewsViewModel : ObservableObject
                 ReviewDate = "09.03.2026",
                 ReviewDateValue = new DateTime(2026, 3, 9),
                 Rating = 5,
-                ReviewText = "Mahsulotga va Samokat.uz tashkilotchilariga raxmat. Sifatli mahsulot tez va arzonga yetib keldi. Sizlarga ham Samokat.uzni tavsiya qilaman. Bundan buyon faqat Samokat.uzdan mahsulotlarni sotib olaman.",
+                ReviewText = "Mahsulotga va Ninimum.uz tashkilotchilariga raxmat. Sifatli mahsulot tez va arzonga yetib keldi. Sizlarga ham Ninimum.uzni tavsiya qilaman. Bundan buyon faqat Ninimum.uzdan mahsulotlarni sotib olaman.",
                 ReplyText = "Hurmatli Eshmatov Toshmat, xaridingiz uchun sizga o’z jamoamiz nomidan minnatdorchilik bildiramiz. Kelgusida bundanda yaxshiroq ishlashga harakat qilamiz.",
                 Photos = new ObservableCollection<string>
                 {

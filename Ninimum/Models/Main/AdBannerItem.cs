@@ -1,6 +1,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 
-namespace Samokat.Models.Main;
+namespace Ninimum.Models.Main;
 
 public partial class AdBannerItem : ObservableObject
 {

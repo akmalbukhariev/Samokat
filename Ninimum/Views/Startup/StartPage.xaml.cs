@@ -1,11 +1,11 @@
 
 using System.Collections.ObjectModel;
 using System.Windows.Input;
-using Samokat.Models;
-using Samokat.Models.Startup;
-using Samokat.Views.LoginRegister;
+using Ninimum.Models;
+using Ninimum.Models.Startup;
+using Ninimum.Views.LoginRegister;
 
-namespace Samokat.Views.Startup;
+namespace Ninimum.Views.Startup;
 
 public partial class StartPage : BasePage
 {
@@ -98,7 +98,7 @@ public partial class StartPage : BasePage
 /*
 Start Page:
 - Logo
-- App Name (Samokat.uz)
+- App Name (Ninimum.uz)
 - Region Selection
 - Language Selection
 - Continue Button
