@@ -1,0 +1,16 @@
+# .NET MAUI
+bin/
+obj/
+
+# VS Code
+.vscode/
+
+# Mac
+.DS_Store
+
+# User files
+*.user
+*.suo
+
+# Logs
+*.log

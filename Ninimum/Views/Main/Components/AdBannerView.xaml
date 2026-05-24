@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Samokat.Models.Main"
+    x:Class="Samokat.Views.Main.Components.AdBannerView"
+    x:Name="RootView">
+
+    <Grid RowDefinitions="Auto,Auto"
+          RowSpacing="12">
+
+        <!-- Banner carousel -->
+        <CarouselView x:Name="BannerCarousel"
+                      Grid.Row="0"
+                      HeightRequest="210"
+                      PositionChanged="OnCarouselPositionChanged">
+
+            <CarouselView.ItemTemplate>
+                <DataTemplate x:DataType="models:AdBannerItem">
+                    <Grid Padding="2,0">
+                        <Border 
+                            Padding="30,0,0,0" 
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 32"
+                            HeightRequest="200"
+                            VerticalOptions="Center">
+
+                            <Border.Background>
+                                <LinearGradientBrush StartPoint="0,0"
+                                                     EndPoint="1,1">
+                                    <GradientStop Color="#FF4747" Offset="0.0" />
+                                    <GradientStop Color="#FF666F" Offset="1.0" />
+                                </LinearGradientBrush>
+                            </Border.Background>
+
+                            <Grid Padding="0"
+                                  ColumnDefinitions="*,Auto">
+
+                                <!-- Left text + button -->
+                                <VerticalStackLayout Grid.Column="0"
+                                                     Spacing="18"
+                                                     VerticalOptions="Center">
+
+                                    <Label Text="{Binding Title}"
+                                           TextColor="White"
+                                           FontSize="22"
+                                           FontFamily="{StaticResource FontSFBold}"
+                                           LineBreakMode="WordWrap"
+                                           MaxLines="3" />
+
+                                    <Border StrokeThickness="0"
+                                            BackgroundColor="#F2F2F2"
+                                            StrokeShape="RoundRectangle 26"
+                                            Padding="0"
+                                            HorizontalOptions="Start">
+
+                                        <Grid Padding="14,5,14,5">
+                                            <Label Text="{Binding ButtonText}"
+                                                   TextColor="#252B33"
+                                                   FontSize="18"
+                                                   FontFamily="{StaticResource FontSFBold}"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center" />
+                                            <Grid.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnPurchaseTapped" />
+                                            </Grid.GestureRecognizers>
+                                        </Grid>
+                                    </Border>
+                                </VerticalStackLayout>
+
+                                <Image 
+                                    Grid.Column="1"
+                                    Source="{Binding Image}"
+                                    Aspect="AspectFit"
+                                    WidthRequest="180"
+                                    HeightRequest="170"
+                                    HorizontalOptions="End"
+                                    VerticalOptions="Center" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </DataTemplate>
+            </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <!-- Custom indicator -->
+        <Border Grid.Row="1"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                StrokeThickness="0"
+                BackgroundColor="White"
+                StrokeShape="RoundRectangle 10,10,0,0"
+                Padding="10,6,10,0"
+                Margin="0,-35,0,0">
+
+            <HorizontalStackLayout x:Name="CustomIndicatorLayout"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center"
+                                Spacing="10" />
+        </Border>
+    </Grid>
+</ContentView>

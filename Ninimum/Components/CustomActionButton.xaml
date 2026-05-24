@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converter="clr-namespace:Samokat.Converters"
+             x:Class="Samokat.Components.CustomActionButton"
+             x:Name="ThisView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:NullToBoolConverter x:Key="NullToBoolConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Border
+        x:Name="RootBorder"
+        BackgroundColor="{Binding ButtonBackgroundColor, Source={x:Reference ThisView}}"
+        StrokeThickness="0"
+        HeightRequest="62"
+        StrokeShape="RoundRectangle 40"
+        HorizontalOptions="Fill">
+
+        <HorizontalStackLayout
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Spacing="12">
+
+            <Label
+                Text="{Binding ButtonText, Source={x:Reference ThisView}}"
+                TextColor="{Binding ButtonTextColor, Source={x:Reference ThisView}}"
+                FontFamily="{StaticResource FontSFRegular}"
+                FontSize="18"
+                VerticalOptions="Center" />
+
+            <Image
+                Source="{Binding ButtonImageSource, Source={x:Reference ThisView}}"
+                HeightRequest="24"
+                WidthRequest="24"
+                VerticalOptions="Center" 
+                IsVisible="{Binding ButtonImageSource, Source={x:Reference ThisView}, Converter={StaticResource NullToBoolConverter}}" />
+
+        </HorizontalStackLayout>
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnTapped" />
+        </Border.GestureRecognizers>
+
+    </Border>
+</ContentView>

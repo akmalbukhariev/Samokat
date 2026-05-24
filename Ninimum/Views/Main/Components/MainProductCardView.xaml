@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:Samokat.Models.Main"
+    x:Class="Samokat.Views.Main.Components.MainProductCardView"
+    x:Name="RootView">
+ 
+    <VerticalStackLayout 
+        x:Name="mainStack" 
+        Spacing="8">
+        <!-- Product image area -->
+        <Grid HeightRequest="220">
+            <Border
+                BackgroundColor="#E9EEF2"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 20"
+                Padding="10">
+
+                <Grid>
+
+                    <!-- Single image -->
+                    <Image
+                        x:Name="SingleImage"
+                        Source="{Binding MainImageSource, Source={x:Reference RootView}}"
+                        Aspect="AspectFit"
+                        Margin="10,10,10,10"
+                        IsVisible="False" />
+
+                    <!-- Carousel image -->
+                    <CarouselView
+                        x:Name="ImageCarousel"
+                        ItemsSource="{Binding ImagesSource, Source={x:Reference RootView}}"
+                        PositionChanged="OnCarouselPositionChanged"
+                        IsVisible="False">
+
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate x:DataType="models:MainProductImageItem">
+                                <Grid>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                            Tapped="Product_Tapped"
+                                            NumberOfTapsRequired="1" />
+                                    </Grid.GestureRecognizers>
+                                    <Image
+                                        Source="{Binding ImageSource}"
+                                        Aspect="AspectFit"
+                                        Margin="10,10,10,10" />
+                                </Grid>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+
+                    <!-- Favorite button -->
+                    <Border
+                        BackgroundColor="White"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 16"
+                        WidthRequest="32"
+                        HeightRequest="32"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start"
+                        Margin="0,6,6,0">
+
+                        <Image 
+                            Source="unliked.png"
+                            WidthRequest="20"
+                            HeightRequest="20"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer 
+                                    NumberOfTapsRequired="1"
+                                    Tapped="Like_Tapped"/>
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </Border>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Price row -->
+        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="8">
+
+            <VerticalStackLayout Spacing="4">
+
+                <!-- Old price -->
+                <HorizontalStackLayout Spacing="4" Margin="5,0,0,0">
+                    <Image 
+                        Source="user_green.png"
+                        WidthRequest="16"
+                        HeightRequest="16"
+                        VerticalOptions="Center" />
+
+                    <Label
+                        Text="{Binding OldPrice, Source={x:Reference RootView}}"
+                        FontSize="12"
+                        FontFamily="{StaticResource FontSFBold}"
+                        TextColor="#FF5A52"
+                        VerticalOptions="Center" />
+                </HorizontalStackLayout>
+
+                <!-- New price -->
+                <Border
+                    BackgroundColor="#FF5A52"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 14"
+                    Padding="5"
+                    HorizontalOptions="Start">
+
+                    <HorizontalStackLayout Spacing="3">
+                        <Image 
+                            Source="user_white.png"
+                            WidthRequest="16"
+                            HeightRequest="16"
+                            VerticalOptions="Center" />
+
+                        <Image 
+                            Source="lightning.png"
+                            WidthRequest="14"
+                            HeightRequest="14"
+                            VerticalOptions="Center" />
+
+                        <Label 
+                            Text="{Binding NewPrice, Source={x:Reference RootView}}"
+                            TextColor="White"
+                            FontSize="13"
+                            FontFamily="{StaticResource FontSFBold}"
+                            VerticalOptions="Center" />
+                    </HorizontalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+
+            <!-- Indicator -->
+            <HorizontalStackLayout
+                x:Name="CustomIndicatorLayout"
+                Grid.Column="1"
+                HorizontalOptions="End"
+                VerticalOptions="Start"
+                Spacing="4" />
+        </Grid>
+
+        <!-- Title -->
+        <Label
+            Text="{Binding Title, Source={x:Reference RootView}}"
+            TextColor="#222222"
+            FontSize="14"
+            LineBreakMode="TailTruncation"
+            FontFamily="{StaticResource FontSFRegular}"
+            MaxLines="2"
+            HeightRequest="42">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer
+                    Tapped="Product_Tapped"
+                    NumberOfTapsRequired="1" />
+            </Label.GestureRecognizers>
+        </Label>
+
+        <!-- Rating -->
+        <HorizontalStackLayout Spacing="4">
+            <HorizontalStackLayout.GestureRecognizers>
+                <TapGestureRecognizer
+                    Tapped="Product_Tapped"
+                    NumberOfTapsRequired="1" />
+            </HorizontalStackLayout.GestureRecognizers>    
+            <Image 
+                Source="star.png"
+                WidthRequest="16"
+                HeightRequest="16"
+                VerticalOptions="Center" />
+
+            <Label
+                Text="{Binding RatingText, Source={x:Reference RootView}}"
+                TextColor="#9C9C9C"
+                FontSize="13"
+                FontFamily="{StaticResource FontSFRegular}"
+                VerticalOptions="Center" />
+
+            <Label
+                Text="{Binding ReviewCountText, Source={x:Reference RootView}}"
+                TextColor="#9C9C9C"
+                FontSize="13"
+                FontFamily="{StaticResource FontSFRegular}"
+                VerticalOptions="Center" />
+        </HorizontalStackLayout>
+
+        <!-- Action button -->
+        <Border
+            x:Name="brdAction"
+            BackgroundColor="#F8ECEC"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 18"
+            HeightRequest="36">
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer
+                    NumberOfTapsRequired="1"
+                    Tapped="Tomorrov_Tapped"/>
+            </Border.GestureRecognizers>
+            <Grid>
+                <Label
+                    Text="{Binding ActionButtonText, Source={x:Reference RootView}}"
+                    TextColor="#FF5A52"
+                    FontSize="15"
+                    FontFamily="{StaticResource FontSFMedium}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center" />
+            </Grid>
+        </Border>
+
+    </VerticalStackLayout>
+</ContentView>

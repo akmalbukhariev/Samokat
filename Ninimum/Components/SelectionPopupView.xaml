@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ui="clr-namespace:Xe.AcrylicView;assembly=Xe.AcrylicView"
+             x:Class="Samokat.Components.SelectionPopupView"
+             x:Name="ThisView"
+             IsVisible="False">
+
+    <Grid>
+
+        <!-- Blur background -->
+        <ui:AcrylicView
+            HorizontalOptions="Fill"
+            VerticalOptions="Fill"
+            EffectStyle="Light"
+            TintOpacity="0" />
+
+        <!-- Dark overlay -->
+        <Grid BackgroundColor="#14000000">
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="OnBackgroundTapped" />
+            </Grid.GestureRecognizers>
+        </Grid>
+
+        <!-- Popup card -->
+        <Border
+            BackgroundColor="White"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 28"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            WidthRequest="{Binding PopupWidth, Source={x:Reference ThisView}}"
+            MaximumHeightRequest="{Binding PopupMaxHeight, Source={x:Reference ThisView}}"
+            MinimumHeightRequest="72"
+            Padding="0"
+            ZIndex="10">
+
+            <Border.Shadow>
+                <Shadow Brush="#1F000000"
+                        Offset="0,10"
+                        Radius="22"
+                        Opacity="0.20" />
+            </Border.Shadow>
+
+            <ScrollView VerticalScrollBarVisibility="Never">
+                <VerticalStackLayout x:Name="ItemsHost"
+                                     Spacing="0" />
+            </ScrollView>
+        </Border>
+    </Grid>
+</ContentView>

@@ -1,0 +1,81 @@
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Samokat.Views"
+    xmlns:components="clr-namespace:Samokat.Views.Main.Components"
+    xmlns:models="clr-namespace:Samokat.Models.Main"
+    xmlns:local="clr-namespace:Samokat.Views.Main"
+    x:Class="Samokat.Views.Main.MainPage"
+    BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- ✅ FIXED HEADER -->
+        <components:MainHeaderView Grid.Row="0"/>
+
+        <!-- ✅ SCROLLABLE AREA -->
+        <CollectionView
+            x:Name="MainCollectionView"
+            Grid.Row="1"
+            ItemsSource="{Binding Products}"
+            SelectionMode="None"
+            Scrolled="MainCollectionView_Scrolled"
+            Margin="10,10,10,0">
+
+            <!-- HEADER INSIDE SCROLL -->
+            <CollectionView.Header>
+                <VerticalStackLayout Spacing="20">
+
+                    <!-- 👇 THIS scrolls -->
+                    <components:SearchBarView x:Name="InlineSearchBarView"/>
+
+                    <components:OrderProcessView CurrentStep="OutForDelivery"/>
+
+                    <components:AdBannerView
+                        x:Name="AdBannerView"
+                        ItemsSource="{Binding AdBanners}"
+                        PurchaseCommand="{Binding PurchaseBannerCommand}" />
+
+                </VerticalStackLayout>
+            </CollectionView.Header>
+
+            <!-- PRODUCTS -->
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout
+                    Orientation="Vertical"
+                    VerticalItemSpacing="10"
+                    HorizontalItemSpacing="10"
+                    Span="2" />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:MainProductCardItem">
+                    <components:MainProductCardView
+                        ImagesSource="{Binding Images}"
+                        OldPrice="{Binding OldPrice}"
+                        NewPrice="{Binding NewPrice}"
+                        Title="{Binding Title}"
+                        Rating="{Binding Rating}"
+                        ReviewCount="{Binding ReviewCount}"
+                        ActionButtonText="{Binding ActionText}"
+                        ClickProductCommand="{Binding Source={RelativeSource AncestorType={x:Type local:MainPage}}, Path=BindingContext.ClickProductCommand}"
+                        ClickTomorrowCommand="{Binding Source={RelativeSource AncestorType={x:Type local:MainPage}}, Path=BindingContext.ClickTomorrowCommand}"/>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- ✅ STICKY SEARCH BAR -->
+        <Grid
+            x:Name="StickySearchBarContainer"
+            Grid.Row="1"
+            IsVisible="False"
+            BackgroundColor="White"
+            Padding="10"
+            VerticalOptions="Start"
+            ZIndex="10">
+
+            <components:SearchBarView />
+        </Grid>
+
+    </Grid>
+</page:BasePage>

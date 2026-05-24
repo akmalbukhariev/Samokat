@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Samokat.Views"
+    xmlns:components="clr-namespace:Samokat.Components"
+    xmlns:main_components="clr-namespace:Samokat.Views.Main.Components"
+    xmlns:models="clr-namespace:Samokat.Models.Main"
+    xmlns:local="clr-namespace:Samokat.Views.DetailProduct"
+    x:Class="Samokat.Views.DetailProduct.ProductReviews"
+    x:Name="ThisPage"
+    BackgroundColor="White">
+
+    <Grid>
+        <Grid 
+            RowDefinitions="Auto, 24,*,Auto, Auto" 
+            RowSpacing="0">
+
+        <!-- Header -->
+        <components:PageHeaderView
+            Title="Maxsulot Sharhlari"
+            ShowRightIcon="true"
+            RightImage="ic_filter1.png"
+            BackCommand="{Binding BackCommand}"
+            RightImageCommand="{Binding FilterTapCommand}" />
+
+        <!-- Main scrollable content -->
+        <CollectionView
+            Grid.Row="2"
+            ItemsSource="{Binding Reviews}"
+            SelectionMode="None"
+            BackgroundColor="White"
+            Margin="0">
+
+            <CollectionView.Header>
+                <VerticalStackLayout
+                    Padding="16,12,16,16"
+                    Spacing="16">
+
+                    <!-- Buyer photos header -->
+                    <Grid ColumnDefinitions="*,Auto">
+                        <Label
+                            Text="Xaridorlarning fotosuratlari"
+                            TextColor="#22292F"
+                            FontSize="18"
+                            FontFamily="{StaticResource FontSFMedium}"
+                            CharacterSpacing="0.18"
+                            VerticalOptions="Center" />
+
+                        <Label
+                            Grid.Column="1"
+                            Text="{Binding BuyerPhotosCountText}"
+                            TextColor="#7CB518"
+                            FontSize="16"
+                            FontFamily="{StaticResource FontSFBold}"
+                            CharacterSpacing="0.16"
+                            VerticalOptions="Center" />
+                    </Grid>
+
+                    <!-- Buyer photos horizontal list -->
+                    <CollectionView
+                        ItemsSource="{Binding BuyerPhotos}"
+                        ItemsLayout="HorizontalList"
+                        SelectionMode="None"
+                        HeightRequest="120"
+                        Margin="0">
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Margin="0,0,10,0"
+                                    StrokeThickness="0"
+                                    StrokeShape="RoundRectangle 8"
+                                    WidthRequest="90"
+                                    HeightRequest="120">
+                                    <Image
+                                        Source="{Binding}"
+                                        Aspect="AspectFill"
+                                        WidthRequest="90"
+                                        HeightRequest="120" />
+                                </Border>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                    <!-- Product title card -->
+                    <Border
+                        Padding="10"
+                        BackgroundColor="#FFF2F3"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 8">
+                        <Label
+                            Text="Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik, 12+ oy, 800 g"
+                            TextColor="#22292F"
+                            FontSize="18"
+                            FontFamily="{StaticResource FontSFMedium}"
+                            CharacterSpacing="0.18"
+                            LineBreakMode="WordWrap" />
+                    </Border>
+                </VerticalStackLayout>
+            </CollectionView.Header>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout
+                        Padding="16,0,16,18"
+                        Spacing="8">
+
+                        <!-- Review main block -->
+                        <VerticalStackLayout Spacing="14">
+
+                            <VerticalStackLayout Spacing="5">
+
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label
+                                        Text="{Binding CustomerName}"
+                                        TextColor="#22292F"
+                                        FontSize="18"
+                                        FontFamily="{StaticResource FontSFMedium}"
+                                        CharacterSpacing="0.18" />
+
+                                    <Label
+                                        Grid.Column="1"
+                                        Text="{Binding ReviewDate}"
+                                        TextColor="#96979B"
+                                        FontSize="17"
+                                        FontFamily="{StaticResource FontSFRegular}"
+                                        CharacterSpacing="0.17" />
+                                </Grid>
+
+                                <!-- Stars -->
+                                <HorizontalStackLayout Spacing="2">
+                                    <Label
+                                        Text="{Binding StarsText}"
+                                        TextColor="#F78A08"
+                                        FontSize="18"
+                                        LineBreakMode="NoWrap" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+
+                            <!-- Review text -->
+                            <Label
+                                Text="{Binding ReviewText}"
+                                TextColor="#22292F"
+                                FontSize="17"
+                                FontFamily="{StaticResource FontSFRegular}"
+                                CharacterSpacing="0.17"
+                                LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
+
+                        <!-- Review photos -->
+                        <CollectionView
+                            ItemsSource="{Binding Photos}"
+                            ItemsLayout="HorizontalList"
+                            SelectionMode="None"
+                            HeightRequest="120"
+                            IsVisible="{Binding HasPhotos}">
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Border
+                                        Margin="0,0,8,0"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 8"
+                                        WidthRequest="90"
+                                        HeightRequest="120">
+                                        <Image
+                                            Source="{Binding}"
+                                            Aspect="AspectFill"
+                                            WidthRequest="90"
+                                            HeightRequest="120" />
+                                    </Border>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <!-- Admin reply -->
+                        <Border
+                            Padding="10"
+                            BackgroundColor="#F7F9FB"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 8"
+                            IsVisible="{Binding HasReply}">
+                            <Label
+                                Text="{Binding ReplyText}"
+                                TextColor="#7CB518"
+                                FontSize="17"
+                                FontFamily="{StaticResource FontSFRegular}"
+                                CharacterSpacing="0.17"
+                                LineBreakMode="WordWrap" />
+                        </Border>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!-- Price area -->
+        <Grid
+            Grid.Row="3"
+            ColumnDefinitions="*,Auto"
+            ColumnSpacing="24"
+            Padding="12,8"
+            BackgroundColor="White"
+            VerticalOptions="Center">
+
+            <Label
+                Grid.Column="0"
+                Text="486 000 so’m"
+                VerticalOptions="Center"
+                TextColor="#22292F"
+                FontSize="24"
+                FontFamily="{StaticResource FontSFMedium}"
+                CharacterSpacing="0.24"
+                LineBreakMode="NoWrap" />
+
+            <Border
+                Grid.Column="1"
+                Padding="3"
+                BackgroundColor="#F7F8FB"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 8"
+                VerticalOptions="Center">
+
+                <Grid
+                    ColumnDefinitions="Auto,Auto,Auto"
+                    ColumnSpacing="14"
+                    VerticalOptions="Center">
+
+                    <Image
+                        Source="minus.png"
+                        Aspect="AspectFit"
+                        WidthRequest="24"
+                        HeightRequest="24">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding DecreaseCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                    <Label
+                        Grid.Column="1"
+                        Text="{Binding Quantity}"
+                        MinimumWidthRequest="33"
+                        HorizontalTextAlignment="Center"
+                        VerticalTextAlignment="Center"
+                        VerticalOptions="Center"
+                        TextColor="#96979B"
+                        FontSize="18"
+                        FontFamily="{StaticResource FontSFMedium}"
+                        CharacterSpacing="0.18" />
+
+                    <Image
+                        Grid.Column="2"
+                        Source="plus.png"
+                        Aspect="AspectFit"
+                        WidthRequest="24"
+                        HeightRequest="24">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding IncreaseCommand}" />
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+            </Border>
+        </Grid>
+
+        <!-- Add to cart -->
+        <Grid
+            Grid.Row="4"
+            Padding="8,0"
+            ColumnDefinitions="*,Auto"
+            ColumnSpacing="10">
+
+                <!-- Buy now -->
+                <Button
+                    Grid.Column="0"
+                    HeightRequest="54"
+                    Text="Hoziroq sotib olish"
+                    BackgroundColor="#FD473C"
+                    TextColor="White"
+                    FontSize="18"
+                    FontFamily="{StaticResource FontSFMedium}"
+                    CharacterSpacing="0.18"
+                    CornerRadius="8"
+                    Padding="14,0"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center" />
+
+                <!-- Add to cart -->
+                <Border
+                    Grid.Column="1"
+                    HeightRequest="54"
+                    BackgroundColor="#7CB518"
+                    VerticalOptions="Center">
+                     <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                     </Border.StrokeShape>
+                     <HorizontalStackLayout
+                        Spacing="10">
+                        <Label
+                            Text="Savatchaga"
+                            FontSize="18"
+                            TextColor="White"
+                            FontFamily="{StaticResource FontSFMedium}"
+                            VerticalTextAlignment="Center"
+                            Margin="14, 0, 0, 0"/>
+                        <Image 
+                            Source="ic_basket1.png"
+                            WidthRequest="24"
+                            HeightRequest="24"
+                            VerticalOptions="Center"
+                            Margin="0,0,14,0"/>
+                    </HorizontalStackLayout>
+                </Border>
+
+            </Grid>
+
+    </Grid>
+        <local:ProductReviewsFilterBottomSheet 
+            x:Name="ProductReviewsFilterBottomSheetView"
+            BindingContext="{Binding}"
+            ZIndex="99" />
+    </Grid>
+
+</page:BasePage>

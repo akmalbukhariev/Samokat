@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Samokat.Views"
+    xmlns:components="clr-namespace:Samokat.Components"
+    x:Class="Samokat.Views.LoginRegister.LoginPage"
+    BackgroundColor="White"
+    x:Name="RootPage">
+    
+    <Grid>
+
+        <!-- Main scrollable content -->
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="30,70,30,40"
+                Spacing="24">
+
+                <VerticalStackLayout
+                    HorizontalOptions="Center"
+                    Spacing="20">
+
+                    <Image
+                        Source="logo.png"
+                        HeightRequest="130"
+                        WidthRequest="130"
+                        Aspect="AspectFit"
+                        HorizontalOptions="Center" />
+
+                    <Label HorizontalOptions="Center">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Samokat" TextColor="#FD473C" FontFamily="SansitaOne" FontSize="36" />
+                                <Span Text="." TextColor="#22292F" FontFamily="SansitaOne" FontSize="36" />
+                                <Span Text="uz" TextColor="#FD473C" FontFamily="SansitaOne" FontSize="36" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </VerticalStackLayout>
+
+                <Label
+                    Text="Ushbu ilovaning to’liq imkoniyatlari faqat&#10;ro’yxatdan o’tgan foydalanuvchilarga amal qiladi"
+                    HorizontalTextAlignment="Center"
+                    TextColor="#96979B"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    FontSize="15" />
+
+                <VerticalStackLayout Spacing="14">
+                    <components:InputView
+                        Title="Telefon raqam"
+                        LeftIcon="ic_phone.png"
+                        Keyboard="Telephone"
+                        ClearButtonVisibility="WhileEditing"
+                        Text="{Binding PhoneNumber}" />
+
+                    <components:InputView
+                        Placeholder="*****"
+                        LeftIcon="ic_lock.png"
+                        IsPassword="True"
+                        EnablePasswordToggle="True"
+                        PasswordHideIcon="ic_eye_off.png"
+                        PasswordShowIcon="ic_eye_on.png"
+                        Text="{Binding Password}" />
+                </VerticalStackLayout>
+
+                <Label
+                    Text="Paroldni unutdingizmi?"
+                    TextColor="#FD473C"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    
+                    FontSize="17">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer
+                            NumberOfTapsRequired="1"
+                            Command="{Binding ForgotPasswordCommand}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <components:CustomActionButton
+                    x:Name="btnLogin"
+                    ButtonText="Kirish"
+                    ButtonBackgroundColor="#FD473C"
+                    ButtonTextColor="White"
+                    ButtonImageSource="right.png"
+                    TapCommand="{Binding LoginCommand}" />
+
+                <Label
+                    Text="Siz avval ro’yxatdan o’tmagan bo’lsangiz"
+                    HorizontalTextAlignment="Center"
+                    TextColor="#96979B"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    FontSize="17" />
+
+                <components:CustomActionButton
+                    x:Name="btnRegister"
+                    ButtonText="Ro’yxatdan o’tish"
+                    ButtonBackgroundColor="#7CB518"
+                    ButtonTextColor="White"
+                    TapCommand="{Binding RegisterCommand}" />
+
+                <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="20">
+                    <BoxView Grid.Column="0" HeightRequest="1" VerticalOptions="Center" Color="#DADADA" />
+                    <Label Grid.Column="1" Text="Yoki" TextColor="#96979B" FontFamily="{StaticResource FontSFRegular}" FontSize="17" VerticalTextAlignment="Center" />
+                    <BoxView Grid.Column="2" HeightRequest="1" VerticalOptions="Center" Color="#DADADA" />
+                </Grid>
+
+                <VerticalStackLayout Spacing="10">
+                    <components:CustomActionButton
+                        x:Name="btnGeust"
+                        ButtonText="Ro’yxatdan o’tmay kirish"
+                        ButtonBackgroundColor="#DADADA"
+                        ButtonTextColor="#22292F"
+                        TapCommand="{Binding GuestLoginCommand}" />
+
+                    <Label
+                        Text="Ushbu holatda siz barcha imkoniyatlardan foydalana olmaysiz va sizga maxsus chegirmalar taqdim etilmaydi."
+                        HorizontalTextAlignment="Center"
+                        TextColor="#96979B"
+                        FontFamily="{StaticResource FontSFRegular}"
+                        FontSize="13" />
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <!-- Popup must be OUTSIDE ScrollView -->
+        <components:SmsCodePopup
+                x:Name="popupSms"
+                ConfirmCommand="{Binding BindingContext.ConfirmSmsCodeCommand, Source={x:Reference Name=RootPage}}"
+                IsVisible="False"/>
+        
+        <components:LoadingView 
+            x:Name="loading"
+            ShowLoading="{Binding IsLoading}"/>
+    </Grid>
+</page:BasePage>

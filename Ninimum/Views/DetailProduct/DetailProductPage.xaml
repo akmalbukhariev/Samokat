@@ -1,0 +1,594 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Samokat.Views"
+    xmlns:components="clr-namespace:Samokat.Components"
+    xmlns:main_components="clr-namespace:Samokat.Views.Main.Components"
+    xmlns:models="clr-namespace:Samokat.Models.Main"
+    xmlns:local="clr-namespace:Samokat.Views.DetailProduct"
+    x:Class="Samokat.Views.DetailProduct.DetailProductPage"
+    x:Name="ThisPage"
+    BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,17,*">
+
+        <!-- Header -->
+        <components:PageHeaderView
+            Grid.Row="0"
+            Title="Maxsulot tafsilotlari"
+            BackCommand="{Binding BackCommand}" />
+
+        <!-- Content -->
+        <Grid Grid.Row="2"
+              RowDefinitions="*, 5, Auto, 10, Auto,10"
+              RowSpacing="0">
+
+            <ScrollView>
+                <VerticalStackLayout
+                    Padding="10,8,10,16"
+                    Spacing="24">
+
+                    <!-- IMAGE BLOCK -->
+                    <VerticalStackLayout Spacing="12">
+
+                        <!-- Main Carousel -->
+                        <Grid RowDefinitions="Auto,Auto"
+                              RowSpacing="0">
+
+                            <Border
+                                Grid.Row="0"
+                                HeightRequest="320"
+                                StrokeThickness="0"
+                                BackgroundColor="#F0F9FF">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="14" />
+                                </Border.StrokeShape>
+
+                                <Grid>
+                                    <CarouselView
+                                        x:Name="ProductCarousel"
+                                        ItemsSource="{Binding ProductImages}"
+                                        CurrentItemChanged="ProductCarousel_CurrentItemChanged">
+
+                                        <CarouselView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Grid>
+                                                    <Image
+                                                        Source="{Binding Image}"
+                                                        Aspect="AspectFit"
+                                                        Margin="20,20,20,30"
+                                                        HorizontalOptions="Center"
+                                                        VerticalOptions="Center">
+                                                        <Image.GestureRecognizers>
+                                                            <TapGestureRecognizer Tapped="OnSmallImageTapped" />
+                                                        </Image.GestureRecognizers>
+                                                    </Image>
+                                                </Grid>
+                                            </DataTemplate>
+                                        </CarouselView.ItemTemplate>
+                                    </CarouselView>
+
+                                    <!-- Favorite button -->
+                                    <Border
+                                        Margin="0,10,10,0"
+                                        Padding="5"
+                                        StrokeThickness="0"
+                                        BackgroundColor="#80FFFFFF"
+                                        HorizontalOptions="End"
+                                        VerticalOptions="Start">
+                                        <Border.StrokeShape>
+                                            <RoundRectangle CornerRadius="16" />
+                                        </Border.StrokeShape>
+                                        <Image
+                                            Source="ic_heart_outline.png"
+                                            WidthRequest="24"
+                                            HeightRequest="24" />
+                                    </Border>
+                                </Grid>
+                            </Border>
+
+                            <!-- Custom indicator -->
+                            <Border
+                                Grid.Row="1"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Start"
+                                StrokeThickness="0"
+                                BackgroundColor="White"
+                                Padding="10,6,10,0"
+                                Margin="0,-18,0,0">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="10,10,0,0" />
+                                </Border.StrokeShape>
+                                <HorizontalStackLayout
+                                    x:Name="CustomIndicatorLayout"
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Spacing="10" />
+                            </Border>
+                        </Grid>
+
+                        <!-- Thumbnails -->
+                        <CollectionView
+                            ItemsSource="{Binding ProductImages}"
+                            SelectionMode="None"
+                            ItemsLayout="HorizontalList"
+                            HorizontalScrollBarVisibility="Never">
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid Padding="0">
+                                        <Border
+                                            WidthRequest="86"
+                                            HeightRequest="86"
+                                            Margin="0,0,12,0"
+                                            Padding="6"
+                                            StrokeThickness="1"
+                                            Stroke="#E7E7E7"
+                                            BackgroundColor="#F0F9FF">
+                                            <Border.StrokeShape>
+                                                <RoundRectangle CornerRadius="8" />
+                                            </Border.StrokeShape>
+                                            <Border.Triggers>
+                                            <DataTrigger 
+                                                TargetType="Border"
+                                                Binding="{Binding IsSelected}"
+                                                Value="True">
+                                                    <Setter Property="Stroke" Value="#FD473C" />
+                                                    <Setter Property="StrokeThickness" Value="2" />
+                                                    <Setter Property="BackgroundColor" Value="#FFF1F0" />
+                                                </DataTrigger>
+                                            </Border.Triggers>
+                                            <Image
+                                                Source="{Binding Image}"
+                                                Aspect="AspectFit">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer
+                                                        Tapped="OnThumbnailTapped"
+                                                        CommandParameter="{Binding .}" />
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </VerticalStackLayout>
+
+                    <!-- PRODUCT INFO -->
+                    <VerticalStackLayout Spacing="10">
+
+                        <Label
+                            Text="{Binding ProductTitle}"
+                            TextColor="#22292F"
+                            FontSize="18"
+                            FontFamily="{StaticResource FontSFMedium}"
+                            CharacterSpacing="0.18"
+                            LineBreakMode="WordWrap" />
+
+                        <HorizontalStackLayout Spacing="5">
+                            <Image
+                                Source="ic_check_circle.png"
+                                WidthRequest="20"
+                                HeightRequest="20"
+                                VerticalOptions="Center" />
+
+                            <Label
+                                Text="{Binding StockText}"
+                                TextColor="#7CB518"
+                                FontSize="17"
+                                FontFamily="{StaticResource FontSFRegular}"
+                                CharacterSpacing="0.17"
+                                VerticalTextAlignment="Center" />
+                        </HorizontalStackLayout>
+
+                        <!-- Rating block -->
+                        <Border
+                            Padding="12"
+                            StrokeThickness="0"
+                            BackgroundColor="#F7F9FB">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    NumberOfTapsRequired="1"
+                                    Tapped="Comment_Tapped"/>
+                            </Border.GestureRecognizers>
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>
+                            <Grid ColumnDefinitions="*,Auto">
+
+                                <VerticalStackLayout Spacing="2">
+                                    <HorizontalStackLayout Spacing="5">
+                                        <Label
+                                            Text="{Binding Rating}"
+                                            TextColor="#22292F"
+                                            FontSize="18"
+                                            FontFamily="{StaticResource FontSFMedium}"
+                                            CharacterSpacing="0.18"
+                                            VerticalTextAlignment="Center" />
+
+                                        <HorizontalStackLayout Spacing="2">
+                                            <Image Source="star.png" WidthRequest="14" HeightRequest="14" />
+                                            <Image Source="star.png" WidthRequest="14" HeightRequest="14" />
+                                            <Image Source="star.png" WidthRequest="14" HeightRequest="14" />
+                                            <Image Source="star.png" WidthRequest="14" HeightRequest="14" />
+                                            <Image Source="star.png" WidthRequest="14" HeightRequest="14" />
+                                        </HorizontalStackLayout>
+                                    </HorizontalStackLayout>
+
+                                    <Label
+                                        Text="{Binding ReviewText}"
+                                        TextColor="#96979B"
+                                        FontSize="17"
+                                        FontFamily="{StaticResource FontSFRegular}"
+                                        CharacterSpacing="0.17" />
+                                </VerticalStackLayout>
+
+                                <!-- Right stacked mini images -->
+                                <Grid Grid.Column="1">
+                                   <Image 
+                                    Source="ic_im_comments.png"
+                                    WidthRequest="69"
+                                    HeightRequest="43"
+                                    Aspect="AspectFill" />
+
+                                    <Label
+                                        Text="10+"
+                                        TextColor="White"
+                                        FontSize="15"
+                                        FontFamily="{StaticResource FontSFMedium}"
+                                        CharacterSpacing="0.15"
+                                        HorizontalOptions="Center"
+                                        VerticalOptions="Center" />
+                                </Grid>
+                            </Grid>
+                        </Border>
+
+                        <!-- Price block -->
+                        <Border
+                            Stroke="#FD473C"
+                            StrokeThickness="1"
+                            BackgroundColor="Transparent"
+                            Padding="0">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="8" />
+                            </Border.StrokeShape>    
+                            <Grid ColumnDefinitions="*,1,*">
+
+                                <!-- Subscription -->
+                                <Grid
+                                    Grid.Column="0"
+                                    Padding="12"
+                                    BackgroundColor="#FFF2F3">
+                                    <VerticalStackLayout
+                                        Spacing="6"
+                                        VerticalOptions="End">
+
+                                        <HorizontalStackLayout Spacing="6">
+                                            <Label
+                                                Text="Obuna bilan"
+                                                TextColor="#FD473C"
+                                                FontSize="17"
+                                                FontFamily="{StaticResource FontSFRegular}"
+                                                CharacterSpacing="0.17" />
+
+                                            <Border
+                                                Padding="5,3"
+                                                StrokeThickness="0"
+                                                BackgroundColor="#FD473C">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="16" />
+                                                </Border.StrokeShape>
+                                                <HorizontalStackLayout Spacing="3">
+                                                    <Image Source="ic_user_white.png" WidthRequest="14" HeightRequest="14" />
+                                                    <Image Source="lightning.png" WidthRequest="14" HeightRequest="14" />
+                                                </HorizontalStackLayout>
+                                            </Border>
+                                        </HorizontalStackLayout>
+
+                                        <Label
+                                            Text="{Binding SubscriptionPrice}"
+                                            TextColor="#22292F"
+                                            FontSize="24"
+                                            FontFamily="{StaticResource FontSFMedium}"
+                                            CharacterSpacing="0.24" />
+
+                                        <Label
+                                            Text="{Binding DeliveryLabel}"
+                                            TextColor="#22292F"
+                                            FontSize="17"
+                                            FontFamily="{StaticResource FontSFRegular}"
+                                            CharacterSpacing="0.17" />
+
+                                        <Label
+                                            Text="{Binding SubscriptionDeliveryText}"
+                                            TextColor="#FD473C"
+                                            FontSize="18"
+                                            FontFamily="{StaticResource FontSFMedium}"
+                                            CharacterSpacing="0.18" />
+                                    </VerticalStackLayout>
+                                </Grid>
+
+                                <BoxView
+                                    Grid.Column="1"
+                                    BackgroundColor="#FD473C" />
+
+                                <!-- No subscription -->
+                                <Grid
+                                    Grid.Column="2"
+                                    Padding="12"
+                                    BackgroundColor="#F7F9FB">
+                                    <VerticalStackLayout
+                                        Spacing="6"
+                                        VerticalOptions="End">
+
+                                        <HorizontalStackLayout Spacing="6">
+                                            <Label
+                                                Text="Obunasiz"
+                                                TextColor="#96979B"
+                                                FontSize="17"
+                                                FontFamily="{StaticResource FontSFRegular}"
+                                                CharacterSpacing="0.17" />
+
+                                            <Border
+                                                Padding="5,3"
+                                                StrokeThickness="0"
+                                                BackgroundColor="#96979B">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="16" />
+                                                </Border.StrokeShape>
+                                                <HorizontalStackLayout Spacing="3">
+                                                    <Image Source="ic_user_white.png" WidthRequest="14" HeightRequest="14" />
+                                                    <Image Source="lightning_gray.png" WidthRequest="14" HeightRequest="14" />
+                                                </HorizontalStackLayout>
+                                            </Border>
+                                        </HorizontalStackLayout>
+
+                                        <Label
+                                            Text="{Binding RegularPrice}"
+                                            TextColor="#22292F"
+                                            FontSize="24"
+                                            FontFamily="{StaticResource FontSFMedium}"
+                                            CharacterSpacing="0.24" />
+
+                                        <Label
+                                            Text="{Binding DeliveryLabel}"
+                                            TextColor="#22292F"
+                                            FontSize="17"
+                                            FontFamily="{StaticResource FontSFRegular}"
+                                            CharacterSpacing="0.17" />
+
+                                        <Label
+                                            Text="{Binding RegularDeliveryText}"
+                                            TextColor="#96979B"
+                                            FontSize="18"
+                                            FontFamily="{StaticResource FontSFMedium}"
+                                            CharacterSpacing="0.18" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </Grid>
+                        </Border>
+                    </VerticalStackLayout>
+
+                    <!-- Question button -->
+                    <Border
+                        Padding="12"
+                        Stroke="#7CB518"
+                        StrokeThickness="1"
+                        BackgroundColor="#F8FCF0">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8" />
+                        </Border.StrokeShape>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label
+                                Text="Mahsulot bo’yicha savol berish"
+                                TextColor="#7CB518"
+                                FontSize="17"
+                                FontFamily="{StaticResource FontSFRegular}"
+                                CharacterSpacing="0.17"
+                                VerticalTextAlignment="Center" />
+
+                            <Image
+                                Grid.Column="1"
+                                Source="ic_chat.png"
+                                WidthRequest="24"
+                                HeightRequest="24"
+                                VerticalOptions="Center" />
+                        </Grid>
+                    </Border>
+
+                    <!-- Description -->
+                    <VerticalStackLayout Spacing="5">
+                        <Label
+                            Text="Tavsiflar"
+                            TextColor="#22292F"
+                            FontSize="17"
+                            FontFamily="{StaticResource FontSFMedium}"
+                            CharacterSpacing="0.17" />
+
+                        <Label
+                            Text="{Binding Description}"
+                            TextColor="#96979B"
+                            FontSize="17"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            CharacterSpacing="0.17"
+                            LineBreakMode="TailTruncation"
+                            MaxLines="4" />
+
+                        <HorizontalStackLayout Spacing="5">
+                            <Label
+                                Text="To’liq ko’rish"
+                                TextColor="#FD473C"
+                                FontSize="16"
+                                FontFamily="{StaticResource FontSFBold}"
+                                CharacterSpacing="0.16" />
+
+                            <Image
+                                Source="ic_arrow_right_red.png"
+                                WidthRequest="14"
+                                HeightRequest="14"
+                                VerticalOptions="Center" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+
+                    <!-- Similar products -->
+                    <VerticalStackLayout Spacing="12">
+                        <Label
+                            Text="O’xshash mahsulotlar"
+                            TextColor="#22292F"
+                            FontSize="22"
+                            FontFamily="{StaticResource FontSFMedium}"
+                            CharacterSpacing="0.22" />
+
+                        <CollectionView
+                            x:Name="MainCollectionView"
+                            ItemsSource="{Binding SimilarProducts}"
+                            SelectionMode="None">
+
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout
+                                    Orientation="Vertical"
+                                    VerticalItemSpacing="10"
+                                    HorizontalItemSpacing="10"
+                                    Span="2" />
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="models:MainProductCardItem">
+                                    <main_components:MainProductCardView
+                                        ImagesSource="{Binding Images}"
+                                        OldPrice="{Binding OldPrice}"
+                                        NewPrice="{Binding NewPrice}"
+                                        Title="{Binding Title}"
+                                        Rating="{Binding Rating}"
+                                        ReviewCount="{Binding ReviewCount}"
+                                        ActionButtonText="{Binding ActionText}" />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </ScrollView>
+
+            <!-- Bottom buy area -, + -->
+            <Grid
+                Grid.Row="2"
+                ColumnDefinitions="*,Auto"
+                ColumnSpacing="24"
+                Padding="8,0"
+                VerticalOptions="Center">
+
+                <!-- Price -->
+                <Label
+                    Grid.Column="0"
+                    Text="486 000 so’m"
+                    VerticalOptions="Center"
+                    TextColor="#22292F"
+                    FontSize="24"
+                    FontFamily="{StaticResource FontSFMedium}"
+                    CharacterSpacing="0.24"
+                    LineBreakMode="NoWrap" />
+
+                <!-- Counter container -->
+                <Border
+                    Grid.Column="1"
+                    Padding="3"
+                    BackgroundColor="#F7F8FB"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 8"
+                    VerticalOptions="Center">
+
+                    <Grid
+                        ColumnDefinitions="Auto,Auto,Auto"
+                        ColumnSpacing="14"
+                        VerticalOptions="Center">
+
+                        <!-- Minus button -->
+                        <Image
+                            Source="minus.png"
+                            Aspect="AspectFit"
+                            WidthRequest="24"
+                            HeightRequest="24"/>
+
+                        <!-- Count -->
+                        <Label
+                            Grid.Column="1"
+                            Text="1"
+                            MinimumWidthRequest="33"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center"
+                            VerticalOptions="Center"
+                            TextColor="#96979B"
+                            FontSize="18"
+                            FontFamily="{StaticResource FontSFMedium}"
+                            CharacterSpacing="0.18" />
+
+                        <!-- Plus button -->
+                        <Image
+                            Grid.Column="2"
+                            Source="plus.png"
+                            Aspect="AspectFit"
+                            WidthRequest="24"
+                            HeightRequest="24"/>
+                    </Grid>
+                </Border>
+
+            </Grid>
+
+            <Grid
+                Grid.Row="4"
+                Padding="8,0"
+                ColumnDefinitions="*,Auto"
+                ColumnSpacing="10">
+
+                <!-- Buy now -->
+                <Button
+                    Grid.Column="0"
+                    HeightRequest="54"
+                    Text="Hoziroq sotib olish"
+                    BackgroundColor="#FD473C"
+                    TextColor="White"
+                    FontSize="18"
+                    FontFamily="{StaticResource FontSFMedium}"
+                    CharacterSpacing="0.18"
+                    CornerRadius="8"
+                    Padding="14,0"
+                    HorizontalOptions="Fill"
+                    VerticalOptions="Center" />
+
+                <!-- Add to cart -->
+                <Border
+                    Grid.Column="1"
+                    HeightRequest="54"
+                    BackgroundColor="#7CB518"
+                    VerticalOptions="Center">
+                      <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="8" />
+                        </Border.StrokeShape>
+                    <HorizontalStackLayout 
+                        Spacing="10">
+                        <Label 
+                            Text="Savatchaga"
+                            FontSize="18"
+                            TextColor="White"
+                            FontFamily="{StaticResource FontSFMedium}"
+                            VerticalTextAlignment="Center"
+                            Margin="14, 0, 0, 0"/>
+                        <Image 
+                            Source="ic_basket1.png"
+                            WidthRequest="24"
+                            HeightRequest="24"
+                            VerticalOptions="Center"
+                            Margin="0,0,14,0"/>
+                    </HorizontalStackLayout>
+                </Border>
+
+            </Grid>
+        </Grid>
+        
+        <components:ImagePreviewView 
+            x:Name="ImagePreview"
+            Grid.RowSpan="3"/>
+    </Grid>
+</page:BasePage>

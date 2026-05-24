@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:page="clr-namespace:Samokat.Views"
+             xmlns:components="clr-namespace:Samokat.Components"
+             BackgroundColor="White"
+             x:Class="Samokat.Views.Startup.StartPage">
+
+       <Grid RowDefinitions="*,Auto,30,Auto,40,Auto,*,Auto,50"
+             ColumnDefinitions="30,*,30">
+
+              <VerticalStackLayout Grid.Column="1"
+                                   Grid.Row="1"
+                                   Spacing="20"
+                                   HorizontalOptions="Center">
+                     <Image Source="logo.png"
+                            WidthRequest="130"
+                            HeightRequest="130"
+                            Aspect="AspectFit"/>
+                     <Label Text="Samokat.uz"
+                            FontSize="36"
+                            FontFamily="{StaticResource FontSansitaOne}"
+                            TextColor="Red"
+                            HorizontalOptions="Center"/>
+              </VerticalStackLayout>
+
+              <VerticalStackLayout Grid.Column="1"
+                                   Grid.Row="3"
+                                   Spacing="12">
+                     <components:InputView Title="Hudud:"
+                                          Text="Qashqadaryo"
+                                          IsReadOnly="True"
+                                          TapCommand="{Binding OpenRegionPopupCommand}"/>
+                     <components:InputView Title="Til:"
+                                          Text="O'zbekcha"
+                                          MiddleImage="flag_uz.png"
+                                          IsReadOnly="True"
+                                          TapCommand="{Binding OpenLanguagePopupCommand}"/>
+              </VerticalStackLayout>
+              
+              <components:CustomActionButton x:Name="btnContinue"
+                                             Grid.Column="1"
+                                             Grid.Row="5"
+                                             ButtonText="Davom etish"
+                                             ButtonBackgroundColor="#FF4B4B"
+                                             ButtonTextColor="White"
+                                             ButtonImageSource="right.png"
+                                             TapCommand="{Binding ContinueCommand}" />
+
+              <Label Grid.Column="1"
+                     Grid.Row="7"
+                     Text="v. 0.1.0.2"
+                     FontFamily="{StaticResource FontSFRegular}"
+                     FontSize="17"
+                     TextColor="#96979B"
+                     HorizontalOptions="Center"/>
+       
+              <components:SelectionPopupView x:Name="RegionPopup"
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Grid.RowSpan="9"
+                                            Grid.ColumnSpan="3"
+                                            ItemsSource="{Binding RegionItems}"
+                                            ItemTappedCommand="{Binding RegionSelectedCommand}"
+                                            IsVisible="False"
+                                            PopupWidth="320"
+                                            PopupMaxHeight="620"/>
+
+              <components:SelectionPopupView x:Name="LanguagePopup"
+                                            Grid.Row="0"
+                                            Grid.Column="0"
+                                            Grid.RowSpan="9"
+                                            Grid.ColumnSpan="3"
+                                            ItemsSource="{Binding LanguageItems}"
+                                            ItemTappedCommand="{Binding LanguageSelectedCommand}"
+                                            IsVisible="False"
+                                            PopupWidth="320"
+                                            PopupMaxHeight="240"/>
+       </Grid>
+</page:BasePage>

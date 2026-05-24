@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Samokat.Components.InputView"
+             x:Name="ThisView">
+
+    <Border
+        StrokeThickness="0"
+        BackgroundColor="{StaticResource InputBackground}"
+        HeightRequest="60"
+        StrokeShape="RoundRectangle 30">
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnBorderTapped" />
+        </Border.GestureRecognizers>
+
+        <Grid
+            Padding="20,0"
+            ColumnDefinitions="Auto,*,Auto"
+            ColumnSpacing="12"
+            VerticalOptions="Center">
+
+            <!-- Left Icon -->
+            <Image
+                Grid.Column="0"
+                Source="{Binding LeftIcon, Source={x:Reference ThisView}}"
+                HeightRequest="{Binding LeftIconSize, Source={x:Reference ThisView}}"
+                WidthRequest="{Binding LeftIconSize, Source={x:Reference ThisView}}"
+                VerticalOptions="Center"
+                IsVisible="{Binding HasLeftIcon, Source={x:Reference ThisView}}" />
+
+            <!-- Text Area -->
+            <Grid
+                Grid.Column="1"
+                ColumnDefinitions="Auto,Auto,*"
+                ColumnSpacing="0"
+                VerticalOptions="Center">
+
+                <!-- Title -->
+                <Label
+                    Grid.Column="0"
+                    Text="{Binding Title, Source={x:Reference ThisView}}"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    FontSize="17"
+                    TextColor="{StaticResource InputPlaceholderColor}"
+                    VerticalTextAlignment="Center"
+                    IsVisible="{Binding IsTitleVisible, Source={x:Reference ThisView}}" />
+
+                <!-- Middle Image -->
+                <Image
+                    Grid.Column="1"
+                    Source="{Binding MiddleImage, Source={x:Reference ThisView}}"
+                    HeightRequest="14"
+                    WidthRequest="20"
+                    VerticalOptions="Center"
+                    Aspect="AspectFit"
+                    Margin="0,0,2,0"
+                    IsVisible="{Binding HasMiddleImage, Source={x:Reference ThisView}}" />
+
+                <!-- Entry -->
+                <Entry
+                    x:Name="PART_Entry"
+                    Grid.Column="2"
+                    Text="{Binding Text, Source={x:Reference ThisView}, Mode=TwoWay}"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    Placeholder="{Binding Placeholder, Source={x:Reference ThisView}}"
+                    FontSize="17"
+                    TextColor="{StaticResource InputTextColor}"
+                    PlaceholderColor="{StaticResource InputPlaceholderColor}"
+                    BackgroundColor="Transparent"
+                    IsReadOnly="{Binding IsReadOnly, Source={x:Reference ThisView}}"
+                    InputTransparent="{Binding IsReadOnly, Source={x:Reference ThisView}}"
+                    IsPassword="{Binding CurrentIsPassword, Source={x:Reference ThisView}}"
+                    Keyboard="{Binding Keyboard, Source={x:Reference ThisView}}"
+                    ReturnType="{Binding ReturnType, Source={x:Reference ThisView}}"
+                    ClearButtonVisibility="{Binding ClearButtonVisibility, Source={x:Reference ThisView}}"
+                    VerticalOptions="Center"
+                    Focused="OnEntryFocused"
+                    Unfocused="OnEntryUnfocused"
+                    Completed="OnEntryCompleted" />
+            </Grid>
+
+            <!-- Right Icon -->
+            <Image
+                Grid.Column="2"
+                Source="{Binding CurrentRightIcon, Source={x:Reference ThisView}}"
+                HeightRequest="{Binding RightIconSize, Source={x:Reference ThisView}}"
+                WidthRequest="{Binding RightIconSize, Source={x:Reference ThisView}}"
+                VerticalOptions="Center"
+                IsVisible="{Binding HasRightIcon, Source={x:Reference ThisView}}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnRightIconTapped" />
+                </Image.GestureRecognizers>
+            </Image>
+
+        </Grid>
+
+    </Border>
+
+</ContentView>

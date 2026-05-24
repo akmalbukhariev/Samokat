@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Samokat.Views"
+    xmlns:components="clr-namespace:Samokat.Components"
+    x:Class="Samokat.Views.PaymentCard.CancelOrderPage"
+    x:Name="ThisPage"
+    BackgroundColor="White">
+
+    <Grid>
+        <Grid 
+            Padding="20,0,20,0" 
+            RowDefinitions="Auto,24,Auto,Auto,*">
+
+            <!-- Reusable Header -->
+            <components:PageHeaderView 
+                Grid.Row="0"
+                Title="Buyurtmani bekor qilish" />
+
+            <!-- Order info card -->
+            <Border
+                Grid.Row="2"
+                Margin="0,20,0,0"
+                Padding="10"
+                BackgroundColor="#F7FBEF"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 8">
+
+                <VerticalStackLayout Spacing="24">
+
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="24">
+                        <Label
+                            Text="Nomi"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            FontSize="17"
+                            TextColor="#22292F" />
+
+                        <Label
+                            Grid.Column="1"
+                            Text="{Binding ProductName}"
+                            FontFamily="{StaticResource FontSFMedium}"
+                            FontSize="18"
+                            TextColor="#22292F"
+                            LineBreakMode="TailTruncation"
+                            MaxLines="1" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Label Text="Raqami"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            FontSize="17"
+                            TextColor="#22292F"/>
+
+                        <Label Grid.Column="1"
+                            Text="{Binding OrderNumber}"
+                            FontFamily="{StaticResource FontSFMedium}"
+                            FontSize="17"
+                            TextColor="#22292F"
+                            HorizontalOptions="End"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Label Text="Sanasi"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            FontSize="17"
+                            TextColor="#22292F"/>
+
+                        <Label Grid.Column="1"
+                            Text="{Binding OrderDate}"
+                            FontFamily="{StaticResource FontSFMedium}"
+                            FontSize="17"
+                            TextColor="#22292F"
+                            HorizontalOptions="End"/>
+                    </Grid>
+
+                    <Grid ColumnDefinitions="Auto,*">
+                        <Label Text="Summasi"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            FontSize="17"
+                            TextColor="#22292F"/>
+
+                        <Label Grid.Column="1"
+                            Text="{Binding OrderAmount}"
+                            FontFamily="{StaticResource FontSFMedium}"
+                            FontSize="17"
+                            TextColor="#22292F"
+                            HorizontalOptions="End"/>
+                    </Grid>
+
+                </VerticalStackLayout>
+            </Border>
+
+            <!-- Reason -->
+            <VerticalStackLayout Grid.Row="3" Margin="0,32,0,0" Spacing="12">
+
+                <Label
+                    Text="Bekor qilish sababi"
+                    FontFamily="{StaticResource FontSFMedium}"
+                    FontSize="22"
+                    TextColor="#22292F" />
+
+                <Border
+                    HeightRequest="120"
+                    Padding="10"
+                    BackgroundColor="#F7F8FB"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 8">
+
+                    <Editor
+                        Text="{Binding CancelReason}"
+                        Placeholder="Sababni yozing"
+                        PlaceholderColor="#96979B"
+                        BackgroundColor="Transparent"
+                        FontFamily="{StaticResource FontSFRegular}"
+                        FontSize="17"
+                        TextColor="#22292F"/>
+                </Border>
+
+                <!-- Buttons -->
+                <VerticalStackLayout Margin="0,24,0,0" Spacing="12">
+
+                    <Button
+                        Text="Bekor qilish"
+                        HeightRequest="54"
+                        CornerRadius="40"
+                        BackgroundColor="#DADADA"
+                        TextColor="#22292F"
+                        FontFamily="{StaticResource FontSFMedium}"
+                        FontSize="18"
+                        Command="{Binding CancelOrderCommand}" />
+
+                    <Button
+                        Text="Bekor qilmayman"
+                        HeightRequest="54"
+                        CornerRadius="40"
+                        BackgroundColor="#FD473C"
+                        TextColor="White"
+                        FontFamily="{StaticResource FontSFMedium}"
+                        FontSize="18"
+                        Command="{Binding DoNotCancelCommand}" />
+
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </Grid>
+        
+        <components:QuestionPopupView
+                x:Name="CancelOrderPopup"
+                QuestionTitle="Siz buyurtmani bekor qilyapsiz&#10;Ishonchingiz komilmi?"
+                YesText="Tasdiqlayman"
+                NoText="Bekor qilmayman"
+                SuccessTitle="Buyurtma muvaffaqiyatli bekor qilindi"
+                SuccessMessage="Bekor qilingan buyurtma uchun to’langan mablag’ hisob raqamingizga 3 kun muddatda qaytariladi"
+                OkText="Tushunarli"
+                IsVisible="False"
+                ZIndex="99" />
+    </Grid>
+</page:BasePage>

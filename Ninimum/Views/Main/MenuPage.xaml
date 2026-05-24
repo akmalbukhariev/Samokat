@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Samokat.Views"
+    xmlns:components="clr-namespace:Samokat.Components"
+    xmlns:local="clr-namespace:Samokat.Views.Main"
+    xmlns:model="clr-namespace:Samokat.Models.Menu"
+    x:Class="Samokat.Views.Main.MenuPage"
+    x:Name="ThisPage"
+    BackgroundColor="White">
+ 
+    <Grid
+        Padding="10,20,10,20"
+        RowDefinitions="Auto,*"
+        RowSpacing="24">
+
+        <components:PageHeaderView/>
+
+        <CollectionView
+            Grid.Row="1"
+            ItemsSource="{Binding Categories}"
+            SelectionMode="None">
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:MenuCategoryModel">
+                    <VerticalStackLayout Spacing="0">
+
+                        <!-- Main row -->
+                        <Grid
+                            Padding="0,16"
+                            ColumnDefinitions="24,12,*,16"
+                            VerticalOptions="Center">
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.ToggleCategoryCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+
+                            <Image
+                                Grid.Column="0"
+                                Source="{Binding Icon}"
+                                WidthRequest="24"
+                                HeightRequest="24"
+                                VerticalOptions="Center" />
+
+                            <Label
+                                Grid.Column="2"
+                                Text="{Binding Title}"
+                                FontSize="17"
+                                FontFamily="{StaticResource FontSFRegular}"
+                                TextColor="#2F343A"
+                                VerticalTextAlignment="Center"
+                                LineBreakMode="NoWrap" />
+
+                            <Image
+                                Grid.Column="3"
+                                Source="{Binding ArrowIcon}"
+                                WidthRequest="16"
+                                HeightRequest="16"
+                                HorizontalOptions="End"
+                                VerticalOptions="Center" />
+                        </Grid>
+
+                        <!-- Expanded items -->
+                        <VerticalStackLayout
+                            IsVisible="{Binding IsExpanded}"
+                            Margin="40,0,0,0"
+                            Spacing="0"
+                            BindableLayout.ItemsSource="{Binding Items}">
+
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="model:MenuSubItemModel">
+                                    <Grid
+                                        Padding="0,14"
+                                        ColumnDefinitions="*,24">
+
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.SelectSubItemCommand}"
+                                                CommandParameter="{Binding .}" />
+                                        </Grid.GestureRecognizers>
+
+                                        <Label
+                                            Grid.Column="0"
+                                            Text="{Binding Title}"
+                                            FontFamily="{StaticResource FontSFRegular}"
+                                            FontSize="17"
+                                            VerticalTextAlignment="Center">
+                                            <Label.Triggers>
+                                                <DataTrigger
+                                                    TargetType="Label"
+                                                    Binding="{Binding IsSelected}"
+                                                    Value="True">
+                                                    <Setter Property="TextColor" Value="#0F9D58" />
+                                                    <Setter Property="FontAttributes" Value="Bold" />
+                                                </DataTrigger>
+                                                <DataTrigger
+                                                    TargetType="Label"
+                                                    Binding="{Binding IsSelected}"
+                                                    Value="False">
+                                                    <Setter Property="TextColor" Value="#2F343A" />
+                                                    <Setter Property="FontAttributes" Value="None" />
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+
+                                        <Image
+                                            Grid.Column="1"
+                                            Source="ic_arrow_right"
+                                            WidthRequest="16"
+                                            HeightRequest="16"
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+    
+</page:BasePage>

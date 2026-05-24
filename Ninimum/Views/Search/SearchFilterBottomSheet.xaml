@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:components="clr-namespace:Samokat.Components"
+    x:Class="Samokat.Views.Search.SearchFilterBottomSheet"
+    x:Name="ThisView"
+    IsVisible="False"
+    InputTransparent="False">
+
+    <Grid RowDefinitions="*,Auto">
+
+        <!-- Background -->
+        <BoxView
+            x:Name="Backdrop"
+            Grid.RowSpan="2"
+            BackgroundColor="#66000000"
+            InputTransparent="False" />
+
+        <!-- Sheet -->
+        <Border
+            x:Name="SheetContainer"
+            Grid.Row="1"
+            BackgroundColor="White"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 30,30,0,0"
+            TranslationY="900"
+            VerticalOptions="End">
+
+            <Border.GestureRecognizers>
+                <TapGestureRecognizer />
+            </Border.GestureRecognizers>
+
+            <Grid
+                Padding="14,16,14,16"
+                RowDefinitions="Auto,24,Auto,24,Auto,24,Auto"
+                RowSpacing="0">
+
+                <!-- Handle -->
+                <Border
+                    x:Name="HandleView"
+                    Grid.Row="0"
+                    WidthRequest="90"
+                    HeightRequest="4"
+                    BackgroundColor="#DADADA"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 2"
+                    HorizontalOptions="Center"
+                    Margin="0,0,0,8" />
+
+                <!-- Content -->
+                <VerticalStackLayout
+                    Grid.Row="2"
+                    Spacing="24">
+
+                    <!-- Narx -->
+                    <Label
+                        Text="Narx"
+                        FontSize="22"
+                        FontFamily="{StaticResource FontSFBold}"
+                        TextColor="#22292F"
+                        CharacterSpacing="0.22" />
+
+                    <!-- Price inputs -->
+                    <Grid
+                        ColumnDefinitions="*,10,*"
+                        ColumnSpacing="0">
+
+                        <Border
+                            Grid.Column="0"
+                            HeightRequest="60"
+                            BackgroundColor="#F7F8FB"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 30"
+                            Padding="20,0">
+
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Entry
+                                    Text="{Binding MinPrice}"
+                                    Placeholder="64 000"
+                                    PlaceholderColor="#96979B"
+                                    Keyboard="Numeric"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#96979B"
+                                    FontSize="17"
+                                    FontFamily="{StaticResource FontSFRegular}"
+                                    CharacterSpacing="0.17"
+                                    HorizontalTextAlignment="Start"
+                                    VerticalOptions="Center"
+                                    ClearButtonVisibility="Never" />
+
+                                <Label
+                                    Grid.Column="1"
+                                    Text="dan"
+                                    TextColor="#96979B"
+                                    FontSize="13"
+                                    FontFamily="{StaticResource FontSFMedium}"
+                                    CharacterSpacing="0.13"
+                                    VerticalOptions="Center"
+                                    Margin="10,0,0,0" />
+                            </Grid>
+                        </Border>
+
+                        <Border
+                            Grid.Column="2"
+                            HeightRequest="60"
+                            BackgroundColor="#F7F8FB"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 30"
+                            Padding="20,0">
+
+                            <Grid ColumnDefinitions="*,Auto">
+                                <Entry
+                                    Text="{Binding MaxPrice}"
+                                    Placeholder="71 000"
+                                    PlaceholderColor="#96979B"
+                                    Keyboard="Numeric"
+                                    BackgroundColor="Transparent"
+                                    TextColor="#96979B"
+                                    FontSize="17"
+                                    FontFamily="{StaticResource FontSFRegular}"
+                                    CharacterSpacing="0.17"
+                                    HorizontalTextAlignment="Start"
+                                    VerticalOptions="Center"
+                                    ClearButtonVisibility="Never" />
+
+                                <Label
+                                    Grid.Column="1"
+                                    Text="gacha"
+                                    TextColor="#96979B"
+                                    FontSize="13"
+                                    FontFamily="{StaticResource FontSFMedium}"
+                                    CharacterSpacing="0.13"
+                                    VerticalOptions="Center"
+                                    Margin="10,0,0,0" />
+                            </Grid>
+                        </Border>
+                    </Grid>
+
+                    <!-- Saralash -->
+                    <Label
+                        Text="Saralash"
+                        FontSize="22"
+                        FontFamily="{StaticResource FontSFBold}"
+                        TextColor="#22292F"
+                        CharacterSpacing="0.22"
+                        Margin="0,10,0,0" />
+
+                    <!-- Radio list -->
+                    <VerticalStackLayout Spacing="24">
+
+                        <components:CustomRadioButtonView
+                            Text="Avval narxi arzonlar"
+                            FontSize="17"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            IsSelected="{Binding IsSortCheapFirst}"
+                            Command="{Binding SelectSortCommand}"
+                            CommandParameter="cheap"
+                            SelectedColor="#21C940"
+                            UnselectedColor="#96979B"
+                            TextColor="#22292F" />
+
+                        <components:CustomRadioButtonView
+                            Text="Avval narxi qimmati"
+                            FontSize="17"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            IsSelected="{Binding IsSortExpensiveFirst}"
+                            Command="{Binding SelectSortCommand}"
+                            CommandParameter="expensive"
+                            SelectedColor="#21C940"
+                            UnselectedColor="#96979B"
+                            TextColor="#22292F" />
+
+                        <components:CustomRadioButtonView
+                            Text="Avval yangilari"
+                            FontSize="17"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            IsSelected="{Binding IsSortNewestFirst}"
+                            Command="{Binding SelectSortCommand}"
+                            CommandParameter="newest"
+                            SelectedColor="#21C940"
+                            UnselectedColor="#96979B"
+                            TextColor="#22292F" />
+
+                        <components:CustomRadioButtonView
+                            Text="Avval eskilari"
+                            FontSize="17"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            IsSelected="{Binding IsSortOldestFirst}"
+                            Command="{Binding SelectSortCommand}"
+                            CommandParameter="oldest"
+                            SelectedColor="#21C940"
+                            UnselectedColor="#96979B"
+                            TextColor="#22292F" />
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+
+                <!-- Bottom button -->
+                <Grid Grid.Row="6" Margin="0,24,0,0">
+                    <components:CustomActionButton
+                        x:Name="btnConfirmCode"
+                        ButtonText="Filtrlash"
+                        ButtonBackgroundColor="#FD473C"
+                        ButtonTextColor="White"
+                        TapCommand="{Binding ApplyFilterCommand}" />
+                </Grid>
+
+            </Grid>
+        </Border>
+    </Grid>
+</ContentView>

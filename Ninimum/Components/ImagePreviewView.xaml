@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Samokat.Components.ImagePreviewView"
+    x:Name="ThisView"
+    IsVisible="True"
+    Opacity="1"
+    InputTransparent="True"
+    BackgroundColor="Transparent">
+
+    <Grid BackgroundColor="Transparent">
+
+        <BoxView x:Name="boxFullImage"
+                 BackgroundColor="Black"
+                 IsVisible="False"
+                 Opacity="0"
+                 InputTransparent="True">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer NumberOfTapsRequired="1"
+                                      Tapped="OnOverlayTapped" />
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <Image x:Name="fullImage"
+               Source="{Binding Source={x:Reference ThisView}, Path=PreviewImageSource}"
+               Aspect="AspectFit"
+               IsVisible="False"
+               Opacity="1"
+               TranslationY="0"
+               HorizontalOptions="Center"
+               VerticalOptions="Center">
+            <Image.GestureRecognizers>
+                <SwipeGestureRecognizer Direction="Up"
+                                        Swiped="OnImageSwiped" />
+                <SwipeGestureRecognizer Direction="Down"
+                                        Swiped="OnImageSwiped" />
+                <TapGestureRecognizer NumberOfTapsRequired="1"
+                                      Tapped="OnImageTapped" />
+            </Image.GestureRecognizers>
+        </Image>
+
+    </Grid>
+</ContentView>
