@@ -40,7 +40,7 @@
             StrokeThickness="0"
             Padding="18,22,18,18"
             StrokeShape="RoundRectangle 30">
-
+            
             <VerticalStackLayout Spacing="16">
 
                 <VerticalStackLayout Spacing="10">
@@ -62,7 +62,11 @@
                         HorizontalOptions="Center"
                         TextColor="#96979B"
                         FontSize="17"
-                        CharacterSpacing="0.17" />
+                        CharacterSpacing="0.17">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="LblTimer_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
                 </VerticalStackLayout>
 
                 <Grid

@@ -1,10 +1,14 @@
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Models;
 using Models.Requests;
 using Models.Responses;
+using Ninimum.Models;
+using Ninimum.Services;
+using Ninimum.Views.LoginRegister;
 using Utils;
 
 namespace Ninimum.ViewModels;
@@ -31,6 +35,14 @@ public partial class RegisterPageViewModel : ObservableObject
     private string confirmPassword = string.Empty;
 
     [ObservableProperty]
+    private string address = string.Empty;
+    [ObservableProperty]
+    private double locationLatitude;
+
+    [ObservableProperty]
+    private double locationLongitude;
+
+    [ObservableProperty]
     private bool isLoading = false;
 
     [ObservableProperty]
@@ -40,11 +52,26 @@ public partial class RegisterPageViewModel : ObservableObject
     private bool isAgreementChecked = false;
     #endregion
 
-    private UserApiService apiService;
-    public RegisterPageViewModel(UserApiService apiService)
+    [ObservableProperty]
+    private ICommand addressTapCommand;
+
+    private readonly UserApiService apiService;
+    private readonly AppControl appControl;
+
+    public RegisterPageViewModel(UserApiService apiService, AppControl appControl)
     {
         this.apiService = apiService;
-        //Children.Add(new ChildInputModel());
+        this.appControl = appControl;
+
+       MessagingCenter.Subscribe<AddressPage, SelectedAddressModel>(this,"SelectedAddress",
+            (sender, selectedAddress) =>
+            {
+                Address = selectedAddress.Address;
+                LocationLatitude = selectedAddress.Latitude;
+                LocationLongitude = selectedAddress.Longitude;
+            });
+
+        AddressTapCommand = new Command(AdressTapped);
 
         FirstName = "Akmal";
         LastName = "Karimov";
@@ -72,13 +99,13 @@ public partial class RegisterPageViewModel : ObservableObject
             IsGirlSelected = true
         });
     }
-    
+
     [RelayCommand]
     private void AddChild()
     {
-         Children.Add(new ChildInputModel());
+        Children.Add(new ChildInputModel());
     }
- 
+
     [RelayCommand]
     private async Task Register()
     {
@@ -103,6 +130,14 @@ public partial class RegisterPageViewModel : ObservableObject
             await AlertService.ShowAlertAsync(
                 "Ogohlantirish",
                 "Telefon raqamni kiriting.");
+            return;
+        }
+
+        if (string.IsNullOrWhiteSpace(Address) || Address == "Manzil")
+        {
+            await AlertService.ShowAlertAsync(
+                "Ogohlantirish",
+                "Iltimos, manzilingizni tanlang.");
             return;
         }
 
@@ -143,6 +178,9 @@ public partial class RegisterPageViewModel : ObservableObject
             region_id = 1,
             first_name = FirstName.Trim(),
             last_name = LastName.Trim(),
+            location_latitude = LocationLatitude,
+            location_longitude = LocationLongitude,
+            address = Address.Trim(),
             phone_number = PhoneNumber.Trim(),
             password = Password
         };
@@ -155,6 +193,7 @@ public partial class RegisterPageViewModel : ObservableObject
         if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
         {
             await AlertService.ShowAlertAsync("Success", "Ro’yxatdan o’tish muvaffaqiyatli.");
+            await appControl.Login(PhoneNumber, Password);
         }
     }
 
@@ -162,5 +201,10 @@ public partial class RegisterPageViewModel : ObservableObject
     private void ToggleAgreement()
     {
         IsAgreementChecked = !IsAgreementChecked;
+    }
+
+    private async void AdressTapped()
+    { 
+        await AppNavigatorService.NavigateTo(nameof(AddressPage));
     }
 }

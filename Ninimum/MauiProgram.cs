@@ -17,6 +17,7 @@ using Api.Services;
 using Ninimum.Views.LoginRegister;
 using RestSharp;
 using Utils;
+using Ninimum.Views.Authorization;
 
 #if ANDROID
 
@@ -35,6 +36,7 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
 			.UseAcrylicView()
+			.UseMauiMaps()
 			.UseMauiCommunityToolkit()
 			.ConfigureFonts(fonts =>
 			{
@@ -56,7 +58,7 @@ public static class MauiProgram
 		var mauiApp = builder.Build();
 		AppService.Init(mauiApp.Services);
 
-		return builder.Build();
+		return mauiApp;
 	}
 
 	private static void RegisterSingleton(MauiAppBuilder builder)
@@ -75,7 +77,7 @@ public static class MauiProgram
 #if ANDROID
 		builder.Services.AddSingleton<IStatusBarService, Ninimum.Platforms.Android.StatusBarService>();
 		//builder.Services.AddSingleton<INotificationService, NotificationService>();
-		//builder.Services.AddSingleton<IKeyboardHelper, KeyboardHelper>();
+		builder.Services.AddSingleton<IKeyboardHelper, KeyboardHelper>();
 #endif
 
 #if IOS
@@ -99,6 +101,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<ChildrenPage>();
 		builder.Services.AddTransient<ChildInfoPage>();
 		builder.Services.AddTransient<MyProfilePage>();
+		builder.Services.AddTransient<AuthorizationPage>();
+		builder.Services.AddTransient<AddressPage>();
 
 		builder.Services.AddTransient<MainPageViewModel>();
 		builder.Services.AddTransient<MenuPageViewModel>();

@@ -16,7 +16,7 @@
             HeightRequest="35"
             VerticalOptions="Center"
             HorizontalOptions="Start"
-            Margin="0,4.44,0,0">
+            Margin="05,4.44,0,0">
             <Grid.GestureRecognizers>
                 <TapGestureRecognizer
                     NumberOfTapsRequired="1"

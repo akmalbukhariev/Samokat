@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Ninimum.Views"
+    xmlns:components="clr-namespace:Ninimum.Components"
+    x:Class="Ninimum.Views.Authorization.AuthorizationPage"
+    BackgroundColor="White"
+    x:Name="RootPage">
+
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout
+                Padding="20,20,30,50"
+                Spacing="24">
+
+                <!-- Header -->
+                <components:PageHeaderView
+                    Title="Avtorizatsya"/>
+
+                <!-- Description -->
+                <Label
+                    Text="Iltimos, telefon raqamingizni kiriting"
+                    HorizontalTextAlignment="Center"
+                    TextColor="#96979B"
+                    FontSize="17"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    CharacterSpacing="0.17" />
+
+                <!-- Input -->
+                <components:InputView
+                    Title="Telefon raqam"
+                    LeftIcon="ic_phone.png"
+                    Keyboard="Telephone"
+                    Text="{Binding PhoneNumber}" 
+                    ClearButtonVisibility="WhileEditing"/>
+
+                <!-- Button -->
+                <components:CustomActionButton
+                        x:Name="btnSend"
+                        ButtonText="Yuborish"
+                        ButtonBackgroundColor="#FD473C"
+                        ButtonTextColor="White"
+                        ButtonImageSource="right.png"
+                        TapCommand="{Binding SendCommand}"/>
+
+                <!-- Footer -->
+                <Label
+                    Text="Ushbu telefon raqam orqali siz platformadan unumli foydalanishingiz mumkin.Telefon raqamingizni to’g’ri kiritishingiz juda ham muhim. Telefon raqamingizni kiritishingiz orqali siz ommaviy ofertaga roziligingizni bildirasiz."
+                    HorizontalTextAlignment="Center"
+                    TextColor="#96979B"
+                    FontSize="17"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    CharacterSpacing="0.17" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+    
+        <components:SmsCodePopup
+                x:Name="popupSms"
+                ConfirmCommand="{Binding Source={x:Reference RootPage}, Path=BindingContext.ConfirmSmsCodeCommand}"
+                ResendCommand="{Binding Source={x:Reference RootPage}, Path=BindingContext.ResendSmsCommand}"
+                IsVisible="False"/>
+        
+        <components:LoadingView 
+            x:Name="loading"
+            ShowLoading="{Binding IsLoading}"/>
+    </Grid>
+</page:BasePage>

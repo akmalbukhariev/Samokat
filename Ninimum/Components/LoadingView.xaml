@@ -15,7 +15,7 @@
         </Grid.GestureRecognizers>
 
         <ActivityIndicator x:Name="loading"
-                           Color="{StaticResource User}"
+                           Color="#FD473C"
                            Scale="1.5"
                            VerticalOptions="Center"
                            HorizontalOptions="Center"/>

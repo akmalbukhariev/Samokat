@@ -13,14 +13,15 @@ namespace Api.Services
         private const string BASE_URL = "";
         //private const string BASE_URL = "/ninimum/api/v1/";
         private const string LOGIN_USER = $"{BASE_URL}user/login";
-        private const string CHECK_USER = $"{BASE_URL}user/checkUser/";
+        private const string CHECK_PHONE_NUMBER = $"{BASE_URL}user/checkPhoneNumber";
         private const string LOGOUT_USER = $"{BASE_URL}user/logout";
         private const string REGISTER_USER = $"{BASE_URL}user/register";
         private const string GET_USER_INFO = $"{BASE_URL}user/getUserInfo";
         private const string GET_USER_LIST = $"{BASE_URL}user/getUserByIdList";
         private const string UPDATE_USER_INFO = $"{BASE_URL}user/updateUserInfo";
-        private const string UPDATE_USER_PHONE_NUMBER = $"{BASE_URL}user/updateUserPhoneNumber";  
+        private const string UPDATE_USER_PHONE_NUMBER = $"{BASE_URL}user/updateUserPhoneNumber";
         private const string DELETE_USER_ACCOUNT = $"{BASE_URL}user/deleteUser/";
+        private const string VERIFY_NUMBER = $"{BASE_URL}message/verifyPhoneNumber";
         #endregion
 
         public UserApiService(RestClient client)
@@ -40,39 +41,6 @@ namespace Api.Services
             };
         }
 
-        public async Task<Response> CheckUser(string phoneNumber)
-        {
-            var response = new Response();
-
-            try
-            {
-                var receivedData = await GetAsync($"{CHECK_USER}{phoneNumber}", false);
-
-                if (!string.IsNullOrWhiteSpace(receivedData))
-                {
-                    var deserializedResponse = JsonConvert.DeserializeObject<Response>(receivedData);
-                    if (deserializedResponse != null)
-                    {
-                        return deserializedResponse;
-                    }
-                }
-
-                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
-            }
-            catch (JsonException jsonEx)
-            {
-                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
-                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
-            }
-            catch (Exception ex)
-            {
-                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
-                response.resultMsg = $"API: {ex.Message}";
-            }
-
-            return response;
-        }
-
         public async Task<Response> DeleteUseAccount(string reasons)
         {
             var response = new Response();
@@ -80,7 +48,7 @@ namespace Api.Services
             try
             {
                 var encodedReasons = Uri.EscapeDataString(reasons ?? string.Empty);
- 
+
                 var url = $"{DELETE_USER_ACCOUNT}{encodedReasons}";
 
                 var receivedData = await DeleteAsync(url);
@@ -209,17 +177,49 @@ namespace Api.Services
             return response;
         }
 
-        /*public async Task<GetUserInfoResponse> GetUserInfo()
+        public async Task<string> GetAddressFromYandexAsync(double latitude, double longitude)
         {
-            var response = new GetUserInfoResponse();
+            try
+            {
+                const string apiKey = "bb9a670d-13db-4cec-8fc9-a03c8b2b4ece";
+
+                var url =
+                    $"https://geocode-maps.yandex.ru/v1/?" +
+                    $"apikey={apiKey}" +
+                    $"&geocode={longitude},{latitude}" +
+                    $"&lang=en_US" +
+                    $"&format=json";
+
+                using var httpClient = new HttpClient();
+
+                var json = await httpClient.GetStringAsync(url);
+
+                dynamic result = JsonConvert.DeserializeObject(json);
+
+                string address =
+                    result.response.GeoObjectCollection.featureMember[0]
+                        .GeoObject.metaDataProperty.GeocoderMetaData.text;
+
+                return address;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Yandex address error: {ex.Message}");
+                return string.Empty;
+            }
+        }
+
+        public async Task<VerifyPhoneNumberResponse> VerifyNumber(VerifyPhoneNumberRequest data)
+        {
+            var response = new VerifyPhoneNumberResponse();
 
             try
             {
-                var receivedData = await GetAsync(GET_USER_INFO);
+                var receivedData = await PostAsync(VERIFY_NUMBER, data);
 
                 if (!string.IsNullOrWhiteSpace(receivedData))
                 {
-                    var deserializedResponse = JsonConvert.DeserializeObject<GetUserInfoResponse>(receivedData);
+                    var deserializedResponse = JsonConvert.DeserializeObject<VerifyPhoneNumberResponse>(receivedData);
                     if (deserializedResponse != null)
                     {
                         return deserializedResponse;
@@ -242,17 +242,17 @@ namespace Api.Services
             return response;
         }
 
-        public async Task<Response> UpdateUserInfo(UpdateUserInfoRequest data)
+        public async Task<CheckPhoneNumberResponse> CheckPhoneNumber(CheckPhoneNumberRequest data)
         {
-            var response = new Response();
+            var response = new CheckPhoneNumberResponse();
 
             try
             {
-                var receivedData = await PostAsync(UPDATE_USER_INFO, data);
+                var receivedData = await PostAsync(CHECK_PHONE_NUMBER, data);
 
                 if (!string.IsNullOrWhiteSpace(receivedData))
                 {
-                    var deserializedResponse = JsonConvert.DeserializeObject<Response>(receivedData);
+                    var deserializedResponse = JsonConvert.DeserializeObject<CheckPhoneNumberResponse>(receivedData);
                     if (deserializedResponse != null)
                     {
                         return deserializedResponse;
@@ -273,7 +273,7 @@ namespace Api.Services
             }
 
             return response;
-        }*/
+        }
 
         public async Task<Response> UpdateUserProfileInfo(Stream imageStream, Dictionary<string, string>? additionalData)
         {
@@ -307,5 +307,7 @@ namespace Api.Services
 
             return response;
         }
+
+
     }
 }

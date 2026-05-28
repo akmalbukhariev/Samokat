@@ -46,6 +46,18 @@ public partial class SmsCodePopup : ContentView
         set => SetValue(SmsCodeProperty, value);
     }
 
+    public static readonly BindableProperty ResendCommandProperty =
+    BindableProperty.Create(
+        nameof(ResendCommand),
+        typeof(ICommand),
+        typeof(SmsCodePopup));
+
+    public ICommand ResendCommand
+    {
+        get => (ICommand)GetValue(ResendCommandProperty);
+        set => SetValue(ResendCommandProperty, value);
+    }
+
     public void Show()
     {
         IsVisible = true;
@@ -69,8 +81,13 @@ public partial class SmsCodePopup : ContentView
         _smsCode = string.Empty;
         SmsCode = string.Empty;
         HiddenOtpEntry.Text = string.Empty;
+
         _secondsLeft = 45;
         lblTimer.Text = FormatTime(_secondsLeft);
+        lblTimer.TextColor = Color.FromArgb("#96979B");
+        lblTimer.InputTransparent = true;
+        lblTimer.Opacity = 0.6;
+
         UpdateOtpUI();
         RestartTimer();
     }
@@ -82,7 +99,7 @@ public partial class SmsCodePopup : ContentView
 
     private void OnConfirmTapped()
     {
-        if (_smsCode.Length != 4)
+        if (_smsCode.Length < 4)
             return;
 
         if (ConfirmCommand?.CanExecute(_smsCode) == true)
@@ -161,7 +178,18 @@ public partial class SmsCodePopup : ContentView
             Cursor4.IsVisible = false;
         }
 
-        btnConfirmCode.IsEnabled = _smsCode.Length == 4;
+        bool canConfirm = _smsCode.Length == 4;
+        btnConfirmCode.IsEnabled = canConfirm;
+
+        btnConfirmCode.ButtonBackgroundColor =
+            canConfirm
+                ? Color.FromArgb("#FD473C")
+                : Color.FromArgb("#D9D9D9");
+
+        btnConfirmCode.ButtonTextColor =
+            canConfirm
+                ? Colors.White
+                : Color.FromArgb("#9E9E9E");
     }
 
     private void SetBoxState(Border box, BoxView cursor, bool isActive)
@@ -202,12 +230,30 @@ public partial class SmsCodePopup : ContentView
         _timer.Start();
     }
 
+    private async void LblTimer_Tapped(object sender, TappedEventArgs e)
+    {
+        if (_secondsLeft > 0)
+            return;
+
+        await AnimateElementScaleDown(lblTimer);
+
+        if (ResendCommand?.CanExecute(null) == true)
+            ResendCommand.Execute(null);
+
+        Reset();
+    }
+
     private void Timer_Tick(object? sender, EventArgs e)
     {
         if (_secondsLeft <= 0)
         {
-            lblTimer.Text = "0:00";
             _timer?.Stop();
+
+            lblTimer.Text = "Send again";
+            lblTimer.TextColor = Color.FromArgb("#FD473C");
+            lblTimer.InputTransparent = false;
+            lblTimer.Opacity = 1;
+
             return;
         }
 

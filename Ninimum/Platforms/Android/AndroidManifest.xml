@@ -1,10 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+		  package="com.ninimum.app">
 	<application android:allowBackup="true" 
 				 android:icon="@mipmap/appicon" 
 				 android:roundIcon="@mipmap/appicon_round"
 				 android:usesCleartextTraffic="true"
-				 android:supportsRtl="true"></application>
+				 android:supportsRtl="true">
+			<meta-data android:name="com.google.android.geo.API_KEY"
+		           android:value="AIzaSyAPEefDuAth41Iw4808y8RpCdgDoMeqS50"/>
+				  
+	</application>
 	
 	
 	<uses-permission android:name="android.permission.CAMERA" />

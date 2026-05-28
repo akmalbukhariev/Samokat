@@ -2,6 +2,7 @@ using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models.Requests;
 using Models.Responses;
+using Ninimum.Views.Authorization;
 using Ninimum.Views.LoginRegister;
 using System.Windows.Input;
 using Utils;
@@ -68,8 +69,8 @@ public partial class LoginPageViewModel : ObservableObject
             }
             else
             {
-
-             }
+                    
+            }
 
             ShowSmsPopupAction?.Invoke();
         }
@@ -90,7 +91,7 @@ public partial class LoginPageViewModel : ObservableObject
 
     private async Task OnRegister()
     {
-        await AppNavigatorService.NavigateTo(nameof(RegisterPage));
+        await AppNavigatorService.NavigateTo(nameof(AuthorizationPage));
     }
 
     private async Task OnGuestLogin()

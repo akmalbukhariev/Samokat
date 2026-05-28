@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Ninimum.Views"
+    xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+    xmlns:components="clr-namespace:Ninimum.Components"
+    x:Class="Ninimum.Views.LoginRegister.AddressPage"
+    BackgroundColor="White">
+
+    <Grid RowDefinitions="50,*">
+
+        <components:PageHeaderView
+            Title="Yetkazib berish manzili"/>
+
+        <Grid Grid.Row="1">
+
+            <maps:Map
+                x:Name="map"
+                MapType="Street"
+                IsShowingUser="true"/>
+
+            <Grid
+                x:Name="CenterPin"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                TranslationY="-45">
+
+                <BoxView
+                    WidthRequest="3"
+                    HeightRequest="24"
+                    Color="#FD473C"
+                    VerticalOptions="End"
+                    Margin="0,34,0,0"/>
+
+                <Ellipse
+                    WidthRequest="44"
+                    HeightRequest="44"
+                    Fill="#FD473C"/>
+
+                <Ellipse
+                    WidthRequest="14"
+                    HeightRequest="14"
+                    Fill="White"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            </Grid>
+
+            <Border
+                WidthRequest="58"
+                HeightRequest="58"
+                BackgroundColor="White"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 29"
+                HorizontalOptions="End"
+                VerticalOptions="End"
+                Margin="0,0,20,170">
+
+                <Label
+                    Text="➤"
+                    Rotation="-45"
+                    FontSize="30"
+                    TextColor="#22292F"
+                    HorizontalTextAlignment="Center"
+                    VerticalTextAlignment="Center"/>
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="CurrentLocation_Tapped"/>
+                </Border.GestureRecognizers>
+            </Border>
+
+            <Border
+                x:Name="BottomPanel"
+                BackgroundColor="White"
+                StrokeThickness="0"
+                Padding="24,12,24,28"
+                VerticalOptions="End"
+                HeightRequest="300"
+                StrokeShape="RoundRectangle 28,28,0,0">
+                <Border.GestureRecognizers>
+                    <PanGestureRecognizer PanUpdated="BottomPanel_PanUpdated"/>
+                </Border.GestureRecognizers>
+
+                <VerticalStackLayout Spacing="14">
+
+                    <BoxView
+                        WidthRequest="54"
+                        HeightRequest="5"
+                        CornerRadius="3"
+                        Color="#BDBDBD"
+                        HorizontalOptions="Center"/>
+
+                    <Grid 
+                        x:Name="SearchHeaderGrid" 
+                        ColumnSpacing="12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition x:Name="MapColumn" Width="80" />
+                        </Grid.ColumnDefinitions>
+
+                        <Border
+                            BackgroundColor="#EDEDF0"
+                            StrokeThickness="0"
+                            StrokeShape="RoundRectangle 14"
+                            Padding="14,0">
+
+                            <Entry
+                                x:Name="AddressEntry"
+                                Text="{Binding AddressText}"
+                                Placeholder="Buyurtma qayerga yetkazib berilsin?"
+                                FontSize="17"
+                                TextColor="#22292F"
+                                PlaceholderColor="#8F8F99"
+                                BackgroundColor="Transparent"
+                                HeightRequest="56"
+                                Focused="AddressEntry_Focused"
+                                Unfocused="AddressEntry_Unfocused"
+                                Completed="AddressEntry_Completed"/>
+                        </Border>
+
+                        <Label
+                            x:Name="MapButtonLabel"
+                            Grid.Column="1"
+                            Text="Xarita"
+                            FontSize="17"
+                            TextColor="#111111"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center">
+
+                            <Label.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="MapButton_Tapped"/>
+                            </Label.GestureRecognizers>
+                        </Label>
+                    </Grid>
+
+                    <Label
+                        x:Name="HintLabel"
+                        Text="Tuman, ko‘cha, uy yoki yaqin-atrofdagi mo‘ljal"
+                        FontSize="16"
+                        TextColor="#8F8F99"/>
+
+                    <Grid
+                        x:Name="MyLocationRow"
+                        ColumnDefinitions="40,*,30"
+                        HeightRequest="56">
+
+                        <Label
+                            Text="➤"
+                            Rotation="-45"
+                            FontSize="28"
+                            TextColor="#22292F"
+                            VerticalTextAlignment="Center"/>
+
+                        <Label
+                            Grid.Column="1"
+                            Text="Mening joylashuvim"
+                            FontSize="19"
+                            TextColor="#22292F"
+                            VerticalTextAlignment="Center"/>
+
+                        <Label
+                            Grid.Column="2"
+                            Text="›"
+                            FontSize="34"
+                            TextColor="#8F8F99"
+                            HorizontalTextAlignment="End"
+                            VerticalTextAlignment="Center"/>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="MyLocation_Tapped"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
+
+                    <BoxView
+                        x:Name="DividerLine"
+                        HeightRequest="1"
+                        Color="#E5E5E5"/>
+
+                    <Label
+                        x:Name="NoDeliveryLabel"
+                        Text="Hozircha bu yerga yetkazma xizmati yo‘q.&#10;Boshqa manzil yoki yaqin-atrofdagi&#10;buyurtmalarni tarqatish punktini tanlang"
+                        FontSize="16"
+                        TextColor="#B00000"
+                        IsVisible="False"/>
+
+                    <Button
+                        x:Name="PickupButton"
+                        Text="Tarqatish punktini tanlash"
+                        FontSize="17"
+                        TextColor="White"
+                        BackgroundColor="#FD473C"
+                        CornerRadius="12"
+                        HeightRequest="56"
+                        Clicked="PickupButton_Clicked"
+                        IsVisible="False"/>
+
+                </VerticalStackLayout>
+            </Border>
+
+        </Grid>
+    </Grid>
+</page:BasePage>

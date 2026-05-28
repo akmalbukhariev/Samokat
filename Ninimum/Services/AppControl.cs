@@ -1,18 +1,29 @@
 ﻿using System.Globalization;
 using System.Text.RegularExpressions;
+using Api.Services;
+using Models.Dto;
+using Models.Requests;
+using Models.Responses;
 using Utils;
 
 namespace Ninimum.Services
 {
     public class AppControl
     {
+        public bool IsBlocked = false;
+        public UserDto userDto { get; set; } = new UserDto();
         private readonly LanguageService lang;
-        private AppStoreService appStoreService;
+        private readonly UserApiService apiService;
+        private AppStoreService storeService;
 
-        public AppControl(LanguageService lang, AppStoreService appStoreService)
+        public AppControl(
+            LanguageService lang,
+            AppStoreService storeService,
+            UserApiService apiService)
         {
             this.lang = lang;
-            this.appStoreService = appStoreService;
+            this.storeService = storeService;
+            this.apiService = apiService;
         }
 
         public bool IsConnectedToWifi()
@@ -20,9 +31,57 @@ namespace Ninimum.Services
             return Connectivity.NetworkAccess == NetworkAccess.Internet;
         }
 
-        public void Login()
+        public async Task Login(string phoneNumber, string password)
         {
-            SetRootPage(new AppShell());
+            var request = new LoginUserRequest
+            {
+                phone_number = phoneNumber,
+                password = password
+            };
+            LoginUserResponse response = await apiService.Login(request);
+            if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
+            {
+                userDto = response.resultData;
+
+                storeService.Set(AppKeys.IsLoggedIn, true);
+                storeService.Set(AppKeys.PhoneNumber, phoneNumber);
+                storeService.Set(AppKeys.Password, password);
+
+                SetRootPage(new ContentPage
+                {
+                    BackgroundColor = Colors.White,
+                    Content = new ActivityIndicator
+                    {
+                        IsRunning = true,
+                        Color = AppConstants.COLOR_USER,
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.Center
+                    }
+                });
+
+                await Task.Delay(100);
+                
+                SetRootPage(new AppShell());
+            }
+        }
+
+        public async Task Logout(bool isBlocked = true)
+        {
+            IsBlocked = isBlocked;
+
+            Response response = await apiService.LogOut();
+            if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
+            {
+                //do something
+            }
+
+            storeService.Remove(AppKeys.IsLoggedIn);
+            storeService.Remove(AppKeys.PhoneNumber);
+            storeService.Remove(AppKeys.Password);
+
+            await apiService.ClearTokenAsync();
+
+            SetRootPage(new AppEntryShell());
         }
 
         public void SetRootPage(Page page)

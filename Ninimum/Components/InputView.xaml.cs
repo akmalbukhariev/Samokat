@@ -353,13 +353,16 @@ public partial class InputView : ContentView
         OnPropertyChanged(nameof(CurrentRightIcon));
     }
 
-    private void OnBorderTapped(object sender, TappedEventArgs e)
+    private async void OnBorderTapped(object sender, TappedEventArgs e)
     {
         if (!IsReadOnly)
             PART_Entry.Focus();
 
         if (TapCommand?.CanExecute(null) == true)
             TapCommand.Execute(null);
+        
+        await brdMain.ScaleTo(0.96, 100, Easing.CubicOut);
+        await brdMain.ScaleTo(1.0, 100, Easing.CubicIn);
     }
 
     private async void OnRightIconTapped(object sender, TappedEventArgs e)

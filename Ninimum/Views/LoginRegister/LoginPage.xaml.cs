@@ -40,6 +40,5 @@ public partial class LoginPage : BasePage
     private void HideSmsPopup()
     {
         popupSms.Hide();
-        appControl.Login();
     }
 }

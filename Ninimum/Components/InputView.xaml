@@ -5,6 +5,7 @@
              x:Name="ThisView">
 
     <Border
+        x:Name="brdMain"
         StrokeThickness="0"
         BackgroundColor="{StaticResource InputBackground}"
         HeightRequest="60"
@@ -18,7 +19,8 @@
             Padding="20,0"
             ColumnDefinitions="Auto,*,Auto"
             ColumnSpacing="12"
-            VerticalOptions="Center">
+            VerticalOptions="Center"
+            InputTransparent="{Binding IsReadOnly, Source={x:Reference ThisView}}">
 
             <!-- Left Icon -->
             <Image

@@ -43,13 +43,15 @@
                     LeftIcon="ic_phone.png"
                     Keyboard="Telephone"
                     Text="{Binding PhoneNumber}"
-                    ClearButtonVisibility="WhileEditing" />
+                    ClearButtonVisibility="WhileEditing"
+                    IsVisible="False"/>
 
                 <components:InputView
-                    Title="Hudud"
+                    Title="Manzil"
                     LeftIcon="ic_location.png"
-                    Text="{Binding Region}"
-                    ClearButtonVisibility="WhileEditing" />
+                    IsReadOnly="True"
+                    Text="{Binding Address}"
+                    TapCommand="{Binding AddressTapCommand}" />
 
                 <components:InputView
                     Title="Parol"
