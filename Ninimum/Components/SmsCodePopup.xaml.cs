@@ -1,4 +1,5 @@
 using System.Windows.Input;
+using Ninimum.Services;
 
 namespace Ninimum.Components;
 
@@ -8,16 +9,18 @@ public partial class SmsCodePopup : ContentView
     private IDispatcherTimer? _timer;
     private int _secondsLeft = 45;
     public ICommand ConfirmTapCommand { get; }
+    private readonly IKeyboardHelper keyboardHelper;
     public SmsCodePopup()
     {
         InitializeComponent();
-
+        keyboardHelper = AppService.Get<IKeyboardHelper>();
+         
         ConfirmTapCommand = new Command(OnConfirmTapped);
 
         UpdateOtpUI();
         StartTimer();
 
-         BindingContext = this;
+        BindingContext = this;
     }
 
     public static readonly BindableProperty ConfirmCommandProperty =
@@ -190,6 +193,9 @@ public partial class SmsCodePopup : ContentView
             canConfirm
                 ? Colors.White
                 : Color.FromArgb("#9E9E9E");
+
+        if (canConfirm)
+            keyboardHelper.HideKeyboard();
     }
 
     private void SetBoxState(Border box, BoxView cursor, bool isActive)

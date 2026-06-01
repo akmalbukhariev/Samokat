@@ -1,5 +1,4 @@
-﻿
-namespace Utils
+﻿namespace Utils
 {
     public enum ApiResult
     {
@@ -34,26 +33,30 @@ namespace Utils
         LOGIN = 252,
         LOGIN_INACTIVE = 253,
         LOGIN_BANNED = 254,
-        LOGIN_FAILED = 255,
-        PASSWORD_IS_NOT_MATCHED = 256,
-        VERIFY_PHONE_NUMBER_FAILED = 257,
+        PASSWORD_IS_NOT_MATCHED = 255,
+
+        VERIFY_PHONE_NUMBER_FAILED = 256,
+        SEND_TEMP_PASSWORD_FAILED = 257,
 
         AUTHENTICATION_ERROR = 300,
         INTERNAL_ERROR = 301,
         SERVER_ERROR = 302,
         TOKEN_EMPTY = 360,
 
-        API_SERVICE_ERROR = 361,
-        JSON_PARSING_ERROR = 362,
-        UNKNOWN_ERROR = 363
+        ROLE_INVALID = 410,
+
+        API_SERVICE_ERROR = 1000,
+        JSON_PARSING_ERROR = 1001,
+        UNKNOWN_ERROR = 1002
     }
-     
+
     public static class ResultExtensions
     {
-       private static readonly Dictionary<ApiResult, string> _messages = new()
-       {
+        private static readonly Dictionary<ApiResult, string> _messages = new()
+        {
             { ApiResult.SUCCESS, "Success." },
             { ApiResult.FAILED, "Failed." },
+
             { ApiResult.USER_EXIST, "User exist" },
             { ApiResult.USER_NOT_EXIST, "User is not exist" },
             { ApiResult.COMPANY_NOT_EXIST, "Company is not exist" },
@@ -62,7 +65,7 @@ namespace Utils
             { ApiResult.BRANCH_EXIST, "Branch is exist" },
             { ApiResult.POSTER_EXIST, "Poster is exist" },
             { ApiResult.POSTER_NOT_EXIST, "Poster is not exist" },
-            { ApiResult.POSTER_COMMENT_NOT_EXIST, "Poster comment is not exist" },
+            { ApiResult.POSTER_COMMENT_NOT_EXIST, "Poster comment is exist" },
             { ApiResult.POSTER_COMMENT_EXIST, "Poster comment is exist" },
             { ApiResult.POSTER_FEEDBACK_EXIST, "Poster feedback is exist" },
             { ApiResult.POSTER_FEEDBACK_NOT_EXIST, "Poster feedback is not exist" },
@@ -70,9 +73,10 @@ namespace Utils
             { ApiResult.PROMOTION_NOT_EXIST, "Promotion is not exist" },
             { ApiResult.USER_PASSWORD_NOT_MATCHED, "Password is not matched!" },
             { ApiResult.NOT_FOUND, "Not found!" },
+            { ApiResult.FOUND, "Found!" },
             { ApiResult.BLOCK_USER, "User blocked!" },
             { ApiResult.DELETE_USER, "User deleted!" },
-            { ApiResult.FOUND, "Found!" },
+
             { ApiResult.TOKEN_INVALID, "Invalid token information." },
             { ApiResult.TOKEN_EXPIRED_TIME, "This token is expired." },
             { ApiResult.TOKEN_UNSUPPORTED_JWT, "Unsupported token information." },
@@ -80,14 +84,19 @@ namespace Utils
             { ApiResult.LOGIN_DUPLICATE, "Duplicate login." },
             { ApiResult.LOGIN, "Please log in first." },
             { ApiResult.LOGIN_INACTIVE, "Please log in first." },
-            { ApiResult.LOGIN_FAILED, "Login failed. No response from server."},
             { ApiResult.LOGIN_BANNED, "User is banned. Access denied." },
             { ApiResult.PASSWORD_IS_NOT_MATCHED, "Password is not matched" },
+
             { ApiResult.VERIFY_PHONE_NUMBER_FAILED, "The phone verification failed." },
+            { ApiResult.SEND_TEMP_PASSWORD_FAILED, "Temp password failed." },
+
             { ApiResult.AUTHENTICATION_ERROR, "Your authentication information cannot be verified." },
             { ApiResult.INTERNAL_ERROR, "Something went wrong on our end. We're working to fix it." },
             { ApiResult.SERVER_ERROR, "A system error has occurred. Please contact your administrator." },
             { ApiResult.TOKEN_EMPTY, "Empty token" },
+
+            { ApiResult.ROLE_INVALID, "Role is invalid" },
+
             { ApiResult.API_SERVICE_ERROR, "Empty or invalid response from server" },
             { ApiResult.JSON_PARSING_ERROR, "JSON Parsing Error" },
             { ApiResult.UNKNOWN_ERROR, "Unknown error occurred" }
@@ -95,7 +104,9 @@ namespace Utils
 
         public static string GetMessage(this ApiResult result)
         {
-            return _messages.TryGetValue(result, out var message) ? message : "Unknown result code.";
+            return _messages.TryGetValue(result, out var message)
+                ? message
+                : "Unknown result code.";
         }
 
         public static string GetCodeToString(this ApiResult result)
@@ -106,9 +117,8 @@ namespace Utils
         public static ApiResult? GetResultByCode(int code)
         {
             if (Enum.IsDefined(typeof(ApiResult), code))
-            {
                 return (ApiResult)code;
-            }
+
             return null;
         }
     }

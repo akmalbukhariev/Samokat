@@ -72,7 +72,7 @@
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer
                             NumberOfTapsRequired="1"
-                            Command="{Binding ForgotPasswordCommand}"/>
+                            Tapped="ForgotPassword_Tapped"/>
                     </Label.GestureRecognizers>
                 </Label>
 

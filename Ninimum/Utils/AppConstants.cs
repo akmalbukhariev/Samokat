@@ -15,7 +15,7 @@ namespace Utils
 
 #region Domen
         //public const string SERVER_DOMAIN = "www.ninimum.uz";
-        public const string SERVER_DOMAIN = "192.168.219.151:8083";
+        public const string SERVER_DOMAIN = "192.168.219.165:8083";
         public const string BASE_USER_URL = $"http://{SERVER_DOMAIN}/ninimum/api/v1/";
 #endregion
 
@@ -55,8 +55,6 @@ namespace Utils
         public const string LAN_ICON_UZBEK = "flag_uz.png";
         public const string LAN_ICON_ENGLISH = "flag_en.png";
         public const string LAN_ICON_RUSSIAN = "flag_ru.png";
-
-        public static Color COLOR_USER = (Color)Application.Current.Resources["User"];
-        public static Color COLOR_COMPANY = (Color)Application.Current.Resources["Company"];
+        
     }
 }

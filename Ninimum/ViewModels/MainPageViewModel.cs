@@ -1,9 +1,16 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Windows.Input;
+using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Models.Requests;
+using Models.Responses;
+using Ninimum.Models.Dto;
 using Ninimum.Models.Main;
 using Ninimum.Views.DetailProduct;
 using Ninimum.Views.Formalization;
+using Utils;
 
 namespace Ninimum.ViewModels;
 
@@ -11,16 +18,37 @@ public partial class MainPageViewModel : ObservableObject
 {
     [ObservableProperty] private ICommand notificationTapCommand;
     [ObservableProperty] private ICommand buyNowCommand;
-    [ObservableProperty] private ICommand menuCommand; 
+    [ObservableProperty] private ICommand menuCommand;
     [ObservableProperty] private ObservableCollection<AdBannerItem> adBanners;
     [ObservableProperty] private ICommand purchaseBannerCommand;
     [ObservableProperty] private ICommand clickProductCommand;
     [ObservableProperty] private ICommand clickTomorrowCommand;
     [ObservableProperty] private ObservableCollection<MainProductCardItem> products;
+    [ObservableProperty] private bool isLoading;
+    [ObservableProperty] private bool isRefreshing;
 
-    public MainPageViewModel()
+    private readonly UserApiService apiService;
+
+    private int offset = 0;
+    private const int PageSize = 10;
+    private bool hasMoreItems = true;
+
+    public IAsyncRelayCommand LoadMoreCommand { get; }
+    public IAsyncRelayCommand RefreshCommand { get; }
+
+    public MainPageViewModel(UserApiService apiService)
     {
+        this.apiService = apiService;
+
+        Products = new ObservableCollection<MainProductCardItem>();
+
         NotificationTapCommand = new Command(OnNotificationTapped);
+        PurchaseBannerCommand = new Command<AdBannerItem>(OnPurchaseBanner);
+        ClickProductCommand = new Command<MainProductCardItem>(ProductClicked);
+        ClickTomorrowCommand = new Command<MainProductCardItem>(TomorrowClicked);
+
+        LoadMoreCommand = new AsyncRelayCommand(LoadMoreAsync);
+        RefreshCommand = new AsyncRelayCommand(RefreshAsync);
 
         AdBanners = new ObservableCollection<AdBannerItem>
         {
@@ -49,78 +77,123 @@ public partial class MainPageViewModel : ObservableObject
                 Image = "huggiest.png"
             }
         };
-        PurchaseBannerCommand = new Command<AdBannerItem>(OnPurchaseBanner);
+    }
 
-        Products = new ObservableCollection<MainProductCardItem>
+    public async Task LoadInitialAsync()
+    {
+        offset = 0;
+        hasMoreItems = true;
+        Products.Clear();
+
+        await LoadProductsAsync();
+    }
+
+    private async Task LoadProductsAsync(bool isRefresh = false)
+    {
+        if (IsLoading || (!hasMoreItems && !isRefresh))
+            return;
+
+        try
         {
-            new MainProductCardItem
+            if (isRefresh)
             {
-                OldPrice = "545 000",
-                NewPrice = "486 000",
-                Title = "Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik",
-                Rating = 4.8,
-                ReviewCount = 301,
-                ActionText = "+ Ertaga",
-                Images = new ObservableCollection<MainProductImageItem>
-                {
-                    new MainProductImageItem { ImageSource = "product_1.png" },
-                    new MainProductImageItem { ImageSource = "product_1.png" },
-                    new MainProductImageItem { ImageSource = "product_1.png" },
-                    new MainProductImageItem { ImageSource = "product_1.png" }
-                }
-            },
-            new MainProductCardItem
-            {
-                OldPrice = "545 000",
-                NewPrice = "486 000",
-                Title = "Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik",
-                Rating = 4.8,
-                ReviewCount = 301,
-                ActionText = "+ Ertaga",
-                Images = new ObservableCollection<MainProductImageItem>
-                {
-                    new MainProductImageItem { ImageSource = "product_2.png" },
-                    new MainProductImageItem { ImageSource = "product_2.png" },
-                    new MainProductImageItem { ImageSource = "product_2.png" },
-                    new MainProductImageItem { ImageSource = "product_2.png" }
-                }
-            },
-            new MainProductCardItem
-            {
-                OldPrice = "545 000",
-                NewPrice = "486 000",
-                Title = "Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik",
-                Rating = 4.8,
-                ReviewCount = 301,
-                ActionText = "+ Ertaga",
-                Images = new ObservableCollection<MainProductImageItem>
-                {
-                    new MainProductImageItem { ImageSource = "product_2.png" },
-                    new MainProductImageItem { ImageSource = "product_2.png" },
-                    new MainProductImageItem { ImageSource = "product_2.png" },
-                    new MainProductImageItem { ImageSource = "product_2.png" }
-                }
-            },
-            new MainProductCardItem
-            {
-                OldPrice = "545 000",
-                NewPrice = "486 000",
-                Title = "Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik",
-                Rating = 4.8,
-                ReviewCount = 301,
-                ActionText = "+ Ertaga",
-                Images = new ObservableCollection<MainProductImageItem>
-                {
-                    new MainProductImageItem { ImageSource = "product_1.png" },
-                    new MainProductImageItem { ImageSource = "product_1.png" },
-                    new MainProductImageItem { ImageSource = "product_1.png" },
-                    new MainProductImageItem { ImageSource = "product_1.png" }
-                }
+                IsRefreshing = true;
+                offset = 0;
+                hasMoreItems = true;
+                Products.Clear();
             }
-        };
+            else
+            {
+                IsLoading = true;
+            }
 
-        ClickProductCommand = new Command<MainProductCardItem>(ProductClicked);
-        ClickTomorrowCommand = new Command<MainProductCardItem>(TomorrowClicked);
+            var request = new ProductListRequest
+            {
+                categoryId = 1,
+                pageSize = PageSize,
+                offset = offset
+            };
+
+            ProductListResponse response = await apiService.GetProductList(request);
+
+            if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
+            {
+                List<ProductDto> items = response.resultData;
+
+                if (items == null || items.Count == 0)
+                {
+                    hasMoreItems = false;
+                    return;
+                }
+
+                foreach (var item in items)
+                {
+                    Products.Add(ToMainProductCardItem(item));
+                }
+
+                offset += items.Count;
+
+                if (items.Count < PageSize)
+                    hasMoreItems = false;
+            }
+            else
+            {
+                hasMoreItems = false;
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[ERROR] LoadProductsAsync: {ex.Message}");
+        }
+        finally
+        {
+            IsLoading = false;
+            IsRefreshing = false;
+        }
+    }
+
+    private MainProductCardItem ToMainProductCardItem(ProductDto item)
+    {
+        var images = new ObservableCollection<MainProductImageItem>();
+
+        if (item.images != null && item.images.Count > 0)
+        {
+            foreach (var img in item.images.OrderBy(x => x.sort_order ?? 0))
+            {
+                images.Add(new MainProductImageItem
+                {
+                    ImageSource = img.image_url
+                });
+            }
+        }
+        else
+        {
+            images.Add(new MainProductImageItem
+            {
+                ImageSource = "product_1.png"
+            });
+        }
+
+        return new MainProductCardItem
+        {
+            Price = item.price?.ToString("N0").Replace(",", " ") ?? "0",
+            Subscription_price = item.subscription_price?.ToString("N0").Replace(",", " ") ?? "0",
+            Title = item.name ?? "",
+            Rating = 4.8,
+            ReviewCount = 301,
+            ActionText = "+ Ertaga",
+            Images = images
+        };
+    }
+
+    private async Task LoadMoreAsync()
+    {
+        await LoadProductsAsync();
+    }
+
+    private async Task RefreshAsync()
+    {
+        await LoadProductsAsync(isRefresh: true);
     }
 
     private async void ProductClicked(MainProductCardItem product)
@@ -143,9 +216,6 @@ public partial class MainPageViewModel : ObservableObject
         if (item == null)
             return;
 
-        await Application.Current!.MainPage!.DisplayAlert(
-            "Purchase",
-            item.Title,
-            "OK");
+        await Application.Current!.MainPage!.DisplayAlert("Purchase", item.Title, "OK");
     }
 }

@@ -11,6 +11,8 @@ namespace Ninimum.Services
     public class AppControl
     {
         public bool IsBlocked = false;
+        public bool IsLoggedIn { get; set; } = false;
+        
         public UserDto userDto { get; set; } = new UserDto();
         private readonly LanguageService lang;
         private readonly UserApiService apiService;
@@ -41,28 +43,33 @@ namespace Ninimum.Services
             LoginUserResponse response = await apiService.Login(request);
             if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
             {
-                userDto = response.resultData;
-
-                storeService.Set(AppKeys.IsLoggedIn, true);
-                storeService.Set(AppKeys.PhoneNumber, phoneNumber);
-                storeService.Set(AppKeys.Password, password);
-
-                SetRootPage(new ContentPage
-                {
-                    BackgroundColor = Colors.White,
-                    Content = new ActivityIndicator
-                    {
-                        IsRunning = true,
-                        Color = AppConstants.COLOR_USER,
-                        VerticalOptions = LayoutOptions.Center,
-                        HorizontalOptions = LayoutOptions.Center
-                    }
-                });
-
-                await Task.Delay(100);
-                
-                SetRootPage(new AppShell());
+                await InitLoginPage(response.resultData, phoneNumber, password);
             }
+        }
+
+        public async Task InitLoginPage(UserDto userDto,string phoneNumber, string password)
+        { 
+            this.userDto = userDto;
+
+            storeService.Set(AppKeys.IsLoggedIn, true);
+            storeService.Set(AppKeys.PhoneNumber, phoneNumber);
+            storeService.Set(AppKeys.Password, password);
+
+            SetRootPage(new ContentPage
+            {
+                BackgroundColor = Colors.White,
+                Content = new ActivityIndicator
+                {
+                    IsRunning = true,
+                    Color = (Color)Application.Current.Resources["PrimaryColor"],
+                    VerticalOptions = LayoutOptions.Center,
+                    HorizontalOptions = LayoutOptions.Center
+                }
+            });
+
+            await Task.Delay(100);
+            
+            SetRootPage(new AppShell());
         }
 
         public async Task Logout(bool isBlocked = true)
@@ -82,6 +89,32 @@ namespace Ninimum.Services
             await apiService.ClearTokenAsync();
 
             SetRootPage(new AppEntryShell());
+        }
+
+        public async Task<string?> SendVerificationCode(string phoneNumber)
+        {
+            try
+            {
+                var data = new VerifyPhoneNumberRequest
+                {
+                    phone_number = phoneNumber
+                };
+
+                VerifyPhoneNumberResponse response =
+                    await apiService.VerifyNumber(data);
+
+                if (response?.resultCode == ApiResult.SUCCESS.GetCodeToString())
+                {
+                    return response.resultData.code;
+                }
+
+                return null;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return null;
+            }
         }
 
         public void SetRootPage(Page page)

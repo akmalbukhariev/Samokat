@@ -21,6 +21,13 @@ public partial class MainPage : BasePage
         InlineSearchBarView.SearchClicked += SearchClicked;
     }
 
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        await viewModel.LoadInitialAsync();
+    }
+
     private async void LeftMenuClicked()
     {
         await AppNavigatorService.NavigateTo(nameof(MenuPage));

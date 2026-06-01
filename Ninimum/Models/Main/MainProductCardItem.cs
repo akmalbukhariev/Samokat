@@ -9,8 +9,8 @@ public partial class MainProductCardItem : ObservableObject
 
     [ObservableProperty] private bool isFavorite;
 
-    [ObservableProperty] private string oldPrice = string.Empty;
-    [ObservableProperty] private string newPrice = string.Empty;
+    [ObservableProperty] private string price = string.Empty;
+    [ObservableProperty] private string subscription_price = string.Empty;
 
     [ObservableProperty] private string title = string.Empty;
 

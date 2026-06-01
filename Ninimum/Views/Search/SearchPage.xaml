@@ -50,8 +50,8 @@
                     <DataTemplate x:DataType="models:MainProductCardItem">
                         <main_components:MainProductCardView
                             ImagesSource="{Binding Images}"
-                            OldPrice="{Binding OldPrice}"
-                            NewPrice="{Binding NewPrice}"
+                            Price="{Binding OldPrice}"
+                            SubscriptionPrice="{Binding NewPrice}"
                             Title="{Binding Title}"
                             Rating="{Binding Rating}"
                             ReviewCount="{Binding ReviewCount}"

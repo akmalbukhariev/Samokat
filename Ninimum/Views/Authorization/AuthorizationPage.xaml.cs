@@ -43,8 +43,7 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
     private readonly UserApiService apiService;
     private readonly AppControl appControl;
     private readonly IKeyboardHelper keyboardHelper;
-    private VerifyPhoneNumberResponse response;
-    
+     
     public AuthorizationPage(
         UserApiService apiService,
         IKeyboardHelper keyboardHelper,
@@ -80,19 +79,36 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
             if (!canUsePhoneNumber)
                 return;
 
-            bool sent = await SendVerificationCode();
+            IsLoading = true;
+            string? code = await appControl.SendVerificationCode(PhoneNumber);
+            IsLoading = false;
 
-            if (sent)
+            if (!string.IsNullOrEmpty(code))
+            {
+                verificationCode = code;
                 popupSms.Show();
+            }
+            else
+            {
+                await AlertService.ShowAlertAsync("Error", "SMS yuborilmadi");
+            }
         });
     }
 
     private async void OnResendSms()
     {
-        bool sent = await SendVerificationCode();
+        IsLoading = true;
+        string? code = await appControl.SendVerificationCode(PhoneNumber);
+        IsLoading = false;
 
-        if (!sent)
+        if (!string.IsNullOrEmpty(code))
+        {
+            verificationCode = code;
+        }
+        else
+        {
             await AlertService.ShowAlertAsync("Error", "SMS yuborilmadi");
+        }
     }
 
     private async void OnConfirmSmsCode(string code)
@@ -108,38 +124,6 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
         await AppNavigatorService.NavigateTo(nameof(RegisterPage));
     }
     
-    private async Task<bool> SendVerificationCode()
-    {
-        try
-        {
-            VerifyPhoneNumberRequest data = new VerifyPhoneNumberRequest()
-            {
-                phone_number = PhoneNumber
-            };
-
-            IsLoading = true;
-
-            response = await apiService.VerifyNumber(data);
-
-            if (response?.resultCode == ApiResult.SUCCESS.GetCodeToString())
-            {
-                verificationCode = response.resultData.code;
-                return true;
-            }
-
-            return false;
-        }
-        catch (Exception ex)
-        {
-            Console.WriteLine(ex.Message);
-            return false;
-        }
-        finally
-        {
-            IsLoading = false;
-        }
-    }
-
     private bool CheckVerificationCode(string code)
     {
         if (string.IsNullOrEmpty(code))

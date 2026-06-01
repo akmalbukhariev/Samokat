@@ -37,6 +37,7 @@ public partial class App : Application
         Routing.RegisterRoute(nameof(ForgotPasswordPage), typeof(ForgotPasswordPage));
         Routing.RegisterRoute(nameof(AuthorizationPage), typeof(AuthorizationPage));
         Routing.RegisterRoute(nameof(AddressPage), typeof(AddressPage));
+        Routing.RegisterRoute(nameof(ChangePasswordPage), typeof(ChangePasswordPage));
         #endregion
 
         #region Main pages

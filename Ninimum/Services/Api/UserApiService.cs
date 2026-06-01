@@ -17,11 +17,14 @@ namespace Api.Services
         private const string LOGOUT_USER = $"{BASE_URL}user/logout";
         private const string REGISTER_USER = $"{BASE_URL}user/register";
         private const string GET_USER_INFO = $"{BASE_URL}user/getUserInfo";
+        private const string UPDATE_USER_PASSWORD = $"{BASE_URL}user/forgotPassword";
         private const string GET_USER_LIST = $"{BASE_URL}user/getUserByIdList";
         private const string UPDATE_USER_INFO = $"{BASE_URL}user/updateUserInfo";
         private const string UPDATE_USER_PHONE_NUMBER = $"{BASE_URL}user/updateUserPhoneNumber";
         private const string DELETE_USER_ACCOUNT = $"{BASE_URL}user/deleteUser/";
         private const string VERIFY_NUMBER = $"{BASE_URL}message/verifyPhoneNumber";
+        private const string SEND_TEMP_PASSWORD = $"{BASE_URL}message/sendTemporaryPassword";
+        private const string GET_PRODUCT_LIST = $"{BASE_URL}product/getProductList";
         #endregion
 
         public UserApiService(RestClient client)
@@ -36,8 +39,8 @@ namespace Api.Services
 
             return response ?? new LoginUserResponse
             {
-                resultCode = ApiResult.LOGIN_FAILED.GetCodeToString(),
-                resultMsg = ApiResult.LOGIN_FAILED.GetMessage()
+                resultCode = ApiResult.FAILED.GetCodeToString(),
+                resultMsg = ApiResult.FAILED.GetMessage()
             };
         }
 
@@ -144,6 +147,39 @@ namespace Api.Services
             return response;
         }
 
+        public async Task<Response> UpdateUserPassword(ForgotPasswordParam data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PostAsync(UPDATE_USER_PASSWORD, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<Response>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+    
         public async Task<Response> RegisterUser(RegisterUserRequest data)
         {
             var response = new Response();
@@ -242,6 +278,39 @@ namespace Api.Services
             return response;
         }
 
+        public async Task<VerifyPhoneNumberResponse> SendTempPassword(VerifyPhoneNumberRequest data)
+        {
+            var response = new VerifyPhoneNumberResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(SEND_TEMP_PASSWORD, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<VerifyPhoneNumberResponse>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
         public async Task<CheckPhoneNumberResponse> CheckPhoneNumber(CheckPhoneNumberRequest data)
         {
             var response = new CheckPhoneNumberResponse();
@@ -253,6 +322,39 @@ namespace Api.Services
                 if (!string.IsNullOrWhiteSpace(receivedData))
                 {
                     var deserializedResponse = JsonConvert.DeserializeObject<CheckPhoneNumberResponse>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<ProductListResponse> GetProductList(ProductListRequest data)
+        {
+            var response = new ProductListResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(GET_PRODUCT_LIST, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<ProductListResponse>(receivedData);
                     if (deserializedResponse != null)
                     {
                         return deserializedResponse;

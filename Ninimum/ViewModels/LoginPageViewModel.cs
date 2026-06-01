@@ -2,6 +2,7 @@ using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models.Requests;
 using Models.Responses;
+using Ninimum.Services;
 using Ninimum.Views.Authorization;
 using Ninimum.Views.LoginRegister;
 using System.Windows.Input;
@@ -37,11 +38,15 @@ public partial class LoginPageViewModel : ObservableObject
 
     public Action? ShowSmsPopupAction { get; set; }
     public Action? HideSmsPopupAction { get; set; }
-    private readonly UserApiService apiService;
+    private string verificationCode = "";
 
-    public LoginPageViewModel(UserApiService apiService)
+    private readonly UserApiService apiService;
+    private readonly AppControl appControl;
+    private LoginUserResponse response;
+    public LoginPageViewModel(UserApiService apiService, AppControl appControl)
     {
         this.apiService = apiService;
+        this.appControl = appControl;
 
         LoginCommand = new Command(async () => await OnLogin());
         RegisterCommand = new Command(async () => await OnRegister());
@@ -54,6 +59,18 @@ public partial class LoginPageViewModel : ObservableObject
     {
         try
         {
+            if (string.IsNullOrWhiteSpace(PhoneNumber))
+            {
+                await AlertService.ShowAlertAsync("Info", "Telefon raqamni kiriting");
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(Password))
+            {
+                await AlertService.ShowAlertAsync("Info", "Parolni kiriting");
+                return;
+            }
+            
             IsLoading = true;
 
             var request = new LoginUserRequest
@@ -62,21 +79,37 @@ public partial class LoginPageViewModel : ObservableObject
                 password = Password
             };
 
-            LoginUserResponse response = await apiService.Login(request);
+            response = await apiService.Login(request);
+
             if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
             {
-                
+                string? code = await appControl.SendVerificationCode(PhoneNumber);
+
+                if (!string.IsNullOrEmpty(code))
+                {
+                    verificationCode = code;
+                    ShowSmsPopupAction?.Invoke();
+                }
+                else
+                {
+                    await AlertService.ShowAlertAsync("Error", "SMS yuborilmadi");
+                }
             }
             else
             {
-                    
-            }
+                string message = response.resultCode switch
+                {
+                    "PASSWORD_IS_NOT_MATCHED" => "Parol noto‘g‘ri",
+                    "USER_NOT_EXIST" => "Foydalanuvchi topilmadi",
+                    _ => response.resultMsg ?? "Xatolik yuz berdi"
+                };
 
-            ShowSmsPopupAction?.Invoke();
+                await AlertService.ShowAlertAsync("Error", message);
+            }
         }
         catch (Exception ex)
         {
-            await Application.Current.MainPage.DisplayAlert("Error", ex.Message, "OK");
+            await AlertService.ShowAlertAsync("Error", ex.Message);
         }
         finally
         {
@@ -84,9 +117,17 @@ public partial class LoginPageViewModel : ObservableObject
         }
     }
 
-    private void OnConfirmSmsCode(string code)
+    private async void OnConfirmSmsCode(string code)
     {
+        if (string.IsNullOrWhiteSpace(code) || code != verificationCode)
+        {
+            await AlertService.ShowAlertAsync("Code", "Kod noto‘g‘ri");
+            return;
+        }
+
         HideSmsPopupAction?.Invoke();
+
+        await appControl.InitLoginPage(response.resultData, PhoneNumber, Password);
     }
 
     private async Task OnRegister()

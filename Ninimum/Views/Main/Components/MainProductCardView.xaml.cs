@@ -44,30 +44,30 @@ public partial class MainProductCardView : ContentView
         set => SetValue(MainImageSourceProperty, value);
     }
 
-    public static readonly BindableProperty OldPriceProperty =
+    public static readonly BindableProperty PriceProperty =
         BindableProperty.Create(
-            nameof(OldPrice),
+            nameof(Price),
             typeof(string),
             typeof(MainProductCardView),
             string.Empty);
 
-    public string OldPrice
+    public string Price
     {
-        get => (string)GetValue(OldPriceProperty);
-        set => SetValue(OldPriceProperty, value);
+        get => (string)GetValue(PriceProperty);
+        set => SetValue(PriceProperty, value);
     }
 
-    public static readonly BindableProperty NewPriceProperty =
+    public static readonly BindableProperty SubscriptionPriceProperty =
         BindableProperty.Create(
-            nameof(NewPrice),
+            nameof(SubscriptionPrice),
             typeof(string),
             typeof(MainProductCardView),
             string.Empty);
 
-    public string NewPrice
+    public string SubscriptionPrice
     {
-        get => (string)GetValue(NewPriceProperty);
-        set => SetValue(NewPriceProperty, value);
+        get => (string)GetValue(SubscriptionPriceProperty);
+        set => SetValue(SubscriptionPriceProperty, value);
     }
 
     public static readonly BindableProperty TitleProperty =

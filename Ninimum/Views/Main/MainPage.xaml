@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Views.Main.Components"
+    xmlns:main_components="clr-namespace:Ninimum.Components"
     xmlns:models="clr-namespace:Ninimum.Models.Main"
     xmlns:local="clr-namespace:Ninimum.Views.Main"
     x:Class="Ninimum.Views.Main.MainPage"
@@ -10,14 +11,16 @@
 
     <Grid RowDefinitions="Auto,*">
 
-        <!-- ✅ FIXED HEADER -->
+        <!-- FIXED HEADER -->
         <components:MainHeaderView Grid.Row="0"/>
 
-        <!-- ✅ SCROLLABLE AREA -->
+        <!-- SCROLLABLE AREA -->
         <CollectionView
             x:Name="MainCollectionView"
             Grid.Row="1"
             ItemsSource="{Binding Products}"
+            RemainingItemsThreshold="3"
+            RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
             SelectionMode="None"
             Scrolled="MainCollectionView_Scrolled"
             Margin="10,10,10,0">
@@ -26,7 +29,7 @@
             <CollectionView.Header>
                 <VerticalStackLayout Spacing="20">
 
-                    <!-- 👇 THIS scrolls -->
+                    <!-- THIS scrolls -->
                     <components:SearchBarView x:Name="InlineSearchBarView"/>
 
                     <components:OrderProcessView CurrentStep="OutForDelivery"/>
@@ -52,8 +55,8 @@
                 <DataTemplate x:DataType="models:MainProductCardItem">
                     <components:MainProductCardView
                         ImagesSource="{Binding Images}"
-                        OldPrice="{Binding OldPrice}"
-                        NewPrice="{Binding NewPrice}"
+                        Price="{Binding Price}"
+                        SubscriptionPrice="{Binding SubscriptionPrice}"
                         Title="{Binding Title}"
                         Rating="{Binding Rating}"
                         ReviewCount="{Binding ReviewCount}"
@@ -64,7 +67,7 @@
             </CollectionView.ItemTemplate>
         </CollectionView>
 
-        <!-- ✅ STICKY SEARCH BAR -->
+        <!-- STICKY SEARCH BAR -->
         <Grid
             x:Name="StickySearchBarContainer"
             Grid.Row="1"
@@ -77,5 +80,9 @@
             <components:SearchBarView />
         </Grid>
 
+        <main_components:LoadingView
+            Grid.RowSpan="2"
+            x:Name="loading"
+            ShowLoading="{Binding IsLoading}"/>
     </Grid>
 </page:BasePage>

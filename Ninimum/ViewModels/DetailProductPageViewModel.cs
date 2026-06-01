@@ -69,8 +69,8 @@ public partial class DetailProductPageViewModel : ObservableObject
         {
             new MainProductCardItem
             {
-                OldPrice = "545 000",
-                NewPrice = "486 000",
+                Price = "545 000",
+                Subscription_price = "486 000",
                 Title = "Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik",
                 Rating = 4.8,
                 ReviewCount = 301,
@@ -85,8 +85,8 @@ public partial class DetailProductPageViewModel : ObservableObject
             },
             new MainProductCardItem
             {
-                OldPrice = "545 000",
-                NewPrice = "486 000",
+                Price = "545 000",
+                Subscription_price = "486 000",
                 Title = "Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik",
                 Rating = 4.8,
                 ReviewCount = 301,
@@ -101,8 +101,8 @@ public partial class DetailProductPageViewModel : ObservableObject
             },
             new MainProductCardItem
             {
-                OldPrice = "545 000",
-                NewPrice = "486 000",
+                Price = "545 000",
+                Subscription_price = "486 000",
                 Title = "Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik",
                 Rating = 4.8,
                 ReviewCount = 301,
@@ -117,8 +117,8 @@ public partial class DetailProductPageViewModel : ObservableObject
             },
             new MainProductCardItem
             {
-                OldPrice = "545 000",
-                NewPrice = "486 000",
+                Price = "545 000",
+                Subscription_price = "486 000",
                 Title = "Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik",
                 Rating = 4.8,
                 ReviewCount = 301,
