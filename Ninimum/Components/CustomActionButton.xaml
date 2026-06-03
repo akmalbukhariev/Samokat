@@ -10,7 +10,7 @@
             <converter:NullToBoolConverter x:Key="NullToBoolConverter"/>
         </ResourceDictionary>
     </ContentView.Resources>
-
+    
     <Border
         x:Name="RootBorder"
         BackgroundColor="{Binding ButtonBackgroundColor, Source={x:Reference ThisView}}"

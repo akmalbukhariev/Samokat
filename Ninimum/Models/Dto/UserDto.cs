@@ -2,8 +2,8 @@ namespace Models.Dto
 {
     public class UserDto
     {
-        public long? id { get; set; }
-        public long? region_id { get; set; }
+        public int? id { get; set; }
+        public int? region_id { get; set; }
 
         public string first_name { get; set; }
         public string last_name { get; set; }

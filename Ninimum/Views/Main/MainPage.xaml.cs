@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using Ninimum.ViewModels;
 using Ninimum.Views.Search;
 
@@ -7,6 +8,7 @@ public partial class MainPage : BasePage
 {
     private readonly MainPageViewModel viewModel;
     private bool _isStickyVisible = false;
+    private bool isFirstLoaded = true;
 
     public MainPage(MainPageViewModel vm)
     {
@@ -19,13 +21,27 @@ public partial class MainPage : BasePage
 
         InlineSearchBarView.MenuClicked += LeftMenuClicked;
         InlineSearchBarView.SearchClicked += SearchClicked;
+        viewModel.PropertyChanged += ViewModel_PropertyChanged;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
 
-        await viewModel.LoadInitialAsync();
+        if (isFirstLoaded)
+        {
+            isFirstLoaded = false;
+            await viewModel.LoadInitialAsync();
+        }
+    }
+
+    private async void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+    {
+        if (e.PropertyName == nameof(viewModel.ShowLikedView) && viewModel.ShowLikedView)
+        {
+            await likeView.DisplayAsAnimation();
+            viewModel.ShowLikedView = false;
+        }
     }
 
     private async void LeftMenuClicked()

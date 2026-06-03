@@ -16,6 +16,8 @@ namespace Ninimum.Models.Dto
         public string barcode { get; set; }
         public string brand { get; set; }
 
+        public bool liked { get; set; }
+
         public double? price { get; set; }
         public double? subscription_price { get; set; }
 

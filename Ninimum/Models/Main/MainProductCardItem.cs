@@ -7,7 +7,7 @@ public partial class MainProductCardItem : ObservableObject
 {
     [ObservableProperty] private ObservableCollection<MainProductImageItem> images = new();
 
-    [ObservableProperty] private bool isFavorite;
+    [ObservableProperty] private bool liked;
 
     [ObservableProperty] private string price = string.Empty;
     [ObservableProperty] private string subscription_price = string.Empty;
@@ -16,6 +16,7 @@ public partial class MainProductCardItem : ObservableObject
 
     [ObservableProperty] private double rating;
     [ObservableProperty] private int reviewCount;
+    [ObservableProperty] private int productId;
 
     [ObservableProperty] private string actionText = "Ertaga";
 }

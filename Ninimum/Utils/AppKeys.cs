@@ -7,5 +7,6 @@ namespace Utils
         public const string IsLanguageSet = "is_language_set";
         public const string PhoneNumber = "phone_number";
         public const string Password = "password";
+        public const string SearchHistoryKey = "search_history";
     }
 }

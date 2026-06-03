@@ -118,8 +118,15 @@ public partial class MainProductCardView : ContentView
             typeof(MainProductCardView),
             "+ Ertaga");
 
-     public static readonly BindableProperty ClickProductCommandProperty =
-        BindableProperty.Create(nameof(ClickProductCommand), typeof(ICommand), typeof(MainProductCardView));
+    public static readonly BindableProperty LikedProperty =
+     BindableProperty.Create(nameof(Liked), typeof(bool), typeof(MainProductCardView), false, propertyChanged: LikedChanged);
+
+    public static readonly BindableProperty LikeCommandProperty =
+        BindableProperty.Create(nameof(LikeCommand), typeof(ICommand), typeof(MainProductCardView));
+
+
+    public static readonly BindableProperty ClickProductCommandProperty =
+       BindableProperty.Create(nameof(ClickProductCommand), typeof(ICommand), typeof(MainProductCardView));
 
     public ICommand ClickProductCommand
     {
@@ -134,6 +141,18 @@ public partial class MainProductCardView : ContentView
     {
         get => (ICommand)GetValue(ClickTomorrowCommandProperty);
         set => SetValue(ClickTomorrowCommandProperty, value);
+    }
+
+    public bool Liked
+    {
+        get => (bool)GetValue(LikedProperty);
+        set => SetValue(LikedProperty, value);
+    }
+
+    public ICommand LikeCommand
+    {
+        get => (ICommand)GetValue(LikeCommandProperty);
+        set => SetValue(LikeCommandProperty, value);
     }
 
     public string ActionButtonText
@@ -248,11 +267,29 @@ public partial class MainProductCardView : ContentView
         }
     }
 
+    private static void LikedChanged(BindableObject bindable, object oldValue, object newValue)
+    {
+        var control = (MainProductCardView)bindable;
+        bool liked = (bool)newValue;
+
+        control.imLiked.Source = liked ? "liked.png" : "unliked.png";
+    }
+
     private async void Like_Tapped(object sender, TappedEventArgs e)
     {
-        Image image = sender as Image;
-        await image.ScaleTo(0.96, 100, Easing.CubicOut);
-        await image.ScaleTo(1.0, 100, Easing.CubicIn);
+        await ClickGuard.RunAsync((VisualElement)sender, async () =>
+        {
+            //HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+
+            await brdLiked.ScaleTo(1.3, 100, Easing.CubicOut);
+            await brdLiked.ScaleTo(1.0, 100, Easing.CubicIn);
+
+            if (BindingContext is MainProductCardItem product &&
+                LikeCommand?.CanExecute(product) == true)
+            {
+                LikeCommand.Execute(product);
+            }
+        });
     }
 
     private async void Product_Tapped(object sender, TappedEventArgs e)
@@ -262,8 +299,7 @@ public partial class MainProductCardView : ContentView
             await mainStack.ScaleTo(0.95, 100, Easing.CubicOut);
             await mainStack.ScaleTo(1.0, 100, Easing.CubicIn);
 
-            if (BindingContext is MainProductCardItem product &&
-                ClickProductCommand?.CanExecute(product) == true)
+            if (BindingContext is MainProductCardItem product &&  ClickProductCommand?.CanExecute(product) == true)
             {
                 ClickProductCommand.Execute(product);
             }
@@ -277,8 +313,7 @@ public partial class MainProductCardView : ContentView
             await brdAction.ScaleTo(0.95, 100, Easing.CubicOut);
             await brdAction.ScaleTo(1.0, 100, Easing.CubicIn);
 
-            if (BindingContext is MainProductCardItem product &&
-                ClickTomorrowCommand?.CanExecute(product) == true)
+            if (BindingContext is MainProductCardItem product && ClickTomorrowCommand?.CanExecute(product) == true)
             {
                 ClickTomorrowCommand.Execute(product);
             }

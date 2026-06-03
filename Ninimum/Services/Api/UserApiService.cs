@@ -25,6 +25,9 @@ namespace Api.Services
         private const string VERIFY_NUMBER = $"{BASE_URL}message/verifyPhoneNumber";
         private const string SEND_TEMP_PASSWORD = $"{BASE_URL}message/sendTemporaryPassword";
         private const string GET_PRODUCT_LIST = $"{BASE_URL}product/getProductList";
+        private const string SEARCH_PRODUCT_LIST = $"{BASE_URL}product/searchProductList";
+        private const string ADD_FAVORITE_PRODUCT = $"{BASE_URL}favorite/addFavorite";
+        private const string DELETE_FAVORITE_PRODUCT = $"{BASE_URL}favorite/deleteFavorite";
         #endregion
 
         public UserApiService(RestClient client)
@@ -377,6 +380,105 @@ namespace Api.Services
             return response;
         }
 
+        public async Task<Response> AddFavoriteProduct(AddFavoriteRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PostAsync(ADD_FAVORITE_PRODUCT, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<Response>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<Response> DeleteFavoriteProduct(DeleteFavoriteRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await DeleteAsync(DELETE_FAVORITE_PRODUCT, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<Response>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<ProductListResponse> SearchProductList(SearchProductParam data)
+        {
+            var response = new ProductListResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(SEARCH_PRODUCT_LIST, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<ProductListResponse>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
         public async Task<Response> UpdateUserProfileInfo(Stream imageStream, Dictionary<string, string>? additionalData)
         {
             var response = new Response();
@@ -409,7 +511,5 @@ namespace Api.Services
 
             return response;
         }
-
-
     }
 }

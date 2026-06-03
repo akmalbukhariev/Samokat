@@ -22,15 +22,24 @@ public partial class SearchPage : BasePage
         if (BindingContext is SearchPageViewModel vm)
         {
             if (viewModel != null)
+            {
                 viewModel.OpenFilterRequested -= ViewModel_OpenFilterRequested;
+                viewModel.CloseFilterRequested -= ViewModel_CloseFilterRequested;
+            }
 
             viewModel = vm;
             viewModel.OpenFilterRequested += ViewModel_OpenFilterRequested;
+            viewModel.CloseFilterRequested += ViewModel_CloseFilterRequested;
         }
     }
 
     private async void ViewModel_OpenFilterRequested()
     {
         await SearchFilterBottomSheetView.ShowAsync();
+    }
+    
+    private async void ViewModel_CloseFilterRequested()
+    {
+        await SearchFilterBottomSheetView.HideAsync();
     }
 }

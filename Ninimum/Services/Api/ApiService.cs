@@ -190,7 +190,25 @@ namespace Api.Services
 
             return await ExecuteRequestAsync(request);
         }
-          
+
+        public async Task<string> DeleteAsync(string endpoint, object? data = null, bool addHeader = true, bool useToken = true)
+        {         
+            var request = new RestRequest(endpoint, Method.Delete);
+            if (addHeader)
+                request.AddHeader("Content-Type", "application/json");
+
+            if (useToken)
+                await SetToken(request);
+
+            if (data != null)
+            {
+                var json = JsonConvert.SerializeObject(data);
+                request.AddJsonBody(json);
+            }
+            
+            return await ExecuteRequestAsync(request);
+        }
+
         public static byte[] ResizeImage(Stream imageStream, int maxWidth = 1024, int maxHeight = 1024, int quality = 80)
         {
             // Copy stream to byte array

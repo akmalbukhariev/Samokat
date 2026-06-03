@@ -8,6 +8,7 @@ using Models.Requests;
 using Models.Responses;
 using Ninimum.Models.Dto;
 using Ninimum.Models.Main;
+using Ninimum.Services;
 using Ninimum.Views.DetailProduct;
 using Ninimum.Views.Formalization;
 using Utils;
@@ -16,28 +17,37 @@ namespace Ninimum.ViewModels;
 
 public partial class MainPageViewModel : ObservableObject
 {
-    [ObservableProperty] private ICommand notificationTapCommand;
-    [ObservableProperty] private ICommand buyNowCommand;
-    [ObservableProperty] private ICommand menuCommand;
-    [ObservableProperty] private ObservableCollection<AdBannerItem> adBanners;
-    [ObservableProperty] private ICommand purchaseBannerCommand;
-    [ObservableProperty] private ICommand clickProductCommand;
-    [ObservableProperty] private ICommand clickTomorrowCommand;
-    [ObservableProperty] private ObservableCollection<MainProductCardItem> products;
-    [ObservableProperty] private bool isLoading;
-    [ObservableProperty] private bool isRefreshing;
-
-    private readonly UserApiService apiService;
-
+    #region Properties
     private int offset = 0;
     private const int PageSize = 10;
     private bool hasMoreItems = true;
+    private readonly HashSet<long> loadedProductIds = new();
+    private bool isRequestRunning = false;
+    [ObservableProperty] private bool isLoading;
+    [ObservableProperty] private bool showLikedView;
+    [ObservableProperty] private bool isLikedViewLiked;
+    [ObservableProperty] private bool isRefreshing;
+    [ObservableProperty] private ObservableCollection<AdBannerItem> adBanners;
+    [ObservableProperty] private ObservableCollection<MainProductCardItem> products;
+    #endregion
 
-    public IAsyncRelayCommand LoadMoreCommand { get; }
-    public IAsyncRelayCommand RefreshCommand { get; }
+    #region Properties command
+    [ObservableProperty] private ICommand notificationTapCommand;
+    [ObservableProperty] private ICommand buyNowCommand;
+    [ObservableProperty] private ICommand menuCommand;
+    [ObservableProperty] private ICommand purchaseBannerCommand;
+    [ObservableProperty] private ICommand clickProductCommand;
+    [ObservableProperty] private ICommand clickTomorrowCommand;
+    [ObservableProperty] private ICommand likeCommand;
+    [ObservableProperty] private IAsyncRelayCommand loadMoreCommand;
+    [ObservableProperty] private IAsyncRelayCommand refreshCommand;
+    #endregion
 
-    public MainPageViewModel(UserApiService apiService)
+    private readonly AppControl appControl;
+    private readonly UserApiService apiService;
+    public MainPageViewModel(AppControl appControl,UserApiService apiService)
     {
+        this.appControl = appControl;
         this.apiService = apiService;
 
         Products = new ObservableCollection<MainProductCardItem>();
@@ -47,6 +57,7 @@ public partial class MainPageViewModel : ObservableObject
         ClickProductCommand = new Command<MainProductCardItem>(ProductClicked);
         ClickTomorrowCommand = new Command<MainProductCardItem>(TomorrowClicked);
 
+        LikeCommand = new Command<MainProductCardItem>(ProductLiked);
         LoadMoreCommand = new AsyncRelayCommand(LoadMoreAsync);
         RefreshCommand = new AsyncRelayCommand(RefreshAsync);
 
@@ -83,6 +94,7 @@ public partial class MainPageViewModel : ObservableObject
     {
         offset = 0;
         hasMoreItems = true;
+        loadedProductIds.Clear();
         Products.Clear();
 
         await LoadProductsAsync();
@@ -90,16 +102,19 @@ public partial class MainPageViewModel : ObservableObject
 
     private async Task LoadProductsAsync(bool isRefresh = false)
     {
-        if (IsLoading || (!hasMoreItems && !isRefresh))
+        if (isRequestRunning || (!hasMoreItems && !isRefresh))
             return;
 
         try
         {
+            isRequestRunning = true;
+
             if (isRefresh)
             {
                 IsRefreshing = true;
                 offset = 0;
                 hasMoreItems = true;
+                loadedProductIds.Clear();
                 Products.Clear();
             }
             else
@@ -109,37 +124,41 @@ public partial class MainPageViewModel : ObservableObject
 
             var request = new ProductListRequest
             {
-                categoryId = 1,
+                user_id = (int)appControl.userDto.id,
+                category_id = 1,
                 pageSize = PageSize,
                 offset = offset
             };
-
+ 
             ProductListResponse response = await apiService.GetProductList(request);
 
-            if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
-            {
-                List<ProductDto> items = response.resultData;
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+                return;
 
-                if (items == null || items.Count == 0)
-                {
-                    hasMoreItems = false;
-                    return;
-                }
+            var items = response.resultData;
 
-                foreach (var item in items)
-                {
-                    Products.Add(ToMainProductCardItem(item));
-                }
-
-                offset += items.Count;
-
-                if (items.Count < PageSize)
-                    hasMoreItems = false;
-            }
-            else
+            if (items == null || items.Count == 0)
             {
                 hasMoreItems = false;
+                return;
             }
+
+            foreach (var item in items)
+            {
+                if (item.id == null)
+                    continue;
+
+                if (loadedProductIds.Contains(item.id.Value))
+                    continue;
+
+                loadedProductIds.Add(item.id.Value);
+                Products.Add(ToMainProductCardItem(item));
+            }
+
+            offset += items.Count;
+
+            if (items.Count < PageSize)
+                hasMoreItems = false;
         }
         catch (Exception ex)
         {
@@ -149,6 +168,7 @@ public partial class MainPageViewModel : ObservableObject
         {
             IsLoading = false;
             IsRefreshing = false;
+            isRequestRunning = false;
         }
     }
 
@@ -179,8 +199,10 @@ public partial class MainPageViewModel : ObservableObject
             Price = item.price?.ToString("N0").Replace(",", " ") ?? "0",
             Subscription_price = item.subscription_price?.ToString("N0").Replace(",", " ") ?? "0",
             Title = item.name ?? "",
+            Liked = item.liked,
             Rating = 4.8,
             ReviewCount = 301,
+            ProductId = (int)item.id,
             ActionText = "+ Ertaga",
             Images = images
         };
@@ -196,9 +218,56 @@ public partial class MainPageViewModel : ObservableObject
         await LoadProductsAsync(isRefresh: true);
     }
 
+    private async void ProductLiked(MainProductCardItem product)
+    {
+        if (product == null)
+            return;
+
+        bool oldLiked = product.Liked;
+
+        try
+        {
+            product.Liked = !oldLiked;
+
+            Response response;
+
+            if (!oldLiked)
+            {
+                response = await apiService.AddFavoriteProduct(
+                    new AddFavoriteRequest
+                    {
+                        user_id = (int)appControl.userDto.id,
+                        product_id = product.ProductId
+                    });
+            }
+            else
+            {
+                response = await apiService.DeleteFavoriteProduct(
+                    new DeleteFavoriteRequest
+                    {
+                        user_id = (int)appControl.userDto.id,
+                        product_id = product.ProductId
+                    });
+            }
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                product.Liked = oldLiked;
+                return;
+            }
+
+            IsLikedViewLiked = product.Liked;
+            ShowLikedView = true;
+        }
+        catch
+        {
+            product.Liked = oldLiked;
+        }
+    }
+
     private async void ProductClicked(MainProductCardItem product)
     {
-        await AppNavigatorService.NavigateTo(nameof(DetailProductPage));
+        //await AppNavigatorService.NavigateTo(nameof(DetailProductPage));
     }
 
     private async void TomorrowClicked(MainProductCardItem product)

@@ -15,57 +15,64 @@
         <components:MainHeaderView Grid.Row="0"/>
 
         <!-- SCROLLABLE AREA -->
-        <CollectionView
-            x:Name="MainCollectionView"
-            Grid.Row="1"
-            ItemsSource="{Binding Products}"
-            RemainingItemsThreshold="3"
-            RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
-            SelectionMode="None"
-            Scrolled="MainCollectionView_Scrolled"
-            Margin="10,10,10,0">
+        <RefreshView 
+            IsRefreshing="{Binding IsRefreshing}"
+            Command="{Binding RefreshCommand}"
+            Margin="10,5,10,5"
+            Grid.Row="1">
+            <CollectionView
+                x:Name="MainCollectionView"
+                ItemsSource="{Binding Products}"
+                RemainingItemsThreshold="1"
+                RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
+                SelectionMode="None"
+                Scrolled="MainCollectionView_Scrolled"
+                Margin="10,10,10,0">
 
-            <!-- HEADER INSIDE SCROLL -->
-            <CollectionView.Header>
-                <VerticalStackLayout Spacing="20">
+                <!-- HEADER INSIDE SCROLL -->
+                <CollectionView.Header>
+                    <VerticalStackLayout Spacing="20">
 
-                    <!-- THIS scrolls -->
-                    <components:SearchBarView x:Name="InlineSearchBarView"/>
+                        <!-- THIS scrolls -->
+                        <components:SearchBarView x:Name="InlineSearchBarView"/>
 
-                    <components:OrderProcessView CurrentStep="OutForDelivery"/>
+                        <components:OrderProcessView CurrentStep="OutForDelivery"/>
 
-                    <components:AdBannerView
-                        x:Name="AdBannerView"
-                        ItemsSource="{Binding AdBanners}"
-                        PurchaseCommand="{Binding PurchaseBannerCommand}" />
+                        <components:AdBannerView
+                            x:Name="AdBannerView"
+                            ItemsSource="{Binding AdBanners}"
+                            PurchaseCommand="{Binding PurchaseBannerCommand}" />
 
-                </VerticalStackLayout>
-            </CollectionView.Header>
+                    </VerticalStackLayout>
+                </CollectionView.Header>
 
-            <!-- PRODUCTS -->
-            <CollectionView.ItemsLayout>
-                <GridItemsLayout
-                    Orientation="Vertical"
-                    VerticalItemSpacing="10"
-                    HorizontalItemSpacing="10"
-                    Span="2" />
-            </CollectionView.ItemsLayout>
+                <!-- PRODUCTS -->
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        Orientation="Vertical"
+                        VerticalItemSpacing="10"
+                        HorizontalItemSpacing="10"
+                        Span="2" />
+                </CollectionView.ItemsLayout>
 
-            <CollectionView.ItemTemplate>
-                <DataTemplate x:DataType="models:MainProductCardItem">
-                    <components:MainProductCardView
-                        ImagesSource="{Binding Images}"
-                        Price="{Binding Price}"
-                        SubscriptionPrice="{Binding SubscriptionPrice}"
-                        Title="{Binding Title}"
-                        Rating="{Binding Rating}"
-                        ReviewCount="{Binding ReviewCount}"
-                        ActionButtonText="{Binding ActionText}"
-                        ClickProductCommand="{Binding Source={RelativeSource AncestorType={x:Type local:MainPage}}, Path=BindingContext.ClickProductCommand}"
-                        ClickTomorrowCommand="{Binding Source={RelativeSource AncestorType={x:Type local:MainPage}}, Path=BindingContext.ClickTomorrowCommand}"/>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:MainProductCardItem">
+                        <components:MainProductCardView
+                                ImagesSource="{Binding Images}"
+                                Price="{Binding Price}"
+                                SubscriptionPrice="{Binding Subscription_price}"
+                                Title="{Binding Title}"
+                                Liked="{Binding Liked}"
+                                Rating="{Binding Rating}"
+                                ReviewCount="{Binding ReviewCount}"
+                                ActionButtonText="{Binding ActionText}"
+                                LikeCommand="{Binding Source={RelativeSource AncestorType={x:Type local:MainPage}}, Path=BindingContext.LikeCommand}"
+                                ClickProductCommand="{Binding Source={RelativeSource AncestorType={x:Type local:MainPage}}, Path=BindingContext.ClickProductCommand}"
+                                ClickTomorrowCommand="{Binding Source={RelativeSource AncestorType={x:Type local:MainPage}}, Path=BindingContext.ClickTomorrowCommand}"/>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
 
         <!-- STICKY SEARCH BAR -->
         <Grid
@@ -79,6 +86,13 @@
 
             <components:SearchBarView />
         </Grid>
+
+        <main_components:CustomLikedView
+            Grid.RowSpan="2"
+            x:Name="likeView" 
+            ShowLiked="{Binding IsLikedViewLiked}"
+            IsVisible="{Binding ShowLikedView}"
+            Grid.Row="2"/>
 
         <main_components:LoadingView
             Grid.RowSpan="2"

@@ -9,6 +9,8 @@ namespace Ninimum.Views.Main.Components;
 public partial class AdBannerView : ContentView
 {
     private int _currentPosition;
+    private IDispatcherTimer? _autoSlideTimer;
+    private const int AutoSlideSeconds = 3;
 
     public AdBannerView()
     {
@@ -72,6 +74,8 @@ public partial class AdBannerView : ContentView
         view.BannerCarousel.ItemsSource = view.ItemsSource;
         view.CurrentPosition = 0;
         view.UpdateCustomIndicator(0);
+
+        view.StartAutoSlide();
     }
 
     private void OnItemsCollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
@@ -153,5 +157,51 @@ public partial class AdBannerView : ContentView
             if (PurchaseCommand?.CanExecute(item) == true)
                 PurchaseCommand.Execute(item);
         }
+    }
+
+    private void StartAutoSlide()
+    {
+        StopAutoSlide();
+
+        if (ItemsSource == null || ItemsSource.Count <= 1)
+            return;
+
+        _autoSlideTimer = Dispatcher.CreateTimer();
+        _autoSlideTimer.Interval = TimeSpan.FromSeconds(AutoSlideSeconds);
+
+        _autoSlideTimer.Tick += (s, e) =>
+        {
+            if (ItemsSource == null || ItemsSource.Count <= 1)
+                return;
+
+            int nextPosition = CurrentPosition + 1;
+
+            if (nextPosition >= ItemsSource.Count)
+                nextPosition = 0;
+
+            CurrentPosition = nextPosition;
+            BannerCarousel.ScrollTo(nextPosition, position: ScrollToPosition.Center, animate: true);
+        };
+
+        _autoSlideTimer.Start();
+    }
+
+    private void StopAutoSlide()
+    {
+        if (_autoSlideTimer == null)
+            return;
+
+        _autoSlideTimer.Stop();
+        _autoSlideTimer = null;
+    }
+
+    protected override void OnParentSet()
+    {
+        base.OnParentSet();
+
+        if (Parent == null)
+            StopAutoSlide();
+        else
+            StartAutoSlide();
     }
 }

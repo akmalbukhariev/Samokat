@@ -21,7 +21,7 @@
     
             <components:InputView
                 Grid.Row="1"
-                Title="word"
+                Title="Mahsulotni qidiring"
                 LeftIcon="ic_serach.png"
                 LeftIconSize="26"
                 Text="{Binding SearchText}"
@@ -29,29 +29,165 @@
                 RightIconSize="30"
                 RightIconCommand="{Binding FilterTapCommand}"
                 ClearButtonVisibility="WhileEditing" />
+            
+            <ActivityIndicator
+                Grid.Row="1"
+                Color="{StaticResource PrimaryColor}"
+                WidthRequest="22"
+                HeightRequest="22"
+                HorizontalOptions="End"
+                VerticalOptions="Center"
+                Margin="0,0,20,0"
+                IsRunning="{Binding IsSearching}"
+                IsVisible="{Binding IsSearching}" />
 
-            <CollectionView
-                x:Name="MainCollectionView"
+            <!-- Recent Search List -->
+            <Grid
                 Grid.Row="2"
-                ItemsSource="{Binding Products}"
-                SelectionMode="None"
-                Margin="10,10,10,0">
+                IsVisible="{Binding ShowRecentSearchList}"
+                RowDefinitions="Auto,35,*"
+                RowSpacing="10"
+                Margin="10,0,10,0">
 
-                <!-- PRODUCTS -->
+                <Label
+                    Text="Oxirgi qidiruvlar"
+                    TextColor="Black"
+                    FontSize="16"
+                    FontFamily="{StaticResource FontSFRegular}" />
+
+                <CollectionView
+                    Grid.Row="1"
+                    ItemsSource="{Binding HistoryList}"
+                    HorizontalScrollBarVisibility="Never">
+
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout
+                            Orientation="Horizontal"
+                            ItemSpacing="10" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <Border
+                                Stroke="#DADADA"
+                                Padding="10,5"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 20">
+
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type CollectionView}}, Path=BindingContext.ClickHistoryCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Border.GestureRecognizers>
+
+                                <Label
+                                    Text="{Binding SearchedText}"
+                                    TextColor="#22292F"
+                                    FontSize="14"
+                                    FontFamily="{StaticResource FontSFRegular}"
+                                    VerticalOptions="Center" />
+                            </Border>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+
+            <!-- Filter Search List -->
+            <CollectionView
+                Grid.Row="2"
+                IsVisible="{Binding ShowFilterSearchList}"
+                ItemsSource="{Binding HistoryList}"
+                Margin="10,0,10,0">
+
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
                         Orientation="Vertical"
-                        VerticalItemSpacing="10"
-                        HorizontalItemSpacing="10"
-                        Span="2" />
+                        VerticalItemSpacing="10" />
                 </CollectionView.ItemsLayout>
 
                 <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid
+                            ColumnDefinitions="Auto,*,Auto"
+                            RowDefinitions="*,1"
+                            Padding="0,8">
+
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer
+                                    Command="{Binding Source={RelativeSource AncestorType={x:Type CollectionView}}, Path=BindingContext.ClickHistoryCommand}"
+                                    CommandParameter="{Binding .}" />
+                            </Grid.GestureRecognizers>
+
+                            <Image
+                                Source="ic_serach.png"
+                                WidthRequest="20"
+                                HeightRequest="20"
+                                Margin="10,0,0,10"
+                                VerticalOptions="Center" />
+
+                            <Label
+                                Grid.Column="1"
+                                Text="{Binding SearchedText}"
+                                TextColor="#22292F"
+                                FontSize="14"
+                                FontFamily="{StaticResource FontSFBold}"
+                                VerticalOptions="Center"
+                                Margin="10,0,0,10" />
+
+                            <Image
+                                Grid.Column="2"
+                                Source="close.png"
+                                WidthRequest="20"
+                                HeightRequest="20"
+                                Margin="0,0,10,10"
+                                VerticalOptions="Center">
+
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type CollectionView}}, Path=BindingContext.RemoveHistoryCommand}"
+                                        CommandParameter="{Binding .}" />
+                                </Image.GestureRecognizers>
+                            </Image>
+
+                            <BoxView
+                                Grid.Row="1"
+                                Grid.ColumnSpan="3"
+                                BackgroundColor="#E5E5E5"
+                                HeightRequest="1" />
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            <RefreshView 
+                IsRefreshing="{Binding IsRefreshing}"
+                Command="{Binding RefreshCommand}"
+                Margin="10,5,10,5"
+                IsVisible="{Binding ShowProductResult}"
+                Grid.Row="2">
+                <CollectionView
+                    x:Name="MainCollectionView"
+                    ItemsSource="{Binding Products}"
+                    RemainingItemsThreshold="2"
+                    RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
+                    SelectionMode="None"
+                    Margin="10,10,10,0">
+
+                    <!-- PRODUCTS -->
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
+                            Orientation="Vertical"
+                            VerticalItemSpacing="10"
+                            HorizontalItemSpacing="10"
+                            Span="2" />
+                    </CollectionView.ItemsLayout>
+
+                    <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:MainProductCardItem">
                         <main_components:MainProductCardView
                             ImagesSource="{Binding Images}"
-                            Price="{Binding OldPrice}"
-                            SubscriptionPrice="{Binding NewPrice}"
+                            Price="{Binding Price}"
+                            SubscriptionPrice="{Binding Subscription_price}"
                             Title="{Binding Title}"
                             Rating="{Binding Rating}"
                             ReviewCount="{Binding ReviewCount}"
@@ -59,7 +195,8 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
-            </CollectionView>
+                </CollectionView>
+            </RefreshView>
         </Grid>
         <!-- Bottom sheet -->
         <local:SearchFilterBottomSheet

@@ -1,9 +1,7 @@
 namespace Models.Requests;
 
-public class ProductListRequest
+public class PageSizeRequest
 {
-    public int user_id;
-    public int category_id { get; set; }
     public int pageSize{ get; set; }
     public int offset{ get; set; }
 }
