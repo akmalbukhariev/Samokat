@@ -45,11 +45,12 @@ public partial class MainPageViewModel : ObservableObject
 
     private readonly AppControl appControl;
     private readonly UserApiService apiService;
-    public MainPageViewModel(AppControl appControl,UserApiService apiService)
+    public MainPageViewModel(AppControl appControl, UserApiService apiService)
     {
         this.appControl = appControl;
         this.apiService = apiService;
 
+        AdBanners = new ObservableCollection<AdBannerItem>();
         Products = new ObservableCollection<MainProductCardItem>();
 
         NotificationTapCommand = new Command(OnNotificationTapped);
@@ -61,33 +62,31 @@ public partial class MainPageViewModel : ObservableObject
         LoadMoreCommand = new AsyncRelayCommand(LoadMoreAsync);
         RefreshCommand = new AsyncRelayCommand(RefreshAsync);
 
+        /*
         AdBanners = new ObservableCollection<AdBannerItem>
         {
             new AdBannerItem
             {
                 Title = "Huggies Elite Soft 1\ntagliklari uchun\nmaxsus chegirma",
-                ButtonText = "Sotib olish",
                 Image = "huggiest.png"
             },
             new AdBannerItem
             {
                 Title = "Bolalar uchun\nyangi mahsulotlar",
-                ButtonText = "Sotib olish",
                 Image = "huggiest.png"
             },
             new AdBannerItem
             {
                 Title = "Maxsus takliflar\nfaqat ilovada",
-                ButtonText = "Sotib olish",
                 Image = "huggiest.png"
             },
             new AdBannerItem
             {
                 Title = "Kerakli mahsulotlarni\nqulay narxda toping",
-                ButtonText = "Sotib olish",
                 Image = "huggiest.png"
             }
         };
+        */
     }
 
     public async Task LoadInitialAsync()
@@ -97,9 +96,43 @@ public partial class MainPageViewModel : ObservableObject
         loadedProductIds.Clear();
         Products.Clear();
 
+        await LoadBannersAsync();
         await LoadProductsAsync();
-    }
+    }    
 
+    private async Task LoadBannersAsync()
+    {
+        try
+        {
+            BannerListResponse response = await apiService.GetBannerList();
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+                return;
+
+            var items = response.resultData;
+
+            if (items == null || items.Count == 0)
+                return;
+
+            AdBanners.Clear();
+
+            foreach (var item in items.OrderBy(x => x.sort_order ?? 0))
+            {
+                AdBanners.Add(new AdBannerItem
+                {
+                    Id = (int)item.id,
+                    ProductId = (int)item.product_id,
+                    Title = item.short_description ?? "",
+                    Image = item.image_url ?? ""
+                });
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[ERROR] LoadBannersAsync: {ex.Message}");
+        }
+    }
+    
     private async Task LoadProductsAsync(bool isRefresh = false)
     {
         if (isRequestRunning || (!hasMoreItems && !isRefresh))
@@ -215,6 +248,7 @@ public partial class MainPageViewModel : ObservableObject
 
     private async Task RefreshAsync()
     {
+        await LoadBannersAsync();
         await LoadProductsAsync(isRefresh: true);
     }
 

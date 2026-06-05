@@ -16,23 +16,14 @@
                 BackgroundColor="#E9EEF2"
                 StrokeThickness="0"
                 StrokeShape="RoundRectangle 20"
-                Padding="10">
+                Padding="0">
 
                 <Grid>
-                    <!-- Single image -->
-                    <Image
-                        x:Name="SingleImage"
-                        Source="{Binding MainImageSource, Source={x:Reference RootView}}"
-                        Aspect="AspectFit"
-                        Margin="10,10,10,10"
-                        IsVisible="False" />
 
-                    <!-- Carousel image -->
                     <CarouselView
                         x:Name="ImageCarousel"
                         ItemsSource="{Binding ImagesSource, Source={x:Reference RootView}}"
-                        PositionChanged="OnCarouselPositionChanged"
-                        IsVisible="False">
+                        PositionChanged="OnCarouselPositionChanged">
 
                         <CarouselView.ItemTemplate>
                             <DataTemplate x:DataType="models:MainProductImageItem">
@@ -42,10 +33,10 @@
                                             Tapped="Product_Tapped"
                                             NumberOfTapsRequired="1" />
                                     </Grid.GestureRecognizers>
+
                                     <Image
                                         Source="{Binding ImageSource}"
-                                        Aspect="AspectFit"
-                                        Margin="10,10,10,10" />
+                                        Aspect="AspectFill" />
                                 </Grid>
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
@@ -62,12 +53,14 @@
                         HorizontalOptions="End"
                         VerticalOptions="Start"
                         Margin="0,6,6,0">
+
                         <Border.GestureRecognizers>
-                            <TapGestureRecognizer 
+                            <TapGestureRecognizer
                                 NumberOfTapsRequired="1"
                                 Tapped="Like_Tapped"/>
                         </Border.GestureRecognizers>
-                        <Image 
+
+                        <Image
                             x:Name="imLiked"
                             Source="unliked.png"
                             WidthRequest="22"
@@ -75,6 +68,7 @@
                             HorizontalOptions="Center"
                             VerticalOptions="Center"/>
                     </Border>
+
                 </Grid>
             </Border>
         </Grid>

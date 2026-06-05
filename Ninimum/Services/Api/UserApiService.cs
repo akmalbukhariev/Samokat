@@ -28,6 +28,8 @@ namespace Api.Services
         private const string SEARCH_PRODUCT_LIST = $"{BASE_URL}product/searchProductList";
         private const string ADD_FAVORITE_PRODUCT = $"{BASE_URL}favorite/addFavorite";
         private const string DELETE_FAVORITE_PRODUCT = $"{BASE_URL}favorite/deleteFavorite";
+        private const string GET_FAVORITE_PRODUCT = $"{BASE_URL}favorite/getFavoriteList";
+        private const string GET_BANNER_LIST = $"{BASE_URL}banner/getBannerList";
         #endregion
 
         public UserApiService(RestClient client)
@@ -347,6 +349,39 @@ namespace Api.Services
             return response;
         }
 
+        public async Task<BannerListResponse> GetBannerList()
+        {
+            var response = new BannerListResponse();
+
+            try
+            {
+                var receivedData = await GetAsync(GET_BANNER_LIST);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<BannerListResponse>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
         public async Task<ProductListResponse> GetProductList(ProductListRequest data)
         {
             var response = new ProductListResponse();
@@ -453,6 +488,39 @@ namespace Api.Services
             try
             {
                 var receivedData = await PostAsync(SEARCH_PRODUCT_LIST, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<ProductListResponse>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<ProductListResponse> GetFavoriteProductList(FavoriteListRequest data)
+        {
+            var response = new ProductListResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(GET_FAVORITE_PRODUCT, data);
 
                 if (!string.IsNullOrWhiteSpace(receivedData))
                 {

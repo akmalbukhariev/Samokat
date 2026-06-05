@@ -15,16 +15,9 @@
     Shell.TabBarForegroundColor="Red"
     Shell.TabBarTitleColor="Red"
     Title="Ninimum">
-    
-    <!--
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate view:ChildrenPage}"
-        Route="StartPage" />
-     -->
-    
+      
      <TabBar>
-          <Tab Title="Uy">
+          <Tab Title="Uy" Appearing="Tab_Appearing">
                <Tab.Icon>
                     <OnPlatform x:TypeArguments="FileImageSource">
                          <On Platform="Android" Value="ic_home.png" />
@@ -35,7 +28,7 @@
                               Shell.NavBarIsVisible="False" />
           </Tab>
 
-          <Tab Title="Sevimli">
+          <Tab Title="Sevimli" Appearing="Tab_Appearing">
                <Tab.Icon>
                     <OnPlatform x:TypeArguments="FileImageSource">
                          <On Platform="Android" Value="ic_favorite.png" />
@@ -46,7 +39,7 @@
                               Shell.NavBarIsVisible="False" />
           </Tab>
 
-          <Tab Title="Savatcha">
+          <Tab Title="Savatcha" Appearing="Tab_Appearing">
                <Tab.Icon>
                     <OnPlatform x:TypeArguments="FileImageSource">
                          <On Platform="Android" Value="ic_basket.png" />
@@ -57,7 +50,7 @@
                               Shell.NavBarIsVisible="False" />
           </Tab>
 
-          <Tab Title="Profil">
+          <Tab Title="Profil" Appearing="Tab_Appearing">
                <Tab.Icon>
                     <OnPlatform x:TypeArguments="FileImageSource">
                          <On Platform="Android" Value="ic_user.png" />

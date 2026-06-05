@@ -15,7 +15,7 @@ namespace Utils
 
 #region Domen
         //public const string SERVER_DOMAIN = "www.ninimum.uz";
-        public const string SERVER_DOMAIN = "192.168.219.146:8083";
+        public const string SERVER_DOMAIN = "192.168.219.123:8083";
         public const string BASE_USER_URL = $"http://{SERVER_DOMAIN}/ninimum/api/v1/";
 #endregion
 

@@ -11,7 +11,14 @@ public partial class FavoritePage : BasePage
         InitializeComponent();
         viewModel = vm;
         BindingContext = vm;
-        
+
         Shell.SetTabBarIsVisible(this, true);
+    }
+    
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        await viewModel.LoadInitialAsync();
     }
 }

@@ -148,15 +148,24 @@ public partial class AdBannerView : ContentView
         }
     }
 
-    private void OnPurchaseTapped(object? sender, TappedEventArgs e)
+    private async void OnPurchaseTapped(object? sender, TappedEventArgs e)
     {
-        if (sender is Element element && element.BindingContext is AdBannerItem item)
+        if (sender is VisualElement element &&
+            element.BindingContext is AdBannerItem item)
         {
+            await AnimateElementScaleDown(element);
+
             PurchaseClicked?.Invoke(this, item);
 
             if (PurchaseCommand?.CanExecute(item) == true)
                 PurchaseCommand.Execute(item);
         }
+    }
+
+    private async Task AnimateElementScaleDown(VisualElement element)
+    {
+        await element.ScaleTo(0.9, 100, Easing.CubicOut);
+        await element.ScaleTo(1.0, 100, Easing.CubicIn);
     }
 
     private void StartAutoSlide()

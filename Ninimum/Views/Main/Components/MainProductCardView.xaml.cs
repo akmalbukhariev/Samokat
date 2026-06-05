@@ -3,6 +3,7 @@ using System.Collections.Specialized;
 using System.Windows.Input;
 using Microsoft.Maui.Controls.Shapes;
 using Ninimum.Models.Main;
+using Ninimum.Services;
 
 namespace Ninimum.Views.Main.Components;
 
@@ -210,7 +211,7 @@ public partial class MainProductCardView : ContentView
         bool hasSingleImage = count == 1;
 
         ImageCarousel.IsVisible = hasCarousel;
-        SingleImage.IsVisible = hasSingleImage;
+        //SingleImage.IsVisible = hasSingleImage;
 
         if (hasCarousel)
         {
@@ -279,7 +280,7 @@ public partial class MainProductCardView : ContentView
     {
         await ClickGuard.RunAsync((VisualElement)sender, async () =>
         {
-            //HapticFeedback.Default.Perform(HapticFeedbackType.Click);
+            AppVibrationService.Like();
 
             await brdLiked.ScaleTo(1.3, 100, Easing.CubicOut);
             await brdLiked.ScaleTo(1.0, 100, Easing.CubicIn);

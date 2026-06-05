@@ -17,8 +17,12 @@
             Title="Sevimlilar"
             ShowBack="false"/>
         
+        <RefreshView 
+            IsRefreshing="{Binding IsRefreshing}"
+            Command="{Binding RefreshCommand}"
+            Margin="10,5,10,5"
+            Grid.Row="2">
         <CollectionView
-                Grid.Row="2"
                 ItemsSource="{Binding Products}"
                 SelectionMode="None"
                 Margin="10,10,10,0">
@@ -36,16 +40,29 @@
                     <DataTemplate x:DataType="models:MainProductCardItem">
                         <main_components:MainProductCardView
                             ImagesSource="{Binding Images}"
-                            Price="{Binding OldPrice}"
-                            SubscriptionPrice="{Binding NewPrice}"
+                            Price="{Binding Price}"
+                            SubscriptionPrice="{Binding Subscription_price}"
                             Title="{Binding Title}"
+                            Liked="{Binding Liked}"
                             Rating="{Binding Rating}"
                             ReviewCount="{Binding ReviewCount}"
-                            ActionButtonText="{Binding ActionText}" />
+                            ActionButtonText="{Binding ActionText}"
+                            LikeCommand="{Binding Source={RelativeSource AncestorType={x:Type local:FavoritePage}}, Path=BindingContext.LikeCommand}"
+                            ClickProductCommand="{Binding Source={RelativeSource AncestorType={x:Type local:FavoritePage}}, Path=BindingContext.ClickProductCommand}"
+                            ClickTomorrowCommand="{Binding Source={RelativeSource AncestorType={x:Type local:FavoritePage}}, Path=BindingContext.ClickTomorrowCommand}"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
             </CollectionView>
+        </RefreshView>
+        <ActivityIndicator
+            Grid.RowSpan="3"
+            x:Name="loading"
+            Color="{StaticResource PrimaryColor}"
+            Scale="1.5"
+            IsRunning="{Binding IsLoading}"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"/>
     </Grid>
 
 </page:BasePage>
