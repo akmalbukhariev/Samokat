@@ -92,7 +92,7 @@ public partial class FavoritePageViewModel : ObservableObject
                 offset = offset
             };
  
-            ProductListResponse response = await apiService.GetFavoriteProductList(request);
+            ProductResponse response = await apiService.GetFavoriteProductList(request);
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
                 return;

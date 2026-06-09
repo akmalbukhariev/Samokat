@@ -266,7 +266,7 @@ public partial class SearchPageViewModel : ObservableObject
                 sortType = GetSelectedSortType()
             };
 
-            ProductListResponse response = await apiService.SearchProductList(request);
+            ProductResponse response = await apiService.SearchProductList(request);
 
             if (token.IsCancellationRequested)
                 return;

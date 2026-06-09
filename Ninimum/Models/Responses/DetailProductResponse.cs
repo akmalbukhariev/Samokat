@@ -3,7 +3,7 @@ using Ninimum.Models.Dto;
 
 namespace Models.Responses;
 
-public class ProductListResponse : Response<List<ProductDto>>
+public class DetailProductResponse : Response<ProductDto>
 { 
     
 }

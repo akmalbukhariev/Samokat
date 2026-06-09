@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Class="Ninimum.Components.DescriptionPopupView"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    IsVisible="False"
+    BackgroundColor="#66000000"
+    x:Name="Root">
+
+   <Grid>
+        <Grid.GestureRecognizers>
+            <TapGestureRecognizer Tapped="Overlay_Tapped"/>
+        </Grid.GestureRecognizers>
+
+        <Border
+            x:Name="PopupBody"
+            BackgroundColor="White"
+            StrokeThickness="0"
+            Padding="18"
+            VerticalOptions="End"
+            TranslationY="600">
+
+            <Border.GestureRecognizers>
+                <PanGestureRecognizer PanUpdated="PopupBody_PanUpdated"/>
+            </Border.GestureRecognizers>
+
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="22,22,0,0"/>
+            </Border.StrokeShape>
+
+            <Grid RowDefinitions="Auto,14,Auto,12,*"
+                  MaximumHeightRequest="520">
+
+                <!-- drag handle -->
+                <Border
+                    Grid.Row="0"
+                    HorizontalOptions="Center"
+                    WidthRequest="50"
+                    HeightRequest="5"
+                    BackgroundColor="#DADADA"
+                    StrokeThickness="0">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="999"/>
+                    </Border.StrokeShape>
+                </Border>
+
+                <!-- header -->
+                <Grid
+                    Grid.Row="2"
+                    ColumnDefinitions="*,Auto">
+
+                    <Label
+                        Text="{Binding Title, Source={x:Reference Root}}"
+                        TextColor="#22292F"
+                        FontSize="20"
+                        FontFamily="{StaticResource FontSFMedium}"
+                        VerticalTextAlignment="Center"/>
+
+                    <Image
+                        Grid.Column="1"
+                        Source="ic_close.png"
+                        WidthRequest="24"
+                        HeightRequest="24">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Close_Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+                </Grid>
+
+                <!-- content -->
+                <ScrollView Grid.Row="4">
+                    <Label
+                        Text="{Binding Description, Source={x:Reference Root}}"
+                        TextColor="#22292F"
+                        FontSize="17"
+                        FontFamily="{StaticResource FontSFRegular}"
+                        LineBreakMode="WordWrap" />
+                </ScrollView>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentView>

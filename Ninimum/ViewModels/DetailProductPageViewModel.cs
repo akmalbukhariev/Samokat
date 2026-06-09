@@ -1,144 +1,389 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
+using System.Windows.Input;
+using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Models.Requests;
+using Models.Responses;
 using Ninimum.Models;
+using Ninimum.Models.Dto;
 using Ninimum.Models.Main;
+using Ninimum.Services;
+using Ninimum.Views.DetailProduct;
+using Ninimum.Views.Formalization;
+using Utils;
 
 namespace Ninimum.ViewModels;
 
+[QueryProperty(nameof(ProductId), "productId")]
 public partial class DetailProductPageViewModel : ObservableObject
-{
-    [ObservableProperty]
-    private ObservableCollection<MainProductCardItem> similarProducts = new();
+{   
+    #region Properties
+    [ObservableProperty] private long productId;
+    [ObservableProperty] private bool productLiked;
+    private int offset = 0;
+    private const int PageSize = 10;
+    private bool hasMoreItems = true;
+    private bool isRequestRunning = false;
+    [ObservableProperty] private double similarProductsHeight;
+    [ObservableProperty] private ImageSource? previewImageSource;
+    [ObservableProperty] private bool showImagePreview;
+    private readonly HashSet<long> loadedProductIds = new();
 
-    [ObservableProperty]
-    private ObservableCollection<ProductImageDetailInfo> productImages = new();
+    [ObservableProperty] private bool isLoading;
+    [ObservableProperty] private bool isRefreshing;
+    [ObservableProperty] private bool showLikedView;
+    [ObservableProperty] private bool isLikedViewLiked;
 
-    [ObservableProperty]
-    private int currentImageIndex;
+    [ObservableProperty] private ObservableCollection<MainProductCardItem> similarProducts = new();
 
-    [ObservableProperty]
-    private string productTitle = "Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik, 12+ oy, 800 g";
+    [ObservableProperty] private ObservableCollection<ProductImageDetailInfo> productImages = new();
 
-    [ObservableProperty]
-    private string stockText = "Omborda 100 dona mavjud; sotuvda mavjud!";
+    [ObservableProperty] private int currentImageIndex;
 
-    [ObservableProperty]
-    private string rating = "4.8";
+    [ObservableProperty] private string productTitle = ".......";
 
-    [ObservableProperty]
-    private string reviewText = "301 sharhlar ∙ 100+ buyurtmalar";
+    [ObservableProperty] private string stockText = ".......";
 
-    [ObservableProperty]
-    private string subscriptionPrice = "486 000 so’m";
+    [ObservableProperty] private string rating = ".......";
 
-    [ObservableProperty]
-    private string regularPrice = "545 000 so’m";
+    [ObservableProperty] private string reviewText = ".......";
 
-    [ObservableProperty]
-    private string deliveryLabel = "Yetzaib berish";
+    [ObservableProperty] private string subscriptionPrice = ".......";
 
-    [ObservableProperty]
-    private string subscriptionDeliveryText = "bepul ∙ 30 minut";
+    [ObservableProperty] private string regularPrice = ".......";
 
-    [ObservableProperty]
-    private string regularDeliveryText = "pullik ∙ 1 kun";
+    [ObservableProperty] private string deliveryLabel = "Yetkazib berish";
 
-    [ObservableProperty]
-    private string description =
-        "Kabrita 3 GOLD - bu 12 oydan oshgan bolalar uchun mo'ljallangan echki sutiga asoslangan quruq sutli ichimlik. Mahsulot sigir sutidan butunlay voz kechadi va sigir suti oqsillariga sezgir bolalar uchun alternativa taklif qiladi. Ichimlik faol o'sishni, jismoniy va aqliy rivojlanishni qo'llab-quvvatlash hamda bolaning immunitet tizimini mustahkamlash uchun barcha zarur ozuqa moddalari bilan boyitilgan.";
+    [ObservableProperty] private string subscriptionDeliveryText = "bepul ∙ minut";
 
-    [ObservableProperty]
-    private int quantity = 1;
+    [ObservableProperty] private string regularDeliveryText = "pullik ∙ 1 kun";
 
-    public IRelayCommand BackCommand { get; }
+    [ObservableProperty] private string description = ".......";
 
-    public DetailProductPageViewModel()
+    [ObservableProperty] private int quantity = 1;
+    #endregion
+
+    #region Commands
+    [ObservableProperty] private ICommand likeSimilarProductCommand;
+    [ObservableProperty] private ICommand clickProductCommand;
+    [ObservableProperty] private ICommand clickTomorrowCommand;
+    [ObservableProperty] private IAsyncRelayCommand loadMoreCommand;
+    [ObservableProperty] private IAsyncRelayCommand refreshCommand;
+    #endregion
+        
+    private readonly AppControl appControl;
+    private readonly UserApiService apiService;
+    public DetailProductPageViewModel(AppControl appControl, UserApiService apiService)
     {
-        BackCommand = new RelayCommand(OnBack);
+        this.appControl = appControl;
+        this.apiService = apiService;
+  
+        LikeSimilarProductCommand = new Command<MainProductCardItem>(SimilarProductLiked);
+        ClickProductCommand = new Command<MainProductCardItem>(ProductClicked);
+        ClickTomorrowCommand = new Command<MainProductCardItem>(TomorrowClicked);
 
-        ProductImages = new ObservableCollection<ProductImageDetailInfo>
-        {
-            new ProductImageDetailInfo("product_2.png"),
-            new ProductImageDetailInfo("product_2.png"),
-            new ProductImageDetailInfo("product_2.png"),
-            new ProductImageDetailInfo("product_2.png")
-        };
+        LoadMoreCommand = new AsyncRelayCommand(LoadMoreAsync);
+        RefreshCommand = new AsyncRelayCommand(RefreshAsync);
 
-        SimilarProducts = new ObservableCollection<MainProductCardItem>
+        SimilarProducts = new ObservableCollection<MainProductCardItem>();
+        ProductImages = new ObservableCollection<ProductImageDetailInfo>();
+    }
+
+    public async Task<bool> ToggleProductLikeAsync()
+    {
+        bool oldLiked = ProductLiked;
+
+        try
         {
-            new MainProductCardItem
+            ProductLiked = !oldLiked;
+
+            Response response;
+
+            if (!oldLiked)
             {
-                Price = "545 000",
-                Subscription_price = "486 000",
-                Title = "Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik",
-                Rating = 4.8,
-                ReviewCount = 301,
-                ActionText = "+ Ertaga",
-                Images = new ObservableCollection<MainProductImageItem>
-                {
-                    new MainProductImageItem { ImageSource = "product_1.png" },
-                    new MainProductImageItem { ImageSource = "product_1.png" },
-                    new MainProductImageItem { ImageSource = "product_1.png" },
-                    new MainProductImageItem { ImageSource = "product_1.png" }
-                }
-            },
-            new MainProductCardItem
+                response = await apiService.AddFavoriteProduct(
+                    new AddFavoriteRequest
+                    {
+                        user_id = (int)appControl.userDto.id,
+                        product_id = (int)ProductId
+                    });
+            }
+            else
             {
-                Price = "545 000",
-                Subscription_price = "486 000",
-                Title = "Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik",
-                Rating = 4.8,
-                ReviewCount = 301,
-                ActionText = "+ Ertaga",
-                Images = new ObservableCollection<MainProductImageItem>
-                {
-                    new MainProductImageItem { ImageSource = "product_2.png" },
-                    new MainProductImageItem { ImageSource = "product_2.png" },
-                    new MainProductImageItem { ImageSource = "product_2.png" },
-                    new MainProductImageItem { ImageSource = "product_2.png" }
-                }
-            },
-            new MainProductCardItem
+                response = await apiService.DeleteFavoriteProduct(
+                    new DeleteFavoriteRequest
+                    {
+                        user_id = (int)appControl.userDto.id,
+                        product_id = (int)ProductId
+                    });
+            }
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
-                Price = "545 000",
-                Subscription_price = "486 000",
-                Title = "Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik",
-                Rating = 4.8,
-                ReviewCount = 301,
-                ActionText = "+ Ertaga",
-                Images = new ObservableCollection<MainProductImageItem>
-                {
-                    new MainProductImageItem { ImageSource = "product_2.png" },
-                    new MainProductImageItem { ImageSource = "product_2.png" },
-                    new MainProductImageItem { ImageSource = "product_2.png" },
-                    new MainProductImageItem { ImageSource = "product_2.png" }
-                }
-            },
-            new MainProductCardItem
+                ProductLiked = oldLiked;
+                return false;
+            }
+
+            IsLikedViewLiked = ProductLiked;
+            ShowLikedView = true;
+
+            return true;
+        }
+        catch
+        {
+            ProductLiked = oldLiked;
+            return false;
+        }
+    }
+
+    private async void ProductClicked(MainProductCardItem product)
+    {
+        await AppNavigatorService.NavigateTo($"{nameof(DetailProductPage)}?productId={product.ProductId}");
+    }
+    
+    private async void TomorrowClicked(MainProductCardItem product)
+    {
+        await AppNavigatorService.NavigateTo(nameof(FormalizationPage));
+    }
+
+    partial void OnProductIdChanged(long value)
+    {
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            await LoadInitialAsync();
+        });
+    }
+
+    private async void SimilarProductLiked(MainProductCardItem product)
+    {
+        if (product == null)
+            return;
+
+        bool oldLiked = product.Liked;
+
+        try
+        {
+            product.Liked = !oldLiked;
+
+            Response response;
+
+            if (!oldLiked)
             {
-                Price = "545 000",
-                Subscription_price = "486 000",
-                Title = "Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik",
-                Rating = 4.8,
-                ReviewCount = 301,
-                ActionText = "+ Ertaga",
-                Images = new ObservableCollection<MainProductImageItem>
+                response = await apiService.AddFavoriteProduct(
+                    new AddFavoriteRequest
+                    {
+                        user_id = (int)appControl.userDto.id,
+                        product_id = product.ProductId
+                    });
+            }
+            else
+            {
+                response = await apiService.DeleteFavoriteProduct(
+                    new DeleteFavoriteRequest
+                    {
+                        user_id = (int)appControl.userDto.id,
+                        product_id = product.ProductId
+                    });
+            }
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                product.Liked = oldLiked;
+                return;
+            }
+
+            IsLikedViewLiked = product.Liked;
+            ShowLikedView = true;
+        }
+        catch (Exception ex)
+        {
+            product.Liked = oldLiked;
+        }
+    }
+
+    public async Task LoadInitialAsync()
+    {
+        offset = 0;
+        hasMoreItems = true;
+
+        loadedProductIds.Clear();
+
+        SimilarProducts.Clear();
+        ProductImages.Clear();
+
+        await LoadProductDetailAsync();
+        await LoadSimilarProductsAsync();
+    }
+
+    private async Task LoadProductDetailAsync()
+    {
+        try
+        {
+            IsLoading = true;
+
+            DetailProductResponse response = await apiService.GetProductDetail(
+                    new ProductDetailRequest
+                    {
+                        user_id = (int)appControl.userDto.id,
+                        product_id = (int)ProductId
+                    });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+                return;
+
+            ProductDto? product = response.resultData;
+
+            if (product == null)
+                return;
+
+            ProductTitle = product.name ?? "";
+            Description = product.description ?? "";
+            ProductLiked = product.liked;
+            StockText = $"Omborda {product.stock_quantity ?? 0} dona mavjud"; 
+            SubscriptionPrice = $"{product.subscription_price?.ToString("N0").Replace(",", " ") ?? "0"} so’m"; 
+            RegularPrice = $"{product.price?.ToString("N0").Replace(",", " ") ?? "0"} so’m";
+
+            ProductImages.Clear();
+
+            if (product.images != null && product.images.Count > 0)
+            {
+                foreach (var image in product.images.OrderBy(x => x.sort_order ?? 0))
                 {
-                    new MainProductImageItem { ImageSource = "product_1.png" },
-                    new MainProductImageItem { ImageSource = "product_1.png" },
-                    new MainProductImageItem { ImageSource = "product_1.png" },
-                    new MainProductImageItem { ImageSource = "product_1.png" }
+                    ProductImages.Add(new ProductImageDetailInfo( image.image_url ?? "no_image.png"));
                 }
             }
+            else
+            {
+                ProductImages.Add(new ProductImageDetailInfo("no_image.png"));
+            }
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[ERROR] LoadProductDetailAsync: {ex.Message}");
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    private async Task LoadSimilarProductsAsync(bool isRefresh = false)
+    {
+        if (isRequestRunning || (!hasMoreItems && !isRefresh))
+            return;
+
+        try
+        {
+            isRequestRunning = true;
+
+            if (isRefresh)
+            {
+                IsRefreshing = true;
+
+                offset = 0;
+                hasMoreItems = true;
+
+                loadedProductIds.Clear();
+                SimilarProducts.Clear();
+            }
+
+            ProductResponse response = await apiService.GetSimilarProduct(
+                    new SimilarProductListRequest
+                    {
+                        user_id = (int)appControl.userDto.id,
+                        product_id = (int)ProductId,
+                        pageSize = PageSize,
+                        offset = offset
+                    });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+                return;
+
+            var items = response.resultData;
+
+            if (items == null || items.Count == 0)
+            {
+                hasMoreItems = false;
+                return;
+            }
+
+            foreach (var item in items)
+            {
+                if (item.id == null)
+                    continue;
+
+                if (loadedProductIds.Contains(item.id.Value))
+                    continue;
+
+                loadedProductIds.Add(item.id.Value);
+
+                SimilarProducts.Add(ToMainProductCardItem(item));
+            }
+
+            SimilarProductsHeight = Math.Ceiling(SimilarProducts.Count / 2.0) * 320;
+
+            offset += items.Count;
+
+            if (items.Count < PageSize)
+                hasMoreItems = false;
+        }
+        finally
+        {
+            IsRefreshing = false;
+            isRequestRunning = false;
+        }
+    }
+
+    private MainProductCardItem ToMainProductCardItem(ProductDto item)
+    {
+        var images =
+            new ObservableCollection<MainProductImageItem>();
+
+        if (item.images != null &&
+            item.images.Count > 0)
+        {
+            foreach (var img in item.images.OrderBy(x => x.sort_order ?? 0))
+            {
+                images.Add(new MainProductImageItem
+                {
+                    ImageSource = img.image_url
+                });
+            }
+        }
+
+        return new MainProductCardItem
+        {
+            Price = item.price?.ToString("N0")
+                .Replace(",", " ") ?? "0",
+
+            Subscription_price =
+                item.subscription_price?.ToString("N0")
+                    .Replace(",", " ") ?? "0",
+
+            ProductId = (int)item.id,
+
+            Title = item.name ?? "",
+            Liked = item.liked,
+
+            Rating = 4.8,
+            ReviewCount = 301,
+
+            ActionText = "+ Ertaga",
+
+            Images = images
         };
     }
 
-    private async void OnBack()
+    private async Task LoadMoreAsync()
     {
-        if (Application.Current?.MainPage == null)
-            return;
+        await LoadSimilarProductsAsync();
+    }
 
-        await Shell.Current.GoToAsync("..");
+    private async Task RefreshAsync()
+    {
+        await LoadProductDetailAsync();
+        await LoadSimilarProductsAsync(true);
     }
 }

@@ -1,5 +1,6 @@
 using Microsoft.Maui.Controls.Shapes;
 using Ninimum.Models;
+using Ninimum.Services;
 using Ninimum.ViewModels;
 
 namespace Ninimum.Views.DetailProduct;
@@ -17,10 +18,13 @@ public partial class DetailProductPage : BasePage
         BindingContext = vm;
 
         Loaded += DetailProductPage_Loaded;
+        viewModel.PropertyChanged += ViewModel_PropertyChanged;
     }
 
     private void DetailProductPage_Loaded(object? sender, EventArgs e)
     {
+        UpdateFavoriteImage();
+
         if (viewModel == null || viewModel.ProductImages.Count == 0)
             return;
 
@@ -31,6 +35,47 @@ public partial class DetailProductPage : BasePage
         UpdateUi(0);
     }
 
+    private async void ViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        if (viewModel == null)
+            return;
+
+        if (e.PropertyName == nameof(DetailProductPageViewModel.ProductLiked))
+        {
+            MainThread.BeginInvokeOnMainThread(UpdateFavoriteImage);
+        }
+
+        if (e.PropertyName == nameof(DetailProductPageViewModel.ShowLikedView))
+        {
+            if (!viewModel.ShowLikedView)
+                return;
+
+            await likeView.DisplayAsAnimation();
+            viewModel.ShowLikedView = false;
+        }
+    }
+
+    private async void Like_Tapped(object sender, TappedEventArgs e)
+    {
+        if (viewModel == null)
+            return;
+
+        await ClickGuard.RunAsync((VisualElement)sender, async () =>
+        {
+            AppVibrationService.Like();
+
+            bool success = await viewModel.ToggleProductLikeAsync();
+
+            if (!success)
+                return;
+
+            UpdateFavoriteImage();
+
+            await brdLiked.ScaleTo(1.3, 100, Easing.CubicOut);
+            await brdLiked.ScaleTo(1.0, 100, Easing.CubicIn);
+        });
+    }
+    
     private void ProductCarousel_CurrentItemChanged(object? sender, CurrentItemChangedEventArgs e)
     {
         if (viewModel == null || _isCarouselUpdating)
@@ -75,6 +120,11 @@ public partial class DetailProductPage : BasePage
         {
             _isCarouselUpdating = false;
         });
+    }
+
+    private async void FullDescription_Tapped(object sender, TappedEventArgs e)
+    {
+        await DescriptionPopup.ShowAsync();
     }
 
     private void UpdateUi(int position)
@@ -140,10 +190,17 @@ public partial class DetailProductPage : BasePage
         }
     }
 
+    private void UpdateFavoriteImage()
+    {
+        imLiked.Source = viewModel?.ProductLiked == true
+            ? "liked.png"
+            : "unliked.png";
+    }
+
     private async void Comment_Tapped(object sender, TappedEventArgs e)
     {
         await AnimateElementScaleDown(sender as VisualElement);
-        
+
         await AppNavigatorService.NavigateTo(nameof(ProductReviews));
     }
 }

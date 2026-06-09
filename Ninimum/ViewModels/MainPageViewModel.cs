@@ -61,32 +61,6 @@ public partial class MainPageViewModel : ObservableObject
         LikeCommand = new Command<MainProductCardItem>(ProductLiked);
         LoadMoreCommand = new AsyncRelayCommand(LoadMoreAsync);
         RefreshCommand = new AsyncRelayCommand(RefreshAsync);
-
-        /*
-        AdBanners = new ObservableCollection<AdBannerItem>
-        {
-            new AdBannerItem
-            {
-                Title = "Huggies Elite Soft 1\ntagliklari uchun\nmaxsus chegirma",
-                Image = "huggiest.png"
-            },
-            new AdBannerItem
-            {
-                Title = "Bolalar uchun\nyangi mahsulotlar",
-                Image = "huggiest.png"
-            },
-            new AdBannerItem
-            {
-                Title = "Maxsus takliflar\nfaqat ilovada",
-                Image = "huggiest.png"
-            },
-            new AdBannerItem
-            {
-                Title = "Kerakli mahsulotlarni\nqulay narxda toping",
-                Image = "huggiest.png"
-            }
-        };
-        */
     }
 
     public async Task LoadInitialAsync()
@@ -163,7 +137,7 @@ public partial class MainPageViewModel : ObservableObject
                 offset = offset
             };
  
-            ProductListResponse response = await apiService.GetProductList(request);
+            ProductResponse response = await apiService.GetProductList(request);
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
                 return;
@@ -301,7 +275,7 @@ public partial class MainPageViewModel : ObservableObject
 
     private async void ProductClicked(MainProductCardItem product)
     {
-        //await AppNavigatorService.NavigateTo(nameof(DetailProductPage));
+        await AppNavigatorService.NavigateTo($"{nameof(DetailProductPage)}?productId={product.ProductId}");
     }
 
     private async void TomorrowClicked(MainProductCardItem product)

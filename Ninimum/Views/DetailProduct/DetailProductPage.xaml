@@ -16,8 +16,7 @@
         <!-- Header -->
         <components:PageHeaderView
             Grid.Row="0"
-            Title="Maxsulot tafsilotlari"
-            BackCommand="{Binding BackCommand}" />
+            Title="Maxsulot tafsilotlari"/>
 
         <!-- Content -->
         <Grid Grid.Row="2"
@@ -71,19 +70,29 @@
 
                                     <!-- Favorite button -->
                                     <Border
-                                        Margin="0,10,10,0"
-                                        Padding="5"
+                                        x:Name="brdLiked"
+                                        BackgroundColor="#33000000"
                                         StrokeThickness="0"
-                                        BackgroundColor="#80FFFFFF"
+                                        StrokeShape="RoundRectangle 16"
+                                        WidthRequest="35"
+                                        HeightRequest="35"
                                         HorizontalOptions="End"
-                                        VerticalOptions="Start">
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="16" />
-                                        </Border.StrokeShape>
+                                        VerticalOptions="Start"
+                                        Margin="0,6,6,0">
+
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                NumberOfTapsRequired="1"
+                                                Tapped="Like_Tapped"/>
+                                        </Border.GestureRecognizers>
+
                                         <Image
-                                            Source="ic_heart_outline.png"
-                                            WidthRequest="24"
-                                            HeightRequest="24" />
+                                            x:Name="imLiked"
+                                            Source="unliked.png"
+                                            WidthRequest="22"
+                                            HeightRequest="22"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"/>
                                     </Border>
                                 </Grid>
                             </Border>
@@ -416,6 +425,9 @@
                             MaxLines="4" />
 
                         <HorizontalStackLayout Spacing="5">
+                            <HorizontalStackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="FullDescription_Tapped"/>
+                            </HorizontalStackLayout.GestureRecognizers>
                             <Label
                                 Text="To’liq ko’rish"
                                 TextColor="#FD473C"
@@ -443,31 +455,32 @@
                         <CollectionView
                             x:Name="MainCollectionView"
                             ItemsSource="{Binding SimilarProducts}"
-                            SelectionMode="None">
-
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout
-                                    Orientation="Vertical"
-                                    VerticalItemSpacing="10"
-                                    HorizontalItemSpacing="10"
-                                    Span="2" />
-                            </CollectionView.ItemsLayout>
+                            SelectionMode="None"
+                            ItemsLayout="HorizontalList"
+                            HorizontalScrollBarVisibility="Never"
+                            HeightRequest="330"
+                            Margin="0,5,0,5">
 
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="models:MainProductCardItem">
                                     <main_components:MainProductCardView
+                                        WidthRequest="170"
                                         ImagesSource="{Binding Images}"
-                                        Price="{Binding OldPrice}"
-                                        SubscriptionPrice="{Binding NewPrice}"
+                                        Price="{Binding Price}"
+                                        SubscriptionPrice="{Binding Subscription_price}"
                                         Title="{Binding Title}"
+                                        Liked="{Binding Liked}"
                                         Rating="{Binding Rating}"
                                         ReviewCount="{Binding ReviewCount}"
-                                        ActionButtonText="{Binding ActionText}" />
+                                        ActionButtonText="{Binding ActionText}"
+                                        LikeCommand="{Binding Source={RelativeSource AncestorType={x:Type local:DetailProductPage}}, Path=BindingContext.LikeSimilarProductCommand}"
+                                        ClickProductCommand="{Binding Source={RelativeSource AncestorType={x:Type local:DetailProductPage}}, Path=BindingContext.ClickProductCommand}"
+                                        ClickTomorrowCommand="{Binding Source={RelativeSource AncestorType={x:Type local:DetailProductPage}}, Path=BindingContext.ClickTomorrowCommand}" />
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
-
-                    </VerticalStackLayout>
+                    </VerticalStackLayout> 
+                
                 </VerticalStackLayout>
             </ScrollView>
 
@@ -587,8 +600,25 @@
             </Grid>
         </Grid>
         
+        <components:DescriptionPopupView
+            x:Name="DescriptionPopup"
+            Grid.RowSpan="3"
+            Title="Tavsiflar"
+            Description="{Binding Description}" />
+            
+        <components:CustomLikedView
+            Grid.RowSpan="3"
+            x:Name="likeView" 
+            ShowLiked="{Binding IsLikedViewLiked}"
+            IsVisible="{Binding ShowLikedView}"/>
+
         <components:ImagePreviewView 
             x:Name="ImagePreview"
             Grid.RowSpan="3"/>
+
+        <components:LoadingView
+            Grid.RowSpan="3"
+            x:Name="loading"
+            ShowLoading="{Binding IsLoading}"/>
     </Grid>
 </page:BasePage>
