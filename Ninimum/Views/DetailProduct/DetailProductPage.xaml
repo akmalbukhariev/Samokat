@@ -216,12 +216,19 @@
                                             CharacterSpacing="0.18"
                                             VerticalTextAlignment="Center" />
 
-                                        <HorizontalStackLayout Spacing="2">
-                                            <Image Source="star.png" WidthRequest="14" HeightRequest="14" />
-                                            <Image Source="star.png" WidthRequest="14" HeightRequest="14" />
-                                            <Image Source="star.png" WidthRequest="14" HeightRequest="14" />
-                                            <Image Source="star.png" WidthRequest="14" HeightRequest="14" />
-                                            <Image Source="star.png" WidthRequest="14" HeightRequest="14" />
+                                        <HorizontalStackLayout
+                                            Spacing="2"
+                                            BindableLayout.ItemsSource="{Binding Stars}">
+
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate>
+                                                    <Image
+                                                        Source="{Binding .}"
+                                                        WidthRequest="14"
+                                                        HeightRequest="14" />
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+
                                         </HorizontalStackLayout>
                                     </HorizontalStackLayout>
 

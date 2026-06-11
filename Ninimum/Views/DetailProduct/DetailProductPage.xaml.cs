@@ -201,6 +201,6 @@ public partial class DetailProductPage : BasePage
     {
         await AnimateElementScaleDown(sender as VisualElement);
 
-        await AppNavigatorService.NavigateTo(nameof(ProductReviews));
+        await AppNavigatorService.NavigateTo( $"{nameof(ProductReviews)}?productId={viewModel.ProductId}");
     }
 }

@@ -17,6 +17,8 @@ namespace Ninimum.Models.Dto
         public string brand { get; set; }
 
         public bool liked { get; set; }
+        public double? average_rating { get; set; }
+        public int? review_count { get; set; }
 
         public double? price { get; set; }
         public double? subscription_price { get; set; }

@@ -32,7 +32,7 @@ namespace Api.Services
         private const string GET_BANNER_LIST = $"{BASE_URL}banner/getBannerList";
         private const string GET_PRODUCT_DETAIL = $"{BASE_URL}product/getProductDetail";
         private const string GET_SIMILAR_PRODUCT_LIST = $"{BASE_URL}product/getSimilarProductList";
-        
+        private const string GET_PRODUCT_REVIEW_LIST = $"{BASE_URL}review/getReviewList";
         #endregion
 
         public UserApiService(RestClient client)
@@ -462,6 +462,39 @@ namespace Api.Services
                 if (!string.IsNullOrWhiteSpace(receivedData))
                 {
                     var deserializedResponse = JsonConvert.DeserializeObject<ProductResponse>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<ReviewProductResponse> GetProductReviewList(ReviewListRequest data)
+        {
+            var response = new ReviewProductResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(GET_PRODUCT_REVIEW_LIST, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<ReviewProductResponse>(receivedData);
                     if (deserializedResponse != null)
                     {
                         return deserializedResponse;

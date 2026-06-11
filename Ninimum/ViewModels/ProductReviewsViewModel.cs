@@ -1,29 +1,70 @@
 using System.Collections.ObjectModel;
 using System.Windows.Input;
+using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using Models.Requests;
+using Models.Responses;
 using Ninimum.Models;
+using Ninimum.Models.Dto;
+using Ninimum.Services;
+using Utils;
 
 namespace Ninimum.ViewModels;
 
+[QueryProperty(nameof(ProductId), "productId")]
 public partial class ProductReviewsViewModel : ObservableObject
 {
+    private readonly UserApiService apiService;
+    private readonly AppControl appControl;
+
     private int _quantity = 1;
 
-    [ObservableProperty] private ICommand backCommand;
-    [ObservableProperty] private ICommand filterTapCommand;
-    [ObservableProperty] private ICommand applyFilterCommand;
-    [ObservableProperty] private ICommand selectSortCommand;
-    [ObservableProperty] private ICommand increaseCommand;
-    [ObservableProperty] private ICommand decreaseCommand;
+    [ObservableProperty] private int productId;
+    [ObservableProperty] private bool isLoading;
 
-    [ObservableProperty] private ObservableCollection<string> buyerPhotos;
-    [ObservableProperty] private ObservableCollection<ProductReviewItem> reviews;
-    [ObservableProperty] private ObservableCollection<ProductReviewItem> allReviews;
+    [ObservableProperty]
+    private ICommand backCommand;
 
-    [ObservableProperty] private bool isSortNewestFirst = true;
-    [ObservableProperty] private bool isSortRatingHighFirst;
-    [ObservableProperty] private bool isSortRatingLowFirst;
-    [ObservableProperty] private bool isPhotoOnly;
+    [ObservableProperty]
+    private ICommand filterTapCommand;
+
+    [ObservableProperty]
+    private ICommand applyFilterCommand;
+
+    [ObservableProperty]
+    private ICommand selectSortCommand;
+
+    [ObservableProperty]
+    private ICommand increaseCommand;
+
+    [ObservableProperty]
+    private ICommand decreaseCommand;
+
+    [ObservableProperty]
+    private ICommand previewImageCommand;
+
+    public event Action<string>? ImagePreviewRequested;
+
+    [ObservableProperty]
+    private ObservableCollection<string> buyerPhotos;
+
+    [ObservableProperty]
+    private ObservableCollection<ProductReviewItem> reviews;
+
+    [ObservableProperty]
+    private ObservableCollection<ProductReviewItem> allReviews;
+
+    [ObservableProperty]
+    private bool isSortNewestFirst = true;
+
+    [ObservableProperty]
+    private bool isSortRatingHighFirst;
+
+    [ObservableProperty]
+    private bool isSortRatingLowFirst;
+
+    [ObservableProperty]
+    private bool isPhotoOnly;
 
     public event Action? OpenFilterRequested;
     public event Action? BackRequested;
@@ -43,7 +84,6 @@ public partial class ProductReviewsViewModel : ObservableObject
 
     public string BuyerPhotosCountText => $"{BuyerPhotos?.Count ?? 0} ta";
 
-    // alias properties for XAML
     public bool IsNewestSelected
     {
         get => IsSortNewestFirst;
@@ -83,12 +123,16 @@ public partial class ProductReviewsViewModel : ObservableObject
         }
     }
 
-    public ProductReviewsViewModel()
+    public ProductReviewsViewModel(AppControl appControl, UserApiService apiService)
     {
+        this.appControl = appControl;
+        this.apiService = apiService;
+
         BackCommand = new Command(OnBackTapped);
         FilterTapCommand = new Command(OnFilterTapped);
         ApplyFilterCommand = new Command(OnApplyFilterTapped);
         SelectSortCommand = new Command<string>(OnSelectSort);
+        PreviewImageCommand = new Command<string>(OnPreviewImageTapped);
 
         IncreaseCommand = new Command(() =>
         {
@@ -101,44 +145,25 @@ public partial class ProductReviewsViewModel : ObservableObject
                 Quantity--;
         });
 
-        BuyerPhotos = new ObservableCollection<string>
-        {
-            "review1.png",
-            "review2.png",
-            "review3.png",
-            "review4.png",
-            "review5.png"
-        };
+        BuyerPhotos = new ObservableCollection<string>();
+        Reviews = new ObservableCollection<ProductReviewItem>();
+        AllReviews = new ObservableCollection<ProductReviewItem>();
+    }
 
-        AllReviews = new ObservableCollection<ProductReviewItem>
-        {
-            new ProductReviewItem
-            {
-                CustomerName = "Eshmatov Toshmat",
-                ReviewDate = "09.03.2026",
-                ReviewDateValue = new DateTime(2026, 3, 9),
-                Rating = 5,
-                ReviewText = "Mahsulotga va Ninimum.uz tashkilotchilariga raxmat. Sifatli mahsulot tez va arzonga yetib keldi. Sizlarga ham Ninimum.uzni tavsiya qilaman. Bundan buyon faqat Ninimum.uzdan mahsulotlarni sotib olaman.",
-                ReplyText = "Hurmatli Eshmatov Toshmat, xaridingiz uchun sizga o’z jamoamiz nomidan minnatdorchilik bildiramiz. Kelgusida bundanda yaxshiroq ishlashga harakat qilamiz.",
-                Photos = new ObservableCollection<string>
-                {
-                    "review2.png",
-                    "review3.png"
-                }
-            },
-            new ProductReviewItem
-            {
-                CustomerName = "Mamatov Mamat",
-                ReviewDate = "08.03.2026",
-                ReviewDateValue = new DateTime(2026, 3, 8),
-                Rating = 4,
-                ReviewText = "Maxsumotni oldim. Hammasi yaxshi, menga yoqdi.",
-                ReplyText = "Hurmatli Mamatov Mamat, xaridingiz uchun sizga o’z jamoamiz nomidan minnatdorchilik bildiramiz. Kelgusida bundanda yaxshiroq ishlashga harakat qilamiz.",
-                Photos = new ObservableCollection<string>()
-            }
-        };
+    private void OnPreviewImageTapped(string imageUrl)
+    {
+        if (string.IsNullOrWhiteSpace(imageUrl))
+            return;
 
-        Reviews = new ObservableCollection<ProductReviewItem>(AllReviews);
+        ImagePreviewRequested?.Invoke(imageUrl);
+    }
+
+    partial void OnProductIdChanged(int value)
+    {
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            await LoadReviewsAsync();
+        });
     }
 
     partial void OnBuyerPhotosChanged(ObservableCollection<string> value)
@@ -159,6 +184,75 @@ public partial class ProductReviewsViewModel : ObservableObject
     partial void OnIsSortRatingLowFirstChanged(bool value)
     {
         OnPropertyChanged(nameof(IsRatingLowSelected));
+    }
+
+    private async Task LoadReviewsAsync()
+    {
+        try
+        {
+            BuyerPhotos.Clear();
+            AllReviews.Clear();
+            Reviews.Clear();
+
+            IsLoading = true;
+            ReviewProductResponse response = await apiService.GetProductReviewList(
+                    new ReviewListRequest
+                    {
+                        product_id = ProductId,
+                        pageSize = 100,
+                        offset = 0
+                    });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+                return;
+
+            if (response.resultData == null)
+                return;
+
+            foreach (ReviewDto review in response.resultData)
+            {
+                ProductReviewItem item = new()
+                {
+                    CustomerName = "Xaridor",
+                    ReviewDate = review.created_at?.ToString("dd.MM.yyyy") ?? "",
+                    ReviewDateValue = review.created_at ?? DateTime.MinValue,
+                    Rating = review.rating ?? 0,
+                    ReviewText = review.comment ?? "",
+                    ReplyText = "",
+                    Photos = new ObservableCollection<string>()
+                };
+
+                if (review.images != null)
+                {
+                    foreach (var image in review.images)
+                    {
+                        if (string.IsNullOrWhiteSpace(image.image_url))
+                            continue;
+
+                        item.Photos.Add(image.image_url);
+
+                        if (!BuyerPhotos.Contains(image.image_url))
+                        {
+                            BuyerPhotos.Add(image.image_url);
+                        }
+                    }
+                }
+
+                AllReviews.Add(item);
+            }
+
+            Reviews = new ObservableCollection<ProductReviewItem>(AllReviews.OrderByDescending(x => x.ReviewDateValue));
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex);
+        }
+        finally
+        { 
+            IsLoading = false;
+        }
+
+        OnPropertyChanged(nameof(BuyerPhotosCountText));
     }
 
     private void OnBackTapped()

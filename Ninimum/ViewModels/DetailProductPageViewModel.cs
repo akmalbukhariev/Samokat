@@ -39,12 +39,13 @@ public partial class DetailProductPageViewModel : ObservableObject
     [ObservableProperty] private ObservableCollection<MainProductCardItem> similarProducts = new();
 
     [ObservableProperty] private ObservableCollection<ProductImageDetailInfo> productImages = new();
-
+    [ObservableProperty] private ObservableCollection<string> stars = new();
     [ObservableProperty] private int currentImageIndex;
 
     [ObservableProperty] private string productTitle = ".......";
 
     [ObservableProperty] private string stockText = ".......";
+    [ObservableProperty] private int ratingStarCount = 0;
 
     [ObservableProperty] private string rating = ".......";
 
@@ -242,6 +243,19 @@ public partial class DetailProductPageViewModel : ObservableObject
             Description = product.description ?? "";
             ProductLiked = product.liked;
             StockText = $"Omborda {product.stock_quantity ?? 0} dona mavjud"; 
+            Rating = (product.average_rating ?? 0).ToString("0.0");
+            RatingStarCount = (int)Math.Round(product.average_rating ?? 0);
+            Stars.Clear();
+
+            int filled = (int)Math.Round((double)product.average_rating);
+
+            for (int i = 0; i < 5; i++)
+            {
+                Stars.Add(i < filled
+                    ? "star.png"
+                    : "star_gray.png");
+            }
+            ReviewText = $"{product.review_count} sharhlar";
             SubscriptionPrice = $"{product.subscription_price?.ToString("N0").Replace(",", " ") ?? "0"} so’m"; 
             RegularPrice = $"{product.price?.ToString("N0").Replace(",", " ") ?? "0"} so’m";
 

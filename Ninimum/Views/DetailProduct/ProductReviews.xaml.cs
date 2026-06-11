@@ -13,6 +13,7 @@ public partial class ProductReviews : BasePage
         BindingContext = viewModel;
 
         Loaded += ProductReviews_Loaded;
+        viewModel.ImagePreviewRequested += ViewModel_ImagePreviewRequested;
 
         Shell.SetTabBarIsVisible(this, false);
     }
@@ -31,6 +32,11 @@ public partial class ProductReviews : BasePage
             viewModel.OpenFilterRequested += ViewModel_OpenFilterRequested;
             viewModel.BackRequested += ViewModel_BackRequested;
         }
+    }
+
+    private async void ViewModel_ImagePreviewRequested(string imageUrl)
+    {
+        await ImagePreview.ShowAsync(imageUrl);
     }
 
     private async void ViewModel_OpenFilterRequested()
