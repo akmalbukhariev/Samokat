@@ -10,22 +10,17 @@ using Ninimum.Models;
 using Ninimum.Models.Dto;
 using Ninimum.Models.Main;
 using Ninimum.Services;
+using Ninimum.Views.DetailProduct;
 using Utils;
 
 namespace Ninimum.ViewModels;
 
 public partial class SearchPageViewModel : ObservableObject
 {
-    [ObservableProperty] private ICommand filterTapCommand;
-    [ObservableProperty] private ICommand applyFilterCommand;
-    [ObservableProperty] private ICommand selectSortCommand;
-    [ObservableProperty] private ObservableCollection<MainProductCardItem> products;
-
+    #region Properties
     [ObservableProperty] private string minPrice = "";
     [ObservableProperty] private string maxPrice = "";
-
     [ObservableProperty] private string searchText = "";
-
     [ObservableProperty] private bool isSortCheapFirst = true;
     [ObservableProperty] private bool isSortExpensiveFirst;
     [ObservableProperty] private bool isSortNewestFirst;
@@ -33,33 +28,50 @@ public partial class SearchPageViewModel : ObservableObject
     [ObservableProperty] private bool isLoading;
     [ObservableProperty] private bool isRefreshing;
     [ObservableProperty] private bool isSearching;
-
+    [ObservableProperty] private bool showLikedView;
+    [ObservableProperty] private bool isLikedViewLiked;
+    [ObservableProperty] private bool showCartView;
+    [ObservableProperty] private bool showRecentSearchList = true;
+    [ObservableProperty] private bool showFilterSearchList = false;
+    [ObservableProperty] private bool showProductResult = false;
+    [ObservableProperty] private ObservableCollection<MainProductCardItem> products;
+    [ObservableProperty] private ObservableCollection<SearchHistoryItem> historyList = new();
     public event Action? OpenFilterRequested;
     public event Action? CloseFilterRequested;
     private CancellationTokenSource? searchCts;
-
     private int offset = 0;
     private const int PageSize = 10;
     private bool hasMoreItems = true;
     private bool isRequestRunning = false;
+    #endregion
 
-    [ObservableProperty] private bool showRecentSearchList = true;
-    [ObservableProperty] private bool showFilterSearchList = false;
-    [ObservableProperty] private bool showProductResult = false;
-
-    [ObservableProperty] private ObservableCollection<SearchHistoryItem> historyList = new();
-
+    #region Commands
+    [ObservableProperty] private ICommand filterTapCommand;
+    [ObservableProperty] private ICommand applyFilterCommand;
+    [ObservableProperty] private ICommand selectSortCommand;
+    [ObservableProperty] private ICommand clickProductCommand;
+    [ObservableProperty] private ICommand clickCartCommand;
+    [ObservableProperty] private ICommand likeCommand;
+    #endregion
+     
     private readonly HashSet<long> loadedProductIds = new();
     private readonly UserApiService apiService;
     private readonly AppStoreService storeService;
-    public SearchPageViewModel(UserApiService apiService, AppStoreService storeService)
+    private readonly AppControl appControl;
+    public SearchPageViewModel(AppControl appControl,UserApiService apiService, AppStoreService storeService)
     {
+        this.appControl = appControl;
         this.apiService = apiService;
         this.storeService = storeService;
 
         FilterTapCommand = new Command(OnFilterTapped);
         ApplyFilterCommand = new Command(OnApplyFilterTapped);
         SelectSortCommand = new Command<string>(OnSelectSort);
+
+        ClickProductCommand = new Command<MainProductCardItem>(ProductClicked);
+        ClickCartCommand = new Command<MainProductCardItem>(CartClicked);
+
+        LikeCommand = new Command<MainProductCardItem>(ProductLiked);
 
         LoadMoreCommand = new AsyncRelayCommand(LoadMoreAsync);
         RefreshCommand = new AsyncRelayCommand(RefreshAsync);
@@ -218,7 +230,7 @@ public partial class SearchPageViewModel : ObservableObject
     private async void OnClickHistory(SearchHistoryItem item)
     {
         if (item == null)
-        return;
+            return;
 
         SearchText = item.SearchedText;
 
@@ -233,7 +245,9 @@ public partial class SearchPageViewModel : ObservableObject
         ShowFilterSearchList = false;
         ShowProductResult = true;
 
+        IsSearching = true;
         await SearchProductsAsync(SearchText, CancellationToken.None);
+        IsSearching = false;
     }
 
     private void OnRemoveHistory(SearchHistoryItem item)
@@ -258,6 +272,7 @@ public partial class SearchPageViewModel : ObservableObject
 
             var request = new SearchProductParam
             {
+                user_id = (int)appControl.userDto.id,
                 keyword = keyword,
                 pageSize = PageSize,
                 offset = offset,
@@ -307,6 +322,93 @@ public partial class SearchPageViewModel : ObservableObject
         }
     }
 
+    private async void ProductLiked(MainProductCardItem product)
+    {
+        if (product == null)
+            return;
+
+        bool oldLiked = product.Liked;
+
+        try
+        {
+            product.Liked = !oldLiked;
+
+            Response response;
+
+            if (!oldLiked)
+            {
+                response = await apiService.AddFavoriteProduct(
+                    new AddFavoriteRequest
+                    {
+                        user_id = (int)appControl.userDto.id,
+                        product_id = product.ProductId
+                    });
+            }
+            else
+            {
+                response = await apiService.DeleteFavoriteProduct(
+                    new DeleteFavoriteRequest
+                    {
+                        user_id = (int)appControl.userDto.id,
+                        product_id = product.ProductId
+                    });
+            }
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                product.Liked = oldLiked;
+                return;
+            }
+
+            IsLikedViewLiked = product.Liked;
+            ShowLikedView = true;
+        }
+        catch
+        {
+            product.Liked = oldLiked;
+        }
+    }
+
+    private async void ProductClicked(MainProductCardItem product)
+    {
+        await AppNavigatorService.NavigateTo($"{nameof(DetailProductPage)}?productId={product.ProductId}");
+    }
+
+    private async void CartClicked(MainProductCardItem product)
+    {
+        if (product == null || product.IsCartLoading)
+            return;
+
+        try
+        {
+            product.IsCartLoading = true;
+
+            Response response = await apiService.AddCartProduct(
+                new AddCartRequest
+                {
+                    user_id = (int)appControl.userDto.id,
+                    product_id = product.ProductId,
+                    quantity = 1
+                });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                await AlertService.ShowAlertAsync("Xatolik", response.resultMsg);
+                return;
+            }
+
+            ShowCartView = true;
+        }
+        catch
+        {
+            await AlertService.ShowAlertAsync("Xatolik", "Mahsulotni savatchaga qo’shib bo’lmadi.");
+        }
+        finally
+        {
+            product.IsCartLoading = false;
+        }
+    }
+   
     private void OnFilterTapped()
     {
         OpenFilterRequested?.Invoke();
@@ -315,7 +417,7 @@ public partial class SearchPageViewModel : ObservableObject
     private async void OnApplyFilterTapped()
     {
         CloseFilterRequested?.Invoke();
-        
+
         searchCts?.Cancel();
 
         AddSearchHistory(SearchText);
@@ -329,7 +431,9 @@ public partial class SearchPageViewModel : ObservableObject
         ShowFilterSearchList = false;
         ShowProductResult = true;
 
+        IsSearching = true;
         await SearchProductsAsync(SearchText, CancellationToken.None);
+        IsSearching = false;
     }
 
     private void OnSelectSort(string sortType)
@@ -390,6 +494,8 @@ public partial class SearchPageViewModel : ObservableObject
             Price = item.price?.ToString("N0").Replace(",", " ") ?? "0",
             Subscription_price = item.subscription_price?.ToString("N0").Replace(",", " ") ?? "0",
             Title = item.name ?? "",
+            Liked = item.liked,
+            ProductId = (int)(item.id ?? 0),
             Rating = 4.8,
             ReviewCount = 301,
             ActionText = "+ Ertaga",

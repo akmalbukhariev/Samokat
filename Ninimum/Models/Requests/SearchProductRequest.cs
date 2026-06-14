@@ -2,6 +2,7 @@ namespace Models.Requests;
 
 public class SearchProductParam : PageSizeRequest
 {
+    public int user_id { get; set; }
     public string keyword { get; set; }
     public double? minPrice { get; set; }
     public double? maxPrice { get; set; }

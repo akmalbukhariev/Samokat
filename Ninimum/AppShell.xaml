@@ -7,7 +7,7 @@
     xmlns:view="clr-namespace:Ninimum.Views.Children"
     xmlns:main="clr-namespace:Ninimum.Views.Main"
     xmlns:favorite="clr-namespace:Ninimum.Views.FavoriteProduct"
-    xmlns:basket="clr-namespace:Ninimum.Views.BasketProduct"
+    xmlns:cart="clr-namespace:Ninimum.Views.Cart"
     xmlns:profile="clr-namespace:Ninimum.Views.Profile"
     Shell.FlyoutBehavior="Disabled"
     Shell.TabBarBackgroundColor="White"
@@ -46,7 +46,7 @@
                          <On Platform="iOS" Value="ic_basket.png" />
                     </OnPlatform>
                </Tab.Icon>
-               <ShellContent ContentTemplate="{DataTemplate basket:BasketProductPage}"
+               <ShellContent ContentTemplate="{DataTemplate cart:CartPage}"
                               Shell.NavBarIsVisible="False" />
           </Tab>
 

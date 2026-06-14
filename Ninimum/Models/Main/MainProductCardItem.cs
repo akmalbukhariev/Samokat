@@ -19,4 +19,11 @@ public partial class MainProductCardItem : ObservableObject
     [ObservableProperty] private int productId;
 
     [ObservableProperty] private string actionText = "Ertaga";
+
+    private bool isCartLoading;
+    public bool IsCartLoading
+    {
+        get => isCartLoading;
+        set => SetProperty(ref isCartLoading, value);
+    }
 }

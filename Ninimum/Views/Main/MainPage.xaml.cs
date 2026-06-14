@@ -5,11 +5,11 @@ using Ninimum.Views.Search;
 namespace Ninimum.Views.Main;
 
 public partial class MainPage : BasePage
-{
+{   
     private readonly MainPageViewModel viewModel;
     private bool _isStickyVisible = false;
     private bool isFirstLoaded = true;
-
+    
     public MainPage(MainPageViewModel vm)
     {
         InitializeComponent();
@@ -23,7 +23,7 @@ public partial class MainPage : BasePage
         InlineSearchBarView.SearchClicked += SearchClicked;
         viewModel.PropertyChanged += ViewModel_PropertyChanged;
     }
-
+    
     protected override async void OnAppearing()
     {
         base.OnAppearing();
@@ -34,7 +34,7 @@ public partial class MainPage : BasePage
             await viewModel.LoadInitialAsync();
         }
     }
-
+     
     private async void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
     {
         if (e.PropertyName == nameof(viewModel.ShowLikedView) && viewModel.ShowLikedView)
@@ -42,18 +42,24 @@ public partial class MainPage : BasePage
             await likeView.DisplayAsAnimation();
             viewModel.ShowLikedView = false;
         }
-    }
 
+        if (e.PropertyName == nameof(viewModel.ShowCartView) && viewModel.ShowCartView)
+        {
+            await cartView.DisplayAsAnimation();
+            viewModel.ShowCartView = false;
+        }
+    }
+    
     private async void LeftMenuClicked()
     {
         await AppNavigatorService.NavigateTo(nameof(MenuPage));
     }
-
+    
     private async void SearchClicked()
     { 
         await AppNavigatorService.NavigateTo(nameof(SearchPage));
     }
-
+    
     private void MainCollectionView_Scrolled(object sender, ItemsViewScrolledEventArgs e)
     {
         double threshold = 100; // adjust if needed

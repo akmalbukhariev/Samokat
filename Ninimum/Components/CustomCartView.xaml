@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Ninimum.Components.CustomCartView"
+    IsVisible="False">
+
+    <Border
+        x:Name="borderContainer"
+        Opacity="0.85"
+        StrokeThickness="0"
+        BackgroundColor="Black"
+        Padding="0"
+        WidthRequest="76"
+        HeightRequest="60">
+
+        <Border.StrokeShape>
+            <RoundRectangle CornerRadius="8" />
+        </Border.StrokeShape>
+
+        <Grid ColumnDefinitions="Auto,Auto"
+              ColumnSpacing="3"
+              HorizontalOptions="Center"
+              VerticalOptions="Center">
+
+            <Label
+                Grid.Column="0"
+                Text="+"
+                TextColor="White"
+                FontSize="32"
+                FontFamily="{StaticResource FontSFBold}"
+                FontAttributes="Bold"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center" />
+
+            <Image
+                Grid.Column="1"
+                Source="ic_basket1.png"
+                WidthRequest="30"
+                HeightRequest="30"
+                Aspect="AspectFit"
+                VerticalOptions="Center" />
+        </Grid>
+    </Border>
+</ContentView>

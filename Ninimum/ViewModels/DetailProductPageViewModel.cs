@@ -18,7 +18,7 @@ namespace Ninimum.ViewModels;
 
 [QueryProperty(nameof(ProductId), "productId")]
 public partial class DetailProductPageViewModel : ObservableObject
-{   
+{
     #region Properties
     [ObservableProperty] private long productId;
     [ObservableProperty] private bool productLiked;
@@ -30,10 +30,10 @@ public partial class DetailProductPageViewModel : ObservableObject
     [ObservableProperty] private ImageSource? previewImageSource;
     [ObservableProperty] private bool showImagePreview;
     private readonly HashSet<long> loadedProductIds = new();
-
     [ObservableProperty] private bool isLoading;
     [ObservableProperty] private bool isRefreshing;
     [ObservableProperty] private bool showLikedView;
+    [ObservableProperty] private bool showCartView;
     [ObservableProperty] private bool isLikedViewLiked;
 
     [ObservableProperty] private ObservableCollection<MainProductCardItem> similarProducts = new();
@@ -41,7 +41,6 @@ public partial class DetailProductPageViewModel : ObservableObject
     [ObservableProperty] private ObservableCollection<ProductImageDetailInfo> productImages = new();
     [ObservableProperty] private ObservableCollection<string> stars = new();
     [ObservableProperty] private int currentImageIndex;
-
     [ObservableProperty] private string productTitle = ".......";
 
     [ObservableProperty] private string stockText = ".......";
@@ -64,26 +63,27 @@ public partial class DetailProductPageViewModel : ObservableObject
     [ObservableProperty] private string description = ".......";
 
     [ObservableProperty] private int quantity = 1;
+    [ObservableProperty] private string bottomPrice = "0 so’m";
     #endregion
 
     #region Commands
     [ObservableProperty] private ICommand likeSimilarProductCommand;
     [ObservableProperty] private ICommand clickProductCommand;
-    [ObservableProperty] private ICommand clickTomorrowCommand;
+    [ObservableProperty] private ICommand clickCartCommand;
     [ObservableProperty] private IAsyncRelayCommand loadMoreCommand;
     [ObservableProperty] private IAsyncRelayCommand refreshCommand;
     #endregion
-        
+
     private readonly AppControl appControl;
     private readonly UserApiService apiService;
     public DetailProductPageViewModel(AppControl appControl, UserApiService apiService)
     {
         this.appControl = appControl;
         this.apiService = apiService;
-  
+
         LikeSimilarProductCommand = new Command<MainProductCardItem>(SimilarProductLiked);
         ClickProductCommand = new Command<MainProductCardItem>(ProductClicked);
-        ClickTomorrowCommand = new Command<MainProductCardItem>(TomorrowClicked);
+        ClickCartCommand = new Command<MainProductCardItem>(CartClicked);
 
         LoadMoreCommand = new AsyncRelayCommand(LoadMoreAsync);
         RefreshCommand = new AsyncRelayCommand(RefreshAsync);
@@ -143,10 +143,10 @@ public partial class DetailProductPageViewModel : ObservableObject
     {
         await AppNavigatorService.NavigateTo($"{nameof(DetailProductPage)}?productId={product.ProductId}");
     }
-    
-    private async void TomorrowClicked(MainProductCardItem product)
+
+    private async void CartClicked(MainProductCardItem product)
     {
-        await AppNavigatorService.NavigateTo(nameof(FormalizationPage));
+        //await AppNavigatorService.NavigateTo(nameof(FormalizationPage));
     }
 
     partial void OnProductIdChanged(long value)
@@ -242,7 +242,7 @@ public partial class DetailProductPageViewModel : ObservableObject
             ProductTitle = product.name ?? "";
             Description = product.description ?? "";
             ProductLiked = product.liked;
-            StockText = $"Omborda {product.stock_quantity ?? 0} dona mavjud"; 
+            StockText = $"Omborda {product.stock_quantity ?? 0} dona mavjud";
             Rating = (product.average_rating ?? 0).ToString("0.0");
             RatingStarCount = (int)Math.Round(product.average_rating ?? 0);
             Stars.Clear();
@@ -256,16 +256,16 @@ public partial class DetailProductPageViewModel : ObservableObject
                     : "star_gray.png");
             }
             ReviewText = $"{product.review_count} sharhlar";
-            SubscriptionPrice = $"{product.subscription_price?.ToString("N0").Replace(",", " ") ?? "0"} so’m"; 
+            SubscriptionPrice = $"{product.subscription_price?.ToString("N0").Replace(",", " ") ?? "0"} so’m";
             RegularPrice = $"{product.price?.ToString("N0").Replace(",", " ") ?? "0"} so’m";
-
+            BottomPrice = SubscriptionPrice;
             ProductImages.Clear();
 
             if (product.images != null && product.images.Count > 0)
             {
                 foreach (var image in product.images.OrderBy(x => x.sort_order ?? 0))
                 {
-                    ProductImages.Add(new ProductImageDetailInfo( image.image_url ?? "no_image.png"));
+                    ProductImages.Add(new ProductImageDetailInfo(image.image_url ?? "no_image.png"));
                 }
             }
             else
@@ -369,12 +369,9 @@ public partial class DetailProductPageViewModel : ObservableObject
 
         return new MainProductCardItem
         {
-            Price = item.price?.ToString("N0")
-                .Replace(",", " ") ?? "0",
+            Price = item.price?.ToString("N0").Replace(",", " ") ?? "0",
 
-            Subscription_price =
-                item.subscription_price?.ToString("N0")
-                    .Replace(",", " ") ?? "0",
+            Subscription_price = item.subscription_price?.ToString("N0").Replace(",", " ") ?? "0",
 
             ProductId = (int)item.id,
 
@@ -399,5 +396,52 @@ public partial class DetailProductPageViewModel : ObservableObject
     {
         await LoadProductDetailAsync();
         await LoadSimilarProductsAsync(true);
+    }
+
+    public async Task<bool> AddProductToCartAsync()
+    {
+        try
+        {
+            IsLoading = true;
+
+            Response response = await apiService.AddCartProduct(
+                new AddCartRequest
+                {
+                    user_id = (int)appControl.userDto.id,
+                    product_id = (int)ProductId,
+                    quantity = Quantity
+                });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                await AlertService.ShowAlertAsync("Xatolik", response.resultMsg);
+                return false;
+            }
+
+            ShowCartView = true;
+            return true;
+        }
+        catch
+        {
+            await AlertService.ShowAlertAsync("Xatolik", "Mahsulotni savatchaga qo’shib bo’lmadi.");
+            return false;
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
+    public void IncreaseQuantity()
+    {
+        Quantity++;
+    }
+
+    public void DecreaseQuantity()
+    {
+        if (Quantity <= 1)
+            return;
+
+        Quantity--;
     }
 }

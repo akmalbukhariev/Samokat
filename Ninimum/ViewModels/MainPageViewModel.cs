@@ -26,6 +26,7 @@ public partial class MainPageViewModel : ObservableObject
     [ObservableProperty] private bool isLoading;
     [ObservableProperty] private bool showLikedView;
     [ObservableProperty] private bool isLikedViewLiked;
+    [ObservableProperty] private bool showCartView;
     [ObservableProperty] private bool isRefreshing;
     [ObservableProperty] private ObservableCollection<AdBannerItem> adBanners;
     [ObservableProperty] private ObservableCollection<MainProductCardItem> products;
@@ -37,7 +38,7 @@ public partial class MainPageViewModel : ObservableObject
     [ObservableProperty] private ICommand menuCommand;
     [ObservableProperty] private ICommand purchaseBannerCommand;
     [ObservableProperty] private ICommand clickProductCommand;
-    [ObservableProperty] private ICommand clickTomorrowCommand;
+    [ObservableProperty] private ICommand clickCartCommand;
     [ObservableProperty] private ICommand likeCommand;
     [ObservableProperty] private IAsyncRelayCommand loadMoreCommand;
     [ObservableProperty] private IAsyncRelayCommand refreshCommand;
@@ -56,7 +57,7 @@ public partial class MainPageViewModel : ObservableObject
         NotificationTapCommand = new Command(OnNotificationTapped);
         PurchaseBannerCommand = new Command<AdBannerItem>(OnPurchaseBanner);
         ClickProductCommand = new Command<MainProductCardItem>(ProductClicked);
-        ClickTomorrowCommand = new Command<MainProductCardItem>(TomorrowClicked);
+        ClickCartCommand = new Command<MainProductCardItem>(CartClicked);
 
         LikeCommand = new Command<MainProductCardItem>(ProductLiked);
         LoadMoreCommand = new AsyncRelayCommand(LoadMoreAsync);
@@ -222,6 +223,8 @@ public partial class MainPageViewModel : ObservableObject
 
     private async Task RefreshAsync()
     {
+        AppVibrationService.Click();
+
         await LoadBannersAsync();
         await LoadProductsAsync(isRefresh: true);
     }
@@ -278,9 +281,39 @@ public partial class MainPageViewModel : ObservableObject
         await AppNavigatorService.NavigateTo($"{nameof(DetailProductPage)}?productId={product.ProductId}");
     }
 
-    private async void TomorrowClicked(MainProductCardItem product)
+    private async void CartClicked(MainProductCardItem product)
     {
-        await AppNavigatorService.NavigateTo(nameof(FormalizationPage));
+        if (product == null || product.IsCartLoading)
+            return;
+
+        try
+        {
+            product.IsCartLoading = true;
+
+            Response response = await apiService.AddCartProduct(
+                new AddCartRequest
+                {
+                    user_id = (int)appControl.userDto.id,
+                    product_id = product.ProductId,
+                    quantity = 1
+                });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                await AlertService.ShowAlertAsync("Xatolik", response.resultMsg);
+                return;
+            }
+
+            ShowCartView = true;
+        }
+        catch
+        {
+            await AlertService.ShowAlertAsync("Xatolik", "Mahsulotni savatchaga qo’shib bo’lmadi.");
+        }
+        finally
+        {
+            product.IsCartLoading = false;
+        }
     }
 
     private async void OnNotificationTapped()

@@ -1,10 +1,10 @@
 using System.Windows.Input;
 
-namespace Ninimum.Views.BasketProduct;
+namespace Ninimum.Views.Cart;
 
-public partial class BasketCartItemView : ContentView
+public partial class CartItemView : ContentView
 {
-    public BasketCartItemView()
+    public CartItemView()
     {
         InitializeComponent();
         UpdateCheckIcon();
@@ -14,7 +14,7 @@ public partial class BasketCartItemView : ContentView
         BindableProperty.Create(
             nameof(ProductImageSource),
             typeof(ImageSource),
-            typeof(BasketCartItemView),
+            typeof(CartItemView),
             default(ImageSource));
 
     public ImageSource ProductImageSource
@@ -27,7 +27,7 @@ public partial class BasketCartItemView : ContentView
         BindableProperty.Create(
             nameof(Title),
             typeof(string),
-            typeof(BasketCartItemView),
+            typeof(CartItemView),
             string.Empty);
 
     public string Title
@@ -36,37 +36,37 @@ public partial class BasketCartItemView : ContentView
         set => SetValue(TitleProperty, value);
     }
 
-    public static readonly BindableProperty OldPriceProperty =
+    public static readonly BindableProperty PriceProperty =
         BindableProperty.Create(
-            nameof(OldPrice),
+            nameof(Price),
             typeof(string),
-            typeof(BasketCartItemView),
+            typeof(CartItemView),
             string.Empty);
 
-    public string OldPrice
+    public string Price
     {
-        get => (string)GetValue(OldPriceProperty);
-        set => SetValue(OldPriceProperty, value);
+        get => (string)GetValue(PriceProperty);
+        set => SetValue(PriceProperty, value);
     }
 
-    public static readonly BindableProperty NewPriceProperty =
+    public static readonly BindableProperty SubscriptionPriceProperty =
         BindableProperty.Create(
-            nameof(NewPrice),
+            nameof(SubscriptionPrice),
             typeof(string),
-            typeof(BasketCartItemView),
+            typeof(CartItemView),
             string.Empty);
 
-    public string NewPrice
+    public string SubscriptionPrice
     {
-        get => (string)GetValue(NewPriceProperty);
-        set => SetValue(NewPriceProperty, value);
+        get => (string)GetValue(SubscriptionPriceProperty);
+        set => SetValue(SubscriptionPriceProperty, value);
     }
 
     public static readonly BindableProperty IsCheckedProperty =
         BindableProperty.Create(
             nameof(IsChecked),
             typeof(bool),
-            typeof(BasketCartItemView),
+            typeof(CartItemView),
             false,
             BindingMode.TwoWay,
             propertyChanged: OnIsCheckedChanged);
@@ -81,7 +81,7 @@ public partial class BasketCartItemView : ContentView
         BindableProperty.Create(
             nameof(CheckIconSource),
             typeof(string),
-            typeof(BasketCartItemView),
+            typeof(CartItemView),
             "ic_uncheck.png");
 
     public string CheckIconSource
@@ -94,7 +94,7 @@ public partial class BasketCartItemView : ContentView
         BindableProperty.Create(
             nameof(Quantity),
             typeof(int),
-            typeof(BasketCartItemView),
+            typeof(CartItemView),
             1,
             BindingMode.TwoWay);
 
@@ -108,7 +108,7 @@ public partial class BasketCartItemView : ContentView
         BindableProperty.Create(
             nameof(QuantityChangedCommand),
             typeof(ICommand),
-            typeof(BasketCartItemView));
+            typeof(CartItemView));
 
     public ICommand QuantityChangedCommand
     {
@@ -120,7 +120,7 @@ public partial class BasketCartItemView : ContentView
         BindableProperty.Create(
             nameof(ToggleCheckedCommand),
             typeof(ICommand),
-            typeof(BasketCartItemView));
+            typeof(CartItemView));
 
     public ICommand ToggleCheckedCommand
     {
@@ -130,7 +130,7 @@ public partial class BasketCartItemView : ContentView
 
     private static void OnIsCheckedChanged(BindableObject bindable, object oldValue, object newValue)
     {
-        if (bindable is BasketCartItemView view)
+        if (bindable is CartItemView view)
             view.UpdateCheckIcon();
     }
 

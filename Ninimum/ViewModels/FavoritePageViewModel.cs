@@ -25,13 +25,14 @@ public partial class FavoritePageViewModel : ObservableObject
     private bool isRequestRunning = false;
     [ObservableProperty] private bool isLoading;
     [ObservableProperty] private bool isRefreshing;
+    [ObservableProperty] private bool showCartView;
     [ObservableProperty] private ObservableCollection<MainProductCardItem> products;
     #endregion
 
     #region Properties command
     [ObservableProperty] private ICommand likeCommand;
     [ObservableProperty] private ICommand clickProductCommand;
-    [ObservableProperty] private ICommand clickTomorrowCommand;
+    [ObservableProperty] private ICommand clickCartCommand;
     [ObservableProperty] private IAsyncRelayCommand loadMoreCommand;
     [ObservableProperty] private IAsyncRelayCommand refreshCommand;
     #endregion
@@ -46,7 +47,7 @@ public partial class FavoritePageViewModel : ObservableObject
         Products = new ObservableCollection<MainProductCardItem>();
 
         clickProductCommand = new Command<MainProductCardItem>(ProductClicked);
-        ClickTomorrowCommand = new Command<MainProductCardItem>(TomorrowClicked);
+        ClickCartCommand = new Command<MainProductCardItem>(CartClicked);
 
         LikeCommand = new Command<MainProductCardItem>(ProductLiked);
         LoadMoreCommand = new AsyncRelayCommand(LoadMoreAsync);
@@ -177,6 +178,8 @@ public partial class FavoritePageViewModel : ObservableObject
 
     private async Task RefreshAsync()
     {
+        AppVibrationService.Click();
+        
         await LoadProductsAsync(isRefresh: true);
     }
 
@@ -214,9 +217,39 @@ public partial class FavoritePageViewModel : ObservableObject
         //await AppNavigatorService.NavigateTo(nameof(DetailProductPage));
     }
 
-    private async void TomorrowClicked(MainProductCardItem product)
+    private async void CartClicked(MainProductCardItem product)
     {
-        //await AppNavigatorService.NavigateTo(nameof(FormalizationPage));
+        if (product == null || product.IsCartLoading)
+            return;
+
+        try
+        {
+            product.IsCartLoading = true;
+
+            Response response = await apiService.AddCartProduct(
+                new AddCartRequest
+                {
+                    user_id = (int)appControl.userDto.id,
+                    product_id = product.ProductId,
+                    quantity = 1
+                });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                await AlertService.ShowAlertAsync("Xatolik", response.resultMsg);
+                return;
+            }
+
+            ShowCartView = true;
+        }
+        catch
+        {
+            await AlertService.ShowAlertAsync("Xatolik", "Mahsulotni savatchaga qo’shib bo’lmadi.");
+        }
+        finally
+        {
+            product.IsCartLoading = false;
+        }
     }
 
 }

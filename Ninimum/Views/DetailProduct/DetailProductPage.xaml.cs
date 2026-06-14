@@ -53,6 +53,12 @@ public partial class DetailProductPage : BasePage
             await likeView.DisplayAsAnimation();
             viewModel.ShowLikedView = false;
         }
+
+        if (e.PropertyName == nameof(viewModel.ShowCartView) && viewModel.ShowCartView)
+        {
+            await cartView.DisplayAsAnimation();
+            viewModel.ShowCartView = false;
+        }
     }
 
     private async void Like_Tapped(object sender, TappedEventArgs e)
@@ -75,7 +81,7 @@ public partial class DetailProductPage : BasePage
             await brdLiked.ScaleTo(1.0, 100, Easing.CubicIn);
         });
     }
-    
+
     private void ProductCarousel_CurrentItemChanged(object? sender, CurrentItemChangedEventArgs e)
     {
         if (viewModel == null || _isCarouselUpdating)
@@ -201,6 +207,26 @@ public partial class DetailProductPage : BasePage
     {
         await AnimateElementScaleDown(sender as VisualElement);
 
-        await AppNavigatorService.NavigateTo( $"{nameof(ProductReviews)}?productId={viewModel.ProductId}");
+        await AppNavigatorService.NavigateTo(
+       $"{nameof(ProductReviews)}" +
+       $"?productId={viewModel.ProductId}" +
+       $"&title={Uri.EscapeDataString(viewModel.ProductTitle)}");
+    }
+
+    private async void Cart_Tapped(object sender, TappedEventArgs e)
+    {
+        await AnimateElementScaleDown(sender as VisualElement);
+
+        await viewModel.AddProductToCartAsync();
+    }
+    
+    private void Minus_Tapped(object sender, TappedEventArgs e)
+    {
+        viewModel?.DecreaseQuantity();
+    }
+
+    private void Plus_Tapped(object sender, TappedEventArgs e)
+    {
+        viewModel?.IncreaseQuantity();
     }
 }

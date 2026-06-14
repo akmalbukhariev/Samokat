@@ -1,6 +1,6 @@
 using System.Windows.Input;
 
-namespace Ninimum.Views.BasketProduct;
+namespace Ninimum.Views.Cart;
 
 public partial class QuantitySelectorView : ContentView
 {

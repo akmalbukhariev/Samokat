@@ -37,7 +37,9 @@
                         Spacing="16">
 
                         <!-- Buyer photos header -->
-                        <Grid ColumnDefinitions="*,Auto">
+                        <Grid 
+                            IsVisible="False"
+                            ColumnDefinitions="*,Auto">
                             <Label
                                 Text="Xaridorlarning fotosuratlari"
                                 TextColor="#22292F"
@@ -58,6 +60,7 @@
 
                         <!-- Buyer photos horizontal list -->
                         <CollectionView
+                            IsVisible="False"
                             ItemsSource="{Binding BuyerPhotos}"
                             ItemsLayout="HorizontalList"
                             SelectionMode="None"
@@ -95,7 +98,7 @@
                             StrokeThickness="0"
                             StrokeShape="RoundRectangle 8">
                             <Label
-                                Text="Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik, 12+ oy, 800 g"
+                                Text="{Binding Title}"
                                 TextColor="#22292F"
                                 FontSize="18"
                                 FontFamily="{StaticResource FontSFMedium}"

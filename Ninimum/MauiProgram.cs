@@ -8,7 +8,6 @@ using Ninimum.Views.Main;
 using Ninimum.Views.Search;
 using Ninimum.Views.DetailProduct;
 using Ninimum.Views.FavoriteProduct;
-using Ninimum.Views.BasketProduct;
 using Ninimum.Views.Formalization;
 using Ninimum.Views.PaymentCard;
 using Ninimum.Views.Children;
@@ -18,6 +17,7 @@ using Ninimum.Views.LoginRegister;
 using RestSharp;
 using Utils;
 using Ninimum.Views.Authorization;
+using Ninimum.Views.Cart;
 
 #if ANDROID
 
@@ -95,7 +95,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<DetailProductPage>();
 		builder.Services.AddTransient<ProductReviews>();
 		builder.Services.AddTransient<FavoritePage>();
-		builder.Services.AddTransient<BasketProductPage>();
+		builder.Services.AddTransient<CartPage>();
 		builder.Services.AddTransient<FormalizationPage>();
 		builder.Services.AddTransient<PaymentCardPage>();
 		builder.Services.AddTransient<ChildrenPage>();
@@ -110,7 +110,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<DetailProductPageViewModel>();
 		builder.Services.AddTransient<ProductReviewsViewModel>();
 		builder.Services.AddTransient<FavoritePageViewModel>();
-		builder.Services.AddTransient<BasketProductPageViewModel>();
+		builder.Services.AddTransient<CartPageViewModel>();
 		builder.Services.AddTransient<LoginPageViewModel>();
 		builder.Services.AddTransient<RegisterPageViewModel>();
 

@@ -119,6 +119,19 @@ public partial class MainProductCardView : ContentView
             typeof(MainProductCardView),
             "+ Ertaga");
 
+    public static readonly BindableProperty IsCartLoadingProperty =
+    BindableProperty.Create(
+        nameof(IsCartLoading),
+        typeof(bool),
+        typeof(MainProductCardView),
+        false);
+
+    public bool IsCartLoading
+    {
+        get => (bool)GetValue(IsCartLoadingProperty);
+        set => SetValue(IsCartLoadingProperty, value);
+    }
+
     public static readonly BindableProperty LikedProperty =
      BindableProperty.Create(nameof(Liked), typeof(bool), typeof(MainProductCardView), false, propertyChanged: LikedChanged);
 
@@ -135,13 +148,13 @@ public partial class MainProductCardView : ContentView
         set => SetValue(ClickProductCommandProperty, value);
     }
     
-    public static readonly BindableProperty ClickTomorrowCommandProperty =
-        BindableProperty.Create(nameof(ClickTomorrowCommand), typeof(ICommand), typeof(MainProductCardView));
+    public static readonly BindableProperty ClickCartCommandProperty =
+        BindableProperty.Create(nameof(ClickCartCommand), typeof(ICommand), typeof(MainProductCardView));
 
-     public ICommand ClickTomorrowCommand
+     public ICommand ClickCartCommand
     {
-        get => (ICommand)GetValue(ClickTomorrowCommandProperty);
-        set => SetValue(ClickTomorrowCommandProperty, value);
+        get => (ICommand)GetValue(ClickCartCommandProperty);
+        set => SetValue(ClickCartCommandProperty, value);
     }
 
     public bool Liked
@@ -307,16 +320,18 @@ public partial class MainProductCardView : ContentView
         });
     }
 
-    private async void Tomorrov_Tapped(object sender, TappedEventArgs e)
+    private async void Cart_Tapped(object sender, TappedEventArgs e)
     {
         await ClickGuard.RunAsync(brdAction, async () =>
         {
+            AppVibrationService.Like();
+            
             await brdAction.ScaleTo(0.95, 100, Easing.CubicOut);
             await brdAction.ScaleTo(1.0, 100, Easing.CubicIn);
 
-            if (BindingContext is MainProductCardItem product && ClickTomorrowCommand?.CanExecute(product) == true)
+            if (BindingContext is MainProductCardItem product && ClickCartCommand?.CanExecute(product) == true)
             {
-                ClickTomorrowCommand.Execute(product);
+                ClickCartCommand.Execute(product);
             }
         });
     }

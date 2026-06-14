@@ -4,34 +4,32 @@ using System.Windows.Input;
 
 namespace Ninimum.Models;
 
-public partial class BasketProductItemModel : ObservableObject
+public partial class CartProductItemModel : ObservableObject
 {
-    [ObservableProperty]
-    private string productImageSource = string.Empty;
+    public int CartId { get; set; }
+    public int ProductId { get; set; }
+    
+    [ObservableProperty] private string productImageSource = string.Empty;
 
-    [ObservableProperty]
-    private string title = string.Empty;
+    [ObservableProperty] private string title = string.Empty;
 
-    [ObservableProperty]
-    private string oldPrice = string.Empty;
+    [ObservableProperty] private string price = string.Empty;
 
-    [ObservableProperty]
-    private string newPrice = string.Empty;
+    [ObservableProperty] private string subscriptionPrice = string.Empty;
 
-    [ObservableProperty]
-    private bool isChecked;
+    public int PriceValue { get; set; }
+    public int SubscriptionPriceValue { get; set; }
 
-    [ObservableProperty]
-    private int quantity = 1;
-
-    public int NewPriceValue { get; set; }
-
+    [ObservableProperty] private bool isChecked;
+    
+    [ObservableProperty] private int quantity = 1;
+    
     public ICommand? ParentChangedCommand { get; set; }
 
     public IRelayCommand ToggleCheckedCommand { get; }
     public IRelayCommand<int> QuantityChangedCommand { get; }
 
-    public BasketProductItemModel()
+    public CartProductItemModel()
     {
         ToggleCheckedCommand = new RelayCommand(OnToggleChecked);
         QuantityChangedCommand = new RelayCommand<int>(HandleQuantityChanged);

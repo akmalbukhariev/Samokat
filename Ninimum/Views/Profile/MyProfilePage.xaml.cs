@@ -8,6 +8,25 @@ namespace Ninimum.Views.Profile;
 
 public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 {
+    #region Commands
+    public ICommand OrderCommand { get; }
+    public ICommand ReviewCommand { get; }
+    public ICommand PaymentCardCommand { get; }
+    public ICommand MessageCommand { get; }
+    public ICommand NotificationCommand { get; }
+    public ICommand ToggleSettingsCommand { get; }
+
+    public ICommand RegionCommand { get; }
+    public ICommand LanguageCommand { get; }
+    public ICommand ThemeCommand { get; }
+    public ICommand ChangePhoneCommand { get; }
+    public ICommand ChangePasswordCommand { get; }
+    public ICommand MyTariffCommand { get; }
+    public ICommand ChildrenCommand { get; }
+    public ICommand DeleteAccountCommand { get; }
+    public ICommand LogoutCommand { get; }
+    #endregion
+
     private bool _isSettingsExpanded = true;
     private string _selectedLanguageFlag = "flag_uz.png";
 
@@ -27,8 +46,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         }
     }
 
-    public string SettingsArrowIcon =>
-        IsSettingsExpanded ? "ic_arrow_up.png" : "ic_arrow_down.png";
+    public string SettingsArrowIcon => IsSettingsExpanded ? "ic_arrow_up.png" : "ic_arrow_down.png";
 
     public string SelectedLanguageFlag
     {
@@ -42,24 +60,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
             }
         }
     }
-
-    public ICommand OrderCommand { get; }
-    public ICommand ReviewCommand { get; }
-    public ICommand PaymentCardCommand { get; }
-    public ICommand MessageCommand { get; }
-    public ICommand NotificationCommand { get; }
-    public ICommand ToggleSettingsCommand { get; }
-
-    public ICommand RegionCommand { get; }
-    public ICommand LanguageCommand { get; }
-    public ICommand ThemeCommand { get; }
-    public ICommand ChangePhoneCommand { get; }
-    public ICommand ChangePasswordCommand { get; }
-    public ICommand MyTariffCommand { get; }
-    public ICommand ChildrenCommand { get; }
-    public ICommand DeleteAccountCommand { get; }
-    public ICommand LogoutCommand { get; }
-
+ 
     private AppControl appControl;
     public MyProfilePage(AppControl appControl)
     {
@@ -94,6 +95,9 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         };
 
         BindingContext = this;
+
+        lbUserName.Text = appControl.userDto.first_name;
+        lbPhoneNumber.Text = appControl.userDto.phone_number;
 
         Shell.SetTabBarIsVisible(this, true);
     }

@@ -46,23 +46,27 @@
                             Liked="{Binding Liked}"
                             Rating="{Binding Rating}"
                             ReviewCount="{Binding ReviewCount}"
-                            ActionButtonText="{Binding ActionText}"
+                            IsCartLoading="{Binding IsCartLoading}"
                             LikeCommand="{Binding Source={RelativeSource AncestorType={x:Type local:FavoritePage}}, Path=BindingContext.LikeCommand}"
                             ClickProductCommand="{Binding Source={RelativeSource AncestorType={x:Type local:FavoritePage}}, Path=BindingContext.ClickProductCommand}"
-                            ClickTomorrowCommand="{Binding Source={RelativeSource AncestorType={x:Type local:FavoritePage}}, Path=BindingContext.ClickTomorrowCommand}"/>
+                            ClickCartCommand="{Binding Source={RelativeSource AncestorType={x:Type local:FavoritePage}}, Path=BindingContext.ClickCartCommand}"/>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
             </CollectionView>
         </RefreshView>
-        <ActivityIndicator
+        
+        <components:CustomCartView
+            Grid.RowSpan="3"
+            x:Name="cartView"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            ZIndex="20" />
+
+        <components:LoadingView
             Grid.RowSpan="3"
             x:Name="loading"
-            Color="{StaticResource PrimaryColor}"
-            Scale="1.5"
-            IsRunning="{Binding IsLoading}"
-            VerticalOptions="Center"
-            HorizontalOptions="Center"/>
+            ShowLoading="{Binding IsLoading}"/>
     </Grid>
 
 </page:BasePage>

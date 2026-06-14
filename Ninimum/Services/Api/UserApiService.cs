@@ -33,6 +33,9 @@ namespace Api.Services
         private const string GET_PRODUCT_DETAIL = $"{BASE_URL}product/getProductDetail";
         private const string GET_SIMILAR_PRODUCT_LIST = $"{BASE_URL}product/getSimilarProductList";
         private const string GET_PRODUCT_REVIEW_LIST = $"{BASE_URL}review/getReviewList";
+        private const string ADD_CART_PRODUCT = $"{BASE_URL}cart/addCart";
+        private const string GET_CART_LIST = $"{BASE_URL}cart/getCartList";
+        private const string DELETE_CART_LIST = $"{BASE_URL}cart/deleteCart";
         #endregion
 
         public UserApiService(RestClient client)
@@ -528,6 +531,105 @@ namespace Api.Services
                 if (!string.IsNullOrWhiteSpace(receivedData))
                 {
                     var deserializedResponse = JsonConvert.DeserializeObject<Response>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<Response> AddCartProduct(AddCartRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PostAsync(ADD_CART_PRODUCT, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<Response>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<Response> DeleteCartProduct(DeleteCartRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PostAsync(DELETE_CART_LIST, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<Response>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<CartResponse> GetCartList(CartListRequest data)
+        {
+            var response = new CartResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(GET_CART_LIST, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<CartResponse>(receivedData);
                     if (deserializedResponse != null)
                     {
                         return deserializedResponse;

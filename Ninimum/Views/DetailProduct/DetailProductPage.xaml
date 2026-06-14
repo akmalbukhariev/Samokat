@@ -482,7 +482,7 @@
                                         ActionButtonText="{Binding ActionText}"
                                         LikeCommand="{Binding Source={RelativeSource AncestorType={x:Type local:DetailProductPage}}, Path=BindingContext.LikeSimilarProductCommand}"
                                         ClickProductCommand="{Binding Source={RelativeSource AncestorType={x:Type local:DetailProductPage}}, Path=BindingContext.ClickProductCommand}"
-                                        ClickTomorrowCommand="{Binding Source={RelativeSource AncestorType={x:Type local:DetailProductPage}}, Path=BindingContext.ClickTomorrowCommand}" />
+                                        ClickCartCommand="{Binding Source={RelativeSource AncestorType={x:Type local:DetailProductPage}}, Path=BindingContext.ClickCartCommand}" />
                                 </DataTemplate>
                             </CollectionView.ItemTemplate>
                         </CollectionView>
@@ -502,7 +502,7 @@
                 <!-- Price -->
                 <Label
                     Grid.Column="0"
-                    Text="486 000 so’m"
+                    Text="{Binding BottomPrice}"
                     VerticalOptions="Center"
                     TextColor="#22292F"
                     FontSize="24"
@@ -529,12 +529,16 @@
                             Source="minus.png"
                             Aspect="AspectFit"
                             WidthRequest="24"
-                            HeightRequest="24"/>
+                            HeightRequest="24">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Minus_Tapped" />
+                            </Image.GestureRecognizers>
+                        </Image>
 
                         <!-- Count -->
                         <Label
                             Grid.Column="1"
-                            Text="1"
+                            Text="{Binding Quantity}"
                             MinimumWidthRequest="33"
                             HorizontalTextAlignment="Center"
                             VerticalTextAlignment="Center"
@@ -550,7 +554,11 @@
                             Source="plus.png"
                             Aspect="AspectFit"
                             WidthRequest="24"
-                            HeightRequest="24"/>
+                            HeightRequest="24">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Plus_Tapped" />
+                            </Image.GestureRecognizers>
+                        </Image>
                     </Grid>
                 </Border>
 
@@ -583,9 +591,14 @@
                     HeightRequest="54"
                     BackgroundColor="#7CB518"
                     VerticalOptions="Center">
-                      <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="8" />
-                        </Border.StrokeShape>
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer
+                            NumberOfTapsRequired="1"
+                            Tapped="Cart_Tapped"/>
+                    </Border.GestureRecognizers>
                     <HorizontalStackLayout 
                         Spacing="10">
                         <Label 
@@ -612,7 +625,14 @@
             Grid.RowSpan="3"
             Title="Tavsiflar"
             Description="{Binding Description}" />
-            
+
+        <components:CustomCartView
+            Grid.RowSpan="3"
+            x:Name="cartView"
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            ZIndex="20" />
+
         <components:CustomLikedView
             Grid.RowSpan="3"
             x:Name="likeView" 

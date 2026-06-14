@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:models="clr-namespace:Ninimum.Models.Main"
     x:Class="Ninimum.Views.Main.Components.MainProductCardView"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     x:Name="RootView">
  
     <VerticalStackLayout 
@@ -188,16 +189,41 @@
             <Border.GestureRecognizers>
                 <TapGestureRecognizer
                     NumberOfTapsRequired="1"
-                    Tapped="Tomorrov_Tapped"/>
+                    Tapped="Cart_Tapped"/>
             </Border.GestureRecognizers>
             <Grid>
+                <ActivityIndicator
+                    Color="{StaticResource PrimaryColor}"
+                    IsVisible="{Binding IsCartLoading, Source={x:Reference RootView}}"
+                    IsRunning="{Binding IsCartLoading, Source={x:Reference RootView}}"
+                    WidthRequest="22"
+                    HeightRequest="22"
+                    Margin="5,0,0,0"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Center" />
+                <Grid
+                    ColumnDefinitions="Auto,Auto"
+                    ColumnSpacing="5"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center">
+                <Image
+                    Source="ic_basket.png"
+                    Aspect="AspectFit"
+                    WidthRequest="20"
+                    HeightRequest="20">
+                    <Image.Behaviors>
+                        <toolkit:IconTintColorBehavior TintColor="{StaticResource PrimaryColor}" />
+                    </Image.Behaviors>
+                    </Image>
                 <Label
-                    Text="{Binding ActionButtonText, Source={x:Reference RootView}}"
-                    TextColor="#FF5A52"
+                    Grid.Column="1"
+                    Text="Savatcha"
+                    TextColor="{StaticResource PrimaryColor}"
                     FontSize="15"
                     FontFamily="{StaticResource FontSFMedium}"
                     HorizontalOptions="Center"
                     VerticalOptions="Center" />
+            </Grid>
             </Grid>
         </Border>
 

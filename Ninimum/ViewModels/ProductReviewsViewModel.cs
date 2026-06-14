@@ -12,6 +12,7 @@ using Utils;
 namespace Ninimum.ViewModels;
 
 [QueryProperty(nameof(ProductId), "productId")]
+[QueryProperty(nameof(Title), "title")]
 public partial class ProductReviewsViewModel : ObservableObject
 {
     private readonly UserApiService apiService;
@@ -20,6 +21,7 @@ public partial class ProductReviewsViewModel : ObservableObject
     private int _quantity = 1;
 
     [ObservableProperty] private int productId;
+    [ObservableProperty] private string title;
     [ObservableProperty] private bool isLoading;
 
     [ObservableProperty]
@@ -231,10 +233,10 @@ public partial class ProductReviewsViewModel : ObservableObject
 
                         item.Photos.Add(image.image_url);
 
-                        if (!BuyerPhotos.Contains(image.image_url))
+                        /*if (!BuyerPhotos.Contains(image.image_url))
                         {
                             BuyerPhotos.Add(image.image_url);
-                        }
+                        }*/
                     }
                 }
 
