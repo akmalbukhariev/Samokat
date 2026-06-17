@@ -1,20 +1,60 @@
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Input;
 
 namespace Ninimum.Models;
 
-public class PaymentCardModel
+public class PaymentCardModel : INotifyPropertyChanged
 {
-    public string CardNumber { get; set; }
-    public string ExpireDate { get; set; }
-    public bool IsPrimary { get; set; }
+    public long Id { get; set; }
 
-    public ICommand ToggleCommand => new Command(() =>
-    {
-        IsPrimary = !IsPrimary;
-    });
+    private string _cardNumber = string.Empty;
+    private string _expireDate = string.Empty;
+    private bool _isPrimary;
 
-    public ICommand DeleteCommand => new Command(() =>
+    public string CardNumber
     {
-        // handle delete
-    });
+        get => _cardNumber;
+        set
+        {
+            if (_cardNumber != value)
+            {
+                _cardNumber = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public string ExpireDate
+    {
+        get => _expireDate;
+        set
+        {
+            if (_expireDate != value)
+            {
+                _expireDate = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool IsPrimary
+    {
+        get => _isPrimary;
+        set
+        {
+            if (_isPrimary != value)
+            {
+                _isPrimary = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    protected void OnPropertyChanged([CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
 }

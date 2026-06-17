@@ -36,6 +36,10 @@ namespace Api.Services
         private const string ADD_CART_PRODUCT = $"{BASE_URL}cart/addCart";
         private const string GET_CART_LIST = $"{BASE_URL}cart/getCartList";
         private const string DELETE_CART_LIST = $"{BASE_URL}cart/deleteCart";
+        private const string CREATE_PAYMENT_CARD = $"{BASE_URL}payment/createPaymentCard";
+        private const string GET_PAYMENT_CARD_LIST = $"{BASE_URL}payment/getPaymentCardList";
+        private const string DELETE_PAYMENT_CARD = $"{BASE_URL}payment/deletePaymentCard";
+        private const string SET_DEFAULT_PAYMENT_CARD = $"{BASE_URL}payment/setDefaultPaymentCard";
         #endregion
 
         public UserApiService(RestClient client)
@@ -586,6 +590,39 @@ namespace Api.Services
             return response;
         }
 
+        public async Task<PaymentCardListResponse> GetPaymentCardList(PaymentCardListParam data)
+        {
+            var response = new PaymentCardListResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(GET_PAYMENT_CARD_LIST, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<PaymentCardListResponse>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
         public async Task<Response> DeleteCartProduct(DeleteCartRequest data)
         {
             var response = new Response();
@@ -630,6 +667,105 @@ namespace Api.Services
                 if (!string.IsNullOrWhiteSpace(receivedData))
                 {
                     var deserializedResponse = JsonConvert.DeserializeObject<CartResponse>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<Response> AddPaymentCard(CreatePaymentCardRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PostAsync(CREATE_PAYMENT_CARD, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<Response>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<Response> DeletePaymentCard(DeletePaymentCardRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PostAsync(DELETE_PAYMENT_CARD, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<Response>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<Response> SetDefaultPaymentCard(SetDefaultPaymentCardRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PutAsync(SET_DEFAULT_PAYMENT_CARD, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<Response>(receivedData);
                     if (deserializedResponse != null)
                     {
                         return deserializedResponse;

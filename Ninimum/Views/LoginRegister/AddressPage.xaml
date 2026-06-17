@@ -185,7 +185,7 @@
 
                     <Button
                         x:Name="PickupButton"
-                        Text="Tarqatish punktini tanlash"
+                        Text="Saqlash"
                         FontSize="17"
                         TextColor="White"
                         BackgroundColor="#FD473C"

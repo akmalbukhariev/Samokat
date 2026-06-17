@@ -12,6 +12,7 @@ using Ninimum.Models.Main;
 using Ninimum.Services;
 using Ninimum.Views.DetailProduct;
 using Ninimum.Views.Formalization;
+using Ninimum.Views.PaymentCard;
 using Utils;
 
 namespace Ninimum.ViewModels;
@@ -63,7 +64,8 @@ public partial class DetailProductPageViewModel : ObservableObject
     [ObservableProperty] private string description = ".......";
 
     [ObservableProperty] private int quantity = 1;
-    [ObservableProperty] private string bottomPrice = "0 so’m";
+    [ObservableProperty] private string finalPrice = "0 so’m";
+    private double FinalPriceValue = 0.0;
     #endregion
 
     #region Commands
@@ -258,7 +260,8 @@ public partial class DetailProductPageViewModel : ObservableObject
             ReviewText = $"{product.review_count} sharhlar";
             SubscriptionPrice = $"{product.subscription_price?.ToString("N0").Replace(",", " ") ?? "0"} so’m";
             RegularPrice = $"{product.price?.ToString("N0").Replace(",", " ") ?? "0"} so’m";
-            BottomPrice = SubscriptionPrice;
+            FinalPrice = RegularPrice;
+            FinalPriceValue = product.price ?? 0.0;
             ProductImages.Clear();
 
             if (product.images != null && product.images.Count > 0)
@@ -431,7 +434,6 @@ public partial class DetailProductPageViewModel : ObservableObject
             IsLoading = false;
         }
     }
-
     public void IncreaseQuantity()
     {
         Quantity++;
@@ -443,5 +445,28 @@ public partial class DetailProductPageViewModel : ObservableObject
             return;
 
         Quantity--;
+    }
+
+    public async Task PurchaseNowAsync()
+    {
+        FormalizationNavigationStore.Data = new FormalizationData
+        {
+            UserId = (long)appControl.userDto.id,
+            AddressText = appControl.userDto.address,
+
+            Products = new List<FormalizationProductItem>
+            {
+                new FormalizationProductItem
+                {
+                    ProductId = ProductId,
+                    Name = ProductTitle,
+                    ImageSource = ProductImages.FirstOrDefault()?.Image ?? string.Empty,
+                    Quantity = Quantity,
+                    Price = FinalPriceValue
+                }
+            }
+        };
+
+        await AppNavigatorService.NavigateTo(nameof(FormalizationPage));
     }
 }

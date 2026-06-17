@@ -132,7 +132,8 @@
                 Grid.Column="1"
                 HorizontalOptions="End"
                 VerticalOptions="Start"
-                Spacing="4" />
+                Spacing="4"
+                IsVisible="{Binding IsIndicatorVisible, Source={x:Reference RootView}}"/>
         </Grid>
 
         <!-- Title -->
@@ -185,7 +186,8 @@
             BackgroundColor="#F8ECEC"
             StrokeThickness="0"
             StrokeShape="RoundRectangle 18"
-            HeightRequest="36">
+            HeightRequest="36"
+            IsVisible="{Binding IsCartTextVisible, Source={x:Reference RootView}}">
             <Border.GestureRecognizers>
                 <TapGestureRecognizer
                     NumberOfTapsRequired="1"
@@ -202,6 +204,7 @@
                     HorizontalOptions="Start"
                     VerticalOptions="Center" />
                 <Grid
+                    
                     ColumnDefinitions="Auto,Auto"
                     ColumnSpacing="5"
                     VerticalOptions="Center"

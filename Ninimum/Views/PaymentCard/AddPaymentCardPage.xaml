@@ -11,18 +11,17 @@
 
     <page:BasePage.Resources>
         <ResourceDictionary>
-            <converter:BoolToImageConverter x:Key="BoolToImageConverter"/>    
+            <converter:BoolToImageConverter x:Key="BoolToImageConverter"/>
         </ResourceDictionary>
     </page:BasePage.Resources>
 
-    <Grid RowDefinitions="Auto,24,*, Auto">
+    <Grid RowDefinitions="Auto,24,*,Auto">
 
         <components:PageHeaderView Title="Yangi karta qo’shish" />
 
-        <!-- Scrollable content -->
         <ScrollView Grid.Row="2">
             <VerticalStackLayout Padding="16,0,16,20" Spacing="24">
-  
+
                 <Border
                     StrokeThickness="0"
                     StrokeShape="RoundRectangle 20"
@@ -48,6 +47,7 @@
                                 TextColor="White" />
 
                             <Entry
+                                x:Name="CardNumberEntry"
                                 Text="{Binding CardNumber}"
                                 BackgroundColor="Transparent"
                                 TextColor="White"
@@ -56,7 +56,9 @@
                                 Keyboard="Numeric"
                                 MaxLength="19"
                                 Placeholder="8600 1204 2881 8500"
-                                PlaceholderColor="#CCFFFFFF" />
+                                PlaceholderColor="#CCFFFFFF"
+                                IsReadOnly="False"
+                                IsEnabled="True" />
                         </VerticalStackLayout>
 
                         <HorizontalStackLayout
@@ -64,7 +66,7 @@
                             Spacing="24">
 
                             <Border
-                                WidthRequest="160"
+                                WidthRequest="220"
                                 Padding="16,10"
                                 BackgroundColor="#33FFFFFF"
                                 StrokeThickness="0"
@@ -77,14 +79,17 @@
                                         FontSize="15"
                                         TextColor="White" />
 
-                                    <HorizontalStackLayout Spacing="0">
+                                    <HorizontalStackLayout
+                                        Spacing="4"
+                                        HorizontalOptions="Center">
+
                                         <Entry
                                             x:Name="MonthEntry"
                                             Text="{Binding ExpireMonth}"
-                                            WidthRequest="24"
+                                            WidthRequest="36"
                                             MaxLength="2"
                                             Keyboard="Numeric"
-                                            BackgroundColor="Red"
+                                            BackgroundColor="Transparent"
                                             TextColor="White"
                                             FontFamily="{StaticResource FontSFMedium}"
                                             FontSize="24"
@@ -102,7 +107,7 @@
                                         <Entry
                                             x:Name="YearEntry"
                                             Text="{Binding ExpireYear}"
-                                            WidthRequest="24"
+                                            WidthRequest="36"
                                             MaxLength="2"
                                             Keyboard="Numeric"
                                             BackgroundColor="Transparent"
@@ -116,7 +121,9 @@
                                 </VerticalStackLayout>
                             </Border>
 
+                            <!-- CVV hidden for MVP -->
                             <Border
+                                IsVisible="False"
                                 WidthRequest="110"
                                 Padding="16,10"
                                 BackgroundColor="#33FFFFFF"
@@ -144,20 +151,22 @@
                                 </VerticalStackLayout>
                             </Border>
                         </HorizontalStackLayout>
-
                     </VerticalStackLayout>
                 </Border>
 
-                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="16">
+                <Grid 
+                    ColumnDefinitions="*,Auto" 
+                    ColumnSpacing="16" 
+                    IsVisible="False">
                     <VerticalStackLayout Spacing="2">
                         <Label
-                            Text="Kartani eslab qolish"
+                            Text="Kartani saqlash"
                             FontFamily="{StaticResource FontSFRegular}"
                             FontSize="17"
                             TextColor="#22292F" />
 
                         <Label
-                            Text="Men axborotlarimni saqlash shartlariga roziman"
+                            Text="Keyingi xaridlar uchun ushbu kartani saqlashga roziman"
                             FontFamily="{StaticResource FontSFRegular}"
                             FontSize="13"
                             TextColor="#96979B" />
@@ -175,17 +184,34 @@
                     </Image>
                 </Grid>
 
-                <Label
-                    Text="Unutmang, ma’lumotlari kiritilayotgan karta o’zingizga tegishli bo’lishi kerak. Agar siz begonaning to’lov kartasidan ruxsatisiz foydalanayotgan bo’lsangiz qonun oldida javobgar bo’lishingiz mumkin."
-                    FontFamily="{StaticResource FontSFRegular}"
-                    FontSize="13"
-                    TextColor="#96979B"
-                    LineBreakMode="WordWrap" />
+                <Border
+                    BackgroundColor="#F1FAEA"
+                    Stroke="#D8EFC9"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 12"
+                    Padding="14">
+
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                        <Image
+                            Source="ic_security.png"
+                            WidthRequest="34"
+                            HeightRequest="34"
+                            VerticalOptions="Center" />
+
+                        <Label
+                            Grid.Column="1"
+                            Text="Karta ma’lumotlari xavfsiz saqlanadi va uchinchi shaxslarga berilmaydi."
+                            FontFamily="{StaticResource FontSFRegular}"
+                            FontSize="15"
+                            TextColor="#22292F"
+                            LineBreakMode="WordWrap"
+                            VerticalTextAlignment="Center" />
+                    </Grid>
+                </Border>
 
             </VerticalStackLayout>
         </ScrollView>
 
-        <!-- Fixed bottom button -->
         <Border
             Grid.Row="3"
             Margin="16,0,16,20"
@@ -195,7 +221,9 @@
             HeightRequest="56">
 
             <Border.GestureRecognizers>
-                <TapGestureRecognizer Command="{Binding SaveCardCommand}" />
+                <TapGestureRecognizer 
+                    NumberOfTapsRequired="1" 
+                    Tapped="SaveCard_Tapped"/>
             </Border.GestureRecognizers>
 
             <Grid>

@@ -132,6 +132,32 @@ public partial class MainProductCardView : ContentView
         set => SetValue(IsCartLoadingProperty, value);
     }
 
+    public static readonly BindableProperty IsCartTextVisibleProperty =
+    BindableProperty.Create(
+        nameof(IsCartTextVisible),
+        typeof(bool),
+        typeof(MainProductCardView),
+        true);
+
+    public bool IsCartTextVisible
+    {
+        get => (bool)GetValue(IsCartTextVisibleProperty);
+        set => SetValue(IsCartTextVisibleProperty, value);
+    }
+
+    public static readonly BindableProperty IsIndicatorVisibleProperty =
+    BindableProperty.Create(
+        nameof(IsIndicatorVisible),
+        typeof(bool),
+        typeof(MainProductCardView),
+        true);
+
+    public bool IsIndicatorVisible
+    {
+        get => (bool)GetValue(IsIndicatorVisibleProperty);
+        set => SetValue(IsIndicatorVisibleProperty, value);
+    }
+
     public static readonly BindableProperty LikedProperty =
      BindableProperty.Create(nameof(Liked), typeof(bool), typeof(MainProductCardView), false, propertyChanged: LikedChanged);
 

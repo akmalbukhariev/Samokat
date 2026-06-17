@@ -6,7 +6,7 @@ namespace Ninimum.Views.PaymentCard;
 
 public partial class AddPaymentCardPage : BasePage, INotifyPropertyChanged
 {
-    private string _cardNumber = "8600 1204 2881 8500";
+    private string _cardNumber = string.Empty;
     private string _expireDate = string.Empty;
     private string _cvv = string.Empty;
     private bool _rememberCard = true;
@@ -54,7 +54,6 @@ public partial class AddPaymentCardPage : BasePage, INotifyPropertyChanged
     }
 
     public ICommand ToggleRememberCommand { get; }
-    public ICommand SaveCardCommand { get; }
 
     public AddPaymentCardPage()
     {
@@ -64,9 +63,7 @@ public partial class AddPaymentCardPage : BasePage, INotifyPropertyChanged
         {
             RememberCard = !RememberCard;
         });
-
-        SaveCardCommand = new Command(async () => await OnSaveCard());
-
+ 
         BindingContext = this;
     }
 
@@ -108,6 +105,17 @@ public partial class AddPaymentCardPage : BasePage, INotifyPropertyChanged
 
     public string ExpireDate => $"{ExpireMonth}/{ExpireYear}";
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            await Task.Delay(300);
+            CardNumberEntry.Focus();
+        });
+    }
+
     private async Task OnSaveCard()
     {
         await DisplayAlert("Info", "Karta saqlandi.", "OK");
@@ -116,5 +124,10 @@ public partial class AddPaymentCardPage : BasePage, INotifyPropertyChanged
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+    }
+
+    private async void SaveCard_Tapped(object sender, TappedEventArgs e)
+    {
+        await AnimateElementScaleDown(sender as Border);
     }
 }

@@ -219,7 +219,7 @@ public partial class DetailProductPage : BasePage
 
         await viewModel.AddProductToCartAsync();
     }
-    
+
     private void Minus_Tapped(object sender, TappedEventArgs e)
     {
         viewModel?.DecreaseQuantity();
@@ -228,5 +228,16 @@ public partial class DetailProductPage : BasePage
     private void Plus_Tapped(object sender, TappedEventArgs e)
     {
         viewModel?.IncreaseQuantity();
+    }
+
+    private async void Purchase_Clicked(object sender, EventArgs e)
+    {
+        if (viewModel == null)
+            return;
+
+        await ClickGuard.RunAsync((VisualElement)sender, async () =>
+        {
+            await viewModel.PurchaseNowAsync();
+        });
     }
 }

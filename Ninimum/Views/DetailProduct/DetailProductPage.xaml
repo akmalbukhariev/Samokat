@@ -465,13 +465,15 @@
                             SelectionMode="None"
                             ItemsLayout="HorizontalList"
                             HorizontalScrollBarVisibility="Never"
-                            HeightRequest="330"
                             Margin="0,5,0,5">
 
                             <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="models:MainProductCardItem">
                                     <main_components:MainProductCardView
                                         WidthRequest="170"
+                                        HeightRequest="365"
+                                        IsCartTextVisible="False" 
+                                        IsIndicatorVisible="False"
                                         ImagesSource="{Binding Images}"
                                         Price="{Binding Price}"
                                         SubscriptionPrice="{Binding Subscription_price}"
@@ -493,6 +495,7 @@
 
             <!-- Bottom buy area -, + -->
             <Grid
+                IsVisible="True"
                 Grid.Row="2"
                 ColumnDefinitions="*,Auto"
                 ColumnSpacing="24"
@@ -502,7 +505,7 @@
                 <!-- Price -->
                 <Label
                     Grid.Column="0"
-                    Text="{Binding BottomPrice}"
+                    Text="{Binding FinalPrice}"
                     VerticalOptions="Center"
                     TextColor="#22292F"
                     FontSize="24"
@@ -512,6 +515,7 @@
 
                 <!-- Counter container -->
                 <Border
+                    IsVisible="False"
                     Grid.Column="1"
                     Padding="3"
                     BackgroundColor="#F7F8FB"
@@ -583,7 +587,8 @@
                     CornerRadius="8"
                     Padding="14,0"
                     HorizontalOptions="Fill"
-                    VerticalOptions="Center" />
+                    VerticalOptions="Center"
+                    Clicked="Purchase_Clicked"/>
 
                 <!-- Add to cart -->
                 <Border
