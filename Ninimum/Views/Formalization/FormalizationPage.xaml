@@ -353,6 +353,11 @@
             TextColor="White"
             BackgroundColor="#FD473C"
             Clicked="OnCreateOrderClicked" />
+        
+        <components:LoadingView
+            Grid.RowSpan="5"
+            x:Name="loading"
+            ShowLoading="{Binding IsLoading}"/>
      
     </Grid>
 </page:BasePage>

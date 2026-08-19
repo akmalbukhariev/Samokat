@@ -24,13 +24,14 @@ public partial class PaymentCardPage : BasePage
     public ICommand DeleteCardCommand { get; }
     public ICommand AddCardCommand { get; }
 
+    public static bool NeedRefreshCards { get; set; }
+
     private readonly UserApiService apiService;
-    private readonly AppControl appControl;
     public PaymentCardPage(AppControl appControl, UserApiService apiService)
     {
         InitializeComponent();
 
-        this.appControl = appControl;
+        base.appControl = appControl;
         this.apiService = apiService;
 
         TogglePrimaryCommand = new Command<PaymentCardModel>(async card => await OnTogglePrimary(card));
@@ -40,6 +41,47 @@ public partial class PaymentCardPage : BasePage
         BindingContext = this;
 
         LoadCards();
+    }
+
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (!NeedRefreshCards)
+        return;
+
+        await LoadCardsFromApiAsync();
+
+        NeedRefreshCards = false;
+    }
+
+    private async Task LoadCardsFromApiAsync()
+    {
+        try
+        {
+            loading.ShowLoading = true;
+
+            PaymentCardListResponse response =
+                await apiService.GetPaymentCardList(
+                    new PaymentCardListParam()
+                    {
+                        user_id = appControl.userDto.id ?? 0
+                    });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                await AlertService.ShowAlertAsync("Karta", "Kartalar yuklanmadi");
+                return;
+            }
+
+            NavigationCards = response.resultData ?? new List<PaymentCardDto>();
+
+            LoadCards();
+        }
+        finally
+        {
+            loading.ShowLoading = false;
+        }
     }
 
     private void LoadCards()
@@ -125,14 +167,17 @@ public partial class PaymentCardPage : BasePage
 
     private async void OnDeleteCardTapped(object sender, TappedEventArgs e)
     {
-        if (sender is not VisualElement element)
-            return;
+        await ClickGuard.RunAsync((VisualElement)sender, async () =>
+        {
+            if (sender is not VisualElement element)
+                return;
 
-        if (element.BindingContext is not PaymentCardModel card)
-            return;
+            if (element.BindingContext is not PaymentCardModel card)
+                return;
 
-        await AnimateElementScaleDown(element);
-        await OnDeleteCard(card);
+            await AnimateElementScaleDown(element);
+            await OnDeleteCard(card);
+        });
     }
 
     private async Task OnDeleteCard(PaymentCardModel card)
@@ -186,7 +231,10 @@ public partial class PaymentCardPage : BasePage
 
     private async Task OnAddCard()
     {
-        await AnimateElementScaleDown(frAddCard);
-        await AppNavigatorService.NavigateTo(nameof(AddPaymentCardPage));
+        await ClickGuard.RunAsync(frAddCard, async () =>
+        {
+            await AnimateElementScaleDown(frAddCard);
+            await AppNavigatorService.NavigateTo(nameof(AddPaymentCardPage));
+        });
     }
 }

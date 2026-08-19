@@ -5,8 +5,11 @@ using Models.Requests;
 using Models.Responses;
 using Ninimum.Models;
 using Ninimum.Services;
+using Ninimum.Views.Formalization;
+using Ninimum.Views.Payment;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq.Expressions;
 using System.Windows.Input;
 using Utils;
 
@@ -48,7 +51,7 @@ public partial class CartPageViewModel : ObservableObject
         LoadMoreCommand = new AsyncRelayCommand(LoadMoreAsync);
         RefreshCommand = new AsyncRelayCommand(RefreshAsync);
     }
-
+    
     public async Task LoadCartListAsync()
     {
         offset = 0;
@@ -176,20 +179,32 @@ public partial class CartPageViewModel : ObservableObject
         if (!selected.Any())
             return;
 
-        foreach (var item in selected)
+        try
         {
-            Response response = await apiService.DeleteCartProduct(new DeleteCartRequest
+            IsLoading = true;
+            foreach (var item in selected)
             {
-                cart_id = item.CartId,
-                user_id = (int)appControl.userDto.id
-            });
+                Response response = await apiService.DeleteCartProduct(new DeleteCartRequest
+                {
+                    cart_id = item.CartId,
+                    user_id = (int)appControl.userDto.id
+                });
 
-            if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
-            {
-                CartProducts.Remove(item);
-                loadedCartIds.Remove(item.CartId);
-                offset = Math.Max(0, offset - 1);
+                if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
+                {
+                    CartProducts.Remove(item);
+                    loadedCartIds.Remove(item.CartId);
+                    offset = Math.Max(0, offset - 1);
+                }
             }
+        }
+        catch (Exception ex)
+        {
+
+        }
+        finally
+        {
+            IsLoading = false;
         }
 
         OnPropertyChanged(nameof(CartCountText));
@@ -200,6 +215,45 @@ public partial class CartPageViewModel : ObservableObject
     private void JoinTariff()
     {
     }
+
+    [RelayCommand]
+    private async Task Checkout()
+    {
+        AppVibrationService.Click();
+
+        var selectedProducts = CartProducts
+            .Where(x => x.IsChecked)
+            .ToList();
+
+        if (!selectedProducts.Any())
+        {
+            await Shell.Current.DisplayAlert(
+                "Xatolik",
+                "Iltimos, kamida bitta mahsulotni tanlang.",
+                "OK");
+
+            return;
+        }
+
+        FormalizationNavigationStore.Data = new FormalizationData
+        {
+            UserId = (long)appControl.userDto.id,
+            AddressText = appControl.userDto.address,
+
+            Products = selectedProducts
+                .Select(x => new FormalizationProductItem
+                {
+                    ProductId = x.ProductId,
+                    Name = x.Title,
+                    ImageSource = x.ProductImageSource,
+                    Quantity = x.Quantity,
+                    Price = x.PriceValue
+                })
+                .ToList()
+        };
+
+        await AppNavigatorService.NavigateTo(nameof(FormalizationPage));
+    } 
 
     private void UpdateSummary()
     {

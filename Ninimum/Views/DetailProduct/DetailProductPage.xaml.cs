@@ -205,19 +205,25 @@ public partial class DetailProductPage : BasePage
 
     private async void Comment_Tapped(object sender, TappedEventArgs e)
     {
-        await AnimateElementScaleDown(sender as VisualElement);
+        await ClickGuard.RunAsync((VisualElement)sender, async () =>
+        {
+            await AnimateElementScaleDown(sender as VisualElement);
 
-        await AppNavigatorService.NavigateTo(
-       $"{nameof(ProductReviews)}" +
-       $"?productId={viewModel.ProductId}" +
-       $"&title={Uri.EscapeDataString(viewModel.ProductTitle)}");
+            await AppNavigatorService.NavigateTo(
+           $"{nameof(ProductReviews)}" +
+           $"?productId={viewModel.ProductId}" +
+           $"&title={Uri.EscapeDataString(viewModel.ProductTitle)}");
+        });
     }
 
     private async void Cart_Tapped(object sender, TappedEventArgs e)
     {
-        await AnimateElementScaleDown(sender as VisualElement);
+        await ClickGuard.RunAsync((VisualElement)sender, async () =>
+        {
+            await AnimateElementScaleDown(sender as VisualElement);
 
-        await viewModel.AddProductToCartAsync();
+            await viewModel.AddProductToCartAsync();
+        });
     }
 
     private void Minus_Tapped(object sender, TappedEventArgs e)
@@ -235,9 +241,6 @@ public partial class DetailProductPage : BasePage
         if (viewModel == null)
             return;
 
-        await ClickGuard.RunAsync((VisualElement)sender, async () =>
-        {
-            await viewModel.PurchaseNowAsync();
-        });
+        await ClickGuard.RunAsync((VisualElement)sender, viewModel.PurchaseNowAsync);
     }
 }

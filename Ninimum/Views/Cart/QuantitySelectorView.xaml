@@ -1,69 +1,119 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentView
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="Ninimum.Views.Cart.QuantitySelectorView"
     x:Name="RootView">
 
+    <!-- Whole quantity selector -->
     <Border
-        Padding="3"
-        BackgroundColor="#F7F8FB"
+        Padding="4"
+        BackgroundColor="#F6F7F9"
         StrokeThickness="0"
-        StrokeShape="RoundRectangle 8"
+        StrokeShape="RoundRectangle 16"
         HorizontalOptions="Start"
         VerticalOptions="Center">
 
         <Grid
-            ColumnDefinitions="Auto,Auto,Auto"
-            ColumnSpacing="14"
+            ColumnDefinitions="40,44,40"
+            ColumnSpacing="6"
             VerticalOptions="Center">
 
+            <!-- ================================================== -->
+            <!-- MINUS BUTTON                                       -->
+            <!-- ================================================== -->
             <Border
+                Grid.Column="0"
+                WidthRequest="40"
+                HeightRequest="40"
+                Padding="0"
                 BackgroundColor="White"
-                Stroke="#DADADA"
-                StrokeThickness="1"
-                StrokeShape="RoundRectangle 6"
-                Padding="10,8">
-                <Image
-                    Source="minus.png"
-                    Aspect="AspectFit"
-                    WidthRequest="24"
-                    HeightRequest="24">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnDecreaseTapped" />
-                    </Image.GestureRecognizers>
-                </Image>
+                Stroke="#D7D7D7"
+                StrokeThickness="1.5"
+                StrokeShape="RoundRectangle 11"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Tapped="OnDecreaseTapped" />
+                </Border.GestureRecognizers>
+
+                <Grid>
+                    <BoxView
+                        WidthRequest="22"
+                        HeightRequest="2"
+                        CornerRadius="1"
+                        BackgroundColor="#96979B"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+                </Grid>
+
             </Border>
 
+
+            <!-- ================================================== -->
+            <!-- QUANTITY                                           -->
+            <!-- ================================================== -->
             <Label
                 Grid.Column="1"
                 Text="{Binding Quantity, Source={x:Reference RootView}}"
-                MinimumWidthRequest="33"
+                TextColor="#96979B"
+                FontSize="20"
+                FontFamily="{StaticResource FontSFMedium}"
                 HorizontalTextAlignment="Center"
                 VerticalTextAlignment="Center"
-                VerticalOptions="Center"
-                TextColor="#96979B"
-                FontSize="18"
-                FontFamily="{StaticResource FontSFMedium}"
-                CharacterSpacing="0.18" />
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill" />
 
+
+            <!-- ================================================== -->
+            <!-- PLUS BUTTON                                        -->
+            <!-- ================================================== -->
             <Border
                 Grid.Column="2"
+                WidthRequest="40"
+                HeightRequest="40"
+                Padding="0"
                 BackgroundColor="White"
-                Stroke="#DADADA"
-                StrokeThickness="1"
-                StrokeShape="RoundRectangle 6"
-                Padding="10,8">
-                <Image
-                    Source="plus.png"
-                    Aspect="AspectFit"
-                    WidthRequest="24"
-                    HeightRequest="24">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="OnIncreaseTapped" />
-                    </Image.GestureRecognizers>
-                </Image>
+                Stroke="#D7D7D7"
+                StrokeThickness="1.5"
+                StrokeShape="RoundRectangle 11"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer
+                        Tapped="OnIncreaseTapped" />
+                </Border.GestureRecognizers>
+
+                <Grid>
+
+                    <!-- horizontal line -->
+                    <BoxView
+                        WidthRequest="22"
+                        HeightRequest="2"
+                        CornerRadius="1"
+                        BackgroundColor="#96979B"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+
+                    <!-- vertical line -->
+                    <BoxView
+                        WidthRequest="2"
+                        HeightRequest="22"
+                        CornerRadius="1"
+                        BackgroundColor="#96979B"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center" />
+
+                </Grid>
+
             </Border>
+
         </Grid>
+
     </Border>
+
 </ContentView>

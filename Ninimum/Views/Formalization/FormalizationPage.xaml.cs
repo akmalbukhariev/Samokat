@@ -1,10 +1,12 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Api.Services;
 using Models.Requests;
 using Models.Responses;
 using Ninimum.Models.Dto;
 using Ninimum.Services;
 using Ninimum.Views.LoginRegister;
+using Ninimum.Views.Payment;
 using Ninimum.Views.PaymentCard;
 using Utils;
 
@@ -12,12 +14,13 @@ namespace Ninimum.Views.Formalization;
 
 public partial class FormalizationPage : BasePage
 {
-    private const int ProductPrice = 545000;
+    //private const int ProductPrice = 545000;
     private const int DeliveryPrice = 0;
     private bool productsExpanded;
 
     private PaymentCardDto? selectedPaymentCard;
     public ObservableCollection<ProductItem> Products { get; } = new();
+    public bool IsLoading = false;
     private readonly UserApiService apiService;
     private readonly AppControl appControl;
     public FormalizationPage(AppControl appControl, UserApiService apiService)
@@ -150,41 +153,186 @@ public partial class FormalizationPage : BasePage
 
     private async void OnPaymentMethodTapped(object sender, TappedEventArgs e)
     {
-        await AnimateElementScaleDown(sender as Border);
+        await ClickGuard.RunAsync((VisualElement)sender, async () =>
+        {
+            await AnimateElementScaleDown(sender as Border);
 
-        await AppNavigatorService.NavigateTo(nameof(PaymentCardPage));
+            await AppNavigatorService.NavigateTo(nameof(PaymentCardPage));
+        });
     }
 
     private async void OnCreateOrderClicked(object sender, EventArgs e)
     {
-        if (selectedPaymentCard == null)
+        await ClickGuard.RunAsync((VisualElement)sender, async () =>
         {
-            await DisplayAlert(
-                "To‘lov kartasi",
-                "Iltimos, to‘lov kartasini qo‘shing yoki tanlang.",
-                "OK");
+            try
+            {
+                AppVibrationService.Click();
 
-            await AppNavigatorService.NavigateTo(nameof(PaymentCardPage));
-            return;
-        }
+                var data = FormalizationNavigationStore.Data;
 
-        await DisplayAlert(
-            "OK",
-            $"Tanlangan karta: **** **** **** {selectedPaymentCard.last_four_digits}",
-            "OK");
+                if (data == null || data.Products == null || !data.Products.Any())
+                {
+                    await Shell.Current.DisplayAlert(
+                        "Xatolik",
+                        "Buyurtma ma’lumotlari topilmadi.",
+                        "OK");
 
-        // Next:
-        // CreateOrder API
-        // Mock payment success
-        // Clear cart
+                    return;
+                }
+
+                int totalPrice = (int)data.Products.Sum(x => x.Price * x.Quantity);
+
+                if (totalPrice <= 0)
+                {
+                    await Shell.Current.DisplayAlert(
+                        "Xatolik",
+                        "Buyurtma summasi noto'g'ri.",
+                        "OK");
+
+                    return;
+                }
+
+                long addressId = 1;
+
+                var createOrderRequest = new CreateOrderRequest
+                {
+                    userId = data.UserId,
+                    addressId = addressId,
+                    totalPrice = totalPrice,
+
+                    products = data.Products
+                        .Select(x => new CreateOrderProductRequest
+                        {
+                            productId = x.ProductId,
+                            price = (int)x.Price,
+                            quantity = x.Quantity
+                        })
+                        .ToList()
+                };
+
+                Debug.WriteLine(
+                    $"CREATE ORDER => userId={createOrderRequest.userId}, " +
+                    $"addressId={createOrderRequest.addressId}, " +
+                    $"totalPrice={createOrderRequest.totalPrice}");
+
+                foreach (var product in createOrderRequest.products)
+                {
+                    Debug.WriteLine(
+                        $"ORDER PRODUCT => productId={product.productId}, " +
+                        $"price={product.price}, " +
+                        $"quantity={product.quantity}");
+                }
+
+                IsLoading = true;
+
+                CreateOrderResponse createOrderResponse =
+                    await apiService.CreateOrder(createOrderRequest);
+
+                if (createOrderResponse.resultCode != ApiResult.SUCCESS.GetCodeToString())
+                {
+                    await Shell.Current.DisplayAlert(
+                        "Xatolik",
+                        createOrderResponse.resultMsg ?? "Buyurtma yaratilmadi.",
+                        "OK");
+
+                    return;
+                }
+
+                if (createOrderResponse.resultData == null ||
+                    createOrderResponse.resultData <= 0)
+                {
+                    await Shell.Current.DisplayAlert(
+                        "Xatolik",
+                        "Buyurtma ID olinmadi.",
+                        "OK");
+
+                    return;
+                }
+
+                long orderId = createOrderResponse.resultData.Value;
+
+                Debug.WriteLine(
+                    $"ORDER CREATED SUCCESSFULLY => orderId={orderId}");
+
+                var paymeRequest = new CreatePaymeCheckoutUrlRequest
+                {
+                    order_id = (int)orderId
+                };
+
+                CreatePaymeCheckoutUrlResponse paymeResponse =
+                    await apiService.CreatePaymeCheckoutUrl(paymeRequest);
+
+                if (paymeResponse.resultCode != ApiResult.SUCCESS.GetCodeToString())
+                {
+                    await Shell.Current.DisplayAlert(
+                        "Xatolik",
+                        paymeResponse.resultMsg ?? "Payme URL yaratilmadi.",
+                        "OK");
+
+                    return;
+                }
+
+                if (paymeResponse.resultData == null ||
+                    string.IsNullOrWhiteSpace(paymeResponse.resultData.payment_url))
+                {
+                    await Shell.Current.DisplayAlert(
+                        "Xatolik",
+                        "Payme to'lov manzili olinmadi.",
+                        "OK");
+
+                    return;
+                }
+
+                string paymentUrl = paymeResponse.resultData.payment_url;
+
+                Debug.WriteLine($"PAYME CHECKOUT URL => {paymentUrl}");
+
+                var parameters = new ShellNavigationQueryParameters
+                {
+                    ["PaymentUrl"] = paymentUrl,
+                    ["OrderId"] = orderId
+                };
+
+                await Shell.Current.GoToAsync(
+                    nameof(PaymentPage),
+                    parameters);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[ERROR] CreateOrder: {ex}");
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        });
+    }
+
+    private int GetProductsPrice()
+    {
+        return Products.Sum(product => ParseSom(product.PriceText));
+    }
+
+    private static int ParseSom(string priceText)
+    {
+        if (string.IsNullOrWhiteSpace(priceText))
+            return 0;
+
+        string onlyNumbers = new string(priceText.Where(char.IsDigit).ToArray());
+
+        return int.TryParse(onlyNumbers, out int price)
+            ? price
+            : 0;
     }
 
     private void UpdateSummaryUI()
     {
-        int total = ProductPrice + DeliveryPrice;
+        int productsPrice = GetProductsPrice();
+        int total = productsPrice + DeliveryPrice;
 
         ProductsCountLabel.Text = $"{Products.Count} ta";
-        ProductsPriceLabel.Text = FormatSom(ProductPrice);
+        ProductsPriceLabel.Text = FormatSom(productsPrice);
         DeliveryPriceLabel.Text = DeliveryPrice == 0 ? "Bepul" : FormatSom(DeliveryPrice);
         TotalPriceLabel.Text = FormatSom(total);
     }

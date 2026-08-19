@@ -203,7 +203,8 @@
                     Padding="14,0"
                     BackgroundColor="#FD473C"
                     CornerRadius="8"
-                    VerticalOptions="Center" />
+                    VerticalOptions="Center" 
+                    Command="{Binding CheckoutCommand}"/>
             </Grid>
         
         </Grid>

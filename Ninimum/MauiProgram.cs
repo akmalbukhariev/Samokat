@@ -18,6 +18,8 @@ using RestSharp;
 using Utils;
 using Ninimum.Views.Authorization;
 using Ninimum.Views.Cart;
+using Ninimum.Views.Payment;
+using Ninimum.Views.Orders;
 
 #if ANDROID
 
@@ -104,6 +106,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<MyProfilePage>();
 		builder.Services.AddTransient<AuthorizationPage>();
 		builder.Services.AddTransient<AddressPage>();
+		builder.Services.AddTransient<PaymentPage>();
+		builder.Services.AddTransient<OrdersPage>();
 
 		builder.Services.AddTransient<MainPageViewModel>();
 		builder.Services.AddTransient<MenuPageViewModel>();
@@ -114,6 +118,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<CartPageViewModel>();
 		builder.Services.AddTransient<LoginPageViewModel>();
 		builder.Services.AddTransient<RegisterPageViewModel>();
+		builder.Services.AddTransient<OrdersPageViewModel>();
 
 		builder.Services.AddTransient(sp =>
                 new UserApiService(

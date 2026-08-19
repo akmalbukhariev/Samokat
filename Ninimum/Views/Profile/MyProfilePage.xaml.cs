@@ -2,6 +2,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Ninimum.Services;
+using Ninimum.Views.Orders;
 using Ninimum.Views.PaymentCard;
 
 namespace Ninimum.Views.Profile;
@@ -117,8 +118,8 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
     private async void OnOrderClicked()
     {
-        await DisplayAlert("Clicked", "Buyurtma", "OK");
-        // await Navigation.PushAsync(new OrdersPage());
+        AppVibrationService.Like();
+        await AppNavigatorService.NavigateTo(nameof(OrdersPage));
     }
 
     private async void OnReviewClicked()

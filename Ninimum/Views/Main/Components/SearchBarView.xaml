@@ -7,10 +7,11 @@
     x:DataType="vm:MainPageViewModel">
 
     <Grid 
-        ColumnDefinitions="60,*" 
+        ColumnDefinitions="Auto,*" 
         ColumnSpacing="10">
 
         <Button
+            IsVisible="False"
             Grid.Column="0"
             BackgroundColor="#F7F9FB"
             CornerRadius="30"

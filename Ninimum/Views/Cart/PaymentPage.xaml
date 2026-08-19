@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Ninimum.Views"
+    xmlns:components="clr-namespace:Ninimum.Components"
+    x:Class="Ninimum.Views.Payment.PaymentPage"
+    BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <!-- Header -->
+        <components:PageHeaderView
+            Grid.Row="0"
+            ShowBack="true"
+            Title="To'lov" />
+
+        <!-- Payment content -->
+        <Grid Grid.Row="1">
+
+            <WebView
+                x:Name="PaymeWebView"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"
+                Navigating="PaymeWebView_Navigating"
+                Navigated="PaymeWebView_Navigated" />
+
+            <!-- Loading overlay -->
+            <Grid
+                x:Name="LoadingLayout"
+                BackgroundColor="#80FFFFFF"
+                IsVisible="True">
+
+                <VerticalStackLayout
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Spacing="14">
+
+                    <ActivityIndicator
+                        x:Name="ActivityIndicator"
+                        IsRunning="True"
+                        WidthRequest="44"
+                        HeightRequest="44"
+                        Color="#FD473C" />
+
+                    <Label
+                        Text="To'lov sahifasi yuklanmoqda..."
+                        TextColor="#22292F"
+                        FontSize="16"
+                        HorizontalTextAlignment="Center"
+                        FontFamily="{StaticResource FontSFRegular}" />
+
+                </VerticalStackLayout>
+
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+
+</page:BasePage>

@@ -36,10 +36,13 @@
                         <!-- THIS scrolls -->
                         <components:SearchBarView x:Name="InlineSearchBarView"/>
 
-                        <components:OrderProcessView CurrentStep="OutForDelivery"/>
+                        <components:OrderProcessView 
+                            IsVisible="False"
+                            CurrentStep="OutForDelivery"/>
 
                         <components:AdBannerView
                             x:Name="AdBannerView"
+                            IsVisible="{Binding ShowBanners}"
                             ItemsSource="{Binding AdBanners}"
                             PurchaseCommand="{Binding PurchaseBannerCommand}" />
 

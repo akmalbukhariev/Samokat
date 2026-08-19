@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Ninimum.Views"
+    xmlns:components="clr-namespace:Ninimum.Components"
+    xmlns:orderComponents="clr-namespace:Ninimum.Views.Main.Components"
+    xmlns:models="clr-namespace:Ninimum.Models"
+    x:Class="Ninimum.Views.Orders.OrdersPage"
+    x:Name="ThisPage"
+    BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,Auto,*">
+
+        <components:PageHeaderView
+            Grid.Row="0"
+            ShowBack="true"
+            Title="Buyurtmalar" />
+
+        <!-- Tabs -->
+        <Grid
+            Grid.Row="1"
+            Margin="20,18,20,16"
+            Padding="4"
+            HeightRequest="56"
+            ColumnDefinitions="*,*"
+            BackgroundColor="#F5F6F8">
+
+            <Border
+                Grid.Column="0"
+                BackgroundColor="{Binding ActiveTabBackground}"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 10">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ShowActiveCommand}" />
+                </Border.GestureRecognizers>
+
+                <HorizontalStackLayout
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Spacing="7">
+
+                    <Label
+                        Text="Amaldagi"
+                        FontSize="17"
+                        TextColor="#22292F"
+                        FontFamily="{StaticResource FontSFMedium}" />
+
+                    <Border
+                        Padding="6,1"
+                        BackgroundColor="#DADBDD"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 10">
+
+                        <Label
+                            Text="{Binding ActiveCountText}"
+                            FontSize="12"
+                            TextColor="#96979B" />
+                    </Border>
+
+                </HorizontalStackLayout>
+
+            </Border>
+
+            <Border
+                Grid.Column="1"
+                BackgroundColor="{Binding CompletedTabBackground}"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 10">
+
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ShowCompletedCommand}" />
+                </Border.GestureRecognizers>
+
+                <HorizontalStackLayout
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                    Spacing="7">
+
+                    <Label
+                        Text="Tugatilgani"
+                        FontSize="17"
+                        TextColor="#22292F"
+                        FontFamily="{StaticResource FontSFMedium}" />
+
+                    <Border
+                        Padding="6,1"
+                        BackgroundColor="#DADBDD"
+                        StrokeThickness="0"
+                        StrokeShape="RoundRectangle 10">
+
+                        <Label
+                            Text="{Binding CompletedCountText}"
+                            FontSize="12"
+                            TextColor="#96979B" />
+                    </Border>
+
+                </HorizontalStackLayout>
+
+            </Border>
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+
+            <!-- ACTIVE -->
+            <CollectionView
+                IsVisible="{Binding ShowActiveOrders}"
+                ItemsSource="{Binding ActiveOrders}"
+                SelectionMode="None">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:OrderItemModel">
+
+                        <VerticalStackLayout>
+
+                            <Border
+                                Margin="0,0,0,10"
+                                Padding="20,18"
+                                BackgroundColor="White"
+                                StrokeThickness="0">
+
+                                <VerticalStackLayout Spacing="16">
+
+                                    <!-- Date / Order number -->
+                                    <Grid ColumnDefinitions="*,Auto">
+
+                                        <Label
+                                            Text="{Binding OrderDate}"
+                                            FontSize="19"
+                                            TextColor="#22292F"
+                                            FontFamily="{StaticResource FontSFBold}" />
+
+                                        <Label
+                                            Grid.Column="1"
+                                            Text="{Binding DisplayOrderNumber}"
+                                            FontSize="14"
+                                            TextColor="#96979B"
+                                            VerticalOptions="Center" />
+
+                                    </Grid>
+
+                                    <BoxView
+                                        HeightRequest="1"
+                                        Color="#EEEEEE" />
+
+                                    <!-- Status -->
+                                    <Label
+                                        Text="{Binding StatusText}"
+                                        FontSize="18"
+                                        TextColor="#22292F"
+                                        FontFamily="{StaticResource FontSFBold}" />
+
+                                    <!-- Products -->
+                                    <VerticalStackLayout
+                                        BindableLayout.ItemsSource="{Binding Products}"
+                                        Spacing="16">
+
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="models:OrderProductItemModel">
+
+                                                <Grid
+                                                    ColumnDefinitions="90,*"
+                                                    ColumnSpacing="14">
+
+                                                    <Border
+                                                        Grid.Column="0"
+                                                        WidthRequest="90"
+                                                        HeightRequest="90"
+                                                        BackgroundColor="#F5FAFC"
+                                                        StrokeThickness="0"
+                                                        StrokeShape="RoundRectangle 8">
+
+                                                        <Image
+                                                            Source="{Binding ProductImageUrl}"
+                                                            Aspect="AspectFit"
+                                                            Margin="7" />
+
+                                                    </Border>
+
+                                                    <VerticalStackLayout
+                                                        Grid.Column="1"
+                                                        VerticalOptions="Center"
+                                                        Spacing="5">
+
+                                                        <Label
+                                                            Text="{Binding ProductName}"
+                                                            FontSize="16"
+                                                            TextColor="#22292F"
+                                                            FontFamily="{StaticResource FontSFRegular}"
+                                                            MaxLines="2"
+                                                            LineBreakMode="TailTruncation" />
+
+                                                        <Label
+                                                            Text="{Binding PriceText}"
+                                                            FontSize="15"
+                                                            TextColor="#666666" />
+
+                                                        <Label
+                                                            Text="{Binding Quantity, StringFormat='{0} ta'}"
+                                                            FontSize="14"
+                                                            TextColor="#96979B" />
+
+                                                    </VerticalStackLayout>
+
+                                                </Grid>
+
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+
+                                    </VerticalStackLayout>
+
+                                    <!-- Buttons -->
+                                    <Grid
+                                        ColumnDefinitions="*"
+                                        Margin="0,4,0,0">
+
+                                        <Border
+                                            HeightRequest="48"
+                                            BackgroundColor="White"
+                                            Stroke="#D8D9DD"
+                                            StrokeThickness="1"
+                                            StrokeShape="RoundRectangle 8">
+
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.ToggleOrderCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+
+                                            <Label
+                                                Text="Buyurtma holati"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                FontSize="16"
+                                                TextColor="#22292F"
+                                                FontFamily="{StaticResource FontSFMedium}" />
+
+                                        </Border>
+
+                                    </Grid>
+
+                                    <!-- Progress only when requested -->
+                                    <orderComponents:OrderProcessView
+                                        IsVisible="{Binding IsExpanded}"
+                                        OrderNumber="{Binding DisplayOrderNumber}"
+                                        OrderStatus="{Binding Status}"
+                                        IsExpanded="True" />
+
+                                </VerticalStackLayout>
+
+                            </Border>
+
+                            <!-- Coupang-like separator -->
+                            <BoxView
+                                HeightRequest="10"
+                                Color="#F4F5F6" />
+
+                        </VerticalStackLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout
+                        Padding="20,80"
+                        HorizontalOptions="Center">
+
+                        <Label
+                            Text="Amaldagi buyurtmalar mavjud emas"
+                            TextColor="#96979B"
+                            FontSize="16" />
+
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+
+            </CollectionView>
+
+
+            <!-- COMPLETED -->
+            <CollectionView
+                IsVisible="{Binding ShowCompletedOrders}"
+                ItemsSource="{Binding CompletedOrders}"
+                SelectionMode="None">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="models:OrderItemModel">
+
+                        <VerticalStackLayout>
+
+                            <Border
+                                Padding="20,18"
+                                BackgroundColor="White"
+                                StrokeThickness="0">
+
+                                <VerticalStackLayout Spacing="16">
+
+                                    <Grid ColumnDefinitions="*,Auto">
+
+                                        <Label
+                                            Text="{Binding OrderDate}"
+                                            FontSize="19"
+                                            TextColor="#22292F"
+                                            FontFamily="{StaticResource FontSFBold}" />
+
+                                        <Label
+                                            Grid.Column="1"
+                                            Text="{Binding DisplayOrderNumber}"
+                                            FontSize="14"
+                                            TextColor="#96979B"
+                                            VerticalOptions="Center" />
+
+                                    </Grid>
+
+                                    <BoxView HeightRequest="1" Color="#EEEEEE" />
+
+                                    <Label
+                                        Text="{Binding StatusText}"
+                                        FontSize="18"
+                                        TextColor="#22292F"
+                                        FontFamily="{StaticResource FontSFBold}" />
+
+                                    <VerticalStackLayout
+                                        BindableLayout.ItemsSource="{Binding Products}"
+                                        Spacing="16">
+
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="models:OrderProductItemModel">
+
+                                                <Grid
+                                                    ColumnDefinitions="90,*"
+                                                    ColumnSpacing="14">
+
+                                                    <Border
+                                                        WidthRequest="90"
+                                                        HeightRequest="90"
+                                                        BackgroundColor="#F5FAFC"
+                                                        StrokeThickness="0"
+                                                        StrokeShape="RoundRectangle 8">
+
+                                                        <Image
+                                                            Source="{Binding ProductImageUrl}"
+                                                            Aspect="AspectFit"
+                                                            Margin="7" />
+
+                                                    </Border>
+
+                                                    <VerticalStackLayout
+                                                        Grid.Column="1"
+                                                        VerticalOptions="Center"
+                                                        Spacing="5">
+
+                                                        <Label
+                                                            Text="{Binding ProductName}"
+                                                            FontSize="16"
+                                                            TextColor="#22292F"
+                                                            MaxLines="2" />
+
+                                                        <Label
+                                                            Text="{Binding PriceText}"
+                                                            FontSize="15"
+                                                            TextColor="#666666" />
+
+                                                        <Label
+                                                            Text="{Binding Quantity, StringFormat='{0} ta'}"
+                                                            FontSize="14"
+                                                            TextColor="#96979B" />
+
+                                                    </VerticalStackLayout>
+
+                                                </Grid>
+
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+
+                                    </VerticalStackLayout>
+
+                                    <Border
+                                        HeightRequest="48"
+                                        BackgroundColor="White"
+                                        Stroke="#D8D9DD"
+                                        StrokeThickness="1"
+                                        StrokeShape="RoundRectangle 8">
+
+                                        <Border.GestureRecognizers>
+                                            <TapGestureRecognizer
+                                                Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.ToggleOrderCommand}"
+                                                CommandParameter="{Binding .}" />
+                                        </Border.GestureRecognizers>
+
+                                        <Label
+                                            Text="Buyurtma holati"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center"
+                                            FontSize="16"
+                                            TextColor="#22292F" />
+
+                                    </Border>
+
+                                    <orderComponents:OrderProcessView
+                                        IsVisible="{Binding IsExpanded}"
+                                        OrderNumber="{Binding DisplayOrderNumber}"
+                                        OrderStatus="{Binding Status}"
+                                        IsExpanded="True" />
+
+                                </VerticalStackLayout>
+
+                            </Border>
+
+                            <BoxView
+                                HeightRequest="10"
+                                Color="#F4F5F6" />
+
+                        </VerticalStackLayout>
+
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+            <components:LoadingView ShowLoading="{Binding IsLoading}" />
+
+        </Grid>
+
+    </Grid>
+
+</page:BasePage>

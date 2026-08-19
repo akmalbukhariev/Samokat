@@ -28,6 +28,7 @@ public partial class MainPageViewModel : ObservableObject
     [ObservableProperty] private bool isLikedViewLiked;
     [ObservableProperty] private bool showCartView;
     [ObservableProperty] private bool isRefreshing;
+    [ObservableProperty] private bool showBanners;
     [ObservableProperty] private ObservableCollection<AdBannerItem> adBanners;
     [ObservableProperty] private ObservableCollection<MainProductCardItem> products;
     #endregion
@@ -101,6 +102,8 @@ public partial class MainPageViewModel : ObservableObject
                     Image = item.image_url ?? ""
                 });
             }
+
+            ShowBanners = AdBanners.Count > 0;
         }
         catch (Exception ex)
         {

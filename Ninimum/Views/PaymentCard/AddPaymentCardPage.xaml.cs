@@ -1,6 +1,11 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Api.Services;
+using Models.Requests;
+using Models.Responses;
+using Ninimum.Services;
+using Utils;
 
 namespace Ninimum.Views.PaymentCard;
 
@@ -19,9 +24,16 @@ public partial class AddPaymentCardPage : BasePage, INotifyPropertyChanged
         get => _cardNumber;
         set
         {
-            if (_cardNumber != value)
+            var digits = new string((value ?? string.Empty)
+                .Where(char.IsDigit)
+                .ToArray());
+
+            if (digits.Length > 16)
+                digits = digits[..16];
+
+            if (_cardNumber != digits)
             {
-                _cardNumber = value;
+                _cardNumber = digits;
                 OnPropertyChanged();
             }
         }
@@ -55,15 +67,19 @@ public partial class AddPaymentCardPage : BasePage, INotifyPropertyChanged
 
     public ICommand ToggleRememberCommand { get; }
 
-    public AddPaymentCardPage()
+    private readonly UserApiService apiService;
+    public AddPaymentCardPage(AppControl appControl, UserApiService apiService)
     {
         InitializeComponent();
 
+        base.appControl = appControl;
+        this.apiService = apiService;
+        
         ToggleRememberCommand = new Command(() =>
         {
             RememberCard = !RememberCard;
         });
- 
+
         BindingContext = this;
     }
 
@@ -103,7 +119,7 @@ public partial class AddPaymentCardPage : BasePage, INotifyPropertyChanged
         }
     }
 
-    public string ExpireDate => $"{ExpireMonth}/{ExpireYear}";
+    public string ExpireDate => $"{ExpireMonth}/{ExpireYear}"; 
 
     protected override void OnAppearing()
     {
@@ -115,12 +131,7 @@ public partial class AddPaymentCardPage : BasePage, INotifyPropertyChanged
             CardNumberEntry.Focus();
         });
     }
-
-    private async Task OnSaveCard()
-    {
-        await DisplayAlert("Info", "Karta saqlandi.", "OK");
-    }
-
+        
     protected virtual void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -129,5 +140,72 @@ public partial class AddPaymentCardPage : BasePage, INotifyPropertyChanged
     private async void SaveCard_Tapped(object sender, TappedEventArgs e)
     {
         await AnimateElementScaleDown(sender as Border);
+
+        try
+        {
+            string cleanCardNumber = new string(
+                (CardNumber ?? string.Empty).Where(char.IsDigit).ToArray());
+
+            if (cleanCardNumber.Length != 16)
+            {
+                await DisplayAlert("Xatolik", "Karta raqamini to‘liq kiriting.", "OK");
+                return;
+            }
+
+            if (!int.TryParse(ExpireMonth, out int expiryMonth) ||  expiryMonth < 1 || expiryMonth > 12)
+            {
+                await DisplayAlert("Xatolik", "Amal qilish oyini to‘g‘ri kiriting.", "OK");
+                return;
+            }
+
+            if (!int.TryParse(ExpireYear, out int expiryYear))
+            {
+                await DisplayAlert("Xatolik", "Amal qilish yilini to‘g‘ri kiriting.", "OK");
+                return;
+            }
+
+            if (expiryYear < 100)
+                expiryYear += 2000;
+
+            loading.ShowLoading = true;
+            Response response = await apiService.AddPaymentCard(
+                new CreatePaymentCardRequest
+                {
+                    user_id = appControl.userDto.id ?? 0,
+
+                    card_number = cleanCardNumber,
+
+                    card_brand = string.Empty,
+                    card_hash = string.Empty,
+                    last_four_digits = string.Empty,
+                    payment_token = string.Empty,
+
+                    card_holder_name = string.Empty,
+                    expiry_month = expiryMonth,
+                    expiry_year = expiryYear,
+
+                    cvv = string.Empty,
+                    is_default = true
+                });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                await DisplayAlert("Xatolik", response.resultMsg, "OK");
+                return;
+            }
+
+            await DisplayAlert("Muvaffaqiyatli", "Karta saqlandi.", "OK");
+
+            PaymentCardPage.NeedRefreshCards = true;
+            await AppNavigatorService.NavigateTo("..");
+        }
+        catch
+        {
+            await DisplayAlert("Xatolik", "Kartani saqlab bo‘lmadi.", "OK");
+        }
+        finally
+        { 
+            loading.ShowLoading = false;
+        }
     }
 }

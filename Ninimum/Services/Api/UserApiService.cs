@@ -40,6 +40,12 @@ namespace Api.Services
         private const string GET_PAYMENT_CARD_LIST = $"{BASE_URL}payment/getPaymentCardList";
         private const string DELETE_PAYMENT_CARD = $"{BASE_URL}payment/deletePaymentCard";
         private const string SET_DEFAULT_PAYMENT_CARD = $"{BASE_URL}payment/setDefaultPaymentCard";
+        private const string CREATE_ORDER = $"{BASE_URL}order/createOrder";
+        private const string GET_PAYME_CHEKOUT_URL = $"{BASE_URL}payment/payme/createCheckoutUrl";
+        private const string GET_ORDER_PAYMENT_STATUS = $"{BASE_URL}order/getOrderPaymentStatus";
+        private const string GET_ORDER_PROCESS = $"{BASE_URL}order/getOrderProcess";
+        private const string GET_ORDER_LIST = $"{BASE_URL}order/getOrderList";
+        private const string GET_ORDER_DETAIL = $"{BASE_URL}order/getOrderDetail";
         #endregion
 
         public UserApiService(RestClient client)
@@ -622,7 +628,7 @@ namespace Api.Services
 
             return response;
         }
-
+        
         public async Task<Response> DeleteCartProduct(DeleteCartRequest data)
         {
             var response = new Response();
@@ -655,7 +661,7 @@ namespace Api.Services
 
             return response;
         }
-
+        
         public async Task<CartResponse> GetCartList(CartListRequest data)
         {
             var response = new CartResponse();
@@ -745,6 +751,207 @@ namespace Api.Services
             {
                 response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
                 response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<CreateOrderResponse> CreateOrder(CreateOrderRequest data)
+        {
+            var response = new CreateOrderResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(CREATE_ORDER, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<CreateOrderResponse>(receivedData);
+
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<CreatePaymeCheckoutUrlResponse> CreatePaymeCheckoutUrl(CreatePaymeCheckoutUrlRequest data)
+        {
+            var response = new CreatePaymeCheckoutUrlResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(GET_PAYME_CHEKOUT_URL, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<CreatePaymeCheckoutUrlResponse>(receivedData);
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<OrderPaymentStatusResponse> GetOrderPaymentStatus(OrderStatusRequest data)
+        {
+            var response = new OrderPaymentStatusResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(GET_ORDER_PAYMENT_STATUS, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<OrderPaymentStatusResponse>(receivedData);
+
+                    if (deserializedResponse != null)
+                        return deserializedResponse;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<OrderProcessResponse> GetOrderProcess(OrderStatusRequest data)
+        {
+            var response = new OrderProcessResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(GET_ORDER_PROCESS, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<OrderProcessResponse>(receivedData);
+
+                    if (deserializedResponse != null)
+                    {
+                        return deserializedResponse;
+                    }
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<OrderListResponse> GetOrderList(OrderListRequest data)
+        {
+            var response = new OrderListResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(GET_ORDER_LIST, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<OrderListResponse>(receivedData);
+
+                    if (result != null)
+                        return result;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<OrderDetailResponse> GetOrderDetail(OrderStatusRequest data)
+        {
+            var response = new OrderDetailResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(GET_ORDER_DETAIL, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<OrderDetailResponse>(receivedData);
+
+                    if (result != null)
+                        return result;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
             }
             catch (Exception ex)
             {

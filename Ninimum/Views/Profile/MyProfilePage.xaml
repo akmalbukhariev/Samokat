@@ -79,7 +79,7 @@
                         <Image Source="ic_order.png" WidthRequest="24" HeightRequest="24" />
                         <Label Grid.Column="2" Text="Buyurtma" Style="{StaticResource ProfileMenuTextStyle}" />
 
-                        <Border Grid.Column="3" Padding="10,2" BackgroundColor="#F7FBEF" StrokeThickness="0" StrokeShape="RoundRectangle 20">
+                        <Border IsVisible="False" Grid.Column="3" Padding="10,2" BackgroundColor="#F7FBEF" StrokeThickness="0" StrokeShape="RoundRectangle 20">
                             <Label Text="2/1" Style="{StaticResource ProfileBadgeTextStyle}" />
                         </Border>
 
