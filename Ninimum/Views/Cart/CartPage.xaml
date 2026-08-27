@@ -136,6 +136,15 @@
                                     </Label>
 
                                     <Label
+                                        IsVisible="{Binding HasActiveSubscription}"
+                                        Text="{Binding ActiveTariffText}"
+                                        TextColor="#16A34A"
+                                        FontSize="17"
+                                        FontFamily="{StaticResource FontSFMedium}"
+                                        LineBreakMode="WordWrap" />
+
+                                    <Label
+                                        IsVisible="{Binding HasActiveSubscription, Converter={StaticResource InverseBoolConverter}}"
                                         Text="Buning uchun siz Tarif rejasiga ulanishingiz kerak bo’ladi."
                                         TextColor="#22292F"
                                         FontSize="17"
@@ -143,6 +152,7 @@
                                         LineBreakMode="WordWrap" />
 
                                     <Label
+                                        IsVisible="{Binding HasActiveSubscription, Converter={StaticResource InverseBoolConverter}}"
                                         Text="Iltimos birorta Tarif rejasini tanlang va maxsus chegirmalarga ega bo’ling"
                                         TextColor="#22292F"
                                         FontSize="17"
@@ -151,6 +161,7 @@
                                 </VerticalStackLayout>
 
                                 <Button
+                                    IsVisible="{Binding HasActiveSubscription, Converter={StaticResource InverseBoolConverter}}"
                                     Text="Tarifga azo bo’lish"
                                     HeightRequest="64"
                                     CornerRadius="16"

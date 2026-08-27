@@ -10,6 +10,7 @@ using Ninimum.Models;
 using Ninimum.Services;
 using Ninimum.Views.LoginRegister;
 using Utils;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace Ninimum.ViewModels;
 
@@ -62,14 +63,16 @@ public partial class RegisterPageViewModel : ObservableObject
     {
         this.apiService = apiService;
         this.appControl = appControl;
-
-       MessagingCenter.Subscribe<AddressPage, SelectedAddressModel>(this,"SelectedAddress",
-            (sender, selectedAddress) =>
-            {
-                Address = selectedAddress.Address;
-                LocationLatitude = selectedAddress.Latitude;
-                LocationLongitude = selectedAddress.Longitude;
-            });
+  
+        WeakReferenceMessenger.Default.Register<object, SelectedAddressModel, string>(
+                this,
+                "SelectedAddress",
+                (recipient, selectedAddress) =>
+                {
+                    Address = selectedAddress.Address;
+                    LocationLatitude = selectedAddress.Latitude;
+                    LocationLongitude = selectedAddress.Longitude;
+                });
 
         AddressTapCommand = new Command(AdressTapped);
 

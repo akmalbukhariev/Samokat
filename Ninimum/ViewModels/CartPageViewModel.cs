@@ -6,6 +6,7 @@ using Models.Responses;
 using Ninimum.Models;
 using Ninimum.Services;
 using Ninimum.Views.Formalization;
+using Ninimum.Views.MyTariff;
 using Ninimum.Views.Payment;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -39,6 +40,8 @@ public partial class CartPageViewModel : ObservableObject
     [ObservableProperty] private string bottomSelectedCountText = "0 ta mahsulot";
     [ObservableProperty] private string totalRegularPrice = "0";
     [ObservableProperty] private string totalTariffPrice = "0";
+    [ObservableProperty] private bool hasActiveSubscription;
+    [ObservableProperty] private string activeTariffText = string.Empty;
 
     [ObservableProperty] private IAsyncRelayCommand loadMoreCommand;
     [ObservableProperty] private IAsyncRelayCommand refreshCommand;
@@ -59,6 +62,7 @@ public partial class CartPageViewModel : ObservableObject
         loadedCartIds.Clear();
         CartProducts.Clear();
 
+        await LoadActiveSubscriptionAsync();
         await LoadCartProductsAsync();
     }
 
@@ -157,6 +161,7 @@ public partial class CartPageViewModel : ObservableObject
     {
         AppVibrationService.Click();
 
+        await LoadActiveSubscriptionAsync();
         await LoadCartProductsAsync(isRefresh: true);
     }
 
@@ -212,8 +217,10 @@ public partial class CartPageViewModel : ObservableObject
     }
 
     [RelayCommand]
-    private void JoinTariff()
+    private async Task JoinTariff()
     {
+        AppVibrationService.Click();
+        await AppNavigatorService.NavigateTo(nameof(TariffsPage));
     }
 
     [RelayCommand]
@@ -235,6 +242,8 @@ public partial class CartPageViewModel : ObservableObject
             return;
         }
 
+        await LoadActiveSubscriptionAsync();
+
         FormalizationNavigationStore.Data = new FormalizationData
         {
             UserId = (long)appControl.userDto.id,
@@ -247,7 +256,7 @@ public partial class CartPageViewModel : ObservableObject
                     Name = x.Title,
                     ImageSource = x.ProductImageSource,
                     Quantity = x.Quantity,
-                    Price = x.PriceValue
+                    Price = GetEffectivePrice(x)
                 })
                 .ToList()
         };
@@ -255,13 +264,50 @@ public partial class CartPageViewModel : ObservableObject
         await AppNavigatorService.NavigateTo(nameof(FormalizationPage));
     } 
 
+    private async Task LoadActiveSubscriptionAsync()
+    {
+        try
+        {
+            ActiveSubscriptionResponse response = await apiService.GetActiveSubscription(new ActiveSubscriptionRequest
+            {
+                userId = appControl.userDto.id ?? 0
+            });
+
+            var subscription = response.resultData;
+            HasActiveSubscription =
+                response.resultCode == ApiResult.SUCCESS.GetCodeToString() &&
+                subscription != null &&
+                string.Equals(subscription.subscriptionStatus, "ACTIVE", StringComparison.OrdinalIgnoreCase);
+
+            ActiveTariffText = HasActiveSubscription
+                ? $"Faol tarif: {subscription!.tariffName}"
+                : string.Empty;
+        }
+        catch (Exception ex)
+        {
+            HasActiveSubscription = false;
+            ActiveTariffText = string.Empty;
+            Debug.WriteLine($"[ERROR] LoadActiveSubscriptionAsync: {ex.Message}");
+        }
+
+        UpdateSummary();
+    }
+
+    private int GetEffectivePrice(CartProductItemModel product)
+    {
+        if (HasActiveSubscription && product.SubscriptionPriceValue > 0)
+            return product.SubscriptionPriceValue;
+
+        return product.PriceValue;
+    }
+
     private void UpdateSummary()
     {
         int selectedCount = CartProducts.Count(x => x.IsChecked);
 
         int tariffTotal = CartProducts
             .Where(x => x.IsChecked)
-            .Sum(x => x.SubscriptionPriceValue * x.Quantity);
+            .Sum(x => (x.SubscriptionPriceValue > 0 ? x.SubscriptionPriceValue : x.PriceValue) * x.Quantity);
 
         int regularTotal = CartProducts
             .Where(x => x.IsChecked)
@@ -271,7 +317,11 @@ public partial class CartPageViewModel : ObservableObject
 
         TotalTariffPrice = FormatPrice(tariffTotal);
         TotalRegularPrice = FormatPrice(regularTotal);
-        BottomTotalPrice = $"{FormatPrice(regularTotal)} so’m";
+        int effectiveTotal = CartProducts
+            .Where(x => x.IsChecked)
+            .Sum(x => GetEffectivePrice(x) * x.Quantity);
+
+        BottomTotalPrice = $"{FormatPrice(effectiveTotal)} so’m";
         BottomSelectedCountText = $"{selectedCount} ta mahsulot";
 
         SelectAllIcon = CartProducts.Any() && CartProducts.All(x => x.IsChecked)

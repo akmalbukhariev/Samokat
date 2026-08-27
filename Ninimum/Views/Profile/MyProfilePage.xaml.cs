@@ -1,8 +1,13 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Api.Services;
+using Models.Requests;
+using Models.Responses;
 using Ninimum.Services;
 using Ninimum.Views.Orders;
+using Ninimum.Views.MyTariff;
+using Utils;
 using Ninimum.Views.PaymentCard;
 
 namespace Ninimum.Views.Profile;
@@ -30,6 +35,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
     private bool _isSettingsExpanded = true;
     private string _selectedLanguageFlag = "flag_uz.png";
+    private string _currentTariffName = "Tarif yo‘q";
 
     public new event PropertyChangedEventHandler? PropertyChanged;
 
@@ -49,6 +55,20 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
     public string SettingsArrowIcon => IsSettingsExpanded ? "ic_arrow_up.png" : "ic_arrow_down.png";
 
+
+    public string CurrentTariffName
+    {
+        get => _currentTariffName;
+        set
+        {
+            if (_currentTariffName != value)
+            {
+                _currentTariffName = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
     public string SelectedLanguageFlag
     {
         get => _selectedLanguageFlag;
@@ -62,11 +82,13 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         }
     }
  
-    private AppControl appControl;
-    public MyProfilePage(AppControl appControl)
+    private readonly AppControl appControl;
+    private readonly UserApiService apiService;
+    public MyProfilePage(AppControl appControl, UserApiService apiService)
     {
         InitializeComponent();
         this.appControl = appControl;
+        this.apiService = apiService;
 
         OrderCommand = new Command(OnOrderClicked);
         ReviewCommand = new Command(OnReviewClicked);
@@ -97,10 +119,19 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
         BindingContext = this;
 
+        Shell.SetTabBarIsVisible(this, true);
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (!await appControl.EnsureAuthenticatedAsync(true))
+            return;
+
         lbUserName.Text = appControl.userDto.first_name;
         lbPhoneNumber.Text = appControl.userDto.phone_number;
-
-        Shell.SetTabBarIsVisible(this, true);
+        await LoadCurrentTariffAsync();
     }
 
     private void OnLogoutClicked()
@@ -187,7 +218,30 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
     private async void OnMyTariffClicked()
     {
-        await DisplayAlert("Clicked", "Mening tarifim", "OK");
+        await AppNavigatorService.NavigateTo(nameof(MyTariffPage));
+    }
+
+    private async Task LoadCurrentTariffAsync()
+    {
+        try
+        {
+            ActiveSubscriptionResponse response = await apiService.GetActiveSubscription(new ActiveSubscriptionRequest
+            {
+                userId = appControl.userDto.id ?? 0
+            });
+
+            var subscription = response.resultData;
+            bool isActive =
+                response.resultCode == ApiResult.SUCCESS.GetCodeToString() &&
+                subscription != null &&
+                string.Equals(subscription.subscriptionStatus, "ACTIVE", StringComparison.OrdinalIgnoreCase);
+
+            CurrentTariffName = isActive ? subscription!.tariffName : "Tarif yo‘q";
+        }
+        catch
+        {
+            CurrentTariffName = "Tarif yo‘q";
+        }
     }
 
     private async void OnChildrenClicked()

@@ -1,49 +1,80 @@
 using Ninimum.Services;
-using Ninimum.Views.LoginRegister;
-using Ninimum.Views.Startup;
+using Utils;
 
-namespace Ninimum
+namespace Ninimum;
+
+public partial class AppEntryShell : Shell
 {
-    public partial class AppEntryShell : Shell
+    private readonly AppStoreService appStoreService;
+    private readonly AppControl appControl;
+    private bool initialized;
+
+    public AppEntryShell()
     {
-        private AppStoreService appStoreService;
-        private LanguageService languageService;
-        public AppEntryShell()
+        InitializeComponent();
+
+        appStoreService = AppService.GetRequired<AppStoreService>();
+        appControl = AppService.GetRequired<AppControl>();
+
+        ShowLoadingPage();
+        Loaded += OnLoaded;
+    }
+
+    private async void OnLoaded(object? sender, EventArgs e)
+    {
+        if (initialized)
+            return;
+
+        initialized = true;
+        await InitializeSessionAsync();
+    }
+
+    private async Task InitializeSessionAsync()
+    {
+        bool hasSavedLogin = appStoreService.Get(AppKeys.IsLoggedIn, false);
+
+        if (hasSavedLogin)
         {
-            InitializeComponent();
+            string phoneNumber = appStoreService.Get(AppKeys.PhoneNumber, string.Empty);
+            string password = appStoreService.Get(AppKeys.Password, string.Empty);
 
-            appStoreService = AppService.Get<AppStoreService>();
-            languageService = AppService.Get<LanguageService>();
-
-            Init();
-        }
-
-        private void Init()
-        {
-            Items.Clear();
-
-            //languageService.SetCulture(languageService.GetCurrentLanguage());
-
-            //bool isLanguageSet = appStoreService.Get(AppKeys.IsLanguageSet, false);
-            //if (isLanguageSet)
+            if (!string.IsNullOrWhiteSpace(phoneNumber) && !string.IsNullOrWhiteSpace(password))
             {
-                var loginItem = new ShellContent
+                try
                 {
-                    ContentTemplate = new DataTemplate(typeof(LoginPage))
-                    //ContentTemplate = new DataTemplate(typeof(BlockedPage))
-                };
+                    bool restored = await appControl.Login(phoneNumber, password);
 
-                Items.Add(loginItem);
+                    if (restored)
+                        return;
+                }
+                catch
+                {
+                    // If session restoration cannot be completed, open the app as guest.
+                    // Saved credentials are kept so the user can still log in later.
+                }
             }
-            /*else
-            {
-                var languageItem = new ShellContent
-                {
-                    ContentTemplate = new DataTemplate(typeof(StartPage))
-                };
-
-                Items.Add(languageItem);
-            }*/
         }
+
+        await appControl.StartGuestMode();
+    }
+
+    private void ShowLoadingPage()
+    {
+        Items.Clear();
+
+        Items.Add(new ShellContent
+        {
+            Content = new ContentPage
+            {
+                BackgroundColor = Colors.White,
+                Content = new ActivityIndicator
+                {
+                    IsRunning = true,
+                    Color = (Color)Application.Current!.Resources["PrimaryColor"],
+                    VerticalOptions = LayoutOptions.Center,
+                    HorizontalOptions = LayoutOptions.Center
+                }
+            }
+        });
     }
 }

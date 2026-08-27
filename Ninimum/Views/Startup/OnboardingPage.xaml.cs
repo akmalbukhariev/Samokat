@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Microsoft.Maui.Controls.Shapes;
 using Ninimum.Models.Startup;
-using Ninimum.Views.LoginRegister;
+using Ninimum.Services;
 
 namespace Ninimum.Views.Startup;
 
@@ -58,7 +58,7 @@ public partial class OnboardingPage : BasePage
     private async void OnSkipTapped(object sender, TappedEventArgs e)
     {
         await AnimateElementScaleDown(lbSkip);
-        await AppNavigatorService.NavigateTo(nameof(LoginPage));
+        await AppService.GetRequired<AppControl>().StartGuestMode();
     }
 
     private void OnCarouselPositionChanged(object sender, PositionChangedEventArgs e)
@@ -68,7 +68,7 @@ public partial class OnboardingPage : BasePage
 
     private async void OnStart()
     {
-        await AppNavigatorService.NavigateTo(nameof(LoginPage));
+        await AppService.GetRequired<AppControl>().StartGuestMode();
     }
 
     private void UpdateBottomSection(int position)

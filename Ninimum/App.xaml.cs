@@ -5,6 +5,7 @@ using Ninimum.Views.DetailProduct;
 using Ninimum.Views.Formalization;
 using Ninimum.Views.LoginRegister;
 using Ninimum.Views.Main;
+using Ninimum.Views.MyTariff;
 using Ninimum.Views.Orders;
 using Ninimum.Views.Payment;
 using Ninimum.Views.PaymentCard;
@@ -55,7 +56,9 @@ public partial class App : Application
         Routing.RegisterRoute(nameof(CancelOrderPage), typeof(CancelOrderPage));
         Routing.RegisterRoute(nameof(PaymentCardPage), typeof(PaymentCardPage));
         Routing.RegisterRoute(nameof(PaymentPage), typeof(PaymentPage));
-        Routing.RegisterRoute(nameof(OrdersPage),typeof(OrdersPage));
+        Routing.RegisterRoute(nameof(OrdersPage), typeof(OrdersPage));
+        Routing.RegisterRoute(nameof(MyTariffPage), typeof(MyTariffPage));
+        Routing.RegisterRoute(nameof(TariffsPage), typeof(TariffsPage));
         #endregion
     }
 

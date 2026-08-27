@@ -46,6 +46,8 @@ namespace Api.Services
         private const string GET_ORDER_PROCESS = $"{BASE_URL}order/getOrderProcess";
         private const string GET_ORDER_LIST = $"{BASE_URL}order/getOrderList";
         private const string GET_ORDER_DETAIL = $"{BASE_URL}order/getOrderDetail";
+        private const string GET_ACTIVE_SUBSCRIPTION = $"{BASE_URL}subscription/getActiveSubscription";
+        private const string GET_SUBSCRIPTION_LIST = $"{BASE_URL}subscription/getSubscriptionList";
         #endregion
 
         public UserApiService(RestClient client)
@@ -662,6 +664,68 @@ namespace Api.Services
             return response;
         }
         
+        public async Task<ActiveSubscriptionResponse> GetActiveSubscription(ActiveSubscriptionRequest data)
+        {
+            var response = new ActiveSubscriptionResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(GET_ACTIVE_SUBSCRIPTION, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<ActiveSubscriptionResponse>(receivedData);
+                    if (deserializedResponse != null)
+                        return deserializedResponse;
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<SubscriptionListResponse> GetSubscriptionList(ActiveSubscriptionRequest data)
+        {
+            var response = new SubscriptionListResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(GET_SUBSCRIPTION_LIST, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var deserializedResponse = JsonConvert.DeserializeObject<SubscriptionListResponse>(receivedData);
+                    if (deserializedResponse != null)
+                        return deserializedResponse;
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
         public async Task<CartResponse> GetCartList(CartListRequest data)
         {
             var response = new CartResponse();

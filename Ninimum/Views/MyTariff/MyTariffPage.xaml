@@ -33,9 +33,10 @@
         <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
             <VerticalStackLayout Padding="20,24,20,24" Spacing="24">
 
-                <!-- Current tariff -->
+                <!-- Current active tariff -->
                 <Border
-                    Padding="10"
+                    IsVisible="{Binding HasActiveSubscription}"
+                    Padding="14"
                     BackgroundColor="White"
                     Stroke="#F78A08"
                     StrokeThickness="1"
@@ -44,30 +45,64 @@
                     <VerticalStackLayout Spacing="14">
 
                         <HorizontalStackLayout Spacing="10">
+                            <Label Text="Holati" Style="{StaticResource TariffLabelStyle}" />
+                            <Label Text="Faol" TextColor="#16A34A" FontFamily="{StaticResource FontSFMedium}" FontSize="17" />
+                        </HorizontalStackLayout>
+
+                        <HorizontalStackLayout Spacing="10">
                             <Label Text="Tarif rejasi" Style="{StaticResource TariffLabelStyle}" />
-                            <Label Text="Gold" Style="{StaticResource TariffValueStyle}" />
+                            <Label Text="{Binding CurrentTariffName}" Style="{StaticResource TariffValueStyle}" />
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="10">
                             <Label Text="Azo bo’lgan sana" Style="{StaticResource TariffLabelStyle}" />
-                            <Label Text="26.03.2026" Style="{StaticResource TariffValueStyle}" />
+                            <Label Text="{Binding CurrentStartDate}" Style="{StaticResource TariffValueStyle}" />
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="10">
                             <Label Text="Tarif tugashiga" Style="{StaticResource TariffLabelStyle}" />
-                            <Label Text="29 kun qoldi" Style="{StaticResource TariffValueStyle}" />
+                            <Label Text="{Binding CurrentRemainingText}" Style="{StaticResource TariffValueStyle}" />
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="10">
                             <Label Text="Narxi" Style="{StaticResource TariffLabelStyle}" />
-                            <Label Text="99 000 so’m" Style="{StaticResource TariffValueStyle}" />
+                            <Label Text="{Binding CurrentPrice}" Style="{StaticResource TariffValueStyle}" />
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="10">
-                            <Label Text="Keyingi yechish sanasi" Style="{StaticResource TariffLabelStyle}" />
-                            <Label Text="25.04.2026" Style="{StaticResource TariffValueStyle}" />
+                            <Label Text="Tarif tugash sanasi" Style="{StaticResource TariffLabelStyle}" />
+                            <Label Text="{Binding CurrentEndDate}" Style="{StaticResource TariffValueStyle}" />
                         </HorizontalStackLayout>
 
+                    </VerticalStackLayout>
+                </Border>
+
+                <!-- No active tariff -->
+                <Border
+                    IsVisible="{Binding HasActiveSubscription, Converter={StaticResource InverseBoolConverter}}"
+                    Padding="18"
+                    BackgroundColor="#F7F8FB"
+                    Stroke="#DADADA"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10">
+
+                    <VerticalStackLayout Spacing="16">
+                        <Label
+                            Text="Sizda faol tarif mavjud emas. Iltimos, tarifga obuna bo‘ling."
+                            TextColor="#22292F"
+                            FontSize="17"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            LineBreakMode="WordWrap" />
+
+                        <Button
+                            Text="Tarifga azo bo’lish"
+                            HeightRequest="54"
+                            CornerRadius="12"
+                            BackgroundColor="#FF4A3F"
+                            TextColor="White"
+                            FontSize="17"
+                            FontFamily="{StaticResource FontSFBold}"
+                            Command="{Binding JoinTariffCommand}" />
                     </VerticalStackLayout>
                 </Border>
 
@@ -98,7 +133,6 @@
                             VerticalOptions="Center" />
                     </HorizontalStackLayout>
 
-                    <!-- Dynamic list -->
                     <CollectionView
                         ItemsSource="{Binding TariffHistory}"
                         IsVisible="{Binding IsHistoryVisible}"

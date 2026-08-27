@@ -98,28 +98,6 @@
                     ButtonTextColor="White"
                     TapCommand="{Binding RegisterCommand}" />
 
-                <Grid ColumnDefinitions="*,Auto,*" ColumnSpacing="20">
-                    <BoxView Grid.Column="0" HeightRequest="1" VerticalOptions="Center" Color="#DADADA" />
-                    <Label Grid.Column="1" Text="Yoki" TextColor="#96979B" FontFamily="{StaticResource FontSFRegular}" FontSize="17" VerticalTextAlignment="Center" />
-                    <BoxView Grid.Column="2" HeightRequest="1" VerticalOptions="Center" Color="#DADADA" />
-                </Grid>
-
-                <VerticalStackLayout Spacing="10">
-                    <components:CustomActionButton
-                        x:Name="btnGeust"
-                        ButtonText="Ro’yxatdan o’tmay kirish"
-                        ButtonBackgroundColor="#DADADA"
-                        ButtonTextColor="#22292F"
-                        TapCommand="{Binding GuestLoginCommand}" />
-
-                    <Label
-                        Text="Ushbu holatda siz barcha imkoniyatlardan foydalana olmaysiz va sizga maxsus chegirmalar taqdim etilmaydi."
-                        HorizontalTextAlignment="Center"
-                        TextColor="#96979B"
-                        FontFamily="{StaticResource FontSFRegular}"
-                        FontSize="13" />
-                </VerticalStackLayout>
-
             </VerticalStackLayout>
         </ScrollView>
 

@@ -227,7 +227,7 @@
                         </Grid.GestureRecognizers>
 
                         <Label Text="Mening tarifim" Style="{StaticResource ProfileMenuTextStyle}" />
-                        <Label Grid.Column="1" Text="Gold" Style="{StaticResource ProfileGreenValueStyle}" />
+                        <Label Grid.Column="1" Text="{Binding CurrentTariffName}" Style="{StaticResource ProfileGreenValueStyle}" />
                         <Image Grid.Column="2" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 

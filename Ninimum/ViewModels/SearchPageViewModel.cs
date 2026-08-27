@@ -272,7 +272,7 @@ public partial class SearchPageViewModel : ObservableObject
 
             var request = new SearchProductParam
             {
-                user_id = (int)appControl.userDto.id,
+                user_id = appControl.CurrentUserId,
                 keyword = keyword,
                 pageSize = PageSize,
                 offset = offset,
@@ -327,6 +327,9 @@ public partial class SearchPageViewModel : ObservableObject
         if (product == null)
             return;
 
+        if (!await appControl.EnsureAuthenticatedAsync())
+            return;
+
         bool oldLiked = product.Liked;
 
         try
@@ -340,7 +343,7 @@ public partial class SearchPageViewModel : ObservableObject
                 response = await apiService.AddFavoriteProduct(
                     new AddFavoriteRequest
                     {
-                        user_id = (int)appControl.userDto.id,
+                        user_id = appControl.CurrentUserId,
                         product_id = product.ProductId
                     });
             }
@@ -349,7 +352,7 @@ public partial class SearchPageViewModel : ObservableObject
                 response = await apiService.DeleteFavoriteProduct(
                     new DeleteFavoriteRequest
                     {
-                        user_id = (int)appControl.userDto.id,
+                        user_id = appControl.CurrentUserId,
                         product_id = product.ProductId
                     });
             }
@@ -379,6 +382,9 @@ public partial class SearchPageViewModel : ObservableObject
         if (product == null || product.IsCartLoading)
             return;
 
+        if (!await appControl.EnsureAuthenticatedAsync())
+            return;
+
         try
         {
             product.IsCartLoading = true;
@@ -386,7 +392,7 @@ public partial class SearchPageViewModel : ObservableObject
             Response response = await apiService.AddCartProduct(
                 new AddCartRequest
                 {
-                    user_id = (int)appControl.userDto.id,
+                    user_id = appControl.CurrentUserId,
                     product_id = product.ProductId,
                     quantity = 1
                 });

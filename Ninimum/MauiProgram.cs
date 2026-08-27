@@ -20,6 +20,7 @@ using Ninimum.Views.Authorization;
 using Ninimum.Views.Cart;
 using Ninimum.Views.Payment;
 using Ninimum.Views.Orders;
+using Ninimum.Views.MyTariff;
 
 #if ANDROID
 
@@ -108,6 +109,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<AddressPage>();
 		builder.Services.AddTransient<PaymentPage>();
 		builder.Services.AddTransient<OrdersPage>();
+		builder.Services.AddTransient<MyTariffPage>();
+		builder.Services.AddTransient<TariffsPage>();
 
 		builder.Services.AddTransient<MainPageViewModel>();
 		builder.Services.AddTransient<MenuPageViewModel>();

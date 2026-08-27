@@ -1,9 +1,10 @@
-﻿using System.Globalization;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using Api.Services;
 using Models.Dto;
 using Models.Requests;
 using Models.Responses;
+using Ninimum.Views.LoginRegister;
 using Utils;
 
 namespace Ninimum.Services
@@ -12,7 +13,10 @@ namespace Ninimum.Services
     {
         public bool IsBlocked = false;
         public bool IsLoggedIn { get; set; } = false;
-        
+        public bool IsAuthenticated => IsLoggedIn && CurrentUserId > 0;
+        public bool IsGuest => !IsAuthenticated;
+        public int CurrentUserId => userDto?.id ?? 0;
+
         public UserDto userDto { get; set; } = new UserDto();
         private readonly LanguageService lang;
         private readonly UserApiService apiService;
@@ -33,23 +37,28 @@ namespace Ninimum.Services
             return Connectivity.NetworkAccess == NetworkAccess.Internet;
         }
 
-        public async Task Login(string phoneNumber, string password)
+        public async Task<bool> Login(string phoneNumber, string password)
         {
             var request = new LoginUserRequest
             {
                 phone_number = phoneNumber,
                 password = password
             };
+
             LoginUserResponse response = await apiService.Login(request);
-            if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
-            {
-                await InitLoginPage(response.resultData, phoneNumber, password);
-            }
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString() || response.resultData == null)
+                return false;
+
+            await InitLoginPage(response.resultData, phoneNumber, password);
+            return true;
         }
 
         public async Task InitLoginPage(UserDto userDto,string phoneNumber, string password)
-        { 
-            this.userDto = userDto;
+        {
+            this.userDto = userDto ?? new UserDto();
+            IsLoggedIn = true;
+            IsBlocked = false;
 
             storeService.Set(AppKeys.IsLoggedIn, true);
             storeService.Set(AppKeys.PhoneNumber, phoneNumber);
@@ -72,6 +81,47 @@ namespace Ninimum.Services
             SetRootPage(new AppShell());
         }
 
+        public async Task StartGuestMode(bool clearSavedLogin = false)
+        {
+            IsLoggedIn = false;
+            IsBlocked = false;
+            userDto = new UserDto();
+
+            if (clearSavedLogin)
+            {
+                storeService.Remove(AppKeys.IsLoggedIn);
+                storeService.Remove(AppKeys.PhoneNumber);
+                storeService.Remove(AppKeys.Password);
+            }
+
+            await apiService.ClearTokenAsync();
+            SetRootPage(new AppShell());
+        }
+
+        public async Task<bool> EnsureAuthenticatedAsync(bool moveToHomeBeforeLogin = false)
+        {
+            if (IsAuthenticated)
+                return true;
+
+            if (moveToHomeBeforeLogin)
+                SelectHomeTab();
+
+            if (Shell.Current?.CurrentPage is not LoginPage)
+                await AppNavigatorService.NavigateTo(nameof(LoginPage));
+
+            return false;
+        }
+
+        private static void SelectHomeTab()
+        {
+            var shellItem = Shell.Current?.CurrentItem;
+
+            if (shellItem == null || shellItem.Items.Count == 0)
+                return;
+
+            shellItem.CurrentItem = shellItem.Items[0];
+        }
+
         public async Task Logout(bool isBlocked = true)
         {
             IsBlocked = isBlocked;
@@ -86,9 +136,13 @@ namespace Ninimum.Services
             storeService.Remove(AppKeys.PhoneNumber);
             storeService.Remove(AppKeys.Password);
 
+            IsLoggedIn = false;
+            userDto = new UserDto();
+
             await apiService.ClearTokenAsync();
 
-            SetRootPage(new AppEntryShell());
+            // After logout the user continues browsing as a guest.
+            SetRootPage(new AppShell());
         }
 
         public async Task<string?> SendVerificationCode(string phoneNumber)

@@ -28,9 +28,6 @@ public partial class LoginPageViewModel : ObservableObject
     private ICommand registerCommand;
 
     [ObservableProperty]
-    private ICommand guestLoginCommand;
-
-    [ObservableProperty]
     private ICommand forgotPasswordCommand;
     
     [ObservableProperty]
@@ -50,7 +47,6 @@ public partial class LoginPageViewModel : ObservableObject
 
         LoginCommand = new Command(async () => await OnLogin());
         RegisterCommand = new Command(async () => await OnRegister());
-        GuestLoginCommand = new Command(async () => await OnGuestLogin());
         ForgotPasswordCommand = new Command(async () => await OnForgotPassword());
         ConfirmSmsCodeCommand = new Command<string>(OnConfirmSmsCode);
     }
@@ -133,11 +129,6 @@ public partial class LoginPageViewModel : ObservableObject
     private async Task OnRegister()
     {
         await AppNavigatorService.NavigateTo(nameof(AuthorizationPage));
-    }
-
-    private async Task OnGuestLogin()
-    {
-         
     }
 
     private async Task OnForgotPassword()

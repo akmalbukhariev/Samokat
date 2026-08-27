@@ -135,7 +135,7 @@ public partial class MainPageViewModel : ObservableObject
 
             var request = new ProductListRequest
             {
-                user_id = (int)appControl.userDto.id,
+                user_id = appControl.CurrentUserId,
                 category_id = 1,
                 pageSize = PageSize,
                 offset = offset
@@ -237,6 +237,9 @@ public partial class MainPageViewModel : ObservableObject
         if (product == null)
             return;
 
+        if (!await appControl.EnsureAuthenticatedAsync())
+            return;
+
         bool oldLiked = product.Liked;
 
         try
@@ -250,7 +253,7 @@ public partial class MainPageViewModel : ObservableObject
                 response = await apiService.AddFavoriteProduct(
                     new AddFavoriteRequest
                     {
-                        user_id = (int)appControl.userDto.id,
+                        user_id = appControl.CurrentUserId,
                         product_id = product.ProductId
                     });
             }
@@ -259,7 +262,7 @@ public partial class MainPageViewModel : ObservableObject
                 response = await apiService.DeleteFavoriteProduct(
                     new DeleteFavoriteRequest
                     {
-                        user_id = (int)appControl.userDto.id,
+                        user_id = appControl.CurrentUserId,
                         product_id = product.ProductId
                     });
             }
@@ -289,6 +292,9 @@ public partial class MainPageViewModel : ObservableObject
         if (product == null || product.IsCartLoading)
             return;
 
+        if (!await appControl.EnsureAuthenticatedAsync())
+            return;
+
         try
         {
             product.IsCartLoading = true;
@@ -296,7 +302,7 @@ public partial class MainPageViewModel : ObservableObject
             Response response = await apiService.AddCartProduct(
                 new AddCartRequest
                 {
-                    user_id = (int)appControl.userDto.id,
+                    user_id = appControl.CurrentUserId,
                     product_id = product.ProductId,
                     quantity = 1
                 });
@@ -321,6 +327,9 @@ public partial class MainPageViewModel : ObservableObject
 
     private async void OnNotificationTapped()
     {
+        if (!await appControl.EnsureAuthenticatedAsync())
+            return;
+
         await Application.Current.MainPage.DisplayAlert("Info", "Notification clicked", "OK");
     }
     

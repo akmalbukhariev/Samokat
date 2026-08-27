@@ -66,6 +66,7 @@ public partial class DetailProductPageViewModel : ObservableObject
     [ObservableProperty] private int quantity = 1;
     [ObservableProperty] private string finalPrice = "0 so’m";
     private double FinalPriceValue = 0.0;
+    private bool hasActiveSubscription;
     #endregion
 
     #region Commands
@@ -96,6 +97,9 @@ public partial class DetailProductPageViewModel : ObservableObject
 
     public async Task<bool> ToggleProductLikeAsync()
     {
+        if (!await appControl.EnsureAuthenticatedAsync())
+            return false;
+
         bool oldLiked = ProductLiked;
 
         try
@@ -109,7 +113,7 @@ public partial class DetailProductPageViewModel : ObservableObject
                 response = await apiService.AddFavoriteProduct(
                     new AddFavoriteRequest
                     {
-                        user_id = (int)appControl.userDto.id,
+                        user_id = appControl.CurrentUserId,
                         product_id = (int)ProductId
                     });
             }
@@ -118,7 +122,7 @@ public partial class DetailProductPageViewModel : ObservableObject
                 response = await apiService.DeleteFavoriteProduct(
                     new DeleteFavoriteRequest
                     {
-                        user_id = (int)appControl.userDto.id,
+                        user_id = appControl.CurrentUserId,
                         product_id = (int)ProductId
                     });
             }
@@ -164,6 +168,9 @@ public partial class DetailProductPageViewModel : ObservableObject
         if (product == null)
             return;
 
+        if (!await appControl.EnsureAuthenticatedAsync())
+            return;
+
         bool oldLiked = product.Liked;
 
         try
@@ -177,7 +184,7 @@ public partial class DetailProductPageViewModel : ObservableObject
                 response = await apiService.AddFavoriteProduct(
                     new AddFavoriteRequest
                     {
-                        user_id = (int)appControl.userDto.id,
+                        user_id = appControl.CurrentUserId,
                         product_id = product.ProductId
                     });
             }
@@ -186,7 +193,7 @@ public partial class DetailProductPageViewModel : ObservableObject
                 response = await apiService.DeleteFavoriteProduct(
                     new DeleteFavoriteRequest
                     {
-                        user_id = (int)appControl.userDto.id,
+                        user_id = appControl.CurrentUserId,
                         product_id = product.ProductId
                     });
             }
@@ -216,6 +223,7 @@ public partial class DetailProductPageViewModel : ObservableObject
         SimilarProducts.Clear();
         ProductImages.Clear();
 
+        await LoadActiveSubscriptionAsync();
         await LoadProductDetailAsync();
         await LoadSimilarProductsAsync();
     }
@@ -229,7 +237,7 @@ public partial class DetailProductPageViewModel : ObservableObject
             DetailProductResponse response = await apiService.GetProductDetail(
                     new ProductDetailRequest
                     {
-                        user_id = (int)appControl.userDto.id,
+                        user_id = appControl.CurrentUserId,
                         product_id = (int)ProductId
                     });
 
@@ -260,8 +268,15 @@ public partial class DetailProductPageViewModel : ObservableObject
             ReviewText = $"{product.review_count} sharhlar";
             SubscriptionPrice = $"{product.subscription_price?.ToString("N0").Replace(",", " ") ?? "0"} so’m";
             RegularPrice = $"{product.price?.ToString("N0").Replace(",", " ") ?? "0"} so’m";
-            FinalPrice = RegularPrice;
-            FinalPriceValue = product.price ?? 0.0;
+
+            double regularPriceValue = product.price ?? 0.0;
+            double subscriptionPriceValue = product.subscription_price ?? 0.0;
+
+            FinalPriceValue = hasActiveSubscription && subscriptionPriceValue > 0
+                ? subscriptionPriceValue
+                : regularPriceValue;
+
+            FinalPrice = $"{FinalPriceValue.ToString("N0").Replace(",", " ")} so’m";
             ProductImages.Clear();
 
             if (product.images != null && product.images.Count > 0)
@@ -283,6 +298,35 @@ public partial class DetailProductPageViewModel : ObservableObject
         finally
         {
             IsLoading = false;
+        }
+    }
+
+    private async Task LoadActiveSubscriptionAsync()
+    {
+        if (!appControl.IsAuthenticated)
+        {
+            hasActiveSubscription = false;
+            return;
+        }
+
+        try
+        {
+            ActiveSubscriptionResponse response = await apiService.GetActiveSubscription(new ActiveSubscriptionRequest
+            {
+                userId = appControl.CurrentUserId
+            });
+
+            var subscription = response.resultData;
+
+            hasActiveSubscription =
+                response.resultCode == ApiResult.SUCCESS.GetCodeToString() &&
+                subscription != null &&
+                string.Equals(subscription.subscriptionStatus, "ACTIVE", StringComparison.OrdinalIgnoreCase);
+        }
+        catch (Exception ex)
+        {
+            hasActiveSubscription = false;
+            Debug.WriteLine($"[ERROR] LoadActiveSubscriptionAsync: {ex.Message}");
         }
     }
 
@@ -309,7 +353,7 @@ public partial class DetailProductPageViewModel : ObservableObject
             ProductResponse response = await apiService.GetSimilarProduct(
                     new SimilarProductListRequest
                     {
-                        user_id = (int)appControl.userDto.id,
+                        user_id = appControl.CurrentUserId,
                         product_id = (int)ProductId,
                         pageSize = PageSize,
                         offset = offset
@@ -397,12 +441,16 @@ public partial class DetailProductPageViewModel : ObservableObject
 
     private async Task RefreshAsync()
     {
+        await LoadActiveSubscriptionAsync();
         await LoadProductDetailAsync();
         await LoadSimilarProductsAsync(true);
     }
 
     public async Task<bool> AddProductToCartAsync()
     {
+        if (!await appControl.EnsureAuthenticatedAsync())
+            return false;
+
         try
         {
             IsLoading = true;
@@ -410,7 +458,7 @@ public partial class DetailProductPageViewModel : ObservableObject
             Response response = await apiService.AddCartProduct(
                 new AddCartRequest
                 {
-                    user_id = (int)appControl.userDto.id,
+                    user_id = appControl.CurrentUserId,
                     product_id = (int)ProductId,
                     quantity = Quantity
                 });
@@ -449,9 +497,12 @@ public partial class DetailProductPageViewModel : ObservableObject
 
     public async Task PurchaseNowAsync()
     {
+        if (!await appControl.EnsureAuthenticatedAsync())
+            return;
+
         FormalizationNavigationStore.Data = new FormalizationData
         {
-            UserId = (long)appControl.userDto.id,
+            UserId = appControl.CurrentUserId,
             AddressText = appControl.userDto.address,
 
             Products = new List<FormalizationProductItem>

@@ -6,6 +6,7 @@ using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 using Ninimum.Models;
 using Ninimum.Services;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace Ninimum.Views.LoginRegister;
 
@@ -354,12 +355,21 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         if (!result)
             return;
 
-        MessagingCenter.Send(this, "SelectedAddress", new SelectedAddressModel
+        /*MessagingCenter.Send(this, "SelectedAddress", new SelectedAddressModel
         {
             Address = AddressText,
             Latitude = latitude,
             Longitude = longitude
-        });
+        });*/
+
+        WeakReferenceMessenger.Default.Send(
+            new SelectedAddressModel
+            {
+                Address = AddressText,
+                Latitude = latitude,
+                Longitude = longitude
+            },
+            "SelectedAddress");
 
         await AppNavigatorService.NavigateTo("..");
     }

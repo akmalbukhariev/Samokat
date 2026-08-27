@@ -1,16 +1,19 @@
 
 using System.ComponentModel;
 using Ninimum.ViewModels;
+using Ninimum.Services;
 
 namespace Ninimum.Views.FavoriteProduct;
 
 public partial class FavoritePage : BasePage
 {
-    private FavoritePageViewModel viewModel;
-    public FavoritePage(FavoritePageViewModel vm)
+    private readonly FavoritePageViewModel viewModel;
+
+    public FavoritePage(FavoritePageViewModel vm, AppControl appControl)
     {
         InitializeComponent();
         viewModel = vm;
+        this.appControl = appControl;
         BindingContext = vm;
 
         Shell.SetTabBarIsVisible(this, true);
@@ -21,6 +24,9 @@ public partial class FavoritePage : BasePage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+
+        if (!await appControl.EnsureAuthenticatedAsync(true))
+            return;
 
         await viewModel.LoadInitialAsync();
     }
