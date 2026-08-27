@@ -1,4 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 using Ninimum.Services;
 using Ninimum.Services.Interface;
@@ -101,7 +101,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<CartPage>();
 		builder.Services.AddTransient<FormalizationPage>();
 		builder.Services.AddTransient<PaymentCardPage>();
-		builder.Services.AddTransient<PaymentCardPage>();
+		builder.Services.AddTransient<CancelOrderPage>();
 		builder.Services.AddTransient<AddPaymentCardPage>();
 		builder.Services.AddTransient<ChildInfoPage>();
 		builder.Services.AddTransient<MyProfilePage>();

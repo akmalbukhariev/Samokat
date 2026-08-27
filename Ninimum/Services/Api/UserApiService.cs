@@ -1,4 +1,4 @@
-﻿
+
 using Models.Requests;
 using Models.Responses;
 using Newtonsoft.Json;
@@ -46,6 +46,7 @@ namespace Api.Services
         private const string GET_ORDER_PROCESS = $"{BASE_URL}order/getOrderProcess";
         private const string GET_ORDER_LIST = $"{BASE_URL}order/getOrderList";
         private const string GET_ORDER_DETAIL = $"{BASE_URL}order/getOrderDetail";
+        private const string CANCEL_ORDER = $"{BASE_URL}order/cancelOrder";
         private const string GET_ACTIVE_SUBSCRIPTION = $"{BASE_URL}subscription/getActiveSubscription";
         private const string GET_SUBSCRIPTION_LIST = $"{BASE_URL}subscription/getSubscriptionList";
         #endregion
@@ -1016,6 +1017,40 @@ namespace Api.Services
 
                 response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
                 response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+
+        public async Task<Response> CancelOrder(CancelOrderRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PutAsync(CANCEL_ORDER, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<Response>(receivedData);
+
+                    if (result != null)
+                        return result;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
             }
             catch (Exception ex)
             {

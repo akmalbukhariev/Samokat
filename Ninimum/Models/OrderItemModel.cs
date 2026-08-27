@@ -30,6 +30,10 @@ public partial class OrderItemModel : ObservableObject
         }
     }
 
+    public bool CanCancel =>
+        string.Equals(Status, "PENDING", StringComparison.OrdinalIgnoreCase) ||
+        string.Equals(Status, "CONFIRMED", StringComparison.OrdinalIgnoreCase);
+
     [ObservableProperty] private string status = string.Empty;
     [ObservableProperty] private string orderDate = string.Empty;
     [ObservableProperty] private string totalPrice = string.Empty;
@@ -41,5 +45,6 @@ public partial class OrderItemModel : ObservableObject
     partial void OnStatusChanged(string value)
     {
         OnPropertyChanged(nameof(StatusText));
+        OnPropertyChanged(nameof(CanCancel));
     }
 }

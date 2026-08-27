@@ -86,7 +86,7 @@
                         <Image Grid.Column="4" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
-                    <Grid ColumnDefinitions="32,10,*,Auto,24">
+                    <Grid IsVisible="False" ColumnDefinitions="32,10,*,Auto,24">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ReviewCommand}" />
                         </Grid.GestureRecognizers>
@@ -101,7 +101,7 @@
                         <Image Grid.Column="4" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
-                    <Grid ColumnDefinitions="32,10,*,Auto,24">
+                    <Grid IsVisible="False" ColumnDefinitions="32,10,*,Auto,24">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding PaymentCardCommand}" />
                         </Grid.GestureRecognizers>
@@ -116,7 +116,7 @@
                         <Image Grid.Column="4" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
-                    <Grid ColumnDefinitions="32,10,*,Auto,24">
+                    <Grid IsVisible="False" ColumnDefinitions="32,10,*,Auto,24">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding MessageCommand}" />
                         </Grid.GestureRecognizers>
@@ -192,7 +192,7 @@
                         <Image Grid.Column="2" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
-                    <Grid ColumnDefinitions="*,Auto,24">
+                    <Grid IsVisible="False" ColumnDefinitions="*,Auto,24">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ThemeCommand}" />
                         </Grid.GestureRecognizers>

@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using Models.Requests;
 using Ninimum.Models;
 using Ninimum.Services;
+using Ninimum.Views.PaymentCard;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Utils;
@@ -51,7 +52,11 @@ public partial class OrdersPageViewModel : ObservableObject
 
             foreach (var order in response.resultData)
             {
-                if (!string.Equals(order.paymentStatus, "PAID", StringComparison.OrdinalIgnoreCase))
+                bool isPaid = string.Equals(order.paymentStatus, "PAID", StringComparison.OrdinalIgnoreCase);
+                bool isRefunded = string.Equals(order.paymentStatus, "REFUNDED", StringComparison.OrdinalIgnoreCase);
+                bool isCompleted = IsCompleted(order.status);
+
+                if ((!isCompleted && !isPaid) || (isCompleted && !isPaid && !isRefunded))
                     continue;
 
                 var item = new OrderItemModel
@@ -66,7 +71,7 @@ public partial class OrdersPageViewModel : ObservableObject
                     OrderDate = FormatDate(order.orderedAt)
                 };
 
-                if (IsCompleted(order.status))
+                if (isCompleted)
                     CompletedOrders.Add(item);
                 else
                     ActiveOrders.Add(item);
@@ -166,6 +171,32 @@ public partial class OrdersPageViewModel : ObservableObject
         {
             order.IsLoading = false;
         }
+    }
+
+    [RelayCommand]
+    private async Task CancelOrder(OrderItemModel order)
+    {
+        if (order == null || !order.CanCancel)
+            return;
+
+        await LoadOrderProcessAsync(order);
+
+        if (!order.CanCancel)
+            return;
+
+        string productName = order.Products.FirstOrDefault()?.ProductName ?? "Buyurtma";
+
+        if (order.Products.Count > 1)
+            productName = $"{productName} +{order.Products.Count - 1}";
+
+        await AppNavigatorService.NavigateTo(nameof(CancelOrderPage), new Dictionary<string, object>
+        {
+            ["OrderId"] = order.OrderId,
+            ["ProductName"] = productName,
+            ["OrderNumber"] = order.DisplayOrderNumber,
+            ["OrderDate"] = order.OrderDate,
+            ["OrderAmount"] = order.TotalPrice
+        });
     }
 
     [RelayCommand]

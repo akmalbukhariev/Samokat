@@ -121,11 +121,11 @@
                 <VerticalStackLayout Margin="0,24,0,0" Spacing="12">
 
                     <Button
-                        Text="Bekor qilish"
+                        Text="Buyurtmani bekor qilish"
                         HeightRequest="54"
                         CornerRadius="40"
-                        BackgroundColor="#DADADA"
-                        TextColor="#22292F"
+                        BackgroundColor="#FD473C"
+                        TextColor="White"
                         FontFamily="{StaticResource FontSFMedium}"
                         FontSize="18"
                         Command="{Binding CancelOrderCommand}" />
@@ -134,8 +134,10 @@
                         Text="Bekor qilmayman"
                         HeightRequest="54"
                         CornerRadius="40"
-                        BackgroundColor="#FD473C"
-                        TextColor="White"
+                        BackgroundColor="White"
+                        BorderColor="#D8D9DD"
+                        BorderWidth="1"
+                        TextColor="#22292F"
                         FontFamily="{StaticResource FontSFMedium}"
                         FontSize="18"
                         Command="{Binding DoNotCancelCommand}" />
@@ -145,13 +147,17 @@
             </VerticalStackLayout>
         </Grid>
         
+        <components:LoadingView
+                ShowLoading="{Binding IsCancelling}"
+                ZIndex="98" />
+
         <components:QuestionPopupView
                 x:Name="CancelOrderPopup"
                 QuestionTitle="Siz buyurtmani bekor qilyapsiz&#10;Ishonchingiz komilmi?"
                 YesText="Tasdiqlayman"
                 NoText="Bekor qilmayman"
                 SuccessTitle="Buyurtma muvaffaqiyatli bekor qilindi"
-                SuccessMessage="Bekor qilingan buyurtma uchun to’langan mablag’ hisob raqamingizga 3 kun muddatda qaytariladi"
+                SuccessMessage="Buyurtma bekor qilindi. Buyurtmalar ro‘yxatida uning holatini ko‘rishingiz mumkin."
                 OkText="Tushunarli"
                 IsVisible="False"
                 ZIndex="99" />

@@ -218,15 +218,23 @@
 
                                     <!-- Buttons -->
                                     <Grid
-                                        ColumnDefinitions="*"
+                                        ColumnDefinitions="*,*"
+                                        ColumnSpacing="10"
                                         Margin="0,4,0,0">
 
                                         <Border
+                                            Grid.Column="0"
                                             HeightRequest="48"
                                             BackgroundColor="White"
                                             Stroke="#D8D9DD"
                                             StrokeThickness="1"
                                             StrokeShape="RoundRectangle 8">
+
+                                            <Border.Triggers>
+                                                <DataTrigger TargetType="Border" Binding="{Binding CanCancel}" Value="False">
+                                                    <Setter Property="Grid.ColumnSpan" Value="2" />
+                                                </DataTrigger>
+                                            </Border.Triggers>
 
                                             <Border.GestureRecognizers>
                                                 <TapGestureRecognizer
@@ -240,6 +248,31 @@
                                                 VerticalOptions="Center"
                                                 FontSize="16"
                                                 TextColor="#22292F"
+                                                FontFamily="{StaticResource FontSFMedium}" />
+
+                                        </Border>
+
+                                        <Border
+                                            Grid.Column="1"
+                                            IsVisible="{Binding CanCancel}"
+                                            HeightRequest="48"
+                                            BackgroundColor="#FEF1F2"
+                                            Stroke="#FD473C"
+                                            StrokeThickness="1"
+                                            StrokeShape="RoundRectangle 8">
+
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer
+                                                    Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.CancelOrderCommand}"
+                                                    CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+
+                                            <Label
+                                                Text="Bekor qilish"
+                                                HorizontalOptions="Center"
+                                                VerticalOptions="Center"
+                                                FontSize="16"
+                                                TextColor="#EA1111"
                                                 FontFamily="{StaticResource FontSFMedium}" />
 
                                         </Border>
