@@ -118,6 +118,8 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
     {
         try
         {
+            loading.ShowLoading = true;
+
             var request = new ActiveSubscriptionRequest
             {
                 userId = appControl.userDto.id ?? 0
@@ -155,6 +157,10 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
             HasActiveSubscription = false;
             TariffHistory.Clear();
             OnPropertyChanged(nameof(HasHistory));
+        }
+        finally
+        {
+            loading.ShowLoading = false;
         }
     }
 

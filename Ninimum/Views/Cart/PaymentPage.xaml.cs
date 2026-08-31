@@ -2,6 +2,7 @@ using Api.Services;
 using Models.Requests;
 using Ninimum.Services;
 using Ninimum.Views.Main;
+using Ninimum.Views.MyTariff;
 using System.Diagnostics;
 using Utils;
 
@@ -13,6 +14,8 @@ public partial class PaymentPage : BasePage, IQueryAttributable
     private readonly AppControl appControl;
 
     private long orderId;
+    private long subscriptionId;
+    private string paymentType = "ORDER";
     private string paymentUrl = string.Empty;
 
     private bool paymentReturnHandled;
@@ -39,7 +42,14 @@ public partial class PaymentPage : BasePage, IQueryAttributable
         if (query.TryGetValue("OrderId", out var orderIdValue))
             long.TryParse(orderIdValue?.ToString(), out orderId);
 
-        Debug.WriteLine($"PAYMENT PAGE => orderId={orderId}");
+        if (query.TryGetValue("SubscriptionId", out var subscriptionIdValue))
+            long.TryParse(subscriptionIdValue?.ToString(), out subscriptionId);
+
+        if (query.TryGetValue("PaymentType", out var paymentTypeValue) &&
+            !string.IsNullOrWhiteSpace(paymentTypeValue?.ToString()))
+            paymentType = paymentTypeValue!.ToString()!.ToUpperInvariant();
+
+        Debug.WriteLine($"PAYMENT PAGE => type={paymentType}, orderId={orderId}, subscriptionId={subscriptionId}");
 
         if (string.IsNullOrWhiteSpace(paymentUrl))
             return;
@@ -86,7 +96,10 @@ public partial class PaymentPage : BasePage, IQueryAttributable
 
     private async Task<bool> CheckPaymentStatusOnceAsync(CancellationToken cancellationToken)
     {
-        if (orderId <= 0)
+        if (paymentType == "TARIFF" && subscriptionId <= 0)
+            return false;
+
+        if (paymentType != "TARIFF" && orderId <= 0)
             return false;
 
         bool lockTaken = false;
@@ -99,48 +112,66 @@ public partial class PaymentPage : BasePage, IQueryAttributable
             if (Volatile.Read(ref paymentFinished) == 1)
                 return true;
 
-            var response = await apiService.GetOrderPaymentStatus(
-                new OrderStatusRequest
-                {
-                    orderId = orderId,
-                    userId = (long)appControl.userDto.id
-                });
-
-            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            if (paymentType == "TARIFF")
             {
-                Debug.WriteLine(
-                    $"PAYMENT STATUS API ERROR => {response.resultMsg}");
+                var response = await apiService.GetTariffPaymentStatus(
+                    new TariffPaymentStatusRequest
+                    {
+                        subscriptionId = subscriptionId,
+                        userId = appControl.CurrentUserId
+                    });
+
+                if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+                {
+                    Debug.WriteLine($"TARIFF PAYMENT STATUS API ERROR => {response.resultMsg}");
+                    return false;
+                }
+
+                string paymentStatus = response.resultData?.paymentStatus ?? string.Empty;
+                string subscriptionStatus = response.resultData?.subscriptionStatus ?? string.Empty;
+
+                Debug.WriteLine($"TARIFF PAYMENT STATUS => subscriptionId={subscriptionId}, payment={paymentStatus}, subscription={subscriptionStatus}");
+
+                if (paymentStatus.Equals("PAID", StringComparison.OrdinalIgnoreCase) ||
+                    subscriptionStatus.Equals("ACTIVE", StringComparison.OrdinalIgnoreCase))
+                {
+                    await FinishPaymentAsync("PAID");
+                    return true;
+                }
+
+                if (paymentStatus.Equals("FAILED", StringComparison.OrdinalIgnoreCase) ||
+                    paymentStatus.Equals("CANCELLED", StringComparison.OrdinalIgnoreCase) ||
+                    subscriptionStatus.Equals("CANCELLED", StringComparison.OrdinalIgnoreCase))
+                {
+                    await FinishPaymentAsync(paymentStatus);
+                    return true;
+                }
 
                 return false;
             }
 
-            string paymentStatus =
-                response.resultData?.paymentStatus ?? string.Empty;
+            var orderResponse = await apiService.GetOrderPaymentStatus(
+                new OrderStatusRequest
+                {
+                    orderId = orderId,
+                    userId = appControl.CurrentUserId
+                });
 
-            Debug.WriteLine(
-                $"PAYMENT STATUS => orderId={orderId}, status={paymentStatus}");
-
-            if (paymentStatus.Equals(
-                    "PAID",
-                    StringComparison.OrdinalIgnoreCase))
+            if (orderResponse.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
-                await FinishPaymentAsync(paymentStatus);
-                return true;
+                Debug.WriteLine($"PAYMENT STATUS API ERROR => {orderResponse.resultMsg}");
+                return false;
             }
 
-            if (paymentStatus.Equals(
-                    "FAILED",
-                    StringComparison.OrdinalIgnoreCase))
-            {
-                await FinishPaymentAsync(paymentStatus);
-                return true;
-            }
+            string orderPaymentStatus = orderResponse.resultData?.paymentStatus ?? string.Empty;
 
-            if (paymentStatus.Equals(
-                    "CANCELLED",
-                    StringComparison.OrdinalIgnoreCase))
+            Debug.WriteLine($"PAYMENT STATUS => orderId={orderId}, status={orderPaymentStatus}");
+
+            if (orderPaymentStatus.Equals("PAID", StringComparison.OrdinalIgnoreCase) ||
+                orderPaymentStatus.Equals("FAILED", StringComparison.OrdinalIgnoreCase) ||
+                orderPaymentStatus.Equals("CANCELLED", StringComparison.OrdinalIgnoreCase))
             {
-                await FinishPaymentAsync(paymentStatus);
+                await FinishPaymentAsync(orderPaymentStatus);
                 return true;
             }
 
@@ -152,9 +183,7 @@ public partial class PaymentPage : BasePage, IQueryAttributable
         }
         catch (Exception ex)
         {
-            Debug.WriteLine(
-                $"[ERROR] CheckPaymentStatusOnceAsync => {ex}");
-
+            Debug.WriteLine($"[ERROR] CheckPaymentStatusOnceAsync => {ex}");
             return false;
         }
         finally
@@ -251,11 +280,14 @@ public partial class PaymentPage : BasePage, IQueryAttributable
         paymentStatusCts?.Cancel();
 
         Debug.WriteLine(
-            $"PAYMENT FINISHED => orderId={orderId}, status={paymentStatus}");
+            $"PAYMENT FINISHED => type={paymentType}, orderId={orderId}, subscriptionId={subscriptionId}, status={paymentStatus}");
 
         await MainThread.InvokeOnMainThreadAsync(async () =>
         {
-            await AppNavigatorService.NavigateTo(nameof(MainPage));
+            if (paymentType == "TARIFF")
+                await AppNavigatorService.NavigateTo(nameof(MyTariffPage));
+            else
+                await AppNavigatorService.NavigateTo(nameof(MainPage));
         });
     }
 

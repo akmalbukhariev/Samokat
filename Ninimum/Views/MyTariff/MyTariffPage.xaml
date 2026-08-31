@@ -74,6 +74,18 @@
                             <Label Text="{Binding CurrentEndDate}" Style="{StaticResource TariffValueStyle}" />
                         </HorizontalStackLayout>
 
+                        <!-- Active users can open TariffsPage and switch to another plan. -->
+                        <Button
+                            Text="Tarifni o‘zgartirish"
+                            HeightRequest="54"
+                            Margin="0,6,0,0"
+                            CornerRadius="12"
+                            BackgroundColor="#FF4A3F"
+                            TextColor="White"
+                            FontSize="17"
+                            FontFamily="{StaticResource FontSFBold}"
+                            Command="{Binding JoinTariffCommand}" />
+
                     </VerticalStackLayout>
                 </Border>
 
@@ -180,6 +192,11 @@
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>
+
+        <components:LoadingView
+            x:Name="loading"
+            Grid.RowSpan="2"
+            ZIndex="100" />
 
     </Grid>
 </page:BasePage>

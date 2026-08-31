@@ -19,11 +19,13 @@ namespace Api.Services
         private const string GET_REGIONS = $"{BASE_URL}region/getRegions";
         private const string GET_USER_INFO = $"{BASE_URL}user/getUserInfo";
         private const string UPDATE_USER_PASSWORD = $"{BASE_URL}user/forgotPassword";
+        private const string CHANGE_PASSWORD = $"{BASE_URL}user/changePassword";
         private const string GET_USER_LIST = $"{BASE_URL}user/getUserByIdList";
         private const string UPDATE_USER_INFO = $"{BASE_URL}user/updateUserInfo";
         private const string CHANGE_REGION = $"{BASE_URL}user/changeRegion";
         private const string UPDATE_USER_PHONE_NUMBER = $"{BASE_URL}user/updateUserPhoneNumber";
-        private const string DELETE_USER_ACCOUNT = $"{BASE_URL}user/deleteUser/";
+        private const string CHANGE_PHONE_NUMBER = $"{BASE_URL}user/changePhoneNumber";
+        private const string DELETE_USER_ACCOUNT = $"{BASE_URL}user/deleteAccount";
         private const string VERIFY_NUMBER = $"{BASE_URL}message/verifyPhoneNumber";
         private const string SEND_TEMP_PASSWORD = $"{BASE_URL}message/sendTemporaryPassword";
         private const string GET_PRODUCT_LIST = $"{BASE_URL}product/getProductList";
@@ -51,6 +53,9 @@ namespace Api.Services
         private const string CANCEL_ORDER = $"{BASE_URL}order/cancelOrder";
         private const string GET_ACTIVE_SUBSCRIPTION = $"{BASE_URL}subscription/getActiveSubscription";
         private const string GET_SUBSCRIPTION_LIST = $"{BASE_URL}subscription/getSubscriptionList";
+        private const string GET_TARIFF_LIST = $"{BASE_URL}tariff/getTariffList";
+        private const string CREATE_TARIFF_CHECKOUT = $"{BASE_URL}subscription/payme/createCheckoutUrl";
+        private const string GET_TARIFF_PAYMENT_STATUS = $"{BASE_URL}subscription/getPaymentStatus";
         private const string DELETE_ORDER_HISTORY = $"{BASE_URL}order/deleteOrderHistory";
         #endregion
 
@@ -104,27 +109,22 @@ namespace Api.Services
             };
         }
 
-        public async Task<Response> DeleteUseAccount(string reasons)
+        public async Task<Response> DeleteUserAccount(DeleteAccountRequest data)
         {
             var response = new Response();
 
             try
             {
-                var encodedReasons = Uri.EscapeDataString(reasons ?? string.Empty);
-
-                var url = $"{DELETE_USER_ACCOUNT}{encodedReasons}";
-
-                var receivedData = await DeleteAsync(url);
+                var receivedData = await DeleteAsync(DELETE_USER_ACCOUNT, data);
 
                 if (!string.IsNullOrWhiteSpace(receivedData))
                 {
-                    var deserializedResponse = JsonConvert.DeserializeObject<Response>(receivedData);
-                    if (deserializedResponse != null)
-                    {
-                        return deserializedResponse;
-                    }
+                    var result = JsonConvert.DeserializeObject<Response>(receivedData);
+                    if (result != null)
+                        return result;
                 }
 
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
                 response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
             }
             catch (JsonException jsonEx)
@@ -273,6 +273,70 @@ namespace Api.Services
             return response;
         }
     
+        public async Task<Response> ChangePhoneNumber(ChangePhoneNumberRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PutAsync(CHANGE_PHONE_NUMBER, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<Response>(receivedData);
+                    if (result != null)
+                        return result;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<Response> ChangePassword(ChangePasswordRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PutAsync(CHANGE_PASSWORD, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<Response>(receivedData);
+                    if (result != null)
+                        return result;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
         public async Task<Response> RegisterUser(RegisterUserRequest data)
         {
             var response = new Response();
@@ -786,6 +850,87 @@ namespace Api.Services
             {
                 response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
                 response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<TariffListResponse> GetTariffList()
+        {
+            var response = new TariffListResponse();
+
+            try
+            {
+                var receivedData = await GetAsync(GET_TARIFF_LIST);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<TariffListResponse>(receivedData);
+                    if (result != null)
+                        return result;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<CreateTariffCheckoutResponse> CreateTariffCheckout(CreateTariffCheckoutRequest data)
+        {
+            var response = new CreateTariffCheckoutResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(CREATE_TARIFF_CHECKOUT, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<CreateTariffCheckoutResponse>(receivedData);
+                    if (result != null)
+                        return result;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<TariffPaymentStatusResponse> GetTariffPaymentStatus(TariffPaymentStatusRequest data)
+        {
+            var response = new TariffPaymentStatusResponse();
+
+            try
+            {
+                var receivedData = await PostAsync(GET_TARIFF_PAYMENT_STATUS, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<TariffPaymentStatusResponse>(receivedData);
+                    if (result != null)
+                        return result;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
             }
             catch (Exception ex)
             {

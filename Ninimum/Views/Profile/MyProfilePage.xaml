@@ -208,7 +208,7 @@
                         </Grid.GestureRecognizers>
 
                         <Label Text="Telefon raqamni o’zgartirish" Style="{StaticResource ProfileMenuTextStyle}" />
-                        <Label Grid.Column="1" Text="...888888" Style="{StaticResource ProfileGreenValueStyle}" />
+                        <Label Grid.Column="1" Text="{Binding MaskedPhoneNumber}" Style="{StaticResource ProfileGreenValueStyle}" />
                         <Image Grid.Column="2" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
@@ -288,9 +288,22 @@
                 PopupMaxHeight="360"
                 ZIndex="100" />
 
+        <components:SelectionPopupView
+                x:Name="LanguagePopup"
+                ItemsSource="{Binding LanguageItems}"
+                ItemTappedCommand="{Binding LanguageSelectedCommand}"
+                IsVisible="False"
+                PopupWidth="320"
+                PopupMaxHeight="300"
+                ZIndex="101" />
+
         <components:LoadingView
                 ShowLoading="{Binding IsRegionUpdating}"
                 ZIndex="110" />
+
+        <components:LoadingView
+                ShowLoading="{Binding IsProfileBusy}"
+                ZIndex="111" />
 
         <components:QuestionPopupView
                 x:Name="logOutPopup"

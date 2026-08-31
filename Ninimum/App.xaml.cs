@@ -1,6 +1,7 @@
-﻿using Microsoft.Maui.Handlers;
+using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Platform;
 using Ninimum.Views.Authorization;
+using Ninimum.Views.ChangePhoneNumber;
 using Ninimum.Views.DetailProduct;
 using Ninimum.Views.Formalization;
 using Ninimum.Views.LoginRegister;
@@ -41,6 +42,8 @@ public partial class App : Application
         Routing.RegisterRoute(nameof(AuthorizationPage), typeof(AuthorizationPage));
         Routing.RegisterRoute(nameof(AddressPage), typeof(AddressPage));
         Routing.RegisterRoute(nameof(ChangePasswordPage), typeof(ChangePasswordPage));
+        Routing.RegisterRoute(nameof(ChangePhoneNumberPage), typeof(ChangePhoneNumberPage));
+        Routing.RegisterRoute("ProfileChangePasswordPage", typeof(Ninimum.Views.ChangePassword.ChangePasswordPage));
         #endregion
 
         #region Main pages

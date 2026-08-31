@@ -27,6 +27,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     public ICommand RegionCommand { get; }
     public ICommand RegionSelectedCommand { get; }
     public ICommand LanguageCommand { get; }
+    public ICommand LanguageSelectedCommand { get; }
     public ICommand ThemeCommand { get; }
     public ICommand ChangePhoneCommand { get; }
     public ICommand ChangePasswordCommand { get; }
@@ -39,6 +40,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     private bool _isSettingsExpanded = true;
     private string _selectedLanguageFlag = "flag_uz.png";
     private string _currentTariffName = "Tarif yo‘q";
+    private bool _isProfileBusy;
     private string _selectedRegionName = "Qashqadaryo";
     private bool _isRegionUpdating;
 
@@ -62,6 +64,32 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
 
     public ObservableCollection<PopupItemModel> RegionItems => appControl.RegionItems;
+    public ObservableCollection<PopupItemModel> LanguageItems { get; } = new();
+
+    public string MaskedPhoneNumber
+    {
+        get
+        {
+            string digits = new string((appControl.userDto.phone_number ?? string.Empty).Where(char.IsDigit).ToArray());
+            if (digits.Length < 6)
+                return appControl.userDto.phone_number ?? string.Empty;
+
+            return $"...{digits[^6..]}";
+        }
+    }
+
+    public bool IsProfileBusy
+    {
+        get => _isProfileBusy;
+        set
+        {
+            if (_isProfileBusy == value)
+                return;
+
+            _isProfileBusy = value;
+            OnPropertyChanged();
+        }
+    }
 
     public string SelectedRegionName
     {
@@ -117,11 +145,14 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
  
     private readonly AppControl appControl;
     private readonly UserApiService apiService;
-    public MyProfilePage(AppControl appControl, UserApiService apiService)
+    private readonly LanguageService languageService;
+
+    public MyProfilePage(AppControl appControl, UserApiService apiService, LanguageService languageService)
     {
         InitializeComponent();
         this.appControl = appControl;
         this.apiService = apiService;
+        this.languageService = languageService;
 
         OrderCommand = new Command(OnOrderClicked);
         ReviewCommand = new Command(OnReviewClicked);
@@ -138,6 +169,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         RegionCommand = new Command(OnRegionClicked);
         RegionSelectedCommand = new Command<PopupItemModel>(OnRegionSelected);
         LanguageCommand = new Command(OnLanguageClicked);
+        LanguageSelectedCommand = new Command<PopupItemModel>(OnLanguageSelected);
         ThemeCommand = new Command(OnThemeClicked);
         ChangePhoneCommand = new Command(OnChangePhoneClicked);
         ChangePasswordCommand = new Command(OnChangePasswordClicked);
@@ -157,6 +189,13 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
             appControl.ShowTabBar(true);
         };
 
+        LanguagePopup.Closed += (s, e) =>
+        {
+            appControl.ShowTabBar(true);
+        };
+
+        PrepareLanguageItems();
+
         BindingContext = this;
 
         Shell.SetTabBarIsVisible(this, true);
@@ -171,6 +210,9 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
         lbUserName.Text = appControl.userDto.first_name;
         lbPhoneNumber.Text = appControl.userDto.phone_number;
+        OnPropertyChanged(nameof(MaskedPhoneNumber));
+
+        ApplyLanguageSelection(languageService.GetCurrentLanguage(), persist: false);
 
         await appControl.LoadRegionsAsync();
         appControl.SelectRegion(appControl.userDto.region_id ?? appControl.SelectedRegionId);
@@ -300,24 +342,79 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         }
     }
 
-    private async void OnLanguageClicked()
+    private void OnLanguageClicked()
     {
         AppVibrationService.Like();
+        RefreshLanguageSelection(languageService.GetCurrentLanguage());
+        appControl.ShowTabBar(false);
+        LanguagePopup.IsVisible = true;
+    }
 
-        var selected = await DisplayActionSheet(
-            "Tilni tanlang",
-            "Bekor qilish",
-            null,
-            "O‘zbek",
-            "Русский",
-            "English");
+    private void OnLanguageSelected(PopupItemModel item)
+    {
+        if (item == null)
+            return;
 
-        if (selected == "O‘zbek")
-            SelectedLanguageFlag = "flag_uz.png";
-        else if (selected == "Русский")
-            SelectedLanguageFlag = "flag_ru.png";
-        else if (selected == "English")
-            SelectedLanguageFlag = "flag_en.png";
+        string cultureCode = item.Id switch
+        {
+            2 => AppConstants.RU,
+            3 => AppConstants.EN,
+            _ => AppConstants.UZ
+        };
+
+        ApplyLanguageSelection(cultureCode, persist: true);
+        LanguagePopup.Refresh();
+        LanguagePopup.IsVisible = false;
+        appControl.ShowTabBar(true);
+    }
+
+    private void PrepareLanguageItems()
+    {
+        if (LanguageItems.Count > 0)
+            return;
+
+        LanguageItems.Add(new PopupItemModel { Id = 1, Text = "O‘zbek", LeftImage = AppConstants.LAN_ICON_UZBEK });
+        LanguageItems.Add(new PopupItemModel { Id = 2, Text = "Русский", LeftImage = AppConstants.LAN_ICON_RUSSIAN });
+        LanguageItems.Add(new PopupItemModel { Id = 3, Text = "English", LeftImage = AppConstants.LAN_ICON_ENGLISH });
+
+        RefreshLanguageSelection(languageService.GetCurrentLanguage());
+    }
+
+    private void ApplyLanguageSelection(string cultureCode, bool persist)
+    {
+        // Translation resources can be connected here later. For now this method
+        // stores the selected culture and updates the profile language indicator.
+        if (persist)
+            languageService.SetCulture(cultureCode);
+
+        SelectedLanguageFlag = cultureCode switch
+        {
+            AppConstants.RU => AppConstants.LAN_ICON_RUSSIAN,
+            AppConstants.EN => AppConstants.LAN_ICON_ENGLISH,
+            _ => AppConstants.LAN_ICON_UZBEK
+        };
+
+        RefreshLanguageSelection(cultureCode);
+        OnLanguageChanged(cultureCode);
+    }
+
+    private void RefreshLanguageSelection(string cultureCode)
+    {
+        int selectedId = cultureCode switch
+        {
+            AppConstants.RU => 2,
+            AppConstants.EN => 3,
+            _ => 1
+        };
+
+        foreach (var item in LanguageItems)
+            item.RightImage = item.Id == selectedId ? "check_gray.png" : string.Empty;
+    }
+
+    private void OnLanguageChanged(string cultureCode)
+    {
+        System.Diagnostics.Debug.WriteLine($"LANGUAGE CHANGED => {cultureCode}");
+        // Add resource refresh/reload logic here when translation files are ready.
     }
 
     private async void OnThemeClicked()
@@ -328,13 +425,13 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     private async void OnChangePhoneClicked()
     {
         AppVibrationService.Like();
-        await DisplayAlert("Clicked", "Telefon raqamni o’zgartirish", "OK");
+        await AppNavigatorService.NavigateTo(nameof(Ninimum.Views.ChangePhoneNumber.ChangePhoneNumberPage));
     }
 
     private async void OnChangePasswordClicked()
     {
         AppVibrationService.Like();
-        await DisplayAlert("Clicked", "Parolni o’zgartirish", "OK");
+        await AppNavigatorService.NavigateTo("ProfileChangePasswordPage");
     }
 
     private async void OnMyTariffClicked()
@@ -373,7 +470,44 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
     private async void OnDeleteAccountClicked()
     {
-        await DisplayAlert("Clicked", "Akkauntni o’chirish", "OK");
+        AppVibrationService.Like();
+
+        bool confirmed = await DisplayAlert(
+            "Akkauntni o‘chirish",
+            "Akkaunt o‘chirilgandan so‘ng uni qayta tiklab bo‘lmaydi. Akkauntni o‘chirmoqchimisiz?",
+            "O‘chirish",
+            "Bekor qilish");
+
+        if (!confirmed || IsProfileBusy)
+            return;
+
+        try
+        {
+            IsProfileBusy = true;
+
+            var response = await apiService.DeleteUserAccount(new DeleteAccountRequest
+            {
+                userId = appControl.CurrentUserId
+            });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                await DisplayAlert("Xatolik", response.resultMsg ?? "Akkauntni o‘chirib bo‘lmadi.", "Yopish");
+                return;
+            }
+
+            await DisplayAlert("Akkaunt o‘chirildi", "Akkauntingiz muvaffaqiyatli o‘chirildi.", "OK");
+            await appControl.StartGuestMode(clearSavedLogin: true);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[ERROR] DeleteAccount => {ex}");
+            await DisplayAlert("Xatolik", "Akkauntni o‘chirib bo‘lmadi.", "Yopish");
+        }
+        finally
+        {
+            IsProfileBusy = false;
+        }
     }
  
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)

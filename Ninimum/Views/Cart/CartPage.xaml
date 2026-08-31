@@ -162,7 +162,7 @@
 
                                 <Button
                                     IsVisible="{Binding HasActiveSubscription, Converter={StaticResource InverseBoolConverter}}"
-                                    Text="Tarifga azo bo’lish"
+                                    Text="Tarifga a’zo bo‘lish"
                                     HeightRequest="64"
                                     CornerRadius="16"
                                     BackgroundColor="#FF4A3F"

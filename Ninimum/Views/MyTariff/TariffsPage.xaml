@@ -164,14 +164,17 @@
 
                                     <Button
                                         Grid.Row="2"
-                                        Text="Sotib olish"
+                                        Text="{Binding ActionText}"
+                                        IsEnabled="{Binding CanPurchase}"
                                         BackgroundColor="{Binding Color}"
                                         TextColor="White"
                                         FontSize="20"
                                         FontFamily="{StaticResource FontSFBold}"
                                         CornerRadius="28"
                                         HeightRequest="58"
-                                        Margin="0,10,0,0" />
+                                        Margin="0,10,0,0"
+                                        CommandParameter="{Binding .}"
+                                        Clicked="OnBuyTariffClicked" />
 
                                 </Grid>
                             </Grid>
@@ -196,6 +199,11 @@
             FontFamily="{StaticResource FontSFMedium}"
             LineBreakMode="WordWrap"
             Margin="38,12,38,0" />
+
+        <components:LoadingView
+            x:Name="loading"
+            Grid.RowSpan="5"
+            ZIndex="100" />
 
     </Grid>
 </page:BasePage>

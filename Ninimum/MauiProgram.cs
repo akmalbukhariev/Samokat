@@ -112,6 +112,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<OrdersPage>();
 		builder.Services.AddTransient<MyTariffPage>();
 		builder.Services.AddTransient<TariffsPage>();
+		builder.Services.AddTransient<Ninimum.Views.ChangePhoneNumber.ChangePhoneNumberPage>();
+		builder.Services.AddTransient<Ninimum.Views.ChangePassword.ChangePasswordPage>();
 
 		builder.Services.AddTransient<MainPageViewModel>();
 		builder.Services.AddTransient<MenuPageViewModel>();

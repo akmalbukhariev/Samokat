@@ -8,21 +8,16 @@
     x:Name="ThisPage"
     BackgroundColor="White">
 
-    <Grid RowDefinitions="Auto,*, Auto">
+    <Grid RowDefinitions="Auto,*,Auto">
 
-        <!-- Header -->
         <components:PageHeaderView
             Grid.Row="0"
-            Title="Telefon raqamini o’zgartirish" />
+            Title="Telefon raqamini o‘zgartirish" />
 
-        <ScrollView Grid.Row="1">
+        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout Padding="20,24,20,24" Spacing="24">
 
-            <VerticalStackLayout
-                Padding="20,24,20,24"
-                Spacing="24">
-
-                <!-- Current phone -->
-                <VerticalStackLayout Spacing="0">
+                <VerticalStackLayout Spacing="4">
                     <Label
                         Text="Sizning amaldagi telefon raqamingiz"
                         FontFamily="{StaticResource FontSFRegular}"
@@ -31,58 +26,39 @@
 
                     <Label
                         Text="{Binding CurrentPhoneNumber}"
-                        FontFamily="{StaticResource FontSFRegular}"
+                        FontFamily="{StaticResource FontSFMedium}"
                         FontSize="17"
                         TextColor="#7CB518" />
                 </VerticalStackLayout>
 
-                <!-- Description -->
                 <Label
-                    Text="Iltimos, yangi telefon raqamingizni kiriting"
+                    Text="Yangi telefon raqamingizni kiriting. Yangi raqam SMS kod orqali tasdiqlanadi."
                     FontFamily="{StaticResource FontSFRegular}"
                     FontSize="17"
-                    TextColor="#22292F" />
+                    TextColor="#22292F"
+                    LineBreakMode="WordWrap" />
 
-                <!-- Warning -->
                 <Border
                     Padding="10"
                     BackgroundColor="#FFF2F3"
                     StrokeThickness="0"
                     StrokeShape="RoundRectangle 8">
-
                     <Label
-                        Text="Diqqat! Birovning ma’lumotlaridan noqonuniy tarzda foydalanish qonun buzilishi holatiga olib kelishi mumkin."
+                        Text="Diqqat! Tasdiqlash tugagach, xavfsizlik uchun akkauntga yangi raqam bilan qayta kirishingiz kerak."
                         FontFamily="{StaticResource FontSFRegular}"
                         FontSize="13"
                         TextColor="#EA1111" />
                 </Border>
 
-                <!-- Inputs -->
-                <VerticalStackLayout Spacing="14">
+                <components:InputView
+                    Title="Yangi telefon raqam"
+                    Placeholder="90 123 45 67"
+                    LeftIcon="ic_phone.png"
+                    Keyboard="Telephone"
+                    ClearButtonVisibility="WhileEditing"
+                    Text="{Binding PhoneNumber}" />
 
-                    <components:InputView
-                        Title="Telefon raqam"
-                        LeftIcon="ic_phone.png"
-                        Keyboard="Telephone"
-                        ClearButtonVisibility="WhileEditing"
-                        Text="{Binding PhoneNumber}" />
-
-                    <components:InputView
-                        Placeholder="*****"
-                        LeftIcon="ic_lock.png"
-                        IsPassword="True"
-                        EnablePasswordToggle="True"
-                        PasswordHideIcon="ic_eye_off.png"
-                        PasswordShowIcon="ic_eye_on.png"
-                        Text="{Binding Password}" />
-
-                </VerticalStackLayout>
-
-                <!-- Agreement -->
-                <Grid
-                    ColumnDefinitions="24,*"
-                    ColumnSpacing="12">
-
+                <Grid ColumnDefinitions="24,*" ColumnSpacing="12">
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding ToggleAgreementCommand}" />
                     </Grid.GestureRecognizers>
@@ -95,26 +71,41 @@
 
                     <Label
                         Grid.Column="1"
-                        Text="Barcha to’ldirilgan ma’lumotlar to’g’riligini kafolatlayman"
+                        Text="Kiritilgan telefon raqam menga tegishli ekanini tasdiqlayman"
                         FontFamily="{StaticResource FontSFRegular}"
-                        FontSize="17"
+                        FontSize="16"
                         TextColor="#22292F"
                         LineBreakMode="WordWrap" />
                 </Grid>
 
             </VerticalStackLayout>
-
         </ScrollView>
-    
+
         <Button
             Grid.Row="2"
-            Text="O’zgartirish"
+            Text="Davom etish"
             HeightRequest="56"
             CornerRadius="8"
             Margin="15,0,15,24"
-            BackgroundColor="#7CB518"
+            BackgroundColor="{Binding SubmitButtonColor}"
             TextColor="White"
             FontFamily="{StaticResource FontSFMedium}"
-            FontSize="18"/>
+            FontSize="18"
+            IsEnabled="{Binding CanSubmit}"
+            Command="{Binding SubmitCommand}" />
+
+        <components:SmsCodePopup
+            x:Name="popupSms"
+            Grid.RowSpan="3"
+            ConfirmCommand="{Binding ConfirmSmsCodeCommand}"
+            ResendCommand="{Binding ResendSmsCommand}"
+            IsVisible="False"
+            ZIndex="100" />
+
+        <components:LoadingView
+            Grid.RowSpan="3"
+            ShowLoading="{Binding IsLoading}"
+            ZIndex="110" />
+
     </Grid>
 </page:BasePage>
