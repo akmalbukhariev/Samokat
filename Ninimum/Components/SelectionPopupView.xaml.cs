@@ -6,6 +6,8 @@ namespace Ninimum.Components;
 
 public partial class SelectionPopupView : ContentView
 {
+    public event EventHandler? Closed;
+
     public SelectionPopupView()
     {
         InitializeComponent();
@@ -61,6 +63,11 @@ public partial class SelectionPopupView : ContentView
     {
         get => (double)GetValue(PopupMaxHeightProperty);
         set => SetValue(PopupMaxHeightProperty, value);
+    }
+
+    public void Refresh()
+    {
+        BuildItems();
     }
 
     private static void OnItemsSourceChanged(BindableObject bindable, object oldValue, object newValue)
@@ -191,5 +198,6 @@ public partial class SelectionPopupView : ContentView
     private void OnBackgroundTapped(object sender, TappedEventArgs e)
     {
         IsVisible = false;
+        Closed?.Invoke(this, EventArgs.Empty);
     }
 }

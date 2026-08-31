@@ -171,7 +171,7 @@
                         </Grid.GestureRecognizers>
 
                         <Label Text="Region" Style="{StaticResource ProfileMenuTextStyle}" />
-                        <Label Grid.Column="1" Text="Qashqadaryo" Style="{StaticResource ProfileGreenValueStyle}" />
+                        <Label Grid.Column="1" Text="{Binding SelectedRegionName}" Style="{StaticResource ProfileGreenValueStyle}" />
                         <Image Grid.Column="2" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
@@ -279,6 +279,19 @@
 
             </VerticalStackLayout>
         </ScrollView>
+        <components:SelectionPopupView
+                x:Name="RegionPopup"
+                ItemsSource="{Binding RegionItems}"
+                ItemTappedCommand="{Binding RegionSelectedCommand}"
+                IsVisible="False"
+                PopupWidth="320"
+                PopupMaxHeight="360"
+                ZIndex="100" />
+
+        <components:LoadingView
+                ShowLoading="{Binding IsRegionUpdating}"
+                ZIndex="110" />
+
         <components:QuestionPopupView
                 x:Name="logOutPopup"
                 QuestionTitle="Siz profildan chiqayapsiz.&#10;Ishonchingiz komilmi?"

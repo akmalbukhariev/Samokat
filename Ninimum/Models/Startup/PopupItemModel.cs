@@ -4,6 +4,7 @@ namespace Ninimum.Models.Startup;
 
 public partial class PopupItemModel : ObservableObject
 {
+    [ObservableProperty] private int id;
     [ObservableProperty] private string text = string.Empty;
     [ObservableProperty] private string leftImage = string.Empty;
     [ObservableProperty] private string rightImage = string.Empty;

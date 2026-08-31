@@ -79,7 +79,7 @@ public partial class RegisterPageViewModel : ObservableObject
         FirstName = "Akmal";
         LastName = "Karimov";
         PhoneNumber = "998998887766";
-        Region = "Toshkent";
+        Region = appControl.CurrentRegionName;
         Password = "123";
         ConfirmPassword = "123";
         IsAgreementChecked = true;
@@ -178,7 +178,7 @@ public partial class RegisterPageViewModel : ObservableObject
 
         var request = new RegisterUserRequest
         {
-            region_id = 1,
+            region_id = appControl.SelectedRegionId,
             first_name = FirstName.Trim(),
             last_name = LastName.Trim(),
             location_latitude = LocationLatitude,

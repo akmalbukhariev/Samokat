@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
+
 <ContentView
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -6,18 +7,21 @@
     x:Name="ThisView">
 
     <ContentView.Resources>
+
         <ResourceDictionary>
+
             <Style x:Key="TitleLabelStyle" TargetType="Label">
-                <Setter Property="FontSize" Value="15" />
+                <Setter Property="FontSize" Value="16" />
                 <Setter Property="TextColor" Value="#22292F" />
-                <Setter Property="FontFamily" Value="{StaticResource FontSFMedium}" />
+                <Setter Property="FontFamily" Value="{StaticResource FontSFBold}" />
                 <Setter Property="LineBreakMode" Value="WordWrap" />
             </Style>
 
             <Style x:Key="SubtitleLabelStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="14" />
-                <Setter Property="TextColor" Value="#22292F" />
+                <Setter Property="TextColor" Value="#55585E" />
                 <Setter Property="FontFamily" Value="{StaticResource FontSFRegular}" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
             </Style>
 
             <Style x:Key="StepLabelStyle" TargetType="Label">
@@ -26,159 +30,218 @@
                 <Setter Property="HorizontalTextAlignment" Value="Center" />
                 <Setter Property="FontFamily" Value="{StaticResource FontSFRegular}" />
             </Style>
+
         </ResourceDictionary>
+
     </ContentView.Resources>
 
-    <Border
-        Padding="20,16"
-        BackgroundColor="#FFF2F3"
-        StrokeThickness="0"
-        StrokeShape="RoundRectangle 24">
 
-        <VerticalStackLayout Spacing="14">
+    <Grid>
 
-            <!-- Header -->
-            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
-                <Grid.GestureRecognizers>
+        <!-- Main order process -->
+        <Border
+            Padding="20,18"
+            BackgroundColor="#FFF2F3"
+            StrokeThickness="0"
+            StrokeShape="RoundRectangle 24">
+
+            <VerticalStackLayout Spacing="16">
+
+                <!-- Current status information -->
+                <Grid
+                    ColumnDefinitions="*,Auto"
+                    ColumnSpacing="12">
+
+                    <Grid.GestureRecognizers>
                         <TapGestureRecognizer Tapped="OnToggleTapped" />
-                </Grid.GestureRecognizers>
-                <VerticalStackLayout Grid.Column="0" Spacing="4">
-                    <Label
-                        x:Name="TitleLabel"
-                        Style="{StaticResource TitleLabelStyle}"
-                        Text="0123456 sonli buyurtma yig’ish jarayonida" />
+                    </Grid.GestureRecognizers>
 
-                    <Label
-                        x:Name="SubtitleLabel"
-                        Style="{StaticResource SubtitleLabelStyle}"
-                        Text="Buyurtmangizni 31-martga qadar yetkazamiz" />
-                </VerticalStackLayout>
 
-                <Image
-                    x:Name="ToggleImage"
-                    Grid.Column="1"
-                    WidthRequest="15"
-                    HeightRequest="15"
-                    Source="ic_arrow_up.png"
-                    HorizontalOptions="End"
-                    VerticalOptions="Start">
-                    
-                </Image>
-            </Grid>
+                    <VerticalStackLayout
+                        Grid.Column="0"
+                        Spacing="6">
 
-            <!-- Expandable content -->
-            <Border
-                x:Name="ProgressContainer"
-                Padding="18,16"
-                BackgroundColor="White"
-                StrokeThickness="0"
-                StrokeShape="RoundRectangle 20"
-                IsVisible="True">
+                        <Label
+                            x:Name="TitleLabel"
+                            Style="{StaticResource TitleLabelStyle}" />
 
-                <Grid RowDefinitions="22,Auto" RowSpacing="14">
+                        <Label
+                            x:Name="SubtitleLabel"
+                            Style="{StaticResource SubtitleLabelStyle}" />
 
-                    <!-- Progress -->
+                    </VerticalStackLayout>
+
+
+                    <Image
+                        x:Name="ToggleImage"
+                        Grid.Column="1"
+                        WidthRequest="15"
+                        HeightRequest="15"
+                        Source="ic_arrow_up.png"
+                        IsVisible="{Binding Source={x:Reference ThisView}, Path=InternalToggleEnabled}"
+                        HorizontalOptions="End"
+                        VerticalOptions="Start" />
+
+                </Grid>
+
+
+                <!-- Progress -->
+                <Border
+                    x:Name="ProgressContainer"
+                    Padding="20,18"
+                    BackgroundColor="White"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 20">
+
                     <Grid
-                        Grid.Row="0"
-                        ColumnDefinitions="14,*,14,*,14,*,14"
-                        ColumnSpacing="0"
+                        RowDefinitions="22,Auto"
+                        RowSpacing="14">
+
+
+                        <!-- 3 steps -->
+                        <Grid
+                            Grid.Row="0"
+                            ColumnDefinitions="14,*,14,*,14"
+                            ColumnSpacing="0"
+                            VerticalOptions="Center">
+
+                            <Image
+                                x:Name="Step1Circle"
+                                Grid.Column="0"
+                                WidthRequest="14"
+                                HeightRequest="14"
+                                Source="ic_fill_circle.png"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center" />
+
+
+                            <Image
+                                x:Name="Line1"
+                                Grid.Column="1"
+                                HeightRequest="2"
+                                Source="ic_dot_line.png"
+                                Aspect="Fill"
+                                HorizontalOptions="Fill"
+                                VerticalOptions="Center"
+                                Margin="-2,0,-2,0" />
+
+
+                            <Image
+                                x:Name="Step2Circle"
+                                Grid.Column="2"
+                                WidthRequest="14"
+                                HeightRequest="14"
+                                Source="ic_empty_circle.png"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center" />
+
+
+                            <Image
+                                x:Name="Line2"
+                                Grid.Column="3"
+                                HeightRequest="2"
+                                Source="ic_dot_line.png"
+                                Aspect="Fill"
+                                HorizontalOptions="Fill"
+                                VerticalOptions="Center"
+                                Margin="-2,0,-2,0" />
+
+
+                            <Image
+                                x:Name="Step3Circle"
+                                Grid.Column="4"
+                                WidthRequest="14"
+                                HeightRequest="14"
+                                Source="ic_empty_circle.png"
+                                HorizontalOptions="Center"
+                                VerticalOptions="Center" />
+
+                        </Grid>
+
+
+                        <!-- Step labels -->
+                        <Grid
+                            Grid.Row="1"
+                            ColumnDefinitions="*,*,*"
+                            ColumnSpacing="8">
+
+                            <Label
+                                Grid.Column="0"
+                                Text="Qabul qilindi"
+                                Style="{StaticResource StepLabelStyle}" />
+
+                            <Label
+                                Grid.Column="1"
+                                Text="Tayyorlanmoqda"
+                                Style="{StaticResource StepLabelStyle}" />
+
+                            <Label
+                                Grid.Column="2"
+                                Text="Yo‘lda"
+                                Style="{StaticResource StepLabelStyle}" />
+
+                        </Grid>
+
+                    </Grid>
+
+                </Border>
+
+            </VerticalStackLayout>
+
+        </Border>
+
+
+        <!-- Loading overlay -->
+        <Grid
+            IsVisible="{Binding Source={x:Reference ThisView}, Path=IsLoading}"
+            BackgroundColor="#E6FFF2F3">
+
+            <Border
+                Padding="22,16"
+                Margin="25"
+                BackgroundColor="White"
+                Stroke="#EEEEEE"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 16"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+
+                <HorizontalStackLayout
+                    Spacing="12"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center">
+
+                    <ActivityIndicator
+                        WidthRequest="25"
+                        HeightRequest="25"
+                        Color="#FD473C"
+                        IsRunning="{Binding Source={x:Reference ThisView}, Path=IsLoading}"
+                        VerticalOptions="Center" />
+
+                    <VerticalStackLayout
+                        Spacing="2"
                         VerticalOptions="Center">
 
-                        <Image
-                            x:Name="Step1Circle"
-                            Grid.Column="0"
-                            WidthRequest="14"
-                            HeightRequest="14"
-                            Source="ic_fill_circle.png"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center" />
-
-                        <Image
-                            x:Name="Line1"
-                            Grid.Column="1"
-                            HeightRequest="2"
-                            Source="ic_dot_line.png"
-                            Aspect="Fill"
-                            HorizontalOptions="Fill"
-                            VerticalOptions="Center"
-                            Margin="-2,0,-2,0" />
-
-                        <Image
-                            x:Name="Step2Circle"
-                            Grid.Column="2"
-                            WidthRequest="14"
-                            HeightRequest="14"
-                            Source="ic_empty_circle.png"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center" />
-
-                        <Image
-                            x:Name="Line2"
-                            Grid.Column="3"
-                            HeightRequest="2"
-                            Source="ic_dot_line.png"
-                            Aspect="Fill"
-                            HorizontalOptions="Fill"
-                            VerticalOptions="Center"
-                            Margin="-2,0,-2,0" />
-
-                        <Image
-                            x:Name="Step3Circle"
-                            Grid.Column="4"
-                            WidthRequest="14"
-                            HeightRequest="14"
-                            Source="ic_empty_circle.png"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center" />
-
-                        <Image
-                            x:Name="Line3"
-                            Grid.Column="5"
-                            HeightRequest="2"
-                            Source="ic_dot_line.png"
-                            Aspect="Fill"
-                            HorizontalOptions="Fill"
-                            VerticalOptions="Center"
-                            Margin="-2,0,-2,0" />
-
-                        <Image
-                            x:Name="Step4Circle"
-                            Grid.Column="6"
-                            WidthRequest="14"
-                            HeightRequest="14"
-                            Source="ic_empty_circle.png"
-                            HorizontalOptions="Center"
-                            VerticalOptions="Center" />
-                    </Grid>
-
-                    <!-- Labels -->
-                    <Grid
-                        Grid.Row="1"
-                        ColumnDefinitions="*,*,*,*"
-                        ColumnSpacing="8">
+                        <Label
+                            Text="Buyurtma holati tekshirilmoqda..."
+                            FontSize="14"
+                            TextColor="#22292F"
+                            FontFamily="{StaticResource FontSFMedium}" />
 
                         <Label
-                            Grid.Column="0"
-                            Text="Qabul&#10;qilish"
-                            Style="{StaticResource StepLabelStyle}" />
+                            Text="Iltimos, biroz kuting"
+                            FontSize="12"
+                            TextColor="#96979B"
+                            FontFamily="{StaticResource FontSFRegular}" />
 
-                        <Label
-                            Grid.Column="1"
-                            Text="Yig’ish&#10;ishlari"
-                            Style="{StaticResource StepLabelStyle}" />
+                    </VerticalStackLayout>
 
-                        <Label
-                            Grid.Column="2"
-                            Text="Yetkazib&#10;berish"
-                            Style="{StaticResource StepLabelStyle}" />
+                </HorizontalStackLayout>
 
-                        <Label
-                            Grid.Column="3"
-                            Text="Yetkazib&#10;berildi"
-                            Style="{StaticResource StepLabelStyle}" />
-                    </Grid>
-                </Grid>
             </Border>
-        </VerticalStackLayout>
-    </Border>
+
+        </Grid>
+
+    </Grid>
+
 </ContentView>

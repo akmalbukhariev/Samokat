@@ -21,6 +21,7 @@ using Ninimum.Views.Cart;
 using Ninimum.Views.Payment;
 using Ninimum.Views.Orders;
 using Ninimum.Views.MyTariff;
+using Ninimum.Views.Startup;
 
 #if ANDROID
 

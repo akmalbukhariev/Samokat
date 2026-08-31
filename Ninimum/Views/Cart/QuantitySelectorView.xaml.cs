@@ -1,4 +1,5 @@
 using System.Windows.Input;
+using Ninimum.Services;
 
 namespace Ninimum.Views.Cart;
 
@@ -40,6 +41,8 @@ public partial class QuantitySelectorView : ContentView
 
     private void OnDecreaseTapped(object? sender, TappedEventArgs e)
     {
+        AppVibrationService.Like();
+        
         if (Quantity > 1)
         {
             Quantity--;
@@ -49,6 +52,7 @@ public partial class QuantitySelectorView : ContentView
 
     private void OnIncreaseTapped(object? sender, TappedEventArgs e)
     {
+        AppVibrationService.Like();
         Quantity++;
         NotifyQuantityChanged();
     }

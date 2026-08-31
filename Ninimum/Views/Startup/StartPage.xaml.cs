@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Ninimum.Models;
 using Ninimum.Models.Startup;
+using Ninimum.Services;
 using Ninimum.Views.LoginRegister;
 
 namespace Ninimum.Views.Startup;
@@ -19,29 +20,23 @@ public partial class StartPage : BasePage
     public ICommand LanguageSelectedCommand { get; }
     public ICommand ContinueCommand { get; }
 
-    public StartPage()
+    private readonly AppControl appControl;
+
+    public StartPage(AppControl appControl)
     {
         InitializeComponent();
+        this.appControl = appControl;
 
-        OpenRegionPopupCommand = new Command(() => RegionPopup.IsVisible = true);
+        OpenRegionPopupCommand = new Command(() =>
+        {
+            RegionPopup.Refresh();
+            RegionPopup.IsVisible = true;
+        });
         OpenLanguagePopupCommand = new Command(() => LanguagePopup.IsVisible = true);
 
-        RegionItems = new ObservableCollection<PopupItemModel>
-        {
-            new() { Text = "Qoraqalpog'iston" },
-            new() { Text = "Andijon" },
-            new() { Text = "Buxoro" },
-            new() { Text = "Jizzax" },
-            new() { Text = "Qashqadaryo", RightImage = "check_icon.png" },
-            new() { Text = "Navoiy" },
-            new() { Text = "Namangan" },
-            new() { Text = "Samarqand" },
-            new() { Text = "Sirdaryo" },
-            new() { Text = "Surxondaryo" },
-            new() { Text = "Farg'ona" },
-            new() { Text = "Xorazm" },
-            new() { Text = "Toshkent" }
-        };
+        RegionItems = appControl.RegionItems;
+        appControl.SelectRegion(appControl.SelectedRegionId);
+        RegionInput.Text = appControl.GetRegionName(appControl.SelectedRegionId);
 
         LanguageItems = new ObservableCollection<PopupItemModel>
         {
@@ -58,13 +53,24 @@ public partial class StartPage : BasePage
         BindingContext = this;
     }
 
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        await appControl.LoadRegionsAsync();
+        appControl.SelectRegion(appControl.SelectedRegionId);
+        RegionInput.Text = appControl.GetRegionName(appControl.SelectedRegionId);
+        RegionPopup.Refresh();
+    }
+
     private void OnRegionSelected(PopupItemModel item)
     {
-        foreach (var region in RegionItems)
-            region.RightImage = string.Empty;
+        if (item == null)
+            return;
 
-        item.RightImage = "check_gray.png";
-
+        appControl.SelectRegion(item.Id);
+        RegionInput.Text = item.Text;
+        RegionPopup.Refresh();
         RegionPopup.IsVisible = false;
     }
 
@@ -80,6 +86,7 @@ public partial class StartPage : BasePage
 
     private void OnRegionTapped(object sender, TappedEventArgs e)
     {
+        RegionPopup.Refresh();
         RegionPopup.IsVisible = true;
     }
 

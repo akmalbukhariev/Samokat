@@ -1,9 +1,11 @@
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Text.RegularExpressions;
 using Api.Services;
 using Models.Dto;
 using Models.Requests;
 using Models.Responses;
+using Ninimum.Models.Startup;
 using Ninimum.Views.LoginRegister;
 using Utils;
 
@@ -18,6 +20,86 @@ namespace Ninimum.Services
         public int CurrentUserId => userDto?.id ?? 0;
 
         public UserDto userDto { get; set; } = new UserDto();
+
+        public ObservableCollection<PopupItemModel> RegionItems { get; } = new()
+        {
+            // Fallback values. They are replaced by /region/getRegions when the API is available.
+            new() { Id = 1, Text = "Qashqadaryo" },
+            new() { Id = 2, Text = "Toshkent" },
+            new() { Id = 3, Text = "Samarqand" },
+            new() { Id = 4, Text = "Buxoro" }
+        };
+
+        private bool regionsLoaded;
+
+        public int SelectedRegionId { get; private set; } = 1;
+
+        public string CurrentRegionName =>
+            RegionItems.FirstOrDefault(x => x.Id == (userDto?.region_id ?? SelectedRegionId))?.Text
+            ?? RegionItems.First().Text;
+
+        public async Task LoadRegionsAsync(bool force = false)
+        {
+            if (regionsLoaded && !force)
+                return;
+
+            try
+            {
+                RegionListResponse response = await apiService.GetRegions();
+
+                if (response.resultCode != ApiResult.SUCCESS.GetCodeToString() ||
+                    response.resultData == null ||
+                    response.resultData.Count == 0)
+                    return;
+
+                var regions = response.resultData
+                    .Where(x => x.isActive && x.id > 0 && !string.IsNullOrWhiteSpace(x.name))
+                    .OrderBy(x => x.id)
+                    .ToList();
+
+                if (regions.Count == 0)
+                    return;
+
+                RegionItems.Clear();
+
+                foreach (var region in regions)
+                {
+                    RegionItems.Add(new PopupItemModel
+                    {
+                        Id = region.id,
+                        Text = region.name
+                    });
+                }
+
+                regionsLoaded = true;
+
+                if (!RegionItems.Any(x => x.Id == SelectedRegionId))
+                    SelectedRegionId = RegionItems[0].Id;
+
+                SelectRegion(userDto?.region_id ?? SelectedRegionId);
+            }
+            catch
+            {
+                // Keep the fallback region list if the server cannot be reached.
+            }
+        }
+
+        public void SelectRegion(int regionId)
+        {
+            if (!RegionItems.Any(x => x.Id == regionId))
+                return;
+
+            SelectedRegionId = regionId;
+
+            foreach (var region in RegionItems)
+                region.RightImage = region.Id == regionId ? "check_gray.png" : string.Empty;
+        }
+
+        public string GetRegionName(int? regionId)
+        {
+            return RegionItems.FirstOrDefault(x => x.Id == regionId)?.Text
+                   ?? RegionItems.First().Text;
+        }
         private readonly LanguageService lang;
         private readonly UserApiService apiService;
         private AppStoreService storeService;
@@ -30,6 +112,7 @@ namespace Ninimum.Services
             this.lang = lang;
             this.storeService = storeService;
             this.apiService = apiService;
+            SelectRegion(SelectedRegionId);
         }
 
         public bool IsConnectedToWifi()
@@ -57,6 +140,7 @@ namespace Ninimum.Services
         public async Task InitLoginPage(UserDto userDto,string phoneNumber, string password)
         {
             this.userDto = userDto ?? new UserDto();
+            SelectRegion(this.userDto.region_id ?? SelectedRegionId);
             IsLoggedIn = true;
             IsBlocked = false;
 

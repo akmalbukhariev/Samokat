@@ -8,10 +8,12 @@ public partial class OrderProcessView : ContentView
     {
         InitializeComponent();
 
+        ConvertStatusToStep();
         UpdateProgress();
         UpdateExpandState();
         UpdateOrderInfo();
     }
+
 
     public static readonly BindableProperty OrderNumberProperty =
         BindableProperty.Create(
@@ -73,6 +75,34 @@ public partial class OrderProcessView : ContentView
     }
 
 
+    public static readonly BindableProperty InternalToggleEnabledProperty =
+        BindableProperty.Create(
+            nameof(InternalToggleEnabled),
+            typeof(bool),
+            typeof(OrderProcessView),
+            true);
+
+    public bool InternalToggleEnabled
+    {
+        get => (bool)GetValue(InternalToggleEnabledProperty);
+        set => SetValue(InternalToggleEnabledProperty, value);
+    }
+
+
+    public static readonly BindableProperty IsLoadingProperty =
+        BindableProperty.Create(
+            nameof(IsLoading),
+            typeof(bool),
+            typeof(OrderProcessView),
+            false);
+
+    public bool IsLoading
+    {
+        get => (bool)GetValue(IsLoadingProperty);
+        set => SetValue(IsLoadingProperty, value);
+    }
+
+
     private static void OnOrderStatusChanged(
         BindableObject bindable,
         object oldValue,
@@ -92,9 +122,7 @@ public partial class OrderProcessView : ContentView
         object newValue)
     {
         if (bindable is OrderProcessView view)
-        {
             view.UpdateOrderInfo();
-        }
     }
 
 
@@ -104,9 +132,7 @@ public partial class OrderProcessView : ContentView
         object newValue)
     {
         if (bindable is OrderProcessView view)
-        {
             view.UpdateProgress();
-        }
     }
 
 
@@ -116,9 +142,7 @@ public partial class OrderProcessView : ContentView
         object newValue)
     {
         if (bindable is OrderProcessView view)
-        {
             view.UpdateExpandState();
-        }
     }
 
 
@@ -128,28 +152,20 @@ public partial class OrderProcessView : ContentView
         {
             case "PENDING":
             case "CONFIRMED":
-                CurrentStep =
-                    OrderProcessStep.OrderReceived;
+                CurrentStep = OrderProcessStep.OrderReceived;
                 break;
 
             case "PREPARING":
-                CurrentStep =
-                    OrderProcessStep.Preparing;
+                CurrentStep = OrderProcessStep.Preparing;
                 break;
 
             case "ON_THE_WAY":
-                CurrentStep =
-                    OrderProcessStep.OutForDelivery;
-                break;
-
             case "DELIVERED":
-                CurrentStep =
-                    OrderProcessStep.Delivered;
+                CurrentStep = OrderProcessStep.OutForDelivery;
                 break;
 
-            case "CANCELLED":
-                CurrentStep =
-                    OrderProcessStep.OrderReceived;
+            default:
+                CurrentStep = OrderProcessStep.OrderReceived;
                 break;
         }
     }
@@ -159,7 +175,7 @@ public partial class OrderProcessView : ContentView
     {
         string number =
             string.IsNullOrWhiteSpace(OrderNumber)
-                ? ""
+                ? string.Empty
                 : OrderNumber;
 
         switch (OrderStatus?.ToUpperInvariant())
@@ -167,36 +183,54 @@ public partial class OrderProcessView : ContentView
             case "PENDING":
                 TitleLabel.Text =
                     $"{number} sonli buyurtma qabul qilindi";
+
+                SubtitleLabel.Text =
+                    "Buyurtmangiz holati tekshirilmoqda.";
                 break;
+
 
             case "CONFIRMED":
                 TitleLabel.Text =
-                    $"{number} sonli buyurtma tasdiqlandi";
+                    $"{number} sonli buyurtma qabul qilindi";
+
+                SubtitleLabel.Text =
+                    "To‘lov muvaffaqiyatli amalga oshirildi. Buyurtmangiz tez orada tayyorlanadi.";
                 break;
+
 
             case "PREPARING":
                 TitleLabel.Text =
-                    $"{number} sonli buyurtma yig’ish jarayonida";
+                    $"{number} sonli buyurtma tayyorlanmoqda";
+
+                SubtitleLabel.Text =
+                    "Mahsulotlaringiz yetkazib berish uchun tayyorlanmoqda.";
                 break;
+
 
             case "ON_THE_WAY":
                 TitleLabel.Text =
-                    $"{number} sonli buyurtma yetkazib berilmoqda";
+                    $"{number} sonli buyurtma yo‘lda";
+
+                SubtitleLabel.Text =
+                    "Buyurtmangiz sizga yetkazib berilmoqda.";
                 break;
+
 
             case "DELIVERED":
                 TitleLabel.Text =
                     $"{number} sonli buyurtma yetkazib berildi";
+
+                SubtitleLabel.Text =
+                    "Buyurtmangiz muvaffaqiyatli yetkazib berildi.";
                 break;
 
-            case "CANCELLED":
-                TitleLabel.Text =
-                    $"{number} sonli buyurtma bekor qilindi";
-                break;
 
             default:
                 TitleLabel.Text =
                     $"{number} sonli buyurtma";
+
+                SubtitleLabel.Text =
+                    string.Empty;
                 break;
         }
     }
@@ -207,11 +241,10 @@ public partial class OrderProcessView : ContentView
         Step1Circle.Source = "ic_empty_circle.png";
         Step2Circle.Source = "ic_empty_circle.png";
         Step3Circle.Source = "ic_empty_circle.png";
-        Step4Circle.Source = "ic_empty_circle.png";
 
         Line1.Source = "ic_dot_line.png";
         Line2.Source = "ic_dot_line.png";
-        Line3.Source = "ic_dot_line.png";
+
 
         switch (CurrentStep)
         {
@@ -255,40 +288,13 @@ public partial class OrderProcessView : ContentView
                     "ic_solid_line.png";
 
                 break;
-
-
-            case OrderProcessStep.Delivered:
-
-                Step1Circle.Source =
-                    "ic_fill_circle.png";
-
-                Step2Circle.Source =
-                    "ic_fill_circle.png";
-
-                Step3Circle.Source =
-                    "ic_fill_circle.png";
-
-                Step4Circle.Source =
-                    "ic_fill_circle.png";
-
-                Line1.Source =
-                    "ic_solid_line.png";
-
-                Line2.Source =
-                    "ic_solid_line.png";
-
-                Line3.Source =
-                    "ic_solid_line.png";
-
-                break;
         }
     }
 
 
     private void UpdateExpandState()
     {
-        ProgressContainer.IsVisible =
-            IsExpanded;
+        ProgressContainer.IsVisible = IsExpanded;
 
         ToggleImage.Source =
             IsExpanded
@@ -301,6 +307,9 @@ public partial class OrderProcessView : ContentView
         object sender,
         TappedEventArgs e)
     {
+        if (!InternalToggleEnabled)
+            return;
+
         IsExpanded = !IsExpanded;
     }
 }

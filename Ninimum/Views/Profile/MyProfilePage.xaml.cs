@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -5,6 +6,7 @@ using Api.Services;
 using Models.Requests;
 using Models.Responses;
 using Ninimum.Services;
+using Ninimum.Models.Startup;
 using Ninimum.Views.Orders;
 using Ninimum.Views.MyTariff;
 using Utils;
@@ -23,6 +25,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     public ICommand ToggleSettingsCommand { get; }
 
     public ICommand RegionCommand { get; }
+    public ICommand RegionSelectedCommand { get; }
     public ICommand LanguageCommand { get; }
     public ICommand ThemeCommand { get; }
     public ICommand ChangePhoneCommand { get; }
@@ -36,6 +39,8 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     private bool _isSettingsExpanded = true;
     private string _selectedLanguageFlag = "flag_uz.png";
     private string _currentTariffName = "Tarif yo‘q";
+    private string _selectedRegionName = "Qashqadaryo";
+    private bool _isRegionUpdating;
 
     public new event PropertyChangedEventHandler? PropertyChanged;
 
@@ -55,6 +60,34 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
     public string SettingsArrowIcon => IsSettingsExpanded ? "ic_arrow_up.png" : "ic_arrow_down.png";
 
+
+    public ObservableCollection<PopupItemModel> RegionItems => appControl.RegionItems;
+
+    public string SelectedRegionName
+    {
+        get => _selectedRegionName;
+        set
+        {
+            if (_selectedRegionName != value)
+            {
+                _selectedRegionName = value;
+                OnPropertyChanged();
+            }
+        }
+    }
+
+    public bool IsRegionUpdating
+    {
+        get => _isRegionUpdating;
+        set
+        {
+            if (_isRegionUpdating != value)
+            {
+                _isRegionUpdating = value;
+                OnPropertyChanged();
+            }
+        }
+    }
 
     public string CurrentTariffName
     {
@@ -98,10 +131,12 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
         ToggleSettingsCommand = new Command(() =>
         {
+            AppVibrationService.Like();
             IsSettingsExpanded = !IsSettingsExpanded;
         });
 
         RegionCommand = new Command(OnRegionClicked);
+        RegionSelectedCommand = new Command<PopupItemModel>(OnRegionSelected);
         LanguageCommand = new Command(OnLanguageClicked);
         ThemeCommand = new Command(OnThemeClicked);
         ChangePhoneCommand = new Command(OnChangePhoneClicked);
@@ -113,6 +148,11 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
         logOutPopup.Confirmed += OnLogoutConfirmed;
         logOutPopup.Closed += (s, e) =>
+        {
+            appControl.ShowTabBar(true);
+        };
+
+        RegionPopup.Closed += (s, e) =>
         {
             appControl.ShowTabBar(true);
         };
@@ -131,6 +171,12 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
         lbUserName.Text = appControl.userDto.first_name;
         lbPhoneNumber.Text = appControl.userDto.phone_number;
+
+        await appControl.LoadRegionsAsync();
+        appControl.SelectRegion(appControl.userDto.region_id ?? appControl.SelectedRegionId);
+        SelectedRegionName = appControl.CurrentRegionName;
+        RegionPopup.Refresh();
+
         await LoadCurrentTariffAsync();
     }
 
@@ -168,6 +214,8 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
     private async void OnMessageClicked()
     {
+        AppVibrationService.Like();
+
         await DisplayAlert("Clicked", "Yozishma", "OK");
         // await Navigation.PushAsync(new ChatListPage());
     }
@@ -178,13 +226,84 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         // await Navigation.PushAsync(new NotificationPage());
     }
 
-    private async void OnRegionClicked()
+    private void OnRegionClicked()
     {
-        await DisplayAlert("Clicked", "Region", "OK");
+        AppVibrationService.Like();
+
+        if (IsRegionUpdating)
+            return;
+
+        if (appControl.RegionItems.Count == 0)
+            return;
+
+        appControl.SelectRegion(
+            appControl.userDto.region_id ?? appControl.SelectedRegionId);
+
+        appControl.ShowTabBar(false);
+
+        RegionPopup.IsVisible = true;
+    }
+
+    private async void OnRegionSelected(PopupItemModel item)
+    {
+        if (item == null || item.Id <= 0 || IsRegionUpdating)
+            return;
+
+        int currentRegionId = appControl.userDto.region_id ?? appControl.SelectedRegionId;
+
+        if (item.Id == currentRegionId)
+        {
+            RegionPopup.IsVisible = false;
+            appControl.ShowTabBar(true);
+            return;
+        }
+
+        try
+        {
+            IsRegionUpdating = true;
+
+            var response = await apiService.ChangeRegion(new ChangeRegionRequest
+            {
+                userId = appControl.CurrentUserId,
+                regionId = item.Id
+            });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                await DisplayAlert(
+                    "Xatolik",
+                    "Regionni o‘zgartirib bo‘lmadi. Iltimos, qayta urinib ko‘ring.",
+                    "Yopish");
+                return;
+            }
+
+            appControl.userDto.region_id = item.Id;
+            appControl.SelectRegion(item.Id);
+            SelectedRegionName = item.Text;
+
+            RegionPopup.Refresh();
+            RegionPopup.IsVisible = false;
+            appControl.ShowTabBar(true);
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[ERROR] ChangeRegion => {ex}");
+
+            await DisplayAlert(
+                "Xatolik",
+                "Regionni o‘zgartirib bo‘lmadi. Iltimos, qayta urinib ko‘ring.",
+                "Yopish");
+        }
+        finally
+        {
+            IsRegionUpdating = false;
+        }
     }
 
     private async void OnLanguageClicked()
     {
+        AppVibrationService.Like();
+
         var selected = await DisplayActionSheet(
             "Tilni tanlang",
             "Bekor qilish",
@@ -208,16 +327,19 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
     private async void OnChangePhoneClicked()
     {
+        AppVibrationService.Like();
         await DisplayAlert("Clicked", "Telefon raqamni o’zgartirish", "OK");
     }
 
     private async void OnChangePasswordClicked()
     {
+        AppVibrationService.Like();
         await DisplayAlert("Clicked", "Parolni o’zgartirish", "OK");
     }
 
     private async void OnMyTariffClicked()
     {
+        AppVibrationService.Like();
         await AppNavigatorService.NavigateTo(nameof(MyTariffPage));
     }
 

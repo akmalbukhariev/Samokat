@@ -16,10 +16,12 @@ namespace Api.Services
         private const string CHECK_PHONE_NUMBER = $"{BASE_URL}user/checkPhoneNumber";
         private const string LOGOUT_USER = $"{BASE_URL}user/logout";
         private const string REGISTER_USER = $"{BASE_URL}user/register";
+        private const string GET_REGIONS = $"{BASE_URL}region/getRegions";
         private const string GET_USER_INFO = $"{BASE_URL}user/getUserInfo";
         private const string UPDATE_USER_PASSWORD = $"{BASE_URL}user/forgotPassword";
         private const string GET_USER_LIST = $"{BASE_URL}user/getUserByIdList";
         private const string UPDATE_USER_INFO = $"{BASE_URL}user/updateUserInfo";
+        private const string CHANGE_REGION = $"{BASE_URL}user/changeRegion";
         private const string UPDATE_USER_PHONE_NUMBER = $"{BASE_URL}user/updateUserPhoneNumber";
         private const string DELETE_USER_ACCOUNT = $"{BASE_URL}user/deleteUser/";
         private const string VERIFY_NUMBER = $"{BASE_URL}message/verifyPhoneNumber";
@@ -49,12 +51,46 @@ namespace Api.Services
         private const string CANCEL_ORDER = $"{BASE_URL}order/cancelOrder";
         private const string GET_ACTIVE_SUBSCRIPTION = $"{BASE_URL}subscription/getActiveSubscription";
         private const string GET_SUBSCRIPTION_LIST = $"{BASE_URL}subscription/getSubscriptionList";
+        private const string DELETE_ORDER_HISTORY = $"{BASE_URL}order/deleteOrderHistory";
         #endregion
 
         public UserApiService(RestClient client)
             : base(client)
         {
 
+        }
+
+        public async Task<RegionListResponse> GetRegions()
+        {
+            var response = new RegionListResponse();
+
+            try
+            {
+                var receivedData = await GetAsync(GET_REGIONS, false);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<RegionListResponse>(receivedData);
+
+                    if (result != null)
+                        return result;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
         }
 
         public async Task<LoginUserResponse> Login(LoginUserRequest data)
@@ -122,6 +158,39 @@ namespace Api.Services
                     }
                 }
 
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<Response> ChangeRegion(ChangeRegionRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PutAsync(CHANGE_REGION, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<Response>(receivedData);
+
+                    if (result != null)
+                        return result;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
                 response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
             }
             catch (JsonException jsonEx)
@@ -711,6 +780,39 @@ namespace Api.Services
                         return deserializedResponse;
                 }
 
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<Response> DeleteOrderHistory(OrderStatusRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PutAsync(DELETE_ORDER_HISTORY, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<Response>(receivedData);
+
+                    if (result != null)
+                        return result;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
                 response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
             }
             catch (JsonException jsonEx)

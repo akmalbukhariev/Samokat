@@ -27,7 +27,8 @@
               <VerticalStackLayout Grid.Column="1"
                                    Grid.Row="3"
                                    Spacing="12">
-                     <components:InputView Title="Hudud:"
+                     <components:InputView x:Name="RegionInput"
+                                          Title="Hudud:"
                                           Text="Qashqadaryo"
                                           IsReadOnly="True"
                                           TapCommand="{Binding OpenRegionPopupCommand}"/>

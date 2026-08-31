@@ -169,6 +169,12 @@
                                                     ColumnDefinitions="90,*"
                                                     ColumnSpacing="14">
 
+                                                    <Grid.GestureRecognizers>
+                                                        <TapGestureRecognizer
+                                                            Tapped="Product_Tapped"
+                                                            NumberOfTapsRequired="1" />
+                                                    </Grid.GestureRecognizers>
+
                                                     <Border
                                                         Grid.Column="0"
                                                         WidthRequest="90"
@@ -242,13 +248,35 @@
                                                     CommandParameter="{Binding .}" />
                                             </Border.GestureRecognizers>
 
-                                            <Label
-                                                Text="Buyurtma holati"
-                                                HorizontalOptions="Center"
-                                                VerticalOptions="Center"
-                                                FontSize="16"
-                                                TextColor="#22292F"
-                                                FontFamily="{StaticResource FontSFMedium}" />
+                                            <Grid
+                                                ColumnDefinitions="*,Auto">
+
+                                                <Label
+                                                    Grid.ColumnSpan="2"
+                                                    Text="Buyurtma holati"
+                                                    HorizontalOptions="Start"
+                                                    VerticalOptions="Center"
+                                                    FontSize="16"
+                                                    TextColor="#22292F"
+                                                    FontFamily="{StaticResource FontSFMedium}"
+                                                    Margin="10,0,0,0"/>
+
+                                                <Image
+                                                    Grid.Column="1"
+                                                    WidthRequest="14"
+                                                    HeightRequest="14"
+                                                    HorizontalOptions="End"
+                                                    VerticalOptions="Center"
+                                                    Margin="0,0,10,0"
+                                                    Source="ic_arrow_down.png">
+                                                    <Image.Triggers>
+                                                        <DataTrigger TargetType="Image" Binding="{Binding IsExpanded}" Value="True">
+                                                            <Setter Property="Source" Value="ic_arrow_up.png" />
+                                                        </DataTrigger>
+                                                    </Image.Triggers>
+                                                </Image>
+
+                                            </Grid>
 
                                         </Border>
 
@@ -284,7 +312,9 @@
                                         IsVisible="{Binding IsExpanded}"
                                         OrderNumber="{Binding DisplayOrderNumber}"
                                         OrderStatus="{Binding Status}"
-                                        IsExpanded="True" />
+                                        IsLoading="{Binding IsLoading}"
+                                        IsExpanded="True"
+                                        InternalToggleEnabled="False" />
 
                                 </VerticalStackLayout>
 
@@ -374,6 +404,12 @@
                                                     ColumnDefinitions="90,*"
                                                     ColumnSpacing="14">
 
+                                                    <Grid.GestureRecognizers>
+                                                        <TapGestureRecognizer
+                                                            Tapped="Product_Tapped"
+                                                            NumberOfTapsRequired="1" />
+                                                    </Grid.GestureRecognizers>
+
                                                     <Border
                                                         WidthRequest="90"
                                                         HeightRequest="90"
@@ -417,34 +453,29 @@
                                         </BindableLayout.ItemTemplate>
 
                                     </VerticalStackLayout>
-
+                                    
                                     <Border
                                         HeightRequest="48"
-                                        BackgroundColor="White"
-                                        Stroke="#D8D9DD"
+                                        BackgroundColor="#FEF1F2"
+                                        Stroke="#FD473C"
                                         StrokeThickness="1"
                                         StrokeShape="RoundRectangle 8">
 
                                         <Border.GestureRecognizers>
                                             <TapGestureRecognizer
-                                                Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.ToggleOrderCommand}"
+                                                Command="{Binding Source={x:Reference ThisPage}, Path=BindingContext.DeleteCompletedOrderCommand}"
                                                 CommandParameter="{Binding .}" />
                                         </Border.GestureRecognizers>
 
                                         <Label
-                                            Text="Buyurtma holati"
+                                            Text="Buyurtmalar tarixidan o‘chirish"
                                             HorizontalOptions="Center"
                                             VerticalOptions="Center"
                                             FontSize="16"
-                                            TextColor="#22292F" />
+                                            TextColor="#EA1111"
+                                            FontFamily="{StaticResource FontSFMedium}" />
 
                                     </Border>
-
-                                    <orderComponents:OrderProcessView
-                                        IsVisible="{Binding IsExpanded}"
-                                        OrderNumber="{Binding DisplayOrderNumber}"
-                                        OrderStatus="{Binding Status}"
-                                        IsExpanded="True" />
 
                                 </VerticalStackLayout>
 

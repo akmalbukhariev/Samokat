@@ -4,6 +4,7 @@ using CommunityToolkit.Mvvm.Input;
 using Models.Requests;
 using Ninimum.Models;
 using Ninimum.Services;
+using Ninimum.Views.DetailProduct;
 using Ninimum.Views.PaymentCard;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -153,19 +154,34 @@ public partial class OrdersPageViewModel : ObservableObject
     }
 
     [RelayCommand]
+    private async Task ProductClicked(OrderProductItemModel product)
+    {
+        if (product == null || product.ProductId <= 0)
+            return;
+
+        await AppNavigatorService.NavigateTo(
+            $"{nameof(DetailProductPage)}?productId={product.ProductId}");
+    }
+
+    [RelayCommand]
     private async Task ToggleOrder(OrderItemModel order)
     {
         if (order == null || order.IsLoading)
             return;
 
+        if (order.IsExpanded)
+        {
+            order.IsExpanded = false;
+            return;
+        }
+
+        order.IsExpanded = true;
+
         try
         {
             order.IsLoading = true;
 
-            if (!order.IsExpanded)
-                await LoadOrderProcessAsync(order);
-
-            order.IsExpanded = !order.IsExpanded;
+            await LoadOrderProcessAsync(order);
         }
         finally
         {
@@ -199,6 +215,61 @@ public partial class OrdersPageViewModel : ObservableObject
         });
     }
 
+    [RelayCommand]
+    private async Task DeleteCompletedOrder(OrderItemModel order)
+    {
+        if (order == null || order.IsLoading)
+            return;
+
+        bool confirmed = await AlertService.ShowConfirmationAsync(
+            "Buyurtmalar tarixidan o‘chirish",
+            "Bu buyurtma buyurtmalar tarixidan o‘chiriladi va uni qayta tiklab bo‘lmaydi. O‘chirmoqchimisiz?",
+            "O‘chirish",
+            "Yopish");
+
+        if (!confirmed)
+            return;
+
+        try
+        {
+            order.IsLoading = true;
+            IsLoading = true;
+
+            var response = await apiService.DeleteOrderHistory(new OrderStatusRequest
+            {
+                orderId = order.OrderId,
+                userId = (long)appControl.userDto.id
+            });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                await AlertService.ShowAlertAsync(
+                    "Xatolik",
+                    "Buyurtmalar tarixini o‘chirib bo‘lmadi.",
+                    "Yopish");
+
+                return;
+            }
+
+            CompletedOrders.Remove(order);
+
+            CompletedCountText = CompletedOrders.Count.ToString();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[ERROR] DeleteCompletedOrder => {ex}");
+
+            await AlertService.ShowAlertAsync(
+                "Xatolik",
+                "Buyurtmalar tarixini o‘chirib bo‘lmadi.",
+                "Yopish");
+        }
+        finally
+        {
+            order.IsLoading = false;
+            IsLoading = false;
+        }
+    }
     [RelayCommand]
     private void ShowActive()
     {
