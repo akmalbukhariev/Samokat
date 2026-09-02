@@ -131,7 +131,7 @@
                         <Image Grid.Column="4" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
-                    <Grid ColumnDefinitions="32,10,*,Auto,24">
+                    <Grid ColumnDefinitions="32,10,*,Auto,24" IsVisible="False">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NotificationCommand}" />
                         </Grid.GestureRecognizers>
@@ -231,7 +231,7 @@
                         <Image Grid.Column="2" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
-                    <Grid ColumnDefinitions="*,Auto,24">
+                    <Grid ColumnDefinitions="*,Auto,24" IsVisible="False">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ChildrenCommand}" />
                         </Grid.GestureRecognizers>

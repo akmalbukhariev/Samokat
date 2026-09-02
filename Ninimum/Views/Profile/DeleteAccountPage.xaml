@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Ninimum.Views"
+    xmlns:components="clr-namespace:Ninimum.Components"
+    x:Class="Ninimum.Views.Profile.DeleteAccountPage"
+    BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <components:PageHeaderView
+            Grid.Row="0"
+            ShowBack="true"
+            Title="Akkauntni o‘chirish" />
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout
+                Padding="20,22,20,32"
+                Spacing="16">
+
+                <Label
+                    Text="Akkauntingizni o‘chirishdan oldin, nima sababdan ketayotganingizni bilishni istaymiz. Fikringiz xizmatimizni yaxshilashga yordam beradi."
+                    FontSize="15"
+                    TextColor="#55585E"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    LineBreakMode="WordWrap" />
+
+                <Label
+                    FontSize="18"
+                    TextColor="#22292F"
+                    FontFamily="{StaticResource FontSFRegular}">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span
+                                Text="Nega akkauntingizni o‘chirmoqchisiz?"
+                                FontFamily="{StaticResource FontSFBold}" />
+                            <Span Text="  Bir yoki bir nechta sababni tanlang." />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+
+                <VerticalStackLayout Spacing="8">
+
+                    <Grid
+                        x:Name="RowTooExpensive"
+                        ColumnDefinitions="Auto,*"
+                        ColumnSpacing="10"
+                        Padding="4,6">
+                        <CheckBox
+                            x:Name="CbTooExpensive"
+                            Color="{StaticResource PrimaryColor}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Narxlar men uchun qimmat"
+                            VerticalOptions="Center"
+                            FontSize="16"
+                            TextColor="#22292F" />
+                    </Grid>
+
+                    <Grid
+                        x:Name="RowNotEnoughValue"
+                        ColumnDefinitions="Auto,*"
+                        ColumnSpacing="10"
+                        Padding="4,6">
+                        <CheckBox
+                            x:Name="CbNotEnoughValue"
+                            Color="{StaticResource PrimaryColor}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Xizmat men kutgan foydani bermadi"
+                            VerticalOptions="Center"
+                            FontSize="16"
+                            TextColor="#22292F" />
+                    </Grid>
+
+                    <Grid
+                        x:Name="RowNotEnoughOffers"
+                        ColumnDefinitions="Auto,*"
+                        ColumnSpacing="10"
+                        Padding="4,6">
+                        <CheckBox
+                            x:Name="CbNotEnoughOffers"
+                            Color="{StaticResource PrimaryColor}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Kerakli mahsulot yoki takliflarni topmadim"
+                            VerticalOptions="Center"
+                            FontSize="16"
+                            TextColor="#22292F" />
+                    </Grid>
+
+                    <Grid
+                        x:Name="RowHardToUse"
+                        ColumnDefinitions="Auto,*"
+                        ColumnSpacing="10"
+                        Padding="4,6">
+                        <CheckBox
+                            x:Name="CbHardToUse"
+                            Color="{StaticResource PrimaryColor}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Ilovadan foydalanish qiyin"
+                            VerticalOptions="Center"
+                            FontSize="16"
+                            TextColor="#22292F" />
+                    </Grid>
+
+                    <Grid
+                        x:Name="RowNoTime"
+                        ColumnDefinitions="Auto,*"
+                        ColumnSpacing="10"
+                        Padding="4,6">
+                        <CheckBox
+                            x:Name="CbNoTime"
+                            Color="{StaticResource PrimaryColor}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Ilovadan endi foydalanmayman"
+                            VerticalOptions="Center"
+                            FontSize="16"
+                            TextColor="#22292F" />
+                    </Grid>
+
+                    <Grid
+                        x:Name="RowPreferOther"
+                        ColumnDefinitions="Auto,*"
+                        ColumnSpacing="10"
+                        Padding="4,6">
+                        <CheckBox
+                            x:Name="CbPreferOther"
+                            Color="{StaticResource PrimaryColor}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Boshqa xizmat yoki ilovani afzal ko‘raman"
+                            VerticalOptions="Center"
+                            FontSize="16"
+                            TextColor="#22292F" />
+                    </Grid>
+
+                    <Grid
+                        x:Name="RowTechnicalIssues"
+                        ColumnDefinitions="Auto,*"
+                        ColumnSpacing="10"
+                        Padding="4,6">
+                        <CheckBox
+                            x:Name="CbTechnicalIssues"
+                            Color="{StaticResource PrimaryColor}"
+                            VerticalOptions="Center" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Texnik muammolarga duch keldim"
+                            VerticalOptions="Center"
+                            FontSize="16"
+                            TextColor="#22292F" />
+                    </Grid>
+
+                    <Grid
+                        x:Name="RowOther"
+                        ColumnDefinitions="Auto,*"
+                        ColumnSpacing="10"
+                        Padding="4,6">
+                        <CheckBox
+                            x:Name="CbOther"
+                            Color="{StaticResource PrimaryColor}"
+                            VerticalOptions="Center"
+                            CheckedChanged="CbOther_CheckedChanged" />
+                        <Label
+                            Grid.Column="1"
+                            Text="Boshqa sabab"
+                            VerticalOptions="Center"
+                            FontSize="16"
+                            TextColor="#22292F" />
+                    </Grid>
+
+                    <Border
+                        x:Name="OtherEntryBackground"
+                        IsVisible="False"
+                        BackgroundColor="#F5F6F8"
+                        Stroke="#E2E3E6"
+                        StrokeThickness="1"
+                        StrokeShape="RoundRectangle 10">
+
+                        <Entry
+                            x:Name="OtherEntry"
+                            IsVisible="False"
+                            MaxLength="80"
+                            Placeholder="Sababni qisqacha yozing"
+                            BackgroundColor="Transparent"
+                            TextColor="#22292F"
+                            PlaceholderColor="#96979B"
+                            HeightRequest="48"
+                            Margin="12,0" />
+
+                    </Border>
+
+                </VerticalStackLayout>
+
+                <Label
+                    Text="Fikringiz uchun rahmat. Akkaunt o‘chirilgandan so‘ng ushbu akkaunt bilan tizimga kira olmaysiz."
+                    FontSize="14"
+                    TextColor="#777A80"
+                    LineBreakMode="WordWrap"
+                    Margin="0,4,0,0" />
+
+                <Button
+                    x:Name="DeleteButton"
+                    Text="Akkauntni o‘chirish"
+                    BackgroundColor="#EA1111"
+                    TextColor="White"
+                    CornerRadius="10"
+                    HeightRequest="52"
+                    FontSize="17"
+                    FontFamily="{StaticResource FontSFBold}"
+                    Margin="0,8,0,20"
+                    Clicked="DeleteButton_Clicked" />
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <components:LoadingView
+            x:Name="loading"
+            Grid.RowSpan="2" />
+
+    </Grid>
+
+</page:BasePage>

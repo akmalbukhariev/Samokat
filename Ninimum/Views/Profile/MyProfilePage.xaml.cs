@@ -472,43 +472,12 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     {
         AppVibrationService.Like();
 
-        bool confirmed = await DisplayAlert(
-            "Akkauntni o‘chirish",
-            "Akkaunt o‘chirilgandan so‘ng uni qayta tiklab bo‘lmaydi. Akkauntni o‘chirmoqchimisiz?",
-            "O‘chirish",
-            "Bekor qilish");
-
-        if (!confirmed || IsProfileBusy)
+        if (IsProfileBusy)
             return;
 
-        try
-        {
-            IsProfileBusy = true;
-
-            var response = await apiService.DeleteUserAccount(new DeleteAccountRequest
-            {
-                userId = appControl.CurrentUserId
-            });
-
-            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
-            {
-                await DisplayAlert("Xatolik", response.resultMsg ?? "Akkauntni o‘chirib bo‘lmadi.", "Yopish");
-                return;
-            }
-
-            await DisplayAlert("Akkaunt o‘chirildi", "Akkauntingiz muvaffaqiyatli o‘chirildi.", "OK");
-            await appControl.StartGuestMode(clearSavedLogin: true);
-        }
-        catch (Exception ex)
-        {
-            System.Diagnostics.Debug.WriteLine($"[ERROR] DeleteAccount => {ex}");
-            await DisplayAlert("Xatolik", "Akkauntni o‘chirib bo‘lmadi.", "Yopish");
-        }
-        finally
-        {
-            IsProfileBusy = false;
-        }
+        await AppNavigatorService.NavigateTo(nameof(DeleteAccountPage));
     }
+
  
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {

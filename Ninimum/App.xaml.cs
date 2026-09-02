@@ -10,6 +10,7 @@ using Ninimum.Views.MyTariff;
 using Ninimum.Views.Orders;
 using Ninimum.Views.Payment;
 using Ninimum.Views.PaymentCard;
+using Ninimum.Views.Profile;
 using Ninimum.Views.Search;
 using Ninimum.Views.Startup;
 
@@ -62,6 +63,7 @@ public partial class App : Application
         Routing.RegisterRoute(nameof(OrdersPage), typeof(OrdersPage));
         Routing.RegisterRoute(nameof(MyTariffPage), typeof(MyTariffPage));
         Routing.RegisterRoute(nameof(TariffsPage), typeof(TariffsPage));
+        Routing.RegisterRoute(nameof(DeleteAccountPage), typeof(DeleteAccountPage));
         #endregion
     }
 

@@ -106,6 +106,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<AddPaymentCardPage>();
 		builder.Services.AddTransient<ChildInfoPage>();
 		builder.Services.AddTransient<MyProfilePage>();
+		builder.Services.AddTransient<DeleteAccountPage>();
 		builder.Services.AddTransient<AuthorizationPage>();
 		builder.Services.AddTransient<AddressPage>();
 		builder.Services.AddTransient<PaymentPage>();
