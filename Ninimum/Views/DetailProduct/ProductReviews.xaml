@@ -137,12 +137,19 @@
                                     </Grid>
 
                                     <!-- Stars -->
-                                    <HorizontalStackLayout Spacing="2">
+                                    <HorizontalStackLayout Spacing="10">
                                         <Label
                                             Text="{Binding StarsText}"
                                             TextColor="#F78A08"
                                             FontSize="18"
                                             LineBreakMode="NoWrap" />
+                                        <Label
+                                            Text="Tasdiqlangan xarid"
+                                            TextColor="#7CB518"
+                                            FontSize="13"
+                                            FontFamily="{StaticResource FontSFMedium}"
+                                            VerticalTextAlignment="Center"
+                                            IsVisible="{Binding IsVerifiedPurchase}" />
                                     </HorizontalStackLayout>
                                 </VerticalStackLayout>
 
@@ -206,126 +213,43 @@
                         </VerticalStackLayout>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
+
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout Padding="24,50" Spacing="8" HorizontalOptions="Center">
+                        <Label Text="Hali sharhlar yo'q" FontSize="20" FontFamily="{StaticResource FontSFMedium}" TextColor="#22292F" HorizontalTextAlignment="Center" />
+                        <Label Text="Bu mahsulot bo'yicha birinchi sharhni xaridorlar qoldirishi mumkin." FontSize="15" FontFamily="{StaticResource FontSFRegular}" TextColor="#96979B" HorizontalTextAlignment="Center" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
             </CollectionView>
-
-            <!-- Price area -->
-            <Grid
-                Grid.Row="3"
-                ColumnDefinitions="*,Auto"
-                ColumnSpacing="24"
-                Padding="12,8"
-                BackgroundColor="White"
-                VerticalOptions="Center">
-
-                <Label
-                    Grid.Column="0"
-                    Text="486 000 so’m"
-                    VerticalOptions="Center"
-                    TextColor="#22292F"
-                    FontSize="24"
-                    FontFamily="{StaticResource FontSFMedium}"
-                    CharacterSpacing="0.24"
-                    LineBreakMode="NoWrap" />
-
-                <Border
-                    Grid.Column="1"
-                    Padding="3"
-                    BackgroundColor="#F7F8FB"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 8"
-                    VerticalOptions="Center">
-
-                    <Grid
-                        ColumnDefinitions="Auto,Auto,Auto"
-                        ColumnSpacing="14"
-                        VerticalOptions="Center">
-
-                        <Image
-                            Source="minus.png"
-                            Aspect="AspectFit"
-                            WidthRequest="24"
-                            HeightRequest="24">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding DecreaseCommand}" />
-                            </Image.GestureRecognizers>
-                        </Image>
-
-                        <Label
-                            Grid.Column="1"
-                            Text="{Binding Quantity}"
-                            MinimumWidthRequest="33"
-                            HorizontalTextAlignment="Center"
-                            VerticalTextAlignment="Center"
-                            VerticalOptions="Center"
-                            TextColor="#96979B"
-                            FontSize="18"
-                            FontFamily="{StaticResource FontSFMedium}"
-                            CharacterSpacing="0.18" />
-
-                        <Image
-                            Grid.Column="2"
-                            Source="plus.png"
-                            Aspect="AspectFit"
-                            WidthRequest="24"
-                            HeightRequest="24">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding IncreaseCommand}" />
-                            </Image.GestureRecognizers>
-                        </Image>
-                    </Grid>
-                </Border>
-            </Grid>
-
-            <!-- Add to cart -->
-            <Grid
+                        
+            <!-- Review eligibility / write review -->
+            <Border
                 Grid.Row="4"
-                Padding="8,0"
-                ColumnDefinitions="*,Auto"
-                ColumnSpacing="10">
-
-                    <!-- Buy now -->
+                Margin="12,6,12,12"
+                Padding="12"
+                BackgroundColor="#F7F8FB"
+                StrokeThickness="0"
+                StrokeShape="RoundRectangle 10">
+                <Grid RowDefinitions="Auto,Auto" RowSpacing="10">
+                    <Label
+                        Text="{Binding ReviewEligibilityText}"
+                        TextColor="#62666D"
+                        FontSize="14"
+                        FontFamily="{StaticResource FontSFRegular}"
+                        LineBreakMode="WordWrap" />
                     <Button
-                        Grid.Column="0"
-                        HeightRequest="54"
-                        Text="Hoziroq sotib olish"
-                        BackgroundColor="#FD473C"
+                        Grid.Row="1"
+                        Text="{Binding ReviewActionText}"
+                        HeightRequest="52"
+                        CornerRadius="8"
+                        BackgroundColor="#7CB518"
                         TextColor="White"
                         FontSize="18"
                         FontFamily="{StaticResource FontSFMedium}"
-                        CharacterSpacing="0.18"
-                        CornerRadius="8"
-                        Padding="14,0"
-                        HorizontalOptions="Fill"
-                        VerticalOptions="Center" />
-
-                    <!-- Add to cart -->
-                    <Border
-                        Grid.Column="1"
-                        HeightRequest="54"
-                        BackgroundColor="#7CB518"
-                        VerticalOptions="Center">
-                        <Border.StrokeShape>
-                            <RoundRectangle CornerRadius="8" />
-                        </Border.StrokeShape>
-                        <HorizontalStackLayout
-                            Spacing="10">
-                            <Label
-                                Text="Savatchaga"
-                                FontSize="18"
-                                TextColor="White"
-                                FontFamily="{StaticResource FontSFMedium}"
-                                VerticalTextAlignment="Center"
-                                Margin="14, 0, 0, 0"/>
-                            <Image 
-                                Source="ic_basket1.png"
-                                WidthRequest="24"
-                                HeightRequest="24"
-                                VerticalOptions="Center"
-                                Margin="0,0,14,0"/>
-                        </HorizontalStackLayout>
-                    </Border>
-
+                        Command="{Binding WriteReviewCommand}"
+                        IsVisible="{Binding CanShowReviewAction}" />
                 </Grid>
+            </Border>
 
         </Grid>
         <components:ImagePreviewView 
@@ -335,9 +259,9 @@
             BindingContext="{Binding}"
             ZIndex="99" />
         <components:LoadingView
-            Grid.RowSpan="3"
             x:Name="loading"
-            ShowLoading="{Binding IsLoading}"/>
+            ZIndex="1000"
+            ShowLoading="{Binding IsLoading}" />
     </Grid>
 
 </page:BasePage>

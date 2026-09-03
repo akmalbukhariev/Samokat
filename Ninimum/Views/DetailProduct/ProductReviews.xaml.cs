@@ -49,6 +49,19 @@ public partial class ProductReviews : BasePage
         await Navigation.PopAsync();
     }
 
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        viewModel.OpenFilterRequested -= ViewModel_OpenFilterRequested;
+        viewModel.BackRequested -= ViewModel_BackRequested;
+        viewModel.OpenFilterRequested += ViewModel_OpenFilterRequested;
+        viewModel.BackRequested += ViewModel_BackRequested;
+
+        if (viewModel.ProductId > 0)
+            await viewModel.RefreshAsync();
+    }
+
     protected override void OnDisappearing()
     {
         base.OnDisappearing();

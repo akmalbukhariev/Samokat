@@ -37,6 +37,9 @@ namespace Api.Services
         private const string GET_PRODUCT_DETAIL = $"{BASE_URL}product/getProductDetail";
         private const string GET_SIMILAR_PRODUCT_LIST = $"{BASE_URL}product/getSimilarProductList";
         private const string GET_PRODUCT_REVIEW_LIST = $"{BASE_URL}review/getReviewList";
+        private const string GET_REVIEW_ELIGIBILITY = $"{BASE_URL}review/getReviewEligibility";
+        private const string ADD_REVIEW = $"{BASE_URL}review/addReview";
+        private const string UPDATE_REVIEW = $"{BASE_URL}review/updateReview";
         private const string ADD_CART_PRODUCT = $"{BASE_URL}cart/addCart";
         private const string GET_CART_LIST = $"{BASE_URL}cart/getCartList";
         private const string DELETE_CART_LIST = $"{BASE_URL}cart/deleteCart";
@@ -663,6 +666,54 @@ namespace Api.Services
                 response.resultMsg = $"API: {ex.Message}";
             }
 
+            return response;
+        }
+
+        public async Task<ReviewEligibilityResponse> GetReviewEligibility(ReviewEligibilityRequest data)
+        {
+            var response = new ReviewEligibilityResponse();
+            try
+            {
+                var receivedData = await PostAsync(GET_REVIEW_ELIGIBILITY, data);
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                    return JsonConvert.DeserializeObject<ReviewEligibilityResponse>(receivedData) ?? response;
+            }
+            catch (Exception ex)
+            {
+                response.resultMsg = $"API: {ex.Message}";
+            }
+            return response;
+        }
+
+        public async Task<Response> AddProductReview(AddReviewRequest data, IReadOnlyList<FileResult>? images = null)
+        {
+            var response = new Response();
+            try
+            {
+                var receivedData = await PostMultipartAsync(ADD_REVIEW, data, images);
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                    return JsonConvert.DeserializeObject<Response>(receivedData) ?? response;
+            }
+            catch (Exception ex)
+            {
+                response.resultMsg = $"API: {ex.Message}";
+            }
+            return response;
+        }
+
+        public async Task<Response> UpdateProductReview(UpdateReviewRequest data, IReadOnlyList<FileResult>? images = null)
+        {
+            var response = new Response();
+            try
+            {
+                var receivedData = await PostMultipartAsync(UPDATE_REVIEW, data, images);
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                    return JsonConvert.DeserializeObject<Response>(receivedData) ?? response;
+            }
+            catch (Exception ex)
+            {
+                response.resultMsg = $"API: {ex.Message}";
+            }
             return response;
         }
 

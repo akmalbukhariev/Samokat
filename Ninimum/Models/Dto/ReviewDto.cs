@@ -18,6 +18,8 @@ namespace Ninimum.Models.Dto
         public DateTime? updated_at { get; set; }
 
         public List<ReviewImageDto> images { get; set; } = new();
+        public string? customer_name { get; set; }
+        public bool? verified_purchase { get; set; }
     }
 
     public class ReviewImageDto

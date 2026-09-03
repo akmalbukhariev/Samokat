@@ -159,6 +159,26 @@ namespace Api.Services
             return await ExecuteRequestAsync(request);
         }
 
+        public async Task<string> PostMultipartAsync(string endpoint, object data, IReadOnlyList<FileResult>? files = null)
+        {
+            var request = new RestRequest(endpoint, Method.Post);
+            await SetToken(request);
+            request.AlwaysMultipartFormData = true;
+            request.AddParameter("data", JsonConvert.SerializeObject(data));
+
+            if (files != null)
+            {
+                foreach (var file in files)
+                {
+                    await using var stream = await file.OpenReadAsync();
+                    var fileBytes = ResizeImage(stream);
+                    request.AddFile("images", fileBytes, string.IsNullOrWhiteSpace(file.FileName) ? "review.jpg" : file.FileName, "image/jpeg");
+                }
+            }
+
+            return await ExecuteRequestAsync(request);
+        }
+
         public async Task<string> PostImageAsync(string endpoint, Stream imageStream, Dictionary<string, string>? additionalData = null, string streamName = "image_data")
         {
             var request = new RestRequest(endpoint, Method.Post);

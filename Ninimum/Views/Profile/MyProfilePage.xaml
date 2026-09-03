@@ -302,7 +302,7 @@
                 ZIndex="110" />
 
         <components:LoadingView
-                ShowLoading="{Binding IsProfileBusy}"
+                ShowLoading="{Binding IsLoading}"
                 ZIndex="111" />
 
         <components:QuestionPopupView

@@ -19,10 +19,19 @@ public partial class ProductReviewsViewModel : ObservableObject
     private readonly AppControl appControl;
 
     private int _quantity = 1;
+    private readonly SemaphoreSlim _refreshLock = new(1, 1);
 
     [ObservableProperty] private int productId;
     [ObservableProperty] private string title;
     [ObservableProperty] private bool isLoading;
+    [ObservableProperty] private bool canWriteReview;
+    [ObservableProperty] private bool canEditReview;
+    [ObservableProperty] private bool canShowReviewAction;
+    [ObservableProperty] private string reviewActionText = "Sharh qoldirish";
+    [ObservableProperty] private ReviewDto? existingReview;
+    [ObservableProperty] private bool showReviewEligibilityMessage;
+    [ObservableProperty] private string reviewEligibilityText = string.Empty;
+    [ObservableProperty] private long? eligibleOrderId;
 
     [ObservableProperty]
     private ICommand backCommand;
@@ -44,6 +53,9 @@ public partial class ProductReviewsViewModel : ObservableObject
 
     [ObservableProperty]
     private ICommand previewImageCommand;
+
+    [ObservableProperty]
+    private ICommand writeReviewCommand;
 
     public event Action<string>? ImagePreviewRequested;
 
@@ -135,6 +147,7 @@ public partial class ProductReviewsViewModel : ObservableObject
         ApplyFilterCommand = new Command(OnApplyFilterTapped);
         SelectSortCommand = new Command<string>(OnSelectSort);
         PreviewImageCommand = new Command<string>(OnPreviewImageTapped);
+        WriteReviewCommand = new Command(async () => await OnWriteReviewTapped());
 
         IncreaseCommand = new Command(() =>
         {
@@ -160,14 +173,6 @@ public partial class ProductReviewsViewModel : ObservableObject
         ImagePreviewRequested?.Invoke(imageUrl);
     }
 
-    partial void OnProductIdChanged(int value)
-    {
-        MainThread.BeginInvokeOnMainThread(async () =>
-        {
-            await LoadReviewsAsync();
-        });
-    }
-
     partial void OnBuyerPhotosChanged(ObservableCollection<string> value)
     {
         OnPropertyChanged(nameof(BuyerPhotosCountText));
@@ -188,6 +193,104 @@ public partial class ProductReviewsViewModel : ObservableObject
         OnPropertyChanged(nameof(IsRatingLowSelected));
     }
 
+    public async Task RefreshAsync()
+    {
+        await _refreshLock.WaitAsync();
+
+        try
+        {
+            IsLoading = true;
+            await LoadReviewsAsync();
+            await LoadReviewEligibilityAsync();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine(ex);
+        }
+        finally
+        {
+            IsLoading = false;
+            _refreshLock.Release();
+        }
+    }
+
+    private async Task LoadReviewEligibilityAsync()
+    {
+        CanWriteReview = false;
+        CanEditReview = false;
+        CanShowReviewAction = false;
+        ReviewActionText = "Sharh qoldirish";
+        ExistingReview = null;
+        EligibleOrderId = null;
+        ShowReviewEligibilityMessage = true;
+
+        if (!appControl.IsAuthenticated)
+        {
+            ReviewEligibilityText = "Sharh qoldirish uchun akkauntingizga kiring.";
+            return;
+        }
+
+        ReviewEligibilityResponse response = await apiService.GetReviewEligibility(new ReviewEligibilityRequest
+        {
+            product_id = ProductId
+        });
+
+        if (response.resultCode != ApiResult.SUCCESS.GetCodeToString() || response.resultData == null)
+        {
+            ReviewEligibilityText = "Sharh qoldirish holatini tekshirib bo'lmadi.";
+            return;
+        }
+
+        ExistingReview = response.resultData.existing_review;
+        CanWriteReview = response.resultData.can_review && response.resultData.order_id.HasValue;
+        EligibleOrderId = response.resultData.order_id;
+
+        if (CanWriteReview)
+        {
+            CanShowReviewAction = true;
+            ReviewActionText = "Sharh qoldirish";
+            ReviewEligibilityText = "Siz bu mahsulotni xarid qilgansiz. Tajribangizni boshqalar bilan ulashing.";
+            return;
+        }
+
+        CanEditReview = response.resultData.already_reviewed && ExistingReview?.id is > 0 && ExistingReview?.order_id is > 0;
+        if (CanEditReview)
+        {
+            CanShowReviewAction = true;
+            ReviewActionText = "Sharhni tahrirlash";
+            ReviewEligibilityText = "Siz ushbu mahsulot uchun sharh qoldirgansiz. Xohlasangiz uni tahrirlashingiz mumkin.";
+            return;
+        }
+
+        if (!response.resultData.has_purchased)
+            ReviewEligibilityText = "Sharh faqat ushbu mahsulotni kamida bir marta xarid qilgan foydalanuvchilar uchun mavjud.";
+        else
+            ReviewEligibilityText = "Hozircha sharh qoldirish mumkin emas.";
+    }
+
+    private async Task OnWriteReviewTapped()
+    {
+        if (CanWriteReview && EligibleOrderId.HasValue)
+        {
+            await AppNavigatorService.NavigateTo(
+                $"{nameof(Ninimum.Views.DetailProduct.LeaveCommentPage)}" +
+                $"?productId={ProductId}" +
+                $"&orderId={EligibleOrderId.Value}" +
+                $"&title={Uri.EscapeDataString(Title ?? string.Empty)}");
+            return;
+        }
+
+        if (!CanEditReview || ExistingReview == null || !ExistingReview.id.HasValue || !ExistingReview.order_id.HasValue)
+            return;
+
+        await AppNavigatorService.NavigateTo(
+            $"{nameof(Ninimum.Views.DetailProduct.LeaveCommentPage)}" +
+            $"?productId={ProductId}" +
+            $"&orderId={ExistingReview.order_id.Value}" +
+            $"&reviewId={ExistingReview.id.Value}" +
+            $"&title={Uri.EscapeDataString(Title ?? string.Empty)}");
+    }
+
     private async Task LoadReviewsAsync()
     {
         try
@@ -196,7 +299,6 @@ public partial class ProductReviewsViewModel : ObservableObject
             AllReviews.Clear();
             Reviews.Clear();
 
-            IsLoading = true;
             ReviewProductResponse response = await apiService.GetProductReviewList(
                     new ReviewListRequest
                     {
@@ -215,12 +317,13 @@ public partial class ProductReviewsViewModel : ObservableObject
             {
                 ProductReviewItem item = new()
                 {
-                    CustomerName = "Xaridor",
+                    CustomerName = string.IsNullOrWhiteSpace(review.customer_name) ? "Xaridor" : review.customer_name,
                     ReviewDate = review.created_at?.ToString("dd.MM.yyyy") ?? "",
                     ReviewDateValue = review.created_at ?? DateTime.MinValue,
                     Rating = review.rating ?? 0,
                     ReviewText = review.comment ?? "",
                     ReplyText = "",
+                    IsVerifiedPurchase = review.verified_purchase ?? false,
                     Photos = new ObservableCollection<string>()
                 };
 
@@ -248,10 +351,6 @@ public partial class ProductReviewsViewModel : ObservableObject
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine(ex);
-        }
-        finally
-        { 
-            IsLoading = false;
         }
 
         OnPropertyChanged(nameof(BuyerPhotosCountText));

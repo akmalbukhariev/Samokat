@@ -10,6 +10,7 @@ public class ProductReviewItem
     public int Rating { get; set; }
     public string ReviewText { get; set; } = string.Empty;
     public string ReplyText { get; set; } = string.Empty;
+    public bool IsVerifiedPurchase { get; set; }
     public ObservableCollection<string> Photos { get; set; } = new();
 
     public bool HasPhotos => Photos != null && Photos.Count > 0;

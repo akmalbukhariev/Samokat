@@ -14,7 +14,7 @@
     <Grid RowDefinitions="Auto,24,*">
 
         <components:PageHeaderView
-            Title="Sharh qoldirish"
+            Title="{Binding PageTitle}"
             Grid.Row="0" />
 
         <ScrollView Grid.Row="2">
@@ -28,7 +28,7 @@
                     BackgroundColor="#FBEFF1"
                     BorderColor="Transparent">
                     <Label
-                        Text="Kabrita 3 GOLD echki sutiga asoslangan kukunli sutli ichimlik, 12+ oy, 800 g"
+                        Text="{Binding ProductTitle}"
                         FontSize="18"
                         FontFamily="{StaticResource FontSFMedium}"
                         LineBreakMode="WordWrap"
@@ -117,48 +117,58 @@
                     BackgroundColor="White">
 
                     <HorizontalStackLayout Spacing="12">
+                        <CollectionView
+                            ItemsSource="{Binding SelectedImages}"
+                            ItemsLayout="HorizontalList"
+                            SelectionMode="None"
+                            HeightRequest="84"
+                            HorizontalOptions="Start">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid WidthRequest="84" HeightRequest="84" Margin="0,0,8,0">
+                                        <Border StrokeThickness="0" StrokeShape="RoundRectangle 8">
+                                            <Image Source="{Binding PreviewSource}" Aspect="AspectFill" />
+                                        </Border>
+                                        <Border
+                                            HorizontalOptions="End"
+                                            VerticalOptions="Start"
+                                            Margin="0,4,4,0"
+                                            Padding="5,1"
+                                            BackgroundColor="#99000000"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 10">
+                                            <Label Text="×" TextColor="White" FontSize="16" />
+                                            <Border.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnRemovePhotoTapped" CommandParameter="{Binding .}" />
+                                            </Border.GestureRecognizers>
+                                        </Border>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
 
-                        <!-- Existing image -->
-                        <Frame
+                        <Border
                             WidthRequest="84"
                             HeightRequest="84"
-                            Padding="0"
-                            CornerRadius="8"
-                            HasShadow="False"
-                            BorderColor="Transparent"
-                            BackgroundColor="#F3F3F3">
-                            <Image
-                                Source="sample_product_review.png"
-                                Aspect="AspectFill" />
-                        </Frame>
-
-                        <!-- Add image -->
-                        <Frame
-                            WidthRequest="84"
-                            HeightRequest="84"
-                            Padding="0"
-                            CornerRadius="8"
-                            HasShadow="False"
-                            BorderColor="#D9D9D9"
+                            Stroke="#D9D9D9"
+                            StrokeThickness="1"
+                            StrokeShape="RoundRectangle 8"
                             BackgroundColor="#F8F8F8">
-
-                            <Grid>
-                                <Label
-                                    Text="🖼"
-                                    FontSize="30"
-                                    HorizontalOptions="Center"
-                                    VerticalOptions="Center"
-                                    TextColor="#A0A0A0" />
-                            </Grid>
-                        </Frame>
-
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
+                                <Label Text="+" FontSize="30" HorizontalTextAlignment="Center" TextColor="#7CB518" />
+                                <Label Text="Rasm" FontSize="12" TextColor="#777777" />
+                            </VerticalStackLayout>
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAddPhotoTapped" />
+                            </Border.GestureRecognizers>
+                        </Border>
                     </HorizontalStackLayout>
                 </Frame>
 
                 <!-- Submit button -->
                 <Button
                     x:Name="SubmitButton"
-                    Text="Yuborish"
+                    Text="{Binding DefaultSubmitButtonText}"
                     HeightRequest="58"
                     CornerRadius="12"
                     BackgroundColor="#84BC13"
@@ -170,5 +180,10 @@
 
             </VerticalStackLayout>
         </ScrollView>
+
+        <components:LoadingView
+            Grid.RowSpan="3"
+            ZIndex="1000"
+            ShowLoading="{Binding IsLoading}" />
     </Grid>
 </page:BasePage>

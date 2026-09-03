@@ -44,6 +44,20 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     private string _selectedRegionName = "Qashqadaryo";
     private bool _isRegionUpdating;
 
+    private bool _isLoading;
+    public bool IsLoading
+    {
+        get => _isLoading;
+        set
+        {
+            if (_isLoading != value)
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
+    }
+
     public new event PropertyChangedEventHandler? PropertyChanged;
 
     public bool IsSettingsExpanded
@@ -61,7 +75,6 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     }
 
     public string SettingsArrowIcon => IsSettingsExpanded ? "ic_arrow_up.png" : "ic_arrow_down.png";
-
 
     public ObservableCollection<PopupItemModel> RegionItems => appControl.RegionItems;
     public ObservableCollection<PopupItemModel> LanguageItems { get; } = new();
@@ -232,7 +245,10 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     {
         logOutPopup.IsVisible = false;
         appControl.ShowTabBar(true);
-        await DisplayAlert("Logout", "Logged out", "OK");
+
+        IsLoading = true;
+        await appControl.Logout();
+        IsLoading = false;
     }
 
     private async void OnOrderClicked()
@@ -477,8 +493,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
         await AppNavigatorService.NavigateTo(nameof(DeleteAccountPage));
     }
-
- 
+    
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)
     {
         PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
