@@ -81,7 +81,7 @@ public partial class FavoritePageViewModel : ObservableObject
                 loadedProductIds.Clear();
                 Products.Clear();
             }
-            else
+            else if (offset == 0 && Products.Count == 0)
             {
                 IsLoading = true;
             }
@@ -205,6 +205,8 @@ public partial class FavoritePageViewModel : ObservableObject
 
             if (offset > 0)
                 offset--;
+
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Main);
         }
         catch (Exception ex)
         {
@@ -241,6 +243,7 @@ public partial class FavoritePageViewModel : ObservableObject
             }
 
             ShowCartView = true;
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Cart);
         }
         catch
         {

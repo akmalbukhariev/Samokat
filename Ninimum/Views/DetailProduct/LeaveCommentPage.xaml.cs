@@ -282,6 +282,9 @@ public partial class LeaveCommentPage : BasePage
                 return;
             }
 
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.ProductReviews(ProductId));
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.DetailProduct(ProductId));
+
             await DisplayAlert(
                 "Muvaffaqiyatli",
                 IsEditMode ? "Sharhingiz yangilandi." : "Sharhingiz yuborildi.",

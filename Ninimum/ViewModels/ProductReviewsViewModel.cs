@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using Models.Requests;
 using Models.Responses;
 using Ninimum.Models;
@@ -24,6 +25,7 @@ public partial class ProductReviewsViewModel : ObservableObject
     [ObservableProperty] private int productId;
     [ObservableProperty] private string title;
     [ObservableProperty] private bool isLoading;
+    [ObservableProperty] private bool isRefreshing;
     [ObservableProperty] private bool canWriteReview;
     [ObservableProperty] private bool canEditReview;
     [ObservableProperty] private bool canShowReviewAction;
@@ -56,6 +58,8 @@ public partial class ProductReviewsViewModel : ObservableObject
 
     [ObservableProperty]
     private ICommand writeReviewCommand;
+
+    public IAsyncRelayCommand RefreshCommand { get; }
 
     public event Action<string>? ImagePreviewRequested;
 
@@ -148,6 +152,7 @@ public partial class ProductReviewsViewModel : ObservableObject
         SelectSortCommand = new Command<string>(OnSelectSort);
         PreviewImageCommand = new Command<string>(OnPreviewImageTapped);
         WriteReviewCommand = new Command(async () => await OnWriteReviewTapped());
+        RefreshCommand = new AsyncRelayCommand(ManualRefreshAsync);
 
         IncreaseCommand = new Command(() =>
         {
@@ -193,13 +198,15 @@ public partial class ProductReviewsViewModel : ObservableObject
         OnPropertyChanged(nameof(IsRatingLowSelected));
     }
 
-    public async Task RefreshAsync()
+    public async Task RefreshAsync(bool showLoading = true)
     {
         await _refreshLock.WaitAsync();
 
         try
         {
-            IsLoading = true;
+            if (showLoading)
+                IsLoading = true;
+
             await LoadReviewsAsync();
             await LoadReviewEligibilityAsync();
         }
@@ -209,8 +216,25 @@ public partial class ProductReviewsViewModel : ObservableObject
         }
         finally
         {
-            IsLoading = false;
+            if (showLoading)
+                IsLoading = false;
+
             _refreshLock.Release();
+        }
+    }
+
+    private async Task ManualRefreshAsync()
+    {
+        AppVibrationService.Click();
+
+        try
+        {
+            IsRefreshing = true;
+            await RefreshAsync(showLoading: false);
+        }
+        finally
+        {
+            IsRefreshing = false;
         }
     }
 

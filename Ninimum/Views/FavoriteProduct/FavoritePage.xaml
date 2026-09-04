@@ -24,6 +24,8 @@
             Grid.Row="2">
         <CollectionView
                 ItemsSource="{Binding Products}"
+                RemainingItemsThreshold="1"
+                RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
                 SelectionMode="None"
                 Margin="10,10,10,0">
 

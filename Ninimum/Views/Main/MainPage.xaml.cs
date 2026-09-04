@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using Ninimum.ViewModels;
 using Ninimum.Views.Search;
+using Ninimum.Services;
 
 namespace Ninimum.Views.Main;
 
@@ -28,11 +29,13 @@ public partial class MainPage : BasePage
     {
         base.OnAppearing();
 
-        if (isFirstLoaded)
-        {
-            isFirstLoaded = false;
-            await viewModel.LoadInitialAsync();
-        }
+        bool needsRefresh = PageDataRefreshState.ConsumeDirty(PageDataRefreshState.Main);
+
+        if (!isFirstLoaded && !needsRefresh)
+            return;
+
+        isFirstLoaded = false;
+        await viewModel.LoadInitialAsync();
     }
      
     private async void ViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)

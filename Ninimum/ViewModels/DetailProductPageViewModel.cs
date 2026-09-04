@@ -135,6 +135,8 @@ public partial class DetailProductPageViewModel : ObservableObject
 
             IsLikedViewLiked = ProductLiked;
             ShowLikedView = true;
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Favorites);
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Main);
 
             return true;
         }
@@ -470,6 +472,7 @@ public partial class DetailProductPageViewModel : ObservableObject
             }
 
             ShowCartView = true;
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Cart);
             return true;
         }
         catch

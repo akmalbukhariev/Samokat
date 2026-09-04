@@ -128,8 +128,10 @@ public partial class MainPageViewModel : ObservableObject
                 loadedProductIds.Clear();
                 Products.Clear();
             }
-            else
+            else if (offset == 0 && Products.Count == 0)
             {
+                // Full-screen LoadingView is only for the first/full load.
+                // Infinite scrolling must not cover an already loaded page.
                 IsLoading = true;
             }
 
@@ -275,6 +277,7 @@ public partial class MainPageViewModel : ObservableObject
 
             IsLikedViewLiked = product.Liked;
             ShowLikedView = true;
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Favorites);
         }
         catch
         {
@@ -314,6 +317,7 @@ public partial class MainPageViewModel : ObservableObject
             }
 
             ShowCartView = true;
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Cart);
         }
         catch
         {

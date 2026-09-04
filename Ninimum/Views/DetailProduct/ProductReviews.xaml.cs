@@ -1,10 +1,12 @@
 using Ninimum.ViewModels;
+using Ninimum.Services;
 
 namespace Ninimum.Views.DetailProduct;
 
 public partial class ProductReviews : BasePage
 {
     ProductReviewsViewModel viewModel;
+    private bool _hasLoaded;
 
     public ProductReviews(ProductReviewsViewModel vm)
     {
@@ -58,8 +60,17 @@ public partial class ProductReviews : BasePage
         viewModel.OpenFilterRequested += ViewModel_OpenFilterRequested;
         viewModel.BackRequested += ViewModel_BackRequested;
 
-        if (viewModel.ProductId > 0)
-            await viewModel.RefreshAsync();
+        if (viewModel.ProductId <= 0)
+            return;
+
+        bool needsRefresh = PageDataRefreshState.ConsumeDirty(
+            PageDataRefreshState.ProductReviews(viewModel.ProductId));
+
+        if (_hasLoaded && !needsRefresh)
+            return;
+
+        _hasLoaded = true;
+        await viewModel.RefreshAsync();
     }
 
     protected override void OnDisappearing()

@@ -83,7 +83,7 @@ public partial class CartPageViewModel : ObservableObject
                 loadedCartIds.Clear();
                 CartProducts.Clear();
             }
-            else
+            else if (offset == 0 && CartProducts.Count == 0)
             {
                 IsLoading = true;
             }

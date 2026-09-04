@@ -24,8 +24,11 @@
                 RightImageCommand="{Binding FilterTapCommand}" />
 
             <!-- Main scrollable content -->
-            <CollectionView
+            <RefreshView
                 Grid.Row="2"
+                IsRefreshing="{Binding IsRefreshing}"
+                Command="{Binding RefreshCommand}">
+            <CollectionView
                 ItemsSource="{Binding Reviews}"
                 SelectionMode="None"
                 BackgroundColor="White"
@@ -221,6 +224,7 @@
                     </VerticalStackLayout>
                 </CollectionView.EmptyView>
             </CollectionView>
+            </RefreshView>
                         
             <!-- Review eligibility / write review -->
             <Border

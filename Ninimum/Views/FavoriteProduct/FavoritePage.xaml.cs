@@ -8,6 +8,7 @@ namespace Ninimum.Views.FavoriteProduct;
 public partial class FavoritePage : BasePage
 {
     private readonly FavoritePageViewModel viewModel;
+    private bool _hasLoaded;
 
     public FavoritePage(FavoritePageViewModel vm, AppControl appControl)
     {
@@ -28,6 +29,12 @@ public partial class FavoritePage : BasePage
         if (!await appControl.EnsureAuthenticatedAsync(true))
             return;
 
+        bool needsRefresh = PageDataRefreshState.ConsumeDirty(PageDataRefreshState.Favorites);
+
+        if (_hasLoaded && !needsRefresh)
+            return;
+
+        _hasLoaded = true;
         await viewModel.LoadInitialAsync();
     }
     

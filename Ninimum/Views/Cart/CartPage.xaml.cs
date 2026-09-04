@@ -11,6 +11,7 @@ namespace Ninimum.Views.Cart;
 public partial class CartPage : BasePage
 {
     private readonly CartPageViewModel viewModel;
+    private bool _hasLoaded;
 
     public CartPage(CartPageViewModel vm, AppControl appControl)
     {
@@ -29,6 +30,12 @@ public partial class CartPage : BasePage
         if (!await appControl.EnsureAuthenticatedAsync(true))
             return;
 
+        bool needsRefresh = PageDataRefreshState.ConsumeDirty(PageDataRefreshState.Cart);
+
+        if (_hasLoaded && !needsRefresh)
+            return;
+
+        _hasLoaded = true;
         await viewModel.LoadCartListAsync();
     }
 }

@@ -10,6 +10,7 @@ public partial class DetailProductPage : BasePage
     private readonly DetailProductPageViewModel? viewModel;
     private int _currentPosition = -1;
     private bool _isCarouselUpdating;
+    private bool _hasAppeared;
 
     public DetailProductPage(DetailProductPageViewModel vm)
     {
@@ -19,6 +20,26 @@ public partial class DetailProductPage : BasePage
 
         Loaded += DetailProductPage_Loaded;
         viewModel.PropertyChanged += ViewModel_PropertyChanged;
+    }
+
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (!_hasAppeared)
+        {
+            _hasAppeared = true;
+            return;
+        }
+
+        if (viewModel == null || viewModel.ProductId <= 0)
+            return;
+
+        if (!PageDataRefreshState.ConsumeDirty(PageDataRefreshState.DetailProduct(viewModel.ProductId)))
+            return;
+
+        await viewModel.LoadInitialAsync();
     }
 
     private void DetailProductPage_Loaded(object? sender, EventArgs e)

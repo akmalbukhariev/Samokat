@@ -90,7 +90,7 @@ public partial class SearchPageViewModel : ObservableObject
 
     private async Task LoadMoreAsync()
     {
-        await SearchProductsAsync(SearchText, CancellationToken.None);
+        await SearchProductsAsync(SearchText, CancellationToken.None, showMainLoading: false);
     }
 
     private async Task RefreshAsync()
@@ -365,6 +365,8 @@ public partial class SearchPageViewModel : ObservableObject
 
             IsLikedViewLiked = product.Liked;
             ShowLikedView = true;
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Favorites);
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Main);
         }
         catch
         {
@@ -404,6 +406,7 @@ public partial class SearchPageViewModel : ObservableObject
             }
 
             ShowCartView = true;
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Cart);
         }
         catch
         {
