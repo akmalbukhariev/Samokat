@@ -392,6 +392,9 @@
                         Stroke="#7CB518"
                         StrokeThickness="1"
                         BackgroundColor="#F8FCF0">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Question_Tapped" />
+                        </Border.GestureRecognizers>
                         <Border.StrokeShape>
                             <RoundRectangle CornerRadius="8" />
                         </Border.StrokeShape>

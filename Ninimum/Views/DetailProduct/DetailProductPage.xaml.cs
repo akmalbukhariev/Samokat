@@ -263,6 +263,22 @@ public partial class DetailProductPage : BasePage
         });
     }
 
+    private async void Question_Tapped(object sender, TappedEventArgs e)
+    {
+        if (viewModel == null || viewModel.ProductId <= 0)
+            return;
+
+        await ClickGuard.RunAsync((VisualElement)sender, async () =>
+        {
+            await AnimateElementScaleDown(sender as VisualElement);
+
+            await AppNavigatorService.NavigateTo(
+                $"{nameof(ProductQuestionsPage)}" +
+                $"?productId={viewModel.ProductId}" +
+                $"&title={Uri.EscapeDataString(viewModel.ProductTitle ?? string.Empty)}");
+        });
+    }
+
     private async void Cart_Tapped(object sender, TappedEventArgs e)
     {
         await ClickGuard.RunAsync((VisualElement)sender, async () =>

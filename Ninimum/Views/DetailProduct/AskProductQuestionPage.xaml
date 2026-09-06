@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Ninimum.Views"
+    xmlns:components="clr-namespace:Ninimum.Components"
+    x:Class="Ninimum.Views.DetailProduct.AskProductQuestionPage">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <components:PageHeaderView
+            Title="Savol berish"
+            ShowRightIcon="False"
+            BackCommand="{Binding BackCommand}" />
+
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="16,12,16,24" Spacing="20">
+                <Border
+                    Padding="12"
+                    BackgroundColor="#FFF2F3"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 8">
+                    <Label
+                        Text="{Binding Title}"
+                        TextColor="#22292F"
+                        FontSize="18"
+                        FontFamily="{StaticResource FontSFMedium}"
+                        LineBreakMode="WordWrap" />
+                </Border>
+
+                <VerticalStackLayout Spacing="7">
+                    <Label
+                        Text="Mahsulot bo'yicha savolingizni yozing"
+                        TextColor="#22292F"
+                        FontSize="20"
+                        FontFamily="{StaticResource FontSFMedium}"
+                        LineBreakMode="WordWrap" />
+                    <Label
+                        Text="Mahsulotning xususiyati, tarkibi, o'lchami yoki foydalanish bo'yicha aniq savol yozishingiz mumkin."
+                        TextColor="#96979B"
+                        FontSize="15"
+                        FontFamily="{StaticResource FontSFRegular}"
+                        LineBreakMode="WordWrap" />
+                </VerticalStackLayout>
+
+                <Border
+                    Padding="14"
+                    BackgroundColor="#F7F8FB"
+                    Stroke="#ECEDEF"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10">
+                    <Editor
+                        Text="{Binding QuestionText}"
+                        Placeholder="Savolingizni kiriting..."
+                        PlaceholderColor="#A3A5AA"
+                        TextColor="#22292F"
+                        FontSize="17"
+                        FontFamily="{StaticResource FontSFRegular}"
+                        AutoSize="TextChanges"
+                        MinimumHeightRequest="180"
+                        MaxLength="1000"
+                        BackgroundColor="Transparent" />
+                </Border>
+
+                <Label
+                    Text="{Binding CharacterCountText}"
+                    TextColor="#96979B"
+                    FontSize="14"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    HorizontalTextAlignment="End" />
+
+                <Border
+                    Padding="12"
+                    BackgroundColor="#F8FCF0"
+                    StrokeThickness="0"
+                    StrokeShape="RoundRectangle 8">
+                    <Label
+                        Text="Savol berish uchun mahsulotni oldin xarid qilgan bo'lishingiz shart emas."
+                        TextColor="#6C951C"
+                        FontSize="14"
+                        FontFamily="{StaticResource FontSFRegular}"
+                        LineBreakMode="WordWrap" />
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <Button
+            Grid.Row="2"
+            Margin="16,10,16,18"
+            Text="Savolni yuborish"
+            Command="{Binding SubmitCommand}"
+            IsEnabled="{Binding CanSubmit}"
+            HeightRequest="56"
+            CornerRadius="8"
+            BackgroundColor="#7CB518"
+            TextColor="White"
+            FontSize="18"
+            FontFamily="{StaticResource FontSFMedium}" />
+
+        <components:LoadingView
+            Grid.RowSpan="3"
+            ZIndex="100"
+            ShowLoading="{Binding IsLoading}" />
+    </Grid>
+</page:BasePage>

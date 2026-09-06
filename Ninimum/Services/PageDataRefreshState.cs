@@ -17,6 +17,7 @@ public static class PageDataRefreshState
     public const string Orders = "Orders";
 
     public static string ProductReviews(long productId) => $"ProductReviews:{productId}";
+    public static string ProductQuestions(long productId) => $"ProductQuestions:{productId}";
     public static string DetailProduct(long productId) => $"DetailProduct:{productId}";
 
     public static void MarkDirty(string key)

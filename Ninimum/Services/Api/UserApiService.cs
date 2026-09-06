@@ -40,6 +40,8 @@ namespace Api.Services
         private const string GET_REVIEW_ELIGIBILITY = $"{BASE_URL}review/getReviewEligibility";
         private const string ADD_REVIEW = $"{BASE_URL}review/addReview";
         private const string UPDATE_REVIEW = $"{BASE_URL}review/updateReview";
+        private const string GET_PRODUCT_QUESTION_LIST = $"{BASE_URL}product-question/getQuestionList";
+        private const string ADD_PRODUCT_QUESTION = $"{BASE_URL}product-question/addQuestion";
         private const string ADD_CART_PRODUCT = $"{BASE_URL}cart/addCart";
         private const string GET_CART_LIST = $"{BASE_URL}cart/getCartList";
         private const string DELETE_CART_LIST = $"{BASE_URL}cart/deleteCart";
@@ -714,6 +716,61 @@ namespace Api.Services
             {
                 response.resultMsg = $"API: {ex.Message}";
             }
+            return response;
+        }
+
+        public async Task<ProductQuestionListResponse> GetProductQuestionList(ProductQuestionListRequest data)
+        {
+            var response = new ProductQuestionListResponse();
+
+            try
+            {
+                // Product questions are public, just like the review list.
+                var receivedData = await PostAsync(GET_PRODUCT_QUESTION_LIST, data, useToken: false);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                    return JsonConvert.DeserializeObject<ProductQuestionListResponse>(receivedData) ?? response;
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<Response> AddProductQuestion(AddProductQuestionRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PostAsync(ADD_PRODUCT_QUESTION, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                    return JsonConvert.DeserializeObject<Response>(receivedData) ?? response;
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
             return response;
         }
 

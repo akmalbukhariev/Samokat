@@ -55,6 +55,8 @@ public partial class App : Application
         Routing.RegisterRoute(nameof(DetailProductPage), typeof(DetailProductPage));
         Routing.RegisterRoute(nameof(ProductReviews), typeof(ProductReviews));
         Routing.RegisterRoute(nameof(LeaveCommentPage), typeof(LeaveCommentPage));
+        Routing.RegisterRoute(nameof(ProductQuestionsPage), typeof(ProductQuestionsPage));
+        Routing.RegisterRoute(nameof(AskProductQuestionPage), typeof(AskProductQuestionPage));
         Routing.RegisterRoute(nameof(FormalizationPage), typeof(FormalizationPage));
         Routing.RegisterRoute(nameof(AddPaymentCardPage), typeof(AddPaymentCardPage));
         Routing.RegisterRoute(nameof(CancelOrderPage), typeof(CancelOrderPage));
