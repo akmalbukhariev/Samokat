@@ -20,6 +20,7 @@ public partial class LeaveCommentPage : BasePage
     private bool _isSubmitting;
     private bool _editLoaded;
     private bool _isLoading;
+    private bool _isMediaPickerOpen;
 
     public bool IsLoading
     {
@@ -54,6 +55,9 @@ public partial class LeaveCommentPage : BasePage
     }
 
     public ObservableCollection<ReviewPhotoItem> SelectedImages { get; } = new();
+    public bool HasSelectedImages => SelectedImages.Count > 0;
+    public bool CanAddMorePhotos => SelectedImages.Count < 3;
+    public string PhotoLimitText => $"{SelectedImages.Count}/3 ta fotosurat";
 
     public LeaveCommentPage(UserApiService apiService, AppControl appControl)
     {
@@ -61,6 +65,7 @@ public partial class LeaveCommentPage : BasePage
         this.apiService = apiService;
         this.appControl = appControl;
         BindingContext = this;
+        SelectedImages.CollectionChanged += (_, _) => UpdatePhotoState();
         InitializePage();
     }
 
@@ -68,6 +73,14 @@ public partial class LeaveCommentPage : BasePage
     {
         _selectedRating = 0;
         UpdateStars(_selectedRating);
+        UpdatePhotoState();
+    }
+
+    private void UpdatePhotoState()
+    {
+        OnPropertyChanged(nameof(HasSelectedImages));
+        OnPropertyChanged(nameof(CanAddMorePhotos));
+        OnPropertyChanged(nameof(PhotoLimitText));
     }
 
     protected override async void OnAppearing()
@@ -171,25 +184,90 @@ public partial class LeaveCommentPage : BasePage
         if (Star5 != null) Star5.Source = rating >= 5 ? "star.png" : "star_gray.png";
     }
 
-    private async void OnAddPhotoTapped(object sender, TappedEventArgs e)
+    private async void OnTakePhotoTapped(object sender, TappedEventArgs e)
     {
-        if (SelectedImages.Count >= 3)
+        if (!CanAddMorePhotos || _isMediaPickerOpen)
+            return;
+
+        if (!MediaPicker.Default.IsCaptureSupported)
         {
-            await DisplayAlert("Ogohlantirish", "Ko'pi bilan 3 ta fotosurat joylash mumkin.", "OK");
+            await DisplayAlert("Ogohlantirish", "Ushbu qurilmada kamera orqali rasm olish mavjud emas.", "OK");
             return;
         }
 
         try
         {
-            FileResult? file = await MediaPicker.Default.PickPhotoAsync();
-            if (file == null)
-                return;
+            _isMediaPickerOpen = true;
 
-            SelectedImages.Add(new ReviewPhotoItem(file));
+            PermissionStatus permission = await Permissions.CheckStatusAsync<Permissions.Camera>();
+            if (permission != PermissionStatus.Granted)
+                permission = await Permissions.RequestAsync<Permissions.Camera>();
+
+            if (permission != PermissionStatus.Granted)
+            {
+                await DisplayAlert("Kamera ruxsati", "Rasmga olish uchun ilovaga kamera ruxsatini bering.", "OK");
+                return;
+            }
+
+            // Keep the original EXIF orientation until ApiService.ResizeImage processes it.
+            // ResizeImage rotates the actual pixels, resizes to the upload limit and then
+            // re-encodes as JPEG, so the server never depends on EXIF for display orientation.
+            FileResult? file = await MediaPicker.Default.CapturePhotoAsync(new MediaPickerOptions
+            {
+                Title = "Sharh uchun rasmga olish",
+                RotateImage = false,
+                PreserveMetaData = true
+            });
+
+            if (file != null && CanAddMorePhotos)
+                SelectedImages.Add(new ReviewPhotoItem(file));
+        }
+        catch (PermissionException)
+        {
+            await DisplayAlert("Kamera ruxsati", "Kamera ruxsati berilmagan.", "OK");
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Xatolik", $"Rasmga olib bo'lmadi: {ex.Message}", "OK");
+        }
+        finally
+        {
+            _isMediaPickerOpen = false;
+        }
+    }
+
+    private async void OnPickPhotoTapped(object sender, TappedEventArgs e)
+    {
+        if (!CanAddMorePhotos || _isMediaPickerOpen)
+            return;
+
+        try
+        {
+            _isMediaPickerOpen = true;
+            int remainingCount = 3 - SelectedImages.Count;
+
+            List<FileResult> files = await MediaPicker.Default.PickPhotosAsync(new MediaPickerOptions
+            {
+                Title = "Sharh uchun fotosurat tanlang",
+                SelectionLimit = remainingCount,
+                RotateImage = false,
+                PreserveMetaData = true
+            });
+
+            foreach (FileResult file in files.Take(remainingCount))
+                SelectedImages.Add(new ReviewPhotoItem(file));
+        }
+        catch (PermissionException)
+        {
+            await DisplayAlert("Ruxsat", "Fotosuratlarni tanlash uchun galereyaga ruxsat bering.", "OK");
         }
         catch (Exception ex)
         {
             await DisplayAlert("Xatolik", $"Fotosuratni tanlab bo'lmadi: {ex.Message}", "OK");
+        }
+        finally
+        {
+            _isMediaPickerOpen = false;
         }
     }
 
@@ -284,6 +362,8 @@ public partial class LeaveCommentPage : BasePage
 
             PageDataRefreshState.MarkDirty(PageDataRefreshState.ProductReviews(ProductId));
             PageDataRefreshState.MarkDirty(PageDataRefreshState.DetailProduct(ProductId));
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Main);
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Favorites);
 
             await DisplayAlert(
                 "Muvaffaqiyatli",

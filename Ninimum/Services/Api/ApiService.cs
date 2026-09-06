@@ -1,4 +1,4 @@
-﻿using Microsoft.Maui.Graphics.Platform;
+using Microsoft.Maui.Graphics.Platform;
 using Newtonsoft.Json;
 using RestSharp;
 using SkiaSharp;
@@ -172,7 +172,8 @@ namespace Api.Services
                 {
                     await using var stream = await file.OpenReadAsync();
                     var fileBytes = ResizeImage(stream);
-                    request.AddFile("images", fileBytes, string.IsNullOrWhiteSpace(file.FileName) ? "review.jpg" : file.FileName, "image/jpeg");
+                    var uploadFileName = $"review_{Guid.NewGuid():N}.jpg";
+                    request.AddFile("images", fileBytes, uploadFileName, "image/jpeg");
                 }
             }
 
@@ -229,121 +230,119 @@ namespace Api.Services
             return await ExecuteRequestAsync(request);
         }
 
+        /// <summary>
+        /// Normalizes EXIF orientation, constrains the image dimensions and encodes it as JPEG
+        /// before it is uploaded. This prevents camera photos from appearing sideways after
+        /// their EXIF metadata is removed by the server or another image decoder.
+        /// </summary>
         public static byte[] ResizeImage(Stream imageStream, int maxWidth = 1024, int maxHeight = 1024, int quality = 80)
         {
-            // Copy stream to byte array
             using var msOriginal = new MemoryStream();
             imageStream.CopyTo(msOriginal);
-            var imageBytes = msOriginal.ToArray();
+            byte[] imageBytes = msOriginal.ToArray();
 
             try
             {
-                // Decode bitmap
-                using var original = SKBitmap.Decode(imageBytes);
-                if (original == null)
-                {
-                    // Return original bytes if decode fails
-                    return imageBytes;
-                }
-
-                // Try to read EXIF orientation
                 SKEncodedOrigin origin = SKEncodedOrigin.TopLeft;
-                try
+                using (var skStream = new SKMemoryStream(imageBytes))
+                using (var codec = SKCodec.Create(skStream))
                 {
-                    using var skStream = new SKMemoryStream(imageBytes);
-                    using var codec = SKCodec.Create(skStream);
                     if (codec != null)
                         origin = codec.EncodedOrigin;
                 }
-                catch
-                {
-                    // Ignore codec errors, just use default orientation
-                }
 
-                using var orientedBitmap = ApplyExifOrientation(original, origin);
-
-                int ow = orientedBitmap.Width, oh = orientedBitmap.Height;
-
-                // If already small, just return JPEG directly
-                if (ow <= maxWidth && oh <= maxHeight)
-                {
-                    using var ms = new MemoryStream();
-                    using var img = SKImage.FromBitmap(orientedBitmap);
-                    using var data = img.Encode(SKEncodedImageFormat.Jpeg, quality);
-                    data?.SaveTo(ms);
-                    return ms.ToArray();
-                }
-
-                // Resize
-                float ratio = Math.Min((float)maxWidth / ow, (float)maxHeight / oh);
-                int nw = Math.Max(1, (int)(ow * ratio));
-                int nh = Math.Max(1, (int)(oh * ratio));
-
-                var sampling = new SKSamplingOptions(SKFilterMode.Linear);
-                using var resized = orientedBitmap.Resize(new SKImageInfo(nw, nh), sampling);
-                if (resized == null)
-                {
-                    // Fallback: return original bytes
+                using var original = SKBitmap.Decode(imageBytes);
+                if (original == null)
                     return imageBytes;
+
+                SKBitmap oriented = ApplyExifOrientation(original, origin);
+                try
+                {
+                    int originalWidth = oriented.Width;
+                    int originalHeight = oriented.Height;
+                    float ratio = Math.Min(1f, Math.Min((float)maxWidth / originalWidth, (float)maxHeight / originalHeight));
+                    int newWidth = Math.Max(1, (int)Math.Round(originalWidth * ratio));
+                    int newHeight = Math.Max(1, (int)Math.Round(originalHeight * ratio));
+
+                    if (newWidth == originalWidth && newHeight == originalHeight)
+                        return EncodeJpeg(oriented, quality);
+
+                    var sampling = new SKSamplingOptions(SKFilterMode.Linear);
+                    using var resized = oriented.Resize(new SKImageInfo(newWidth, newHeight), sampling);
+                    return resized != null ? EncodeJpeg(resized, quality) : EncodeJpeg(oriented, quality);
                 }
-
-                using var image = SKImage.FromBitmap(resized);
-                using var msFinal = new MemoryStream();
-                using var dataFinal = image.Encode(SKEncodedImageFormat.Jpeg, quality);
-                dataFinal?.SaveTo(msFinal);
-
-                return msFinal.ToArray();
+                finally
+                {
+                    if (!ReferenceEquals(oriented, original))
+                        oriented.Dispose();
+                }
             }
             catch
             {
-                // Skia failed → Android native fallback
+                // Skia is normally used on both Android and iOS. If image decoding fails,
+                // retain the previous Android fallback rather than blocking review upload.
                 return ConvertToJpegAndroid(imageBytes, maxWidth, maxHeight, quality);
             }
         }
 
+        private static byte[] EncodeJpeg(SKBitmap bitmap, int quality)
+        {
+            using var image = SKImage.FromBitmap(bitmap);
+            using var data = image.Encode(SKEncodedImageFormat.Jpeg, ClampQuality(quality));
+            return data?.ToArray() ?? Array.Empty<byte>();
+        }
+
         private static byte[] ConvertToJpegAndroid(byte[] bytes, int maxW, int maxH, int quality)
         {
-            #if ANDROID
+#if ANDROID
             try
             {
-                // Probe image bounds without loading full bitmap
                 var opts = new Android.Graphics.BitmapFactory.Options { InJustDecodeBounds = true };
                 Android.Graphics.BitmapFactory.DecodeByteArray(bytes, 0, bytes.Length, opts);
 
                 if (opts.OutWidth <= 0 || opts.OutHeight <= 0)
                     return bytes;
 
-                // Compute sampling to roughly fit within target
                 opts.InSampleSize = ComputeInSampleSize(opts.OutWidth, opts.OutHeight, maxW, maxH);
                 opts.InJustDecodeBounds = false;
                 opts.InPreferredConfig = Android.Graphics.Bitmap.Config.Argb8888;
 
                 using var bmp = Android.Graphics.BitmapFactory.DecodeByteArray(bytes, 0, bytes.Length, opts);
-                if (bmp == null) return bytes;
+                if (bmp == null)
+                    return bytes;
 
-                // Scale again if still larger
-                int w = bmp.Width, h = bmp.Height;
-                float ratio = Math.Min((float)maxW / w, (float)maxH / h);
+                int width = bmp.Width;
+                int height = bmp.Height;
+                float ratio = Math.Min(1f, Math.Min((float)maxW / width, (float)maxH / height));
+                int newWidth = Math.Max(1, (int)Math.Round(width * ratio));
+                int newHeight = Math.Max(1, (int)Math.Round(height * ratio));
 
-                using var finalBmp = (ratio < 1f)
-                    ? Android.Graphics.Bitmap.CreateScaledBitmap(bmp,
-                            Math.Max(1, (int)(w * ratio)),
-                            Math.Max(1, (int)(h * ratio)),
-                            true)
-                    : bmp;
+                Android.Graphics.Bitmap? scaled = null;
+                Android.Graphics.Bitmap finalBitmap = bmp;
+                if (newWidth != width || newHeight != height)
+                {
+                    scaled = Android.Graphics.Bitmap.CreateScaledBitmap(bmp, newWidth, newHeight, true);
+                    finalBitmap = scaled;
+                }
 
-                using var ms = new MemoryStream();
-                finalBmp.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, ClampQuality(quality), ms);
-                return ms.ToArray();
+                try
+                {
+                    using var ms = new MemoryStream();
+                    finalBitmap.Compress(Android.Graphics.Bitmap.CompressFormat.Jpeg, ClampQuality(quality), ms);
+                    return ms.ToArray();
+                }
+                finally
+                {
+                    scaled?.Dispose();
+                }
             }
             catch
             {
-                // Last resort: return original
                 return bytes;
             }
-            #else
-                return bytes;
-            #endif
+#else
+            return bytes;
+#endif
         }
 
         private static int ComputeInSampleSize(int width, int height, int reqW, int reqH)
@@ -359,51 +358,70 @@ namespace Api.Services
             return Math.Max(1, inSample);
         }
 
-        private static int ClampQuality(int q) => Math.Min(100, Math.Max(1, q));
+        private static int ClampQuality(int quality) => Math.Min(100, Math.Max(1, quality));
 
+        /// <summary>
+        /// Applies every EXIF orientation supported by SKCodec. The returned bitmap is a new
+        /// bitmap only when a transform is required; TopLeft returns the original instance.
+        /// </summary>
         private static SKBitmap ApplyExifOrientation(SKBitmap bitmap, SKEncodedOrigin origin)
         {
-            SKBitmap rotated;
+            if (origin == SKEncodedOrigin.TopLeft)
+                return bitmap;
+
+            bool swapDimensions = origin is SKEncodedOrigin.LeftTop or SKEncodedOrigin.RightTop
+                or SKEncodedOrigin.RightBottom or SKEncodedOrigin.LeftBottom;
+
+            var result = new SKBitmap(
+                swapDimensions ? bitmap.Height : bitmap.Width,
+                swapDimensions ? bitmap.Width : bitmap.Height);
+
+            using var canvas = new SKCanvas(result);
 
             switch (origin)
             {
-                case SKEncodedOrigin.BottomRight: // 180°
-                    rotated = new SKBitmap(bitmap.Width, bitmap.Height);
-                    using (var canvas = new SKCanvas(rotated))
-                    {
-                        canvas.RotateDegrees(180, bitmap.Width / 2, bitmap.Height / 2);
-                        canvas.DrawBitmap(bitmap, 0, 0);
-                    }
+                case SKEncodedOrigin.TopRight: // mirror horizontally
+                    canvas.Translate(result.Width, 0);
+                    canvas.Scale(-1, 1);
                     break;
 
-                case SKEncodedOrigin.RightTop: // 90° CW
-                    rotated = new SKBitmap(bitmap.Height, bitmap.Width);
-                    using (var canvas = new SKCanvas(rotated))
-                    {
-                        canvas.Translate(rotated.Width, 0);
-                        canvas.RotateDegrees(90);
-                        canvas.DrawBitmap(bitmap, 0, 0);
-                    }
+                case SKEncodedOrigin.BottomRight: // 180 degrees
+                    canvas.Translate(result.Width, result.Height);
+                    canvas.RotateDegrees(180);
                     break;
 
-                case SKEncodedOrigin.LeftBottom: // 270° CW
-                    rotated = new SKBitmap(bitmap.Height, bitmap.Width);
-                    using (var canvas = new SKCanvas(rotated))
-                    {
-                        canvas.Translate(0, rotated.Height);
-                        canvas.RotateDegrees(270);
-                        canvas.DrawBitmap(bitmap, 0, 0);
-                    }
+                case SKEncodedOrigin.BottomLeft: // mirror vertically
+                    canvas.Translate(0, result.Height);
+                    canvas.Scale(1, -1);
                     break;
 
-                default:
-                    // No rotation needed
-                    return bitmap;
+                case SKEncodedOrigin.LeftTop: // transpose
+                    canvas.RotateDegrees(90);
+                    canvas.Scale(1, -1);
+                    break;
+
+                case SKEncodedOrigin.RightTop: // 90 degrees clockwise
+                    canvas.Translate(result.Width, 0);
+                    canvas.RotateDegrees(90);
+                    break;
+
+                case SKEncodedOrigin.RightBottom: // transverse
+                    canvas.Translate(result.Width, result.Height);
+                    canvas.Scale(1, -1);
+                    canvas.RotateDegrees(90);
+                    break;
+
+                case SKEncodedOrigin.LeftBottom: // 270 degrees clockwise
+                    canvas.Translate(0, result.Height);
+                    canvas.RotateDegrees(270);
+                    break;
             }
 
-            return rotated;
+            canvas.DrawBitmap(bitmap, 0, 0);
+            canvas.Flush();
+            return result;
         }
-        
+
         /// <summary>
         /// Generic login method that allows different response types.
         /// </summary>

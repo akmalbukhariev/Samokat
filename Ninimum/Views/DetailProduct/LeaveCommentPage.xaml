@@ -116,13 +116,13 @@
                     BorderColor="#D9D9D9"
                     BackgroundColor="White">
 
-                    <HorizontalStackLayout Spacing="12">
+                    <VerticalStackLayout Spacing="12">
                         <CollectionView
+                            IsVisible="{Binding HasSelectedImages}"
                             ItemsSource="{Binding SelectedImages}"
                             ItemsLayout="HorizontalList"
                             SelectionMode="None"
-                            HeightRequest="84"
-                            HorizontalOptions="Start">
+                            HeightRequest="84">
                             <CollectionView.ItemTemplate>
                                 <DataTemplate>
                                     <Grid WidthRequest="84" HeightRequest="84" Margin="0,0,8,0">
@@ -147,22 +147,54 @@
                             </CollectionView.ItemTemplate>
                         </CollectionView>
 
-                        <Border
-                            WidthRequest="84"
-                            HeightRequest="84"
-                            Stroke="#D9D9D9"
-                            StrokeThickness="1"
-                            StrokeShape="RoundRectangle 8"
-                            BackgroundColor="#F8F8F8">
-                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="2">
-                                <Label Text="+" FontSize="30" HorizontalTextAlignment="Center" TextColor="#7CB518" />
-                                <Label Text="Rasm" FontSize="12" TextColor="#777777" />
-                            </VerticalStackLayout>
-                            <Border.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnAddPhotoTapped" />
-                            </Border.GestureRecognizers>
-                        </Border>
-                    </HorizontalStackLayout>
+                        <Grid ColumnDefinitions="*,*" ColumnSpacing="10">
+                            <Border
+                                Grid.Column="0"
+                                HeightRequest="52"
+                                Stroke="#D9D9D9"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 10"
+                                BackgroundColor="#F8F8F8"
+                                IsEnabled="{Binding CanAddMorePhotos}">
+                                <HorizontalStackLayout
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Spacing="7">
+                                    <Label Text="+" FontSize="24" TextColor="#7CB518" VerticalTextAlignment="Center" />
+                                    <Label Text="Kamera" FontSize="14" TextColor="#555555" VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnTakePhotoTapped" />
+                                </Border.GestureRecognizers>
+                            </Border>
+
+                            <Border
+                                Grid.Column="1"
+                                HeightRequest="52"
+                                Stroke="#D9D9D9"
+                                StrokeThickness="1"
+                                StrokeShape="RoundRectangle 10"
+                                BackgroundColor="#F8F8F8"
+                                IsEnabled="{Binding CanAddMorePhotos}">
+                                <HorizontalStackLayout
+                                    HorizontalOptions="Center"
+                                    VerticalOptions="Center"
+                                    Spacing="7">
+                                    <Label Text="+" FontSize="24" TextColor="#7CB518" VerticalTextAlignment="Center" />
+                                    <Label Text="Galereya" FontSize="14" TextColor="#555555" VerticalTextAlignment="Center" />
+                                </HorizontalStackLayout>
+                                <Border.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnPickPhotoTapped" />
+                                </Border.GestureRecognizers>
+                            </Border>
+                        </Grid>
+
+                        <Label
+                            Text="{Binding PhotoLimitText}"
+                            FontSize="12"
+                            TextColor="#999999"
+                            HorizontalTextAlignment="End" />
+                    </VerticalStackLayout>
                 </Frame>
 
                 <!-- Submit button -->

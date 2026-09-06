@@ -163,8 +163,8 @@ public partial class FavoritePageViewModel : ObservableObject
             Subscription_price = item.subscription_price?.ToString("N0").Replace(",", " ") ?? "0",
             Title = item.name ?? "",
             Liked = item.liked,
-            Rating = 4.8,
-            ReviewCount = 301,
+            Rating = item.average_rating ?? 0,
+            ReviewCount = item.review_count ?? 0,
             ProductId = (int)item.id,
             ActionText = "+ Ertaga",
             Images = images

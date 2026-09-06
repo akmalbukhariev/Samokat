@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 using Microsoft.Maui.Controls.Shapes;
 using Ninimum.Models;
 using Ninimum.Services;
@@ -20,6 +21,7 @@ public partial class DetailProductPage : BasePage
 
         Loaded += DetailProductPage_Loaded;
         viewModel.PropertyChanged += ViewModel_PropertyChanged;
+        viewModel.ProductImages.CollectionChanged += ProductImages_CollectionChanged;
     }
 
 
@@ -45,15 +47,39 @@ public partial class DetailProductPage : BasePage
     private void DetailProductPage_Loaded(object? sender, EventArgs e)
     {
         UpdateFavoriteImage();
+        InitializeProductImagesUi();
+    }
 
-        if (viewModel == null || viewModel.ProductImages.Count == 0)
+    private void ProductImages_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
+    {
+        MainThread.BeginInvokeOnMainThread(InitializeProductImagesUi);
+    }
+
+    private void InitializeProductImagesUi()
+    {
+        if (viewModel == null)
             return;
 
-        var firstItem = viewModel.ProductImages[0];
-        _currentPosition = 0;
-        ProductCarousel.CurrentItem = firstItem;
+        if (viewModel.ProductImages.Count == 0)
+        {
+            _currentPosition = -1;
+            CustomIndicatorLayout.Children.Clear();
+            return;
+        }
 
-        UpdateUi(0);
+        int position = _currentPosition;
+        if (position < 0 || position >= viewModel.ProductImages.Count)
+            position = 0;
+
+        _isCarouselUpdating = true;
+        _currentPosition = position;
+        ProductCarousel.CurrentItem = viewModel.ProductImages[position];
+        UpdateUi(position);
+
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+            _isCarouselUpdating = false;
+        });
     }
 
     private async void ViewModel_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

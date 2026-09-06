@@ -505,8 +505,8 @@ public partial class SearchPageViewModel : ObservableObject
             Title = item.name ?? "",
             Liked = item.liked,
             ProductId = (int)(item.id ?? 0),
-            Rating = 4.8,
-            ReviewCount = 301,
+            Rating = item.average_rating ?? 0,
+            ReviewCount = item.review_count ?? 0,
             ActionText = "+ Ertaga",
             Images = images
         };

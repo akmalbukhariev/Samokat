@@ -266,6 +266,21 @@ public partial class ProductReviewsViewModel : ObservableObject
         }
 
         ExistingReview = response.resultData.existing_review;
+
+        // An existing review always takes priority. A user has one active review per product.
+        // Even if an older backend response happens to return can_review=true as well,
+        // the UI must open the existing review for editing instead of creating another one.
+        CanEditReview = response.resultData.already_reviewed && ExistingReview?.id is > 0 && ExistingReview?.order_id is > 0;
+        if (CanEditReview)
+        {
+            CanWriteReview = false;
+            EligibleOrderId = ExistingReview!.order_id;
+            CanShowReviewAction = true;
+            ReviewActionText = "Sharhni tahrirlash";
+            ReviewEligibilityText = "Siz ushbu mahsulot uchun sharh qoldirgansiz. Xohlasangiz uni tahrirlashingiz mumkin.";
+            return;
+        }
+
         CanWriteReview = response.resultData.can_review && response.resultData.order_id.HasValue;
         EligibleOrderId = response.resultData.order_id;
 
@@ -277,15 +292,6 @@ public partial class ProductReviewsViewModel : ObservableObject
             return;
         }
 
-        CanEditReview = response.resultData.already_reviewed && ExistingReview?.id is > 0 && ExistingReview?.order_id is > 0;
-        if (CanEditReview)
-        {
-            CanShowReviewAction = true;
-            ReviewActionText = "Sharhni tahrirlash";
-            ReviewEligibilityText = "Siz ushbu mahsulot uchun sharh qoldirgansiz. Xohlasangiz uni tahrirlashingiz mumkin.";
-            return;
-        }
-
         if (!response.resultData.has_purchased)
             ReviewEligibilityText = "Sharh faqat ushbu mahsulotni kamida bir marta xarid qilgan foydalanuvchilar uchun mavjud.";
         else
@@ -294,24 +300,26 @@ public partial class ProductReviewsViewModel : ObservableObject
 
     private async Task OnWriteReviewTapped()
     {
-        if (CanWriteReview && EligibleOrderId.HasValue)
+        // Edit takes priority over create. This prevents a second review from being opened
+        // when the user already has an active review for this product.
+        if (CanEditReview && ExistingReview?.id is > 0 && ExistingReview?.order_id is > 0)
         {
             await AppNavigatorService.NavigateTo(
                 $"{nameof(Ninimum.Views.DetailProduct.LeaveCommentPage)}" +
                 $"?productId={ProductId}" +
-                $"&orderId={EligibleOrderId.Value}" +
+                $"&orderId={ExistingReview.order_id.Value}" +
+                $"&reviewId={ExistingReview.id.Value}" +
                 $"&title={Uri.EscapeDataString(Title ?? string.Empty)}");
             return;
         }
 
-        if (!CanEditReview || ExistingReview == null || !ExistingReview.id.HasValue || !ExistingReview.order_id.HasValue)
+        if (!CanWriteReview || !EligibleOrderId.HasValue)
             return;
 
         await AppNavigatorService.NavigateTo(
             $"{nameof(Ninimum.Views.DetailProduct.LeaveCommentPage)}" +
             $"?productId={ProductId}" +
-            $"&orderId={ExistingReview.order_id.Value}" +
-            $"&reviewId={ExistingReview.id.Value}" +
+            $"&orderId={EligibleOrderId.Value}" +
             $"&title={Uri.EscapeDataString(Title ?? string.Empty)}");
     }
 
