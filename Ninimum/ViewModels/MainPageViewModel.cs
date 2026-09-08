@@ -96,10 +96,13 @@ public partial class MainPageViewModel : ObservableObject
             {
                 AdBanners.Add(new AdBannerItem
                 {
-                    Id = (int)item.id,
-                    ProductId = (int)item.product_id,
-                    Title = item.short_description ?? "",
-                    Image = item.image_url ?? ""
+                    Id = (int)(item.id ?? 0),
+                    ProductId = (int)(item.product_id ?? 0),
+                    ProductName = item.name ?? string.Empty,
+                    Title = item.short_description ?? item.name ?? string.Empty,
+                    Image = item.image_url ?? string.Empty,
+                    Price = item.price ?? 0,
+                    SubscriptionPrice = item.subscription_price ?? 0
                 });
             }
 
@@ -337,11 +340,96 @@ public partial class MainPageViewModel : ObservableObject
         await Application.Current.MainPage.DisplayAlert("Info", "Notification clicked", "OK");
     }
     
+    private bool isBannerPurchaseNavigating;
+
     private async void OnPurchaseBanner(AdBannerItem? item)
     {
-        if (item == null)
+        if (item == null || isBannerPurchaseNavigating)
             return;
 
-        await Application.Current!.MainPage!.DisplayAlert("Purchase", item.Title, "OK");
+        if (!await appControl.EnsureAuthenticatedAsync())
+            return;
+
+        if (item.ProductId <= 0)
+        {
+            await AlertService.ShowAlertAsync("Xatolik", "Mahsulot ma’lumotlari topilmadi.");
+            return;
+        }
+
+        try
+        {
+            isBannerPurchaseNavigating = true;
+            IsLoading = true;
+
+            double finalPrice = item.Price;
+
+            // Match DetailProductPage's pricing rule: users with an active
+            // subscription buy at subscription_price when one exists.
+            if (item.SubscriptionPrice > 0)
+            {
+                try
+                {
+                    ActiveSubscriptionResponse subscriptionResponse =
+                        await apiService.GetActiveSubscription(new ActiveSubscriptionRequest
+                        {
+                            userId = appControl.CurrentUserId
+                        });
+
+                    bool hasActiveSubscription =
+                        subscriptionResponse.resultCode == ApiResult.SUCCESS.GetCodeToString() &&
+                        subscriptionResponse.resultData != null &&
+                        string.Equals(
+                            subscriptionResponse.resultData.subscriptionStatus,
+                            "ACTIVE",
+                            StringComparison.OrdinalIgnoreCase);
+
+                    if (hasActiveSubscription)
+                        finalPrice = item.SubscriptionPrice;
+                }
+                catch (Exception ex)
+                {
+                    // If subscription status cannot be checked, safely fall back
+                    // to the product's regular price instead of blocking checkout.
+                    Debug.WriteLine($"[WARN] Banner subscription check failed: {ex.Message}");
+                }
+            }
+
+            if (finalPrice <= 0)
+            {
+                await AlertService.ShowAlertAsync("Xatolik", "Mahsulot narxi noto‘g‘ri.");
+                return;
+            }
+
+            FormalizationNavigationStore.Data = new FormalizationData
+            {
+                UserId = appControl.CurrentUserId,
+                AddressText = appControl.userDto.address ?? string.Empty,
+                Products = new List<FormalizationProductItem>
+                {
+                    new()
+                    {
+                        ProductId = item.ProductId,
+                        Name = string.IsNullOrWhiteSpace(item.ProductName)
+                            ? item.Title
+                            : item.ProductName,
+                        ImageSource = item.Image,
+                        Quantity = 1,
+                        Price = finalPrice
+                    }
+                }
+            };
+
+            await AppNavigatorService.NavigateTo(nameof(FormalizationPage));
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[ERROR] Banner purchase navigation: {ex}");
+            await AlertService.ShowAlertAsync("Xatolik", "Rasmiylashtirish sahifasini ochib bo‘lmadi.");
+        }
+        finally
+        {
+            IsLoading = false;
+            isBannerPurchaseNavigating = false;
+        }
     }
 }

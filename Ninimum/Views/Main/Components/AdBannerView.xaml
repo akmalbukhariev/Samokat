@@ -12,17 +12,19 @@
         <!-- Banner carousel -->
         <CarouselView x:Name="BannerCarousel"
                       Grid.Row="0"
-                      HeightRequest="210"
+                      HeightRequest="200"
+                      Loop="True"
+                      PeekAreaInsets="0"
                       PositionChanged="OnCarouselPositionChanged">
 
             <CarouselView.ItemTemplate>
                 <DataTemplate x:DataType="models:AdBannerItem">
                     <Grid Padding="2,0">
-                        <Border 
-                            Padding="30,0,0,0" 
+                        <Border
+                            Padding="24,0,16,0"
                             StrokeThickness="0"
-                            StrokeShape="RoundRectangle 32"
-                            HeightRequest="200"
+                            StrokeShape="RoundRectangle 30"
+                            HeightRequest="190"
                             VerticalOptions="Center">
 
                             <Border.Background>
@@ -33,50 +35,61 @@
                                 </LinearGradientBrush>
                             </Border.Background>
 
-                            <Grid Padding="0"
-                                  ColumnDefinitions="*,Auto">
+                            <Grid ColumnDefinitions="1.2*,0.8*"
+                                  ColumnSpacing="10">
 
                                 <!-- Left text + button -->
                                 <VerticalStackLayout Grid.Column="0"
-                                                     Spacing="18"
+                                                     Spacing="16"
                                                      VerticalOptions="Center">
 
                                     <Label Text="{Binding Title}"
                                            TextColor="White"
-                                           FontSize="22"
+                                           FontSize="21"
                                            FontFamily="{StaticResource FontSFBold}"
                                            LineBreakMode="WordWrap"
                                            MaxLines="3" />
 
-                                    <Border
-                                        StrokeThickness="0"
-                                        BackgroundColor="#F2F2F2"
-                                        StrokeShape="RoundRectangle 26"
-                                        Padding="0"
-                                        HorizontalOptions="Start">
+                                    <Border StrokeThickness="0"
+                                            BackgroundColor="#F2F2F2"
+                                            StrokeShape="RoundRectangle 26"
+                                            Padding="0"
+                                            HorizontalOptions="Start">
                                         <Border.GestureRecognizers>
                                             <TapGestureRecognizer Tapped="OnPurchaseTapped" />
                                         </Border.GestureRecognizers>
-                                        <Grid Padding="14,5,14,5">
-                                            <Label
-                                                Text="Sotib olish"
-                                                TextColor="#252B33"
-                                                FontSize="18"
-                                                FontFamily="{StaticResource FontSFBold}"
-                                                HorizontalOptions="Center"
-                                                VerticalOptions="Center" />
+                                        <Grid Padding="14,6">
+                                            <Label Text="Sotib olish"
+                                                   TextColor="#252B33"
+                                                   FontSize="17"
+                                                   FontFamily="{StaticResource FontSFBold}"
+                                                   HorizontalOptions="Center"
+                                                   VerticalOptions="Center" />
                                         </Grid>
                                     </Border>
                                 </VerticalStackLayout>
 
-                                <Image 
-                                    Grid.Column="1"
-                                    Source="{Binding Image}"
-                                    Aspect="AspectFit"
-                                    WidthRequest="180"
-                                    HeightRequest="170"
-                                    HorizontalOptions="End"
-                                    VerticalOptions="Center" />
+                                <!-- Keep banner product art inside a small intentional card.
+                                     Product images commonly have a white source background;
+                                     constraining it here prevents that background from covering
+                                     the right half of the banner. -->
+                                <Grid Grid.Column="1"
+                                      HorizontalOptions="Center"
+                                      VerticalOptions="Center">
+                                    <Border WidthRequest="122"
+                                            HeightRequest="150"
+                                            Padding="7"
+                                            BackgroundColor="#F8FFFFFF"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 18"
+                                            HorizontalOptions="Center"
+                                            VerticalOptions="Center">
+                                        <Image Source="{Binding Image}"
+                                               Aspect="AspectFit"
+                                               HorizontalOptions="Fill"
+                                               VerticalOptions="Fill" />
+                                    </Border>
+                                </Grid>
                             </Grid>
                         </Border>
                     </Grid>
@@ -95,9 +108,9 @@
                 Margin="0,-35,0,0">
 
             <HorizontalStackLayout x:Name="CustomIndicatorLayout"
-                                HorizontalOptions="Center"
-                                VerticalOptions="Center"
-                                Spacing="10" />
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"
+                                   Spacing="10" />
         </Border>
     </Grid>
 </ContentView>
