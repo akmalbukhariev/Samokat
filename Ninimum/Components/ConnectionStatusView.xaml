@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="Ninimum.Components.ConnectionStatusView"
+    IsVisible="{Binding IsBannerVisible}">
+
+    <Border
+        BackgroundColor="{Binding BannerColor}"
+        StrokeThickness="0"
+        Padding="12,7">
+
+        <Border.GestureRecognizers>
+            <TapGestureRecognizer Tapped="OnRetryTapped" />
+        </Border.GestureRecognizers>
+
+        <HorizontalStackLayout
+            HorizontalOptions="Center"
+            VerticalOptions="Center"
+            Spacing="8">
+
+            <ActivityIndicator
+                WidthRequest="16"
+                HeightRequest="16"
+                Color="White"
+                IsVisible="{Binding ShowSpinner}"
+                IsRunning="{Binding ShowSpinner}" />
+
+            <Label
+                Text="{Binding StatusText}"
+                TextColor="White"
+                FontSize="14"
+                FontFamily="{StaticResource FontSFMedium}"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center" />
+        </HorizontalStackLayout>
+    </Border>
+</ContentView>

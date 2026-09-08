@@ -31,6 +31,8 @@ public partial class LoginPage : BasePage
 
     protected override async void OnAppearing()
     {
+        base.OnAppearing();
+
         appControl.IsLoggedIn = storeService.Get(AppKeys.IsLoggedIn, false);
         string phoneNumber = storeService.Get(AppKeys.PhoneNumber, "");
         string password = storeService.Get(AppKeys.Password, "");
@@ -44,9 +46,23 @@ public partial class LoginPage : BasePage
         {
             if (appControl.IsLoggedIn)
             {
+                var monitor = AppService.Get<ConnectionMonitorService>();
+
+                // If the app opens while the backend is down, keep this login restoration
+                // pending. ConnectionStatusView is the waiting UI. As soon as the server
+                // comes back, this method continues automatically and restores the session.
+                if (monitor != null && !await monitor.CheckNowAsync())
+                    await monitor.WaitUntilConnectedAsync();
+
                 viewModel.IsLoading = true;
-                await appControl.Login(phoneNumber, password);
-                viewModel.IsLoading = false;
+                try
+                {
+                    await appControl.Login(phoneNumber, password);
+                }
+                finally
+                {
+                    viewModel.IsLoading = false;
+                }
             }
         }
     }

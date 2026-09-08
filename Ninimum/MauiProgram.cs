@@ -70,6 +70,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<AppStoreService>();
 		builder.Services.AddSingleton<AppControl>();
 		builder.Services.AddSingleton<LanguageService>();
+		builder.Services.AddSingleton<ConnectionMonitorService>();
 		builder.Services.AddSingleton<UserApiService>();
 		builder.Services.AddSingleton(sp =>
                 new RestClient(new RestClientOptions(AppConstants.BASE_USER_URL)

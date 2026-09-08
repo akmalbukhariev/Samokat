@@ -1,6 +1,7 @@
-﻿using System.Runtime.CompilerServices;
+using System.Runtime.CompilerServices;
 
 using Microsoft.Maui.Controls.PlatformConfiguration;
+using Ninimum.Components;
 using Ninimum.Services;
 using Ninimum.Services.Interface;
 
@@ -11,6 +12,7 @@ namespace Ninimum.Views
         protected CancellationTokenSource? cts;
         protected AppControl appControl;
         protected IStatusBarService statusBarService;
+        private bool connectionStatusAttached;
 
         protected BasePage()
         {
@@ -20,11 +22,83 @@ namespace Ninimum.Views
 
             statusBarService = AppService.Get<IStatusBarService>();
             statusBarService.SetStatusBarColor(Colors.White.ToArgbHex(), false);
+
+            // Attach the global connection banner from Loaded rather than relying only
+            // on OnAppearing. Some pages override OnAppearing and may forget to call
+            // base.OnAppearing(), but every BasePage still needs the connection state.
+            Loaded += OnBasePageLoaded;
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
+            EnsureConnectionStatusView();
+        }
+
+        private void OnBasePageLoaded(object? sender, EventArgs e)
+        {
+            EnsureConnectionStatusView();
+        }
+
+        private void EnsureConnectionStatusView()
+        {
+            if (connectionStatusAttached || Content == null)
+                return;
+
+            var monitor = AppService.Get<ConnectionMonitorService>();
+            if (monitor == null)
+                return;
+
+            var pageContent = Content;
+            Content = null;
+
+            var root = new Grid
+            {
+                RowDefinitions =
+                {
+                    new RowDefinition(GridLength.Auto),
+                    new RowDefinition(GridLength.Star)
+                }
+            };
+
+            var connectionStatus = new ConnectionStatusView
+            {
+                BindingContext = monitor
+            };
+
+            // Keep the current page visible while the server is unavailable, but do not
+            // allow controls underneath to receive taps, swipes, pull-to-refresh or other
+            // gestures. This avoids misleading empty-state actions and repeated API calls.
+            // The global ConnectionStatusView above remains the single explanation of why
+            // the page is temporarily unavailable.
+            var contentHost = new Grid();
+            contentHost.Children.Add(pageContent);
+
+            var connectionInteractionBlocker = new Grid
+            {
+                BackgroundColor = new Color(0.96f, 0.96f, 0.96f, 0.42f),
+                InputTransparent = false,
+                ZIndex = 10000
+            };
+
+            // A visible background makes this element participate in hit testing on every
+            // platform. The no-op recognizer is intentional: touches stop here instead of
+            // reaching RefreshView, CollectionView, SwipeView, buttons or page gestures.
+            connectionInteractionBlocker.GestureRecognizers.Add(new TapGestureRecognizer());
+            connectionInteractionBlocker.SetBinding(
+                IsVisibleProperty,
+                new Binding(nameof(ConnectionMonitorService.IsBannerVisible), source: monitor));
+
+            contentHost.Children.Add(connectionInteractionBlocker);
+
+            Grid.SetRow(connectionStatus, 0);
+            Grid.SetRow(contentHost, 1);
+            root.Children.Add(connectionStatus);
+            root.Children.Add(contentHost);
+
+            Content = root;
+            connectionStatusAttached = true;
+            monitor.Start();
         }
 
         protected void CancelAndDisposeCts()

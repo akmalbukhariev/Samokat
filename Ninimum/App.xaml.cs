@@ -1,5 +1,6 @@
 using Microsoft.Maui.Handlers;
 using Microsoft.Maui.Platform;
+using Ninimum.Services;
 using Ninimum.Views.Authorization;
 using Ninimum.Views.ChangePhoneNumber;
 using Ninimum.Views.DetailProduct;
@@ -28,9 +29,16 @@ public partial class App : Application
 
     protected override Window CreateWindow(IActivationState? activationState)
     {
-        return new Window(new AppEntryShell());
-        //return new Window(new AppShell());
-	}
+        var window = new Window(new AppEntryShell());
+        var connectionMonitor = AppService.Get<ConnectionMonitorService>();
+
+        window.Activated += (_, _) => connectionMonitor?.Start();
+        window.Resumed += (_, _) => connectionMonitor?.Start();
+        window.Stopped += (_, _) => connectionMonitor?.Stop();
+        window.Destroying += (_, _) => connectionMonitor?.Stop();
+
+        return window;
+    }
 
     private void RegisterRoutes()
     {

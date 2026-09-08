@@ -43,6 +43,7 @@
 
         <!-- Notification clickable area -->
         <Grid
+            IsVisible="False"
             Grid.Column="2"
             WidthRequest="58"
             HeightRequest="58"

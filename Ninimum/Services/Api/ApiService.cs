@@ -1,5 +1,6 @@
 using Microsoft.Maui.Graphics.Platform;
 using Newtonsoft.Json;
+using Ninimum.Services;
 using RestSharp;
 using SkiaSharp;
 using System.Text;
@@ -107,14 +108,68 @@ namespace Api.Services
 
         private async Task<string> ExecuteRequestAsync(RestRequest request)
         {
-            var response = await _client.ExecuteAsync(request);
-            if (response.RawBytes != null && response.RawBytes.Length > 0)
+            var monitor = AppService.Get<ConnectionMonitorService>();
+            bool canResumeAutomatically = request.Method == Method.Get;
+
+            // Reads are safe to resume after reconnection. Instead of returning an empty
+            // response while the server is down, keep the request pending in the background.
+            // LoadingView hides itself while the connection banner is visible.
+            if (monitor?.ShouldSkipApiRequest == true)
             {
-                var json = Encoding.UTF8.GetString(response.RawBytes);
-                return json;
+                if (canResumeAutomatically)
+                    await monitor.WaitUntilConnectedAsync();
+                else
+                {
+                    monitor.Retry();
+                    return string.Empty;
+                }
             }
 
-            return response.Content ?? string.Empty;
+            while (true)
+            {
+                try
+                {
+                    var response = await _client.ExecuteAsync(request);
+
+                    // Any completed HTTP response proves that the API server is reachable.
+                    // Business errors (400/401/500) are not connection errors.
+                    if (response.ResponseStatus == ResponseStatus.Completed)
+                    {
+                        monitor?.ReportApiSuccess();
+
+                        if (response.RawBytes != null && response.RawBytes.Length > 0)
+                            return Encoding.UTF8.GetString(response.RawBytes);
+
+                        return response.Content ?? string.Empty;
+                    }
+
+                    bool serverReachable = monitor == null ||
+                        await monitor.ConfirmServerReachableAfterRequestFailureAsync();
+
+                    // If the heartbeat still reaches the backend, this was an endpoint-specific
+                    // failure/timeout rather than a global connection outage. Do not flash the
+                    // global ConnectionStatusView and do not retry the request forever.
+                    if (!canResumeAutomatically || monitor == null || serverReachable)
+                        return response.Content ?? string.Empty;
+
+                    // The server is genuinely unreachable. The compact connection banner is now
+                    // the waiting UI; the GET resumes automatically when the monitor recovers.
+                    await monitor.WaitUntilConnectedAsync();
+                }
+                catch
+                {
+                    bool serverReachable = monitor == null ||
+                        await monitor.ConfirmServerReachableAfterRequestFailureAsync();
+
+                    if (!canResumeAutomatically || monitor == null)
+                        throw;
+
+                    if (serverReachable)
+                        return string.Empty;
+
+                    await monitor.WaitUntilConnectedAsync();
+                }
+            }
         }
 
         public async Task<string> GetAsync(string endpoint, bool useToken = true)
@@ -427,44 +482,86 @@ namespace Api.Services
         /// </summary>
         public async Task<T?> LoginAsync<T>(string endpoint, object data) where T : class
         {
-            try
+            var monitor = AppService.Get<ConnectionMonitorService>();
+
+            // Login is safe to continue after a transport outage: if the app was opened
+            // while the backend was down, wait for recovery instead of returning a fake
+            // login failure. No LoadingView is shown while the connection banner is active.
+            if (monitor?.ShouldSkipApiRequest == true)
+                await monitor.WaitUntilConnectedAsync();
+
+            var request = new RestRequest(endpoint, Method.Post);
+            request.AddHeader("Content-Type", "application/json");
+            var json = JsonConvert.SerializeObject(data);
+            request.AddJsonBody(json);
+
+            bool retriedAfterReconnect = false;
+
+            while (true)
             {
-                var request = new RestRequest(endpoint, Method.Post);
-                request.AddHeader("Content-Type", "application/json");
-                var json = JsonConvert.SerializeObject(data);
-                request.AddJsonBody(json);
-
-                var request111 = _client.BuildUri(request);
-                var response = await _client.ExecuteAsync(request);
-
-                if (response.IsSuccessful && !string.IsNullOrWhiteSpace(response.Content))
+                try
                 {
-                    var result = JsonConvert.DeserializeObject<T>(response.Content);
+                    var response = await _client.ExecuteAsync(request);
 
-                    // Extract token from headers
-                    if (response.Headers != null)
+                    if (response.ResponseStatus != ResponseStatus.Completed)
                     {
-                        var tokenHeader = response.Headers.FirstOrDefault(h => h.Name == "access-token");
-                        if (tokenHeader != null && tokenHeader.Value != null)
+                        bool serverReachable = monitor == null ||
+                            await monitor.ConfirmServerReachableAfterRequestFailureAsync();
+
+                        if (monitor != null && !serverReachable && !retriedAfterReconnect)
                         {
-                            string token = tokenHeader.Value.ToString();
-                            await SetTokenAsync(token);
+                            await monitor.WaitUntilConnectedAsync();
+                            retriedAfterReconnect = true;
+                            continue;
                         }
+
+                        return null;
                     }
 
-                    return result;
+                    monitor?.ReportApiSuccess();
+
+                    if (response.IsSuccessful && !string.IsNullOrWhiteSpace(response.Content))
+                    {
+                        var result = JsonConvert.DeserializeObject<T>(response.Content);
+
+                        if (response.Headers != null)
+                        {
+                            var tokenHeader = response.Headers.FirstOrDefault(h => h.Name == "access-token");
+                            if (tokenHeader?.Value != null)
+                            {
+                                string token = tokenHeader.Value.ToString();
+                                await SetTokenAsync(token);
+                            }
+                        }
+
+                        return result;
+                    }
+
+                    return null;
+                }
+                catch (JsonException jsonEx)
+                {
+                    monitor?.ReportApiSuccess();
+                    Console.WriteLine($"JSON Parsing Error: {jsonEx.Message}");
+                    return null;
+                }
+                catch (Exception ex)
+                {
+                    bool serverReachable = monitor == null ||
+                        await monitor.ConfirmServerReachableAfterRequestFailureAsync();
+                    Console.WriteLine($"Login Error: {ex.Message}");
+
+                    if (monitor != null && !serverReachable && !retriedAfterReconnect)
+                    {
+                        await monitor.WaitUntilConnectedAsync();
+                        retriedAfterReconnect = true;
+                        continue;
+                    }
+
+                    return null;
                 }
             }
-            catch (JsonException jsonEx)
-            {
-                Console.WriteLine($"JSON Parsing Error: {jsonEx.Message}");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Login Error: {ex.Message}");
-            }
-
-            return null;
         }
+
     }
 }

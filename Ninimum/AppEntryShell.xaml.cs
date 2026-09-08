@@ -7,6 +7,7 @@ public partial class AppEntryShell : Shell
 {
     private readonly AppStoreService appStoreService;
     private readonly AppControl appControl;
+    private readonly ConnectionMonitorService connectionMonitor;
     private bool initialized;
 
     public AppEntryShell()
@@ -15,6 +16,7 @@ public partial class AppEntryShell : Shell
 
         appStoreService = AppService.GetRequired<AppStoreService>();
         appControl = AppService.GetRequired<AppControl>();
+        connectionMonitor = AppService.GetRequired<ConnectionMonitorService>();
 
         ShowLoadingPage();
         Loaded += OnLoaded;
@@ -42,20 +44,48 @@ public partial class AppEntryShell : Shell
             {
                 try
                 {
-                    bool restored = await appControl.Login(phoneNumber, password);
+                    bool serverAvailable = await connectionMonitor.CheckNowAsync();
+                    if (!serverAvailable)
+                    {
+                        // Show the normal app immediately instead of trapping the user on a
+                        // startup spinner. API reads will wait in the background and resume.
+                        // Also keep a one-time session restore pending for when the server is UP.
+                        await appControl.StartGuestMode();
+                        _ = RestoreSavedSessionWhenConnectedAsync(phoneNumber, password);
+                        return;
+                    }
 
+                    bool restored = await appControl.Login(phoneNumber, password);
                     if (restored)
                         return;
                 }
                 catch
                 {
-                    // If session restoration cannot be completed, open the app as guest.
-                    // Saved credentials are kept so the user can still log in later.
+                    // Saved credentials are kept. If restoration fails for a real credential
+                    // reason, the app remains usable as guest and the user can log in manually.
                 }
             }
         }
 
         await appControl.StartGuestMode();
+    }
+
+    private async Task RestoreSavedSessionWhenConnectedAsync(string phoneNumber, string password)
+    {
+        try
+        {
+            await connectionMonitor.WaitUntilConnectedAsync();
+
+            if (appControl.IsAuthenticated)
+                return;
+
+            await appControl.Login(phoneNumber, password);
+        }
+        catch
+        {
+            // Connection monitoring keeps running. A failed credential/session restore must
+            // never make the app unusable; the user can still authenticate manually.
+        }
     }
 
     private void ShowLoadingPage()

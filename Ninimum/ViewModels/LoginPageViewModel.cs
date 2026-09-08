@@ -66,7 +66,11 @@ public partial class LoginPageViewModel : ObservableObject
                 await AlertService.ShowAlertAsync("Info", "Parolni kiriting");
                 return;
             }
-            
+
+            var monitor = AppService.Get<ConnectionMonitorService>();
+            if (monitor != null && !await monitor.CheckNowAsync())
+                await monitor.WaitUntilConnectedAsync();
+
             IsLoading = true;
 
             var request = new LoginUserRequest
