@@ -5,6 +5,7 @@ namespace Utils
         public const string UserRole = "user_role";
         public const string IsLoggedIn = "is_logged_in";
         public const string IsLanguageSet = "is_language_set";
+        public const string HasCompletedOnboarding = "has_completed_onboarding";
         public const string PhoneNumber = "phone_number";
         public const string Password = "password";
         public const string SearchHistoryKey = "search_history";

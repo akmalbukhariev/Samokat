@@ -4,12 +4,17 @@ using System.Windows.Input;
 using Microsoft.Maui.Controls.Shapes;
 using Ninimum.Models.Startup;
 using Ninimum.Services;
+using Utils;
 
 namespace Ninimum.Views.Startup;
 
 public partial class OnboardingPage : BasePage
 {
     public ICommand StartCommand { get; }
+
+    private readonly AppStoreService appStoreService;
+    private readonly AppControl appControl;
+    private bool isCompleting;
 
     private readonly List<OnboardingSlide> _slides = new()
     {
@@ -43,9 +48,12 @@ public partial class OnboardingPage : BasePage
         }
     };
     
-    public OnboardingPage()
+    public OnboardingPage(AppStoreService appStoreService, AppControl appControl)
     {
         InitializeComponent();
+
+        this.appStoreService = appStoreService;
+        this.appControl = appControl;
 
         StartCommand = new Command(OnStart);
 
@@ -58,7 +66,7 @@ public partial class OnboardingPage : BasePage
     private async void OnSkipTapped(object sender, TappedEventArgs e)
     {
         await AnimateElementScaleDown(lbSkip);
-        await AppService.GetRequired<AppControl>().StartGuestMode();
+        CompleteOnboarding();
     }
 
     private void OnCarouselPositionChanged(object sender, PositionChangedEventArgs e)
@@ -66,9 +74,22 @@ public partial class OnboardingPage : BasePage
         UpdateBottomSection(e.CurrentPosition);
     }
 
-    private async void OnStart()
+    private void OnStart()
     {
-        await AppService.GetRequired<AppControl>().StartGuestMode();
+        CompleteOnboarding();
+    }
+
+    private void CompleteOnboarding()
+    {
+        if (isCompleting)
+            return;
+
+        isCompleting = true;
+        appStoreService.Set(AppKeys.HasCompletedOnboarding, true);
+
+        // Return to the normal startup pipeline. AppEntryShell will now skip
+        // first-launch pages and run the existing saved-login / guest logic.
+        appControl.SetRootPage(new AppEntryShell());
     }
 
     private void UpdateBottomSection(int position)

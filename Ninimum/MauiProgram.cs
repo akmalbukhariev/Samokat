@@ -93,6 +93,8 @@ public static class MauiProgram
 
 	private static void RegisterTransient(MauiAppBuilder builder)
 	{
+		builder.Services.AddTransient<StartPage>();
+		builder.Services.AddTransient<OnboardingPage>();
 		builder.Services.AddTransient<LoginPage>();
 		builder.Services.AddTransient<MainPage>();
 		builder.Services.AddTransient<MenuPage>();

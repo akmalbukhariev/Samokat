@@ -33,6 +33,13 @@ public partial class AppEntryShell : Shell
 
     private async Task InitializeSessionAsync()
     {
+        bool hasCompletedOnboarding = appStoreService.Get(AppKeys.HasCompletedOnboarding, false);
+        if (!hasCompletedOnboarding)
+        {
+            ShowFirstLaunchPage();
+            return;
+        }
+
         bool hasSavedLogin = appStoreService.Get(AppKeys.IsLoggedIn, false);
 
         if (hasSavedLogin)
@@ -86,6 +93,17 @@ public partial class AppEntryShell : Shell
             // Connection monitoring keeps running. A failed credential/session restore must
             // never make the app unusable; the user can still authenticate manually.
         }
+    }
+
+    private void ShowFirstLaunchPage()
+    {
+        Items.Clear();
+
+        Items.Add(new ShellContent
+        {
+            Route = "FirstLaunch",
+            Content = AppService.GetRequired<Ninimum.Views.Startup.StartPage>()
+        });
     }
 
     private void ShowLoadingPage()
