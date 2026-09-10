@@ -67,6 +67,7 @@ public partial class DetailProductPageViewModel : ObservableObject
     [ObservableProperty] private string finalPrice = "0 so’m";
     private double FinalPriceValue = 0.0;
     private bool hasActiveSubscription;
+    private long? activeTariffSubscriptionId;
     #endregion
 
     #region Commands
@@ -308,6 +309,7 @@ public partial class DetailProductPageViewModel : ObservableObject
         if (!appControl.IsAuthenticated)
         {
             hasActiveSubscription = false;
+            activeTariffSubscriptionId = null;
             return;
         }
 
@@ -324,10 +326,15 @@ public partial class DetailProductPageViewModel : ObservableObject
                 response.resultCode == ApiResult.SUCCESS.GetCodeToString() &&
                 subscription != null &&
                 string.Equals(subscription.subscriptionStatus, "ACTIVE", StringComparison.OrdinalIgnoreCase);
+
+            activeTariffSubscriptionId = hasActiveSubscription
+                ? subscription!.subscriptionId
+                : null;
         }
         catch (Exception ex)
         {
             hasActiveSubscription = false;
+            activeTariffSubscriptionId = null;
             Debug.WriteLine($"[ERROR] LoadActiveSubscriptionAsync: {ex.Message}");
         }
     }
@@ -507,6 +514,7 @@ public partial class DetailProductPageViewModel : ObservableObject
         {
             UserId = appControl.CurrentUserId,
             AddressText = appControl.userDto.address,
+            TariffSubscriptionId = activeTariffSubscriptionId,
 
             Products = new List<FormalizationProductItem>
             {

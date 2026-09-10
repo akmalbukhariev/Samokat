@@ -23,6 +23,7 @@ public partial class CartPageViewModel : ObservableObject
     private bool hasMoreItems = true;
     private bool isRequestRunning = false;
     private readonly HashSet<int> loadedCartIds = new();
+    private long? activeTariffSubscriptionId;
 
     private readonly UserApiService apiService;
     private readonly AppControl appControl;
@@ -248,6 +249,7 @@ public partial class CartPageViewModel : ObservableObject
         {
             UserId = (long)appControl.userDto.id,
             AddressText = appControl.userDto.address,
+            TariffSubscriptionId = activeTariffSubscriptionId,
 
             Products = selectedProducts
                 .Select(x => new FormalizationProductItem
@@ -279,6 +281,10 @@ public partial class CartPageViewModel : ObservableObject
                 subscription != null &&
                 string.Equals(subscription.subscriptionStatus, "ACTIVE", StringComparison.OrdinalIgnoreCase);
 
+            activeTariffSubscriptionId = HasActiveSubscription
+                ? subscription!.subscriptionId
+                : null;
+
             ActiveTariffText = HasActiveSubscription
                 ? $"Faol tarif: {subscription!.tariffName}"
                 : string.Empty;
@@ -286,6 +292,7 @@ public partial class CartPageViewModel : ObservableObject
         catch (Exception ex)
         {
             HasActiveSubscription = false;
+            activeTariffSubscriptionId = null;
             ActiveTariffText = string.Empty;
             Debug.WriteLine($"[ERROR] LoadActiveSubscriptionAsync: {ex.Message}");
         }

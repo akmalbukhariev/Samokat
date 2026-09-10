@@ -14,6 +14,7 @@ public class FormalizationData
 {
     public long UserId { get; set; }
     public long? AddressId { get; set; }
+    public long? TariffSubscriptionId { get; set; }
 
     public List<FormalizationProductItem> Products { get; set; } = new();
 

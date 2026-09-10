@@ -362,6 +362,7 @@ public partial class MainPageViewModel : ObservableObject
             IsLoading = true;
 
             double finalPrice = item.Price;
+            long? activeTariffSubscriptionId = null;
 
             // Match DetailProductPage's pricing rule: users with an active
             // subscription buy at subscription_price when one exists.
@@ -384,7 +385,10 @@ public partial class MainPageViewModel : ObservableObject
                             StringComparison.OrdinalIgnoreCase);
 
                     if (hasActiveSubscription)
+                    {
                         finalPrice = item.SubscriptionPrice;
+                        activeTariffSubscriptionId = subscriptionResponse.resultData!.subscriptionId;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -404,6 +408,7 @@ public partial class MainPageViewModel : ObservableObject
             {
                 UserId = appControl.CurrentUserId,
                 AddressText = appControl.userDto.address ?? string.Empty,
+                TariffSubscriptionId = activeTariffSubscriptionId,
                 Products = new List<FormalizationProductItem>
                 {
                     new()

@@ -200,6 +200,7 @@ public partial class FormalizationPage : BasePage
                     userId = data.UserId,
                     addressId = addressId,
                     totalPrice = totalPrice,
+                    tariffSubscriptionId = data.TariffSubscriptionId,
 
                     products = data.Products
                         .Select(x => new CreateOrderProductRequest
@@ -214,6 +215,7 @@ public partial class FormalizationPage : BasePage
                 Debug.WriteLine(
                     $"CREATE ORDER => userId={createOrderRequest.userId}, " +
                     $"addressId={createOrderRequest.addressId}, " +
+                    $"tariffSubscriptionId={createOrderRequest.tariffSubscriptionId}, " +
                     $"totalPrice={createOrderRequest.totalPrice}");
 
                 foreach (var product in createOrderRequest.products)

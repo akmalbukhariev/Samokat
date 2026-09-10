@@ -4,8 +4,8 @@ namespace Utils
     internal class AppConstants
     {
 #region Domen
-        //public const string SERVER_DOMAIN = "95.182.118.233:8083";
-        public const string SERVER_DOMAIN = "192.168.219.105:8083";
+        public const string SERVER_DOMAIN = "95.182.118.233:8083";
+        //public const string SERVER_DOMAIN = "192.168.219.105:8083";
         public const string BASE_USER_URL = $"http://{SERVER_DOMAIN}/ninimum/api/v1/";
         public const string HEALTH_URL = $"http://{SERVER_DOMAIN}/actuator/health";
 #endregion

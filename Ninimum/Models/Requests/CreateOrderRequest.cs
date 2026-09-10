@@ -10,6 +10,8 @@ public class CreateOrderRequest
 
     public int totalPrice { get; set; }
 
+    public long? tariffSubscriptionId { get; set; }
+
     public List<CreateOrderProductRequest> products { get; set; } = new();
 }
 
