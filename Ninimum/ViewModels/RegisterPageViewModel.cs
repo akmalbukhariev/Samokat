@@ -76,15 +76,15 @@ public partial class RegisterPageViewModel : ObservableObject
 
         AddressTapCommand = new Command(AdressTapped);
 
-        FirstName = "Akmal";
+        /*FirstName = "Akmal";
         LastName = "Karimov";
         PhoneNumber = "998998887766";
         Region = appControl.CurrentRegionName;
         Password = "123";
         ConfirmPassword = "123";
-        IsAgreementChecked = true;
+        IsAgreementChecked = true;*/
 
-        Children.Add(new ChildInputModel
+        /*Children.Add(new ChildInputModel
         {
             FirstName = "Ali",
             LastName = "Karimov",
@@ -100,7 +100,7 @@ public partial class RegisterPageViewModel : ObservableObject
             BirthDate = "2022-05-10",
             IsBoySelected = false,
             IsGirlSelected = true
-        });
+        });*/
     }
 
     [RelayCommand]
@@ -128,13 +128,13 @@ public partial class RegisterPageViewModel : ObservableObject
             return;
         }
 
-        if (string.IsNullOrWhiteSpace(PhoneNumber))
+        /*if (string.IsNullOrWhiteSpace(PhoneNumber))
         {
             await AlertService.ShowAlertAsync(
                 "Ogohlantirish",
                 "Telefon raqamni kiriting.");
             return;
-        }
+        }*/
 
         if (string.IsNullOrWhiteSpace(Address) || Address == "Manzil")
         {
@@ -189,8 +189,7 @@ public partial class RegisterPageViewModel : ObservableObject
         };
 
         IsLoading = true;
-        Response response =
-            await apiService.RegisterUser(request);
+        Response response = await apiService.RegisterUser(request);
         IsLoading = false;
 
         if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())

@@ -187,12 +187,14 @@
 
                 <!-- Payment -->
                 <Label
+                    IsVisible="False"
                     Text="To’lov usuli"
                     FontSize="22"
                     TextColor="#22292F"
                     FontFamily="{StaticResource FontSFMedium}" />
 
                 <Border
+                    IsVisible="False"
                     Stroke="#7CB518"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 14"

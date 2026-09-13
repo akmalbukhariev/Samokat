@@ -9,7 +9,7 @@
     x:Class="Ninimum.Views.Main.MainPage"
     BackgroundColor="White">
 
-    <Grid RowDefinitions="Auto,*">
+    <Grid RowDefinitions="Auto,*, Auto">
 
         <!-- FIXED HEADER -->
         <components:MainHeaderView Grid.Row="0"/>
@@ -91,22 +91,28 @@
         </Grid>
         
         <main_components:CustomLikedView
-            Grid.RowSpan="2"
+            Grid.RowSpan="3"
             x:Name="likeView" 
             ShowLiked="{Binding IsLikedViewLiked}"
             IsVisible="{Binding ShowLikedView}"
             Grid.Row="2"/>
         
         <main_components:CustomCartView
-            Grid.RowSpan="2"
+            Grid.RowSpan="3"
             x:Name="cartView"
             HorizontalOptions="Center"
             VerticalOptions="Center"
             ZIndex="20" />
         
         <main_components:LoadingView
-            Grid.RowSpan="2"
+            Grid.RowSpan="3"
             x:Name="loading"
             ShowLoading="{Binding IsLoading}"/>
+
+        <BoxView
+            HeightRequest="1"
+            BackgroundColor="LightGray"
+            HorizontalOptions="Fill"
+            Grid.Row="2"/>
     </Grid>
 </page:BasePage>

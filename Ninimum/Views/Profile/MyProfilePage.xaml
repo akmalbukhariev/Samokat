@@ -34,7 +34,7 @@
         </ResourceDictionary>
     </page:BasePage.Resources>
 
-    <Grid>
+    <Grid RowDefinitions="*,Auto">
         <ScrollView VerticalScrollBarVisibility="Never">
             <VerticalStackLayout Padding="20,70,20,24" Spacing="0">
 
@@ -304,7 +304,7 @@
         <components:LoadingView
                 ShowLoading="{Binding IsLoading}"
                 ZIndex="111" />
-
+        
         <components:QuestionPopupView
                 x:Name="logOutPopup"
                 QuestionTitle="Siz profildan chiqayapsiz.&#10;Ishonchingiz komilmi?"
@@ -315,5 +315,10 @@
                 OkText=""
                 IsVisible="False"
                 ZIndex="99" />
+        <BoxView
+                HeightRequest="1"
+                BackgroundColor="LightGray"
+                HorizontalOptions="Fill"
+                Grid.Row="1"/>
     </Grid>
 </page:BasePage>

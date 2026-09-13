@@ -11,7 +11,7 @@
     x:Name="ThisPage"
     BackgroundColor="White">
 
-    <Grid RowDefinitions="Auto, 24, *">
+    <Grid RowDefinitions="Auto, 24, *, Auto">
         <components:PageHeaderView
             Grid.Row="0"
             Title="Sevimlilar"
@@ -59,16 +59,22 @@
         </RefreshView>
         
         <components:CustomCartView
-            Grid.RowSpan="3"
+            Grid.RowSpan="4"
             x:Name="cartView"
             HorizontalOptions="Center"
             VerticalOptions="Center"
             ZIndex="20" />
 
         <components:LoadingView
-            Grid.RowSpan="3"
+            Grid.RowSpan="4"
             x:Name="loading"
             ShowLoading="{Binding IsLoading}"/>
+
+        <BoxView
+            HeightRequest="1"
+            BackgroundColor="LightGray"
+            HorizontalOptions="Fill"
+            Grid.Row="3"/>
     </Grid>
 
 </page:BasePage>

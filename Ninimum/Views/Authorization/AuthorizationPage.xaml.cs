@@ -14,7 +14,7 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
 {
     private string verificationCode = "";
 
-    private string _phoneNumber = "998998871665";
+    private string _phoneNumber = "";
     public string PhoneNumber
     {
         get => _phoneNumber;
