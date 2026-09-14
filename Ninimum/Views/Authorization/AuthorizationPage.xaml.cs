@@ -97,6 +97,7 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
 
     private async void OnResendSms()
     {
+        verificationCode = string.Empty;
         IsLoading = true;
         string? code = await appControl.SendVerificationCode(PhoneNumber);
         IsLoading = false;
@@ -121,7 +122,12 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
 
         popupSms.Hide();
 
-        await AppNavigatorService.NavigateTo(nameof(RegisterPage));
+        await AppNavigatorService.NavigateTo(
+            nameof(RegisterPage),
+            new Dictionary<string, object>
+            {
+                ["PhoneNumber"] = PhoneNumber.Trim()
+            });
     }
     
     private bool CheckVerificationCode(string code)

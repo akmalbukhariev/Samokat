@@ -47,6 +47,19 @@ public partial class PageHeaderView : ContentView
         set => SetValue(ShowBackProperty, value);
     }
 
+    public static readonly BindableProperty NavigateBackAutomaticallyProperty =
+        BindableProperty.Create(
+            nameof(NavigateBackAutomatically),
+            typeof(bool),
+            typeof(PageHeaderView),
+            true);
+
+    public bool NavigateBackAutomatically
+    {
+        get => (bool)GetValue(NavigateBackAutomaticallyProperty);
+        set => SetValue(NavigateBackAutomaticallyProperty, value);
+    }
+
     public static readonly BindableProperty RightImageProperty =
         BindableProperty.Create(
             nameof(RightImage),
@@ -92,7 +105,8 @@ public partial class PageHeaderView : ContentView
         if (BackCommand?.CanExecute(null) == true)
             BackCommand.Execute(null);
 
-        await AppNavigatorService.NavigateTo("..");
+        if (NavigateBackAutomatically)
+            await AppNavigatorService.NavigateTo("..");
     }
 
     private async void RightImage_Tapped(object sender, TappedEventArgs e)

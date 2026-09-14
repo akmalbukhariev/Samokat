@@ -1,12 +1,19 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
+using Api.Services;
+using Models.Requests;
+using Ninimum.Services;
+using Utils;
 
 namespace Ninimum.Views.LoginRegister;
 
-public partial class ForgotPasswordPage : BasePage, INotifyPropertyChanged
+public partial class ForgotPasswordPage : BasePage, INotifyPropertyChanged, IQueryAttributable
 {
-    private string _phoneNumber;
+    private readonly UserApiService apiService;
+
+    private string _phoneNumber = string.Empty;
+    private bool _isLoading;
 
     public string PhoneNumber
     {
@@ -18,33 +25,86 @@ public partial class ForgotPasswordPage : BasePage, INotifyPropertyChanged
         }
     }
 
-    public ICommand BackCommand { get; }
+    public bool IsLoading
+    {
+        get => _isLoading;
+        set
+        {
+            _isLoading = value;
+            OnPropertyChanged();
+        }
+    }
+
     public ICommand SendCommand { get; }
 
-    public ForgotPasswordPage()
+    public ForgotPasswordPage(UserApiService apiService)
     {
         InitializeComponent();
 
-        BackCommand = new Command(OnBackTapped);
+        this.apiService = apiService;
         SendCommand = new Command(OnSendTapped);
-        
+
         BindingContext = this;
     }
 
-    private async void OnBackTapped()
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        //await Navigation.PopAsync();
+        if (query.TryGetValue("PhoneNumber", out var phoneNumberValue))
+            PhoneNumber = phoneNumberValue?.ToString()?.Trim() ?? string.Empty;
     }
 
     private async void OnSendTapped()
     {
-        await AnimateElementScaleDown(btnSend);
+        await ClickGuard.RunAsync(btnSend, async () =>
+        {
+            if (string.IsNullOrWhiteSpace(PhoneNumber))
+            {
+                await AlertService.ShowAlertAsync(
+                    "Ma'lumot",
+                    "Telefon raqam topilmadi. Iltimos, kirish sahifasiga qayting.");
+                return;
+            }
 
-        if (string.IsNullOrWhiteSpace(PhoneNumber))
-            return;
+            try
+            {
+                IsLoading = true;
 
-        // your API call or popup logic here
-        await DisplayAlert("Info", "Temporary password sending logic goes here.", "OK");
+                var response = await apiService.SendTempPassword(new VerifyPhoneNumberRequest
+                {
+                    phone_number = PhoneNumber.Trim()
+                });
+
+                if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
+                {
+                    await AlertService.ShowAlertAsync(
+                        "Muvaffaqiyatli",
+                        "Vaqtinchalik parol telefon raqamingizga SMS orqali yuborildi.");
+
+                    await AppNavigatorService.NavigateTo("..");
+                    return;
+                }
+
+                if (response.resultCode == ApiResult.USER_NOT_EXIST.GetCodeToString())
+                {
+                    await AlertService.ShowAlertAsync(
+                        "Ma'lumot",
+                        "Bu telefon raqam bilan foydalanuvchi topilmadi.");
+                    return;
+                }
+
+                await AlertService.ShowAlertAsync(
+                    "Xatolik",
+                    response.resultMsg ?? "Vaqtinchalik parolni yuborib bo'lmadi.");
+            }
+            catch (Exception ex)
+            {
+                await AlertService.ShowAlertAsync("Xatolik", ex.Message);
+            }
+            finally
+            {
+                IsLoading = false;
+            }
+        });
     }
 
     public new event PropertyChangedEventHandler? PropertyChanged;

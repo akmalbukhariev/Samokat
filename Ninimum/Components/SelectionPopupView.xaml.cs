@@ -103,6 +103,12 @@ public partial class SelectionPopupView : ContentView
                 list.Add(item);
         }
 
+        // Size the card to its actual rows when the list is short.
+        // This removes the unused blank area below the final language row,
+        // while longer lists (for example regions) still scroll at max height.
+        const double rowHeight = 73d;
+        PopupCard.HeightRequest = Math.Min(PopupMaxHeight, Math.Max(72d, list.Count * rowHeight));
+
         for (int i = 0; i < list.Count; i++)
         {
             var item = list[i];

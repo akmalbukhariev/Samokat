@@ -105,6 +105,7 @@
         <components:SmsCodePopup
                 x:Name="popupSms"
                 ConfirmCommand="{Binding BindingContext.ConfirmSmsCodeCommand, Source={x:Reference Name=RootPage}}"
+                ResendCommand="{Binding BindingContext.ResendSmsCommand, Source={x:Reference Name=RootPage}}"
                 IsVisible="False"/>
         
         <components:LoadingView 

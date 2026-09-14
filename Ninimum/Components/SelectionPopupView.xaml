@@ -24,6 +24,7 @@
 
         <!-- Popup card -->
         <Border
+            x:Name="PopupCard"
             BackgroundColor="White"
             StrokeThickness="0"
             StrokeShape="RoundRectangle 28"

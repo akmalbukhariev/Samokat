@@ -56,6 +56,7 @@ namespace Api.Services
         private const string GET_ORDER_LIST = $"{BASE_URL}order/getOrderList";
         private const string GET_ORDER_DETAIL = $"{BASE_URL}order/getOrderDetail";
         private const string CANCEL_ORDER = $"{BASE_URL}order/cancelOrder";
+        private const string CANCEL_UNPAID_ORDER = $"{BASE_URL}order/cancelUnpaidOrder";
         private const string GET_ACTIVE_SUBSCRIPTION = $"{BASE_URL}subscription/getActiveSubscription";
         private const string GET_SUBSCRIPTION_LIST = $"{BASE_URL}subscription/getSubscriptionList";
         private const string GET_TARIFF_LIST = $"{BASE_URL}tariff/getTariffList";
@@ -446,7 +447,7 @@ namespace Api.Services
 
             try
             {
-                var receivedData = await PostAsync(SEND_TEMP_PASSWORD, data);
+                var receivedData = await PostAsync(SEND_TEMP_PASSWORD, data, useToken: false);
 
                 if (!string.IsNullOrWhiteSpace(receivedData))
                 {
@@ -1382,6 +1383,39 @@ namespace Api.Services
             return response;
         }
 
+
+        public async Task<Response> CancelUnpaidOrder(CancelOrderRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PutAsync(CANCEL_UNPAID_ORDER, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<Response>(receivedData);
+
+                    if (result != null)
+                        return result;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
 
         public async Task<Response> CancelOrder(CancelOrderRequest data)
         {

@@ -14,7 +14,9 @@
         <components:PageHeaderView
             Grid.Row="0"
             ShowBack="true"
-            Title="To'lov" />
+            Title="To'lov"
+            BackCommand="{Binding BackCommand}"
+            NavigateBackAutomatically="False" />
 
         <!-- Payment content -->
         <Grid Grid.Row="1">

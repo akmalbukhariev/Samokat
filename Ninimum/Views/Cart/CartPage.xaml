@@ -23,6 +23,7 @@
             <!-- Top actions -->
             <Grid
                 Grid.Row="1"
+                IsVisible="{Binding HasCartItems}"
                 Margin="0,22,0,18"
                 ColumnDefinitions="*,Auto,Auto"
                 ColumnSpacing="12">
@@ -86,6 +87,28 @@
                         <LinearItemsLayout Orientation="Vertical" ItemSpacing="16" />
                     </CollectionView.ItemsLayout>
 
+                    <CollectionView.EmptyView>
+                        <VerticalStackLayout
+                            Padding="20,80,20,20"
+                            Spacing="10"
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center">
+                            <Label
+                                Text="Savatchangiz hozircha bo'sh"
+                                HorizontalTextAlignment="Center"
+                                TextColor="#22292F"
+                                FontSize="21"
+                                FontFamily="{StaticResource FontSFMedium}" />
+                            <Label
+                                Text="Mahsulotlarni savatchaga qo'shganingizda ular shu yerda ko'rinadi."
+                                HorizontalTextAlignment="Center"
+                                TextColor="#96979B"
+                                FontSize="16"
+                                FontFamily="{StaticResource FontSFRegular}"
+                                LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
+                    </CollectionView.EmptyView>
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <local:CartItemView
@@ -102,6 +125,7 @@
 
                     <CollectionView.Footer>
                         <Border
+                            IsVisible="{Binding HasCartItems}"
                             Margin="0,20,0,0"
                             Padding="18"
                             BackgroundColor="#F6EAEA"
@@ -179,6 +203,7 @@
             <!-- Fixed bottom bar -->
             <Grid
                 Grid.Row="4"
+                IsVisible="{Binding HasCartItems}"
                 Padding="8,0"
                 ColumnDefinitions="*,Auto"
                 VerticalOptions="Center"
@@ -219,6 +244,7 @@
             </Grid>
 
             <BoxView
+                IsVisible="{Binding HasCartItems}"
                 HeightRequest="1"
                 BackgroundColor="LightGray"
                 HorizontalOptions="Fill"

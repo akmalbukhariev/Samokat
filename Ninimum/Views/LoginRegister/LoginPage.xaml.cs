@@ -70,7 +70,19 @@ public partial class LoginPage : BasePage
     private async void ForgotPassword_Tapped(object sender, TappedEventArgs e)
     {
         await AnimateElementScaleDown(sender as Label);
-        await AppNavigatorService.NavigateTo(nameof(ForgotPasswordPage));
+
+        if (string.IsNullOrWhiteSpace(viewModel.PhoneNumber))
+        {
+            await AlertService.ShowAlertAsync("Ma'lumot", "Avval telefon raqamingizni kiriting.");
+            return;
+        }
+
+        await AppNavigatorService.NavigateTo(
+            nameof(ForgotPasswordPage),
+            new Dictionary<string, object>
+            {
+                ["PhoneNumber"] = viewModel.PhoneNumber.Trim()
+            });
     }
 
     private void ShowSmsPopup()

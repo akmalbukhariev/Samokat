@@ -88,7 +88,7 @@
             Margin="16,10,16,18"
             Text="Savolni yuborish"
             Command="{Binding SubmitCommand}"
-            IsEnabled="{Binding CanSubmit}"
+            IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
             HeightRequest="56"
             CornerRadius="8"
             BackgroundColor="#7CB518"

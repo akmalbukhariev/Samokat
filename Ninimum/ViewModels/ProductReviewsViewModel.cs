@@ -293,7 +293,7 @@ public partial class ProductReviewsViewModel : ObservableObject
         }
 
         if (!response.resultData.has_purchased)
-            ReviewEligibilityText = "Sharh faqat ushbu mahsulotni kamida bir marta xarid qilgan foydalanuvchilar uchun mavjud.";
+            ReviewEligibilityText = "Sharh qoldirish uchun ushbu mahsulotni kamida bir marta xarid qilgan bo'lishingiz kerak";
         else
             ReviewEligibilityText = "Hozircha sharh qoldirish mumkin emas.";
     }

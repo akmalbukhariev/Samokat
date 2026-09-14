@@ -17,7 +17,7 @@
             RowDefinitions="Auto,Auto,*"
             RowSpacing="24">
 
-            <components:PageHeaderView/>
+            <components:PageHeaderView Title="Qidiruv"/>
     
             <components:InputView
                 Grid.Row="1"
@@ -41,24 +41,27 @@
                 IsRunning="{Binding IsSearching}"
                 IsVisible="{Binding IsSearching}" />
 
-            <!-- Recent Search List -->
+            <!-- Recent searches (Coupang-style quick search history) -->
             <Grid
                 Grid.Row="2"
                 IsVisible="{Binding ShowRecentSearchList}"
-                RowDefinitions="Auto,35,*"
-                RowSpacing="10"
+                RowDefinitions="Auto,Auto"
+                RowSpacing="12"
                 Margin="10,0,10,0">
 
                 <Label
                     Text="Oxirgi qidiruvlar"
-                    TextColor="Black"
-                    FontSize="16"
-                    FontFamily="{StaticResource FontSFRegular}" />
+                    TextColor="#22292F"
+                    FontSize="17"
+                    FontFamily="{StaticResource FontSFMedium}" />
 
                 <CollectionView
                     Grid.Row="1"
                     ItemsSource="{Binding HistoryList}"
-                    HorizontalScrollBarVisibility="Never">
+                    HeightRequest="44"
+                    HorizontalScrollBarVisibility="Never"
+                    VerticalScrollBarVisibility="Never"
+                    SelectionMode="None">
 
                     <CollectionView.ItemsLayout>
                         <LinearItemsLayout
@@ -66,13 +69,23 @@
                             ItemSpacing="10" />
                     </CollectionView.ItemsLayout>
 
+                    <CollectionView.EmptyView>
+                        <Label
+                            Text="Hozircha qidiruvlar yo‘q"
+                            TextColor="#96979B"
+                            FontSize="14"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            VerticalOptions="Center" />
+                    </CollectionView.EmptyView>
+
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
                             <Border
                                 Stroke="#DADADA"
-                                Padding="10,5"
+                                Padding="12,7"
                                 StrokeThickness="1"
-                                StrokeShape="RoundRectangle 20">
+                                StrokeShape="RoundRectangle 20"
+                                VerticalOptions="Center">
 
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer

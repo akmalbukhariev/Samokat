@@ -8,18 +8,20 @@ public partial class SmsCodePopup : ContentView
     private string _smsCode = string.Empty;
     private IDispatcherTimer? _timer;
     private int _secondsLeft = 45;
+    private bool _isExpired;
+
     public ICommand ConfirmTapCommand { get; }
+
     private readonly IKeyboardHelper keyboardHelper;
+
     public SmsCodePopup()
     {
         InitializeComponent();
+
         keyboardHelper = AppService.Get<IKeyboardHelper>();
-         
         ConfirmTapCommand = new Command(OnConfirmTapped);
 
         UpdateOtpUI();
-        StartTimer();
-
         BindingContext = this;
     }
 
@@ -50,10 +52,10 @@ public partial class SmsCodePopup : ContentView
     }
 
     public static readonly BindableProperty ResendCommandProperty =
-    BindableProperty.Create(
-        nameof(ResendCommand),
-        typeof(ICommand),
-        typeof(SmsCodePopup));
+        BindableProperty.Create(
+            nameof(ResendCommand),
+            typeof(ICommand),
+            typeof(SmsCodePopup));
 
     public ICommand ResendCommand
     {
@@ -69,23 +71,29 @@ public partial class SmsCodePopup : ContentView
         MainThread.BeginInvokeOnMainThread(async () =>
         {
             await Task.Delay(100);
-            HiddenOtpEntry.Focus();
+
+            if (IsVisible && !_isExpired)
+                HiddenOtpEntry.Focus();
         });
     }
 
     public void Hide()
     {
-        IsVisible = false;
+        _timer?.Stop();
+        keyboardHelper.HideKeyboard();
         HiddenOtpEntry.Unfocus();
+        IsVisible = false;
     }
 
     public void Reset()
     {
+        _isExpired = false;
+        _secondsLeft = 45;
         _smsCode = string.Empty;
+
         SmsCode = string.Empty;
         HiddenOtpEntry.Text = string.Empty;
 
-        _secondsLeft = 45;
         lblTimer.Text = FormatTime(_secondsLeft);
         lblTimer.TextColor = Color.FromArgb("#96979B");
         lblTimer.InputTransparent = true;
@@ -97,12 +105,19 @@ public partial class SmsCodePopup : ContentView
 
     private void OnBackgroundTapped(object sender, TappedEventArgs e)
     {
-        //Hide();
+        // Keep background taps from closing the popup accidentally.
+        // The explicit X button is used to close it.
+    }
+
+    private async void CloseButton_Tapped(object sender, TappedEventArgs e)
+    {
+        await AnimateElementScaleDown(CloseButton);
+        Hide();
     }
 
     private void OnConfirmTapped()
     {
-        if (_smsCode.Length < 4)
+        if (_isExpired || _secondsLeft <= 0 || _smsCode.Length != 4)
             return;
 
         if (ConfirmCommand?.CanExecute(_smsCode) == true)
@@ -111,11 +126,22 @@ public partial class SmsCodePopup : ContentView
 
     private void OtpArea_Tapped(object sender, TappedEventArgs e)
     {
+        if (_isExpired)
+            return;
+
         HiddenOtpEntry.Focus();
     }
 
     private void HiddenOtpEntry_TextChanged(object sender, TextChangedEventArgs e)
     {
+        if (_isExpired)
+        {
+            if (!string.IsNullOrEmpty(HiddenOtpEntry.Text))
+                HiddenOtpEntry.Text = string.Empty;
+
+            return;
+        }
+
         var newText = e.NewTextValue ?? string.Empty;
         newText = new string(newText.Where(char.IsDigit).ToArray());
 
@@ -138,7 +164,8 @@ public partial class SmsCodePopup : ContentView
 
     private async void HiddenOtpEntry_Focused(object sender, FocusEventArgs e)
     {
-        await PopupCard.TranslateTo(0, -90, 180, Easing.CubicOut);
+        if (!_isExpired)
+            await PopupCard.TranslateTo(0, -90, 180, Easing.CubicOut);
     }
 
     private async void HiddenOtpEntry_Unfocused(object sender, FocusEventArgs e)
@@ -151,12 +178,17 @@ public partial class SmsCodePopup : ContentView
 
     private void HiddenOtpEntry_Completed(object sender, EventArgs e)
     {
+        if (_isExpired)
+            return;
+
         if (_smsCode.Length < 4)
         {
             MainThread.BeginInvokeOnMainThread(async () =>
             {
                 await Task.Delay(50);
-                HiddenOtpEntry.Focus();
+
+                if (IsVisible && !_isExpired)
+                    HiddenOtpEntry.Focus();
             });
         }
     }
@@ -168,12 +200,12 @@ public partial class SmsCodePopup : ContentView
         Digit3Label.Text = _smsCode.Length > 2 ? _smsCode[2].ToString() : string.Empty;
         Digit4Label.Text = _smsCode.Length > 3 ? _smsCode[3].ToString() : string.Empty;
 
-        SetBoxState(Box1, Cursor1, _smsCode.Length == 0);
-        SetBoxState(Box2, Cursor2, _smsCode.Length == 1);
-        SetBoxState(Box3, Cursor3, _smsCode.Length == 2);
-        SetBoxState(Box4, Cursor4, _smsCode.Length == 3);
+        SetBoxState(Box1, Cursor1, !_isExpired && _smsCode.Length == 0);
+        SetBoxState(Box2, Cursor2, !_isExpired && _smsCode.Length == 1);
+        SetBoxState(Box3, Cursor3, !_isExpired && _smsCode.Length == 2);
+        SetBoxState(Box4, Cursor4, !_isExpired && _smsCode.Length == 3);
 
-        if (_smsCode.Length >= 4)
+        if (_smsCode.Length >= 4 || _isExpired)
         {
             Cursor1.IsVisible = false;
             Cursor2.IsVisible = false;
@@ -181,7 +213,7 @@ public partial class SmsCodePopup : ContentView
             Cursor4.IsVisible = false;
         }
 
-        bool canConfirm = _smsCode.Length == 4;
+        bool canConfirm = !_isExpired && _secondsLeft > 0 && _smsCode.Length == 4;
         btnConfirmCode.IsEnabled = canConfirm;
 
         btnConfirmCode.ButtonBackgroundColor =
@@ -238,48 +270,66 @@ public partial class SmsCodePopup : ContentView
 
     private async void LblTimer_Tapped(object sender, TappedEventArgs e)
     {
-        if (_secondsLeft > 0)
+        if (!_isExpired)
             return;
 
         await AnimateElementScaleDown(lblTimer);
 
-        if (ResendCommand?.CanExecute(null) == true)
-            ResendCommand.Execute(null);
+        if (ResendCommand?.CanExecute(null) != true)
+            return;
 
+        ResendCommand.Execute(null);
         Reset();
     }
 
     private void Timer_Tick(object? sender, EventArgs e)
     {
-        if (_secondsLeft <= 0)
+        if (_isExpired)
         {
             _timer?.Stop();
-
-            lblTimer.Text = "Send again";
-            lblTimer.TextColor = Color.FromArgb("#FD473C");
-            lblTimer.InputTransparent = false;
-            lblTimer.Opacity = 1;
-
             return;
         }
 
         _secondsLeft--;
+
+        if (_secondsLeft <= 0)
+        {
+            ExpireCode();
+            return;
+        }
+
         lblTimer.Text = FormatTime(_secondsLeft);
     }
 
-    private string FormatTime(int totalSeconds)
+    private void ExpireCode()
+    {
+        _secondsLeft = 0;
+        _isExpired = true;
+        _timer?.Stop();
+
+        _smsCode = string.Empty;
+        SmsCode = string.Empty;
+        HiddenOtpEntry.Text = string.Empty;
+        HiddenOtpEntry.Unfocus();
+
+        lblTimer.Text = "Qayta yuborish";
+        lblTimer.TextColor = Color.FromArgb("#FD473C");
+        lblTimer.InputTransparent = false;
+        lblTimer.Opacity = 1;
+
+        UpdateOtpUI();
+    }
+
+    private static string FormatTime(int totalSeconds)
     {
         int minutes = totalSeconds / 60;
         int seconds = totalSeconds % 60;
         return $"{minutes}:{seconds:D2}";
     }
 
-    protected Task AnimateElementScaleDown(VisualElement element)
+    protected async Task AnimateElementScaleDown(VisualElement element)
     {
-        return Task.Run(async () =>
-        {
-            await element.ScaleTo(0.9, 100, Easing.CubicOut);
-            await element.ScaleTo(1.0, 100, Easing.CubicIn);
-        });
+        await element.ScaleTo(0.9, 100, Easing.CubicOut);
+        await element.ScaleTo(1.0, 100, Easing.CubicIn);
     }
 }

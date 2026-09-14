@@ -253,35 +253,47 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
     private async void OnOrderClicked()
     {
-        AppVibrationService.Like();
-        await AppNavigatorService.NavigateTo(nameof(OrdersPage));
+        await RunProfileActionAsync(async () =>
+        {
+            AppVibrationService.Like();
+            await AppNavigatorService.NavigateTo(nameof(OrdersPage));
+        });
     }
 
     private async void OnReviewClicked()
     {
-        await DisplayAlert("Clicked", "Sharh", "OK");
-        // await Navigation.PushAsync(new ReviewsPage());
+        await RunProfileActionAsync(async () =>
+        {
+            await DisplayAlert("Clicked", "Sharh", "OK");
+            // await Navigation.PushAsync(new ReviewsPage());
+        });
     }
 
     private async void OnPaymentCardClicked()
     {
-        //await DisplayAlert("Clicked", "To’lov karta", "OK");
-        //await Navigation.PushAsync(new PaymentCardsPage());
-        await AppNavigatorService.NavigateTo(nameof(PaymentCardPage));
+        await RunProfileActionAsync(async () =>
+        {
+            await AppNavigatorService.NavigateTo(nameof(PaymentCardPage));
+        });
     }
 
     private async void OnMessageClicked()
     {
-        AppVibrationService.Like();
-
-        await DisplayAlert("Clicked", "Yozishma", "OK");
-        // await Navigation.PushAsync(new ChatListPage());
+        await RunProfileActionAsync(async () =>
+        {
+            AppVibrationService.Like();
+            await DisplayAlert("Clicked", "Yozishma", "OK");
+            // await Navigation.PushAsync(new ChatListPage());
+        });
     }
 
     private async void OnNotificationClicked()
     {
-        await DisplayAlert("Clicked", "Xabarnoma", "OK");
-        // await Navigation.PushAsync(new NotificationPage());
+        await RunProfileActionAsync(async () =>
+        {
+            await DisplayAlert("Clicked", "Xabarnoma", "OK");
+            // await Navigation.PushAsync(new NotificationPage());
+        });
     }
 
     private void OnRegionClicked()
@@ -435,25 +447,34 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
     private async void OnThemeClicked()
     {
-        await DisplayAlert("Clicked", "Ko’rinish rejimi", "OK");
+        await RunProfileActionAsync(() => DisplayAlert("Clicked", "Ko’rinish rejimi", "OK"));
     }
 
     private async void OnChangePhoneClicked()
     {
-        AppVibrationService.Like();
-        await AppNavigatorService.NavigateTo(nameof(Ninimum.Views.ChangePhoneNumber.ChangePhoneNumberPage));
+        await RunProfileActionAsync(async () =>
+        {
+            AppVibrationService.Like();
+            await AppNavigatorService.NavigateTo(nameof(Ninimum.Views.ChangePhoneNumber.ChangePhoneNumberPage));
+        });
     }
 
     private async void OnChangePasswordClicked()
     {
-        AppVibrationService.Like();
-        await AppNavigatorService.NavigateTo("ProfileChangePasswordPage");
+        await RunProfileActionAsync(async () =>
+        {
+            AppVibrationService.Like();
+            await AppNavigatorService.NavigateTo("ProfileChangePasswordPage");
+        });
     }
 
     private async void OnMyTariffClicked()
     {
-        AppVibrationService.Like();
-        await AppNavigatorService.NavigateTo(nameof(MyTariffPage));
+        await RunProfileActionAsync(async () =>
+        {
+            AppVibrationService.Like();
+            await AppNavigatorService.NavigateTo(nameof(MyTariffPage));
+        });
     }
 
     private async Task LoadCurrentTariffAsync()
@@ -481,17 +502,28 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
     private async void OnChildrenClicked()
     {
-        await DisplayAlert("Clicked", "Farzandlarim", "OK");
+        await RunProfileActionAsync(() => DisplayAlert("Clicked", "Farzandlarim", "OK"));
     }
 
     private async void OnDeleteAccountClicked()
     {
-        AppVibrationService.Like();
-
         if (IsProfileBusy)
             return;
 
-        await AppNavigatorService.NavigateTo(nameof(DeleteAccountPage));
+        await RunProfileActionAsync(async () =>
+        {
+            AppVibrationService.Like();
+            await AppNavigatorService.NavigateTo(nameof(DeleteAccountPage));
+        });
+    }
+
+    private Task RunProfileActionAsync(Func<Task> action)
+    {
+        // Keep the page-level guard so repeated taps cannot push the same route more
+        // than once, but do not toggle InputTransparent on the whole ContentPage.
+        // Toggling the whole page during a Shell push can briefly expose Android's
+        // transition background as a black frame.
+        return ClickGuard.RunAsync(this, action, cooldownMs: 300, setInputTransparent: false);
     }
     
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)

@@ -31,12 +31,14 @@
                HorizontalOptions="Center"
                VerticalOptions="Center">
             <Image.GestureRecognizers>
+                <PinchGestureRecognizer PinchUpdated="OnImagePinchUpdated" />
+                <PanGestureRecognizer PanUpdated="OnImagePanUpdated" />
+                <TapGestureRecognizer NumberOfTapsRequired="2"
+                                      Tapped="OnImageDoubleTapped" />
                 <SwipeGestureRecognizer Direction="Up"
                                         Swiped="OnImageSwiped" />
                 <SwipeGestureRecognizer Direction="Down"
                                         Swiped="OnImageSwiped" />
-                <TapGestureRecognizer NumberOfTapsRequired="1"
-                                      Tapped="OnImageTapped" />
             </Image.GestureRecognizers>
         </Image>
 

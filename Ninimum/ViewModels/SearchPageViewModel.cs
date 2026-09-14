@@ -192,11 +192,13 @@ public partial class SearchPageViewModel : ObservableObject
         if (keyword.Length < 3)
             return;
 
-        var exists = HistoryList.Any(x =>
+        var existing = HistoryList.FirstOrDefault(x =>
             x.SearchedText.Equals(keyword, StringComparison.OrdinalIgnoreCase));
 
-        if (exists)
-            return;
+        // A repeated search becomes the most recent item, just like common
+        // shopping apps, instead of leaving the old entry in place.
+        if (existing != null)
+            HistoryList.Remove(existing);
 
         HistoryList.Insert(0, new SearchHistoryItem
         {
@@ -218,6 +220,18 @@ public partial class SearchPageViewModel : ObservableObject
         foreach (var item in list)
         {
             HistoryList.Add(item);
+        }
+    }
+
+    public void RefreshSearchHistoryForDisplay()
+    {
+        LoadSearchHistory();
+
+        if (string.IsNullOrWhiteSpace(SearchText))
+        {
+            ShowRecentSearchList = true;
+            ShowFilterSearchList = false;
+            ShowProductResult = false;
         }
     }
 

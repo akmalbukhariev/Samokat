@@ -38,6 +38,28 @@
                         Span="2" />
                 </CollectionView.ItemsLayout>
 
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout
+                        Padding="20,90,20,20"
+                        Spacing="10"
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center">
+                        <Label
+                            Text="Sevimlilar ro'yxati hozircha bo'sh"
+                            HorizontalTextAlignment="Center"
+                            TextColor="#22292F"
+                            FontSize="21"
+                            FontFamily="{StaticResource FontSFMedium}" />
+                        <Label
+                            Text="Yoqtirgan mahsulotlaringizni yurakcha orqali saqlang. Ular shu yerda ko'rinadi."
+                            HorizontalTextAlignment="Center"
+                            TextColor="#96979B"
+                            FontSize="16"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            LineBreakMode="WordWrap" />
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="models:MainProductCardItem">
                         <main_components:MainProductCardView

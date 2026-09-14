@@ -57,7 +57,6 @@ public partial class App : Application
 
         #region Main pages
         Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
-        Routing.RegisterRoute(nameof(RegisterPage), typeof(RegisterPage));
         Routing.RegisterRoute(nameof(MenuPage), typeof(MenuPage));
         Routing.RegisterRoute(nameof(SearchPage), typeof(SearchPage));
         Routing.RegisterRoute(nameof(DetailProductPage), typeof(DetailProductPage));
@@ -152,15 +151,3 @@ public partial class App : Application
 #endif
     }
 }
-
-/*
-1. After registration was successed then log in aoutomaticly and navigate to main page. Also, phone number is not passed to RegisterPage from AuthorizationPage.
-2. Savatcha page is showing some tools even though there is no products in the cart. It should be hidden when there is no products in the cart. Instead of that, display some message for user friendly.
-3. In the "Maxsulotlar Sharhlari" page, it supposed to display "Sharh qoldirish uchun ushbu mahsulotni kamida bir marta xarid qilgan bo'lishingiz kerak". Please check and fix. If the user did not buy this product then that message should display.
-4. Savol yuborish button must clickable in "Savol berish" page. If text is emopty then it should display "Iltimos, savolni kiriting" message.
-5. When I press the "Buyurtmani rasmiylashtirish" button, it is creating an order in the orders table and it opens payme page. So, it is ok, but, if I did not implement and go back to the "Rasmiylashtirish" page orders table still saving that order. What do you think should I delete it if payment is not implemented?
-6. Please complete the ForgotPasswordPage. I should be able to send a temporary password to the user. Please implement it. when this page is appearing phone number should display. I mean user should not rnter again.
-7. SmsCodePopup is working but, when time is up, then user had to press "Send again" text to send again. However, when I press the "Tasdiqlash" button it could send even time is up. Do something better.
-8. When SmsCodePopup is  showed, user is not able to close it. Please do something to close it. I mean, user should be able to close it.
-9. Add something user friendly that when user navigate to thr "Sevimlilar" page and there is no products in the list, it should display some message for user friendly.
-*/

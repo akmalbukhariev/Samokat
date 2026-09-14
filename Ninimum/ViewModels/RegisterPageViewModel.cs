@@ -128,13 +128,13 @@ public partial class RegisterPageViewModel : ObservableObject
             return;
         }
 
-        /*if (string.IsNullOrWhiteSpace(PhoneNumber))
+        if (string.IsNullOrWhiteSpace(PhoneNumber))
         {
             await AlertService.ShowAlertAsync(
                 "Ogohlantirish",
-                "Telefon raqamni kiriting.");
+                "Telefon raqam topilmadi. Iltimos, ro'yxatdan o'tishni qaytadan boshlang.");
             return;
-        }*/
+        }
 
         if (string.IsNullOrWhiteSpace(Address) || Address == "Manzil")
         {
@@ -188,14 +188,36 @@ public partial class RegisterPageViewModel : ObservableObject
             password = Password
         };
 
-        IsLoading = true;
-        Response response = await apiService.RegisterUser(request);
-        IsLoading = false;
-
-        if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
+        try
         {
-            await AlertService.ShowAlertAsync("Success", "Ro’yxatdan o’tish muvaffaqiyatli.");
-            await appControl.Login(PhoneNumber, Password);
+            IsLoading = true;
+
+            Response response = await apiService.RegisterUser(request);
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                await AlertService.ShowAlertAsync(
+                    "Xatolik",
+                    response.resultMsg ?? "Ro'yxatdan o'tib bo'lmadi.");
+                return;
+            }
+
+            bool loggedIn = await appControl.Login(PhoneNumber.Trim(), Password);
+
+            if (!loggedIn)
+            {
+                await AlertService.ShowAlertAsync(
+                    "Ma'lumot",
+                    "Ro'yxatdan o'tish muvaffaqiyatli, ammo avtomatik kirib bo'lmadi. Iltimos, kirish sahifasidan qayta urinib ko'ring.");
+            }
+        }
+        catch (Exception ex)
+        {
+            await AlertService.ShowAlertAsync("Xatolik", ex.Message);
+        }
+        finally
+        {
+            IsLoading = false;
         }
     }
 

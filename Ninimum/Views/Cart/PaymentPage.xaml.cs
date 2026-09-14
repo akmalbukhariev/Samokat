@@ -1,9 +1,11 @@
 using Api.Services;
 using Models.Requests;
+using Models.Responses;
 using Ninimum.Services;
 using Ninimum.Views.Main;
 using Ninimum.Views.MyTariff;
 using System.Diagnostics;
+using System.Windows.Input;
 using Utils;
 
 namespace Ninimum.Views.Payment;
@@ -23,6 +25,9 @@ public partial class PaymentPage : BasePage, IQueryAttributable
 
     private CancellationTokenSource? paymentStatusCts;
     private readonly SemaphoreSlim paymentStatusCheckLock = new(1, 1);
+    private int backFlowRunning;
+
+    public ICommand BackCommand { get; }
 
     public PaymentPage(UserApiService apiService, AppControl appControl)
     {
@@ -30,6 +35,9 @@ public partial class PaymentPage : BasePage, IQueryAttributable
 
         this.apiService = apiService;
         this.appControl = appControl;
+
+        BackCommand = new Command(async () => await HandleBackAsync());
+        BindingContext = this;
 
         Shell.SetTabBarIsVisible(this, false);
     }
@@ -291,6 +299,108 @@ public partial class PaymentPage : BasePage, IQueryAttributable
         });
     }
 
+    private async Task HandleBackAsync()
+    {
+        if (Interlocked.Exchange(ref backFlowRunning, 1) == 1)
+            return;
+
+        try
+        {
+            paymentStatusCts?.Cancel();
+
+            if (Volatile.Read(ref paymentFinished) == 1)
+                return;
+
+            if (paymentType != "ORDER" || orderId <= 0)
+            {
+                await AppNavigatorService.NavigateTo("..");
+                return;
+            }
+
+            string currentStatus = await GetCurrentOrderPaymentStatusAsync();
+
+            if (currentStatus.Equals("PAID", StringComparison.OrdinalIgnoreCase))
+            {
+                await FinishPaymentAsync("PAID");
+                return;
+            }
+
+            if (currentStatus.Equals("FAILED", StringComparison.OrdinalIgnoreCase) ||
+                currentStatus.Equals("CANCELLED", StringComparison.OrdinalIgnoreCase))
+            {
+                Interlocked.Exchange(ref paymentFinished, 1);
+                await AppNavigatorService.NavigateTo("..");
+                return;
+            }
+
+            bool shouldLeave = await Shell.Current.DisplayAlert(
+                "To'lov yakunlanmagan",
+                "Ortga qaytsangiz, ushbu to'lanmagan buyurtma bekor qilinadi. Davom etasizmi?",
+                "Ha",
+                "Yo'q");
+
+            if (!shouldLeave)
+            {
+                StartPaymentStatusChecking();
+                return;
+            }
+
+            Response cancelResponse = await apiService.CancelUnpaidOrder(new CancelOrderRequest
+            {
+                orderId = orderId,
+                userId = appControl.CurrentUserId,
+                reason = "To'lov sahifasidan chiqildi"
+            });
+
+            if (cancelResponse.resultCode == ApiResult.SUCCESS.GetCodeToString())
+            {
+                Interlocked.Exchange(ref paymentFinished, 1);
+                PageDataRefreshState.MarkDirty(PageDataRefreshState.Orders);
+                await AppNavigatorService.NavigateTo("..");
+                return;
+            }
+
+            // The payment callback may have completed while the user was confirming.
+            currentStatus = await GetCurrentOrderPaymentStatusAsync();
+
+            if (currentStatus.Equals("PAID", StringComparison.OrdinalIgnoreCase))
+            {
+                await FinishPaymentAsync("PAID");
+                return;
+            }
+
+            await AlertService.ShowAlertAsync(
+                "Xatolik",
+                cancelResponse.resultMsg ?? "To'lanmagan buyurtmani bekor qilib bo'lmadi.");
+
+            StartPaymentStatusChecking();
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[ERROR] HandleBackAsync => {ex}");
+            await AlertService.ShowAlertAsync("Xatolik", "To'lov holatini tekshirib bo'lmadi.");
+            StartPaymentStatusChecking();
+        }
+        finally
+        {
+            Interlocked.Exchange(ref backFlowRunning, 0);
+        }
+    }
+
+    private async Task<string> GetCurrentOrderPaymentStatusAsync()
+    {
+        var response = await apiService.GetOrderPaymentStatus(new OrderStatusRequest
+        {
+            orderId = orderId,
+            userId = appControl.CurrentUserId
+        });
+
+        if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            return string.Empty;
+
+        return response.resultData?.paymentStatus ?? string.Empty;
+    }
+
     private void ShowLoading(bool show)
     {
         MainThread.BeginInvokeOnMainThread(() =>
@@ -309,10 +419,7 @@ public partial class PaymentPage : BasePage, IQueryAttributable
 
     protected override bool OnBackButtonPressed()
     {
-        paymentStatusCts?.Cancel();
-
-        _ = AppNavigatorService.NavigateTo("..");
-
+        _ = HandleBackAsync();
         return true;
     }
 }

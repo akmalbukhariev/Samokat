@@ -97,8 +97,8 @@
         <components:SmsCodePopup
             x:Name="popupSms"
             Grid.RowSpan="3"
-            ConfirmCommand="{Binding ConfirmSmsCodeCommand}"
-            ResendCommand="{Binding ResendSmsCommand}"
+            ConfirmCommand="{Binding Source={x:Reference ThisPage}, Path=BindingContext.ConfirmSmsCodeCommand}"
+            ResendCommand="{Binding Source={x:Reference ThisPage}, Path=BindingContext.ResendSmsCommand}"
             IsVisible="False"
             ZIndex="100" />
 

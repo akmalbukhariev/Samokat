@@ -34,6 +34,7 @@ public partial class CartPageViewModel : ObservableObject
 
     [ObservableProperty] private bool isLoading;
     [ObservableProperty] private bool isRefreshing;
+    [ObservableProperty] private bool hasCartItems;
 
     [ObservableProperty] private string selectAllIcon = "ic_uncheck.png";
     [ObservableProperty] private string summaryTopText = "Savatchadagi tanlangan 0 ta mahsulotni";
@@ -62,6 +63,7 @@ public partial class CartPageViewModel : ObservableObject
         hasMoreItems = true;
         loadedCartIds.Clear();
         CartProducts.Clear();
+        UpdateSummary();
 
         await LoadActiveSubscriptionAsync();
         await LoadCartProductsAsync();
@@ -83,6 +85,7 @@ public partial class CartPageViewModel : ObservableObject
                 hasMoreItems = true;
                 loadedCartIds.Clear();
                 CartProducts.Clear();
+                UpdateSummary();
             }
             else if (offset == 0 && CartProducts.Count == 0)
             {
@@ -104,6 +107,7 @@ public partial class CartPageViewModel : ObservableObject
             if (items == null || items.Count == 0)
             {
                 hasMoreItems = false;
+                UpdateSummary();
                 return;
             }
 
@@ -310,6 +314,8 @@ public partial class CartPageViewModel : ObservableObject
 
     private void UpdateSummary()
     {
+        HasCartItems = CartProducts.Count > 0;
+
         int selectedCount = CartProducts.Count(x => x.IsChecked);
 
         int tariffTotal = CartProducts

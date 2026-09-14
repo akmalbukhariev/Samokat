@@ -62,9 +62,16 @@ public partial class AskProductQuestionViewModel : ObservableObject
             return;
 
         string question = QuestionText?.Trim() ?? string.Empty;
+
+        if (string.IsNullOrWhiteSpace(question))
+        {
+            await AlertService.ShowAlertAsync("Ogohlantirish", "Iltimos, savolni kiriting");
+            return;
+        }
+
         if (question.Length < 3)
         {
-            await AlertService.ShowAlertAsync("Ogohlantirish", "Iltimos, mahsulot bo'yicha savolingizni yozing.");
+            await AlertService.ShowAlertAsync("Ogohlantirish", "Savol kamida 3 ta belgidan iborat bo'lishi kerak.");
             return;
         }
 

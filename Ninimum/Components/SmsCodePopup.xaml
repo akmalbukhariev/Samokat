@@ -41,7 +41,24 @@
             Padding="18,22,18,18"
             StrokeShape="RoundRectangle 30">
             
-            <VerticalStackLayout Spacing="16">
+            <Grid>
+                <Label
+                    x:Name="CloseButton"
+                    Text="✕"
+                    FontSize="22"
+                    TextColor="#96979B"
+                    HorizontalOptions="End"
+                    VerticalOptions="Start"
+                    Margin="0,-8,-3,0"
+                    ZIndex="10">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="CloseButton_Tapped" />
+                    </Label.GestureRecognizers>
+                </Label>
+
+                <VerticalStackLayout
+                    Spacing="16"
+                    Margin="0,12,0,0">
 
                 <VerticalStackLayout Spacing="10">
                     <Label
@@ -185,7 +202,8 @@
                     ButtonBackgroundColor="#FD473C"
                     ButtonTextColor="White"
                     TapCommand="{Binding ConfirmTapCommand}" />
-            </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Grid>
         </Border>
     </Grid>
 </ContentView>

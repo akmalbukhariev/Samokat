@@ -10,6 +10,8 @@
     xmlns:cart="clr-namespace:Ninimum.Views.Cart"
     xmlns:profile="clr-namespace:Ninimum.Views.Profile"
     Shell.FlyoutBehavior="Disabled"
+    BackgroundColor="White"
+    Shell.BackgroundColor="White"
     Shell.TabBarBackgroundColor="White"
     Shell.TabBarUnselectedColor="Gray"
     Shell.TabBarForegroundColor="Red"

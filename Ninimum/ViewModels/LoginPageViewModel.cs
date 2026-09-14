@@ -33,6 +33,9 @@ public partial class LoginPageViewModel : ObservableObject
     [ObservableProperty]
     private ICommand confirmSmsCodeCommand;
 
+    [ObservableProperty]
+    private ICommand resendSmsCommand;
+
     public Action? ShowSmsPopupAction { get; set; }
     public Action? HideSmsPopupAction { get; set; }
     private string verificationCode = "";
@@ -49,6 +52,7 @@ public partial class LoginPageViewModel : ObservableObject
         RegisterCommand = new Command(async () => await OnRegister());
         ForgotPasswordCommand = new Command(async () => await OnForgotPassword());
         ConfirmSmsCodeCommand = new Command<string>(OnConfirmSmsCode);
+        ResendSmsCommand = new Command(async () => await OnResendSms());
     }
 
     private async Task OnLogin()
@@ -130,6 +134,36 @@ public partial class LoginPageViewModel : ObservableObject
         await appControl.InitLoginPage(response.resultData, PhoneNumber, Password);
     }
 
+    private async Task OnResendSms()
+    {
+        if (string.IsNullOrWhiteSpace(PhoneNumber))
+            return;
+
+        try
+        {
+            verificationCode = string.Empty;
+            IsLoading = true;
+
+            string? code = await appControl.SendVerificationCode(PhoneNumber.Trim());
+
+            if (string.IsNullOrWhiteSpace(code))
+            {
+                await AlertService.ShowAlertAsync("Xatolik", "SMS yuborilmadi");
+                return;
+            }
+
+            verificationCode = code;
+        }
+        catch (Exception ex)
+        {
+            await AlertService.ShowAlertAsync("Xatolik", ex.Message);
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+    }
+
     private async Task OnRegister()
     {
         await AppNavigatorService.NavigateTo(nameof(AuthorizationPage));
@@ -137,6 +171,17 @@ public partial class LoginPageViewModel : ObservableObject
 
     private async Task OnForgotPassword()
     {
-         await AppNavigatorService.NavigateTo(nameof(ForgotPasswordPage));
+        if (string.IsNullOrWhiteSpace(PhoneNumber))
+        {
+            await AlertService.ShowAlertAsync("Ma'lumot", "Avval telefon raqamingizni kiriting.");
+            return;
+        }
+
+        await AppNavigatorService.NavigateTo(
+            nameof(ForgotPasswordPage),
+            new Dictionary<string, object>
+            {
+                ["PhoneNumber"] = PhoneNumber.Trim()
+            });
     }
 }

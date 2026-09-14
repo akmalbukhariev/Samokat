@@ -267,6 +267,8 @@ public partial class FormalizationPage : BasePage
 
                 if (paymeResponse.resultCode != ApiResult.SUCCESS.GetCodeToString())
                 {
+                    await CancelUnpaidCheckoutOrderAsync(orderId);
+
                     await Shell.Current.DisplayAlert(
                         "Xatolik",
                         paymeResponse.resultMsg ?? "Payme URL yaratilmadi.",
@@ -278,6 +280,8 @@ public partial class FormalizationPage : BasePage
                 if (paymeResponse.resultData == null ||
                     string.IsNullOrWhiteSpace(paymeResponse.resultData.payment_url))
                 {
+                    await CancelUnpaidCheckoutOrderAsync(orderId);
+
                     await Shell.Current.DisplayAlert(
                         "Xatolik",
                         "Payme to'lov manzili olinmadi.",
@@ -309,6 +313,26 @@ public partial class FormalizationPage : BasePage
                 IsLoading = false;
             }
         });
+    }
+
+    private async Task CancelUnpaidCheckoutOrderAsync(long orderId)
+    {
+        if (orderId <= 0)
+            return;
+
+        try
+        {
+            await apiService.CancelUnpaidOrder(new CancelOrderRequest
+            {
+                orderId = orderId,
+                userId = appControl.CurrentUserId,
+                reason = "Payme to'lov sahifasini ochib bo'lmadi"
+            });
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[ERROR] CancelUnpaidCheckoutOrderAsync => {ex}");
+        }
     }
 
     private int GetProductsPrice()

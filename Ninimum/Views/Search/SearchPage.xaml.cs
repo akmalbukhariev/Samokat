@@ -19,6 +19,12 @@ public partial class SearchPage : BasePage
         viewModel.PropertyChanged += ViewModel_PropertyChanged;
     }
 
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        viewModel?.RefreshSearchHistoryForDisplay();
+    }
+
     private void SearchPage_Loaded(object? sender, EventArgs e)
     {
         if (BindingContext is SearchPageViewModel vm)
