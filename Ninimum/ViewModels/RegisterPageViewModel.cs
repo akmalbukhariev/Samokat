@@ -228,7 +228,13 @@ public partial class RegisterPageViewModel : ObservableObject
     }
 
     private async void AdressTapped()
-    { 
+    {
+        AddressSelectionNavigationStore.Prepare(
+            AddressSelectionMode.Registration,
+            Address,
+            LocationLatitude == 0 ? null : LocationLatitude,
+            LocationLongitude == 0 ? null : LocationLongitude);
+
         await AppNavigatorService.NavigateTo(nameof(AddressPage));
     }
 }

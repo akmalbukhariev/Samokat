@@ -69,6 +69,10 @@ public partial class FormalizationPage : BasePage
     {
         base.OnAppearing();
 
+        var data = FormalizationNavigationStore.Data;
+        if (data != null)
+            AddressLabel.Text = data.AddressText;
+
         await LoadPaymentCardsAsync();
     }
 
@@ -129,6 +133,14 @@ public partial class FormalizationPage : BasePage
     private async void OnChangeAddressTapped(object sender, TappedEventArgs e)
     {
         await AnimateElementScaleDown(sender as Border);
+
+        var data = FormalizationNavigationStore.Data;
+
+        AddressSelectionNavigationStore.Prepare(
+            AddressSelectionMode.Checkout,
+            data?.AddressText,
+            data?.AddressLatitude,
+            data?.AddressLongitude);
 
         await AppNavigatorService.NavigateTo(nameof(AddressPage));
     }

@@ -20,6 +20,22 @@
                 MapType="Street"
                 IsShowingUser="true"/>
 
+            <Border
+                BackgroundColor="#EEFFFFFF"
+                Stroke="#E7E7E7"
+                StrokeThickness="1"
+                StrokeShape="RoundRectangle 16"
+                Padding="12,7"
+                HorizontalOptions="Center"
+                VerticalOptions="Start"
+                Margin="0,14,0,0">
+                <Label
+                    Text="Qashqadaryo • Shahrisabz"
+                    FontSize="14"
+                    FontAttributes="Bold"
+                    TextColor="#22292F"/>
+            </Border>
+
             <Grid
                 x:Name="CenterPin"
                 HorizontalOptions="Center"
@@ -115,6 +131,7 @@
                                 HeightRequest="56"
                                 Focused="AddressEntry_Focused"
                                 Unfocused="AddressEntry_Unfocused"
+                                TextChanged="AddressEntry_TextChanged"
                                 Completed="AddressEntry_Completed"/>
                         </Border>
 
@@ -135,7 +152,7 @@
 
                     <Label
                         x:Name="HintLabel"
-                        Text="Tuman, ko‘cha, uy yoki yaqin-atrofdagi mo‘ljal"
+                        Text="Qashqadaryo: tuman, ko‘cha, uy yoki yaqin-atrofdagi mo‘ljal"
                         FontSize="16"
                         TextColor="#8F8F99"/>
 

@@ -9,38 +9,34 @@
     InputTransparent="True"
     BackgroundColor="Transparent">
 
-    <Grid BackgroundColor="Transparent">
+    <Grid BackgroundColor="Transparent" IsClippedToBounds="True">
 
+        <!-- Telegram-style dimmed page background. -->
         <BoxView x:Name="boxFullImage"
                  BackgroundColor="Black"
                  IsVisible="False"
                  Opacity="0"
-                 InputTransparent="True">
-            <BoxView.GestureRecognizers>
-                <TapGestureRecognizer NumberOfTapsRequired="1"
-                                      Tapped="OnOverlayTapped" />
-            </BoxView.GestureRecognizers>
-        </BoxView>
+                 InputTransparent="True" />
 
-        <Image x:Name="fullImage"
-               Source="{Binding Source={x:Reference ThisView}, Path=PreviewImageSource}"
-               Aspect="AspectFit"
-               IsVisible="False"
-               Opacity="1"
-               TranslationY="0"
-               HorizontalOptions="Center"
-               VerticalOptions="Center">
-            <Image.GestureRecognizers>
-                <PinchGestureRecognizer PinchUpdated="OnImagePinchUpdated" />
-                <PanGestureRecognizer PanUpdated="OnImagePanUpdated" />
-                <TapGestureRecognizer NumberOfTapsRequired="2"
-                                      Tapped="OnImageDoubleTapped" />
-                <SwipeGestureRecognizer Direction="Up"
-                                        Swiped="OnImageSwiped" />
-                <SwipeGestureRecognizer Direction="Down"
-                                        Swiped="OnImageSwiped" />
-            </Image.GestureRecognizers>
-        </Image>
+        <!--
+            Keep one full-screen gesture surface and transform only the image.
+            Native Android/iOS gesture detectors are attached to this Grid in code.
+            This avoids MAUI PinchGestureRecognizer + PanGestureRecognizer fighting
+            over the same image, which was the cause of the shaking.
+        -->
+        <Grid x:Name="gestureSurface"
+              BackgroundColor="Transparent">
+
+            <Image x:Name="fullImage"
+                   Source="{Binding Source={x:Reference ThisView}, Path=PreviewImageSource}"
+                   Aspect="AspectFit"
+                   IsVisible="False"
+                   Opacity="1"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="Fill"
+                   AnchorX="0.5"
+                   AnchorY="0.5" />
+        </Grid>
 
     </Grid>
 </ContentView>

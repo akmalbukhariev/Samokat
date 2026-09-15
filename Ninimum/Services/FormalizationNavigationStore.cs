@@ -19,6 +19,8 @@ public class FormalizationData
     public List<FormalizationProductItem> Products { get; set; } = new();
 
     public string AddressText { get; set; } = string.Empty;
+    public double? AddressLatitude { get; set; }
+    public double? AddressLongitude { get; set; }
 }
 
 public class FormalizationProductItem

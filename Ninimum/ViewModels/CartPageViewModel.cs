@@ -253,6 +253,8 @@ public partial class CartPageViewModel : ObservableObject
         {
             UserId = (long)appControl.userDto.id,
             AddressText = appControl.userDto.address,
+            AddressLatitude = appControl.userDto.location_latitude,
+            AddressLongitude = appControl.userDto.location_longitude,
             TariffSubscriptionId = activeTariffSubscriptionId,
 
             Products = selectedProducts

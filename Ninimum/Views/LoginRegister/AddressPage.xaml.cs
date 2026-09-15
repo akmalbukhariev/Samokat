@@ -2,29 +2,46 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
 using Api.Services;
+using CommunityToolkit.Mvvm.Messaging;
 using Microsoft.Maui.Controls.Maps;
 using Microsoft.Maui.Maps;
 using Ninimum.Models;
 using Ninimum.Services;
-using CommunityToolkit.Mvvm.Messaging;
+using Ninimum.Views.Formalization;
 
 namespace Ninimum.Views.LoginRegister;
 
 public partial class AddressPage : BasePage, INotifyPropertyChanged
 {
+    // The map is intentionally limited to Qashqadaryo for the first Ninimum delivery area.
+    // Shahrisabz is the default focus when no previously saved address is available.
+    private const double ShahrisabzLatitude = 39.0578;
+    private const double ShahrisabzLongitude = 66.8342;
+    private const double DefaultMapRadiusKm = 5;
+    private const double AddressMapRadiusKm = 1;
+    private const double MaxMapRadiusKm = 90;
+
+    // A practical bounding box around Qashqadaryo viloyati.
+    // It keeps the user from accidentally moving the map to another country/region.
+    private const double QashqadaryoMinLatitude = 37.85;
+    private const double QashqadaryoMaxLatitude = 39.70;
+    private const double QashqadaryoMinLongitude = 64.10;
+    private const double QashqadaryoMaxLongitude = 67.85;
+
     private double latitude;
     private double longitude;
     private string addressText = string.Empty;
-    private double panStartHeight;  
+    private double panStartHeight;
     private bool isDeliveryAvailable;
 
     private CancellationTokenSource? mapMoveCts;
     private bool isMapMoving;
     private bool isUpdatingMapProgrammatically;
+    private bool isSettingAddressTextProgrammatically;
+    private bool hasPendingAddressSearch;
 
     private const double MapModeHeight = 300;
     private const double SearchModeHeight = 620;
-
     private const double MapModeHeightWithWarning = 300;
     private const double MapModeHeightWithoutWarning = 220;
 
@@ -65,7 +82,7 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
 
     private async void AddressPage_Loaded(object sender, EventArgs e)
     {
-        await MoveToCurrentLocation();
+        await InitializeMapAsync();
     }
 
     private void AddressPage_Unloaded(object sender, EventArgs e)
@@ -74,10 +91,60 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         mapMoveCts?.Cancel();
     }
 
+    private async Task InitializeMapAsync()
+    {
+        var navigationData = AddressSelectionNavigationStore.Data;
+
+        // 1. Existing coordinates have priority. This is what makes checkout address editing
+        //    open exactly where the user's current saved/selected address is.
+        if (navigationData?.Latitude is double initialLatitude &&
+            navigationData.Longitude is double initialLongitude &&
+            IsInsideQashqadaryo(initialLatitude, initialLongitude))
+        {
+            await MoveMapToAsync(
+                initialLatitude,
+                initialLongitude,
+                AddressMapRadiusKm,
+                navigationData.AddressText);
+            return;
+        }
+
+        // 2. Older users may have address text but no usable coordinates. Try to resolve the
+        //    existing address inside Qashqadaryo before falling back to Shahrisabz.
+        if (!string.IsNullOrWhiteSpace(navigationData?.AddressText))
+        {
+            var resolved = await apiService.SearchAddressInQashqadaryoAsync(navigationData.AddressText);
+
+            if (resolved != null && IsInsideQashqadaryo(resolved.Latitude, resolved.Longitude))
+            {
+                await MoveMapToAsync(
+                    resolved.Latitude,
+                    resolved.Longitude,
+                    AddressMapRadiusKm,
+                    resolved.Address);
+                return;
+            }
+        }
+
+        // 3. Registration/new address starts from Shahrisabz instead of the phone's current
+        //    GPS location. This prevents the map from opening in Korea or any unrelated place.
+        await MoveMapToAsync(
+            ShahrisabzLatitude,
+            ShahrisabzLongitude,
+            DefaultMapRadiusKm);
+    }
+
     private async void MapButton_Tapped(object sender, TappedEventArgs e)
     {
         keyboardHelper.HideKeyboard();
         AddressEntry.Unfocus();
+
+        if (hasPendingAddressSearch && !await SearchTypedAddressAsync())
+        {
+            await ShowSearchMode(false);
+            return;
+        }
+
         await ShowMapMode(true);
     }
 
@@ -97,14 +164,74 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
 
     private async void AddressEntry_Unfocused(object sender, FocusEventArgs e)
     {
-        // Do nothing here.
-        // If we reduce panel here, keyboard closing can look strange.
+        // Keep the expanded panel until the user explicitly switches back to the map.
+    }
+
+    private void AddressEntry_TextChanged(object sender, TextChangedEventArgs e)
+    {
+        if (!isSettingAddressTextProgrammatically)
+            hasPendingAddressSearch = true;
     }
 
     private async void AddressEntry_Completed(object sender, EventArgs e)
     {
         AddressEntry.Unfocus();
-        await ShowMapMode(true);
+        keyboardHelper.HideKeyboard();
+
+        if (await SearchTypedAddressAsync())
+            await ShowMapMode(true);
+        else
+            await ShowSearchMode(false);
+    }
+
+    private async Task<bool> SearchTypedAddressAsync()
+    {
+        if (!hasPendingAddressSearch)
+            return true;
+
+        string query = AddressText?.Trim() ?? string.Empty;
+
+        if (string.IsNullOrWhiteSpace(query))
+            return false;
+
+        try
+        {
+            IsBusy = true;
+
+            var result = await apiService.SearchAddressInQashqadaryoAsync(query);
+
+            if (result == null || !IsInsideQashqadaryo(result.Latitude, result.Longitude))
+            {
+                await AlertService.ShowAlertAsync(
+                    "Manzil topilmadi",
+                    "Qashqadaryo viloyatidagi tuman, ko‘cha, uy yoki mo‘ljalni kiriting.");
+                return false;
+            }
+
+            hasPendingAddressSearch = false;
+
+            await MoveMapToAsync(
+                result.Latitude,
+                result.Longitude,
+                AddressMapRadiusKm,
+                result.Address);
+
+            return true;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Address search error: {ex.Message}");
+
+            await AlertService.ShowAlertAsync(
+                "Xatolik",
+                "Manzilni qidirib bo‘lmadi. Iltimos, qayta urinib ko‘ring.");
+
+            return false;
+        }
+        finally
+        {
+            IsBusy = false;
+        }
     }
 
     private double GetMapModeHeight()
@@ -220,17 +347,44 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
 
     private async void Map_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName != nameof(map.VisibleRegion))
-            return;
-
-        if (map.VisibleRegion == null)
+        if (e.PropertyName != nameof(map.VisibleRegion) || map.VisibleRegion == null)
             return;
 
         if (isUpdatingMapProgrammatically)
             return;
 
-        latitude = map.VisibleRegion.Center.Latitude;
-        longitude = map.VisibleRegion.Center.Longitude;
+        double centerLatitude = map.VisibleRegion.Center.Latitude;
+        double centerLongitude = map.VisibleRegion.Center.Longitude;
+        double radiusKm = map.VisibleRegion.Radius.Kilometers;
+
+        // Keep both panning and excessive zoom-out inside the intended service region.
+        if (!IsInsideQashqadaryo(centerLatitude, centerLongitude) || radiusKm > MaxMapRadiusKm)
+        {
+            double clampedLatitude = Math.Clamp(
+                centerLatitude,
+                QashqadaryoMinLatitude,
+                QashqadaryoMaxLatitude);
+
+            double clampedLongitude = Math.Clamp(
+                centerLongitude,
+                QashqadaryoMinLongitude,
+                QashqadaryoMaxLongitude);
+
+            double clampedRadiusKm = Math.Min(
+                Math.Max(radiusKm, AddressMapRadiusKm),
+                MaxMapRadiusKm);
+
+            await MoveMapOnlyAsync(
+                clampedLatitude,
+                clampedLongitude,
+                clampedRadiusKm);
+
+            centerLatitude = clampedLatitude;
+            centerLongitude = clampedLongitude;
+        }
+
+        latitude = centerLatitude;
+        longitude = centerLongitude;
 
         if (!isMapMoving)
         {
@@ -240,7 +394,6 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
 
         mapMoveCts?.Cancel();
         mapMoveCts = new CancellationTokenSource();
-
         var token = mapMoveCts.Token;
 
         try
@@ -250,14 +403,7 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
             isMapMoving = false;
             await CenterPin.TranslateTo(0, -45, 100, Easing.CubicOut);
 
-            IsBusy = true;
-            AddressText = await apiService.GetAddressFromYandexAsync(latitude, longitude);
-
-            isDeliveryAvailable = CheckDeliveryAvailability(latitude, longitude);
-
-            NoDeliveryLabel.IsVisible = !isDeliveryAvailable;
-            PickupButton.IsVisible = true;
-
+            await RefreshAddressForCoordinatesAsync(latitude, longitude);
             await ShowMapMode(true);
         }
         catch (TaskCanceledException)
@@ -267,17 +413,14 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         {
             Console.WriteLine(ex.Message);
         }
-        finally
-        {
-            IsBusy = false;
-        }
     }
-    //location_latitude
-    //location_longitude
+
     private async Task MoveToCurrentLocation()
     {
         try
         {
+            IsBusy = true;
+
             var request = new GeolocationRequest(
                 GeolocationAccuracy.High,
                 TimeSpan.FromSeconds(10));
@@ -285,50 +428,149 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
             var location = await Geolocation.GetLocationAsync(request);
 
             if (location == null)
+            {
+                await AlertService.ShowAlertAsync(
+                    "Joylashuv",
+                    "Joriy joylashuvni aniqlab bo‘lmadi.");
                 return;
+            }
 
-            latitude = location.Latitude;
-            longitude = location.Longitude;
+            if (!IsInsideQashqadaryo(location.Latitude, location.Longitude))
+            {
+                await AlertService.ShowAlertAsync(
+                    "Qashqadaryo hududi",
+                    "Hozircha manzil faqat Qashqadaryo viloyatida tanlanadi. Xarita Qashqadaryo hududida qoladi.");
+                return;
+            }
 
-            isUpdatingMapProgrammatically = true;
-
-            map.MoveToRegion(
-                MapSpan.FromCenterAndRadius(
-                    new Location(latitude, longitude),
-                    Distance.FromKilometers(1)));
-
-            await Task.Delay(500);
-
-            isUpdatingMapProgrammatically = false;
-
-            IsBusy = true;
-            AddressText = await apiService.GetAddressFromYandexAsync(latitude, longitude);
+            await MoveMapToAsync(
+                location.Latitude,
+                location.Longitude,
+                AddressMapRadiusKm);
+        }
+        catch (PermissionException)
+        {
+            await AlertService.ShowAlertAsync(
+                "Joylashuv ruxsati",
+                "Joriy joylashuvdan foydalanish uchun ilovaga joylashuv ruxsatini bering.");
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
 
             await AlertService.ShowAlertAsync(
-                "Location",
-                "Location not found");
+                "Joylashuv",
+                "Joriy joylashuvni aniqlab bo‘lmadi.");
         }
         finally
         {
             IsBusy = false;
+        }
+    }
+
+    private async Task MoveMapToAsync(
+        double targetLatitude,
+        double targetLongitude,
+        double radiusKm,
+        string? knownAddress = null)
+    {
+        if (!IsInsideQashqadaryo(targetLatitude, targetLongitude))
+        {
+            targetLatitude = ShahrisabzLatitude;
+            targetLongitude = ShahrisabzLongitude;
+            radiusKm = DefaultMapRadiusKm;
+            knownAddress = null;
+        }
+
+        latitude = targetLatitude;
+        longitude = targetLongitude;
+
+        await MoveMapOnlyAsync(targetLatitude, targetLongitude, radiusKm);
+
+        if (!string.IsNullOrWhiteSpace(knownAddress))
+        {
+            SetAddressTextFromMap(knownAddress);
+            UpdateDeliveryState();
+        }
+        else
+        {
+            await RefreshAddressForCoordinatesAsync(targetLatitude, targetLongitude);
+        }
+
+        await ShowMapMode(false);
+    }
+
+    private async Task MoveMapOnlyAsync(double targetLatitude, double targetLongitude, double radiusKm)
+    {
+        try
+        {
+            isUpdatingMapProgrammatically = true;
+
+            map.MoveToRegion(
+                MapSpan.FromCenterAndRadius(
+                    new Location(targetLatitude, targetLongitude),
+                    Distance.FromKilometers(Math.Min(radiusKm, MaxMapRadiusKm))));
+
+            await Task.Delay(350);
+        }
+        finally
+        {
             isUpdatingMapProgrammatically = false;
         }
     }
 
+    private async Task RefreshAddressForCoordinatesAsync(double targetLatitude, double targetLongitude)
+    {
+        try
+        {
+            IsBusy = true;
+
+            string resolvedAddress = await apiService.GetAddressFromYandexAsync(
+                targetLatitude,
+                targetLongitude);
+
+            if (!string.IsNullOrWhiteSpace(resolvedAddress))
+                SetAddressTextFromMap(resolvedAddress);
+
+            UpdateDeliveryState();
+        }
+        finally
+        {
+            IsBusy = false;
+        }
+    }
+
+    private void SetAddressTextFromMap(string value)
+    {
+        isSettingAddressTextProgrammatically = true;
+        AddressText = value;
+        hasPendingAddressSearch = false;
+        isSettingAddressTextProgrammatically = false;
+    }
+
+    private void UpdateDeliveryState()
+    {
+        isDeliveryAvailable = CheckDeliveryAvailability(latitude, longitude);
+        NoDeliveryLabel.IsVisible = !isDeliveryAvailable;
+        PickupButton.IsVisible = true;
+    }
+
+    private static bool IsInsideQashqadaryo(double lat, double lon)
+    {
+        return lat >= QashqadaryoMinLatitude &&
+               lat <= QashqadaryoMaxLatitude &&
+               lon >= QashqadaryoMinLongitude &&
+               lon <= QashqadaryoMaxLongitude;
+    }
+
     private bool CheckDeliveryAvailability(double lat, double lon)
     {
-        // Example coordinates for Shahrisabz area.
-        // You can later expand this territory.
-
-        double minLat = 39.0000;
-        double maxLat = 39.1500;
-
-        double minLon = 66.7500;
-        double maxLon = 66.9500;
+        // Current first delivery zone: Shahrisabz and its nearby area.
+        // The map itself can be explored throughout Qashqadaryo.
+        const double minLat = 39.0000;
+        const double maxLat = 39.1500;
+        const double minLon = 66.7500;
+        const double maxLon = 66.9500;
 
         return lat >= minLat &&
                lat <= maxLat &&
@@ -346,6 +588,14 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
 
     private async void PickupButton_Clicked(object sender, EventArgs e)
     {
+        if (string.IsNullOrWhiteSpace(AddressText))
+        {
+            await AlertService.ShowAlertAsync(
+                "Manzil",
+                "Iltimos, yetkazib berish manzilini tanlang.");
+            return;
+        }
+
         bool result = await DisplayAlert(
             "Manzilni tasdiqlash",
             "Bu haqiqiy yetkazib berish manzilimi?",
@@ -355,21 +605,36 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         if (!result)
             return;
 
-        /*MessagingCenter.Send(this, "SelectedAddress", new SelectedAddressModel
+        var selectedAddress = new SelectedAddressModel
         {
             Address = AddressText,
             Latitude = latitude,
             Longitude = longitude
-        });*/
+        };
 
-        WeakReferenceMessenger.Default.Send(
-            new SelectedAddressModel
+        var navigationData = AddressSelectionNavigationStore.Data;
+        AddressSelectionNavigationStore.UpdateSelection(
+            selectedAddress.Address,
+            selectedAddress.Latitude,
+            selectedAddress.Longitude);
+
+        if (navigationData?.Mode == AddressSelectionMode.Checkout)
+        {
+            var formalizationData = FormalizationNavigationStore.Data;
+
+            if (formalizationData != null)
             {
-                Address = AddressText,
-                Latitude = latitude,
-                Longitude = longitude
-            },
-            "SelectedAddress");
+                formalizationData.AddressText = selectedAddress.Address;
+                formalizationData.AddressLatitude = selectedAddress.Latitude;
+                formalizationData.AddressLongitude = selectedAddress.Longitude;
+            }
+        }
+        else
+        {
+            WeakReferenceMessenger.Default.Send(
+                selectedAddress,
+                "SelectedAddress");
+        }
 
         await AppNavigatorService.NavigateTo("..");
     }

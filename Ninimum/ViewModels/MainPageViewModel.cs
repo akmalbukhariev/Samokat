@@ -408,6 +408,8 @@ public partial class MainPageViewModel : ObservableObject
             {
                 UserId = appControl.CurrentUserId,
                 AddressText = appControl.userDto.address ?? string.Empty,
+                AddressLatitude = appControl.userDto.location_latitude,
+                AddressLongitude = appControl.userDto.location_longitude,
                 TariffSubscriptionId = activeTariffSubscriptionId,
                 Products = new List<FormalizationProductItem>
                 {

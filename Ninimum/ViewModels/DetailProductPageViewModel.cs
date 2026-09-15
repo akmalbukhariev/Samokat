@@ -514,6 +514,8 @@ public partial class DetailProductPageViewModel : ObservableObject
         {
             UserId = appControl.CurrentUserId,
             AddressText = appControl.userDto.address,
+            AddressLatitude = appControl.userDto.location_latitude,
+            AddressLongitude = appControl.userDto.location_longitude,
             TariffSubscriptionId = activeTariffSubscriptionId,
 
             Products = new List<FormalizationProductItem>

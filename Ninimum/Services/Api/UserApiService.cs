@@ -2,6 +2,7 @@
 using Models.Requests;
 using Models.Responses;
 using Newtonsoft.Json;
+using Ninimum.Models;
 using RestSharp;
 using Utils;
 
@@ -405,6 +406,78 @@ namespace Api.Services
             {
                 Console.WriteLine($"Yandex address error: {ex.Message}");
                 return string.Empty;
+            }
+        }
+
+        public async Task<SelectedAddressModel?> SearchAddressInQashqadaryoAsync(string query)
+        {
+            if (string.IsNullOrWhiteSpace(query))
+                return null;
+
+            try
+            {
+                const string apiKey = "bb9a670d-13db-4cec-8fc9-a03c8b2b4ece";
+                const string bbox = "64.10,37.85~67.85,39.70";
+
+                string trimmedQuery = query.Trim();
+                string lowerQuery = trimmedQuery.ToLowerInvariant();
+
+                bool alreadyHasRegionContext =
+                    lowerQuery.Contains("qashqadaryo") ||
+                    lowerQuery.Contains("kashkadarya") ||
+                    lowerQuery.Contains("uzbekistan");
+
+                string searchText = alreadyHasRegionContext
+                    ? trimmedQuery
+                    : $"{trimmedQuery}, Qashqadaryo, Uzbekistan";
+
+                string encodedSearchText = Uri.EscapeDataString(searchText);
+
+                var url =
+                    $"https://geocode-maps.yandex.ru/v1/?" +
+                    $"apikey={apiKey}" +
+                    $"&geocode={encodedSearchText}" +
+                    $"&bbox={bbox}" +
+                    $"&rspn=1" +
+                    $"&results=1" +
+                    $"&lang=en_US" +
+                    $"&format=json";
+
+                using var httpClient = new HttpClient();
+                var json = await httpClient.GetStringAsync(url);
+
+                dynamic? result = JsonConvert.DeserializeObject(json);
+                var featureMembers = result?.response?.GeoObjectCollection?.featureMember;
+
+                if (featureMembers == null || featureMembers.Count == 0)
+                    return null;
+
+                dynamic geoObject = featureMembers[0].GeoObject;
+                string position = geoObject.Point.pos;
+                string address = geoObject.metaDataProperty.GeocoderMetaData.text;
+
+                string[] parts = position.Split(
+                    ' ',
+                    StringSplitOptions.RemoveEmptyEntries);
+
+                if (parts.Length != 2 ||
+                    !double.TryParse(parts[0], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double longitude) ||
+                    !double.TryParse(parts[1], System.Globalization.NumberStyles.Float, System.Globalization.CultureInfo.InvariantCulture, out double latitude))
+                {
+                    return null;
+                }
+
+                return new SelectedAddressModel
+                {
+                    Address = address,
+                    Latitude = latitude,
+                    Longitude = longitude
+                };
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Yandex address search error: {ex.Message}");
+                return null;
             }
         }
 
