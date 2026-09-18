@@ -29,8 +29,8 @@ public partial class StartPage : BasePage
 
         OpenRegionPopupCommand = new Command(() =>
         {
-            RegionPopup.Refresh();
-            RegionPopup.IsVisible = true;
+            //RegionPopup.Refresh();
+            //RegionPopup.IsVisible = true;
         });
         OpenLanguagePopupCommand = new Command(() => LanguagePopup.IsVisible = true);
 
