@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Api.Services;
@@ -29,7 +30,7 @@ public partial class ProductReviewsViewModel : ObservableObject
     [ObservableProperty] private bool canWriteReview;
     [ObservableProperty] private bool canEditReview;
     [ObservableProperty] private bool canShowReviewAction;
-    [ObservableProperty] private string reviewActionText = "Sharh qoldirish";
+    [ObservableProperty] private string reviewActionText = AppResource.LeaveAReview;
     [ObservableProperty] private ReviewDto? existingReview;
     [ObservableProperty] private bool showReviewEligibilityMessage;
     [ObservableProperty] private string reviewEligibilityText = string.Empty;
@@ -100,7 +101,7 @@ public partial class ProductReviewsViewModel : ObservableObject
         }
     }
 
-    public string BuyerPhotosCountText => $"{BuyerPhotos?.Count ?? 0} ta";
+    public string BuyerPhotosCountText => string.Format(AppResource.PiecesCount, BuyerPhotos?.Count ?? 0);
 
     public bool IsNewestSelected
     {
@@ -243,14 +244,14 @@ public partial class ProductReviewsViewModel : ObservableObject
         CanWriteReview = false;
         CanEditReview = false;
         CanShowReviewAction = false;
-        ReviewActionText = "Sharh qoldirish";
+        ReviewActionText = AppResource.LeaveAReview;
         ExistingReview = null;
         EligibleOrderId = null;
         ShowReviewEligibilityMessage = true;
 
         if (!appControl.IsAuthenticated)
         {
-            ReviewEligibilityText = "Sharh qoldirish uchun akkauntingizga kiring.";
+            ReviewEligibilityText = AppResource.SignInToLeaveAReview;
             return;
         }
 
@@ -261,7 +262,7 @@ public partial class ProductReviewsViewModel : ObservableObject
 
         if (response.resultCode != ApiResult.SUCCESS.GetCodeToString() || response.resultData == null)
         {
-            ReviewEligibilityText = "Sharh qoldirish holatini tekshirib bo'lmadi.";
+            ReviewEligibilityText = AppResource.CouldNotCheckReviewEligibility;
             return;
         }
 
@@ -276,8 +277,8 @@ public partial class ProductReviewsViewModel : ObservableObject
             CanWriteReview = false;
             EligibleOrderId = ExistingReview!.order_id;
             CanShowReviewAction = true;
-            ReviewActionText = "Sharhni tahrirlash";
-            ReviewEligibilityText = "Siz ushbu mahsulot uchun sharh qoldirgansiz. Xohlasangiz uni tahrirlashingiz mumkin.";
+            ReviewActionText = AppResource.EditReview;
+            ReviewEligibilityText = AppResource.YouAlreadyLeftAReviewForThisProduct;
             return;
         }
 
@@ -287,15 +288,15 @@ public partial class ProductReviewsViewModel : ObservableObject
         if (CanWriteReview)
         {
             CanShowReviewAction = true;
-            ReviewActionText = "Sharh qoldirish";
-            ReviewEligibilityText = "Siz bu mahsulotni xarid qilgansiz. Tajribangizni boshqalar bilan ulashing.";
+            ReviewActionText = AppResource.LeaveAReview;
+            ReviewEligibilityText = AppResource.YouPurchasedThisProductShareYourExperienceWith;
             return;
         }
 
         if (!response.resultData.has_purchased)
-            ReviewEligibilityText = "Sharh qoldirish uchun ushbu mahsulotni kamida bir marta xarid qilgan bo'lishingiz kerak";
+            ReviewEligibilityText = AppResource.YouNeedToHavePurchasedThisProductAt;
         else
-            ReviewEligibilityText = "Hozircha sharh qoldirish mumkin emas.";
+            ReviewEligibilityText = AppResource.ReviewsCannotBeLeftAtTheMoment;
     }
 
     private async Task OnWriteReviewTapped()

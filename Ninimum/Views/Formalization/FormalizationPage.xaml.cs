@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using Api.Services;
@@ -41,7 +42,7 @@ public partial class FormalizationPage : BasePage
 
         if (data == null)
         {
-            DisplayAlert("Xatolik", "Buyurtma ma’lumotlari topilmadi.", "OK");
+            DisplayAlert(AppResource.Error, AppResource.OrderInformationWasNotFound_80654d, AppResource.Ok);
             return;
         }
 
@@ -84,7 +85,7 @@ public partial class FormalizationPage : BasePage
             loadingCard.IsVisible = true;
             loadingCard.IsRunning = true;
 
-            PaymentCardLabel.Text = "Kartalar yuklanmoqda...";
+            PaymentCardLabel.Text = AppResource.PaymentCardsLoading;
             
             PaymentCardListResponse response =
                 await apiService.GetPaymentCardList(
@@ -96,7 +97,7 @@ public partial class FormalizationPage : BasePage
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
                 selectedPaymentCard = null;
-                PaymentCardLabel.Text = "Karta ma’lumotlari olinmadi";
+                PaymentCardLabel.Text = AppResource.CouldNotLoadCardDetails;
                 return;
             }
 
@@ -107,7 +108,7 @@ public partial class FormalizationPage : BasePage
             if (cards.Count == 0)
             {
                 selectedPaymentCard = null;
-                PaymentCardLabel.Text = "Karta tanlanmagan";
+                PaymentCardLabel.Text = AppResource.NoCardSelected;
                 return;
             }
 
@@ -120,7 +121,7 @@ public partial class FormalizationPage : BasePage
         catch
         {
             selectedPaymentCard = null;
-            PaymentCardLabel.Text = "Karta ma’lumotlari olinmadi";
+            PaymentCardLabel.Text = AppResource.CouldNotLoadCardDetails;
         }
         finally
         {
@@ -155,8 +156,8 @@ public partial class FormalizationPage : BasePage
             : 0;
 
         ProductsToggleLabel.Text = productsExpanded
-            ? $"{Products.Count} ta mahsulot yopish"
-            : $"{Products.Count} ta mahsulot ko‘rish";
+            ? string.Format(AppResource.HideProducts, Products.Count)
+            : string.Format(AppResource.ViewProducts, Products.Count);
 
         ProductsToggleIcon.Source = productsExpanded
             ? "ic_arrow_up.png"
@@ -186,9 +187,9 @@ public partial class FormalizationPage : BasePage
                 if (data == null || data.Products == null || !data.Products.Any())
                 {
                     await Shell.Current.DisplayAlert(
-                        "Xatolik",
-                        "Buyurtma ma’lumotlari topilmadi.",
-                        "OK");
+                        AppResource.Error,
+                        AppResource.OrderInformationWasNotFound_80654d,
+                        AppResource.Ok);
 
                     return;
                 }
@@ -198,9 +199,9 @@ public partial class FormalizationPage : BasePage
                 if (totalPrice <= 0)
                 {
                     await Shell.Current.DisplayAlert(
-                        "Xatolik",
-                        "Buyurtma summasi noto'g'ri.",
-                        "OK");
+                        AppResource.Error,
+                        AppResource.TheOrderAmountIsInvalid,
+                        AppResource.Ok);
 
                     return;
                 }
@@ -246,9 +247,9 @@ public partial class FormalizationPage : BasePage
                 if (createOrderResponse.resultCode != ApiResult.SUCCESS.GetCodeToString())
                 {
                     await Shell.Current.DisplayAlert(
-                        "Xatolik",
-                        createOrderResponse.resultMsg ?? "Buyurtma yaratilmadi.",
-                        "OK");
+                        AppResource.Error,
+                        createOrderResponse.resultMsg ?? AppResource.OrderCouldNotBeCreated,
+                        AppResource.Ok);
 
                     return;
                 }
@@ -257,9 +258,9 @@ public partial class FormalizationPage : BasePage
                     createOrderResponse.resultData <= 0)
                 {
                     await Shell.Current.DisplayAlert(
-                        "Xatolik",
-                        "Buyurtma ID olinmadi.",
-                        "OK");
+                        AppResource.Error,
+                        AppResource.OrderIDWasNotReceived,
+                        AppResource.Ok);
 
                     return;
                 }
@@ -282,9 +283,9 @@ public partial class FormalizationPage : BasePage
                     await CancelUnpaidCheckoutOrderAsync(orderId);
 
                     await Shell.Current.DisplayAlert(
-                        "Xatolik",
-                        paymeResponse.resultMsg ?? "Payme URL yaratilmadi.",
-                        "OK");
+                        AppResource.Error,
+                        paymeResponse.resultMsg ?? AppResource.CouldNotGetThePaymePaymentURL,
+                        AppResource.Ok);
 
                     return;
                 }
@@ -295,9 +296,9 @@ public partial class FormalizationPage : BasePage
                     await CancelUnpaidCheckoutOrderAsync(orderId);
 
                     await Shell.Current.DisplayAlert(
-                        "Xatolik",
-                        "Payme to'lov manzili olinmadi.",
-                        "OK");
+                        AppResource.Error,
+                        AppResource.CouldNotGetThePaymePaymentURL,
+                        AppResource.Ok);
 
                     return;
                 }
@@ -338,7 +339,7 @@ public partial class FormalizationPage : BasePage
             {
                 orderId = orderId,
                 userId = appControl.CurrentUserId,
-                reason = "Payme to'lov sahifasini ochib bo'lmadi"
+                reason = AppResource.CouldNotOpenThePaymePaymentPage
             });
         }
         catch (Exception ex)
@@ -369,15 +370,15 @@ public partial class FormalizationPage : BasePage
         int productsPrice = GetProductsPrice();
         int total = productsPrice + DeliveryPrice;
 
-        ProductsCountLabel.Text = $"{Products.Count} ta";
+        ProductsCountLabel.Text = string.Format(AppResource.PiecesCount, Products.Count);
         ProductsPriceLabel.Text = FormatSom(productsPrice);
-        DeliveryPriceLabel.Text = DeliveryPrice == 0 ? "Bepul" : FormatSom(DeliveryPrice);
+        DeliveryPriceLabel.Text = DeliveryPrice == 0 ? AppResource.Free : FormatSom(DeliveryPrice);
         TotalPriceLabel.Text = FormatSom(total);
     }
 
     private static string FormatSom(int amount)
     {
-        return string.Format("{0:N0} so’m", amount).Replace(",", " ");
+        return string.Format(AppResource.UZS_02854f, amount).Replace(",", " ");
     }
 }
 

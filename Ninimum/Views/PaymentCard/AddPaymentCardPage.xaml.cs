@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -148,19 +149,19 @@ public partial class AddPaymentCardPage : BasePage, INotifyPropertyChanged
 
             if (cleanCardNumber.Length != 16)
             {
-                await DisplayAlert("Xatolik", "Karta raqamini to‘liq kiriting.", "OK");
+                await DisplayAlert(AppResource.Error, AppResource.EnterTheFullCardNumber, AppResource.Ok);
                 return;
             }
 
             if (!int.TryParse(ExpireMonth, out int expiryMonth) ||  expiryMonth < 1 || expiryMonth > 12)
             {
-                await DisplayAlert("Xatolik", "Amal qilish oyini to‘g‘ri kiriting.", "OK");
+                await DisplayAlert(AppResource.Error, AppResource.EnterAValidExpiryMonth, AppResource.Ok);
                 return;
             }
 
             if (!int.TryParse(ExpireYear, out int expiryYear))
             {
-                await DisplayAlert("Xatolik", "Amal qilish yilini to‘g‘ri kiriting.", "OK");
+                await DisplayAlert(AppResource.Error, AppResource.EnterAValidExpiryYear, AppResource.Ok);
                 return;
             }
 
@@ -190,18 +191,18 @@ public partial class AddPaymentCardPage : BasePage, INotifyPropertyChanged
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
-                await DisplayAlert("Xatolik", response.resultMsg, "OK");
+                await DisplayAlert(AppResource.Error, response.resultMsg, AppResource.Ok);
                 return;
             }
 
-            await DisplayAlert("Muvaffaqiyatli", "Karta saqlandi.", "OK");
+            await DisplayAlert(AppResource.Success, AppResource.CardSaved, AppResource.Ok);
 
             PaymentCardPage.NeedRefreshCards = true;
             await AppNavigatorService.NavigateTo("..");
         }
         catch
         {
-            await DisplayAlert("Xatolik", "Kartani saqlab bo‘lmadi.", "OK");
+            await DisplayAlert(AppResource.Error, AppResource.CouldNotSaveTheCard, AppResource.Ok);
         }
         finally
         { 

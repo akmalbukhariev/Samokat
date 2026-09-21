@@ -2,9 +2,12 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.ChangePhoneNumber.ChangePhoneNumberPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     x:Name="ThisPage"
     BackgroundColor="White">
 
@@ -12,14 +15,14 @@
 
         <components:PageHeaderView
             Grid.Row="0"
-            Title="Telefon raqamini o‘zgartirish" />
+            Title="{x:Static language:AppResource.ChangePhoneNumber}" />
 
         <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
             <VerticalStackLayout Padding="20,24,20,24" Spacing="24">
 
                 <VerticalStackLayout Spacing="4">
                     <Label
-                        Text="Sizning amaldagi telefon raqamingiz"
+                        Text="{x:Static language:AppResource.YourCurrentPhoneNumber}"
                         FontFamily="{StaticResource FontSFRegular}"
                         FontSize="17"
                         TextColor="#96979B" />
@@ -32,7 +35,7 @@
                 </VerticalStackLayout>
 
                 <Label
-                    Text="Yangi telefon raqamingizni kiriting. Yangi raqam SMS kod orqali tasdiqlanadi."
+                    Text="{x:Static language:AppResource.EnterYourNewPhoneNumberTheNewNumber}"
                     FontFamily="{StaticResource FontSFRegular}"
                     FontSize="17"
                     TextColor="#22292F"
@@ -44,14 +47,14 @@
                     StrokeThickness="0"
                     StrokeShape="RoundRectangle 8">
                     <Label
-                        Text="Diqqat! Tasdiqlash tugagach, xavfsizlik uchun akkauntga yangi raqam bilan qayta kirishingiz kerak."
+                        Text="{x:Static language:AppResource.AttentionAfterVerificationYouWillNeedToSign}"
                         FontFamily="{StaticResource FontSFRegular}"
                         FontSize="13"
                         TextColor="#EA1111" />
                 </Border>
 
                 <components:InputView
-                    Title="Yangi telefon raqam"
+                    Title="{x:Static language:AppResource.NewPhoneNumber}"
                     Placeholder="90 123 45 67"
                     LeftIcon="ic_phone.png"
                     Keyboard="Telephone"
@@ -71,7 +74,7 @@
 
                     <Label
                         Grid.Column="1"
-                        Text="Kiritilgan telefon raqam menga tegishli ekanini tasdiqlayman"
+                        Text="{x:Static language:AppResource.IConfirmThatTheEnteredPhoneNumberBelongs}"
                         FontFamily="{StaticResource FontSFRegular}"
                         FontSize="16"
                         TextColor="#22292F"
@@ -83,7 +86,7 @@
 
         <Button
             Grid.Row="2"
-            Text="Davom etish"
+            Text="{x:Static language:AppResource.Continue}"
             HeightRequest="56"
             CornerRadius="8"
             Margin="15,0,15,24"

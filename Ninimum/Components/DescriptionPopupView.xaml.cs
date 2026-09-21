@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 namespace Ninimum.Components;
 
 public partial class DescriptionPopupView : ContentView
@@ -10,7 +11,7 @@ public partial class DescriptionPopupView : ContentView
             nameof(Title),
             typeof(string),
             typeof(DescriptionPopupView),
-            "Tavsiflar");
+            AppResource.Description);
 
     public static readonly BindableProperty DescriptionProperty =
         BindableProperty.Create(

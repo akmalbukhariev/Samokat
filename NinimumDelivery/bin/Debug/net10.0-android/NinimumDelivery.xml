@@ -1,0 +1,590 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>NinimumDelivery</name>
+    </assembly>
+    <members>
+        <member name="T:NinimumDelivery.Resources.Languages.AppResource">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Accept">
+            <summary>
+              Looks up a localized string similar to Accept.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Accepted">
+            <summary>
+              Looks up a localized string similar to Accepted.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.ActionFailed">
+            <summary>
+              Looks up a localized string similar to The action could not be completed. Please try again..
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Active">
+            <summary>
+              Looks up a localized string similar to In progress.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Address">
+            <summary>
+              Looks up a localized string similar to Address.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Availability">
+            <summary>
+              Looks up a localized string similar to Availability.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Available">
+            <summary>
+              Looks up a localized string similar to Available.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.AvailableOrders">
+            <summary>
+              Looks up a localized string similar to Available deliveries.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Back">
+            <summary>
+              Looks up a localized string similar to Back.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.CallCustomer">
+            <summary>
+              Looks up a localized string similar to Call customer.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Cancelled">
+            <summary>
+              Looks up a localized string similar to Cancelled.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.CannotDeliver">
+            <summary>
+              Looks up a localized string similar to Could not deliver.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.ClaimConfirmMessage">
+            <summary>
+              Looks up a localized string similar to After accepting, the customer phone number will become visible and this delivery will be assigned to you..
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.ClaimConfirmTitle">
+            <summary>
+              Looks up a localized string similar to Accept this delivery?.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.ClaimDelivery">
+            <summary>
+              Looks up a localized string similar to Accept delivery.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Close">
+            <summary>
+              Looks up a localized string similar to Close.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.CompletedToday">
+            <summary>
+              Looks up a localized string similar to Completed today.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Confirm">
+            <summary>
+              Looks up a localized string similar to Confirm.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.ConnectionError">
+            <summary>
+              Looks up a localized string similar to Could not connect to Ninimum server..
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Customer">
+            <summary>
+              Looks up a localized string similar to Customer.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Delivered">
+            <summary>
+              Looks up a localized string similar to Delivered.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Deliveries">
+            <summary>
+              Looks up a localized string similar to Deliveries.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.DeliveryCompletedConfirmMessage">
+            <summary>
+              Looks up a localized string similar to Confirm only after the order has been handed to the customer..
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.DeliveryCompletedConfirmTitle">
+            <summary>
+              Looks up a localized string similar to Confirm delivery.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.DeliveryDetail">
+            <summary>
+              Looks up a localized string similar to Delivery detail.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.DeliveryFailedMessage">
+            <summary>
+              Looks up a localized string similar to Mark this delivery as not delivered? The admin can review it and arrange another attempt..
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.DeliveryFailedTitle">
+            <summary>
+              Looks up a localized string similar to Delivery problem.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.English">
+            <summary>
+              Looks up a localized string similar to English.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Error">
+            <summary>
+              Looks up a localized string similar to Error.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Failed">
+            <summary>
+              Looks up a localized string similar to Not delivered.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Hello">
+            <summary>
+              Looks up a localized string similar to Hello, {0}.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.History">
+            <summary>
+              Looks up a localized string similar to History.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Language">
+            <summary>
+              Looks up a localized string similar to Language.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Login">
+            <summary>
+              Looks up a localized string similar to Sign in.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.LoginFailed">
+            <summary>
+              Looks up a localized string similar to Courier ID or password is incorrect..
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.LoginSubtitle">
+            <summary>
+              Looks up a localized string similar to Sign in with the courier ID and password provided by Ninimum..
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.LoginTitle">
+            <summary>
+              Looks up a localized string similar to Courier login.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Logout">
+            <summary>
+              Looks up a localized string similar to Log out.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.LogoutConfirmMessage">
+            <summary>
+              Looks up a localized string similar to You will need to sign in again to continue delivering orders..
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.LogoutConfirmTitle">
+            <summary>
+              Looks up a localized string similar to Log out?.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.MarkDelivered">
+            <summary>
+              Looks up a localized string similar to Mark as delivered.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.MyDeliveries">
+            <summary>
+              Looks up a localized string similar to My active deliveries.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.No">
+            <summary>
+              Looks up a localized string similar to No.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.NoActiveOrders">
+            <summary>
+              Looks up a localized string similar to You have no active deliveries..
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.NoAvailableOrders">
+            <summary>
+              Looks up a localized string similar to No available deliveries right now..
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.NoHistory">
+            <summary>
+              Looks up a localized string similar to Delivery history is empty..
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.NotAssignedPhone">
+            <summary>
+              Looks up a localized string similar to Available after accepting the delivery.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Offline">
+            <summary>
+              Looks up a localized string similar to Offline.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.OK">
+            <summary>
+              Looks up a localized string similar to OK.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Online">
+            <summary>
+              Looks up a localized string similar to Online.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.OnTheWay">
+            <summary>
+              Looks up a localized string similar to On the way.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.OpenMap">
+            <summary>
+              Looks up a localized string similar to Open map.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Order">
+            <summary>
+              Looks up a localized string similar to Order.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Password">
+            <summary>
+              Looks up a localized string similar to Password.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.PaymentPaid">
+            <summary>
+              Looks up a localized string similar to Paid.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Phone">
+            <summary>
+              Looks up a localized string similar to Phone.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Products">
+            <summary>
+              Looks up a localized string similar to Products.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.ProductsCount">
+            <summary>
+              Looks up a localized string similar to {0} products.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Profile">
+            <summary>
+              Looks up a localized string similar to Profile.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Refresh">
+            <summary>
+              Looks up a localized string similar to Refresh.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Russian">
+            <summary>
+              Looks up a localized string similar to Русский.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.StartDelivery">
+            <summary>
+              Looks up a localized string similar to Start delivery.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.StatusUpdated">
+            <summary>
+              Looks up a localized string similar to Delivery status updated..
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.TodaySummary">
+            <summary>
+              Looks up a localized string similar to Today.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Total">
+            <summary>
+              Looks up a localized string similar to Total.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Uzbek">
+            <summary>
+              Looks up a localized string similar to O‘zbekcha.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Vehicle">
+            <summary>
+              Looks up a localized string similar to Vehicle.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.View">
+            <summary>
+              Looks up a localized string similar to View.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Waiting">
+            <summary>
+              Looks up a localized string similar to Waiting.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.WorkerId">
+            <summary>
+              Looks up a localized string similar to Courier ID.
+            </summary>
+        </member>
+        <member name="P:NinimumDelivery.Resources.Languages.AppResource.Yes">
+            <summary>
+              Looks up a localized string similar to Yes.
+            </summary>
+        </member>
+        <member name="M:NinimumDelivery.Services.AppState.RestoreSavedSession">
+            <summary>
+            Restores the locally saved session without making any network request.
+            This keeps app startup instant and prevents the native splash screen from
+            waiting for the backend/network.
+            </summary>
+        </member>
+        <member name="T:NinimumDelivery.ViewModels.DeliveriesViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.DeliveriesViewModel.Dashboard">
+            <inheritdoc cref="F:NinimumDelivery.ViewModels.DeliveriesViewModel.dashboard"/>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.DeliveriesViewModel.IsLoading">
+            <inheritdoc cref="F:NinimumDelivery.ViewModels.DeliveriesViewModel.isLoading"/>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.DeliveriesViewModel.loadCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.DeliveriesViewModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.DeliveriesViewModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.DeliveriesViewModel.Load"/>.</summary>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.DeliveriesViewModel.openCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.DeliveriesViewModel.OpenCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.DeliveriesViewModel.OpenCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.DeliveriesViewModel.Open(NinimumDelivery.Models.DeliveryJob)"/>.</summary>
+        </member>
+        <member name="T:NinimumDelivery.ViewModels.DeliveryDetailViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.Job">
+            <inheritdoc cref="F:NinimumDelivery.ViewModels.DeliveryDetailViewModel.job"/>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.IsLoading">
+            <inheritdoc cref="F:NinimumDelivery.ViewModels.DeliveryDetailViewModel.isLoading"/>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.DeliveryDetailViewModel.claimCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.ClaimCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.ClaimCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.DeliveryDetailViewModel.Claim"/>.</summary>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.DeliveryDetailViewModel.startDeliveryCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.StartDeliveryCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.StartDeliveryCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.DeliveryDetailViewModel.StartDelivery"/>.</summary>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.DeliveryDetailViewModel.completeCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.CompleteCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.CompleteCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.DeliveryDetailViewModel.Complete"/>.</summary>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.DeliveryDetailViewModel.failCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.FailCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.FailCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.DeliveryDetailViewModel.Fail"/>.</summary>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.DeliveryDetailViewModel.callCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.CallCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.CallCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.DeliveryDetailViewModel.Call"/>.</summary>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.DeliveryDetailViewModel.mapCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.MapCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.MapCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.DeliveryDetailViewModel.Map"/>.</summary>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.DeliveryDetailViewModel.backCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.BackCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.DeliveryDetailViewModel.BackCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.DeliveryDetailViewModel.Back"/>.</summary>
+        </member>
+        <member name="T:NinimumDelivery.ViewModels.HistoryViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.HistoryViewModel.IsLoading">
+            <inheritdoc cref="F:NinimumDelivery.ViewModels.HistoryViewModel.isLoading"/>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.HistoryViewModel.loadCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.HistoryViewModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.HistoryViewModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.HistoryViewModel.Load"/>.</summary>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.HistoryViewModel.openCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.HistoryViewModel.OpenCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.HistoryViewModel.OpenCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand`1"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.HistoryViewModel.Open(NinimumDelivery.Models.DeliveryJob)"/>.</summary>
+        </member>
+        <member name="T:NinimumDelivery.ViewModels.LoginViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.LoginViewModel.WorkerId">
+            <inheritdoc cref="F:NinimumDelivery.ViewModels.LoginViewModel.workerId"/>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.LoginViewModel.Password">
+            <inheritdoc cref="F:NinimumDelivery.ViewModels.LoginViewModel.password"/>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.LoginViewModel.IsLoading">
+            <inheritdoc cref="F:NinimumDelivery.ViewModels.LoginViewModel.isLoading"/>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.LoginViewModel.loginCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.LoginViewModel.LoginCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.LoginViewModel.LoginCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.LoginViewModel.Login"/>.</summary>
+        </member>
+        <member name="T:NinimumDelivery.ViewModels.ProfileViewModel">
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+            <inheritdoc/>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.ProfileViewModel.Worker">
+            <inheritdoc cref="F:NinimumDelivery.ViewModels.ProfileViewModel.worker"/>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.ProfileViewModel.IsLoading">
+            <inheritdoc cref="F:NinimumDelivery.ViewModels.ProfileViewModel.isLoading"/>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.ProfileViewModel.loadCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.ProfileViewModel.LoadCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.ProfileViewModel.LoadCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.ProfileViewModel.Load"/>.</summary>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.ProfileViewModel.logoutCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.ProfileViewModel.LogoutCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.ProfileViewModel.LogoutCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IAsyncRelayCommand"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.ProfileViewModel.Logout"/>.</summary>
+        </member>
+        <member name="F:NinimumDelivery.ViewModels.ProfileViewModel.setLanguageCommand">
+            <summary>The backing field for <see cref="P:NinimumDelivery.ViewModels.ProfileViewModel.SetLanguageCommand"/>.</summary>
+        </member>
+        <member name="P:NinimumDelivery.ViewModels.ProfileViewModel.SetLanguageCommand">
+            <summary>Gets an <see cref="T:CommunityToolkit.Mvvm.Input.IRelayCommand`1"/> instance wrapping <see cref="M:NinimumDelivery.ViewModels.ProfileViewModel.SetLanguage(System.String)"/>.</summary>
+        </member>
+        <member name="T:NinimumDelivery.Resource">
+            <summary>
+            Android Resource Designer class.
+            Exposes the Android Resource designer assembly into the project Namespace.
+            </summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Dashboard">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Dashboard" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.IsLoading">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "IsLoading" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Job">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Job" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.WorkerId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "WorkerId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Password">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Password" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangingArgs.Worker">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangingEventArgs"/> instance for all "Worker" generated properties.</summary>
+        </member>
+        <member name="T:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs">
+            <summary>
+            A helper type providing cached, reusable <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instances
+            for all properties generated with <see cref="T:CommunityToolkit.Mvvm.ComponentModel.ObservablePropertyAttribute"/>.
+            </summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Dashboard">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Dashboard" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.IsLoading">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "IsLoading" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Job">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Job" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.WorkerId">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "WorkerId" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Password">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Password" generated properties.</summary>
+        </member>
+        <member name="F:CommunityToolkit.Mvvm.ComponentModel.__Internals.__KnownINotifyPropertyChangedArgs.Worker">
+            <summary>The cached <see cref="T:System.ComponentModel.PropertyChangedEventArgs"/> instance for all "Worker" generated properties.</summary>
+        </member>
+    </members>
+</doc>

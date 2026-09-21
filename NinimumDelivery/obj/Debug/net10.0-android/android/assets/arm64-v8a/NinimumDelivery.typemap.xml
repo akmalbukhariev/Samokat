@@ -1,0 +1,10 @@
+<api type="debug" assembly-name="NinimumDelivery" mvid="769949e51378435b86ac049ed6c157a1">
+  <java-to-managed>
+    <entry java-name="crc64c8f33831ecf637da/MainActivity" managed-name="NinimumDelivery.MainActivity, NinimumDelivery" managed-type-token-id="33554447" />
+    <entry java-name="crc64c8f33831ecf637da/MainApplication" managed-name="NinimumDelivery.MainApplication, NinimumDelivery" managed-type-token-id="33554448" />
+  </java-to-managed>
+  <managed-to-java>
+    <entry java-name="crc64c8f33831ecf637da/MainActivity" managed-name="NinimumDelivery.MainActivity, NinimumDelivery" managed-type-token-id="33554447" />
+    <entry java-name="crc64c8f33831ecf637da/MainApplication" managed-name="NinimumDelivery.MainApplication, NinimumDelivery" managed-type-token-id="33554448" />
+  </managed-to-java>
+</api>

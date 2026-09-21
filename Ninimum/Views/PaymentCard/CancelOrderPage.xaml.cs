@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using Api.Services;
 using Models.Requests;
 using Ninimum.Services;
@@ -101,13 +102,13 @@ public partial class CancelOrderPage : BasePage, INotifyPropertyChanged, IQueryA
     {
         if (orderId <= 0)
         {
-            await DisplayAlert("Xatolik", "Buyurtma ma’lumoti topilmadi.", "OK");
+            await DisplayAlert(AppResource.Error, AppResource.OrderInformationWasNotFound, AppResource.Ok);
             return;
         }
 
         if (string.IsNullOrWhiteSpace(CancelReason))
         {
-            await DisplayAlert("Xatolik", "Iltimos, bekor qilish sababini yozing.", "OK");
+            await DisplayAlert(AppResource.Error, AppResource.PleaseEnterTheCancellationReason, AppResource.Ok);
             return;
         }
 
@@ -133,7 +134,7 @@ public partial class CancelOrderPage : BasePage, INotifyPropertyChanged, IQueryA
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
                 CancelOrderPopup.IsVisible = false;
-                await DisplayAlert("Xatolik", response.resultMsg ?? "Buyurtmani bekor qilib bo‘lmadi.", "OK");
+                await DisplayAlert(AppResource.Error, response.resultMsg ?? AppResource.CouldNotCancelTheOrder, AppResource.Ok);
                 return;
             }
 
@@ -143,7 +144,7 @@ public partial class CancelOrderPage : BasePage, INotifyPropertyChanged, IQueryA
         catch (Exception ex)
         {
             CancelOrderPopup.IsVisible = false;
-            await DisplayAlert("Xatolik", $"Buyurtmani bekor qilib bo‘lmadi.\n{ex.Message}", "OK");
+            await DisplayAlert(AppResource.Error, string.Format(AppResource.CouldNotCancelTheOrder_f52d7e, ex.Message), AppResource.Ok);
         }
         finally
         {

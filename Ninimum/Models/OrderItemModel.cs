@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System.Collections.ObjectModel;
 
@@ -19,12 +20,12 @@ public partial class OrderItemModel : ObservableObject
         {
             return Status?.ToUpperInvariant() switch
             {
-                "PENDING" => "Buyurtma qabul qilindi",
-                "CONFIRMED" => "Buyurtma tasdiqlandi",
-                "PREPARING" => "Yig'ish jarayonida",
-                "ON_THE_WAY" => "Yetkazib berilmoqda",
-                "DELIVERED" => "Yetkazib berildi",
-                "CANCELLED" => "Buyurtma bekor qilindi",
+                "PENDING" => AppResource.OrderReceived,
+                "CONFIRMED" => AppResource.OrderConfirmed,
+                "PREPARING" => AppResource.BeingPrepared,
+                "ON_THE_WAY" => AppResource.OutForDelivery,
+                "DELIVERED" => AppResource.Delivered,
+                "CANCELLED" => AppResource.OrderCancelled,
                 _ => ""
             };
         }

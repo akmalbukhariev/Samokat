@@ -11,6 +11,7 @@ using Ninimum.Views.Orders;
 using Ninimum.Views.MyTariff;
 using Utils;
 using Ninimum.Views.PaymentCard;
+using Ninimum.Resources.Languages;
 
 namespace Ninimum.Views.Profile;
 
@@ -39,7 +40,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 
     private bool _isSettingsExpanded = true;
     private string _selectedLanguageFlag = "flag_uz.png";
-    private string _currentTariffName = "Tarif yo‘q";
+    private string _currentTariffName = AppResource.NoTariff;
     private bool _isProfileBusy;
     private string _selectedRegionName = "Qashqadaryo";
     private bool _isRegionUpdating;
@@ -210,9 +211,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         PrepareLanguageItems();
 
         BindingContext = this;
-
-        Shell.SetTabBarIsVisible(this, true);
-    }
+}
 
     protected override async void OnAppearing()
     {
@@ -264,7 +263,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     {
         await RunProfileActionAsync(async () =>
         {
-            await DisplayAlert("Clicked", "Sharh", "OK");
+            await DisplayAlert(AppResource.Information, AppResource.Reviews, AppResource.Ok);
             // await Navigation.PushAsync(new ReviewsPage());
         });
     }
@@ -282,7 +281,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         await RunProfileActionAsync(async () =>
         {
             AppVibrationService.Like();
-            await DisplayAlert("Clicked", "Yozishma", "OK");
+            await DisplayAlert(AppResource.Information, AppResource.Messages, AppResource.Ok);
             // await Navigation.PushAsync(new ChatListPage());
         });
     }
@@ -291,7 +290,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     {
         await RunProfileActionAsync(async () =>
         {
-            await DisplayAlert("Clicked", "Xabarnoma", "OK");
+            await DisplayAlert(AppResource.Information, AppResource.Notifications, AppResource.Ok);
             // await Navigation.PushAsync(new NotificationPage());
         });
     }
@@ -341,9 +340,9 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
                 await DisplayAlert(
-                    "Xatolik",
-                    "Regionni o‘zgartirib bo‘lmadi. Iltimos, qayta urinib ko‘ring.",
-                    "Yopish");
+                    AppResource.Error,
+                    AppResource.CouldNotChangeTheRegionPleaseTryAgain,
+                    AppResource.Close);
                 return;
             }
 
@@ -360,9 +359,9 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
             System.Diagnostics.Debug.WriteLine($"[ERROR] ChangeRegion => {ex}");
 
             await DisplayAlert(
-                "Xatolik",
-                "Regionni o‘zgartirib bo‘lmadi. Iltimos, qayta urinib ko‘ring.",
-                "Yopish");
+                AppResource.Error,
+                AppResource.CouldNotChangeTheRegionPleaseTryAgain,
+                AppResource.Close);
         }
         finally
         {
@@ -394,6 +393,10 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         LanguagePopup.Refresh();
         LanguagePopup.IsVisible = false;
         appControl.ShowTabBar(true);
+
+        // x:Static resources are evaluated when pages are created. Recreate the shell
+        // so every visible page/tab is immediately rebuilt in the selected language.
+        appControl.SetRootPage(new AppShell());
     }
 
     private void PrepareLanguageItems()
@@ -401,17 +404,16 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         if (LanguageItems.Count > 0)
             return;
 
-        LanguageItems.Add(new PopupItemModel { Id = 1, Text = "O‘zbek", LeftImage = AppConstants.LAN_ICON_UZBEK });
-        LanguageItems.Add(new PopupItemModel { Id = 2, Text = "Русский", LeftImage = AppConstants.LAN_ICON_RUSSIAN });
-        LanguageItems.Add(new PopupItemModel { Id = 3, Text = "English", LeftImage = AppConstants.LAN_ICON_ENGLISH });
+        LanguageItems.Add(new PopupItemModel { Id = 1, Code = AppConstants.UZ, Text = AppConstants.LAN_UZBEK, LeftImage = AppConstants.LAN_ICON_UZBEK });
+        LanguageItems.Add(new PopupItemModel { Id = 2, Code = AppConstants.RU, Text = AppConstants.LAN_RUSSIAN, LeftImage = AppConstants.LAN_ICON_RUSSIAN });
+        LanguageItems.Add(new PopupItemModel { Id = 3, Code = AppConstants.EN, Text = AppConstants.LAN_ENGLISH, LeftImage = AppConstants.LAN_ICON_ENGLISH });
 
         RefreshLanguageSelection(languageService.GetCurrentLanguage());
     }
 
     private void ApplyLanguageSelection(string cultureCode, bool persist)
     {
-        // Translation resources can be connected here later. For now this method
-        // stores the selected culture and updates the profile language indicator.
+        // Persist the culture through LanguageService and update the profile language indicator.
         if (persist)
             languageService.SetCulture(cultureCode);
 
@@ -442,12 +444,11 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     private void OnLanguageChanged(string cultureCode)
     {
         System.Diagnostics.Debug.WriteLine($"LANGUAGE CHANGED => {cultureCode}");
-        // Add resource refresh/reload logic here when translation files are ready.
     }
 
     private async void OnThemeClicked()
     {
-        await RunProfileActionAsync(() => DisplayAlert("Clicked", "Ko’rinish rejimi", "OK"));
+        await RunProfileActionAsync(() => DisplayAlert(AppResource.Information, AppResource.Appearance, AppResource.Ok));
     }
 
     private async void OnChangePhoneClicked()
@@ -492,17 +493,17 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
                 subscription != null &&
                 string.Equals(subscription.subscriptionStatus, "ACTIVE", StringComparison.OrdinalIgnoreCase);
 
-            CurrentTariffName = isActive ? subscription!.tariffName : "Tarif yo‘q";
+            CurrentTariffName = isActive ? subscription!.tariffName : AppResource.NoTariff;
         }
         catch
         {
-            CurrentTariffName = "Tarif yo‘q";
+            CurrentTariffName = AppResource.NoTariff;
         }
     }
 
     private async void OnChildrenClicked()
     {
-        await RunProfileActionAsync(() => DisplayAlert("Clicked", "Farzandlarim", "OK"));
+        await RunProfileActionAsync(() => DisplayAlert(AppResource.Information, AppResource.MyChildren, AppResource.Ok));
     }
 
     private async void OnDeleteAccountClicked()

@@ -2,6 +2,7 @@
 <ContentView
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.Search.SearchFilterBottomSheet"
     x:Name="ThisView"
@@ -55,7 +56,7 @@
 
                     <!-- Narx -->
                     <Label
-                        Text="Narx"
+                        Text="{x:Static language:AppResource.Price_c09bde}"
                         FontSize="22"
                         FontFamily="{StaticResource FontSFBold}"
                         TextColor="#22292F"
@@ -91,7 +92,7 @@
 
                                 <Label
                                     Grid.Column="1"
-                                    Text="dan"
+                                    Text="{x:Static language:AppResource.From}"
                                     TextColor="#96979B"
                                     FontSize="13"
                                     FontFamily="{StaticResource FontSFMedium}"
@@ -126,7 +127,7 @@
 
                                 <Label
                                     Grid.Column="1"
-                                    Text="gacha"
+                                    Text="{x:Static language:AppResource.To}"
                                     TextColor="#96979B"
                                     FontSize="13"
                                     FontFamily="{StaticResource FontSFMedium}"
@@ -139,7 +140,7 @@
 
                     <!-- Saralash -->
                     <Label
-                        Text="Saralash"
+                        Text="{x:Static language:AppResource.Sort}"
                         FontSize="22"
                         FontFamily="{StaticResource FontSFBold}"
                         TextColor="#22292F"
@@ -150,7 +151,7 @@
                     <VerticalStackLayout Spacing="24">
 
                         <components:CustomRadioButtonView
-                            Text="Avval narxi arzonlar"
+                            Text="{x:Static language:AppResource.LowestPriceFirst}"
                             FontSize="17"
                             FontFamily="{StaticResource FontSFRegular}"
                             IsSelected="{Binding IsSortCheapFirst}"
@@ -161,7 +162,7 @@
                             TextColor="#22292F" />
 
                         <components:CustomRadioButtonView
-                            Text="Avval narxi qimmati"
+                            Text="{x:Static language:AppResource.HighestPriceFirst}"
                             FontSize="17"
                             FontFamily="{StaticResource FontSFRegular}"
                             IsSelected="{Binding IsSortExpensiveFirst}"
@@ -172,7 +173,7 @@
                             TextColor="#22292F" />
 
                         <components:CustomRadioButtonView
-                            Text="Avval yangilari"
+                            Text="{x:Static language:AppResource.NewestFirst}"
                             FontSize="17"
                             FontFamily="{StaticResource FontSFRegular}"
                             IsSelected="{Binding IsSortNewestFirst}"
@@ -183,7 +184,7 @@
                             TextColor="#22292F" />
 
                         <components:CustomRadioButtonView
-                            Text="Avval eskilari"
+                            Text="{x:Static language:AppResource.OldestFirst}"
                             FontSize="17"
                             FontFamily="{StaticResource FontSFRegular}"
                             IsSelected="{Binding IsSortOldestFirst}"
@@ -199,7 +200,7 @@
                 <Grid Grid.Row="6" Margin="0,24,0,0">
                     <components:CustomActionButton
                         x:Name="btnConfirmCode"
-                        ButtonText="Filtrlash"
+                        ButtonText="{x:Static language:AppResource.Filter}"
                         ButtonBackgroundColor="#FD473C"
                         ButtonTextColor="White"
                         TapCommand="{Binding ApplyFilterCommand}" />

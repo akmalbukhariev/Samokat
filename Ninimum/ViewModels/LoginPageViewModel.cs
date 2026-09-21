@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Models.Requests;
@@ -61,13 +62,13 @@ public partial class LoginPageViewModel : ObservableObject
         {
             if (string.IsNullOrWhiteSpace(PhoneNumber))
             {
-                await AlertService.ShowAlertAsync("Info", "Telefon raqamni kiriting");
+                await AlertService.ShowAlertAsync(AppResource.Information, AppResource.EnterPhoneNumber);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(Password))
             {
-                await AlertService.ShowAlertAsync("Info", "Parolni kiriting");
+                await AlertService.ShowAlertAsync(AppResource.Information, AppResource.PleaseEnterPassword);
                 return;
             }
 
@@ -96,24 +97,24 @@ public partial class LoginPageViewModel : ObservableObject
                 }
                 else
                 {
-                    await AlertService.ShowAlertAsync("Error", "SMS yuborilmadi");
+                    await AlertService.ShowAlertAsync(AppResource.Error, AppResource.SMSWasNotSent);
                 }
             }
             else
             {
                 string message = response.resultCode switch
                 {
-                    "PASSWORD_IS_NOT_MATCHED" => "Parol noto‘g‘ri",
-                    "USER_NOT_EXIST" => "Foydalanuvchi topilmadi",
-                    _ => response.resultMsg ?? "Xatolik yuz berdi"
+                    "PASSWORD_IS_NOT_MATCHED" => AppResource.IncorrectPassword,
+                    "USER_NOT_EXIST" => AppResource.UserNotFound,
+                    _ => response.resultMsg ?? AppResource.AnErrorOccurred
                 };
 
-                await AlertService.ShowAlertAsync("Error", message);
+                await AlertService.ShowAlertAsync(AppResource.Error, message);
             }
         }
         catch (Exception ex)
         {
-            await AlertService.ShowAlertAsync("Error", ex.Message);
+            await AlertService.ShowAlertAsync(AppResource.Error, ex.Message);
         }
         finally
         {
@@ -125,7 +126,7 @@ public partial class LoginPageViewModel : ObservableObject
     {
         if (string.IsNullOrWhiteSpace(code) || code != verificationCode)
         {
-            await AlertService.ShowAlertAsync("Code", "Kod noto‘g‘ri");
+            await AlertService.ShowAlertAsync(AppResource.Code, AppResource.IncorrectCode);
             return;
         }
 
@@ -148,7 +149,7 @@ public partial class LoginPageViewModel : ObservableObject
 
             if (string.IsNullOrWhiteSpace(code))
             {
-                await AlertService.ShowAlertAsync("Xatolik", "SMS yuborilmadi");
+                await AlertService.ShowAlertAsync(AppResource.Error, AppResource.SMSWasNotSent);
                 return;
             }
 
@@ -156,7 +157,7 @@ public partial class LoginPageViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await AlertService.ShowAlertAsync("Xatolik", ex.Message);
+            await AlertService.ShowAlertAsync(AppResource.Error, ex.Message);
         }
         finally
         {
@@ -173,7 +174,7 @@ public partial class LoginPageViewModel : ObservableObject
     {
         if (string.IsNullOrWhiteSpace(PhoneNumber))
         {
-            await AlertService.ShowAlertAsync("Ma'lumot", "Avval telefon raqamingizni kiriting.");
+            await AlertService.ShowAlertAsync(AppResource.InformationAscii, AppResource.EnterYourPhoneNumberFirst);
             return;
         }
 

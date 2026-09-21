@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -203,8 +204,8 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
             if (result == null || !IsInsideQashqadaryo(result.Latitude, result.Longitude))
             {
                 await AlertService.ShowAlertAsync(
-                    "Manzil topilmadi",
-                    "Qashqadaryo viloyatidagi tuman, ko‘cha, uy yoki mo‘ljalni kiriting.");
+                    AppResource.AddressNotFound,
+                    AppResource.EnterADistrictStreetHouseOrLandmarkIn);
                 return false;
             }
 
@@ -223,8 +224,8 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
             Console.WriteLine($"Address search error: {ex.Message}");
 
             await AlertService.ShowAlertAsync(
-                "Xatolik",
-                "Manzilni qidirib bo‘lmadi. Iltimos, qayta urinib ko‘ring.");
+                AppResource.Error,
+                AppResource.CouldNotSearchForTheAddressPleaseTry);
 
             return false;
         }
@@ -430,16 +431,16 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
             if (location == null)
             {
                 await AlertService.ShowAlertAsync(
-                    "Joylashuv",
-                    "Joriy joylashuvni aniqlab bo‘lmadi.");
+                    AppResource.Location,
+                    AppResource.CouldNotDetermineYourCurrentLocation);
                 return;
             }
 
             if (!IsInsideQashqadaryo(location.Latitude, location.Longitude))
             {
                 await AlertService.ShowAlertAsync(
-                    "Qashqadaryo hududi",
-                    "Hozircha manzil faqat Qashqadaryo viloyatida tanlanadi. Xarita Qashqadaryo hududida qoladi.");
+                    AppResource.QashqadaryoRegion,
+                    AppResource.ForNowAnAddressCanOnlyBeSelected);
                 return;
             }
 
@@ -451,16 +452,16 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         catch (PermissionException)
         {
             await AlertService.ShowAlertAsync(
-                "Joylashuv ruxsati",
-                "Joriy joylashuvdan foydalanish uchun ilovaga joylashuv ruxsatini bering.");
+                AppResource.LocationPermission,
+                AppResource.LocationPermissionMessage);
         }
         catch (Exception ex)
         {
             Console.WriteLine(ex.Message);
 
             await AlertService.ShowAlertAsync(
-                "Joylashuv",
-                "Joriy joylashuvni aniqlab bo‘lmadi.");
+                AppResource.Location,
+                AppResource.CouldNotDetermineYourCurrentLocation);
         }
         finally
         {
@@ -591,16 +592,16 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         if (string.IsNullOrWhiteSpace(AddressText))
         {
             await AlertService.ShowAlertAsync(
-                "Manzil",
-                "Iltimos, yetkazib berish manzilini tanlang.");
+                AppResource.Address,
+                AppResource.PleaseSelectADeliveryAddress);
             return;
         }
 
         bool result = await DisplayAlert(
-            "Manzilni tasdiqlash",
-            "Bu haqiqiy yetkazib berish manzilimi?",
-            "Ha",
-            "Yo‘q");
+            AppResource.ConfirmAddress,
+            AppResource.IsThisTheCorrectDeliveryAddress,
+            AppResource.Yes,
+            AppResource.No);
 
         if (!result)
             return;

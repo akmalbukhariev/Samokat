@@ -7,6 +7,8 @@
     xmlns:models="clr-namespace:Ninimum.Models.Main"
     xmlns:local="clr-namespace:Ninimum.Views.Main"
     x:Class="Ninimum.Views.Main.MainPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="True"
     BackgroundColor="White">
 
     <Grid RowDefinitions="Auto,*, Auto">
@@ -18,7 +20,7 @@
         <RefreshView
             IsRefreshing="{Binding IsRefreshing}"
             Command="{Binding RefreshCommand}"
-            Margin="10,5,10,5"
+            Margin="10,5,10,0"
             Grid.Row="1">
             <CollectionView
                 x:Name="MainCollectionView"

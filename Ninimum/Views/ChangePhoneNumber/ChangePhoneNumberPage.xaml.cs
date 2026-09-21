@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -109,14 +110,14 @@ public partial class ChangePhoneNumberPage : BasePage, INotifyPropertyChanged
 
         if (!appControl.IsValidUzbekistanPhoneNumber(normalizedPhone))
         {
-            await DisplayAlert("Xatolik", "Telefon raqam noto‘g‘ri. Masalan: 901234567", "Yopish");
+            await DisplayAlert(AppResource.Error, AppResource.InvalidPhoneNumberExample901234567, AppResource.Close);
             return;
         }
 
         string currentPhone = NormalizePhone(appControl.userDto.phone_number);
         if (string.Equals(normalizedPhone, currentPhone, StringComparison.Ordinal))
         {
-            await DisplayAlert("Ma’lumot", "Yangi telefon raqam amaldagi raqamdan farq qilishi kerak.", "Yopish");
+            await DisplayAlert(AppResource.Information, AppResource.TheNewPhoneNumberMustBeDifferentFrom, AppResource.Close);
             return;
         }
 
@@ -131,13 +132,13 @@ public partial class ChangePhoneNumberPage : BasePage, INotifyPropertyChanged
 
             if (checkResponse.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
-                await DisplayAlert("Xatolik", checkResponse.resultMsg ?? "Telefon raqamni tekshirib bo‘lmadi.", "Yopish");
+                await DisplayAlert(AppResource.Error, checkResponse.resultMsg ?? AppResource.CouldNotVerifyThePhoneNumber, AppResource.Close);
                 return;
             }
 
             if (string.Equals(checkResponse.resultData?.existsYn, "Y", StringComparison.OrdinalIgnoreCase))
             {
-                await DisplayAlert("Telefon raqam", "Bu telefon raqam allaqachon ro‘yxatdan o‘tgan.", "Yopish");
+                await DisplayAlert(AppResource.PhoneNumber, AppResource.ThisPhoneNumberIsAlreadyRegistered_dcab50, AppResource.Close);
                 return;
             }
 
@@ -166,7 +167,7 @@ public partial class ChangePhoneNumberPage : BasePage, INotifyPropertyChanged
 
             if (string.IsNullOrWhiteSpace(code))
             {
-                await DisplayAlert("Xatolik", "SMS kod yuborilmadi. Iltimos, qayta urinib ko‘ring.", "Yopish");
+                await DisplayAlert(AppResource.Error, AppResource.TheSMSCodeWasNotSentPleaseTry, AppResource.Close);
                 return;
             }
 
@@ -184,7 +185,7 @@ public partial class ChangePhoneNumberPage : BasePage, INotifyPropertyChanged
         if (string.IsNullOrWhiteSpace(code) ||
             !string.Equals(code, verificationCode, StringComparison.Ordinal))
         {
-            await DisplayAlert("Kod", "SMS kod noto‘g‘ri.", "Yopish");
+            await DisplayAlert(AppResource.Code, AppResource.TheSMSCodeIsIncorrect, AppResource.Close);
             return;
         }
 
@@ -201,7 +202,7 @@ public partial class ChangePhoneNumberPage : BasePage, INotifyPropertyChanged
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
-                await DisplayAlert("Xatolik", response.resultMsg ?? "Telefon raqamni o‘zgartirib bo‘lmadi.", "Yopish");
+                await DisplayAlert(AppResource.Error, response.resultMsg ?? AppResource.CouldNotChangeThePhoneNumber, AppResource.Close);
                 return;
             }
 
@@ -209,16 +210,16 @@ public partial class ChangePhoneNumberPage : BasePage, INotifyPropertyChanged
             storeService.Set(AppKeys.PhoneNumber, pendingPhoneNumber);
 
             await DisplayAlert(
-                "Muvaffaqiyatli",
-                "Telefon raqamingiz o‘zgartirildi. Xavfsizlik uchun qayta kirishingiz kerak.",
-                "OK");
+                AppResource.Success,
+                AppResource.YourPhoneNumberHasBeenChangedForSecurity,
+                AppResource.Ok);
 
             await appControl.StartGuestMode(clearSavedLogin: true);
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"[ERROR] ChangePhoneNumber => {ex}");
-            await DisplayAlert("Xatolik", "Telefon raqamni o‘zgartirib bo‘lmadi.", "Yopish");
+            await DisplayAlert(AppResource.Error, AppResource.CouldNotChangeThePhoneNumber, AppResource.Close);
         }
         finally
         {

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage x:Class="NinimumDelivery.Views.DeliveryDetailPage"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:lang="clr-namespace:NinimumDelivery.Resources.Languages"
+             xmlns:models="clr-namespace:NinimumDelivery.Models"
+             xmlns:components="clr-namespace:NinimumDelivery.Components"
+             Shell.NavBarIsVisible="False" Shell.TabBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid Padding="20,18" ColumnDefinitions="Auto,*" ColumnSpacing="14">
+            <Button Text="←" FontSize="25" BackgroundColor="Transparent" TextColor="{StaticResource TextColor}" Padding="0" Command="{Binding BackCommand}" />
+            <Label Grid.Column="1" Text="{x:Static lang:AppResource.DeliveryDetail}" FontSize="24" FontAttributes="Bold" VerticalTextAlignment="Center" />
+        </Grid>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="20,4,20,24" Spacing="16">
+                <Border Padding="18" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" StrokeShape="RoundRectangle 18">
+                    <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="8">
+                        <Label Text="{Binding Job.DisplayOrderNumber}" FontSize="22" FontAttributes="Bold" />
+                        <Border Grid.Column="1" Padding="10,5" BackgroundColor="{StaticResource PrimarySoft}" StrokeThickness="0" StrokeShape="RoundRectangle 12"><Label Text="{Binding Job.StatusText}" TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold" FontSize="12" /></Border>
+                        <Label Grid.Row="1" Text="{x:Static lang:AppResource.PaymentPaid}" TextColor="{StaticResource SuccessColor}" FontAttributes="Bold" />
+                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Job.PriceText}" FontSize="20" FontAttributes="Bold" />
+                        <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Job.ProductCountText}" Style="{StaticResource MutedLabel}" />
+                    </Grid>
+                </Border>
+
+                <Label Text="{x:Static lang:AppResource.Customer}" Style="{StaticResource SectionTitle}" />
+                <Border Padding="18" Stroke="{StaticResource BorderColor}" StrokeShape="RoundRectangle 18">
+                    <VerticalStackLayout Spacing="9">
+                        <Label Text="{Binding Job.customerName}" FontSize="18" FontAttributes="Bold" />
+                        <Label Text="{Binding Job.DisplayPhone}" Style="{StaticResource MutedLabel}" />
+                        <BoxView HeightRequest="1" Color="{StaticResource BorderColor}" />
+                        <Label Text="{Binding Job.deliveryAddress}" FontSize="16" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <Grid ColumnDefinitions="*,*" ColumnSpacing="10" IsVisible="{Binding ShowContact}">
+                    <Button Text="{x:Static lang:AppResource.CallCustomer}" Command="{Binding CallCommand}" Style="{StaticResource SecondaryButton}" />
+                    <Button Grid.Column="1" Text="{x:Static lang:AppResource.OpenMap}" Command="{Binding MapCommand}" Style="{StaticResource SecondaryButton}" />
+                </Grid>
+
+                <Label Text="{x:Static lang:AppResource.Products}" Style="{StaticResource SectionTitle}" />
+                <VerticalStackLayout BindableLayout.ItemsSource="{Binding Job.products}" Spacing="10">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="models:DeliveryProduct">
+                            <Border Padding="12" Stroke="{StaticResource BorderColor}" StrokeShape="RoundRectangle 15">
+                                <Grid ColumnDefinitions="70,*,Auto" ColumnSpacing="12">
+                                    <Border WidthRequest="70" HeightRequest="70" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" StrokeShape="RoundRectangle 12">
+                                        <Image Source="{Binding productImageUrl}" Aspect="AspectFit" />
+                                    </Border>
+                                    <VerticalStackLayout Grid.Column="1" VerticalOptions="Center" Spacing="4"><Label Text="{Binding productName}" FontAttributes="Bold" MaxLines="2"/><Label Text="{Binding quantity, StringFormat='x{0}'}" Style="{StaticResource MutedLabel}"/></VerticalStackLayout>
+                                    <Label Grid.Column="2" Text="{Binding totalPrice, StringFormat='{0:N0} so‘m'}" VerticalTextAlignment="Center" FontAttributes="Bold" />
+                                </Grid>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <VerticalStackLayout Grid.Row="2" Padding="20,12,20,22" BackgroundColor="White" Spacing="8">
+            <Button Text="{x:Static lang:AppResource.ClaimDelivery}" Command="{Binding ClaimCommand}" Style="{StaticResource PrimaryButton}" IsVisible="{Binding ShowClaim}" />
+            <Button Text="{x:Static lang:AppResource.StartDelivery}" Command="{Binding StartDeliveryCommand}" Style="{StaticResource PrimaryButton}" IsVisible="{Binding ShowStart}" />
+            <Button Text="{x:Static lang:AppResource.MarkDelivered}" Command="{Binding CompleteCommand}" Style="{StaticResource PrimaryButton}" IsVisible="{Binding ShowComplete}" />
+            <Button Text="{x:Static lang:AppResource.CannotDeliver}" Command="{Binding FailCommand}" BackgroundColor="Transparent" TextColor="{StaticResource MutedColor}" IsVisible="{Binding ShowFailure}" />
+        </VerticalStackLayout>
+        <components:LoadingView Grid.RowSpan="3" IsLoading="{Binding IsLoading}" />
+    </Grid>
+</ContentPage>

@@ -2,16 +2,19 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.LoginRegister.AddressPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     BackgroundColor="White">
 
     <Grid RowDefinitions="50,*">
 
         <components:PageHeaderView
-            Title="Yetkazib berish manzili"/>
+            Title="{x:Static language:AppResource.DeliveryAddress}"/>
 
         <Grid Grid.Row="1">
 
@@ -123,7 +126,7 @@
                             <Entry
                                 x:Name="AddressEntry"
                                 Text="{Binding AddressText}"
-                                Placeholder="Buyurtma qayerga yetkazib berilsin?"
+                                Placeholder="{x:Static language:AppResource.WhereShouldTheOrderBeDelivered}"
                                 FontSize="17"
                                 TextColor="#22292F"
                                 PlaceholderColor="#8F8F99"
@@ -138,7 +141,7 @@
                         <Label
                             x:Name="MapButtonLabel"
                             Grid.Column="1"
-                            Text="Xarita"
+                            Text="{x:Static language:AppResource.Map}"
                             FontSize="17"
                             TextColor="#111111"
                             HorizontalTextAlignment="Center"
@@ -152,7 +155,7 @@
 
                     <Label
                         x:Name="HintLabel"
-                        Text="Qashqadaryo: tuman, ko‘cha, uy yoki yaqin-atrofdagi mo‘ljal"
+                        Text="{x:Static language:AppResource.QashqadaryoDistrictStreetHouseOrNearbyLandmark}"
                         FontSize="16"
                         TextColor="#8F8F99"/>
 
@@ -170,7 +173,7 @@
 
                         <Label
                             Grid.Column="1"
-                            Text="Mening joylashuvim"
+                            Text="{x:Static language:AppResource.MyLocation}"
                             FontSize="19"
                             TextColor="#22292F"
                             VerticalTextAlignment="Center"/>
@@ -195,14 +198,14 @@
 
                     <Label
                         x:Name="NoDeliveryLabel"
-                        Text="Hozircha bu yerga yetkazma xizmati yo‘q.&#10;Boshqa manzil yoki yaqin-atrofdagi&#10;buyurtmalarni tarqatish punktini tanlang"
+                        Text="{x:Static language:AppResource.DeliveryIsNotAvailableHereYetChooseAnother}"
                         FontSize="16"
                         TextColor="#B00000"
                         IsVisible="False"/>
 
                     <Button
                         x:Name="PickupButton"
-                        Text="Saqlash"
+                        Text="{x:Static language:AppResource.Save}"
                         FontSize="17"
                         TextColor="White"
                         BackgroundColor="#FD473C"

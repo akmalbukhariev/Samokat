@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Ninimum.Models.Tariff;
@@ -19,5 +20,5 @@ public partial class TariffPlan : ObservableObject
     // can be selected as a replacement plan.
     [ObservableProperty] private bool isCurrent;
     [ObservableProperty] private bool canPurchase = true;
-    [ObservableProperty] private string actionText = "Sotib olish";
+    [ObservableProperty] private string actionText = AppResource.Buy;
 }

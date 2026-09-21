@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Courier login</value>
+  </data>
+  <data name="LoginSubtitle" xml:space="preserve">
+    <value>Sign in with the courier ID and password provided by Ninimum.</value>
+  </data>
+  <data name="WorkerId" xml:space="preserve">
+    <value>Courier ID</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Courier ID or password is incorrect.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Deliveries" xml:space="preserve">
+    <value>Deliveries</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello, {0}</value>
+  </data>
+  <data name="TodaySummary" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Available</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>In progress</value>
+  </data>
+  <data name="CompletedToday" xml:space="preserve">
+    <value>Completed today</value>
+  </data>
+  <data name="AvailableOrders" xml:space="preserve">
+    <value>Available deliveries</value>
+  </data>
+  <data name="MyDeliveries" xml:space="preserve">
+    <value>My active deliveries</value>
+  </data>
+  <data name="NoAvailableOrders" xml:space="preserve">
+    <value>No available deliveries right now.</value>
+  </data>
+  <data name="NoActiveOrders" xml:space="preserve">
+    <value>You have no active deliveries.</value>
+  </data>
+  <data name="NoHistory" xml:space="preserve">
+    <value>Delivery history is empty.</value>
+  </data>
+  <data name="ProductsCount" xml:space="preserve">
+    <value>{0} products</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>View</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="Accepted" xml:space="preserve">
+    <value>Accepted</value>
+  </data>
+  <data name="OnTheWay" xml:space="preserve">
+    <value>On the way</value>
+  </data>
+  <data name="Delivered" xml:space="preserve">
+    <value>Delivered</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Not delivered</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>Cancelled</value>
+  </data>
+  <data name="DeliveryDetail" xml:space="preserve">
+    <value>Delivery detail</value>
+  </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Customer</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="ClaimDelivery" xml:space="preserve">
+    <value>Accept delivery</value>
+  </data>
+  <data name="ClaimConfirmTitle" xml:space="preserve">
+    <value>Accept this delivery?</value>
+  </data>
+  <data name="ClaimConfirmMessage" xml:space="preserve">
+    <value>After accepting, the customer phone number will become visible and this delivery will be assigned to you.</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Accept</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="StartDelivery" xml:space="preserve">
+    <value>Start delivery</value>
+  </data>
+  <data name="MarkDelivered" xml:space="preserve">
+    <value>Mark as delivered</value>
+  </data>
+  <data name="CannotDeliver" xml:space="preserve">
+    <value>Could not deliver</value>
+  </data>
+  <data name="CallCustomer" xml:space="preserve">
+    <value>Call customer</value>
+  </data>
+  <data name="OpenMap" xml:space="preserve">
+    <value>Open map</value>
+  </data>
+  <data name="PaymentPaid" xml:space="preserve">
+    <value>Paid</value>
+  </data>
+  <data name="StatusUpdated" xml:space="preserve">
+    <value>Delivery status updated.</value>
+  </data>
+  <data name="ActionFailed" xml:space="preserve">
+    <value>The action could not be completed. Please try again.</value>
+  </data>
+  <data name="DeliveryCompletedConfirmTitle" xml:space="preserve">
+    <value>Confirm delivery</value>
+  </data>
+  <data name="DeliveryCompletedConfirmMessage" xml:space="preserve">
+    <value>Confirm only after the order has been handed to the customer.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>Offline</value>
+  </data>
+  <data name="Availability" xml:space="preserve">
+    <value>Availability</value>
+  </data>
+  <data name="Vehicle" xml:space="preserve">
+    <value>Vehicle</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Uzbek" xml:space="preserve">
+    <value>O‘zbekcha</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Log out</value>
+  </data>
+  <data name="LogoutConfirmTitle" xml:space="preserve">
+    <value>Log out?</value>
+  </data>
+  <data name="LogoutConfirmMessage" xml:space="preserve">
+    <value>You will need to sign in again to continue delivering orders.</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="ConnectionError" xml:space="preserve">
+    <value>Could not connect to Ninimum server.</value>
+  </data>
+  <data name="NotAssignedPhone" xml:space="preserve">
+    <value>Available after accepting the delivery</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="DeliveryFailedTitle" xml:space="preserve">
+    <value>Delivery problem</value>
+  </data>
+  <data name="DeliveryFailedMessage" xml:space="preserve">
+    <value>Mark this delivery as not delivered? The admin can review it and arrange another attempt.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+</root>

@@ -17,10 +17,7 @@ public partial class MainPage : BasePage
 
         viewModel = vm;
         BindingContext = viewModel;
-
-        Shell.SetTabBarIsVisible(this, true);
-
-        InlineSearchBarView.MenuClicked += LeftMenuClicked;
+InlineSearchBarView.MenuClicked += LeftMenuClicked;
         InlineSearchBarView.SearchClicked += SearchClicked;
         viewModel.PropertyChanged += ViewModel_PropertyChanged;
     }

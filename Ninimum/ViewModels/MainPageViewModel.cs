@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
@@ -219,7 +220,7 @@ public partial class MainPageViewModel : ObservableObject
             Rating = item.average_rating ?? 0,
             ReviewCount = item.review_count ?? 0,
             ProductId = (int)item.id,
-            ActionText = "+ Ertaga",
+            ActionText = AppResource.PlusTomorrow,
             Images = images
         };
     }
@@ -315,7 +316,7 @@ public partial class MainPageViewModel : ObservableObject
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
-                await AlertService.ShowAlertAsync("Xatolik", response.resultMsg);
+                await AlertService.ShowAlertAsync(AppResource.Error, response.resultMsg);
                 return;
             }
 
@@ -324,7 +325,7 @@ public partial class MainPageViewModel : ObservableObject
         }
         catch
         {
-            await AlertService.ShowAlertAsync("Xatolik", "Mahsulotni savatchaga qo’shib bo’lmadi.");
+            await AlertService.ShowAlertAsync(AppResource.Error, AppResource.CouldNotAddTheProductToTheCart);
         }
         finally
         {
@@ -337,7 +338,7 @@ public partial class MainPageViewModel : ObservableObject
         if (!await appControl.EnsureAuthenticatedAsync())
             return;
 
-        await Application.Current.MainPage.DisplayAlert("Info", "Notification clicked", "OK");
+        await Application.Current.MainPage.DisplayAlert(AppResource.Information, AppResource.NotificationClicked, AppResource.Ok);
     }
     
     private bool isBannerPurchaseNavigating;
@@ -352,7 +353,7 @@ public partial class MainPageViewModel : ObservableObject
 
         if (item.ProductId <= 0)
         {
-            await AlertService.ShowAlertAsync("Xatolik", "Mahsulot ma’lumotlari topilmadi.");
+            await AlertService.ShowAlertAsync(AppResource.Error, AppResource.ProductInformationWasNotFound);
             return;
         }
 
@@ -400,7 +401,7 @@ public partial class MainPageViewModel : ObservableObject
 
             if (finalPrice <= 0)
             {
-                await AlertService.ShowAlertAsync("Xatolik", "Mahsulot narxi noto‘g‘ri.");
+                await AlertService.ShowAlertAsync(AppResource.Error, AppResource.TheProductPriceIsInvalid);
                 return;
             }
 
@@ -431,7 +432,7 @@ public partial class MainPageViewModel : ObservableObject
         catch (Exception ex)
         {
             Debug.WriteLine($"[ERROR] Banner purchase navigation: {ex}");
-            await AlertService.ShowAlertAsync("Xatolik", "Rasmiylashtirish sahifasini ochib bo‘lmadi.");
+            await AlertService.ShowAlertAsync(AppResource.Error, AppResource.CouldNotOpenTheCheckoutPage);
         }
         finally
         {

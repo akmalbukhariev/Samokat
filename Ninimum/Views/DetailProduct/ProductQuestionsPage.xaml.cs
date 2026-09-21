@@ -13,8 +13,7 @@ public partial class ProductQuestionsPage : BasePage
         InitializeComponent();
         this.viewModel = viewModel;
         BindingContext = viewModel;
-        Shell.SetTabBarIsVisible(this, false);
-    }
+}
 
     protected override async void OnAppearing()
     {

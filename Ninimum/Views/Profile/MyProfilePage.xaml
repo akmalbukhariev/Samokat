@@ -2,9 +2,12 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.Profile.MyProfilePage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="True"
     x:Name="ThisPage"
     BackgroundColor="White">
 
@@ -61,7 +64,7 @@
                         StrokeThickness="0"
                         StrokeShape="RoundRectangle 20">
                         <Label
-                            Text="Tasdiqlangan"
+                            Text="{x:Static language:AppResource.Verified}"
                             FontFamily="{StaticResource FontSFMedium}"
                             FontSize="14"
                             TextColor="White" />
@@ -77,7 +80,7 @@
                         </Grid.GestureRecognizers>
 
                         <Image Source="ic_order.png" WidthRequest="24" HeightRequest="24" />
-                        <Label Grid.Column="2" Text="Buyurtma" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Label Grid.Column="2" Text="{x:Static language:AppResource.Orders_8b489f}" Style="{StaticResource ProfileMenuTextStyle}" />
 
                         <Border IsVisible="False" Grid.Column="3" Padding="10,2" BackgroundColor="#F7FBEF" StrokeThickness="0" StrokeShape="RoundRectangle 20">
                             <Label Text="2/1" Style="{StaticResource ProfileBadgeTextStyle}" />
@@ -92,7 +95,7 @@
                         </Grid.GestureRecognizers>
 
                         <Image Source="ic_comment.png" WidthRequest="24" HeightRequest="24" />
-                        <Label Grid.Column="2" Text="Sharh" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Label Grid.Column="2" Text="{x:Static language:AppResource.Reviews}" Style="{StaticResource ProfileMenuTextStyle}" />
 
                         <Border Grid.Column="3" Padding="10,2" BackgroundColor="#F7FBEF" StrokeThickness="0" StrokeShape="RoundRectangle 20">
                             <Label Text="2/1" Style="{StaticResource ProfileBadgeTextStyle}" />
@@ -107,7 +110,7 @@
                         </Grid.GestureRecognizers>
 
                         <Image Source="ic_payment_card.png" WidthRequest="24" HeightRequest="24" />
-                        <Label Grid.Column="2" Text="To’lov karta" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Label Grid.Column="2" Text="{x:Static language:AppResource.PaymentCards_6551a6}" Style="{StaticResource ProfileMenuTextStyle}" />
 
                         <Border Grid.Column="3" Padding="10,2" BackgroundColor="#F7FBEF" StrokeThickness="0" StrokeShape="RoundRectangle 20">
                             <Label Text="2" Style="{StaticResource ProfileBadgeTextStyle}" />
@@ -122,7 +125,7 @@
                         </Grid.GestureRecognizers>
 
                         <Image Source="ic_message.png" WidthRequest="24" HeightRequest="24" />
-                        <Label Grid.Column="2" Text="Yozishma" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Label Grid.Column="2" Text="{x:Static language:AppResource.Messages}" Style="{StaticResource ProfileMenuTextStyle}" />
 
                         <Border Grid.Column="3" Padding="10,2" BackgroundColor="#F7FBEF" StrokeThickness="0" StrokeShape="RoundRectangle 20">
                             <Label Text="10" Style="{StaticResource ProfileBadgeTextStyle}" />
@@ -137,7 +140,7 @@
                         </Grid.GestureRecognizers>
 
                         <Image Source="ic_notification1.png" WidthRequest="24" HeightRequest="24" />
-                        <Label Grid.Column="2" Text="Xabarnoma" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Label Grid.Column="2" Text="{x:Static language:AppResource.Notifications}" Style="{StaticResource ProfileMenuTextStyle}" />
 
                         <Border Grid.Column="3" Padding="10,2" BackgroundColor="#F7FBEF" StrokeThickness="0" StrokeShape="RoundRectangle 20">
                             <Label Text="15" Style="{StaticResource ProfileBadgeTextStyle}" />
@@ -153,7 +156,7 @@
                         </Grid.GestureRecognizers>
 
                         <Image Source="ic_setting.png" WidthRequest="24" HeightRequest="24" />
-                        <Label Grid.Column="2" Text="Sozlama" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Label Grid.Column="2" Text="{x:Static language:AppResource.Settings}" Style="{StaticResource ProfileMenuTextStyle}" />
                         <Image Grid.Column="3" Source="{Binding SettingsArrowIcon}" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
@@ -170,7 +173,7 @@
                             <TapGestureRecognizer Command="{Binding RegionCommand}" />
                         </Grid.GestureRecognizers>
 
-                        <Label Text="Region" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Label Text="{x:Static language:AppResource.Region_0f2171}" Style="{StaticResource ProfileMenuTextStyle}" />
                         <Label Grid.Column="1" Text="{Binding SelectedRegionName}" Style="{StaticResource ProfileGreenValueStyle}" />
                         <Image Grid.Column="2" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
@@ -180,7 +183,7 @@
                             <TapGestureRecognizer Command="{Binding LanguageCommand}" />
                         </Grid.GestureRecognizers>
 
-                        <Label Text="Til" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Label Text="{x:Static language:AppResource.Language}" Style="{StaticResource ProfileMenuTextStyle}" />
 
                         <Image
                             Grid.Column="1"
@@ -197,8 +200,8 @@
                             <TapGestureRecognizer Command="{Binding ThemeCommand}" />
                         </Grid.GestureRecognizers>
 
-                        <Label Text="Ko’rinish rejimi" Style="{StaticResource ProfileMenuTextStyle}" />
-                        <Label Grid.Column="1" Text="Yorqin" Style="{StaticResource ProfileGreenValueStyle}" />
+                        <Label Text="{x:Static language:AppResource.Appearance}" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Label Grid.Column="1" Text="{x:Static language:AppResource.Light}" Style="{StaticResource ProfileGreenValueStyle}" />
                         <Image Grid.Column="2" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
@@ -207,7 +210,7 @@
                             <TapGestureRecognizer Command="{Binding ChangePhoneCommand}" />
                         </Grid.GestureRecognizers>
 
-                        <Label Text="Telefon raqamni o’zgartirish" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Label Text="{x:Static language:AppResource.ChangePhoneNumber_ec3e8b}" Style="{StaticResource ProfileMenuTextStyle}" />
                         <Label Grid.Column="1" Text="{Binding MaskedPhoneNumber}" Style="{StaticResource ProfileGreenValueStyle}" />
                         <Image Grid.Column="2" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
@@ -217,7 +220,7 @@
                             <TapGestureRecognizer Command="{Binding ChangePasswordCommand}" />
                         </Grid.GestureRecognizers>
 
-                        <Label Text="Parolni o’zgartirish" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Label Text="{x:Static language:AppResource.ChangePassword}" Style="{StaticResource ProfileMenuTextStyle}" />
                         <Image Grid.Column="1" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
@@ -226,7 +229,7 @@
                             <TapGestureRecognizer Command="{Binding MyTariffCommand}" />
                         </Grid.GestureRecognizers>
 
-                        <Label Text="Mening tarifim" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Label Text="{x:Static language:AppResource.MyTariff}" Style="{StaticResource ProfileMenuTextStyle}" />
                         <Label Grid.Column="1" Text="{Binding CurrentTariffName}" Style="{StaticResource ProfileGreenValueStyle}" />
                         <Image Grid.Column="2" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
@@ -236,13 +239,13 @@
                             <TapGestureRecognizer Command="{Binding ChildrenCommand}" />
                         </Grid.GestureRecognizers>
 
-                        <Label Text="Farzandlarim" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Label Text="{x:Static language:AppResource.MyChildren}" Style="{StaticResource ProfileMenuTextStyle}" />
                         <Label Grid.Column="1" Text="3" Style="{StaticResource ProfileGreenValueStyle}" />
                         <Image Grid.Column="2" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
                     <Label
-                        Text="Akkauntni o’chirib yuborish"
+                        Text="{x:Static language:AppResource.DeleteAccount_fa848a}"
                         FontFamily="{StaticResource FontSFRegular}"
                         FontSize="17"
                         TextColor="#EA1111">
@@ -269,7 +272,7 @@
                         <Image Source="ic_logout.png" WidthRequest="24" HeightRequest="24" />
 
                         <Label
-                            Text="Profildan chiqish"
+                            Text="{x:Static language:AppResource.SignOut}"
                             FontFamily="{StaticResource FontSFRegular}"
                             FontSize="17"
                             TextColor="#EA1111"

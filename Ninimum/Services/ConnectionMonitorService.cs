@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using Utils;
@@ -49,9 +50,9 @@ public sealed class ConnectionMonitorService : INotifyPropertyChanged, IDisposab
 
     public string StatusText => state switch
     {
-        ServerConnectionState.NoInternet => "Internet aloqasi yo'q",
-        ServerConnectionState.Checking => "Serverga ulanmoqda...",
-        ServerConnectionState.ServerUnavailable => "Server bilan aloqa yo'q. Qayta ulanmoqda...",
+        ServerConnectionState.NoInternet => AppResource.NoInternetConnection,
+        ServerConnectionState.Checking => AppResource.ConnectingToServer,
+        ServerConnectionState.ServerUnavailable => AppResource.NoConnectionToTheServerReconnecting,
         _ => string.Empty
     };
 

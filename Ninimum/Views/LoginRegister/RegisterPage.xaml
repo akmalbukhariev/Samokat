@@ -2,16 +2,19 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
     xmlns:sys="clr-namespace:System;assembly=netstandard"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.LoginRegister.RegisterPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     BackgroundColor="White">
 
     <Grid RowDefinitions="50, *">
         <components:PageHeaderView
-                Title="Ro’yxatdan o’tish"/>
+                Title="{x:Static language:AppResource.Register}"/>
    
         <ScrollView Grid.Row="1">
             <VerticalStackLayout
@@ -19,7 +22,7 @@
                 Spacing="20">
 
                 <Label
-                    Text="Ushbu mobil ilovaning imkoniyatlaridan to’liq foydalanish uchun kiritayotgan ma’lumotlaringizni to’g’riligiga e’tibor bering"
+                    Text="{x:Static language:AppResource.ToUseAllFeaturesOfThisAppPlease}"
                     HorizontalTextAlignment="Center"
                     TextColor="#96979B"
                     FontSize="17"
@@ -27,19 +30,19 @@
                     CharacterSpacing="0.17" />
 
                 <components:InputView
-                    Title="Ism"
+                    Title="{x:Static language:AppResource.FirstName_231ae8}"
                     LeftIcon="ic_user.png"
                     Text="{Binding FirstName}"
                     ClearButtonVisibility="WhileEditing" />
 
                 <components:InputView
-                    Title="Familiya"
+                    Title="{x:Static language:AppResource.LastName_f40b4b}"
                     LeftIcon="ic_user.png"
                     Text="{Binding LastName}"
                     ClearButtonVisibility="WhileEditing" />
 
                 <components:InputView
-                    Title="Telefon raqam"
+                    Title="{x:Static language:AppResource.PhoneNumber}"
                     LeftIcon="ic_phone.png"
                     Keyboard="Telephone"
                     Text="{Binding PhoneNumber}"
@@ -47,14 +50,14 @@
                     IsVisible="False"/>
 
                 <components:InputView
-                    Title="Manzil"
+                    Title="{x:Static language:AppResource.Address}"
                     LeftIcon="ic_location.png"
                     IsReadOnly="True"
                     Text="{Binding Address}"
                     TapCommand="{Binding AddressTapCommand}" />
 
                 <components:InputView
-                    Title="Parol"
+                    Title="{x:Static language:AppResource.Password}"
                     LeftIcon="ic_lock.png"
                     IsPassword="True"
                     EnablePasswordToggle="True"
@@ -63,7 +66,7 @@
                     Text="{Binding Password}" />
 
                 <components:InputView
-                    Title="Parol takroriy"
+                    Title="{x:Static language:AppResource.RepeatPassword_b7aca1}"
                     LeftIcon="ic_lock.png"
                     IsPassword="True"
                     EnablePasswordToggle="True"
@@ -72,7 +75,7 @@
                     Text="{Binding ConfirmPassword}" />
 
                 <Label
-                    Text="Farzandlar haqida ma’lumotlar (ixtiyoriy)"
+                    Text="{x:Static language:AppResource.ChildrenInformationOptional}"
                     TextColor="#96979B"
                     FontSize="17"
                     FontFamily="{StaticResource FontSFMedium}"
@@ -90,7 +93,7 @@
                                 <Grid ColumnDefinitions="*,*" ColumnSpacing="20" Padding="20,0">
                                     <components:CustomRadioButtonView
                                         Grid.Column="0"
-                                        Text="O’g’il"
+                                        Text="{x:Static language:AppResource.Boy}"
                                         IsSelected="{Binding IsBoySelected}"
                                         Command="{Binding SelectGenderCommand}"
                                         CommandParameter="boy"
@@ -102,7 +105,7 @@
 
                                     <components:CustomRadioButtonView
                                         Grid.Column="1"
-                                        Text="Qiz"
+                                        Text="{x:Static language:AppResource.Girl}"
                                         IsSelected="{Binding IsGirlSelected}"
                                         Command="{Binding SelectGenderCommand}"
                                         CommandParameter="girl"
@@ -114,13 +117,13 @@
                                 </Grid>
 
                                 <components:InputView
-                                    Title="Ismi"
+                                    Title="{x:Static language:AppResource.FirstName}"
                                     LeftIcon="ic_user.png"
                                     Text="{Binding FirstName}"
                                     ClearButtonVisibility="WhileEditing" />
 
                                 <components:InputView
-                                    Title="Familiyasi"
+                                    Title="{x:Static language:AppResource.LastName}"
                                     LeftIcon="ic_user.png"
                                     Text="{Binding LastName}"
                                     ClearButtonVisibility="WhileEditing" />
@@ -129,7 +132,7 @@
 
                                     <components:InputView
                                         x:Name="birthInput"
-                                        Title="Tug’ilgan kuni"
+                                        Title="{x:Static language:AppResource.DateOfBirth}"
                                         LeftIcon="ic_calendar.png"
                                         Text="{Binding BirthDate}"
                                         IsEnabled="False"/>
@@ -147,7 +150,7 @@
                 </CollectionView>
 
                 <Button
-                    Text="+ Qo’shish"
+                    Text="{x:Static language:AppResource.Add}"
                     TextColor="#FD473C"
                     BackgroundColor="#FFF2F3"
                     CornerRadius="20"
@@ -188,7 +191,7 @@
 
                     <Label
                         Grid.Column="1"
-                        Text="Barcha to’ldirilgan ma’lumotlar to’g’riligini kafolatlayman"
+                        Text="{x:Static language:AppResource.IConfirmThatAllEnteredInformationIsCorrect}"
                         TextColor="#22292F"
                         FontSize="17"
                         FontFamily="{StaticResource FontSFRegular}"
@@ -204,14 +207,14 @@
 
                 <components:CustomActionButton
                     x:Name="btnRegister"
-                    ButtonText="Ro’yxatdan o’tish"
+                    ButtonText="{x:Static language:AppResource.Register}"
                     ButtonBackgroundColor="#FD473C"
                     ButtonTextColor="White"
                     ButtonImageSource="right.png"
                     TapCommand="{Binding RegisterCommand}" />
 
                 <Label
-                Text="Begonaning ma’lumotlarini kiritish Qonun buzilishi oqibatiga olib kelishi mumkin."
+                Text="{x:Static language:AppResource.EnteringAnotherPersonSInformationMayViolateThe}"
                 HorizontalTextAlignment="Center"
                 TextColor="#96979B"
                 FontSize="17"

@@ -2,9 +2,12 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.Profile.DeleteAccountPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     BackgroundColor="White">
 
     <Grid RowDefinitions="Auto,*">
@@ -12,7 +15,7 @@
         <components:PageHeaderView
             Grid.Row="0"
             ShowBack="true"
-            Title="Akkauntni o‘chirish" />
+            Title="{x:Static language:AppResource.DeleteAccount}" />
 
         <ScrollView Grid.Row="1">
             <VerticalStackLayout
@@ -20,7 +23,7 @@
                 Spacing="16">
 
                 <Label
-                    Text="Akkauntingizni o‘chirishdan oldin, nima sababdan ketayotganingizni bilishni istaymiz. Fikringiz xizmatimizni yaxshilashga yordam beradi."
+                    Text="{x:Static language:AppResource.BeforeDeletingYourAccountWeWouldLikeTo}"
                     FontSize="15"
                     TextColor="#55585E"
                     FontFamily="{StaticResource FontSFRegular}"
@@ -33,9 +36,9 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span
-                                Text="Nega akkauntingizni o‘chirmoqchisiz?"
+                                Text="{x:Static language:AppResource.WhyDoYouWantToDeleteYourAccount}"
                                 FontFamily="{StaticResource FontSFBold}" />
-                            <Span Text="  Bir yoki bir nechta sababni tanlang." />
+                            <Span Text="{x:Static language:AppResource.SelectOneOrMoreReasons}" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>
@@ -53,7 +56,7 @@
                             VerticalOptions="Center" />
                         <Label
                             Grid.Column="1"
-                            Text="Narxlar men uchun qimmat"
+                            Text="{x:Static language:AppResource.PricesAreTooHighForMe}"
                             VerticalOptions="Center"
                             FontSize="16"
                             TextColor="#22292F" />
@@ -70,7 +73,7 @@
                             VerticalOptions="Center" />
                         <Label
                             Grid.Column="1"
-                            Text="Xizmat men kutgan foydani bermadi"
+                            Text="{x:Static language:AppResource.TheServiceDidNotProvideTheValueI}"
                             VerticalOptions="Center"
                             FontSize="16"
                             TextColor="#22292F" />
@@ -87,7 +90,7 @@
                             VerticalOptions="Center" />
                         <Label
                             Grid.Column="1"
-                            Text="Kerakli mahsulot yoki takliflarni topmadim"
+                            Text="{x:Static language:AppResource.ICouldNotFindTheProductsOrOffers}"
                             VerticalOptions="Center"
                             FontSize="16"
                             TextColor="#22292F" />
@@ -104,7 +107,7 @@
                             VerticalOptions="Center" />
                         <Label
                             Grid.Column="1"
-                            Text="Ilovadan foydalanish qiyin"
+                            Text="{x:Static language:AppResource.TheAppIsDifficultToUse}"
                             VerticalOptions="Center"
                             FontSize="16"
                             TextColor="#22292F" />
@@ -121,7 +124,7 @@
                             VerticalOptions="Center" />
                         <Label
                             Grid.Column="1"
-                            Text="Ilovadan endi foydalanmayman"
+                            Text="{x:Static language:AppResource.INoLongerUseTheApp}"
                             VerticalOptions="Center"
                             FontSize="16"
                             TextColor="#22292F" />
@@ -138,7 +141,7 @@
                             VerticalOptions="Center" />
                         <Label
                             Grid.Column="1"
-                            Text="Boshqa xizmat yoki ilovani afzal ko‘raman"
+                            Text="{x:Static language:AppResource.IPreferAnotherServiceOrApp}"
                             VerticalOptions="Center"
                             FontSize="16"
                             TextColor="#22292F" />
@@ -155,7 +158,7 @@
                             VerticalOptions="Center" />
                         <Label
                             Grid.Column="1"
-                            Text="Texnik muammolarga duch keldim"
+                            Text="{x:Static language:AppResource.IEncounteredTechnicalIssues}"
                             VerticalOptions="Center"
                             FontSize="16"
                             TextColor="#22292F" />
@@ -173,7 +176,7 @@
                             CheckedChanged="CbOther_CheckedChanged" />
                         <Label
                             Grid.Column="1"
-                            Text="Boshqa sabab"
+                            Text="{x:Static language:AppResource.OtherReason}"
                             VerticalOptions="Center"
                             FontSize="16"
                             TextColor="#22292F" />
@@ -191,7 +194,7 @@
                             x:Name="OtherEntry"
                             IsVisible="False"
                             MaxLength="80"
-                            Placeholder="Sababni qisqacha yozing"
+                            Placeholder="{x:Static language:AppResource.BrieflyDescribeTheReason}"
                             BackgroundColor="Transparent"
                             TextColor="#22292F"
                             PlaceholderColor="#96979B"
@@ -203,7 +206,7 @@
                 </VerticalStackLayout>
 
                 <Label
-                    Text="Fikringiz uchun rahmat. Akkaunt o‘chirilgandan so‘ng ushbu akkaunt bilan tizimga kira olmaysiz."
+                    Text="{x:Static language:AppResource.ThankYouForYourFeedbackAfterTheAccount}"
                     FontSize="14"
                     TextColor="#777A80"
                     LineBreakMode="WordWrap"
@@ -211,7 +214,7 @@
 
                 <Button
                     x:Name="DeleteButton"
-                    Text="Akkauntni o‘chirish"
+                    Text="{x:Static language:AppResource.DeleteAccount}"
                     BackgroundColor="#EA1111"
                     TextColor="White"
                     CornerRadius="10"

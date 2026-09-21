@@ -5,6 +5,8 @@ using Ninimum.Models;
 using Ninimum.Models.Startup;
 using Ninimum.Services;
 using Ninimum.Views.LoginRegister;
+using Ninimum.Resources.Languages;
+using Utils;
 
 namespace Ninimum.Views.Startup;
 
@@ -21,11 +23,15 @@ public partial class StartPage : BasePage
     public ICommand ContinueCommand { get; }
 
     private readonly AppControl appControl;
+    private readonly LanguageService languageService;
+    private string selectedLanguageCode;
 
-    public StartPage(AppControl appControl)
+    public StartPage(AppControl appControl, LanguageService languageService)
     {
         InitializeComponent();
         this.appControl = appControl;
+        this.languageService = languageService;
+        selectedLanguageCode = languageService.GetCurrentLanguage();
 
         OpenRegionPopupCommand = new Command(() =>
         {
@@ -40,10 +46,12 @@ public partial class StartPage : BasePage
 
         LanguageItems = new ObservableCollection<PopupItemModel>
         {
-            new() { Text = "O'zbekcha", LeftImage = "flag_uz.png", RightImage = "check_gray.png" },
-            new() { Text = "Русский", LeftImage = "flag_ru.png" },
-            new() { Text = "English", LeftImage = "flag_en.png" }
+            new() { Code = AppConstants.UZ, Text = AppConstants.LAN_UZBEK, LeftImage = AppConstants.LAN_ICON_UZBEK },
+            new() { Code = AppConstants.RU, Text = AppConstants.LAN_RUSSIAN, LeftImage = AppConstants.LAN_ICON_RUSSIAN },
+            new() { Code = AppConstants.EN, Text = AppConstants.LAN_ENGLISH, LeftImage = AppConstants.LAN_ICON_ENGLISH }
         };
+
+        RefreshLanguageSelection();
 
         RegionSelectedCommand = new Command<PopupItemModel>(OnRegionSelected);
         LanguageSelectedCommand = new Command<PopupItemModel>(OnLanguageSelected);
@@ -76,11 +84,11 @@ public partial class StartPage : BasePage
 
     private void OnLanguageSelected(PopupItemModel item)
     {
-        foreach (var language in LanguageItems)
-            language.RightImage = string.Empty;
-
-        item.RightImage = "check_gray.png";
-
+        selectedLanguageCode = string.IsNullOrWhiteSpace(item.Code) ? AppConstants.UZ : item.Code;
+        RefreshLanguageSelection();
+        LanguageInput.Text = item.Text;
+        LanguageInput.MiddleImage = item.LeftImage;
+        LanguagePopup.Refresh();
         LanguagePopup.IsVisible = false;
     }
 
@@ -97,7 +105,18 @@ public partial class StartPage : BasePage
 
     private async void OnContinue()
     {
+        languageService.SetCulture(selectedLanguageCode);
         await AppNavigatorService.NavigateTo(nameof(OnboardingPage));
+    }
+
+    private void RefreshLanguageSelection()
+    {
+        foreach (var language in LanguageItems)
+            language.RightImage = language.Code == selectedLanguageCode ? "check_gray.png" : string.Empty;
+
+        var selected = LanguageItems.FirstOrDefault(x => x.Code == selectedLanguageCode) ?? LanguageItems.First();
+        LanguageInput.Text = selected.Text;
+        LanguageInput.MiddleImage = selected.LeftImage;
     }
 }
 

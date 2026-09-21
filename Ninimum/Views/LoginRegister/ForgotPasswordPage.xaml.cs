@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -60,8 +61,8 @@ public partial class ForgotPasswordPage : BasePage, INotifyPropertyChanged, IQue
             if (string.IsNullOrWhiteSpace(PhoneNumber))
             {
                 await AlertService.ShowAlertAsync(
-                    "Ma'lumot",
-                    "Telefon raqam topilmadi. Iltimos, kirish sahifasiga qayting.");
+                    AppResource.InformationAscii,
+                    AppResource.PhoneNumberNotFoundPleaseReturnToThe);
                 return;
             }
 
@@ -77,8 +78,8 @@ public partial class ForgotPasswordPage : BasePage, INotifyPropertyChanged, IQue
                 if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
                 {
                     await AlertService.ShowAlertAsync(
-                        "Muvaffaqiyatli",
-                        "Vaqtinchalik parol telefon raqamingizga SMS orqali yuborildi.");
+                        AppResource.Success,
+                        AppResource.ATemporaryPasswordWasSentToYourPhone);
 
                     await AppNavigatorService.NavigateTo("..");
                     return;
@@ -87,18 +88,18 @@ public partial class ForgotPasswordPage : BasePage, INotifyPropertyChanged, IQue
                 if (response.resultCode == ApiResult.USER_NOT_EXIST.GetCodeToString())
                 {
                     await AlertService.ShowAlertAsync(
-                        "Ma'lumot",
-                        "Bu telefon raqam bilan foydalanuvchi topilmadi.");
+                        AppResource.InformationAscii,
+                        AppResource.NoUserWasFoundWithThisPhoneNumber);
                     return;
                 }
 
                 await AlertService.ShowAlertAsync(
-                    "Xatolik",
-                    response.resultMsg ?? "Vaqtinchalik parolni yuborib bo'lmadi.");
+                    AppResource.Error,
+                    response.resultMsg ?? AppResource.CouldNotSendTheTemporaryPassword);
             }
             catch (Exception ex)
             {
-                await AlertService.ShowAlertAsync("Xatolik", ex.Message);
+                await AlertService.ShowAlertAsync(AppResource.Error, ex.Message);
             }
             finally
             {

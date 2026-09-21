@@ -9,6 +9,7 @@ using Models.Responses;
 using Ninimum.Models.Tariff;
 using Ninimum.Services;
 using Utils;
+using Ninimum.Resources.Languages;
 
 namespace Ninimum.Views.MyTariff;
 
@@ -23,6 +24,8 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
     private string _currentEndDate = string.Empty;
     private string _currentRemainingText = string.Empty;
     private string _currentPrice = string.Empty;
+    private long _currentSubscriptionId;
+    private bool _isCancellingTariff;
 
     public ObservableCollection<TariffItem> TariffHistory { get; } = new();
     public bool HasHistory => TariffHistory.Any();
@@ -90,6 +93,7 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
 
     public ICommand ToggleHistoryCommand { get; }
     public ICommand JoinTariffCommand { get; }
+    public ICommand CancelTariffCommand { get; }
 
     public MyTariffPage(UserApiService apiService, AppControl appControl)
     {
@@ -100,6 +104,7 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
 
         ToggleHistoryCommand = new Command(() => IsHistoryVisible = !IsHistoryVisible);
         JoinTariffCommand = new Command(async () => await AppNavigatorService.NavigateTo(nameof(TariffsPage)));
+        CancelTariffCommand = new Command(async () => await CancelTariffAsync());
 
         BindingContext = this;
     }
@@ -135,7 +140,8 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
 
             if (HasActiveSubscription)
             {
-                CurrentTariffName = active!.tariffName;
+                _currentSubscriptionId = active!.subscriptionId;
+                CurrentTariffName = active.tariffName;
                 CurrentStartDate = FormatDate(active.startDate);
                 CurrentEndDate = FormatDate(active.endDate);
                 CurrentRemainingText = GetRemainingDaysText(active.endDate);
@@ -143,6 +149,7 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
             }
             else
             {
+                _currentSubscriptionId = 0;
                 CurrentTariffName = string.Empty;
                 CurrentStartDate = string.Empty;
                 CurrentEndDate = string.Empty;
@@ -150,7 +157,7 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
                 CurrentPrice = string.Empty;
             }
 
-            await LoadHistoryAsync(request);
+            await LoadHistoryAsync(request, HasActiveSubscription ? active : null);
         }
         catch
         {
@@ -164,22 +171,95 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
         }
     }
 
-    private async Task LoadHistoryAsync(ActiveSubscriptionRequest request)
+    private async Task CancelTariffAsync()
+    {
+        if (_isCancellingTariff || !HasActiveSubscription || _currentSubscriptionId <= 0)
+            return;
+
+        bool confirmed = await DisplayAlert(
+            AppResource.CancelTariff,
+            AppResource.CancelTariffConfirmation,
+            AppResource.CancelTariff,
+            AppResource.DoNotCancel);
+
+        if (!confirmed)
+            return;
+
+        try
+        {
+            _isCancellingTariff = true;
+            loading.ShowLoading = true;
+
+            Response response = await apiService.CancelSubscription(new CancelSubscriptionRequest
+            {
+                userId = appControl.userDto.id ?? 0,
+                subscriptionId = _currentSubscriptionId
+            });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                await DisplayAlert(
+                    AppResource.Error,
+                    response.resultMsg ?? AppResource.CouldNotCancelTariff,
+                    AppResource.Close);
+                return;
+            }
+
+            await DisplayAlert(
+                AppResource.Tariff,
+                AppResource.TariffCancelledSuccessfully,
+                AppResource.Close);
+
+            await LoadTariffAsync();
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[ERROR] CancelTariffAsync => {ex}");
+            await DisplayAlert(AppResource.Error, AppResource.CouldNotCancelTariff, AppResource.Close);
+        }
+        finally
+        {
+            loading.ShowLoading = false;
+            _isCancellingTariff = false;
+        }
+    }
+
+    private async Task LoadHistoryAsync(ActiveSubscriptionRequest request, Ninimum.Models.Dto.SubscriptionDto? active)
     {
         SubscriptionListResponse historyResponse = await apiService.GetSubscriptionList(request);
 
         TariffHistory.Clear();
 
+        // Show the currently active tariff first. It has a subscription date, but no
+        // "subscription ended" row because the user is still using this tariff.
+        if (active != null)
+        {
+            TariffHistory.Add(new TariffItem
+            {
+                Plan = active.tariffName,
+                StartDate = FormatDate(active.startDate),
+                EndDate = string.Empty,
+                Price = FormatPrice(active.price),
+                IsActive = true
+            });
+        }
+
         if (historyResponse.resultCode == ApiResult.SUCCESS.GetCodeToString() && historyResponse.resultData != null)
         {
             foreach (var item in historyResponse.resultData)
             {
+                // A cancelled PENDING tariff was never actually activated, so it has
+                // no start date and should not appear in the user's tariff history.
+                if (string.IsNullOrWhiteSpace(item.startDate))
+                    continue;
+
                 TariffHistory.Add(new TariffItem
                 {
                     Plan = item.tariffName,
                     StartDate = FormatDate(item.startDate),
                     EndDate = FormatDate(item.endDate),
-                    Price = FormatPrice(item.price)
+                    Price = FormatPrice(item.price),
+                    IsActive = false
                 });
             }
         }
@@ -204,12 +284,12 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
             return string.Empty;
 
         int days = Math.Max(0, (end.Date - DateTime.Today).Days);
-        return $"{days} kun qoldi";
+        return string.Format(AppResource.DaysRemaining, days);
     }
 
     private static string FormatPrice(int price)
     {
-        return $"{price:N0} so’m".Replace(",", " ");
+        return string.Format(AppResource.UZS_02854f, price).Replace(",", " ");
     }
 
     private void OnPropertyChanged([CallerMemberName] string? propertyName = null)

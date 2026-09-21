@@ -2,6 +2,7 @@
 <ContentView
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:vm="clr-namespace:Ninimum.Models.Main"
     x:Class="Ninimum.Views.Main.Components.ProductItemView"
     x:DataType="vm:ProductItemModel"
@@ -78,7 +79,7 @@
                 TextColor="#96979B" />
 
             <Button
-                Text="Ertaga"
+                Text="{x:Static language:AppResource.Tomorrow}"
                 Command="{Binding Source={x:Reference ThisView}, Path=AddToCartCommand}"
                 CommandParameter="{Binding .}"
                 BackgroundColor="#FFF2F3"

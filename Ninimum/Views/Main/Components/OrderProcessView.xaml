@@ -3,6 +3,7 @@
 <ContentView
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     x:Class="Ninimum.Views.Main.Components.OrderProcessView"
     x:Name="ThisView">
 
@@ -167,17 +168,17 @@
 
                             <Label
                                 Grid.Column="0"
-                                Text="Qabul qilindi"
+                                Text="{x:Static language:AppResource.Received}"
                                 Style="{StaticResource StepLabelStyle}" />
 
                             <Label
                                 Grid.Column="1"
-                                Text="Tayyorlanmoqda"
+                                Text="{x:Static language:AppResource.Preparing}"
                                 Style="{StaticResource StepLabelStyle}" />
 
                             <Label
                                 Grid.Column="2"
-                                Text="Yo‘lda"
+                                Text="{x:Static language:AppResource.OnTheWay}"
                                 Style="{StaticResource StepLabelStyle}" />
 
                         </Grid>
@@ -223,13 +224,13 @@
                         VerticalOptions="Center">
 
                         <Label
-                            Text="Buyurtma holati tekshirilmoqda..."
+                            Text="{x:Static language:AppResource.CheckingOrderStatus}"
                             FontSize="14"
                             TextColor="#22292F"
                             FontFamily="{StaticResource FontSFMedium}" />
 
                         <Label
-                            Text="Iltimos, biroz kuting"
+                            Text="{x:Static language:AppResource.PleaseWaitAMoment}"
                             FontSize="12"
                             TextColor="#96979B"
                             FontFamily="{StaticResource FontSFRegular}" />

@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Collections.ObjectModel;
 using Ninimum.Models;
 
@@ -18,7 +19,7 @@ public partial class ChildrenPage : BasePage
                 FirstName = "Toshmat",
                 LastName = "Eshmatov",
                 BirthDate = "26.03.2000",
-                Age = "5 yosh",
+                Age = AppResource.Text5YearsOld,
                 Gender = "Erkak"
             },
             new ChildrenInfo
@@ -26,7 +27,7 @@ public partial class ChildrenPage : BasePage
                 FirstName = "Toshmat",
                 LastName = "Eshmatov",
                 BirthDate = "26.03.2000",
-                Age = "5 yosh",
+                Age = AppResource.Text5YearsOld,
                 Gender = "Erkak"
             }
         };

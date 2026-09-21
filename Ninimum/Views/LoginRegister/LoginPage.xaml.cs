@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -73,7 +74,7 @@ public partial class LoginPage : BasePage
 
         if (string.IsNullOrWhiteSpace(viewModel.PhoneNumber))
         {
-            await AlertService.ShowAlertAsync("Ma'lumot", "Avval telefon raqamingizni kiriting.");
+            await AlertService.ShowAlertAsync(AppResource.InformationAscii, AppResource.EnterYourPhoneNumberFirst);
             return;
         }
 

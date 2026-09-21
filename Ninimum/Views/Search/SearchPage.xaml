@@ -2,12 +2,15 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     xmlns:main_components="clr-namespace:Ninimum.Views.Main.Components"
     xmlns:models="clr-namespace:Ninimum.Models.Main"
     xmlns:local="clr-namespace:Ninimum.Views.Search"
     x:Class="Ninimum.Views.Search.SearchPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     x:Name="ThisPage"
     BackgroundColor="White">
 
@@ -17,11 +20,11 @@
             RowDefinitions="Auto,Auto,*"
             RowSpacing="24">
 
-            <components:PageHeaderView Title="Qidiruv"/>
+            <components:PageHeaderView Title="{x:Static language:AppResource.SearchTitle}"/>
     
             <components:InputView
                 Grid.Row="1"
-                Title="Mahsulotni qidiring"
+                Title="{x:Static language:AppResource.SearchForAProduct}"
                 LeftIcon="ic_serach.png"
                 LeftIconSize="26"
                 Text="{Binding SearchText}"
@@ -50,7 +53,7 @@
                 Margin="10,0,10,0">
 
                 <Label
-                    Text="Oxirgi qidiruvlar"
+                    Text="{x:Static language:AppResource.RecentSearches}"
                     TextColor="#22292F"
                     FontSize="17"
                     FontFamily="{StaticResource FontSFMedium}" />
@@ -71,7 +74,7 @@
 
                     <CollectionView.EmptyView>
                         <Label
-                            Text="Hozircha qidiruvlar yo‘q"
+                            Text="{x:Static language:AppResource.NoRecentSearchesYet}"
                             TextColor="#96979B"
                             FontSize="14"
                             FontFamily="{StaticResource FontSFRegular}"

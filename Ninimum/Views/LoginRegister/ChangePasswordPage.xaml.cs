@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -44,19 +45,19 @@ public partial class ChangePasswordPage : BasePage
 
         if (string.IsNullOrWhiteSpace(password))
         {
-            await AlertService.ShowAlertAsync("Xato", "Yangi parolni kiriting.");
+            await AlertService.ShowAlertAsync(AppResource.Error, AppResource.EnterANewPassword);
             return;
         }
 
         if (password.Length < 6)
         {
-            await AlertService.ShowAlertAsync("Xato", "Parol kamida 6 ta belgidan iborat bo‘lishi kerak.");
+            await AlertService.ShowAlertAsync(AppResource.Error, AppResource.PasswordMustContainAtLeast6Characters);
             return;
         }
 
         if (password != confirmPassword)
         {
-            await AlertService.ShowAlertAsync("Xato", "Parollar mos emas.");
+            await AlertService.ShowAlertAsync(AppResource.Error, AppResource.PasswordsDoNotMatch_aadae6);
             return;
         }
 
@@ -72,12 +73,12 @@ public partial class ChangePasswordPage : BasePage
 
         if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
         {
-            await AlertService.ShowAlertAsync("Success", "Parol muvaffaqiyatli yangilandi.");
+            await AlertService.ShowAlertAsync(AppResource.Success, AppResource.PasswordUpdatedSuccessfully);
             await appControl.Login(PhoneNumber, password);
         }
         else
         {
-            await AlertService.ShowAlertAsync("Xato", response.resultMsg);
+            await AlertService.ShowAlertAsync(AppResource.Error, response.resultMsg);
         }
     }
 }

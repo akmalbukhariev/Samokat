@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using Utils;
 
 namespace Ninimum.Views.Main.Components;
@@ -182,52 +183,52 @@ public partial class OrderProcessView : ContentView
         {
             case "PENDING":
                 TitleLabel.Text =
-                    $"{number} sonli buyurtma qabul qilindi";
+                    string.Format(AppResource.OrderReceived_7a2c1d, number);
 
                 SubtitleLabel.Text =
-                    "Buyurtmangiz holati tekshirilmoqda.";
+                    AppResource.YourOrderStatusIsBeingChecked;
                 break;
 
 
             case "CONFIRMED":
                 TitleLabel.Text =
-                    $"{number} sonli buyurtma qabul qilindi";
+                    string.Format(AppResource.OrderReceived_7a2c1d, number);
 
                 SubtitleLabel.Text =
-                    "To‘lov muvaffaqiyatli amalga oshirildi. Buyurtmangiz tez orada tayyorlanadi.";
+                    AppResource.PaymentWasSuccessfulYourOrderWillBePrepared;
                 break;
 
 
             case "PREPARING":
                 TitleLabel.Text =
-                    $"{number} sonli buyurtma tayyorlanmoqda";
+                    string.Format(AppResource.OrderIsBeingPrepared, number);
 
                 SubtitleLabel.Text =
-                    "Mahsulotlaringiz yetkazib berish uchun tayyorlanmoqda.";
+                    AppResource.YourProductsAreBeingPreparedForDelivery;
                 break;
 
 
             case "ON_THE_WAY":
                 TitleLabel.Text =
-                    $"{number} sonli buyurtma yo‘lda";
+                    string.Format(AppResource.OrderIsOnTheWay, number);
 
                 SubtitleLabel.Text =
-                    "Buyurtmangiz sizga yetkazib berilmoqda.";
+                    AppResource.YourOrderIsBeingDelivered;
                 break;
 
 
             case "DELIVERED":
                 TitleLabel.Text =
-                    $"{number} sonli buyurtma yetkazib berildi";
+                    string.Format(AppResource.OrderDelivered, number);
 
                 SubtitleLabel.Text =
-                    "Buyurtmangiz muvaffaqiyatli yetkazib berildi.";
+                    AppResource.YourOrderWasDeliveredSuccessfully;
                 break;
 
 
             default:
                 TitleLabel.Text =
-                    $"{number} sonli buyurtma";
+                    string.Format(AppResource.Order, number);
 
                 SubtitleLabel.Text =
                     string.Empty;

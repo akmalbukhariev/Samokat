@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <page:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
              xmlns:page="clr-namespace:Ninimum.Views"
              xmlns:components="clr-namespace:Ninimum.Components"
              BackgroundColor="White"
-             x:Class="Ninimum.Views.Startup.StartPage">
+             x:Class="Ninimum.Views.Startup.StartPage"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False">
 
        <Grid RowDefinitions="*,Auto,30,Auto,40,Auto,*,Auto,50"
              ColumnDefinitions="30,*,30">
@@ -28,11 +31,12 @@
                                    Grid.Row="3"
                                    Spacing="12">
                      <components:InputView x:Name="RegionInput"
-                                          Title="Hudud:"
+                                          Title="{x:Static language:AppResource.Region_2bb95f}"
                                           Text="Qashqadaryo"
                                           IsReadOnly="True"
                                           TapCommand="{Binding OpenRegionPopupCommand}"/>
-                     <components:InputView Title="Til:"
+                     <components:InputView x:Name="LanguageInput"
+                                          Title="{x:Static language:AppResource.Language_802fc1}"
                                           Text="O'zbekcha"
                                           MiddleImage="flag_uz.png"
                                           IsReadOnly="True"
@@ -42,7 +46,7 @@
               <components:CustomActionButton x:Name="btnContinue"
                                              Grid.Column="1"
                                              Grid.Row="5"
-                                             ButtonText="Davom etish"
+                                             ButtonText="{x:Static language:AppResource.Continue}"
                                              ButtonBackgroundColor="#FF4B4B"
                                              ButtonTextColor="White"
                                              ButtonImageSource="right.png"

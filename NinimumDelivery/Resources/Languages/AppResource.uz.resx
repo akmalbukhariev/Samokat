@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Kuryer kirishi</value>
+  </data>
+  <data name="LoginSubtitle" xml:space="preserve">
+    <value>Ninimum tomonidan berilgan kuryer ID va parol bilan tizimga kiring.</value>
+  </data>
+  <data name="WorkerId" xml:space="preserve">
+    <value>Kuryer ID</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Parol</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Kirish</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Kuryer ID yoki parol noto‘g‘ri.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Xatolik</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>Tushunarli</value>
+  </data>
+  <data name="Deliveries" xml:space="preserve">
+    <value>Yetkazmalar</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>Tarix</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Salom, {0}</value>
+  </data>
+  <data name="TodaySummary" xml:space="preserve">
+    <value>Bugun</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Yangi</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Jarayonda</value>
+  </data>
+  <data name="CompletedToday" xml:space="preserve">
+    <value>Bugun tugatildi</value>
+  </data>
+  <data name="AvailableOrders" xml:space="preserve">
+    <value>Yangi yetkazmalar</value>
+  </data>
+  <data name="MyDeliveries" xml:space="preserve">
+    <value>Mening yetkazmalarim</value>
+  </data>
+  <data name="NoAvailableOrders" xml:space="preserve">
+    <value>Hozircha yangi yetkazmalar yo‘q.</value>
+  </data>
+  <data name="NoActiveOrders" xml:space="preserve">
+    <value>Sizda faol yetkazmalar yo‘q.</value>
+  </data>
+  <data name="NoHistory" xml:space="preserve">
+    <value>Yetkazmalar tarixi bo‘sh.</value>
+  </data>
+  <data name="ProductsCount" xml:space="preserve">
+    <value>{0} ta mahsulot</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Ko‘rish</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>Kutilmoqda</value>
+  </data>
+  <data name="Accepted" xml:space="preserve">
+    <value>Qabul qilindi</value>
+  </data>
+  <data name="OnTheWay" xml:space="preserve">
+    <value>Yo‘lda</value>
+  </data>
+  <data name="Delivered" xml:space="preserve">
+    <value>Yetkazildi</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Yetkazilmadi</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>Bekor qilindi</value>
+  </data>
+  <data name="DeliveryDetail" xml:space="preserve">
+    <value>Yetkazma ma’lumoti</value>
+  </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Mijoz</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Manzil</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Telefon</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Buyurtma</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Jami</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Mahsulotlar</value>
+  </data>
+  <data name="ClaimDelivery" xml:space="preserve">
+    <value>Yetkazmani qabul qilish</value>
+  </data>
+  <data name="ClaimConfirmTitle" xml:space="preserve">
+    <value>Yetkazmani qabul qilasizmi?</value>
+  </data>
+  <data name="ClaimConfirmMessage" xml:space="preserve">
+    <value>Qabul qilgandan so‘ng mijozning telefon raqami ko‘rinadi va yetkazma sizga biriktiriladi.</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Qabul qilish</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Yopish</value>
+  </data>
+  <data name="StartDelivery" xml:space="preserve">
+    <value>Yo‘lga chiqish</value>
+  </data>
+  <data name="MarkDelivered" xml:space="preserve">
+    <value>Yetkazib berdim</value>
+  </data>
+  <data name="CannotDeliver" xml:space="preserve">
+    <value>Yetkazib bo‘lmadi</value>
+  </data>
+  <data name="CallCustomer" xml:space="preserve">
+    <value>Mijozga qo‘ng‘iroq</value>
+  </data>
+  <data name="OpenMap" xml:space="preserve">
+    <value>Xaritani ochish</value>
+  </data>
+  <data name="PaymentPaid" xml:space="preserve">
+    <value>To‘langan</value>
+  </data>
+  <data name="StatusUpdated" xml:space="preserve">
+    <value>Yetkazma holati yangilandi.</value>
+  </data>
+  <data name="ActionFailed" xml:space="preserve">
+    <value>Amalni bajarib bo‘lmadi. Qayta urinib ko‘ring.</value>
+  </data>
+  <data name="DeliveryCompletedConfirmTitle" xml:space="preserve">
+    <value>Yetkazilganini tasdiqlash</value>
+  </data>
+  <data name="DeliveryCompletedConfirmMessage" xml:space="preserve">
+    <value>Faqat buyurtma mijozga topshirilgandan keyin tasdiqlang.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Tasdiqlash</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>Ishga tayyor</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>Oflayn</value>
+  </data>
+  <data name="Availability" xml:space="preserve">
+    <value>Ish holati</value>
+  </data>
+  <data name="Vehicle" xml:space="preserve">
+    <value>Transport</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Til</value>
+  </data>
+  <data name="Uzbek" xml:space="preserve">
+    <value>O‘zbekcha</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Chiqish</value>
+  </data>
+  <data name="LogoutConfirmTitle" xml:space="preserve">
+    <value>Hisobdan chiqasizmi?</value>
+  </data>
+  <data name="LogoutConfirmMessage" xml:space="preserve">
+    <value>Yetkazmalarni davom ettirish uchun qayta kirishingiz kerak bo‘ladi.</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Yangilash</value>
+  </data>
+  <data name="ConnectionError" xml:space="preserve">
+    <value>Ninimum serveriga ulanib bo‘lmadi.</value>
+  </data>
+  <data name="NotAssignedPhone" xml:space="preserve">
+    <value>Yetkazmani qabul qilgandan keyin ko‘rinadi</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Orqaga</value>
+  </data>
+  <data name="DeliveryFailedTitle" xml:space="preserve">
+    <value>Yetkazishda muammo</value>
+  </data>
+  <data name="DeliveryFailedMessage" xml:space="preserve">
+    <value>Yetkazmani yetkazilmadi deb belgilaysizmi? Admin holatni ko‘rib, qayta yetkazishni tashkil qilishi mumkin.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ha</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Yo‘q</value>
+  </data>
+</root>

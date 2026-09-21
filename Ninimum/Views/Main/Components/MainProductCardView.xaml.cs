@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Windows.Input;
@@ -117,7 +118,7 @@ public partial class MainProductCardView : ContentView
             nameof(ActionButtonText),
             typeof(string),
             typeof(MainProductCardView),
-            "+ Ertaga");
+            AppResource.PlusTomorrow);
 
     public static readonly BindableProperty IsCartLoadingProperty =
     BindableProperty.Create(

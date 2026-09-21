@@ -2,9 +2,12 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.Authorization.AuthorizationPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     BackgroundColor="White"
     x:Name="RootPage">
 
@@ -16,11 +19,11 @@
 
                 <!-- Header -->
                 <components:PageHeaderView
-                    Title="Avtorizatsya"/>
+                    Title="{x:Static language:AppResource.Authorization}"/>
 
                 <!-- Description -->
                 <Label
-                    Text="Iltimos, telefon raqamingizni kiriting"
+                    Text="{x:Static language:AppResource.PleaseEnterYourPhoneNumber}"
                     HorizontalTextAlignment="Center"
                     TextColor="#96979B"
                     FontSize="17"
@@ -29,7 +32,7 @@
 
                 <!-- Input -->
                 <components:InputView
-                    Title="Telefon raqam"
+                    Title="{x:Static language:AppResource.PhoneNumber}"
                     LeftIcon="ic_phone.png"
                     Keyboard="Telephone"
                     Text="{Binding PhoneNumber}" 
@@ -38,7 +41,7 @@
                 <!-- Button -->
                 <components:CustomActionButton
                         x:Name="btnSend"
-                        ButtonText="Yuborish"
+                        ButtonText="{x:Static language:AppResource.Send}"
                         ButtonBackgroundColor="#FD473C"
                         ButtonTextColor="White"
                         ButtonImageSource="right.png"
@@ -46,7 +49,7 @@
 
                 <!-- Footer -->
                 <Label
-                    Text="Ushbu telefon raqam orqali siz platformadan unumli foydalanishingiz mumkin.Telefon raqamingizni to’g’ri kiritishingiz juda ham muhim. Telefon raqamingizni kiritishingiz orqali siz ommaviy ofertaga roziligingizni bildirasiz."
+                    Text="{x:Static language:AppResource.YouCanUseThePlatformWithThisPhone}"
                     HorizontalTextAlignment="Center"
                     TextColor="#96979B"
                     FontSize="17"

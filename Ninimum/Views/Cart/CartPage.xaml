@@ -2,23 +2,26 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     xmlns:local="clr-namespace:Ninimum.Views.Cart"
     x:Class="Ninimum.Views.Cart.CartPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="True"
     x:Name="ThisPage"
     BackgroundColor="White">
 
     <Grid>
         <Grid
-            Padding="20,0,20,20"
-            RowDefinitions="Auto,Auto,*,10,Auto, Auto">
+            Padding="20,0,20,0"
+            RowDefinitions="Auto,Auto,*,0,Auto,Auto">
             
             <!-- Header -->
             <components:PageHeaderView
                 Grid.Row="0"
                 ShowBack="false"
-                Title="Savatcha" />
+                Title="{x:Static language:AppResource.Cart}" />
 
             <!-- Top actions -->
             <Grid
@@ -94,13 +97,13 @@
                             HorizontalOptions="Center"
                             VerticalOptions="Center">
                             <Label
-                                Text="Savatchangiz hozircha bo'sh"
+                                Text="{x:Static language:AppResource.YourCartIsEmpty}"
                                 HorizontalTextAlignment="Center"
                                 TextColor="#22292F"
                                 FontSize="21"
                                 FontFamily="{StaticResource FontSFMedium}" />
                             <Label
-                                Text="Mahsulotlarni savatchaga qo'shganingizda ular shu yerda ko'rinadi."
+                                Text="{x:Static language:AppResource.ProductsYouAddToTheCartWillAppear}"
                                 HorizontalTextAlignment="Center"
                                 TextColor="#96979B"
                                 FontSize="16"
@@ -151,7 +154,7 @@
                                                     FontFamily="{StaticResource FontSFBold}"
                                                     TextColor="#22292F" />
                                                 <Span
-                                                    Text=" so’mga xarid qilishingiz mumkin."
+                                                    Text="{x:Static language:AppResource.UZSAvailableForPurchase}"
                                                     FontSize="18"
                                                     FontFamily="{StaticResource FontSFRegular}"
                                                     TextColor="#22292F" />
@@ -169,7 +172,7 @@
 
                                     <Label
                                         IsVisible="{Binding HasActiveSubscription, Converter={StaticResource InverseBoolConverter}}"
-                                        Text="Buning uchun siz Tarif rejasiga ulanishingiz kerak bo’ladi."
+                                        Text="{x:Static language:AppResource.ToUseThisYouNeedToSubscribeTo}"
                                         TextColor="#22292F"
                                         FontSize="17"
                                         FontFamily="{StaticResource FontSFRegular}"
@@ -177,7 +180,7 @@
 
                                     <Label
                                         IsVisible="{Binding HasActiveSubscription, Converter={StaticResource InverseBoolConverter}}"
-                                        Text="Iltimos birorta Tarif rejasini tanlang va maxsus chegirmalarga ega bo’ling"
+                                        Text="{x:Static language:AppResource.ChooseATariffPlanAndGetSpecialDiscounts}"
                                         TextColor="#22292F"
                                         FontSize="17"
                                         FontFamily="{StaticResource FontSFRegular}"
@@ -186,7 +189,7 @@
 
                                 <Button
                                     IsVisible="{Binding HasActiveSubscription, Converter={StaticResource InverseBoolConverter}}"
-                                    Text="Tarifga a’zo bo‘lish"
+                                    Text="{x:Static language:AppResource.SubscribeToATariff}"
                                     HeightRequest="64"
                                     CornerRadius="16"
                                     BackgroundColor="#FF4A3F"
@@ -231,7 +234,7 @@
 
                 <Button
                     Grid.Column="1"
-                    Text="Rasmiylashtirish"
+                    Text="{x:Static language:AppResource.Checkout}"
                     FontSize="18"
                     TextColor="White"
                     FontFamily="{StaticResource FontSFMedium}"

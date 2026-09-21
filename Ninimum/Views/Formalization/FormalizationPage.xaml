@@ -2,22 +2,25 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.Formalization.FormalizationPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     x:Name="ThisPage"
     BackgroundColor="White">
 
     <Grid RowDefinitions="Auto,20,*,Auto,8">
 
-        <components:PageHeaderView Title="Rasmiylashtirish" />
+        <components:PageHeaderView Title="{x:Static language:AppResource.Checkout}" />
 
         <ScrollView Grid.Row="2">
             <VerticalStackLayout Padding="16,0,16,30" Spacing="24">
 
                 <!-- Address -->
                 <Label
-                    Text="Yetkazib berish manzili"
+                    Text="{x:Static language:AppResource.DeliveryAddress}"
                     FontSize="22"
                     TextColor="#22292F"
                     FontFamily="{StaticResource FontSFMedium}" />
@@ -41,7 +44,7 @@
                         <Label
                             x:Name="AddressLabel"
                             Grid.Column="1"
-                            Text="Qashqadaryo viloyati, Shahrisabz shahar, Mo’ljal: 25-maktab"
+                            Text="{x:Static language:AppResource.SampleDeliveryAddress}"
                             FontSize="17"
                             TextColor="#22292F"
                             FontFamily="{StaticResource FontSFRegular}"
@@ -58,7 +61,7 @@
 
                 <!-- Products -->
                 <Label
-                    Text="Mahsulotlar"
+                    Text="{x:Static language:AppResource.Products}"
                     FontSize="22"
                     TextColor="#22292F"
                     FontFamily="{StaticResource FontSFMedium}" />
@@ -130,7 +133,7 @@
 
                             <Label
                                 x:Name="ProductsToggleLabel"
-                                Text="2 ta mahsulot ko‘rish"
+                                Text="{x:Static language:AppResource.View2Products}"
                                 FontSize="17"
                                 TextColor="#22292F"
                                 FontFamily="{StaticResource FontSFMedium}" />
@@ -188,7 +191,7 @@
                 <!-- Payment -->
                 <Label
                     IsVisible="False"
-                    Text="To’lov usuli"
+                    Text="{x:Static language:AppResource.PaymentMethod}"
                     FontSize="22"
                     TextColor="#22292F"
                     FontFamily="{StaticResource FontSFMedium}" />
@@ -228,7 +231,7 @@
 
                         <VerticalStackLayout Grid.Column="2" Spacing="3">
                             <Label
-                                Text="Karta orqali"
+                                Text="{x:Static language:AppResource.ByCard}"
                                 FontSize="17"
                                 TextColor="#22292F"
                                 FontFamily="{StaticResource FontSFMedium}" />
@@ -261,7 +264,7 @@
 
                 <!-- Summary -->
                 <Label
-                    Text="Buyurtma tavsiloti"
+                    Text="{x:Static language:AppResource.OrderDetails}"
                     FontSize="22"
                     TextColor="#22292F"
                     FontFamily="{StaticResource FontSFMedium}" />
@@ -276,7 +279,7 @@
                     <VerticalStackLayout Spacing="16">
                         <Grid ColumnDefinitions="*,Auto">
                             <Label
-                                Text="Mahsulotlar soni:"
+                                Text="{x:Static language:AppResource.NumberOfProducts}"
                                 FontSize="16"
                                 TextColor="#22292F"
                                 FontFamily="{StaticResource FontSFRegular}" />
@@ -290,7 +293,7 @@
 
                         <Grid ColumnDefinitions="*,Auto">
                             <Label
-                                Text="Mahsulotlar qiymati:"
+                                Text="{x:Static language:AppResource.ProductsTotal}"
                                 FontSize="16"
                                 TextColor="#22292F"
                                 FontFamily="{StaticResource FontSFRegular}" />
@@ -304,7 +307,7 @@
 
                         <Grid ColumnDefinitions="*,Auto">
                             <Label
-                                Text="Yetkazib berish:"
+                                Text="{x:Static language:AppResource.Delivery}"
                                 FontSize="16"
                                 TextColor="#22292F"
                                 FontFamily="{StaticResource FontSFRegular}" />
@@ -320,7 +323,7 @@
 
                         <Grid ColumnDefinitions="*,Auto">
                             <Label
-                                Text="Jami to’lov:"
+                                Text="{x:Static language:AppResource.TotalPayment}"
                                 FontSize="17"
                                 TextColor="#22292F"
                                 FontFamily="{StaticResource FontSFRegular}" />
@@ -335,7 +338,7 @@
                 </Border>
 
                 <Label
-                    Text="🔒 Ma’lumotlaringiz himoyalangan"
+                    Text="{x:Static language:AppResource.YourDataIsProtected}"
                     HorizontalTextAlignment="Center"
                     FontSize="14"
                     TextColor="#96979B"
@@ -346,7 +349,7 @@
 
         <Button
             Grid.Row="3"
-            Text="Buyurtmani rasmiylashtirish"
+            Text="{x:Static language:AppResource.PlaceOrder}"
             FontFamily="{StaticResource FontSFMedium}"
             FontSize="18"
             CornerRadius="8"

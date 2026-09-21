@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -70,7 +71,7 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
 
             if (string.IsNullOrWhiteSpace(PhoneNumber))
             {
-                await AlertService.ShowAlertAsync("Info", "Telefon raqamni kiriting");
+                await AlertService.ShowAlertAsync(AppResource.Information, AppResource.EnterPhoneNumber);
                 return;
             }
 
@@ -90,7 +91,7 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
             }
             else
             {
-                await AlertService.ShowAlertAsync("Error", "SMS yuborilmadi");
+                await AlertService.ShowAlertAsync(AppResource.Error, AppResource.SMSWasNotSent);
             }
         });
     }
@@ -108,7 +109,7 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
         }
         else
         {
-            await AlertService.ShowAlertAsync("Error", "SMS yuborilmadi");
+            await AlertService.ShowAlertAsync(AppResource.Error, AppResource.SMSWasNotSent);
         }
     }
 
@@ -116,7 +117,7 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
     {
         if (!CheckVerificationCode(code))
         {
-            await AlertService.ShowAlertAsync("Code", "Kod noto‘g‘ri");
+            await AlertService.ShowAlertAsync(AppResource.Code, AppResource.IncorrectCode);
             return;
         }
 
@@ -155,14 +156,14 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
             {
                 if (checkPhoneNumberResponse.resultData.existsYn == "Y")
                 {
-                    await AlertService.ShowAlertAsync("Info", "Bu telefon raqam allaqachon ro‘yxatdan o‘tgan");
+                    await AlertService.ShowAlertAsync(AppResource.Information, AppResource.ThisPhoneNumberIsAlreadyRegistered);
                     return false;
                 }
 
                 return true;
             }
 
-            await AlertService.ShowAlertAsync("Error", checkPhoneNumberResponse?.resultMsg);
+            await AlertService.ShowAlertAsync(AppResource.Error, checkPhoneNumberResponse?.resultMsg);
             return false;
         }
         catch (Exception ex)

@@ -2,6 +2,7 @@
 <ContentView
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:vm="clr-namespace:Ninimum.ViewModels"
     x:Class="Ninimum.Views.Main.Components.MainHeaderView"
     x:DataType="vm:MainPageViewModel">
@@ -27,7 +28,7 @@
             VerticalOptions="Center">
 
             <Label
-                Text="Hudud"
+                Text="{x:Static language:AppResource.Region}"
                 FontSize="14"
                 FontFamily="{StaticResource FontSFMedium}"
                 TextColor="#96979B"

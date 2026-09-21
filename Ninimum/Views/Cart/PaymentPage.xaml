@@ -3,9 +3,12 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.Payment.PaymentPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     BackgroundColor="White">
 
     <Grid RowDefinitions="Auto,*">
@@ -14,7 +17,7 @@
         <components:PageHeaderView
             Grid.Row="0"
             ShowBack="true"
-            Title="To'lov"
+            Title="{x:Static language:AppResource.Payment}"
             BackCommand="{Binding BackCommand}"
             NavigateBackAutomatically="False" />
 
@@ -47,7 +50,7 @@
                         Color="#FD473C" />
 
                     <Label
-                        Text="To'lov sahifasi yuklanmoqda..."
+                        Text="{x:Static language:AppResource.LoadingPaymentPage}"
                         TextColor="#22292F"
                         FontSize="16"
                         HorizontalTextAlignment="Center"

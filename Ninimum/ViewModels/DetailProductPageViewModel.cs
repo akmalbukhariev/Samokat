@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Windows.Input;
@@ -55,16 +56,16 @@ public partial class DetailProductPageViewModel : ObservableObject
 
     [ObservableProperty] private string regularPrice = ".......";
 
-    [ObservableProperty] private string deliveryLabel = "Yetkazib berish";
+    [ObservableProperty] private string deliveryLabel = AppResource.Delivery_199c42;
 
-    [ObservableProperty] private string subscriptionDeliveryText = "bepul ∙ minut";
+    [ObservableProperty] private string subscriptionDeliveryText = AppResource.FreeMin;
 
-    [ObservableProperty] private string regularDeliveryText = "pullik ∙ 1 kun";
+    [ObservableProperty] private string regularDeliveryText = AppResource.Paid1Day;
 
     [ObservableProperty] private string description = ".......";
 
     [ObservableProperty] private int quantity = 1;
-    [ObservableProperty] private string finalPrice = "0 so’m";
+    [ObservableProperty] private string finalPrice = AppResource.Text0UZS;
     private double FinalPriceValue = 0.0;
     private bool hasActiveSubscription;
     private long? activeTariffSubscriptionId;
@@ -255,7 +256,7 @@ public partial class DetailProductPageViewModel : ObservableObject
             ProductTitle = product.name ?? "";
             Description = product.description ?? "";
             ProductLiked = product.liked;
-            StockText = $"Omborda {product.stock_quantity ?? 0} dona mavjud";
+            StockText = string.Format(AppResource.StockAvailable, product.stock_quantity ?? 0);
             Rating = (product.average_rating ?? 0).ToString("0.0");
             RatingStarCount = (int)Math.Round(product.average_rating ?? 0);
             Stars.Clear();
@@ -268,9 +269,9 @@ public partial class DetailProductPageViewModel : ObservableObject
                     ? "star.png"
                     : "star_gray.png");
             }
-            ReviewText = $"{product.review_count} sharhlar";
-            SubscriptionPrice = $"{product.subscription_price?.ToString("N0").Replace(",", " ") ?? "0"} so’m";
-            RegularPrice = $"{product.price?.ToString("N0").Replace(",", " ") ?? "0"} so’m";
+            ReviewText = string.Format(AppResource.ReviewsCount, product.review_count);
+            SubscriptionPrice = string.Format(AppResource.UZS_02854f, product.subscription_price ?? 0).Replace(",", " ");
+            RegularPrice = string.Format(AppResource.UZS_02854f, product.price ?? 0).Replace(",", " ");
 
             double regularPriceValue = product.price ?? 0.0;
             double subscriptionPriceValue = product.subscription_price ?? 0.0;
@@ -279,7 +280,7 @@ public partial class DetailProductPageViewModel : ObservableObject
                 ? subscriptionPriceValue
                 : regularPriceValue;
 
-            FinalPrice = $"{FinalPriceValue.ToString("N0").Replace(",", " ")} so’m";
+            FinalPrice = string.Format(AppResource.UZS_02854f, FinalPriceValue).Replace(",", " ");
             ProductImages.Clear();
 
             if (product.images != null && product.images.Count > 0)
@@ -437,7 +438,7 @@ public partial class DetailProductPageViewModel : ObservableObject
             Rating = item.average_rating ?? 0,
             ReviewCount = item.review_count ?? 0,
 
-            ActionText = "+ Ertaga",
+            ActionText = AppResource.PlusTomorrow,
 
             Images = images
         };
@@ -474,7 +475,7 @@ public partial class DetailProductPageViewModel : ObservableObject
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
-                await AlertService.ShowAlertAsync("Xatolik", response.resultMsg);
+                await AlertService.ShowAlertAsync(AppResource.Error, response.resultMsg);
                 return false;
             }
 
@@ -484,7 +485,7 @@ public partial class DetailProductPageViewModel : ObservableObject
         }
         catch
         {
-            await AlertService.ShowAlertAsync("Xatolik", "Mahsulotni savatchaga qo’shib bo’lmadi.");
+            await AlertService.ShowAlertAsync(AppResource.Error, AppResource.CouldNotAddTheProductToTheCart);
             return false;
         }
         finally

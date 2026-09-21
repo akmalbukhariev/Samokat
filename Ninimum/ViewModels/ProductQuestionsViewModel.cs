@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Collections.ObjectModel;
 using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -29,7 +30,7 @@ public partial class ProductQuestionsViewModel : ObservableObject
     public IAsyncRelayCommand AskQuestionCommand { get; }
     public IAsyncRelayCommand BackCommand { get; }
 
-    public string QuestionCountText => Questions.Count == 0 ? "Savollar yo'q" : $"{Questions.Count} ta savol";
+    public string QuestionCountText => Questions.Count == 0 ? AppResource.NoQuestions : string.Format(AppResource.Questions, Questions.Count);
 
     public ProductQuestionsViewModel(UserApiService apiService, AppControl appControl)
     {
@@ -77,7 +78,7 @@ public partial class ProductQuestionsViewModel : ObservableObject
                     {
                         Id = question.id ?? 0,
                         CustomerName = string.IsNullOrWhiteSpace(question.customer_name)
-                            ? "Foydalanuvchi"
+                            ? AppResource.User
                             : question.customer_name.Trim(),
                         Question = question.question?.Trim() ?? string.Empty,
                         Answer = question.answer?.Trim() ?? string.Empty,

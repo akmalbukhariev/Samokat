@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
  
 using Api.Services;
 using Models.Requests;
@@ -70,7 +71,7 @@ public partial class PaymentCardPage : BasePage
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
-                await AlertService.ShowAlertAsync("Karta", "Kartalar yuklanmadi");
+                await AlertService.ShowAlertAsync(AppResource.Card, AppResource.CardsCouldNotBeLoaded);
                 return;
             }
 
@@ -134,8 +135,8 @@ public partial class PaymentCardPage : BasePage
                 }
 
                 await AlertService.ShowAlertAsync(
-                    "Karta",
-                    "Asosiy karta o‘zgartirilmadi");
+                    AppResource.Card,
+                    AppResource.PrimaryCardWasNotChanged);
 
                 return;
             }
@@ -156,8 +157,8 @@ public partial class PaymentCardPage : BasePage
             }
 
             await AlertService.ShowAlertAsync(
-                "Xatolik",
-                "Asosiy kartani o‘zgartirishda xatolik yuz berdi");
+                AppResource.Error,
+                AppResource.AnErrorOccurredWhileChangingThePrimaryCard);
         }
         finally
         {
@@ -188,10 +189,10 @@ public partial class PaymentCardPage : BasePage
                 return;
 
             bool confirm = await DisplayAlert(
-                "Kartani o‘chirish",
-                $"{card.CardNumber} kartasini o‘chirmoqchimisiz?",
-                "Ha",
-                "Yo‘q");
+                AppResource.DeleteCard_a27c4e,
+                string.Format(AppResource.DoYouWantToDeleteCard, card.CardNumber),
+                AppResource.Yes,
+                AppResource.No);
 
             if (!confirm)
                 return;
@@ -208,7 +209,7 @@ public partial class PaymentCardPage : BasePage
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
-                await AlertService.ShowAlertAsync("Karta", "Karta ma’lumotlari o'chirilmadi");
+                await AlertService.ShowAlertAsync(AppResource.Card, AppResource.CardDetailsWereNotDeleted);
                 return;
             }
 

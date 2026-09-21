@@ -3,6 +3,7 @@
     x:Class="Ninimum.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:local="clr-namespace:Ninimum"
     xmlns:view="clr-namespace:Ninimum.Views.Children"
     xmlns:main="clr-namespace:Ninimum.Views.Main"
@@ -18,19 +19,20 @@
     Shell.TabBarTitleColor="Red"
     Title="Ninimum">
       
-     <TabBar>
-          <Tab Title="Uy" Appearing="Tab_Appearing">
+     <TabBar Route="MainTabs">
+          <Tab Route="HomeTab" Title="{x:Static language:AppResource.Home}" Appearing="Tab_Appearing">
                <Tab.Icon>
                     <OnPlatform x:TypeArguments="FileImageSource">
                          <On Platform="Android" Value="ic_home.png" />
                          <On Platform="iOS" Value="ic_home.png" />
                     </OnPlatform>
                </Tab.Icon>
-               <ShellContent ContentTemplate="{DataTemplate main:MainPage}"
+               <ShellContent Route="HomeRoot"
+                              ContentTemplate="{DataTemplate main:MainPage}"
                               Shell.NavBarIsVisible="False" />
           </Tab>
 
-          <Tab Title="Sevimli" Appearing="Tab_Appearing">
+          <Tab Title="{x:Static language:AppResource.Favorites}" Appearing="Tab_Appearing">
                <Tab.Icon>
                     <OnPlatform x:TypeArguments="FileImageSource">
                          <On Platform="Android" Value="ic_favorite.png" />
@@ -41,7 +43,7 @@
                               Shell.NavBarIsVisible="False" />
           </Tab>
 
-          <Tab Title="Savatcha" Appearing="Tab_Appearing">
+          <Tab Title="{x:Static language:AppResource.Cart}" Appearing="Tab_Appearing">
                <Tab.Icon>
                     <OnPlatform x:TypeArguments="FileImageSource">
                          <On Platform="Android" Value="ic_basket.png" />
@@ -52,7 +54,7 @@
                               Shell.NavBarIsVisible="False" />
           </Tab>
 
-          <Tab Title="Profil" Appearing="Tab_Appearing">
+          <Tab Title="{x:Static language:AppResource.Profile}" Appearing="Tab_Appearing">
                <Tab.Icon>
                     <OnPlatform x:TypeArguments="FileImageSource">
                          <On Platform="Android" Value="ic_user.png" />

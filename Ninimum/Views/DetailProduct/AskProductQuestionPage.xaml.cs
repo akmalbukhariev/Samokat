@@ -8,6 +8,5 @@ public partial class AskProductQuestionPage : BasePage
     {
         InitializeComponent();
         BindingContext = viewModel;
-        Shell.SetTabBarIsVisible(this, false);
-    }
+}
 }

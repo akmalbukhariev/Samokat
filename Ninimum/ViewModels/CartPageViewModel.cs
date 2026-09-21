@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -30,16 +31,16 @@ public partial class CartPageViewModel : ObservableObject
 
     public ObservableCollection<CartProductItemModel> CartProducts { get; } = new();
 
-    public string CartCountText => $"Savatchadagi mahsulotlar soni {CartProducts.Count} ta";
+    public string CartCountText => string.Format(AppResource.CartProductCount, CartProducts.Count);
 
     [ObservableProperty] private bool isLoading;
     [ObservableProperty] private bool isRefreshing;
     [ObservableProperty] private bool hasCartItems;
 
     [ObservableProperty] private string selectAllIcon = "ic_uncheck.png";
-    [ObservableProperty] private string summaryTopText = "Savatchadagi tanlangan 0 ta mahsulotni";
-    [ObservableProperty] private string bottomTotalPrice = "0 so’m";
-    [ObservableProperty] private string bottomSelectedCountText = "0 ta mahsulot";
+    [ObservableProperty] private string summaryTopText = string.Format(AppResource.SelectedCartProducts, 0);
+    [ObservableProperty] private string bottomTotalPrice = AppResource.Text0UZS;
+    [ObservableProperty] private string bottomSelectedCountText = AppResource.Text0Products;
     [ObservableProperty] private string totalRegularPrice = "0";
     [ObservableProperty] private string totalTariffPrice = "0";
     [ObservableProperty] private bool hasActiveSubscription;
@@ -240,9 +241,9 @@ public partial class CartPageViewModel : ObservableObject
         if (!selectedProducts.Any())
         {
             await Shell.Current.DisplayAlert(
-                "Xatolik",
-                "Iltimos, kamida bitta mahsulotni tanlang.",
-                "OK");
+                AppResource.Error,
+                AppResource.PleaseSelectAtLeastOneProduct,
+                AppResource.Ok);
 
             return;
         }
@@ -292,7 +293,7 @@ public partial class CartPageViewModel : ObservableObject
                 : null;
 
             ActiveTariffText = HasActiveSubscription
-                ? $"Faol tarif: {subscription!.tariffName}"
+                ? string.Format(AppResource.ActiveTariff, subscription!.tariffName)
                 : string.Empty;
         }
         catch (Exception ex)
@@ -328,7 +329,7 @@ public partial class CartPageViewModel : ObservableObject
             .Where(x => x.IsChecked)
             .Sum(x => x.PriceValue * x.Quantity);
 
-        SummaryTopText = $"Savatchadagi tanlangan {selectedCount} ta mahsulotni";
+        SummaryTopText = string.Format(AppResource.SelectedCartProducts, selectedCount);
 
         TotalTariffPrice = FormatPrice(tariffTotal);
         TotalRegularPrice = FormatPrice(regularTotal);
@@ -336,8 +337,8 @@ public partial class CartPageViewModel : ObservableObject
             .Where(x => x.IsChecked)
             .Sum(x => GetEffectivePrice(x) * x.Quantity);
 
-        BottomTotalPrice = $"{FormatPrice(effectiveTotal)} so’m";
-        BottomSelectedCountText = $"{selectedCount} ta mahsulot";
+        BottomTotalPrice = string.Format(AppResource.UZS_02854f, effectiveTotal);
+        BottomSelectedCountText = string.Format(AppResource.Products_48d782, selectedCount);
 
         SelectAllIcon = CartProducts.Any() && CartProducts.All(x => x.IsChecked)
             ? "ic_check.png"

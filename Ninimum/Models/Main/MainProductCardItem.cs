@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Collections.ObjectModel;
 using CommunityToolkit.Mvvm.ComponentModel;
 
@@ -18,7 +19,7 @@ public partial class MainProductCardItem : ObservableObject
     [ObservableProperty] private int reviewCount;
     [ObservableProperty] private int productId;
 
-    [ObservableProperty] private string actionText = "Ertaga";
+    [ObservableProperty] private string actionText = AppResource.Tomorrow;
 
     private bool isCartLoading;
     public bool IsCartLoading

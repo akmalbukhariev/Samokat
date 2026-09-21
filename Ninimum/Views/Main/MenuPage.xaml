@@ -7,6 +7,8 @@
     xmlns:local="clr-namespace:Ninimum.Views.Main"
     xmlns:model="clr-namespace:Ninimum.Models.Menu"
     x:Class="Ninimum.Views.Main.MenuPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     x:Name="ThisPage"
     BackgroundColor="White">
  

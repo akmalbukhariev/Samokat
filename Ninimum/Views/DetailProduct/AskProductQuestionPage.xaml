@@ -2,13 +2,16 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
-    x:Class="Ninimum.Views.DetailProduct.AskProductQuestionPage">
+    x:Class="Ninimum.Views.DetailProduct.AskProductQuestionPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,*,Auto">
         <components:PageHeaderView
-            Title="Savol berish"
+            Title="{x:Static language:AppResource.AskAQuestion}"
             ShowRightIcon="False"
             BackCommand="{Binding BackCommand}" />
 
@@ -29,13 +32,13 @@
 
                 <VerticalStackLayout Spacing="7">
                     <Label
-                        Text="Mahsulot bo'yicha savolingizni yozing"
+                        Text="{x:Static language:AppResource.WriteYourQuestionAboutTheProduct}"
                         TextColor="#22292F"
                         FontSize="20"
                         FontFamily="{StaticResource FontSFMedium}"
                         LineBreakMode="WordWrap" />
                     <Label
-                        Text="Mahsulotning xususiyati, tarkibi, o'lchami yoki foydalanish bo'yicha aniq savol yozishingiz mumkin."
+                        Text="{x:Static language:AppResource.YouCanAskASpecificQuestionAboutThe}"
                         TextColor="#96979B"
                         FontSize="15"
                         FontFamily="{StaticResource FontSFRegular}"
@@ -50,7 +53,7 @@
                     StrokeShape="RoundRectangle 10">
                     <Editor
                         Text="{Binding QuestionText}"
-                        Placeholder="Savolingizni kiriting..."
+                        Placeholder="{x:Static language:AppResource.EnterYourQuestion}"
                         PlaceholderColor="#A3A5AA"
                         TextColor="#22292F"
                         FontSize="17"
@@ -74,7 +77,7 @@
                     StrokeThickness="0"
                     StrokeShape="RoundRectangle 8">
                     <Label
-                        Text="Savol berish uchun mahsulotni oldin xarid qilgan bo'lishingiz shart emas."
+                        Text="{x:Static language:AppResource.YouDoNotNeedToHavePurchasedThe}"
                         TextColor="#6C951C"
                         FontSize="14"
                         FontFamily="{StaticResource FontSFRegular}"
@@ -86,7 +89,7 @@
         <Button
             Grid.Row="2"
             Margin="16,10,16,18"
-            Text="Savolni yuborish"
+            Text="{x:Static language:AppResource.SendQuestion}"
             Command="{Binding SubmitCommand}"
             IsEnabled="{Binding IsLoading, Converter={StaticResource InverseBoolConverter}}"
             HeightRequest="56"

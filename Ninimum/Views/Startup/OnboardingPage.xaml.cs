@@ -4,6 +4,7 @@ using System.Windows.Input;
 using Microsoft.Maui.Controls.Shapes;
 using Ninimum.Models.Startup;
 using Ninimum.Services;
+using Ninimum.Resources.Languages;
 using Utils;
 
 namespace Ninimum.Views.Startup;
@@ -20,30 +21,30 @@ public partial class OnboardingPage : BasePage
     {
         new OnboardingSlide
         {
-            Title = "Doimiy\nchegirmalar\nsizni kutmoqda",
+            Title = AppResource.OnboardingDiscountTitle,
             BigText = "15%",
-            Description = "Chegirmalarni doimiy ravishda dastur orqali kuzatib borishingiz mumkin.",
+            Description = AppResource.OnboardingDiscountDescription,
             Image = "onboarding_discount.png"
         },
         new OnboardingSlide
         {
-            Title = "Ilovadan\nfoydalanuvchilari\nuchun maxsus\nchegirmaviy\ntakliflar",
+            Title = AppResource.OnboardingOfferTitle,
             BigText = "50%",
-            Description = "Ilovadan foydalanuvchilari uchun maxsus chegirmaviy takliflar.",
+            Description = AppResource.OnboardingOfferDescription,
             Image = "onboarding_offer.png"
         },
         new OnboardingSlide
         {
-            Title = "Bolalar uchun eng\nkerakli\nmahsulotlarni\nbizning ilova\norqali toping",
-            BigText = "Baby",
-            Description = "Bolalar uchun eng kerakli mahsulotlarni bizning ilova orqali toping.",
+            Title = AppResource.OnboardingBabyTitle,
+            BigText = AppResource.OnboardingBabyBigText,
+            Description = AppResource.OnboardingBabyDescription,
             Image = "onboarding_baby.png"
         },
         new OnboardingSlide
         {
-            Title = "Xonadoningiz\nuchun zarur bo‘lgan\nmahsulotlarni\nonlayn tarzda\nbuyurtma qiling",
-            BigText = "Online",
-            Description = "Xonadoningiz uchun zarur bo‘lgan mahsulotlarni onlayn tarzda buyurtma qiling.",
+            Title = AppResource.OnboardingOnlineTitle,
+            BigText = AppResource.OnboardingOnlineBigText,
+            Description = AppResource.OnboardingOnlineDescription,
             Image = "onboarding_online.png"
         }
     };
@@ -55,7 +56,7 @@ public partial class OnboardingPage : BasePage
         this.appStoreService = appStoreService;
         this.appControl = appControl;
 
-        StartCommand = new Command(OnStart);
+        StartCommand = new Command(async () => await CompleteOnboardingAsync());
 
         OnboardingCarousel.ItemsSource = _slides;
 
@@ -66,7 +67,7 @@ public partial class OnboardingPage : BasePage
     private async void OnSkipTapped(object sender, TappedEventArgs e)
     {
         await AnimateElementScaleDown(lbSkip);
-        CompleteOnboarding();
+        await CompleteOnboardingAsync();
     }
 
     private void OnCarouselPositionChanged(object sender, PositionChangedEventArgs e)
@@ -74,12 +75,7 @@ public partial class OnboardingPage : BasePage
         UpdateBottomSection(e.CurrentPosition);
     }
 
-    private void OnStart()
-    {
-        CompleteOnboarding();
-    }
-
-    private void CompleteOnboarding()
+    private async Task CompleteOnboardingAsync()
     {
         if (isCompleting)
             return;
@@ -87,9 +83,17 @@ public partial class OnboardingPage : BasePage
         isCompleting = true;
         appStoreService.Set(AppKeys.HasCompletedOnboarding, true);
 
-        // Return to the normal startup pipeline. AppEntryShell will now skip
-        // first-launch pages and run the existing saved-login / guest logic.
-        appControl.SetRootPage(new AppEntryShell());
+        try
+        {
+            // Do not create a second AppEntryShell from inside the first one.
+            // The normal first-start path ends in guest mode, so enter it directly.
+            await appControl.StartGuestMode();
+        }
+        catch
+        {
+            isCompleting = false;
+            throw;
+        }
     }
 
     private void UpdateBottomSection(int position)

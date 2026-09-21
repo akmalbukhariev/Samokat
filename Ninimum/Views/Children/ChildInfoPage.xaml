@@ -2,9 +2,12 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.Children.ChildInfoPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     BackgroundColor="White">
 
     <Grid RowDefinitions="Auto,*,Auto"
@@ -24,7 +27,7 @@
 
                     <components:CustomRadioButtonView
                         Grid.Column="0"
-                        Text="O’g’il"
+                        Text="{x:Static language:AppResource.Boy}"
                         IsSelected="{Binding IsBoySelected}"
                         Command="{Binding SelectGenderCommand}"
                         CommandParameter="boy"
@@ -37,7 +40,7 @@
 
                     <components:CustomRadioButtonView
                         Grid.Column="1"
-                        Text="Qiz"
+                        Text="{x:Static language:AppResource.Girl}"
                         IsSelected="{Binding IsGirlSelected}"
                         Command="{Binding SelectGenderCommand}"
                         CommandParameter="girl"
@@ -50,19 +53,19 @@
                 </Grid>
 
                 <components:InputView
-                    Title="Ismi"
+                    Title="{x:Static language:AppResource.FirstName}"
                     LeftIcon="ic_user.png"
                     Text="{Binding ChildFirstName}"
                     ClearButtonVisibility="WhileEditing" />
 
                 <components:InputView
-                    Title="Familiyasi"
+                    Title="{x:Static language:AppResource.LastName}"
                     LeftIcon="ic_user.png"
                     Text="{Binding ChildLastName}"
                     ClearButtonVisibility="WhileEditing" />
 
                 <components:InputView
-                    Title="Tug’ilgan kuni"
+                    Title="{x:Static language:AppResource.DateOfBirth}"
                     LeftIcon="ic_calendar.png"
                     Text="{Binding ChildBirthDate}"
                     ClearButtonVisibility="WhileEditing" />
@@ -80,7 +83,7 @@
 
                     <Label
                         Grid.Column="1"
-                        Text="Barcha to’ldirilgan ma’lumotlar to’g’riligini kafolatlayman"
+                        Text="{x:Static language:AppResource.IConfirmThatAllEnteredInformationIsCorrect}"
                         TextColor="#20262E"
                         FontSize="17"
                         FontFamily="{StaticResource FontSFRegular}"
@@ -88,7 +91,7 @@
                 </Grid>
 
                 <Label
-                    Text="Begonaning ma’lumotlarini kiritish Qonun buzilishi oqibatiga olib kelishi mumkin."
+                    Text="{x:Static language:AppResource.EnteringAnotherPersonSInformationMayViolateThe}"
                     TextColor="#9C9CA3"
                     FontSize="17"
                     FontFamily="{StaticResource FontSFRegular}"

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell x:Class="NinimumDelivery.AppShell"
+       xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+       xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+       xmlns:views="clr-namespace:NinimumDelivery.Views"
+       xmlns:lang="clr-namespace:NinimumDelivery.Resources.Languages"
+       FlyoutBehavior="Disabled"
+       Shell.NavBarIsVisible="False"
+       Shell.TabBarBackgroundColor="White"
+       Shell.TabBarForegroundColor="#FF4545"
+       Shell.TabBarTitleColor="#FF4545"
+       Shell.TabBarUnselectedColor="#8D8D8D">
+    <TabBar>
+        <Tab Title="{x:Static lang:AppResource.Deliveries}">
+            <ShellContent ContentTemplate="{DataTemplate views:DeliveriesPage}" />
+        </Tab>
+        <Tab Title="{x:Static lang:AppResource.History}">
+            <ShellContent ContentTemplate="{DataTemplate views:HistoryPage}" />
+        </Tab>
+        <Tab Title="{x:Static lang:AppResource.Profile}">
+            <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" />
+        </Tab>
+    </TabBar>
+</Shell>

@@ -1,0 +1,1448 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Accessories" xml:space="preserve">
+    <value>Aksesuarlar</value>
+  </data>
+  <data name="AccountDeleted" xml:space="preserve">
+    <value>Akkaunt o‘chirildi</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Faol</value>
+  </data>
+  <data name="ActiveTariff" xml:space="preserve">
+    <value>Faol tarif: {0}</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>+ Qo’shish</value>
+  </data>
+  <data name="Add_4ebad9" xml:space="preserve">
+    <value>Qo‘shish</value>
+  </data>
+  <data name="AddChild" xml:space="preserve">
+    <value>Farzand qo‘shish</value>
+  </data>
+  <data name="AddNewCard" xml:space="preserve">
+    <value>Yangi karta qo’shish</value>
+  </data>
+  <data name="AddProductPhotos" xml:space="preserve">
+    <value>Mahsulot bo’yicha fotosurat joylang</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Manzil</value>
+  </data>
+  <data name="AddressNotFound" xml:space="preserve">
+    <value>Manzil topilmadi</value>
+  </data>
+  <data name="AddToCart" xml:space="preserve">
+    <value>Savatchaga</value>
+  </data>
+  <data name="AfterReceivingTheSMSSignInWithThis" xml:space="preserve">
+    <value>SMS kelgach, kirish sahifasida shu telefon raqami va yuborilgan vaqtinchalik parol bilan kiring.</value>
+  </data>
+  <data name="AfterTheAccountIsDeletedItCannotBe" xml:space="preserve">
+    <value>Akkaunt o‘chirilgandan so‘ng uni ilova orqali qayta tiklab bo‘lmaydi. Davom etmoqchimisiz?</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Yoshi</value>
+  </data>
+  <data name="AllAppFeaturesAreAvailableOnlyToRegistered" xml:space="preserve">
+    <value>Ushbu ilovaning to’liq imkoniyatlari faqat
+ro’yxatdan o’tgan foydalanuvchilarga amal qiladi</value>
+  </data>
+  <data name="AllowCameraAccessToTakeAPhoto" xml:space="preserve">
+    <value>Rasmga olish uchun ilovaga kamera ruxsatini bering.</value>
+  </data>
+  <data name="AllowGalleryAccessToSelectPhotos" xml:space="preserve">
+    <value>Fotosuratlarni tanlash uchun galereyaga ruxsat bering.</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Summasi</value>
+  </data>
+  <data name="AnErrorOccurred" xml:space="preserve">
+    <value>Xatolik yuz berdi</value>
+  </data>
+  <data name="AnErrorOccurredWhileChangingThePrimaryCard" xml:space="preserve">
+    <value>Asosiy kartani o‘zgartirishda xatolik yuz berdi</value>
+  </data>
+  <data name="ANewTemporaryPasswordWillBeSentBy" xml:space="preserve">
+    <value>Ro'yxatdan o'tgan telefon raqamingizga yangi vaqtinchalik parol SMS orqali yuboriladi.</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Ko’rinish rejimi</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Ishonchingiz komilmi?</value>
+  </data>
+  <data name="AskAboutTheProduct" xml:space="preserve">
+    <value>Mahsulot bo’yicha savol berish</value>
+  </data>
+  <data name="AskAQuestion" xml:space="preserve">
+    <value>Savol berish</value>
+  </data>
+  <data name="ATemporaryPasswordWasSentToYourPhone" xml:space="preserve">
+    <value>Vaqtinchalik parol telefon raqamingizga SMS orqali yuborildi.</value>
+  </data>
+  <data name="AttentionAfterVerificationYouWillNeedToSign" xml:space="preserve">
+    <value>Diqqat! Tasdiqlash tugagach, xavfsizlik uchun akkauntga yangi raqam bilan qayta kirishingiz kerak.</value>
+  </data>
+  <data name="Authorization" xml:space="preserve">
+    <value>Avtorizatsya</value>
+  </data>
+  <data name="AVerificationCodeWasSentToYourPhone" xml:space="preserve">
+    <value>Sizning telefon raqamingizga SMS orqali maxfiy kod yuborildi.
+Iltimos, ushbu kodni quyidagi kataklarga kiriting</value>
+  </data>
+  <data name="AwaitingResponse" xml:space="preserve">
+    <value>Javob kutilmoqda</value>
+  </data>
+  <data name="BabyBottles" xml:space="preserve">
+    <value>Sut butilkalar</value>
+  </data>
+  <data name="BeforeDeletingYourAccountWeWouldLikeTo" xml:space="preserve">
+    <value>Akkauntingizni o‘chirishdan oldin, nima sababdan ketayotganingizni bilishni istaymiz. Fikringiz xizmatimizni yaxshilashga yordam beradi.</value>
+  </data>
+  <data name="BeingPrepared" xml:space="preserve">
+    <value>Yig'ish jarayonida</value>
+  </data>
+  <data name="Boy" xml:space="preserve">
+    <value>O’g’il</value>
+  </data>
+  <data name="BrieflyDescribeTheReason" xml:space="preserve">
+    <value>Sababni qisqacha yozing</value>
+  </data>
+  <data name="Buy" xml:space="preserve">
+    <value>Sotib olish</value>
+  </data>
+  <data name="BuyNow" xml:space="preserve">
+    <value>Hoziroq sotib olish</value>
+  </data>
+  <data name="ByCard" xml:space="preserve">
+    <value>Karta orqali</value>
+  </data>
+  <data name="Camera" xml:space="preserve">
+    <value>Kamera</value>
+  </data>
+  <data name="CameraCaptureIsNotAvailableOnThisDevice" xml:space="preserve">
+    <value>Ushbu qurilmada kamera orqali rasm olish mavjud emas.</value>
+  </data>
+  <data name="CameraPermission" xml:space="preserve">
+    <value>Kamera ruxsati</value>
+  </data>
+  <data name="CameraPermissionWasNotGranted" xml:space="preserve">
+    <value>Kamera ruxsati berilmagan.</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Bekor qilish</value>
+  </data>
+  <data name="CancellationReason" xml:space="preserve">
+    <value>Bekor qilish sababi</value>
+  </data>
+  <data name="CancelOrder" xml:space="preserve">
+    <value>Buyurtmani bekor qilish</value>
+  </data>
+  <data name="Card" xml:space="preserve">
+    <value>Karta</value>
+  </data>
+  <data name="CardDetailsAreStoredSecurelyAndAreNot" xml:space="preserve">
+    <value>Karta ma’lumotlari xavfsiz saqlanadi va uchinchi shaxslarga berilmaydi.</value>
+  </data>
+  <data name="CardDetailsWereNotDeleted" xml:space="preserve">
+    <value>Karta ma’lumotlari o'chirilmadi</value>
+  </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>Karta raqami</value>
+  </data>
+  <data name="CardSaved" xml:space="preserve">
+    <value>Karta saqlandi.</value>
+  </data>
+  <data name="CardsCouldNotBeLoaded" xml:space="preserve">
+    <value>Kartalar yuklanmadi</value>
+  </data>
+  <data name="Cart" xml:space="preserve">
+    <value>Savatcha</value>
+  </data>
+  <data name="CartProductCount" xml:space="preserve">
+    <value>Savatchadagi mahsulotlar soni {0} ta</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>O’zgartirish</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Parolni o’zgartirish</value>
+  </data>
+  <data name="ChangePhoneNumber" xml:space="preserve">
+    <value>Telefon raqamini o‘zgartirish</value>
+  </data>
+  <data name="ChangePhoneNumber_ec3e8b" xml:space="preserve">
+    <value>Telefon raqamni o’zgartirish</value>
+  </data>
+  <data name="ChangeTariff" xml:space="preserve">
+    <value>Tarifni o‘zgartirish</value>
+  </data>
+  <data name="CheckingOrderStatus" xml:space="preserve">
+    <value>Buyurtma holati tekshirilmoqda...</value>
+  </data>
+  <data name="Checkout" xml:space="preserve">
+    <value>Rasmiylashtirish</value>
+  </data>
+  <data name="Children" xml:space="preserve">
+    <value>Bolajonlar</value>
+  </data>
+  <data name="ChildrenInformationOptional" xml:space="preserve">
+    <value>Farzandlar haqida ma’lumotlar (ixtiyoriy)</value>
+  </data>
+  <data name="ChooseAPhotoForTheReview" xml:space="preserve">
+    <value>Sharh uchun fotosurat tanlang</value>
+  </data>
+  <data name="ChooseATariffPlanAndGetSpecialDiscounts" xml:space="preserve">
+    <value>Iltimos birorta Tarif rejasini tanlang va maxsus chegirmalarga ega bo’ling</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Yopish</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Kod</value>
+  </data>
+  <data name="CommonCancel" xml:space="preserve">
+    <value>Bekor qilish</value>
+  </data>
+  <data name="CommonClose" xml:space="preserve">
+    <value>Yopish</value>
+  </data>
+  <data name="CommonError" xml:space="preserve">
+    <value>Xatolik</value>
+  </data>
+  <data name="CommonInformation" xml:space="preserve">
+    <value>Ma’lumot</value>
+  </data>
+  <data name="CommonNo" xml:space="preserve">
+    <value>Yo‘q</value>
+  </data>
+  <data name="CommonResend" xml:space="preserve">
+    <value>Qayta yuborish</value>
+  </data>
+  <data name="CommonSuccess" xml:space="preserve">
+    <value>Muvaffaqiyatli</value>
+  </data>
+  <data name="CommonWarning" xml:space="preserve">
+    <value>Ogohlantirish</value>
+  </data>
+  <data name="CommonYes" xml:space="preserve">
+    <value>Ha</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Tugatilgani</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Tasdiqlash</value>
+  </data>
+  <data name="Confirm_d235a9" xml:space="preserve">
+    <value>Tasdiqlayman</value>
+  </data>
+  <data name="ConfirmAddress" xml:space="preserve">
+    <value>Manzilni tasdiqlash</value>
+  </data>
+  <data name="ConnectingToServer" xml:space="preserve">
+    <value>Serverga ulanmoqda...</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Davom etish</value>
+  </data>
+  <data name="Cookies" xml:space="preserve">
+    <value>Pechenilar</value>
+  </data>
+  <data name="CouldNotAddTheProductToTheCart" xml:space="preserve">
+    <value>Mahsulotni savatchaga qo’shib bo’lmadi.</value>
+  </data>
+  <data name="CouldNotCancelTheOrder" xml:space="preserve">
+    <value>Buyurtmani bekor qilib bo‘lmadi.</value>
+  </data>
+  <data name="CouldNotCancelTheOrder_f52d7e" xml:space="preserve">
+    <value>Buyurtmani bekor qilib bo‘lmadi.
+{0}</value>
+  </data>
+  <data name="CouldNotCancelTheUnpaidOrder" xml:space="preserve">
+    <value>To'lanmagan buyurtmani bekor qilib bo'lmadi.</value>
+  </data>
+  <data name="CouldNotChangeThePassword" xml:space="preserve">
+    <value>Parolni o‘zgartirib bo‘lmadi.</value>
+  </data>
+  <data name="CouldNotChangeThePhoneNumber" xml:space="preserve">
+    <value>Telefon raqamni o‘zgartirib bo‘lmadi.</value>
+  </data>
+  <data name="CouldNotChangeTheRegionPleaseTryAgain" xml:space="preserve">
+    <value>Regionni o‘zgartirib bo‘lmadi. Iltimos, qayta urinib ko‘ring.</value>
+  </data>
+  <data name="CouldNotCheckReviewEligibility" xml:space="preserve">
+    <value>Sharh qoldirish holatini tekshirib bo'lmadi.</value>
+  </data>
+  <data name="CouldNotCheckThePaymentStatus" xml:space="preserve">
+    <value>To'lov holatini tekshirib bo'lmadi.</value>
+  </data>
+  <data name="CouldNotDeleteOrderHistory" xml:space="preserve">
+    <value>Buyurtmalar tarixini o‘chirib bo‘lmadi.</value>
+  </data>
+  <data name="CouldNotDeleteTheAccountPleaseTryAgain" xml:space="preserve">
+    <value>Akkauntni o‘chirib bo‘lmadi. Iltimos, qayta urinib ko‘ring.</value>
+  </data>
+  <data name="CouldNotDetermineYourCurrentLocation" xml:space="preserve">
+    <value>Joriy joylashuvni aniqlab bo‘lmadi.</value>
+  </data>
+  <data name="CouldNotGetThePaymePaymentURL" xml:space="preserve">
+    <value>Payme to'lov manzili olinmadi.</value>
+  </data>
+  <data name="CouldNotLoadCardDetails" xml:space="preserve">
+    <value>Karta ma’lumotlari olinmadi</value>
+  </data>
+  <data name="CouldNotLoadTariffs" xml:space="preserve">
+    <value>Tariflarni yuklab bo‘lmadi.</value>
+  </data>
+  <data name="CouldNotLoadTheReview" xml:space="preserve">
+    <value>Sharhni yuklab bo'lmadi: {0}</value>
+  </data>
+  <data name="CouldNotOpenTheCheckoutPage" xml:space="preserve">
+    <value>Rasmiylashtirish sahifasini ochib bo‘lmadi.</value>
+  </data>
+  <data name="CouldNotOpenThePaymePaymentPage" xml:space="preserve">
+    <value>Payme to'lov sahifasini ochib bo'lmadi</value>
+  </data>
+  <data name="CouldNotRegister" xml:space="preserve">
+    <value>Ro'yxatdan o'tib bo'lmadi.</value>
+  </data>
+  <data name="CouldNotSaveTheCard" xml:space="preserve">
+    <value>Kartani saqlab bo‘lmadi.</value>
+  </data>
+  <data name="CouldNotSaveTheReview" xml:space="preserve">
+    <value>Sharhni saqlab bo'lmadi.</value>
+  </data>
+  <data name="CouldNotSearchForTheAddressPleaseTry" xml:space="preserve">
+    <value>Manzilni qidirib bo‘lmadi. Iltimos, qayta urinib ko‘ring.</value>
+  </data>
+  <data name="CouldNotSelectAPhoto" xml:space="preserve">
+    <value>Fotosuratni tanlab bo'lmadi: {0}</value>
+  </data>
+  <data name="CouldNotSendTheQuestion" xml:space="preserve">
+    <value>Savolni yuborib bo'lmadi.</value>
+  </data>
+  <data name="CouldNotSendTheQuestion_a01d00" xml:space="preserve">
+    <value>Savolni yuborib bo'lmadi.
+{0}</value>
+  </data>
+  <data name="CouldNotSendTheTemporaryPassword" xml:space="preserve">
+    <value>Vaqtinchalik parolni yuborib bo'lmadi.</value>
+  </data>
+  <data name="CouldNotStartTariffPayment" xml:space="preserve">
+    <value>Tarif to‘lovini boshlash imkoni bo‘lmadi.</value>
+  </data>
+  <data name="CouldNotTakeAPhoto" xml:space="preserve">
+    <value>Rasmga olib bo'lmadi: {0}</value>
+  </data>
+  <data name="CouldNotVerifyThePhoneNumber" xml:space="preserve">
+    <value>Telefon raqamni tekshirib bo‘lmadi.</value>
+  </data>
+  <data name="CreateANewPasswordForSecurityPleaseEnter" xml:space="preserve">
+    <value>Xavfsizlik uchun yangi parol yarating. Iltimos, yangi parolni ikki marta kiriting.</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>Amaldagi</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Amaldagi parol</value>
+  </data>
+  <data name="CurrentTariff" xml:space="preserve">
+    <value>Amaldagi tarif</value>
+  </data>
+  <data name="CurrentTariffMessage" xml:space="preserve">
+    <value>{0} hozirgi amaldagi tarifingiz.</value>
+  </data>
+  <data name="CustomerPhotos" xml:space="preserve">
+    <value>Xaridorlarning fotosuratlari</value>
+  </data>
+  <data name="CustomersCanLeaveTheFirstReviewForThis" xml:space="preserve">
+    <value>Bu mahsulot bo'yicha birinchi sharhni xaridorlar qoldirishi mumkin.</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Sanasi</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Tug’ilgan kuni</value>
+  </data>
+  <data name="DateOfBirth_b85a8f" xml:space="preserve">
+    <value>Tug‘ilgan kuni</value>
+  </data>
+  <data name="DaysRemaining" xml:space="preserve">
+    <value>{0} kun qoldi</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>O‘chirish</value>
+  </data>
+  <data name="DeleteAccount" xml:space="preserve">
+    <value>Akkauntni o‘chirish</value>
+  </data>
+  <data name="DeleteAccount_fa848a" xml:space="preserve">
+    <value>Akkauntni o’chirib yuborish</value>
+  </data>
+  <data name="DeleteCard" xml:space="preserve">
+    <value>Kartani o‘chirib yuborish</value>
+  </data>
+  <data name="DeleteCard_a27c4e" xml:space="preserve">
+    <value>Kartani o‘chirish</value>
+  </data>
+  <data name="DeleteFromOrderHistory" xml:space="preserve">
+    <value>Buyurtmalar tarixidan o‘chirish</value>
+  </data>
+  <data name="Delivered" xml:space="preserve">
+    <value>Yetkazib berildi</value>
+  </data>
+  <data name="Delivery" xml:space="preserve">
+    <value>Yetkazib berish:</value>
+  </data>
+  <data name="Delivery_199c42" xml:space="preserve">
+    <value>Yetkazib berish</value>
+  </data>
+  <data name="DeliveryAddress" xml:space="preserve">
+    <value>Yetkazib berish manzili</value>
+  </data>
+  <data name="DeliveryIsNotAvailableHereYetChooseAnother" xml:space="preserve">
+    <value>Hozircha bu yerga yetkazma xizmati yo‘q.
+Boshqa manzil yoki yaqin-atrofdagi
+buyurtmalarni tarqatish punktini tanlang</value>
+  </data>
+  <data name="DeliveryWithinOneHour" xml:space="preserve">
+    <value>Mahsulotni 1 soat davomida yetkazish</value>
+  </data>
+  <data name="DeliveryWithinTheDay" xml:space="preserve">
+    <value>Mahsulotni kun davomida yetkazish</value>
+  </data>
+  <data name="DeliveryWithinThreeHours" xml:space="preserve">
+    <value>Mahsulotni 3 soat davomida yetkazish</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Tavsiflar</value>
+  </data>
+  <data name="Diapers" xml:space="preserve">
+    <value>Tagliklar</value>
+  </data>
+  <data name="DiscountsFromOurPartners" xml:space="preserve">
+    <value>Hamkorlarimiz xizmatidan chegirmalar</value>
+  </data>
+  <data name="DoNotCancel" xml:space="preserve">
+    <value>Bekor qilmayman</value>
+  </data>
+  <data name="DoYouWantToDeleteCard" xml:space="preserve">
+    <value>{0} kartasini o‘chirmoqchimisiz?</value>
+  </data>
+  <data name="DoYouWantToSwitchFromTo" xml:space="preserve">
+    <value>{0} tarifidan {1} tarifiga o‘tmoqchimisiz? </value>
+  </data>
+  <data name="DryFormula" xml:space="preserve">
+    <value>Suxoy smes</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Tahrirlash</value>
+  </data>
+  <data name="EditChildInformation" xml:space="preserve">
+    <value>Farzand ma’lumotini tahrirlash</value>
+  </data>
+  <data name="EditReview" xml:space="preserve">
+    <value>Sharhni tahrirlash</value>
+  </data>
+  <data name="EnglishLanguage" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="EnterADistrictStreetHouseOrLandmarkIn" xml:space="preserve">
+    <value>Qashqadaryo viloyatidagi tuman, ko‘cha, uy yoki mo‘ljalni kiriting.</value>
+  </data>
+  <data name="EnterANewPassword" xml:space="preserve">
+    <value>Yangi parolni kiriting.</value>
+  </data>
+  <data name="EnterAValidExpiryMonth" xml:space="preserve">
+    <value>Amal qilish oyini to‘g‘ri kiriting.</value>
+  </data>
+  <data name="EnterAValidExpiryYear" xml:space="preserve">
+    <value>Amal qilish yilini to‘g‘ri kiriting.</value>
+  </data>
+  <data name="EnteringAnotherPersonSInformationMayViolateThe" xml:space="preserve">
+    <value>Begonaning ma’lumotlarini kiritish Qonun buzilishi oqibatiga olib kelishi mumkin.</value>
+  </data>
+  <data name="EnterPhoneNumber" xml:space="preserve">
+    <value>Telefon raqamni kiriting</value>
+  </data>
+  <data name="EnterReasonTitle" xml:space="preserve">
+    <value>Sababni kiriting</value>
+  </data>
+  <data name="EnterTheFullCardNumber" xml:space="preserve">
+    <value>Karta raqamini to‘liq kiriting.</value>
+  </data>
+  <data name="EnterTheReason" xml:space="preserve">
+    <value>Sababni yozing</value>
+  </data>
+  <data name="EnterYourNewPhoneNumberTheNewNumber" xml:space="preserve">
+    <value>Yangi telefon raqamingizni kiriting. Yangi raqam SMS kod orqali tasdiqlanadi.</value>
+  </data>
+  <data name="EnterYourPhoneNumberFirst" xml:space="preserve">
+    <value>Avval telefon raqamingizni kiriting.</value>
+  </data>
+  <data name="EnterYourQuestion" xml:space="preserve">
+    <value>Savolingizni kiriting...</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Xatolik</value>
+  </data>
+  <data name="Expiry" xml:space="preserve">
+    <value>Amal qilishi</value>
+  </data>
+  <data name="FastDelivery" xml:space="preserve">
+    <value>Tezkor yetkazib berish</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Sevimli</value>
+  </data>
+  <data name="FavoritesTitle" xml:space="preserve">
+    <value>Sevimlilar</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filtrlash</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Ismi</value>
+  </data>
+  <data name="FirstName_231ae8" xml:space="preserve">
+    <value>Ism</value>
+  </data>
+  <data name="ForgotYourPassword" xml:space="preserve">
+    <value>Paroldni unutdingizmi?</value>
+  </data>
+  <data name="ForMothers" xml:space="preserve">
+    <value>Onalar uchun</value>
+  </data>
+  <data name="ForNowAnAddressCanOnlyBeSelected" xml:space="preserve">
+    <value>Hozircha manzil faqat Qashqadaryo viloyatida tanlanadi. Xarita Qashqadaryo hududida qoladi.</value>
+  </data>
+  <data name="Free" xml:space="preserve">
+    <value>Bepul</value>
+  </data>
+  <data name="FreeDelivery" xml:space="preserve">
+    <value>Bepul yetkazish</value>
+  </data>
+  <data name="FreeMin" xml:space="preserve">
+    <value>bepul ∙ minut</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>dan</value>
+  </data>
+  <data name="Gallery" xml:space="preserve">
+    <value>Galereya</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Jinsi</value>
+  </data>
+  <data name="Girl" xml:space="preserve">
+    <value>Qiz</value>
+  </data>
+  <data name="GotIt" xml:space="preserve">
+    <value>Tushunarli</value>
+  </data>
+  <data name="HaveAQuestionAboutTheProduct" xml:space="preserve">
+    <value>Mahsulot haqida savolingiz bormi?</value>
+  </data>
+  <data name="HideProducts" xml:space="preserve">
+    <value>{0} ta mahsulot yopish</value>
+  </data>
+  <data name="HighestPriceFirst" xml:space="preserve">
+    <value>Avval narxi qimmati</value>
+  </data>
+  <data name="HighestRatedFirst" xml:space="preserve">
+    <value>Avval bahosi yuqorilari</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Uy</value>
+  </data>
+  <data name="IAgreeToSaveThisCardForFuture" xml:space="preserve">
+    <value>Keyingi xaridlar uchun ushbu kartani saqlashga roziman</value>
+  </data>
+  <data name="IConfirmThatAllEnteredInformationIsCorrect" xml:space="preserve">
+    <value>Barcha to’ldirilgan ma’lumotlar to’g’riligini kafolatlayman</value>
+  </data>
+  <data name="IConfirmThatTheEnteredPhoneNumberBelongs" xml:space="preserve">
+    <value>Kiritilgan telefon raqam menga tegishli ekanini tasdiqlayman</value>
+  </data>
+  <data name="ICouldNotFindTheProductsOrOffers" xml:space="preserve">
+    <value>Kerakli mahsulot yoki takliflarni topmadim</value>
+  </data>
+  <data name="IEncounteredTechnicalIssues" xml:space="preserve">
+    <value>Texnik muammolarga duch keldim</value>
+  </data>
+  <data name="IfYouGoBackThisUnpaidOrderWill" xml:space="preserve">
+    <value>Ortga qaytsangiz, ushbu to'lanmagan buyurtma bekor qilinadi. Davom etasizmi?</value>
+  </data>
+  <data name="IfYouHaveNotRegisteredYet" xml:space="preserve">
+    <value>Siz avval ro’yxatdan o’tmagan bo’lsangiz</value>
+  </data>
+  <data name="IncorrectCode" xml:space="preserve">
+    <value>Kod noto‘g‘ri</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Parol noto‘g‘ri</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Ma’lumot</value>
+  </data>
+  <data name="InformationAscii" xml:space="preserve">
+    <value>Ma'lumot</value>
+  </data>
+  <data name="INoLongerUseTheApp" xml:space="preserve">
+    <value>Ilovadan endi foydalanmayman</value>
+  </data>
+  <data name="InvalidPhoneNumberExample901234567" xml:space="preserve">
+    <value>Telefon raqam noto‘g‘ri. Masalan: 901234567</value>
+  </data>
+  <data name="IPreferAnotherServiceOrApp" xml:space="preserve">
+    <value>Boshqa xizmat yoki ilovani afzal ko‘raman</value>
+  </data>
+  <data name="IsThisTheCorrectDeliveryAddress" xml:space="preserve">
+    <value>Bu haqiqiy yetkazib berish manzilimi?</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Til</value>
+  </data>
+  <data name="Language_802fc1" xml:space="preserve">
+    <value>Til:</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Familiyasi</value>
+  </data>
+  <data name="LastName_f40b4b" xml:space="preserve">
+    <value>Familiya</value>
+  </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Sharh qoldirish</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Yorqin</value>
+  </data>
+  <data name="LoadingPaymentPage" xml:space="preserve">
+    <value>To'lov sahifasi yuklanmoqda...</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Joylashuv</value>
+  </data>
+  <data name="LocationPermission" xml:space="preserve">
+    <value>Joylashuv ruxsati</value>
+  </data>
+  <data name="LocationPermissionMessage" xml:space="preserve">
+    <value>Joriy joylashuvdan foydalanish uchun ilovaga joylashuv ruxsatini bering.</value>
+  </data>
+  <data name="LowestPriceFirst" xml:space="preserve">
+    <value>Avval narxi arzonlar</value>
+  </data>
+  <data name="LowestRatedFirst" xml:space="preserve">
+    <value>Avval bahosi pastlari</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Xarita</value>
+  </data>
+  <data name="MessagePermissionRequired" xml:space="preserve">
+    <value>Barcha fotosuratlarga to‘liq kirish ruxsati kerak. Sozlamalarni ochib, barcha fotosuratlarga ruxsat bering.</value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Yozishma</value>
+  </data>
+  <data name="MyChildren" xml:space="preserve">
+    <value>Farzandlarim</value>
+  </data>
+  <data name="MyLocation" xml:space="preserve">
+    <value>Mening joylashuvim</value>
+  </data>
+  <data name="MyTariff" xml:space="preserve">
+    <value>Mening tarifim</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Nomi</value>
+  </data>
+  <data name="NewestFirst" xml:space="preserve">
+    <value>Avval yangilari</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Yangi parol</value>
+  </data>
+  <data name="NewPhoneNumber" xml:space="preserve">
+    <value>Yangi telefon raqam</value>
+  </data>
+  <data name="NinimumResponse" xml:space="preserve">
+    <value>Ninimum javobi</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Yo‘q</value>
+  </data>
+  <data name="NoAscii" xml:space="preserve">
+    <value>Yo'q</value>
+  </data>
+  <data name="NoCardSelected" xml:space="preserve">
+    <value>Karta tanlanmagan</value>
+  </data>
+  <data name="NoConnectionToTheServerReconnecting" xml:space="preserve">
+    <value>Server bilan aloqa yo'q. Qayta ulanmoqda...</value>
+  </data>
+  <data name="NoCurrentOrders" xml:space="preserve">
+    <value>Amaldagi buyurtmalar mavjud emas</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>Internet aloqasi yo'q</value>
+  </data>
+  <data name="NoQuestions" xml:space="preserve">
+    <value>Savollar yo'q</value>
+  </data>
+  <data name="NoQuestionsYet" xml:space="preserve">
+    <value>Hali savollar yo'q</value>
+  </data>
+  <data name="NoRecentSearchesYet" xml:space="preserve">
+    <value>Hozircha qidiruvlar yo‘q</value>
+  </data>
+  <data name="NoReviewsYet" xml:space="preserve">
+    <value>Hali sharhlar yo'q</value>
+  </data>
+  <data name="NoTariff" xml:space="preserve">
+    <value>Tarif yo‘q</value>
+  </data>
+  <data name="NotificationClicked" xml:space="preserve">
+    <value>Bildirishnoma tanlandi</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Xabarnoma</value>
+  </data>
+  <data name="NoUserWasFoundWithThisPhoneNumber" xml:space="preserve">
+    <value>Bu telefon raqam bilan foydalanuvchi topilmadi.</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Raqami</value>
+  </data>
+  <data name="NumberOfProducts" xml:space="preserve">
+    <value>Mahsulotlar soni:</value>
+  </data>
+  <data name="Nutrition" xml:space="preserve">
+    <value>Oziqlantiruvchi</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OldestFirst" xml:space="preserve">
+    <value>Avval eskilari</value>
+  </data>
+  <data name="OnboardingBabyBigText" xml:space="preserve">
+    <value>Bola</value>
+  </data>
+  <data name="OnboardingBabyDescription" xml:space="preserve">
+    <value>Bolalar uchun eng kerakli mahsulotlarni bizning ilova orqali toping.</value>
+  </data>
+  <data name="OnboardingBabyTitle" xml:space="preserve">
+    <value>Bolalar uchun eng
+kerakli
+mahsulotlarni
+bizning ilova
+orqali toping</value>
+  </data>
+  <data name="OnboardingDiscountDescription" xml:space="preserve">
+    <value>Chegirmalarni doimiy ravishda dastur orqali kuzatib borishingiz mumkin.</value>
+  </data>
+  <data name="OnboardingDiscountTitle" xml:space="preserve">
+    <value>Doimiy
+chegirmalar
+sizni kutmoqda</value>
+  </data>
+  <data name="OnboardingOfferDescription" xml:space="preserve">
+    <value>Ilovadan foydalanuvchilari uchun maxsus chegirmaviy takliflar.</value>
+  </data>
+  <data name="OnboardingOfferTitle" xml:space="preserve">
+    <value>Ilovadan
+foydalanuvchilari
+uchun maxsus
+chegirmaviy
+takliflar</value>
+  </data>
+  <data name="OnboardingOnlineBigText" xml:space="preserve">
+    <value>Onlayn</value>
+  </data>
+  <data name="OnboardingOnlineDescription" xml:space="preserve">
+    <value>Xonadoningiz uchun zarur bo‘lgan mahsulotlarni onlayn tarzda buyurtma qiling.</value>
+  </data>
+  <data name="OnboardingOnlineTitle" xml:space="preserve">
+    <value>Xonadoningiz
+uchun zarur bo‘lgan
+mahsulotlarni
+onlayn tarzda
+buyurtma qiling</value>
+  </data>
+  <data name="OnTheWay" xml:space="preserve">
+    <value>Yo‘lda</value>
+  </data>
+  <data name="OpenSettings" xml:space="preserve">
+    <value>Sozlamalarni ochish</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>{0} sonli buyurtma</value>
+  </data>
+  <data name="OrderCancelled" xml:space="preserve">
+    <value>Buyurtma bekor qilindi</value>
+  </data>
+  <data name="OrderCancelledSuccessfully" xml:space="preserve">
+    <value>Byurtma muvaffaqiyatli bekor qilindi</value>
+  </data>
+  <data name="OrderConfirmed" xml:space="preserve">
+    <value>Buyurtma tasdiqlandi</value>
+  </data>
+  <data name="OrderCouldNotBeCreated" xml:space="preserve">
+    <value>Buyurtma yaratilmadi.</value>
+  </data>
+  <data name="OrderDelivered" xml:space="preserve">
+    <value>{0} sonli buyurtma yetkazib berildi</value>
+  </data>
+  <data name="OrderDetails" xml:space="preserve">
+    <value>Buyurtma tavsiloti</value>
+  </data>
+  <data name="OrderIDWasNotReceived" xml:space="preserve">
+    <value>Buyurtma ID olinmadi.</value>
+  </data>
+  <data name="OrderInformationWasNotFound" xml:space="preserve">
+    <value>Buyurtma ma’lumoti topilmadi.</value>
+  </data>
+  <data name="OrderInformationWasNotFound_80654d" xml:space="preserve">
+    <value>Buyurtma ma’lumotlari topilmadi.</value>
+  </data>
+  <data name="OrderIsBeingPrepared" xml:space="preserve">
+    <value>{0} sonli buyurtma tayyorlanmoqda</value>
+  </data>
+  <data name="OrderIsOnTheWay" xml:space="preserve">
+    <value>{0} sonli buyurtma yo‘lda</value>
+  </data>
+  <data name="OrderReceived" xml:space="preserve">
+    <value>Buyurtma qabul qilindi</value>
+  </data>
+  <data name="OrderReceived_7a2c1d" xml:space="preserve">
+    <value>{0} sonli buyurtma qabul qilindi</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Buyurtmalar</value>
+  </data>
+  <data name="Orders_8b489f" xml:space="preserve">
+    <value>Buyurtma</value>
+  </data>
+  <data name="OrderStatus" xml:space="preserve">
+    <value>Buyurtma holati</value>
+  </data>
+  <data name="OtherReason" xml:space="preserve">
+    <value>Boshqa sabab</value>
+  </data>
+  <data name="OtherReasonIsSelectedPleaseBrieflyDescribeThe" xml:space="preserve">
+    <value>“Boshqa sabab” tanlangan. Iltimos, sababni qisqacha yozing.</value>
+  </data>
+  <data name="OurPartnersArePharmaciesAndRetailStoresYou" xml:space="preserve">
+    <value>* Bizning hamkorlarimiz dorixonalar va savdo do‘konlari. Siz ulardan maxsus chegirmalar va bepul xizmatlar olishingiz mumkin.</value>
+  </data>
+  <data name="OutForDelivery" xml:space="preserve">
+    <value>Yetkazib berilmoqda</value>
+  </data>
+  <data name="Pacifiers" xml:space="preserve">
+    <value>Soskalar</value>
+  </data>
+  <data name="Paid1Day" xml:space="preserve">
+    <value>pullik ∙ 1 kun</value>
+  </data>
+  <data name="PartnerServices" xml:space="preserve">
+    <value>Xamkorlarimizdan xizmat *</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Parol</value>
+  </data>
+  <data name="PasswordMustContainAtLeast6Characters" xml:space="preserve">
+    <value>Parol kamida 6 ta belgidan iborat bo‘lishi kerak.</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Parol bir xil emas.</value>
+  </data>
+  <data name="PasswordsDoNotMatch_aadae6" xml:space="preserve">
+    <value>Parollar mos emas.</value>
+  </data>
+  <data name="PasswordUpdatedSuccessfully" xml:space="preserve">
+    <value>Parol muvaffaqiyatli yangilandi.</value>
+  </data>
+  <data name="Payment" xml:space="preserve">
+    <value>To'lov</value>
+  </data>
+  <data name="PaymentCards" xml:space="preserve">
+    <value>To’lov kartalar</value>
+  </data>
+  <data name="PaymentCards_6551a6" xml:space="preserve">
+    <value>To’lov karta</value>
+  </data>
+  <data name="PaymentCardsLoading" xml:space="preserve">
+    <value>Kartalar yuklanmoqda...</value>
+  </data>
+  <data name="PaymentMethod" xml:space="preserve">
+    <value>To’lov usuli</value>
+  </data>
+  <data name="PaymentNotCompleted" xml:space="preserve">
+    <value>To'lov yakunlanmagan</value>
+  </data>
+  <data name="PaymentPageWasClosed" xml:space="preserve">
+    <value>To'lov sahifasidan chiqildi</value>
+  </data>
+  <data name="PaymentWasSuccessfulYourOrderWillBePrepared" xml:space="preserve">
+    <value>To‘lov muvaffaqiyatli amalga oshirildi. Buyurtmangiz tez orada tayyorlanadi.</value>
+  </data>
+  <data name="Permission" xml:space="preserve">
+    <value>Ruxsat</value>
+  </data>
+  <data name="PermissionRequired" xml:space="preserve">
+    <value>Ruxsat talab qilinadi</value>
+  </data>
+  <data name="PerMonth" xml:space="preserve">
+    <value>bir oy uchun</value>
+  </data>
+  <data name="PersonalHygiene" xml:space="preserve">
+    <value>Shaxsiy gigiena</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Telefon raqam</value>
+  </data>
+  <data name="PhoneNumberNotFoundPleaseRestartRegistration" xml:space="preserve">
+    <value>Telefon raqam topilmadi. Iltimos, ro'yxatdan o'tishni qaytadan boshlang.</value>
+  </data>
+  <data name="PhoneNumberNotFoundPleaseReturnToThe" xml:space="preserve">
+    <value>Telefon raqam topilmadi. Iltimos, kirish sahifasiga qayting.</value>
+  </data>
+  <data name="PiecesCount" xml:space="preserve">
+    <value>{0} dona</value>
+  </data>
+  <data name="PlaceOrder" xml:space="preserve">
+    <value>Buyurtmani rasmiylashtirish</value>
+  </data>
+  <data name="PleaseConfirmPassword" xml:space="preserve">
+    <value>Parolni tasdiqlang.</value>
+  </data>
+  <data name="PleaseEnterAQuestion" xml:space="preserve">
+    <value>Iltimos, savolni kiriting</value>
+  </data>
+  <data name="PleaseEnterFirstName" xml:space="preserve">
+    <value>Ismni kiriting.</value>
+  </data>
+  <data name="PleaseEnterLastName" xml:space="preserve">
+    <value>Familiyani kiriting.</value>
+  </data>
+  <data name="PleaseEnterPassword" xml:space="preserve">
+    <value>Parolni kiriting.</value>
+  </data>
+  <data name="PleaseEnterTheCancellationReason" xml:space="preserve">
+    <value>Iltimos, bekor qilish sababini yozing.</value>
+  </data>
+  <data name="PleaseEnterYourPhoneNumber" xml:space="preserve">
+    <value>Iltimos, telefon raqamingizni kiriting</value>
+  </data>
+  <data name="PleaseRateTheProductWithStars" xml:space="preserve">
+    <value>Iltimos, yulduzcha orqali baho bering.</value>
+  </data>
+  <data name="PleaseSelectADeliveryAddress" xml:space="preserve">
+    <value>Iltimos, yetkazib berish manzilini tanlang.</value>
+  </data>
+  <data name="PleaseSelectAtLeastOneProduct" xml:space="preserve">
+    <value>Iltimos, kamida bitta mahsulotni tanlang.</value>
+  </data>
+  <data name="PleaseSelectTheConfirmationCheckbox" xml:space="preserve">
+    <value>Iltimos, tasdiqlash belgisini tanlang.</value>
+  </data>
+  <data name="PleaseSelectYourAddress" xml:space="preserve">
+    <value>Iltimos, manzilingizni tanlang.</value>
+  </data>
+  <data name="PleaseWaitAMoment" xml:space="preserve">
+    <value>Iltimos, biroz kuting</value>
+  </data>
+  <data name="PleaseWriteAReview" xml:space="preserve">
+    <value>Iltimos, sharh yozing.</value>
+  </data>
+  <data name="PlusTomorrow" xml:space="preserve">
+    <value>+ Ertaga</value>
+  </data>
+  <data name="Porridges" xml:space="preserve">
+    <value>Kashalar</value>
+  </data>
+  <data name="Preparing" xml:space="preserve">
+    <value>Tayyorlanmoqda</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Narxi</value>
+  </data>
+  <data name="Price_c09bde" xml:space="preserve">
+    <value>Narx</value>
+  </data>
+  <data name="PricesAreTooHighForMe" xml:space="preserve">
+    <value>Narxlar men uchun qimmat</value>
+  </data>
+  <data name="PrimaryCardWasNotChanged" xml:space="preserve">
+    <value>Asosiy karta o‘zgartirilmadi</value>
+  </data>
+  <data name="ProductDetails" xml:space="preserve">
+    <value>Maxsulot tafsilotlari</value>
+  </data>
+  <data name="ProductInformationWasNotFound" xml:space="preserve">
+    <value>Mahsulot ma’lumotlari topilmadi.</value>
+  </data>
+  <data name="ProductQuestions" xml:space="preserve">
+    <value>Mahsulot savollari</value>
+  </data>
+  <data name="ProductReviews" xml:space="preserve">
+    <value>Maxsulot Sharhlari</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Mahsulotlar</value>
+  </data>
+  <data name="Products_48d782" xml:space="preserve">
+    <value>{0} ta mahsulot</value>
+  </data>
+  <data name="ProductsTotal" xml:space="preserve">
+    <value>Mahsulotlar qiymati:</value>
+  </data>
+  <data name="ProductsYouAddToTheCartWillAppear" xml:space="preserve">
+    <value>Mahsulotlarni savatchaga qo'shganingizda ular shu yerda ko'rinadi.</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="PurchaseInformationWasNotFound" xml:space="preserve">
+    <value>Xarid ma'lumotlari topilmadi.</value>
+  </data>
+  <data name="PureesAndYogurt" xml:space="preserve">
+    <value>Pyurelar va yogurt</value>
+  </data>
+  <data name="QashqadaryoDistrictStreetHouseOrNearbyLandmark" xml:space="preserve">
+    <value>Qashqadaryo: tuman, ko‘cha, uy yoki yaqin-atrofdagi mo‘ljal</value>
+  </data>
+  <data name="QashqadaryoRegion" xml:space="preserve">
+    <value>Qashqadaryo hududi</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>{0} ta savol</value>
+  </data>
+  <data name="QuestionsAndAnswers" xml:space="preserve">
+    <value>Savol va javoblar</value>
+  </data>
+  <data name="RateWithStars" xml:space="preserve">
+    <value>Yulduzchalar orqali baho qo’ying</value>
+  </data>
+  <data name="Received" xml:space="preserve">
+    <value>Qabul qilindi</value>
+  </data>
+  <data name="RecentSearches" xml:space="preserve">
+    <value>Oxirgi qidiruvlar</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Hudud</value>
+  </data>
+  <data name="Region_0f2171" xml:space="preserve">
+    <value>Hudud</value>
+  </data>
+  <data name="Region_2bb95f" xml:space="preserve">
+    <value>Hudud:</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Ro’yxatdan o’tish</value>
+  </data>
+  <data name="RegistrationWasSuccessfulButAutomaticSignInFailed" xml:space="preserve">
+    <value>Ro'yxatdan o'tish muvaffaqiyatli, ammo avtomatik kirib bo'lmadi. Iltimos, kirish sahifasidan qayta urinib ko'ring.</value>
+  </data>
+  <data name="RepeatNewPassword" xml:space="preserve">
+    <value>Yangi parol takroriy</value>
+  </data>
+  <data name="RepeatPassword" xml:space="preserve">
+    <value>Parolni takrorlang</value>
+  </data>
+  <data name="RepeatPassword_b7aca1" xml:space="preserve">
+    <value>Parol takroriy</value>
+  </data>
+  <data name="Resend" xml:space="preserve">
+    <value>Qayta yuborish</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Parolni tiklash</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Sharh</value>
+  </data>
+  <data name="ReviewsCannotBeLeftAtTheMoment" xml:space="preserve">
+    <value>Hozircha sharh qoldirish mumkin emas.</value>
+  </data>
+  <data name="ReviewsCount" xml:space="preserve">
+    <value>{0} sharhlar</value>
+  </data>
+  <data name="ReviewSent" xml:space="preserve">
+    <value>Sharhingiz yuborildi.</value>
+  </data>
+  <data name="ReviewUpdated" xml:space="preserve">
+    <value>Sharhingiz yangilandi.</value>
+  </data>
+  <data name="RussianLanguage" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="SampleDeliveryAddress" xml:space="preserve">
+    <value>Qashqadaryo viloyati, Shahrisabz shahar, Mo’ljal: 25-maktab</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Saqlash</value>
+  </data>
+  <data name="SaveCard" xml:space="preserve">
+    <value>Kartani saqlash</value>
+  </data>
+  <data name="SaveProductsYouLikeWithTheHeartIcon" xml:space="preserve">
+    <value>Yoqtirgan mahsulotlaringizni yurakcha orqali saqlang. Ular shu yerda ko'rinadi.</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Qidirish</value>
+  </data>
+  <data name="SearchForAProduct" xml:space="preserve">
+    <value>Mahsulotni qidiring</value>
+  </data>
+  <data name="SearchTitle" xml:space="preserve">
+    <value>Qidiruv</value>
+  </data>
+  <data name="SelectAtLeastOneReasonForDeletingThe" xml:space="preserve">
+    <value>Akkauntni o‘chirish sabablaridan kamida bittasini tanlang.</value>
+  </data>
+  <data name="SelectedCartProducts" xml:space="preserve">
+    <value>Savatchadagi tanlangan {0} ta mahsulotni</value>
+  </data>
+  <data name="SelectOneOrMoreReasons" xml:space="preserve">
+    <value>  Bir yoki bir nechta sababni tanlang.</value>
+  </data>
+  <data name="SelectReason" xml:space="preserve">
+    <value>Sababni tanlang</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Yuborish</value>
+  </data>
+  <data name="SendQuestion" xml:space="preserve">
+    <value>Savolni yuborish</value>
+  </data>
+  <data name="SendTemporaryPassword" xml:space="preserve">
+    <value>Vaqtinchalik parol yuborish</value>
+  </data>
+  <data name="SetAsPrimaryCard" xml:space="preserve">
+    <value>Asosiy karta sifatida belgilanishi</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Sozlama</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Kirish</value>
+  </data>
+  <data name="SignInToLeaveAReview" xml:space="preserve">
+    <value>Sharh qoldirish uchun akkauntingizga kiring.</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Profildan chiqish</value>
+  </data>
+  <data name="SimilarProducts" xml:space="preserve">
+    <value>O’xshash mahsulotlar</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>O‘tkazib yuborish</value>
+  </data>
+  <data name="SMSWasNotSent" xml:space="preserve">
+    <value>SMS yuborilmadi</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Saralash</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Boshlash</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Holati</value>
+  </data>
+  <data name="StockAvailable" xml:space="preserve">
+    <value>Omborda {0} dona mavjud</value>
+  </data>
+  <data name="SubscribeToATariff" xml:space="preserve">
+    <value>Tarifga a’zo bo‘lish</value>
+  </data>
+  <data name="SubscribeToATariff_1c0091" xml:space="preserve">
+    <value>Tarifga azo bo’lish</value>
+  </data>
+  <data name="SubscriptionDate" xml:space="preserve">
+    <value>Azo bo’lgan sana</value>
+  </data>
+  <data name="SubscriptionEndDate" xml:space="preserve">
+    <value>Azolik tugagan sana</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Muvaffaqiyatli</value>
+  </data>
+  <data name="TakeAPhotoForTheReview" xml:space="preserve">
+    <value>Sharh uchun rasmga olish</value>
+  </data>
+  <data name="Tariff" xml:space="preserve">
+    <value>Tarif</value>
+  </data>
+  <data name="TariffEndDate" xml:space="preserve">
+    <value>Tarif tugash sanasi</value>
+  </data>
+  <data name="TariffHistory" xml:space="preserve">
+    <value>Tarixdagi tariflar</value>
+  </data>
+  <data name="TariffPlan" xml:space="preserve">
+    <value>Tarif rejasi</value>
+  </data>
+  <data name="Tariffs" xml:space="preserve">
+    <value>Tariflar</value>
+  </data>
+  <data name="Text0Products" xml:space="preserve">
+    <value>0 ta mahsulot</value>
+  </data>
+  <data name="Text0UZS" xml:space="preserve">
+    <value>0 so’m</value>
+  </data>
+  <data name="Text3Photos" xml:space="preserve">
+    <value>{0}/3 ta fotosurat</value>
+  </data>
+  <data name="Text5YearsOld" xml:space="preserve">
+    <value>5 yosh</value>
+  </data>
+  <data name="ThankYouForYourFeedbackAfterTheAccount" xml:space="preserve">
+    <value>Fikringiz uchun rahmat. Akkaunt o‘chirilgandan so‘ng ushbu akkaunt bilan tizimga kira olmaysiz.</value>
+  </data>
+  <data name="ThankYouForYourFeedbackYourAccountWas" xml:space="preserve">
+    <value>Fikringiz uchun rahmat. Akkauntingiz muvaffaqiyatli o‘chirildi.</value>
+  </data>
+  <data name="TheAmountPaidForTheCancelledOrderWill" xml:space="preserve">
+    <value>Bekor qilingan buyurtma uchun to’langan mablag’ hisob raqamingizga 3 kun muddatda qaytariladi</value>
+  </data>
+  <data name="TheAppIsDifficultToUse" xml:space="preserve">
+    <value>Ilovadan foydalanish qiyin</value>
+  </data>
+  <data name="TheCurrentPasswordIsIncorrect" xml:space="preserve">
+    <value>Amaldagi parol noto‘g‘ri.</value>
+  </data>
+  <data name="TheNewPasswordAndRepeatedPasswordDoNot" xml:space="preserve">
+    <value>Yangi parol va takroriy parol mos emas.</value>
+  </data>
+  <data name="TheNewPasswordMustBeDifferentFromThe" xml:space="preserve">
+    <value>Yangi parol amaldagi paroldan farq qilishi kerak.</value>
+  </data>
+  <data name="TheNewPasswordMustContainAtLeast6" xml:space="preserve">
+    <value>Yangi parol kamida 6 ta belgidan iborat bo‘lishi kerak.</value>
+  </data>
+  <data name="TheNewPhoneNumberMustBeDifferentFrom" xml:space="preserve">
+    <value>Yangi telefon raqam amaldagi raqamdan farq qilishi kerak.</value>
+  </data>
+  <data name="TheNewTariffWillBecomeActiveImmediatelyAfter" xml:space="preserve">
+    <value>Yangi tarif to‘lovi tasdiqlangandan so‘ng darhol faol bo‘ladi.</value>
+  </data>
+  <data name="TheOrderAmountIsInvalid" xml:space="preserve">
+    <value>Buyurtma summasi noto'g'ri.</value>
+  </data>
+  <data name="TheProductPriceIsInvalid" xml:space="preserve">
+    <value>Mahsulot narxi noto‘g‘ri.</value>
+  </data>
+  <data name="TheQuestionMustContainAtLeast3Characters" xml:space="preserve">
+    <value>Savol kamida 3 ta belgidan iborat bo'lishi kerak.</value>
+  </data>
+  <data name="TheReviewMustNotExceed2000Characters" xml:space="preserve">
+    <value>Sharh 2000 ta belgidan oshmasligi kerak.</value>
+  </data>
+  <data name="TheReviewToEditWasNotFound" xml:space="preserve">
+    <value>Tahrirlash uchun sharh topilmadi.</value>
+  </data>
+  <data name="TheServiceDidNotProvideTheValueI" xml:space="preserve">
+    <value>Xizmat men kutgan foydani bermadi</value>
+  </data>
+  <data name="TheSMSCodeIsIncorrect" xml:space="preserve">
+    <value>SMS kod noto‘g‘ri.</value>
+  </data>
+  <data name="TheSMSCodeWasNotSentPleaseTry" xml:space="preserve">
+    <value>SMS kod yuborilmadi. Iltimos, qayta urinib ko‘ring.</value>
+  </data>
+  <data name="ThisOrderWillBeRemovedFromOrderHistory" xml:space="preserve">
+    <value>Bu buyurtma buyurtmalar tarixidan o‘chiriladi va uni qayta tiklab bo‘lmaydi. O‘chirmoqchimisiz?</value>
+  </data>
+  <data name="ThisPhoneNumberIsAlreadyRegistered" xml:space="preserve">
+    <value>Bu telefon raqam allaqachon ro‘yxatdan o‘tgan</value>
+  </data>
+  <data name="ThisPhoneNumberIsAlreadyRegistered_dcab50" xml:space="preserve">
+    <value>Bu telefon raqam allaqachon ro‘yxatdan o‘tgan.</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>gacha</value>
+  </data>
+  <data name="ToChangeYourPasswordEnterYourCurrentPassword" xml:space="preserve">
+    <value>Iltimos, parolni o’zgartirish uchun avval amaldagi parolni, so’ngga yangisini ikki marotaba kiriting</value>
+  </data>
+  <data name="Tomorrow" xml:space="preserve">
+    <value>Ertaga</value>
+  </data>
+  <data name="TotalPayment" xml:space="preserve">
+    <value>Jami to’lov:</value>
+  </data>
+  <data name="ToUseAllFeaturesOfThisAppPlease" xml:space="preserve">
+    <value>Ushbu mobil ilovaning imkoniyatlaridan to’liq foydalanish uchun kiritayotgan ma’lumotlaringizni to’g’riligiga e’tibor bering</value>
+  </data>
+  <data name="ToUseThisYouNeedToSubscribeTo" xml:space="preserve">
+    <value>Buning uchun siz Tarif rejasiga ulanishingiz kerak bo’ladi.</value>
+  </data>
+  <data name="UntilTariffEnds" xml:space="preserve">
+    <value>Tarif tugashiga</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Foydalanuvchi</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Foydalanuvchi topilmadi</value>
+  </data>
+  <data name="Uzbek" xml:space="preserve">
+    <value>O‘zbek</value>
+  </data>
+  <data name="UzbekLanguage" xml:space="preserve">
+    <value>O'zbekcha</value>
+  </data>
+  <data name="UZS" xml:space="preserve">
+    <value>so‘m</value>
+  </data>
+  <data name="UZS_02854f" xml:space="preserve">
+    <value>{0:N0} so’m</value>
+  </data>
+  <data name="UZS_b3b773" xml:space="preserve">
+    <value> so'm</value>
+  </data>
+  <data name="UZSAvailableForPurchase" xml:space="preserve">
+    <value> so’mga xarid qilishingiz mumkin.</value>
+  </data>
+  <data name="Verified" xml:space="preserve">
+    <value>Tasdiqlangan</value>
+  </data>
+  <data name="VerifiedPurchase" xml:space="preserve">
+    <value>Tasdiqlangan xarid</value>
+  </data>
+  <data name="View2Products" xml:space="preserve">
+    <value>2 ta mahsulot ko‘rish</value>
+  </data>
+  <data name="ViewFull" xml:space="preserve">
+    <value>To’liq ko’rish</value>
+  </data>
+  <data name="ViewProducts" xml:space="preserve">
+    <value>{0} ta mahsulot ko‘rish</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Ogohlantirish</value>
+  </data>
+  <data name="WhereShouldTheOrderBeDelivered" xml:space="preserve">
+    <value>Buyurtma qayerga yetkazib berilsin?</value>
+  </data>
+  <data name="WhyDoYouWantToDeleteYourAccount" xml:space="preserve">
+    <value>Nega akkauntingizni o‘chirmoqchisiz?</value>
+  </data>
+  <data name="Wipes" xml:space="preserve">
+    <value>Salfetka</value>
+  </data>
+  <data name="WithoutSubscription" xml:space="preserve">
+    <value>Obunasiz</value>
+  </data>
+  <data name="WithPhotosOnly" xml:space="preserve">
+    <value>Faqat fotosuratlilari</value>
+  </data>
+  <data name="WithSubscription" xml:space="preserve">
+    <value>Obuna bilan</value>
+  </data>
+  <data name="WriteAReview" xml:space="preserve">
+    <value>Sharh yozing</value>
+  </data>
+  <data name="WriteYourQuestionAboutTheProduct" xml:space="preserve">
+    <value>Mahsulot bo'yicha savolingizni yozing</value>
+  </data>
+  <data name="WriteYourReviewOfTheProduct" xml:space="preserve">
+    <value>Mahsulot bo’yicha fikringizni yozing</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Ha</value>
+  </data>
+  <data name="YouAlreadyLeftAReviewForThisProduct" xml:space="preserve">
+    <value>Siz ushbu mahsulot uchun sharh qoldirgansiz. Xohlasangiz uni tahrirlashingiz mumkin.</value>
+  </data>
+  <data name="YouAreCancellingTheOrder" xml:space="preserve">
+    <value>Siz buyurtmani bekor qilyapsiz</value>
+  </data>
+  <data name="YouCanAskASpecificQuestionAboutThe" xml:space="preserve">
+    <value>Mahsulotning xususiyati, tarkibi, o'lchami yoki foydalanish bo'yicha aniq savol yozishingiz mumkin.</value>
+  </data>
+  <data name="YouCanAskTheFirstQuestionAboutThis" xml:space="preserve">
+    <value>Ushbu mahsulot bo'yicha birinchi savolni siz berishingiz mumkin.</value>
+  </data>
+  <data name="YouCanUseThePlatformWithThisPhone" xml:space="preserve">
+    <value>Ushbu telefon raqam orqali siz platformadan unumli foydalanishingiz mumkin.Telefon raqamingizni to’g’ri kiritishingiz juda ham muhim. Telefon raqamingizni kiritishingiz orqali siz ommaviy ofertaga roziligingizni bildirasiz.</value>
+  </data>
+  <data name="YouDoNotHaveAnActiveTariffPlease" xml:space="preserve">
+    <value>Sizda faol tarif mavjud emas. Iltimos, tarifga obuna bo‘ling.</value>
+  </data>
+  <data name="YouDoNotNeedToHavePurchasedThe" xml:space="preserve">
+    <value>Savol berish uchun mahsulotni oldin xarid qilgan bo'lishingiz shart emas.</value>
+  </data>
+  <data name="YouNeedToHavePurchasedThisProductAt" xml:space="preserve">
+    <value>Sharh qoldirish uchun ushbu mahsulotni kamida bir marta xarid qilgan bo'lishingiz kerak</value>
+  </data>
+  <data name="YouPurchasedThisProductShareYourExperienceWith" xml:space="preserve">
+    <value>Siz bu mahsulotni xarid qilgansiz. Tajribangizni boshqalar bilan ulashing.</value>
+  </data>
+  <data name="YourCartIsEmpty" xml:space="preserve">
+    <value>Savatchangiz hozircha bo'sh</value>
+  </data>
+  <data name="YourCurrentPhoneNumber" xml:space="preserve">
+    <value>Sizning amaldagi telefon raqamingiz</value>
+  </data>
+  <data name="YourDataIsProtected" xml:space="preserve">
+    <value>🔒 Ma’lumotlaringiz himoyalangan</value>
+  </data>
+  <data name="YourFavoritesListIsEmpty" xml:space="preserve">
+    <value>Sevimlilar ro'yxati hozircha bo'sh</value>
+  </data>
+  <data name="YourOrderIsBeingDelivered" xml:space="preserve">
+    <value>Buyurtmangiz sizga yetkazib berilmoqda.</value>
+  </data>
+  <data name="YourOrderStatusIsBeingChecked" xml:space="preserve">
+    <value>Buyurtmangiz holati tekshirilmoqda.</value>
+  </data>
+  <data name="YourOrderWasDeliveredSuccessfully" xml:space="preserve">
+    <value>Buyurtmangiz muvaffaqiyatli yetkazib berildi.</value>
+  </data>
+  <data name="YourPasswordHasBeenChanged" xml:space="preserve">
+    <value>Parolingiz o‘zgartirildi.</value>
+  </data>
+  <data name="YourPhoneNumberHasBeenChangedForSecurity" xml:space="preserve">
+    <value>Telefon raqamingiz o‘zgartirildi. Xavfsizlik uchun qayta kirishingiz kerak.</value>
+  </data>
+  <data name="YourProductsAreBeingPreparedForDelivery" xml:space="preserve">
+    <value>Mahsulotlaringiz yetkazib berish uchun tayyorlanmoqda.</value>
+  </data>
+  <data name="YourQuestionWasSentTheAnswerWillAppear" xml:space="preserve">
+    <value>Savolingiz yuborildi. Javob berilgach shu sahifada ko'rinadi.</value>
+  </data>
+  <data name="CancelTariff" xml:space="preserve">
+    <value>Tarifni bekor qilish</value>
+  </data>
+  <data name="CancelTariffConfirmation" xml:space="preserve">
+    <value>Faol tarifni bekor qilmoqchimisiz? Tarif imtiyozlari bekor qilingandan so‘ng darhol to‘xtaydi. Pulni qaytarish tasdiqlangach, mablag‘ingiz 24 soatdan keyin hisobingizga qaytariladi.</value>
+  </data>
+  <data name="CouldNotCancelTariff" xml:space="preserve">
+    <value>Tarifni bekor qilib bo‘lmadi.</value>
+  </data>
+  <data name="TariffCancelledSuccessfully" xml:space="preserve">
+    <value>Tarif muvaffaqiyatli bekor qilindi.</value>
+  </data>
+</root>

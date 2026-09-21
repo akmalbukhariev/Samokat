@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Collections.ObjectModel;
 using Api.Services;
 using Microsoft.Maui.Controls.Shapes;
@@ -62,7 +63,7 @@ public partial class TariffsPage : BasePage
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString() || response.resultData == null)
             {
-                await DisplayAlert("Xatolik", response.resultMsg ?? "Tariflarni yuklab bo‘lmadi.", "Yopish");
+                await DisplayAlert(AppResource.Error, response.resultMsg ?? AppResource.CouldNotLoadTariffs, AppResource.Close);
                 return;
             }
 
@@ -90,10 +91,10 @@ public partial class TariffsPage : BasePage
                     IsCurrent = isCurrent,
                     CanPurchase = !isCurrent,
                     ActionText = isCurrent
-                        ? "Amaldagi tarif"
+                        ? AppResource.CurrentTariff
                         : activeTariffId > 0
-                            ? "Tarifni almashtirish"
-                            : "Sotib olish"
+                            ? AppResource.ChangeTariff
+                            : AppResource.Buy
                 });
             }
 
@@ -107,7 +108,7 @@ public partial class TariffsPage : BasePage
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"[ERROR] LoadTariffsAsync => {ex}");
-            await DisplayAlert("Xatolik", "Tariflarni yuklab bo‘lmadi.", "Yopish");
+            await DisplayAlert(AppResource.Error, AppResource.CouldNotLoadTariffs, AppResource.Close);
         }
         finally
         {
@@ -147,7 +148,7 @@ public partial class TariffsPage : BasePage
 
             if (hasActiveTariff && activeResponse.resultData!.tariffId == tariff.Id)
             {
-                await DisplayAlert("Tarif", $"{tariff.Name} hozirgi amaldagi tarifingiz.", "Yopish");
+                await DisplayAlert(AppResource.Tariff, string.Format(AppResource.CurrentTariffMessage, tariff.Name), AppResource.Close);
                 await LoadTariffsAsync();
                 return;
             }
@@ -161,11 +162,11 @@ public partial class TariffsPage : BasePage
 
                 string currentName = activeResponse.resultData!.tariffName;
                 bool confirmed = await DisplayAlert(
-                    "Tarifni almashtirish",
-                    $"{currentName} tarifidan {tariff.Name} tarifiga o‘tmoqchimisiz? " +
-                    "Yangi tarif to‘lovi tasdiqlangandan so‘ng darhol faol bo‘ladi.",
-                    "Almashtirish",
-                    "Bekor qilish");
+                    AppResource.ChangeTariff,
+                    string.Format(AppResource.DoYouWantToSwitchFromTo, currentName, tariff.Name) +
+                    AppResource.TheNewTariffWillBecomeActiveImmediatelyAfter,
+                    AppResource.Change,
+                    AppResource.Cancel);
 
                 if (!confirmed)
                     return;
@@ -185,9 +186,9 @@ public partial class TariffsPage : BasePage
                 string.IsNullOrWhiteSpace(checkoutResponse.resultData.paymentUrl))
             {
                 await DisplayAlert(
-                    "Xatolik",
-                    checkoutResponse.resultMsg ?? "Tarif to‘lovini boshlash imkoni bo‘lmadi.",
-                    "Yopish");
+                    AppResource.Error,
+                    checkoutResponse.resultMsg ?? AppResource.CouldNotStartTariffPayment,
+                    AppResource.Close);
                 return;
             }
 
@@ -203,7 +204,7 @@ public partial class TariffsPage : BasePage
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"[ERROR] BuyTariff => {ex}");
-            await DisplayAlert("Xatolik", "Tarif to‘lovini boshlash imkoni bo‘lmadi.", "Yopish");
+            await DisplayAlert(AppResource.Error, AppResource.CouldNotStartTariffPayment, AppResource.Close);
         }
         finally
         {
@@ -254,17 +255,17 @@ public partial class TariffsPage : BasePage
         string name = tariffName?.ToUpperInvariant() ?? string.Empty;
 
         if (name.Contains("PLATINUM"))
-            return "Mahsulotni 1 soat davomida yetkazish";
+            return AppResource.DeliveryWithinOneHour;
         if (name.Contains("GOLD"))
-            return "Mahsulotni 3 soat davomida yetkazish";
+            return AppResource.DeliveryWithinThreeHours;
         if (name.Contains("SILVER"))
-            return "Mahsulotni kun davomida yetkazish";
+            return AppResource.DeliveryWithinTheDay;
 
         return index switch
         {
-            0 => "Mahsulotni kun davomida yetkazish",
-            1 => "Mahsulotni 3 soat davomida yetkazish",
-            _ => "Tezkor yetkazib berish"
+            0 => AppResource.DeliveryWithinTheDay,
+            1 => AppResource.DeliveryWithinThreeHours,
+            _ => AppResource.FastDelivery
         };
     }
 }

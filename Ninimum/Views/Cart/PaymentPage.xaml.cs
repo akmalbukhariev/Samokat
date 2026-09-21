@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using Api.Services;
 using Models.Requests;
 using Models.Responses;
@@ -38,9 +39,7 @@ public partial class PaymentPage : BasePage, IQueryAttributable
 
         BackCommand = new Command(async () => await HandleBackAsync());
         BindingContext = this;
-
-        Shell.SetTabBarIsVisible(this, false);
-    }
+}
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
@@ -292,10 +291,17 @@ public partial class PaymentPage : BasePage, IQueryAttributable
 
         await MainThread.InvokeOnMainThreadAsync(async () =>
         {
+            // Reset the Shell stack before leaving Payme. Otherwise the old
+            // PaymentPage remains under the destination and Back can reopen
+            // the Payme WebView after the payment has already completed.
+            await AppNavigatorService.NavigateHome(false);
+
             if (paymentType == "TARIFF")
+            {
+                // Show the activated tariff as the completion screen. Home is
+                // directly underneath it, so Back returns to MainPage.
                 await AppNavigatorService.NavigateTo(nameof(MyTariffPage));
-            else
-                await AppNavigatorService.NavigateTo(nameof(MainPage));
+            }
         });
     }
 
@@ -334,10 +340,10 @@ public partial class PaymentPage : BasePage, IQueryAttributable
             }
 
             bool shouldLeave = await Shell.Current.DisplayAlert(
-                "To'lov yakunlanmagan",
-                "Ortga qaytsangiz, ushbu to'lanmagan buyurtma bekor qilinadi. Davom etasizmi?",
-                "Ha",
-                "Yo'q");
+                AppResource.PaymentNotCompleted,
+                AppResource.IfYouGoBackThisUnpaidOrderWill,
+                AppResource.Yes,
+                AppResource.NoAscii);
 
             if (!shouldLeave)
             {
@@ -349,7 +355,7 @@ public partial class PaymentPage : BasePage, IQueryAttributable
             {
                 orderId = orderId,
                 userId = appControl.CurrentUserId,
-                reason = "To'lov sahifasidan chiqildi"
+                reason = AppResource.PaymentPageWasClosed
             });
 
             if (cancelResponse.resultCode == ApiResult.SUCCESS.GetCodeToString())
@@ -370,15 +376,15 @@ public partial class PaymentPage : BasePage, IQueryAttributable
             }
 
             await AlertService.ShowAlertAsync(
-                "Xatolik",
-                cancelResponse.resultMsg ?? "To'lanmagan buyurtmani bekor qilib bo'lmadi.");
+                AppResource.Error,
+                cancelResponse.resultMsg ?? AppResource.CouldNotCancelTheUnpaidOrder);
 
             StartPaymentStatusChecking();
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"[ERROR] HandleBackAsync => {ex}");
-            await AlertService.ShowAlertAsync("Xatolik", "To'lov holatini tekshirib bo'lmadi.");
+            await AlertService.ShowAlertAsync(AppResource.Error, AppResource.CouldNotCheckThePaymentStatus);
             StartPaymentStatusChecking();
         }
         finally

@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -65,13 +66,13 @@ public partial class AskProductQuestionViewModel : ObservableObject
 
         if (string.IsNullOrWhiteSpace(question))
         {
-            await AlertService.ShowAlertAsync("Ogohlantirish", "Iltimos, savolni kiriting");
+            await AlertService.ShowAlertAsync(AppResource.Warning, AppResource.PleaseEnterAQuestion);
             return;
         }
 
         if (question.Length < 3)
         {
-            await AlertService.ShowAlertAsync("Ogohlantirish", "Savol kamida 3 ta belgidan iborat bo'lishi kerak.");
+            await AlertService.ShowAlertAsync(AppResource.Warning, AppResource.TheQuestionMustContainAtLeast3Characters);
             return;
         }
 
@@ -87,17 +88,17 @@ public partial class AskProductQuestionViewModel : ObservableObject
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
-                await AlertService.ShowAlertAsync("Xatolik", response.resultMsg ?? "Savolni yuborib bo'lmadi.");
+                await AlertService.ShowAlertAsync(AppResource.Error, response.resultMsg ?? AppResource.CouldNotSendTheQuestion);
                 return;
             }
 
             PageDataRefreshState.MarkDirty(PageDataRefreshState.ProductQuestions(ProductId));
-            await AlertService.ShowAlertAsync("Muvaffaqiyatli", "Savolingiz yuborildi. Javob berilgach shu sahifada ko'rinadi.");
+            await AlertService.ShowAlertAsync(AppResource.Success, AppResource.YourQuestionWasSentTheAnswerWillAppear);
             await AppNavigatorService.NavigateTo("..");
         }
         catch (Exception ex)
         {
-            await AlertService.ShowAlertAsync("Xatolik", $"Savolni yuborib bo'lmadi.\n{ex.Message}");
+            await AlertService.ShowAlertAsync(AppResource.Error, string.Format(AppResource.CouldNotSendTheQuestion_a01d00, ex.Message));
         }
         finally
         {

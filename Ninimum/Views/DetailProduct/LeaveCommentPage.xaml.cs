@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Collections.ObjectModel;
 using Api.Services;
 using Models.Requests;
@@ -40,8 +41,8 @@ public partial class LeaveCommentPage : BasePage
     public long ReviewId { get; set; }
     public bool IsEditMode => ReviewId > 0;
 
-    public string PageTitle => IsEditMode ? "Sharhni tahrirlash" : "Sharh qoldirish";
-    public string DefaultSubmitButtonText => IsEditMode ? "Saqlash" : "Yuborish";
+    public string PageTitle => IsEditMode ? AppResource.EditReview : AppResource.LeaveAReview;
+    public string DefaultSubmitButtonText => IsEditMode ? AppResource.Save : AppResource.Send;
 
     private string productTitle = string.Empty;
     public string ProductTitle
@@ -57,7 +58,7 @@ public partial class LeaveCommentPage : BasePage
     public ObservableCollection<ReviewPhotoItem> SelectedImages { get; } = new();
     public bool HasSelectedImages => SelectedImages.Count > 0;
     public bool CanAddMorePhotos => SelectedImages.Count < 3;
-    public string PhotoLimitText => $"{SelectedImages.Count}/3 ta fotosurat";
+    public string PhotoLimitText => string.Format(AppResource.Text3Photos, SelectedImages.Count);
 
     public LeaveCommentPage(UserApiService apiService, AppControl appControl)
     {
@@ -115,14 +116,14 @@ public partial class LeaveCommentPage : BasePage
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString() || response.resultData?.existing_review == null)
             {
-                await DisplayAlert("Xatolik", "Tahrirlash uchun sharh topilmadi.", "OK");
+                await DisplayAlert(AppResource.Error, AppResource.TheReviewToEditWasNotFound, AppResource.Ok);
                 return;
             }
 
             ReviewDto review = response.resultData.existing_review;
             if (review.id != ReviewId)
             {
-                await DisplayAlert("Xatolik", "Tahrirlash uchun sharh topilmadi.", "OK");
+                await DisplayAlert(AppResource.Error, AppResource.TheReviewToEditWasNotFound, AppResource.Ok);
                 return;
             }
 
@@ -145,7 +146,7 @@ public partial class LeaveCommentPage : BasePage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Xatolik", $"Sharhni yuklab bo'lmadi: {ex.Message}", "OK");
+            await DisplayAlert(AppResource.Error, string.Format(AppResource.CouldNotLoadTheReview, ex.Message), AppResource.Ok);
         }
         finally
         {
@@ -191,7 +192,7 @@ public partial class LeaveCommentPage : BasePage
 
         if (!MediaPicker.Default.IsCaptureSupported)
         {
-            await DisplayAlert("Ogohlantirish", "Ushbu qurilmada kamera orqali rasm olish mavjud emas.", "OK");
+            await DisplayAlert(AppResource.Warning, AppResource.CameraCaptureIsNotAvailableOnThisDevice, AppResource.Ok);
             return;
         }
 
@@ -205,7 +206,7 @@ public partial class LeaveCommentPage : BasePage
 
             if (permission != PermissionStatus.Granted)
             {
-                await DisplayAlert("Kamera ruxsati", "Rasmga olish uchun ilovaga kamera ruxsatini bering.", "OK");
+                await DisplayAlert(AppResource.CameraPermission, AppResource.AllowCameraAccessToTakeAPhoto, AppResource.Ok);
                 return;
             }
 
@@ -214,7 +215,7 @@ public partial class LeaveCommentPage : BasePage
             // re-encodes as JPEG, so the server never depends on EXIF for display orientation.
             FileResult? file = await MediaPicker.Default.CapturePhotoAsync(new MediaPickerOptions
             {
-                Title = "Sharh uchun rasmga olish",
+                Title = AppResource.TakeAPhotoForTheReview,
                 RotateImage = false,
                 PreserveMetaData = true
             });
@@ -224,11 +225,11 @@ public partial class LeaveCommentPage : BasePage
         }
         catch (PermissionException)
         {
-            await DisplayAlert("Kamera ruxsati", "Kamera ruxsati berilmagan.", "OK");
+            await DisplayAlert(AppResource.CameraPermission, AppResource.CameraPermissionWasNotGranted, AppResource.Ok);
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Xatolik", $"Rasmga olib bo'lmadi: {ex.Message}", "OK");
+            await DisplayAlert(AppResource.Error, string.Format(AppResource.CouldNotTakeAPhoto, ex.Message), AppResource.Ok);
         }
         finally
         {
@@ -248,7 +249,7 @@ public partial class LeaveCommentPage : BasePage
 
             List<FileResult> files = await MediaPicker.Default.PickPhotosAsync(new MediaPickerOptions
             {
-                Title = "Sharh uchun fotosurat tanlang",
+                Title = AppResource.ChooseAPhotoForTheReview,
                 SelectionLimit = remainingCount,
                 RotateImage = false,
                 PreserveMetaData = true
@@ -259,11 +260,11 @@ public partial class LeaveCommentPage : BasePage
         }
         catch (PermissionException)
         {
-            await DisplayAlert("Ruxsat", "Fotosuratlarni tanlash uchun galereyaga ruxsat bering.", "OK");
+            await DisplayAlert(AppResource.Permission, AppResource.AllowGalleryAccessToSelectPhotos, AppResource.Ok);
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Xatolik", $"Fotosuratni tanlab bo'lmadi: {ex.Message}", "OK");
+            await DisplayAlert(AppResource.Error, string.Format(AppResource.CouldNotSelectAPhoto, ex.Message), AppResource.Ok);
         }
         finally
         {
@@ -286,7 +287,7 @@ public partial class LeaveCommentPage : BasePage
         {
             if (!appControl.IsAuthenticated)
             {
-                await DisplayAlert("Ogohlantirish", "Sharh qoldirish uchun akkauntingizga kiring.", "OK");
+                await DisplayAlert(AppResource.Warning, AppResource.SignInToLeaveAReview, AppResource.Ok);
                 return;
             }
 
@@ -294,25 +295,25 @@ public partial class LeaveCommentPage : BasePage
 
             if (_selectedRating <= 0)
             {
-                await DisplayAlert("Ogohlantirish", "Iltimos, yulduzcha orqali baho bering.", "OK");
+                await DisplayAlert(AppResource.Warning, AppResource.PleaseRateTheProductWithStars, AppResource.Ok);
                 return;
             }
 
             if (string.IsNullOrWhiteSpace(comment))
             {
-                await DisplayAlert("Ogohlantirish", "Iltimos, sharh yozing.", "OK");
+                await DisplayAlert(AppResource.Warning, AppResource.PleaseWriteAReview, AppResource.Ok);
                 return;
             }
 
             if (comment.Length > 2000)
             {
-                await DisplayAlert("Ogohlantirish", "Sharh 2000 ta belgidan oshmasligi kerak.", "OK");
+                await DisplayAlert(AppResource.Warning, AppResource.TheReviewMustNotExceed2000Characters, AppResource.Ok);
                 return;
             }
 
             if (ProductId <= 0 || OrderId <= 0)
             {
-                await DisplayAlert("Xatolik", "Xarid ma'lumotlari topilmadi.", "OK");
+                await DisplayAlert(AppResource.Error, AppResource.PurchaseInformationWasNotFound, AppResource.Ok);
                 return;
             }
 
@@ -356,7 +357,7 @@ public partial class LeaveCommentPage : BasePage
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
-                await DisplayAlert("Xatolik", response.resultMsg ?? "Sharhni saqlab bo'lmadi.", "OK");
+                await DisplayAlert(AppResource.Error, response.resultMsg ?? AppResource.CouldNotSaveTheReview, AppResource.Ok);
                 return;
             }
 
@@ -366,15 +367,15 @@ public partial class LeaveCommentPage : BasePage
             PageDataRefreshState.MarkDirty(PageDataRefreshState.Favorites);
 
             await DisplayAlert(
-                "Muvaffaqiyatli",
-                IsEditMode ? "Sharhingiz yangilandi." : "Sharhingiz yuborildi.",
-                "OK");
+                AppResource.Success,
+                IsEditMode ? AppResource.ReviewUpdated : AppResource.ReviewSent,
+                AppResource.Ok);
 
             await Shell.Current.GoToAsync("..");
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Xatolik", ex.Message, "OK");
+            await DisplayAlert(AppResource.Error, ex.Message, AppResource.Ok);
         }
         finally
         {

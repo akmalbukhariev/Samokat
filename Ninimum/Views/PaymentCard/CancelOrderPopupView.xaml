@@ -2,6 +2,7 @@
 <ContentView
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:ui="clr-namespace:Xe.AcrylicView;assembly=Xe.AcrylicView"
     x:Class="Ninimum.Views.PaymentCard.CancelOrderPopupView"
     x:Name="ThisView"
@@ -97,14 +98,14 @@
                         IsVisible="{Binding IsSuccess, Source={x:Reference ThisView}, Converter={StaticResource InverseBoolConverter}}">
 
                         <Label
-                            Text="Siz buyurtmani bekor qilyapsiz"
+                            Text="{x:Static language:AppResource.YouAreCancellingTheOrder}"
                             FontFamily="{StaticResource FontSFRegular}"
                             FontSize="17"
                             TextColor="#22292F"
                             HorizontalTextAlignment="Center" />
 
                         <Label
-                            Text="Ishonchingiz komilmi?"
+                            Text="{x:Static language:AppResource.AreYouSure}"
                             FontFamily="{StaticResource FontSFRegular}"
                             FontSize="17"
                             TextColor="#22292F"
@@ -118,7 +119,7 @@
                         IsVisible="{Binding IsSuccess, Source={x:Reference ThisView}}">
 
                         <Label
-                            Text="Byurtma muvaffaqiyatli bekor qilindi"
+                            Text="{x:Static language:AppResource.OrderCancelledSuccessfully}"
                             FontFamily="{StaticResource FontSFRegular}"
                             FontSize="17"
                             TextColor="#22292F"
@@ -126,7 +127,7 @@
                             HorizontalTextAlignment="Center" />
 
                         <Label
-                            Text="Bekor qilingan buyurtma uchun to’langan mablag’ hisob raqamingizga 3 kun muddatda qaytariladi"
+                            Text="{x:Static language:AppResource.TheAmountPaidForTheCancelledOrderWill}"
                             FontFamily="{StaticResource FontSFRegular}"
                             FontSize="17"
                             TextColor="#96979B"
@@ -143,7 +144,7 @@
                     IsVisible="{Binding IsSuccess, Source={x:Reference ThisView}, Converter={StaticResource InverseBoolConverter}}">
 
                     <Button
-                        Text="Tasdiqlayman"
+                        Text="{x:Static language:AppResource.Confirm_d235a9}"
                         HeightRequest="56"
                         CornerRadius="40"
                         BackgroundColor="#DADADA"
@@ -153,7 +154,7 @@
                         Clicked="OnConfirmClicked" />
 
                     <Button
-                        Text="Bekor qilmayman"
+                        Text="{x:Static language:AppResource.DoNotCancel}"
                         HeightRequest="56"
                         CornerRadius="40"
                         BackgroundColor="#FD473C"
@@ -167,7 +168,7 @@
                 <!-- Success button -->
                 <Button
                     IsVisible="{Binding IsSuccess, Source={x:Reference ThisView}}"
-                    Text="Tushunarli"
+                    Text="{x:Static language:AppResource.GotIt}"
                     HeightRequest="56"
                     CornerRadius="40"
                     BackgroundColor="#FD473C"

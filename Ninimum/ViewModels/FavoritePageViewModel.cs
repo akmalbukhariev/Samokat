@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -166,7 +167,7 @@ public partial class FavoritePageViewModel : ObservableObject
             Rating = item.average_rating ?? 0,
             ReviewCount = item.review_count ?? 0,
             ProductId = (int)item.id,
-            ActionText = "+ Ertaga",
+            ActionText = AppResource.PlusTomorrow,
             Images = images
         };
     }
@@ -238,7 +239,7 @@ public partial class FavoritePageViewModel : ObservableObject
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
-                await AlertService.ShowAlertAsync("Xatolik", response.resultMsg);
+                await AlertService.ShowAlertAsync(AppResource.Error, response.resultMsg);
                 return;
             }
 
@@ -247,7 +248,7 @@ public partial class FavoritePageViewModel : ObservableObject
         }
         catch
         {
-            await AlertService.ShowAlertAsync("Xatolik", "Mahsulotni savatchaga qo’shib bo’lmadi.");
+            await AlertService.ShowAlertAsync(AppResource.Error, AppResource.CouldNotAddTheProductToTheCart);
         }
         finally
         {

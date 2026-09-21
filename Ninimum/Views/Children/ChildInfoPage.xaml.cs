@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -30,8 +31,8 @@ public partial class ChildInfoPage : BasePage, INotifyPropertyChanged
 
         if (_isEditMode && child != null)
         {
-            PageTitle = "Farzand ma’lumotini tahrirlash";
-            ButtonText = "Tahrirlash";
+            PageTitle = AppResource.EditChildInformation;
+            ButtonText = AppResource.Edit;
 
             ChildFirstName = child.FirstName;
             ChildLastName = child.LastName;
@@ -43,8 +44,8 @@ public partial class ChildInfoPage : BasePage, INotifyPropertyChanged
         }
         else
         {
-            PageTitle = "Farzand qo‘shish";
-            ButtonText = "Qo‘shish";
+            PageTitle = AppResource.AddChild;
+            ButtonText = AppResource.Add_4ebad9;
 
             Gender = "Erkak";
             IsBoySelected = true;
@@ -174,7 +175,7 @@ public partial class ChildInfoPage : BasePage, INotifyPropertyChanged
             _editingChild.LastName = ChildLastName;
             _editingChild.BirthDate = ChildBirthDate;
             _editingChild.Gender = Gender;
-            _editingChild.Age = "5 yosh";
+            _editingChild.Age = AppResource.Text5YearsOld;
         }
         else
         {
@@ -184,7 +185,7 @@ public partial class ChildInfoPage : BasePage, INotifyPropertyChanged
                 LastName = ChildLastName,
                 BirthDate = ChildBirthDate,
                 Gender = Gender,
-                Age = "5 yosh"
+                Age = AppResource.Text5YearsOld
             });
         }
 

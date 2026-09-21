@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 namespace Ninimum.Models;
 
 public class OrderProductItemModel
@@ -8,5 +9,5 @@ public class OrderProductItemModel
     public decimal UnitPrice { get; set; }
     public int Quantity { get; set; }
 
-    public string PriceText => $"{UnitPrice:N0}".Replace(",", " ") + " so'm";
+    public string PriceText => $"{UnitPrice:N0}".Replace(",", " ") + AppResource.UZS_b3b773;
 }

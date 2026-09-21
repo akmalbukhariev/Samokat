@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Input;
@@ -115,19 +116,19 @@ public partial class ChangePasswordPage : BasePage, INotifyPropertyChanged
 
         if (NewPassword.Length < 6)
         {
-            await DisplayAlert("Xatolik", "Yangi parol kamida 6 ta belgidan iborat bo‘lishi kerak.", "Yopish");
+            await DisplayAlert(AppResource.Error, AppResource.TheNewPasswordMustContainAtLeast6, AppResource.Close);
             return;
         }
 
         if (!string.Equals(NewPassword, ConfirmPassword, StringComparison.Ordinal))
         {
-            await DisplayAlert("Xatolik", "Yangi parol va takroriy parol mos emas.", "Yopish");
+            await DisplayAlert(AppResource.Error, AppResource.TheNewPasswordAndRepeatedPasswordDoNot, AppResource.Close);
             return;
         }
 
         if (string.Equals(CurrentPassword, NewPassword, StringComparison.Ordinal))
         {
-            await DisplayAlert("Xatolik", "Yangi parol amaldagi paroldan farq qilishi kerak.", "Yopish");
+            await DisplayAlert(AppResource.Error, AppResource.TheNewPasswordMustBeDifferentFromThe, AppResource.Close);
             return;
         }
 
@@ -144,25 +145,25 @@ public partial class ChangePasswordPage : BasePage, INotifyPropertyChanged
 
             if (response.resultCode == ApiResult.PASSWORD_IS_NOT_MATCHED.GetCodeToString())
             {
-                await DisplayAlert("Xatolik", "Amaldagi parol noto‘g‘ri.", "Yopish");
+                await DisplayAlert(AppResource.Error, AppResource.TheCurrentPasswordIsIncorrect, AppResource.Close);
                 return;
             }
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
-                await DisplayAlert("Xatolik", response.resultMsg ?? "Parolni o‘zgartirib bo‘lmadi.", "Yopish");
+                await DisplayAlert(AppResource.Error, response.resultMsg ?? AppResource.CouldNotChangeThePassword, AppResource.Close);
                 return;
             }
 
             storeService.Set(AppKeys.Password, NewPassword);
 
-            await DisplayAlert("Muvaffaqiyatli", "Parolingiz o‘zgartirildi.", "OK");
+            await DisplayAlert(AppResource.Success, AppResource.YourPasswordHasBeenChanged, AppResource.Ok);
             await AppNavigatorService.NavigateTo("..");
         }
         catch (Exception ex)
         {
             System.Diagnostics.Debug.WriteLine($"[ERROR] ChangePassword => {ex}");
-            await DisplayAlert("Xatolik", "Parolni o‘zgartirib bo‘lmadi.", "Yopish");
+            await DisplayAlert(AppResource.Error, AppResource.CouldNotChangeThePassword, AppResource.Close);
         }
         finally
         {

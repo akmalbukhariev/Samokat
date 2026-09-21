@@ -2,10 +2,13 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     xmlns:models="clr-namespace:Ninimum.Models.Tariff"
     x:Class="Ninimum.Views.MyTariff.TariffsPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     BackgroundColor="White">
 
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*"
@@ -13,7 +16,7 @@
 
         <components:PageHeaderView
             Grid.Row="0"
-            Title="Tariflar" />
+            Title="{x:Static language:AppResource.Tariffs}" />
 
         <CarouselView
             x:Name="TariffCarousel"
@@ -64,7 +67,7 @@
                                     <Grid RowDefinitions="Auto, Auto,Auto">
 
                                         <Label
-                                            Text="bir oy uchun"
+                                            Text="{x:Static language:AppResource.PerMonth}"
                                             TextColor="#20262E"
                                             FontSize="15"
                                             FontFamily="{StaticResource FontSFRegular}" />
@@ -79,7 +82,7 @@
 
                                         <Label
                                             Grid.Row="2"
-                                            Text="so‘m"
+                                            Text="{x:Static language:AppResource.UZS}"
                                             TextColor="#20262E"
                                             FontSize="22"
                                             FontFamily="{StaticResource FontSFBold}"
@@ -103,7 +106,7 @@
 
                                             <Label
                                                 Grid.Column="1"
-                                                Text="Bepul yetkazish"
+                                                Text="{x:Static language:AppResource.FreeDelivery}"
                                                 TextColor="#20262E"
                                                 FontSize="17"
                                                 FontFamily="{StaticResource FontSFRegular}" />
@@ -136,7 +139,7 @@
 
                                             <Label
                                                 Grid.Column="1"
-                                                Text="Hamkorlarimiz xizmatidan chegirmalar"
+                                                Text="{x:Static language:AppResource.DiscountsFromOurPartners}"
                                                 TextColor="#20262E"
                                                 FontSize="17"
                                                 FontFamily="{StaticResource FontSFRegular}"
@@ -153,7 +156,7 @@
 
                                             <Label
                                                 Grid.Column="1"
-                                                Text="Xamkorlarimizdan xizmat *"
+                                                Text="{x:Static language:AppResource.PartnerServices}"
                                                 TextColor="#20262E"
                                                 FontSize="17"
                                                 FontFamily="{StaticResource FontSFRegular}"
@@ -193,7 +196,7 @@
 
         <Label
             Grid.Row="3"
-            Text="* Bizning hamkorlarimiz dorixonalar va savdo do‘konlari. Siz ulardan maxsus chegirmalar va bepul xizmatlar olishingiz mumkin."
+            Text="{x:Static language:AppResource.OurPartnersArePharmaciesAndRetailStoresYou}"
             TextColor="#9C9CA3"
             FontSize="14"
             FontFamily="{StaticResource FontSFMedium}"

@@ -1,3 +1,5 @@
+using Ninimum.Resources.Languages;
+
 namespace Ninimum.Views.Formalization;
 
 public static class FormalizationNavigationStore
@@ -33,6 +35,6 @@ public class FormalizationProductItem
 
     public double TotalPrice => Price * Quantity;
 
-    public string QuantityText => $"{Quantity} dona";
-    public string PriceText => $"{TotalPrice:N0} so’m".Replace(",", " ");
+    public string QuantityText => string.Format(AppResource.PiecesCount, Quantity);
+    public string PriceText => string.Format(AppResource.UZS_02854f, TotalPrice).Replace(",", " ");
 }

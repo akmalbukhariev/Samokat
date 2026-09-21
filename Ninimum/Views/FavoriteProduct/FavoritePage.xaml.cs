@@ -16,10 +16,7 @@ public partial class FavoritePage : BasePage
         viewModel = vm;
         this.appControl = appControl;
         BindingContext = vm;
-
-        Shell.SetTabBarIsVisible(this, true);
-
-        viewModel.PropertyChanged += ViewModel_PropertyChanged;
+viewModel.PropertyChanged += ViewModel_PropertyChanged;
     }
 
     protected override async void OnAppearing()

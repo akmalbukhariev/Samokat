@@ -2,12 +2,15 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     xmlns:main_components="clr-namespace:Ninimum.Views.Main.Components"
     xmlns:models="clr-namespace:Ninimum.Models.Main"
     xmlns:local="clr-namespace:Ninimum.Views.DetailProduct"
     x:Class="Ninimum.Views.DetailProduct.ProductReviews"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     x:Name="ThisPage">
 
     <Grid>
@@ -17,7 +20,7 @@
 
             <!-- Header -->
             <components:PageHeaderView
-                Title="Maxsulot Sharhlari"
+                Title="{x:Static language:AppResource.ProductReviews}"
                 ShowRightIcon="false"
                 RightImage="ic_filter1.png"
                 BackCommand="{Binding BackCommand}"
@@ -44,7 +47,7 @@
                             IsVisible="False"
                             ColumnDefinitions="*,Auto">
                             <Label
-                                Text="Xaridorlarning fotosuratlari"
+                                Text="{x:Static language:AppResource.CustomerPhotos}"
                                 TextColor="#22292F"
                                 FontSize="18"
                                 FontFamily="{StaticResource FontSFMedium}"
@@ -147,7 +150,7 @@
                                             FontSize="18"
                                             LineBreakMode="NoWrap" />
                                         <Label
-                                            Text="Tasdiqlangan xarid"
+                                            Text="{x:Static language:AppResource.VerifiedPurchase}"
                                             TextColor="#7CB518"
                                             FontSize="13"
                                             FontFamily="{StaticResource FontSFMedium}"
@@ -219,8 +222,8 @@
 
                 <CollectionView.EmptyView>
                     <VerticalStackLayout Padding="24,50" Spacing="8" HorizontalOptions="Center">
-                        <Label Text="Hali sharhlar yo'q" FontSize="20" FontFamily="{StaticResource FontSFMedium}" TextColor="#22292F" HorizontalTextAlignment="Center" />
-                        <Label Text="Bu mahsulot bo'yicha birinchi sharhni xaridorlar qoldirishi mumkin." FontSize="15" FontFamily="{StaticResource FontSFRegular}" TextColor="#96979B" HorizontalTextAlignment="Center" />
+                        <Label Text="{x:Static language:AppResource.NoReviewsYet}" FontSize="20" FontFamily="{StaticResource FontSFMedium}" TextColor="#22292F" HorizontalTextAlignment="Center" />
+                        <Label Text="{x:Static language:AppResource.CustomersCanLeaveTheFirstReviewForThis}" FontSize="15" FontFamily="{StaticResource FontSFRegular}" TextColor="#96979B" HorizontalTextAlignment="Center" />
                     </VerticalStackLayout>
                 </CollectionView.EmptyView>
             </CollectionView>

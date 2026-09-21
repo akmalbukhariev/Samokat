@@ -2,6 +2,7 @@
 <ContentView
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:models="clr-namespace:Ninimum.Models.Main"
     x:Class="Ninimum.Views.Main.Components.MainProductCardView"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
@@ -220,7 +221,7 @@
                     </Image>
                 <Label
                     Grid.Column="1"
-                    Text="Savatcha"
+                    Text="{x:Static language:AppResource.Cart}"
                     TextColor="{StaticResource PrimaryColor}"
                     FontSize="15"
                     FontFamily="{StaticResource FontSFMedium}"

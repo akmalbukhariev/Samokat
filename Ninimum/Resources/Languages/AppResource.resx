@@ -1,110 +1,5 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version='1.0' encoding='utf-8'?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
-    Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
-    associated with the data types.
-
-    Example:
-
-    ... ado.net/XML headers & schema ...
-    <resheader name="resmimetype">text/microsoft-resx</resheader>
-    <resheader name="version">2.0</resheader>
-    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
-    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-        <value>[base64 mime encoded serialized .NET Framework object]</value>
-    </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
-        <comment>This is a comment</comment>
-    </data>
-
-    There are any number of "resheader" rows that contain simple
-    name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
-    mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
-    extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
-    read any of the formats listed below.
-
-    mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
-            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
-            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-            : and then encoded with base64 encoding.
-
-    mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
-            : using a System.ComponentModel.TypeConverter
-            : and then encoded with base64 encoding.
-    -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
-    <xsd:element name="root" msdata:IsDataSet="true">
-      <xsd:complexType>
-        <xsd:choice maxOccurs="unbounded">
-          <xsd:element name="metadata">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
-              </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string"/>
-              <xsd:attribute name="type" type="xsd:string"/>
-              <xsd:attribute name="mimetype" type="xsd:string"/>
-              <xsd:attribute ref="xml:space"/>
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="assembly">
-            <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string"/>
-              <xsd:attribute name="name" type="xsd:string"/>
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="data">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
-              <xsd:attribute ref="xml:space"/>
-            </xsd:complexType>
-          </xsd:element>
-          <xsd:element name="resheader">
-            <xsd:complexType>
-              <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
-              </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required"/>
-            </xsd:complexType>
-          </xsd:element>
-        </xsd:choice>
-      </xsd:complexType>
-    </xsd:element>
-  </xsd:schema>
   <resheader name="resmimetype">
     <value>text/microsoft-resx</value>
   </resheader>
@@ -117,6 +12,1434 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-   
-
+  <data name="Accessories" xml:space="preserve">
+    <value>Accessories</value>
+  </data>
+  <data name="AccountDeleted" xml:space="preserve">
+    <value>Account deleted</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Active</value>
+  </data>
+  <data name="ActiveTariff" xml:space="preserve">
+    <value>Active tariff: {0}</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>+ Add</value>
+  </data>
+  <data name="Add_4ebad9" xml:space="preserve">
+    <value>Add</value>
+  </data>
+  <data name="AddChild" xml:space="preserve">
+    <value>Add child</value>
+  </data>
+  <data name="AddNewCard" xml:space="preserve">
+    <value>Add new card</value>
+  </data>
+  <data name="AddProductPhotos" xml:space="preserve">
+    <value>Add product photos</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="AddressNotFound" xml:space="preserve">
+    <value>Address not found</value>
+  </data>
+  <data name="AddToCart" xml:space="preserve">
+    <value>Add to cart</value>
+  </data>
+  <data name="AfterReceivingTheSMSSignInWithThis" xml:space="preserve">
+    <value>After receiving the SMS, sign in with this phone number and the temporary password sent to you.</value>
+  </data>
+  <data name="AfterTheAccountIsDeletedItCannotBe" xml:space="preserve">
+    <value>After the account is deleted, it cannot be restored through the app. Do you want to continue?</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Age</value>
+  </data>
+  <data name="AllAppFeaturesAreAvailableOnlyToRegistered" xml:space="preserve">
+    <value>All app features are available only
+to registered users.</value>
+  </data>
+  <data name="AllowCameraAccessToTakeAPhoto" xml:space="preserve">
+    <value>Allow camera access to take a photo.</value>
+  </data>
+  <data name="AllowGalleryAccessToSelectPhotos" xml:space="preserve">
+    <value>Allow gallery access to select photos.</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="AnErrorOccurred" xml:space="preserve">
+    <value>An error occurred</value>
+  </data>
+  <data name="AnErrorOccurredWhileChangingThePrimaryCard" xml:space="preserve">
+    <value>An error occurred while changing the primary card</value>
+  </data>
+  <data name="ANewTemporaryPasswordWillBeSentBy" xml:space="preserve">
+    <value>A new temporary password will be sent by SMS to your registered phone number.</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Appearance</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="AskAboutTheProduct" xml:space="preserve">
+    <value>Ask about the product</value>
+  </data>
+  <data name="AskAQuestion" xml:space="preserve">
+    <value>Ask a question</value>
+  </data>
+  <data name="ATemporaryPasswordWasSentToYourPhone" xml:space="preserve">
+    <value>A temporary password was sent to your phone number by SMS.</value>
+  </data>
+  <data name="AttentionAfterVerificationYouWillNeedToSign" xml:space="preserve">
+    <value>Attention! After verification, you will need to sign in again with the new number for security.</value>
+  </data>
+  <data name="Authorization" xml:space="preserve">
+    <value>Authorization</value>
+  </data>
+  <data name="AVerificationCodeWasSentToYourPhone" xml:space="preserve">
+    <value>A verification code was sent to your phone number by SMS.
+Please enter the code in the fields below.</value>
+  </data>
+  <data name="AwaitingResponse" xml:space="preserve">
+    <value>Awaiting response</value>
+  </data>
+  <data name="BabyBottles" xml:space="preserve">
+    <value>Baby bottles</value>
+  </data>
+  <data name="BeforeDeletingYourAccountWeWouldLikeTo" xml:space="preserve">
+    <value>Before deleting your account, we would like to know why you are leaving. Your feedback helps us improve our service.</value>
+  </data>
+  <data name="BeingPrepared" xml:space="preserve">
+    <value>Being prepared</value>
+  </data>
+  <data name="Boy" xml:space="preserve">
+    <value>Boy</value>
+  </data>
+  <data name="BrieflyDescribeTheReason" xml:space="preserve">
+    <value>Briefly describe the reason</value>
+  </data>
+  <data name="Buy" xml:space="preserve">
+    <value>Buy</value>
+  </data>
+  <data name="BuyNow" xml:space="preserve">
+    <value>Buy now</value>
+  </data>
+  <data name="ByCard" xml:space="preserve">
+    <value>By card</value>
+  </data>
+  <data name="Camera" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="CameraCaptureIsNotAvailableOnThisDevice" xml:space="preserve">
+    <value>Camera capture is not available on this device.</value>
+  </data>
+  <data name="CameraPermission" xml:space="preserve">
+    <value>Camera permission</value>
+  </data>
+  <data name="CameraPermissionWasNotGranted" xml:space="preserve">
+    <value>Camera permission was not granted.</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CancellationReason" xml:space="preserve">
+    <value>Cancellation reason</value>
+  </data>
+  <data name="CancelOrder" xml:space="preserve">
+    <value>Cancel order</value>
+  </data>
+  <data name="Card" xml:space="preserve">
+    <value>Card</value>
+  </data>
+  <data name="CardDetailsAreStoredSecurelyAndAreNot" xml:space="preserve">
+    <value>Card details are stored securely and are not shared with third parties.</value>
+  </data>
+  <data name="CardDetailsWereNotDeleted" xml:space="preserve">
+    <value>Card details were not deleted</value>
+  </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>Card number</value>
+  </data>
+  <data name="CardSaved" xml:space="preserve">
+    <value>Card saved.</value>
+  </data>
+  <data name="CardsCouldNotBeLoaded" xml:space="preserve">
+    <value>Cards could not be loaded</value>
+  </data>
+  <data name="Cart" xml:space="preserve">
+    <value>Cart</value>
+  </data>
+  <data name="CartProductCount" xml:space="preserve">
+    <value>Products in the cart: {0}</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Change</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="ChangePhoneNumber" xml:space="preserve">
+    <value>Change phone number</value>
+  </data>
+  <data name="ChangePhoneNumber_ec3e8b" xml:space="preserve">
+    <value>Change phone number</value>
+  </data>
+  <data name="ChangeTariff" xml:space="preserve">
+    <value>Change tariff</value>
+  </data>
+  <data name="CheckingOrderStatus" xml:space="preserve">
+    <value>Checking order status...</value>
+  </data>
+  <data name="Checkout" xml:space="preserve">
+    <value>Checkout</value>
+  </data>
+  <data name="Children" xml:space="preserve">
+    <value>Children</value>
+  </data>
+  <data name="ChildrenInformationOptional" xml:space="preserve">
+    <value>Children information (optional)</value>
+  </data>
+  <data name="ChooseAPhotoForTheReview" xml:space="preserve">
+    <value>Choose a photo for the review</value>
+  </data>
+  <data name="ChooseATariffPlanAndGetSpecialDiscounts" xml:space="preserve">
+    <value>Choose a tariff plan and get special discounts.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Code</value>
+  </data>
+  <data name="CommonCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="CommonClose" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="CommonError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="CommonInformation" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="CommonNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="CommonResend" xml:space="preserve">
+    <value>Resend</value>
+  </data>
+  <data name="CommonSuccess" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="CommonWarning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="CommonYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Completed</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="Confirm_d235a9" xml:space="preserve">
+    <value>Confirm</value>
+  </data>
+  <data name="ConfirmAddress" xml:space="preserve">
+    <value>Confirm address</value>
+  </data>
+  <data name="ConnectingToServer" xml:space="preserve">
+    <value>Connecting to server...</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Continue</value>
+  </data>
+  <data name="Cookies" xml:space="preserve">
+    <value>Cookies</value>
+  </data>
+  <data name="CouldNotAddTheProductToTheCart" xml:space="preserve">
+    <value>Could not add the product to the cart.</value>
+  </data>
+  <data name="CouldNotCancelTheOrder" xml:space="preserve">
+    <value>Could not cancel the order.</value>
+  </data>
+  <data name="CouldNotCancelTheOrder_f52d7e" xml:space="preserve">
+    <value>Could not cancel the order.
+{0}</value>
+  </data>
+  <data name="CouldNotCancelTheUnpaidOrder" xml:space="preserve">
+    <value>Could not cancel the unpaid order.</value>
+  </data>
+  <data name="CouldNotChangeThePassword" xml:space="preserve">
+    <value>Could not change the password.</value>
+  </data>
+  <data name="CouldNotChangeThePhoneNumber" xml:space="preserve">
+    <value>Could not change the phone number.</value>
+  </data>
+  <data name="CouldNotChangeTheRegionPleaseTryAgain" xml:space="preserve">
+    <value>Could not change the region. Please try again.</value>
+  </data>
+  <data name="CouldNotCheckReviewEligibility" xml:space="preserve">
+    <value>Could not check review eligibility.</value>
+  </data>
+  <data name="CouldNotCheckThePaymentStatus" xml:space="preserve">
+    <value>Could not check the payment status.</value>
+  </data>
+  <data name="CouldNotDeleteOrderHistory" xml:space="preserve">
+    <value>Could not delete order history.</value>
+  </data>
+  <data name="CouldNotDeleteTheAccountPleaseTryAgain" xml:space="preserve">
+    <value>Could not delete the account. Please try again.</value>
+  </data>
+  <data name="CouldNotDetermineYourCurrentLocation" xml:space="preserve">
+    <value>Could not determine your current location.</value>
+  </data>
+  <data name="CouldNotGetThePaymePaymentURL" xml:space="preserve">
+    <value>Could not get the Payme payment URL.</value>
+  </data>
+  <data name="CouldNotLoadCardDetails" xml:space="preserve">
+    <value>Could not load card details</value>
+  </data>
+  <data name="CouldNotLoadTariffs" xml:space="preserve">
+    <value>Could not load tariffs.</value>
+  </data>
+  <data name="CouldNotLoadTheReview" xml:space="preserve">
+    <value>Could not load the review: {0}</value>
+  </data>
+  <data name="CouldNotOpenTheCheckoutPage" xml:space="preserve">
+    <value>Could not open the checkout page.</value>
+  </data>
+  <data name="CouldNotOpenThePaymePaymentPage" xml:space="preserve">
+    <value>Could not open the Payme payment page</value>
+  </data>
+  <data name="CouldNotRegister" xml:space="preserve">
+    <value>Could not register.</value>
+  </data>
+  <data name="CouldNotSaveTheCard" xml:space="preserve">
+    <value>Could not save the card.</value>
+  </data>
+  <data name="CouldNotSaveTheReview" xml:space="preserve">
+    <value>Could not save the review.</value>
+  </data>
+  <data name="CouldNotSearchForTheAddressPleaseTry" xml:space="preserve">
+    <value>Could not search for the address. Please try again.</value>
+  </data>
+  <data name="CouldNotSelectAPhoto" xml:space="preserve">
+    <value>Could not select a photo: {0}</value>
+  </data>
+  <data name="CouldNotSendTheQuestion" xml:space="preserve">
+    <value>Could not send the question.</value>
+  </data>
+  <data name="CouldNotSendTheQuestion_a01d00" xml:space="preserve">
+    <value>Could not send the question.
+{0}</value>
+  </data>
+  <data name="CouldNotSendTheTemporaryPassword" xml:space="preserve">
+    <value>Could not send the temporary password.</value>
+  </data>
+  <data name="CouldNotStartTariffPayment" xml:space="preserve">
+    <value>Could not start tariff payment.</value>
+  </data>
+  <data name="CouldNotTakeAPhoto" xml:space="preserve">
+    <value>Could not take a photo: {0}</value>
+  </data>
+  <data name="CouldNotVerifyThePhoneNumber" xml:space="preserve">
+    <value>Could not verify the phone number.</value>
+  </data>
+  <data name="CreateANewPasswordForSecurityPleaseEnter" xml:space="preserve">
+    <value>Create a new password for security. Please enter the new password twice.</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>Current</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="CurrentTariff" xml:space="preserve">
+    <value>Current tariff</value>
+  </data>
+  <data name="CurrentTariffMessage" xml:space="preserve">
+    <value>{0} is your current tariff.</value>
+  </data>
+  <data name="CustomerPhotos" xml:space="preserve">
+    <value>Customer photos</value>
+  </data>
+  <data name="CustomersCanLeaveTheFirstReviewForThis" xml:space="preserve">
+    <value>Customers can leave the first review for this product.</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Date of birth</value>
+  </data>
+  <data name="DateOfBirth_b85a8f" xml:space="preserve">
+    <value>Date of birth</value>
+  </data>
+  <data name="DaysRemaining" xml:space="preserve">
+    <value>{0} days remaining</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="DeleteAccount" xml:space="preserve">
+    <value>Delete account</value>
+  </data>
+  <data name="DeleteAccount_fa848a" xml:space="preserve">
+    <value>Delete account</value>
+  </data>
+  <data name="DeleteCard" xml:space="preserve">
+    <value>Delete card</value>
+  </data>
+  <data name="DeleteCard_a27c4e" xml:space="preserve">
+    <value>Delete card</value>
+  </data>
+  <data name="DeleteFromOrderHistory" xml:space="preserve">
+    <value>Delete from order history</value>
+  </data>
+  <data name="Delivered" xml:space="preserve">
+    <value>Delivered</value>
+  </data>
+  <data name="Delivery" xml:space="preserve">
+    <value>Delivery:</value>
+  </data>
+  <data name="Delivery_199c42" xml:space="preserve">
+    <value>Delivery</value>
+  </data>
+  <data name="DeliveryAddress" xml:space="preserve">
+    <value>Delivery address</value>
+  </data>
+  <data name="DeliveryIsNotAvailableHereYetChooseAnother" xml:space="preserve">
+    <value>Delivery is not available here yet.
+Choose another address or a nearby
+pickup point.</value>
+  </data>
+  <data name="DeliveryWithinOneHour" xml:space="preserve">
+    <value>Delivery within 1 hour</value>
+  </data>
+  <data name="DeliveryWithinTheDay" xml:space="preserve">
+    <value>Delivery during the day</value>
+  </data>
+  <data name="DeliveryWithinThreeHours" xml:space="preserve">
+    <value>Delivery within 3 hours</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Diapers" xml:space="preserve">
+    <value>Diapers</value>
+  </data>
+  <data name="DiscountsFromOurPartners" xml:space="preserve">
+    <value>Discounts from our partners</value>
+  </data>
+  <data name="DoNotCancel" xml:space="preserve">
+    <value>Do not cancel</value>
+  </data>
+  <data name="DoYouWantToDeleteCard" xml:space="preserve">
+    <value>Do you want to delete card {0}?</value>
+  </data>
+  <data name="DoYouWantToSwitchFromTo" xml:space="preserve">
+    <value>Do you want to switch from {0} to {1}? </value>
+  </data>
+  <data name="DryFormula" xml:space="preserve">
+    <value>Dry formula</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditChildInformation" xml:space="preserve">
+    <value>Edit child information</value>
+  </data>
+  <data name="EditReview" xml:space="preserve">
+    <value>Edit review</value>
+  </data>
+  <data name="EnglishLanguage" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="EnterADistrictStreetHouseOrLandmarkIn" xml:space="preserve">
+    <value>Enter a district, street, house, or landmark in Qashqadaryo region.</value>
+  </data>
+  <data name="EnterANewPassword" xml:space="preserve">
+    <value>Enter a new password.</value>
+  </data>
+  <data name="EnterAValidExpiryMonth" xml:space="preserve">
+    <value>Enter a valid expiry month.</value>
+  </data>
+  <data name="EnterAValidExpiryYear" xml:space="preserve">
+    <value>Enter a valid expiry year.</value>
+  </data>
+  <data name="EnteringAnotherPersonSInformationMayViolateThe" xml:space="preserve">
+    <value>Entering another person's information may violate the law.</value>
+  </data>
+  <data name="EnterPhoneNumber" xml:space="preserve">
+    <value>Enter phone number</value>
+  </data>
+  <data name="EnterReasonTitle" xml:space="preserve">
+    <value>Enter a reason</value>
+  </data>
+  <data name="EnterTheFullCardNumber" xml:space="preserve">
+    <value>Enter the full card number.</value>
+  </data>
+  <data name="EnterTheReason" xml:space="preserve">
+    <value>Enter the reason</value>
+  </data>
+  <data name="EnterYourNewPhoneNumberTheNewNumber" xml:space="preserve">
+    <value>Enter your new phone number. The new number will be verified by SMS code.</value>
+  </data>
+  <data name="EnterYourPhoneNumberFirst" xml:space="preserve">
+    <value>Enter your phone number first.</value>
+  </data>
+  <data name="EnterYourQuestion" xml:space="preserve">
+    <value>Enter your question...</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="Expiry" xml:space="preserve">
+    <value>Expiry</value>
+  </data>
+  <data name="FastDelivery" xml:space="preserve">
+    <value>Fast delivery</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="FavoritesTitle" xml:space="preserve">
+    <value>Favorites</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="FirstName_231ae8" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="ForgotYourPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="ForMothers" xml:space="preserve">
+    <value>For mothers</value>
+  </data>
+  <data name="ForNowAnAddressCanOnlyBeSelected" xml:space="preserve">
+    <value>For now, an address can only be selected within Qashqadaryo region. The map will remain within Qashqadaryo.</value>
+  </data>
+  <data name="Free" xml:space="preserve">
+    <value>Free</value>
+  </data>
+  <data name="FreeDelivery" xml:space="preserve">
+    <value>Free delivery</value>
+  </data>
+  <data name="FreeMin" xml:space="preserve">
+    <value>free ∙ min</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>from</value>
+  </data>
+  <data name="Gallery" xml:space="preserve">
+    <value>Gallery</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="Girl" xml:space="preserve">
+    <value>Girl</value>
+  </data>
+  <data name="GotIt" xml:space="preserve">
+    <value>Got it</value>
+  </data>
+  <data name="HaveAQuestionAboutTheProduct" xml:space="preserve">
+    <value>Have a question about the product?</value>
+  </data>
+  <data name="HideProducts" xml:space="preserve">
+    <value>Hide {0} products</value>
+  </data>
+  <data name="HighestPriceFirst" xml:space="preserve">
+    <value>Highest price first</value>
+  </data>
+  <data name="HighestRatedFirst" xml:space="preserve">
+    <value>Highest rated first</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="IAgreeToSaveThisCardForFuture" xml:space="preserve">
+    <value>I agree to save this card for future purchases</value>
+  </data>
+  <data name="IConfirmThatAllEnteredInformationIsCorrect" xml:space="preserve">
+    <value>I confirm that all entered information is correct</value>
+  </data>
+  <data name="IConfirmThatTheEnteredPhoneNumberBelongs" xml:space="preserve">
+    <value>I confirm that the entered phone number belongs to me</value>
+  </data>
+  <data name="ICouldNotFindTheProductsOrOffers" xml:space="preserve">
+    <value>I could not find the products or offers I needed</value>
+  </data>
+  <data name="IEncounteredTechnicalIssues" xml:space="preserve">
+    <value>I encountered technical issues</value>
+  </data>
+  <data name="IfYouGoBackThisUnpaidOrderWill" xml:space="preserve">
+    <value>If you go back, this unpaid order will be cancelled. Do you want to continue?</value>
+  </data>
+  <data name="IfYouHaveNotRegisteredYet" xml:space="preserve">
+    <value>If you have not registered yet</value>
+  </data>
+  <data name="IncorrectCode" xml:space="preserve">
+    <value>Incorrect code</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Incorrect password</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="InformationAscii" xml:space="preserve">
+    <value>Information</value>
+  </data>
+  <data name="INoLongerUseTheApp" xml:space="preserve">
+    <value>I no longer use the app</value>
+  </data>
+  <data name="InvalidPhoneNumberExample901234567" xml:space="preserve">
+    <value>Invalid phone number. Example: 901234567</value>
+  </data>
+  <data name="IPreferAnotherServiceOrApp" xml:space="preserve">
+    <value>I prefer another service or app</value>
+  </data>
+  <data name="IsThisTheCorrectDeliveryAddress" xml:space="preserve">
+    <value>Is this the correct delivery address?</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="Language_802fc1" xml:space="preserve">
+    <value>Language:</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="LastName_f40b4b" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Leave a review</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="LoadingPaymentPage" xml:space="preserve">
+    <value>Loading payment page...</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Location</value>
+  </data>
+  <data name="LocationPermission" xml:space="preserve">
+    <value>Location permission</value>
+  </data>
+  <data name="LocationPermissionMessage" xml:space="preserve">
+    <value>Allow location access to use your current location.</value>
+  </data>
+  <data name="LowestPriceFirst" xml:space="preserve">
+    <value>Lowest price first</value>
+  </data>
+  <data name="LowestRatedFirst" xml:space="preserve">
+    <value>Lowest rated first</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="MessagePermissionRequired" xml:space="preserve">
+    <value>Full photo access is required. Open Settings and allow access to all photos.</value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Messages</value>
+  </data>
+  <data name="MyChildren" xml:space="preserve">
+    <value>My children</value>
+  </data>
+  <data name="MyLocation" xml:space="preserve">
+    <value>My location</value>
+  </data>
+  <data name="MyTariff" xml:space="preserve">
+    <value>My tariff</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NewestFirst" xml:space="preserve">
+    <value>Newest first</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="NewPhoneNumber" xml:space="preserve">
+    <value>New phone number</value>
+  </data>
+  <data name="NinimumResponse" xml:space="preserve">
+    <value>Ninimum response</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoAscii" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="NoCardSelected" xml:space="preserve">
+    <value>No card selected</value>
+  </data>
+  <data name="NoConnectionToTheServerReconnecting" xml:space="preserve">
+    <value>No connection to the server. Reconnecting...</value>
+  </data>
+  <data name="NoCurrentOrders" xml:space="preserve">
+    <value>No current orders</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>No internet connection</value>
+  </data>
+  <data name="NoQuestions" xml:space="preserve">
+    <value>No questions</value>
+  </data>
+  <data name="NoQuestionsYet" xml:space="preserve">
+    <value>No questions yet</value>
+  </data>
+  <data name="NoRecentSearchesYet" xml:space="preserve">
+    <value>No recent searches yet</value>
+  </data>
+  <data name="NoReviewsYet" xml:space="preserve">
+    <value>No reviews yet</value>
+  </data>
+  <data name="NoTariff" xml:space="preserve">
+    <value>No tariff</value>
+  </data>
+  <data name="NotificationClicked" xml:space="preserve">
+    <value>Notification selected</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="NoUserWasFoundWithThisPhoneNumber" xml:space="preserve">
+    <value>No user was found with this phone number.</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="NumberOfProducts" xml:space="preserve">
+    <value>Number of products:</value>
+  </data>
+  <data name="Nutrition" xml:space="preserve">
+    <value>Nutrition</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OldestFirst" xml:space="preserve">
+    <value>Oldest first</value>
+  </data>
+  <data name="OnboardingBabyBigText" xml:space="preserve">
+    <value>Baby</value>
+  </data>
+  <data name="OnboardingBabyDescription" xml:space="preserve">
+    <value>Find essential products for children through our app.</value>
+  </data>
+  <data name="OnboardingBabyTitle" xml:space="preserve">
+    <value>Find essential
+products
+for children
+through our
+app</value>
+  </data>
+  <data name="OnboardingDiscountDescription" xml:space="preserve">
+    <value>You can always keep track of discounts through the app.</value>
+  </data>
+  <data name="OnboardingDiscountTitle" xml:space="preserve">
+    <value>Regular
+discounts
+await you</value>
+  </data>
+  <data name="OnboardingOfferDescription" xml:space="preserve">
+    <value>Special discount offers for app users.</value>
+  </data>
+  <data name="OnboardingOfferTitle" xml:space="preserve">
+    <value>Special
+discount
+offers for
+app users</value>
+  </data>
+  <data name="OnboardingOnlineBigText" xml:space="preserve">
+    <value>Online</value>
+  </data>
+  <data name="OnboardingOnlineDescription" xml:space="preserve">
+    <value>Order the household essentials you need online.</value>
+  </data>
+  <data name="OnboardingOnlineTitle" xml:space="preserve">
+    <value>Order household
+essentials
+online</value>
+  </data>
+  <data name="OnTheWay" xml:space="preserve">
+    <value>On the way</value>
+  </data>
+  <data name="OpenSettings" xml:space="preserve">
+    <value>Open settings</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order #{0}</value>
+  </data>
+  <data name="OrderCancelled" xml:space="preserve">
+    <value>Order cancelled</value>
+  </data>
+  <data name="OrderCancelledSuccessfully" xml:space="preserve">
+    <value>Order cancelled successfully</value>
+  </data>
+  <data name="OrderConfirmed" xml:space="preserve">
+    <value>Order confirmed</value>
+  </data>
+  <data name="OrderCouldNotBeCreated" xml:space="preserve">
+    <value>Order could not be created.</value>
+  </data>
+  <data name="OrderDelivered" xml:space="preserve">
+    <value>Order #{0} delivered</value>
+  </data>
+  <data name="OrderDetails" xml:space="preserve">
+    <value>Order details</value>
+  </data>
+  <data name="OrderIDWasNotReceived" xml:space="preserve">
+    <value>Order ID was not received.</value>
+  </data>
+  <data name="OrderInformationWasNotFound" xml:space="preserve">
+    <value>Order information was not found.</value>
+  </data>
+  <data name="OrderInformationWasNotFound_80654d" xml:space="preserve">
+    <value>Order information was not found.</value>
+  </data>
+  <data name="OrderIsBeingPrepared" xml:space="preserve">
+    <value>Order #{0} is being prepared</value>
+  </data>
+  <data name="OrderIsOnTheWay" xml:space="preserve">
+    <value>Order #{0} is on the way</value>
+  </data>
+  <data name="OrderReceived" xml:space="preserve">
+    <value>Order received</value>
+  </data>
+  <data name="OrderReceived_7a2c1d" xml:space="preserve">
+    <value>Order #{0} received</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="Orders_8b489f" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="OrderStatus" xml:space="preserve">
+    <value>Order status</value>
+  </data>
+  <data name="OtherReason" xml:space="preserve">
+    <value>Other reason</value>
+  </data>
+  <data name="OtherReasonIsSelectedPleaseBrieflyDescribeThe" xml:space="preserve">
+    <value>“Other reason” is selected. Please briefly describe the reason.</value>
+  </data>
+  <data name="OurPartnersArePharmaciesAndRetailStoresYou" xml:space="preserve">
+    <value>* Our partners are pharmacies and retail stores. You can receive special discounts and free services from them.</value>
+  </data>
+  <data name="OutForDelivery" xml:space="preserve">
+    <value>Out for delivery</value>
+  </data>
+  <data name="Pacifiers" xml:space="preserve">
+    <value>Pacifiers</value>
+  </data>
+  <data name="Paid1Day" xml:space="preserve">
+    <value>paid ∙ 1 day</value>
+  </data>
+  <data name="PartnerServices" xml:space="preserve">
+    <value>Partner services *</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PasswordMustContainAtLeast6Characters" xml:space="preserve">
+    <value>Password must contain at least 6 characters.</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Passwords do not match.</value>
+  </data>
+  <data name="PasswordsDoNotMatch_aadae6" xml:space="preserve">
+    <value>Passwords do not match.</value>
+  </data>
+  <data name="PasswordUpdatedSuccessfully" xml:space="preserve">
+    <value>Password updated successfully.</value>
+  </data>
+  <data name="Payment" xml:space="preserve">
+    <value>Payment</value>
+  </data>
+  <data name="PaymentCards" xml:space="preserve">
+    <value>Payment cards</value>
+  </data>
+  <data name="PaymentCards_6551a6" xml:space="preserve">
+    <value>Payment cards</value>
+  </data>
+  <data name="PaymentCardsLoading" xml:space="preserve">
+    <value>Loading cards...</value>
+  </data>
+  <data name="PaymentMethod" xml:space="preserve">
+    <value>Payment method</value>
+  </data>
+  <data name="PaymentNotCompleted" xml:space="preserve">
+    <value>Payment not completed</value>
+  </data>
+  <data name="PaymentPageWasClosed" xml:space="preserve">
+    <value>Payment page was closed</value>
+  </data>
+  <data name="PaymentWasSuccessfulYourOrderWillBePrepared" xml:space="preserve">
+    <value>Payment was successful. Your order will be prepared soon.</value>
+  </data>
+  <data name="Permission" xml:space="preserve">
+    <value>Permission</value>
+  </data>
+  <data name="PermissionRequired" xml:space="preserve">
+    <value>Permission required</value>
+  </data>
+  <data name="PerMonth" xml:space="preserve">
+    <value>per month</value>
+  </data>
+  <data name="PersonalHygiene" xml:space="preserve">
+    <value>Personal hygiene</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Phone number</value>
+  </data>
+  <data name="PhoneNumberNotFoundPleaseRestartRegistration" xml:space="preserve">
+    <value>Phone number not found. Please restart registration.</value>
+  </data>
+  <data name="PhoneNumberNotFoundPleaseReturnToThe" xml:space="preserve">
+    <value>Phone number not found. Please return to the sign-in page.</value>
+  </data>
+  <data name="PiecesCount" xml:space="preserve">
+    <value>{0} pcs</value>
+  </data>
+  <data name="PlaceOrder" xml:space="preserve">
+    <value>Place order</value>
+  </data>
+  <data name="PleaseConfirmPassword" xml:space="preserve">
+    <value>Please confirm your password.</value>
+  </data>
+  <data name="PleaseEnterAQuestion" xml:space="preserve">
+    <value>Please enter a question</value>
+  </data>
+  <data name="PleaseEnterFirstName" xml:space="preserve">
+    <value>Please enter your first name.</value>
+  </data>
+  <data name="PleaseEnterLastName" xml:space="preserve">
+    <value>Please enter your last name.</value>
+  </data>
+  <data name="PleaseEnterPassword" xml:space="preserve">
+    <value>Please enter your password.</value>
+  </data>
+  <data name="PleaseEnterTheCancellationReason" xml:space="preserve">
+    <value>Please enter the cancellation reason.</value>
+  </data>
+  <data name="PleaseEnterYourPhoneNumber" xml:space="preserve">
+    <value>Please enter your phone number</value>
+  </data>
+  <data name="PleaseRateTheProductWithStars" xml:space="preserve">
+    <value>Please rate the product with stars.</value>
+  </data>
+  <data name="PleaseSelectADeliveryAddress" xml:space="preserve">
+    <value>Please select a delivery address.</value>
+  </data>
+  <data name="PleaseSelectAtLeastOneProduct" xml:space="preserve">
+    <value>Please select at least one product.</value>
+  </data>
+  <data name="PleaseSelectTheConfirmationCheckbox" xml:space="preserve">
+    <value>Please select the confirmation checkbox.</value>
+  </data>
+  <data name="PleaseSelectYourAddress" xml:space="preserve">
+    <value>Please select your address.</value>
+  </data>
+  <data name="PleaseWaitAMoment" xml:space="preserve">
+    <value>Please wait a moment</value>
+  </data>
+  <data name="PleaseWriteAReview" xml:space="preserve">
+    <value>Please write a review.</value>
+  </data>
+  <data name="PlusTomorrow" xml:space="preserve">
+    <value>+ Tomorrow</value>
+  </data>
+  <data name="Porridges" xml:space="preserve">
+    <value>Porridges</value>
+  </data>
+  <data name="Preparing" xml:space="preserve">
+    <value>Preparing</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="Price_c09bde" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="PricesAreTooHighForMe" xml:space="preserve">
+    <value>Prices are too high for me</value>
+  </data>
+  <data name="PrimaryCardWasNotChanged" xml:space="preserve">
+    <value>Primary card was not changed</value>
+  </data>
+  <data name="ProductDetails" xml:space="preserve">
+    <value>Product details</value>
+  </data>
+  <data name="ProductInformationWasNotFound" xml:space="preserve">
+    <value>Product information was not found.</value>
+  </data>
+  <data name="ProductQuestions" xml:space="preserve">
+    <value>Product questions</value>
+  </data>
+  <data name="ProductReviews" xml:space="preserve">
+    <value>Product reviews</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Products_48d782" xml:space="preserve">
+    <value>{0} products</value>
+  </data>
+  <data name="ProductsTotal" xml:space="preserve">
+    <value>Products total:</value>
+  </data>
+  <data name="ProductsYouAddToTheCartWillAppear" xml:space="preserve">
+    <value>Products you add to the cart will appear here.</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="PurchaseInformationWasNotFound" xml:space="preserve">
+    <value>Purchase information was not found.</value>
+  </data>
+  <data name="PureesAndYogurt" xml:space="preserve">
+    <value>Purees and yogurt</value>
+  </data>
+  <data name="QashqadaryoDistrictStreetHouseOrNearbyLandmark" xml:space="preserve">
+    <value>Qashqadaryo: district, street, house, or nearby landmark</value>
+  </data>
+  <data name="QashqadaryoRegion" xml:space="preserve">
+    <value>Qashqadaryo region</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>{0} questions</value>
+  </data>
+  <data name="QuestionsAndAnswers" xml:space="preserve">
+    <value>Questions and answers</value>
+  </data>
+  <data name="RateWithStars" xml:space="preserve">
+    <value>Rate with stars</value>
+  </data>
+  <data name="Received" xml:space="preserve">
+    <value>Received</value>
+  </data>
+  <data name="RecentSearches" xml:space="preserve">
+    <value>Recent searches</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="Region_0f2171" xml:space="preserve">
+    <value>Region</value>
+  </data>
+  <data name="Region_2bb95f" xml:space="preserve">
+    <value>Region:</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="RegistrationWasSuccessfulButAutomaticSignInFailed" xml:space="preserve">
+    <value>Registration was successful, but automatic sign-in failed. Please try again from the sign-in page.</value>
+  </data>
+  <data name="RepeatNewPassword" xml:space="preserve">
+    <value>Repeat new password</value>
+  </data>
+  <data name="RepeatPassword" xml:space="preserve">
+    <value>Repeat password</value>
+  </data>
+  <data name="RepeatPassword_b7aca1" xml:space="preserve">
+    <value>Repeat password</value>
+  </data>
+  <data name="Resend" xml:space="preserve">
+    <value>Resend</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Reviews</value>
+  </data>
+  <data name="ReviewsCannotBeLeftAtTheMoment" xml:space="preserve">
+    <value>Reviews cannot be left at the moment.</value>
+  </data>
+  <data name="ReviewsCount" xml:space="preserve">
+    <value>{0} reviews</value>
+  </data>
+  <data name="ReviewSent" xml:space="preserve">
+    <value>Your review was sent.</value>
+  </data>
+  <data name="ReviewUpdated" xml:space="preserve">
+    <value>Your review was updated.</value>
+  </data>
+  <data name="RussianLanguage" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="SampleDeliveryAddress" xml:space="preserve">
+    <value>Qashqadaryo region, Shahrisabz city, landmark: School No. 25</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="SaveCard" xml:space="preserve">
+    <value>Save card</value>
+  </data>
+  <data name="SaveProductsYouLikeWithTheHeartIcon" xml:space="preserve">
+    <value>Save products you like with the heart icon. They will appear here.</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SearchForAProduct" xml:space="preserve">
+    <value>Search for a product</value>
+  </data>
+  <data name="SearchTitle" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SelectAtLeastOneReasonForDeletingThe" xml:space="preserve">
+    <value>Select at least one reason for deleting the account.</value>
+  </data>
+  <data name="SelectedCartProducts" xml:space="preserve">
+    <value>Selected products in the cart: {0}</value>
+  </data>
+  <data name="SelectOneOrMoreReasons" xml:space="preserve">
+    <value>  Select one or more reasons.</value>
+  </data>
+  <data name="SelectReason" xml:space="preserve">
+    <value>Select a reason</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Send</value>
+  </data>
+  <data name="SendQuestion" xml:space="preserve">
+    <value>Send question</value>
+  </data>
+  <data name="SendTemporaryPassword" xml:space="preserve">
+    <value>Send temporary password</value>
+  </data>
+  <data name="SetAsPrimaryCard" xml:space="preserve">
+    <value>Set as primary card</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="SignInToLeaveAReview" xml:space="preserve">
+    <value>Sign in to leave a review.</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+  <data name="SimilarProducts" xml:space="preserve">
+    <value>Similar products</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>Skip</value>
+  </data>
+  <data name="SMSWasNotSent" xml:space="preserve">
+    <value>SMS was not sent</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Sort</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StockAvailable" xml:space="preserve">
+    <value>{0} items in stock</value>
+  </data>
+  <data name="SubscribeToATariff" xml:space="preserve">
+    <value>Subscribe to a tariff</value>
+  </data>
+  <data name="SubscribeToATariff_1c0091" xml:space="preserve">
+    <value>Subscribe to a tariff</value>
+  </data>
+  <data name="SubscriptionDate" xml:space="preserve">
+    <value>Subscription date</value>
+  </data>
+  <data name="SubscriptionEndDate" xml:space="preserve">
+    <value>Subscription end date</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="TakeAPhotoForTheReview" xml:space="preserve">
+    <value>Take a photo for the review</value>
+  </data>
+  <data name="Tariff" xml:space="preserve">
+    <value>Tariff</value>
+  </data>
+  <data name="TariffEndDate" xml:space="preserve">
+    <value>Tariff end date</value>
+  </data>
+  <data name="TariffHistory" xml:space="preserve">
+    <value>Tariff history</value>
+  </data>
+  <data name="TariffPlan" xml:space="preserve">
+    <value>Tariff plan</value>
+  </data>
+  <data name="Tariffs" xml:space="preserve">
+    <value>Tariffs</value>
+  </data>
+  <data name="Text0Products" xml:space="preserve">
+    <value>0 products</value>
+  </data>
+  <data name="Text0UZS" xml:space="preserve">
+    <value>0 UZS</value>
+  </data>
+  <data name="Text3Photos" xml:space="preserve">
+    <value>{0}/3 photos</value>
+  </data>
+  <data name="Text5YearsOld" xml:space="preserve">
+    <value>5 years old</value>
+  </data>
+  <data name="ThankYouForYourFeedbackAfterTheAccount" xml:space="preserve">
+    <value>Thank you for your feedback. After the account is deleted, you will no longer be able to sign in with this account.</value>
+  </data>
+  <data name="ThankYouForYourFeedbackYourAccountWas" xml:space="preserve">
+    <value>Thank you for your feedback. Your account was deleted successfully.</value>
+  </data>
+  <data name="TheAmountPaidForTheCancelledOrderWill" xml:space="preserve">
+    <value>The amount paid for the cancelled order will be returned to your account within 3 days.</value>
+  </data>
+  <data name="TheAppIsDifficultToUse" xml:space="preserve">
+    <value>The app is difficult to use</value>
+  </data>
+  <data name="TheCurrentPasswordIsIncorrect" xml:space="preserve">
+    <value>The current password is incorrect.</value>
+  </data>
+  <data name="TheNewPasswordAndRepeatedPasswordDoNot" xml:space="preserve">
+    <value>The new password and repeated password do not match.</value>
+  </data>
+  <data name="TheNewPasswordMustBeDifferentFromThe" xml:space="preserve">
+    <value>The new password must be different from the current password.</value>
+  </data>
+  <data name="TheNewPasswordMustContainAtLeast6" xml:space="preserve">
+    <value>The new password must contain at least 6 characters.</value>
+  </data>
+  <data name="TheNewPhoneNumberMustBeDifferentFrom" xml:space="preserve">
+    <value>The new phone number must be different from the current number.</value>
+  </data>
+  <data name="TheNewTariffWillBecomeActiveImmediatelyAfter" xml:space="preserve">
+    <value>The new tariff will become active immediately after payment is confirmed.</value>
+  </data>
+  <data name="TheOrderAmountIsInvalid" xml:space="preserve">
+    <value>The order amount is invalid.</value>
+  </data>
+  <data name="TheProductPriceIsInvalid" xml:space="preserve">
+    <value>The product price is invalid.</value>
+  </data>
+  <data name="TheQuestionMustContainAtLeast3Characters" xml:space="preserve">
+    <value>The question must contain at least 3 characters.</value>
+  </data>
+  <data name="TheReviewMustNotExceed2000Characters" xml:space="preserve">
+    <value>The review must not exceed 2000 characters.</value>
+  </data>
+  <data name="TheReviewToEditWasNotFound" xml:space="preserve">
+    <value>The review to edit was not found.</value>
+  </data>
+  <data name="TheServiceDidNotProvideTheValueI" xml:space="preserve">
+    <value>The service did not provide the value I expected</value>
+  </data>
+  <data name="TheSMSCodeIsIncorrect" xml:space="preserve">
+    <value>The SMS code is incorrect.</value>
+  </data>
+  <data name="TheSMSCodeWasNotSentPleaseTry" xml:space="preserve">
+    <value>The SMS code was not sent. Please try again.</value>
+  </data>
+  <data name="ThisOrderWillBeRemovedFromOrderHistory" xml:space="preserve">
+    <value>This order will be removed from order history and cannot be restored. Do you want to delete it?</value>
+  </data>
+  <data name="ThisPhoneNumberIsAlreadyRegistered" xml:space="preserve">
+    <value>This phone number is already registered</value>
+  </data>
+  <data name="ThisPhoneNumberIsAlreadyRegistered_dcab50" xml:space="preserve">
+    <value>This phone number is already registered.</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>to</value>
+  </data>
+  <data name="ToChangeYourPasswordEnterYourCurrentPassword" xml:space="preserve">
+    <value>To change your password, enter your current password first, then enter the new password twice.</value>
+  </data>
+  <data name="Tomorrow" xml:space="preserve">
+    <value>Tomorrow</value>
+  </data>
+  <data name="TotalPayment" xml:space="preserve">
+    <value>Total payment:</value>
+  </data>
+  <data name="ToUseAllFeaturesOfThisAppPlease" xml:space="preserve">
+    <value>To use all features of this app, please make sure the information you enter is correct.</value>
+  </data>
+  <data name="ToUseThisYouNeedToSubscribeTo" xml:space="preserve">
+    <value>To use this, you need to subscribe to a tariff plan.</value>
+  </data>
+  <data name="UntilTariffEnds" xml:space="preserve">
+    <value>Until tariff ends</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>User not found</value>
+  </data>
+  <data name="Uzbek" xml:space="preserve">
+    <value>Uzbek</value>
+  </data>
+  <data name="UzbekLanguage" xml:space="preserve">
+    <value>O'zbekcha</value>
+  </data>
+  <data name="UZS" xml:space="preserve">
+    <value>UZS</value>
+  </data>
+  <data name="UZS_02854f" xml:space="preserve">
+    <value>{0:N0} UZS</value>
+  </data>
+  <data name="UZS_b3b773" xml:space="preserve">
+    <value> UZS</value>
+  </data>
+  <data name="UZSAvailableForPurchase" xml:space="preserve">
+    <value> UZS available for purchase.</value>
+  </data>
+  <data name="Verified" xml:space="preserve">
+    <value>Verified</value>
+  </data>
+  <data name="VerifiedPurchase" xml:space="preserve">
+    <value>Verified purchase</value>
+  </data>
+  <data name="View2Products" xml:space="preserve">
+    <value>View 2 products</value>
+  </data>
+  <data name="ViewFull" xml:space="preserve">
+    <value>View full</value>
+  </data>
+  <data name="ViewProducts" xml:space="preserve">
+    <value>View {0} products</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Warning</value>
+  </data>
+  <data name="WhereShouldTheOrderBeDelivered" xml:space="preserve">
+    <value>Where should the order be delivered?</value>
+  </data>
+  <data name="WhyDoYouWantToDeleteYourAccount" xml:space="preserve">
+    <value>Why do you want to delete your account?</value>
+  </data>
+  <data name="Wipes" xml:space="preserve">
+    <value>Wipes</value>
+  </data>
+  <data name="WithoutSubscription" xml:space="preserve">
+    <value>Without subscription</value>
+  </data>
+  <data name="WithPhotosOnly" xml:space="preserve">
+    <value>With photos only</value>
+  </data>
+  <data name="WithSubscription" xml:space="preserve">
+    <value>With subscription</value>
+  </data>
+  <data name="WriteAReview" xml:space="preserve">
+    <value>Write a review</value>
+  </data>
+  <data name="WriteYourQuestionAboutTheProduct" xml:space="preserve">
+    <value>Write your question about the product</value>
+  </data>
+  <data name="WriteYourReviewOfTheProduct" xml:space="preserve">
+    <value>Write your review of the product</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="YouAlreadyLeftAReviewForThisProduct" xml:space="preserve">
+    <value>You already left a review for this product. You can edit it if you want.</value>
+  </data>
+  <data name="YouAreCancellingTheOrder" xml:space="preserve">
+    <value>You are cancelling the order</value>
+  </data>
+  <data name="YouCanAskASpecificQuestionAboutThe" xml:space="preserve">
+    <value>You can ask a specific question about the product's features, ingredients, size, or use.</value>
+  </data>
+  <data name="YouCanAskTheFirstQuestionAboutThis" xml:space="preserve">
+    <value>You can ask the first question about this product.</value>
+  </data>
+  <data name="YouCanUseThePlatformWithThisPhone" xml:space="preserve">
+    <value>You can use the platform with this phone number. It is important to enter it correctly. By entering your phone number, you agree to the public offer.</value>
+  </data>
+  <data name="YouDoNotHaveAnActiveTariffPlease" xml:space="preserve">
+    <value>You do not have an active tariff. Please subscribe to a tariff.</value>
+  </data>
+  <data name="YouDoNotNeedToHavePurchasedThe" xml:space="preserve">
+    <value>You do not need to have purchased the product to ask a question.</value>
+  </data>
+  <data name="YouNeedToHavePurchasedThisProductAt" xml:space="preserve">
+    <value>You need to have purchased this product at least once to leave a review.</value>
+  </data>
+  <data name="YouPurchasedThisProductShareYourExperienceWith" xml:space="preserve">
+    <value>You purchased this product. Share your experience with others.</value>
+  </data>
+  <data name="YourCartIsEmpty" xml:space="preserve">
+    <value>Your cart is empty</value>
+  </data>
+  <data name="YourCurrentPhoneNumber" xml:space="preserve">
+    <value>Your current phone number</value>
+  </data>
+  <data name="YourDataIsProtected" xml:space="preserve">
+    <value>🔒 Your data is protected</value>
+  </data>
+  <data name="YourFavoritesListIsEmpty" xml:space="preserve">
+    <value>Your favorites list is empty</value>
+  </data>
+  <data name="YourOrderIsBeingDelivered" xml:space="preserve">
+    <value>Your order is being delivered.</value>
+  </data>
+  <data name="YourOrderStatusIsBeingChecked" xml:space="preserve">
+    <value>Your order status is being checked.</value>
+  </data>
+  <data name="YourOrderWasDeliveredSuccessfully" xml:space="preserve">
+    <value>Your order was delivered successfully.</value>
+  </data>
+  <data name="YourPasswordHasBeenChanged" xml:space="preserve">
+    <value>Your password has been changed.</value>
+  </data>
+  <data name="YourPhoneNumberHasBeenChangedForSecurity" xml:space="preserve">
+    <value>Your phone number has been changed. For security, you need to sign in again.</value>
+  </data>
+  <data name="YourProductsAreBeingPreparedForDelivery" xml:space="preserve">
+    <value>Your products are being prepared for delivery.</value>
+  </data>
+  <data name="YourQuestionWasSentTheAnswerWillAppear" xml:space="preserve">
+    <value>Your question was sent. The answer will appear on this page once it is posted.</value>
+  </data>
+  <data name="CancelTariff" xml:space="preserve">
+    <value>Cancel tariff</value>
+  </data>
+  <data name="CancelTariffConfirmation" xml:space="preserve">
+    <value>Would you like to cancel your active tariff? Tariff benefits will stop immediately after cancellation. Once the refund is approved, the funds will be returned to your account after 24 hours.</value>
+  </data>
+  <data name="CouldNotCancelTariff" xml:space="preserve">
+    <value>Could not cancel the tariff.</value>
+  </data>
+  <data name="TariffCancelledSuccessfully" xml:space="preserve">
+    <value>Tariff cancelled successfully.</value>
+  </data>
 </root>

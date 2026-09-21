@@ -2,12 +2,15 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     xmlns:main_components="clr-namespace:Ninimum.Views.Main.Components"
     xmlns:models="clr-namespace:Ninimum.Models.Main"
     xmlns:local="clr-namespace:Ninimum.Views.DetailProduct"
     x:Class="Ninimum.Views.DetailProduct.DetailProductPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     x:Name="ThisPage"
     BackgroundColor="White">
 
@@ -16,7 +19,7 @@
         <!-- Header -->
         <components:PageHeaderView
             Grid.Row="0"
-            Title="Maxsulot tafsilotlari"/>
+            Title="{x:Static language:AppResource.ProductDetails}"/>
 
         <!-- Content -->
         <Grid Grid.Row="2"
@@ -282,7 +285,7 @@
 
                                         <HorizontalStackLayout Spacing="6">
                                             <Label
-                                                Text="Obuna bilan"
+                                                Text="{x:Static language:AppResource.WithSubscription}"
                                                 TextColor="#FD473C"
                                                 FontSize="17"
                                                 FontFamily="{StaticResource FontSFRegular}"
@@ -340,7 +343,7 @@
 
                                         <HorizontalStackLayout Spacing="6">
                                             <Label
-                                                Text="Obunasiz"
+                                                Text="{x:Static language:AppResource.WithoutSubscription}"
                                                 TextColor="#96979B"
                                                 FontSize="17"
                                                 FontFamily="{StaticResource FontSFRegular}"
@@ -400,7 +403,7 @@
                         </Border.StrokeShape>
                         <Grid ColumnDefinitions="*,Auto">
                             <Label
-                                Text="Mahsulot bo’yicha savol berish"
+                                Text="{x:Static language:AppResource.AskAboutTheProduct}"
                                 TextColor="#7CB518"
                                 FontSize="17"
                                 FontFamily="{StaticResource FontSFRegular}"
@@ -419,7 +422,7 @@
                     <!-- Description -->
                     <VerticalStackLayout Spacing="5">
                         <Label
-                            Text="Tavsiflar"
+                            Text="{x:Static language:AppResource.Description}"
                             TextColor="#22292F"
                             FontSize="17"
                             FontFamily="{StaticResource FontSFMedium}"
@@ -439,7 +442,7 @@
                                 <TapGestureRecognizer Tapped="FullDescription_Tapped"/>
                             </HorizontalStackLayout.GestureRecognizers>
                             <Label
-                                Text="To’liq ko’rish"
+                                Text="{x:Static language:AppResource.ViewFull}"
                                 TextColor="#FD473C"
                                 FontSize="16"
                                 FontFamily="{StaticResource FontSFBold}"
@@ -456,7 +459,7 @@
                     <!-- Similar products -->
                     <VerticalStackLayout Spacing="12">
                         <Label
-                            Text="O’xshash mahsulotlar"
+                            Text="{x:Static language:AppResource.SimilarProducts}"
                             TextColor="#22292F"
                             FontSize="22"
                             FontFamily="{StaticResource FontSFMedium}"
@@ -581,7 +584,7 @@
                 <Button
                     Grid.Column="0"
                     HeightRequest="54"
-                    Text="Hoziroq sotib olish"
+                    Text="{x:Static language:AppResource.BuyNow}"
                     BackgroundColor="#FD473C"
                     TextColor="White"
                     FontSize="18"
@@ -610,7 +613,7 @@
                     <HorizontalStackLayout 
                         Spacing="10">
                         <Label 
-                            Text="Savatchaga"
+                            Text="{x:Static language:AppResource.AddToCart}"
                             FontSize="18"
                             TextColor="White"
                             FontFamily="{StaticResource FontSFMedium}"
@@ -631,7 +634,7 @@
         <components:DescriptionPopupView
             x:Name="DescriptionPopup"
             Grid.RowSpan="3"
-            Title="Tavsiflar"
+            Title="{x:Static language:AppResource.Description}"
             Description="{Binding Description}" />
 
         <components:CustomCartView

@@ -29,6 +29,8 @@ public partial class App : Application
 
     protected override Window CreateWindow(IActivationState? activationState)
     {
+        AppService.GetRequired<LanguageService>().Init();
+
         var window = new Window(new AppEntryShell());
         var connectionMonitor = AppService.Get<ConnectionMonitorService>();
 

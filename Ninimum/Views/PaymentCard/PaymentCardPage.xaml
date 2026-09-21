@@ -2,10 +2,13 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     xmlns:converter="clr-namespace:Ninimum.Converter"
     x:Class="Ninimum.Views.PaymentCard.PaymentCardPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     x:Name="ThisPage"
     BackgroundColor="White">
 
@@ -16,7 +19,7 @@
     </page:BasePage.Resources>
     
     <Grid RowDefinitions="Auto, *">
-        <components:PageHeaderView Title="To’lov kartalar" />
+        <components:PageHeaderView Title="{x:Static language:AppResource.PaymentCards}" />
 
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Spacing="0">
@@ -41,7 +44,7 @@
 
                                 <Grid ColumnDefinitions="*,Auto">
                                     <Label
-                                        Text="Asosiy karta sifatida belgilanishi"
+                                        Text="{x:Static language:AppResource.SetAsPrimaryCard}"
                                         FontFamily="{StaticResource FontSFRegular}"
                                         FontSize="15"
                                         TextColor="#96979B"
@@ -66,7 +69,7 @@
                                 <Grid ColumnDefinitions="*,120" ColumnSpacing="10">
                                     <VerticalStackLayout Spacing="2">
                                         <Label
-                                            Text="Karta raqami"
+                                            Text="{x:Static language:AppResource.CardNumber}"
                                             FontFamily="{StaticResource FontSFRegular}"
                                             FontSize="15"
                                             TextColor="#96979B" />
@@ -79,7 +82,7 @@
 
                                     <VerticalStackLayout Grid.Column="1" Spacing="2">
                                         <Label
-                                            Text="Amal qilishi"
+                                            Text="{x:Static language:AppResource.Expiry}"
                                             FontFamily="{StaticResource FontSFRegular}"
                                             FontSize="15"
                                             TextColor="#96979B" />
@@ -112,7 +115,7 @@
 
                                         <Label
                                             Grid.Column="1"
-                                            Text="Kartani o‘chirib yuborish"
+                                            Text="{x:Static language:AppResource.DeleteCard}"
                                             FontFamily="{StaticResource FontSFMedium}"
                                             FontSize="15"
                                             TextColor="#FD473C"
@@ -152,7 +155,7 @@
                         TextColor="White"
                         VerticalOptions="Center" />
                     <Label
-                        Text="Yangi karta qo’shish"
+                        Text="{x:Static language:AppResource.AddNewCard}"
                         FontFamily="{StaticResource FontSFMedium}"
                         FontSize="18"
                         TextColor="White"

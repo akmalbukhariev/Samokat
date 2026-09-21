@@ -3,11 +3,14 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     xmlns:orderComponents="clr-namespace:Ninimum.Views.Main.Components"
     xmlns:models="clr-namespace:Ninimum.Models"
     x:Class="Ninimum.Views.Orders.OrdersPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     x:Name="ThisPage"
     BackgroundColor="White">
 
@@ -16,7 +19,7 @@
         <components:PageHeaderView
             Grid.Row="0"
             ShowBack="true"
-            Title="Buyurtmalar" />
+            Title="{x:Static language:AppResource.Orders}" />
 
         <!-- Tabs -->
         <Grid
@@ -43,7 +46,7 @@
                     Spacing="7">
 
                     <Label
-                        Text="Amaldagi"
+                        Text="{x:Static language:AppResource.Current}"
                         FontSize="17"
                         TextColor="#22292F"
                         FontFamily="{StaticResource FontSFMedium}" />
@@ -80,7 +83,7 @@
                     Spacing="7">
 
                     <Label
-                        Text="Tugatilgani"
+                        Text="{x:Static language:AppResource.Completed}"
                         FontSize="17"
                         TextColor="#22292F"
                         FontFamily="{StaticResource FontSFMedium}" />
@@ -253,7 +256,7 @@
 
                                                 <Label
                                                     Grid.ColumnSpan="2"
-                                                    Text="Buyurtma holati"
+                                                    Text="{x:Static language:AppResource.OrderStatus}"
                                                     HorizontalOptions="Start"
                                                     VerticalOptions="Center"
                                                     FontSize="16"
@@ -296,7 +299,7 @@
                                             </Border.GestureRecognizers>
 
                                             <Label
-                                                Text="Bekor qilish"
+                                                Text="{x:Static language:AppResource.Cancel}"
                                                 HorizontalOptions="Center"
                                                 VerticalOptions="Center"
                                                 FontSize="16"
@@ -336,7 +339,7 @@
                         HorizontalOptions="Center">
 
                         <Label
-                            Text="Amaldagi buyurtmalar mavjud emas"
+                            Text="{x:Static language:AppResource.NoCurrentOrders}"
                             TextColor="#96979B"
                             FontSize="16" />
 
@@ -468,7 +471,7 @@
                                         </Border.GestureRecognizers>
 
                                         <Label
-                                            Text="Buyurtmalar tarixidan o‘chirish"
+                                            Text="{x:Static language:AppResource.DeleteFromOrderHistory}"
                                             HorizontalOptions="Center"
                                             VerticalOptions="Center"
                                             FontSize="16"

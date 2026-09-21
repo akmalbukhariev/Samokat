@@ -2,9 +2,12 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.MyTariff.MyTariffPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     x:Name="ThisPage"
     BackgroundColor="White">
 
@@ -28,7 +31,7 @@
 
         <components:PageHeaderView
             Grid.Row="0"
-            Title="Mening tarifim" />
+            Title="{x:Static language:AppResource.MyTariff}" />
 
         <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
             <VerticalStackLayout Padding="20,24,20,24" Spacing="24">
@@ -45,38 +48,38 @@
                     <VerticalStackLayout Spacing="14">
 
                         <HorizontalStackLayout Spacing="10">
-                            <Label Text="Holati" Style="{StaticResource TariffLabelStyle}" />
-                            <Label Text="Faol" TextColor="#16A34A" FontFamily="{StaticResource FontSFMedium}" FontSize="17" />
+                            <Label Text="{x:Static language:AppResource.Status}" Style="{StaticResource TariffLabelStyle}" />
+                            <Label Text="{x:Static language:AppResource.Active}" TextColor="#16A34A" FontFamily="{StaticResource FontSFMedium}" FontSize="17" />
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="10">
-                            <Label Text="Tarif rejasi" Style="{StaticResource TariffLabelStyle}" />
+                            <Label Text="{x:Static language:AppResource.TariffPlan}" Style="{StaticResource TariffLabelStyle}" />
                             <Label Text="{Binding CurrentTariffName}" Style="{StaticResource TariffValueStyle}" />
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="10">
-                            <Label Text="Azo bo’lgan sana" Style="{StaticResource TariffLabelStyle}" />
+                            <Label Text="{x:Static language:AppResource.SubscriptionDate}" Style="{StaticResource TariffLabelStyle}" />
                             <Label Text="{Binding CurrentStartDate}" Style="{StaticResource TariffValueStyle}" />
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="10">
-                            <Label Text="Tarif tugashiga" Style="{StaticResource TariffLabelStyle}" />
+                            <Label Text="{x:Static language:AppResource.UntilTariffEnds}" Style="{StaticResource TariffLabelStyle}" />
                             <Label Text="{Binding CurrentRemainingText}" Style="{StaticResource TariffValueStyle}" />
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="10">
-                            <Label Text="Narxi" Style="{StaticResource TariffLabelStyle}" />
+                            <Label Text="{x:Static language:AppResource.Price}" Style="{StaticResource TariffLabelStyle}" />
                             <Label Text="{Binding CurrentPrice}" Style="{StaticResource TariffValueStyle}" />
                         </HorizontalStackLayout>
 
                         <HorizontalStackLayout Spacing="10">
-                            <Label Text="Tarif tugash sanasi" Style="{StaticResource TariffLabelStyle}" />
+                            <Label Text="{x:Static language:AppResource.TariffEndDate}" Style="{StaticResource TariffLabelStyle}" />
                             <Label Text="{Binding CurrentEndDate}" Style="{StaticResource TariffValueStyle}" />
                         </HorizontalStackLayout>
 
                         <!-- Active users can open TariffsPage and switch to another plan. -->
                         <Button
-                            Text="Tarifni o‘zgartirish"
+                            Text="{x:Static language:AppResource.ChangeTariff}"
                             HeightRequest="54"
                             Margin="0,6,0,0"
                             CornerRadius="12"
@@ -85,6 +88,19 @@
                             FontSize="17"
                             FontFamily="{StaticResource FontSFBold}"
                             Command="{Binding JoinTariffCommand}" />
+
+                        <Button
+                            Text="{x:Static language:AppResource.CancelTariff}"
+                            HeightRequest="54"
+                            Margin="0,0,0,0"
+                            CornerRadius="12"
+                            BackgroundColor="White"
+                            BorderColor="#FF4A3F"
+                            BorderWidth="1"
+                            TextColor="#FF4A3F"
+                            FontSize="17"
+                            FontFamily="{StaticResource FontSFBold}"
+                            Command="{Binding CancelTariffCommand}" />
 
                     </VerticalStackLayout>
                 </Border>
@@ -100,14 +116,14 @@
 
                     <VerticalStackLayout Spacing="16">
                         <Label
-                            Text="Sizda faol tarif mavjud emas. Iltimos, tarifga obuna bo‘ling."
+                            Text="{x:Static language:AppResource.YouDoNotHaveAnActiveTariffPlease}"
                             TextColor="#22292F"
                             FontSize="17"
                             FontFamily="{StaticResource FontSFRegular}"
                             LineBreakMode="WordWrap" />
 
                         <Button
-                            Text="Tarifga azo bo’lish"
+                            Text="{x:Static language:AppResource.SubscribeToATariff_1c0091}"
                             HeightRequest="54"
                             CornerRadius="12"
                             BackgroundColor="#FF4A3F"
@@ -132,7 +148,7 @@
                         </HorizontalStackLayout.GestureRecognizers>
 
                         <Label
-                            Text="Tarixdagi tariflar"
+                            Text="{x:Static language:AppResource.TariffHistory}"
                             FontFamily="{StaticResource FontSFMedium}"
                             FontSize="15"
                             TextColor="#96979B"
@@ -163,22 +179,24 @@
                                     <VerticalStackLayout Spacing="14">
 
                                         <HorizontalStackLayout Spacing="10">
-                                            <Label Text="Tarif rejasi" Style="{StaticResource TariffLabelStyle}" />
+                                            <Label Text="{x:Static language:AppResource.TariffPlan}" Style="{StaticResource TariffLabelStyle}" />
                                             <Label Text="{Binding Plan}" Style="{StaticResource TariffValueStyle}" />
                                         </HorizontalStackLayout>
 
                                         <HorizontalStackLayout Spacing="10">
-                                            <Label Text="Azo bo’lgan sana" Style="{StaticResource TariffLabelStyle}" />
+                                            <Label Text="{x:Static language:AppResource.SubscriptionDate}" Style="{StaticResource TariffLabelStyle}" />
                                             <Label Text="{Binding StartDate}" Style="{StaticResource TariffValueStyle}" />
                                         </HorizontalStackLayout>
 
-                                        <HorizontalStackLayout Spacing="10">
-                                            <Label Text="Azolik tugagan sana" Style="{StaticResource TariffLabelStyle}" />
+                                        <HorizontalStackLayout
+                                            Spacing="10"
+                                            IsVisible="{Binding IsActive, Converter={StaticResource InverseBoolConverter}}">
+                                            <Label Text="{x:Static language:AppResource.SubscriptionEndDate}" Style="{StaticResource TariffLabelStyle}" />
                                             <Label Text="{Binding EndDate}" Style="{StaticResource TariffValueStyle}" />
                                         </HorizontalStackLayout>
 
                                         <HorizontalStackLayout Spacing="10">
-                                            <Label Text="Narxi" Style="{StaticResource TariffLabelStyle}" />
+                                            <Label Text="{x:Static language:AppResource.Price}" Style="{StaticResource TariffLabelStyle}" />
                                             <Label Text="{Binding Price}" Style="{StaticResource TariffValueStyle}" />
                                         </HorizontalStackLayout>
 

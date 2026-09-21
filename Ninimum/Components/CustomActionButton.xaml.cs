@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Windows.Input;
 
 namespace Ninimum.Components;
@@ -16,7 +17,7 @@ public partial class CustomActionButton : ContentView
             nameof(ButtonText),
             typeof(string),
             typeof(CustomActionButton),
-            "Davom etish");
+            AppResource.Continue);
 
     public string ButtonText
     {

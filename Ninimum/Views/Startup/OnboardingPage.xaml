@@ -2,10 +2,13 @@
 <page:BasePage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:models="clr-namespace:Ninimum.Models.Startup"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.Startup.OnboardingPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     BackgroundColor="White">
 
     <Grid RowDefinitions="Auto,Auto,Auto,Auto,*"
@@ -16,7 +19,7 @@
             <Grid Grid.Row="0"
                   Padding="0,10,28,0">
                 <Label x:Name="lbSkip" 
-                       Text="O‘tkazib yuborish"
+                       Text="{x:Static language:AppResource.Skip}"
                        HorizontalOptions="End"
                        VerticalOptions="Center"
                        TextColor="#B7B7BC"
@@ -105,7 +108,7 @@
         <!-- Start button -->
         <components:CustomActionButton x:Name="btnStart" 
                                        Grid.Row="4"
-                                       ButtonText="Boshlash"
+                                       ButtonText="{x:Static language:AppResource.Start}"
                                        ButtonBackgroundColor="#FF4B4B"
                                        ButtonTextColor="White"
                                        ButtonImageSource="right.png"

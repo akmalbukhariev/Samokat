@@ -2,9 +2,12 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.PaymentCard.CancelOrderPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     x:Name="ThisPage"
     BackgroundColor="White">
 
@@ -16,7 +19,7 @@
             <!-- Reusable Header -->
             <components:PageHeaderView 
                 Grid.Row="0"
-                Title="Buyurtmani bekor qilish" />
+                Title="{x:Static language:AppResource.CancelOrder}" />
 
             <!-- Order info card -->
             <Border
@@ -31,7 +34,7 @@
 
                     <Grid ColumnDefinitions="Auto,*" ColumnSpacing="24">
                         <Label
-                            Text="Nomi"
+                            Text="{x:Static language:AppResource.Name}"
                             FontFamily="{StaticResource FontSFRegular}"
                             FontSize="17"
                             TextColor="#22292F" />
@@ -47,7 +50,7 @@
                     </Grid>
 
                     <Grid ColumnDefinitions="Auto,*">
-                        <Label Text="Raqami"
+                        <Label Text="{x:Static language:AppResource.Number}"
                             FontFamily="{StaticResource FontSFRegular}"
                             FontSize="17"
                             TextColor="#22292F"/>
@@ -61,7 +64,7 @@
                     </Grid>
 
                     <Grid ColumnDefinitions="Auto,*">
-                        <Label Text="Sanasi"
+                        <Label Text="{x:Static language:AppResource.Date}"
                             FontFamily="{StaticResource FontSFRegular}"
                             FontSize="17"
                             TextColor="#22292F"/>
@@ -75,7 +78,7 @@
                     </Grid>
 
                     <Grid ColumnDefinitions="Auto,*">
-                        <Label Text="Summasi"
+                        <Label Text="{x:Static language:AppResource.Amount}"
                             FontFamily="{StaticResource FontSFRegular}"
                             FontSize="17"
                             TextColor="#22292F"/>
@@ -95,7 +98,7 @@
             <VerticalStackLayout Grid.Row="3" Margin="0,32,0,0" Spacing="12">
 
                 <Label
-                    Text="Bekor qilish sababi"
+                    Text="{x:Static language:AppResource.CancellationReason}"
                     FontFamily="{StaticResource FontSFMedium}"
                     FontSize="22"
                     TextColor="#22292F" />
@@ -109,7 +112,7 @@
 
                     <Editor
                         Text="{Binding CancelReason}"
-                        Placeholder="Sababni yozing"
+                        Placeholder="{x:Static language:AppResource.EnterTheReason}"
                         PlaceholderColor="#96979B"
                         BackgroundColor="Transparent"
                         FontFamily="{StaticResource FontSFRegular}"
@@ -121,7 +124,7 @@
                 <VerticalStackLayout Margin="0,24,0,0" Spacing="12">
 
                     <Button
-                        Text="Buyurtmani bekor qilish"
+                        Text="{x:Static language:AppResource.CancelOrder}"
                         HeightRequest="54"
                         CornerRadius="40"
                         BackgroundColor="#FD473C"
@@ -131,7 +134,7 @@
                         Command="{Binding CancelOrderCommand}" />
 
                     <Button
-                        Text="Bekor qilmayman"
+                        Text="{x:Static language:AppResource.DoNotCancel}"
                         HeightRequest="54"
                         CornerRadius="40"
                         BackgroundColor="White"

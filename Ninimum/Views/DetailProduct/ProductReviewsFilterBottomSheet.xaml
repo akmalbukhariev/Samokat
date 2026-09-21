@@ -2,6 +2,7 @@
 <ContentView
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.DetailProduct.ProductReviewsFilterBottomSheet"
     x:Name="ThisView"
@@ -52,7 +53,7 @@
 
                 <Label
                     Grid.Row="2"
-                    Text="Saralash"
+                    Text="{x:Static language:AppResource.Sort}"
                     FontSize="22"
                     FontFamily="{StaticResource FontSFBold}"
                     TextColor="#22292F"
@@ -70,7 +71,7 @@
                         </Grid.GestureRecognizers>
 
                         <Label
-                            Text="Avval yangilari"
+                            Text="{x:Static language:AppResource.NewestFirst}"
                             VerticalOptions="Center"
                             FontSize="17"
                             FontFamily="{StaticResource FontSFRegular}"
@@ -96,7 +97,7 @@
                         </Grid.GestureRecognizers>
 
                         <Label
-                            Text="Avval bahosi yuqorilari"
+                            Text="{x:Static language:AppResource.HighestRatedFirst}"
                             VerticalOptions="Center"
                             FontSize="17"
                             FontFamily="{StaticResource FontSFRegular}"
@@ -122,7 +123,7 @@
                         </Grid.GestureRecognizers>
 
                         <Label
-                            Text="Avval bahosi pastlari"
+                            Text="{x:Static language:AppResource.LowestRatedFirst}"
                             VerticalOptions="Center"
                             FontSize="17"
                             FontFamily="{StaticResource FontSFRegular}"
@@ -153,7 +154,7 @@
                     VerticalOptions="Center">
 
                     <Label
-                        Text="Faqat fotosuratlilari"
+                        Text="{x:Static language:AppResource.WithPhotosOnly}"
                         VerticalOptions="Center"
                         FontSize="17"
                         FontFamily="{StaticResource FontSFRegular}"
@@ -171,7 +172,7 @@
 
                 <Grid Grid.Row="10">
                     <components:CustomActionButton
-                        ButtonText="Filtrlash"
+                        ButtonText="{x:Static language:AppResource.Filter}"
                         ButtonBackgroundColor="#FD473C"
                         ButtonTextColor="White"
                         TapCommand="{Binding ApplyFilterCommand}" />

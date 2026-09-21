@@ -2,6 +2,7 @@
 <ContentView
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:vm="clr-namespace:Ninimum.ViewModels"
     x:Class="Ninimum.Views.Main.Components.SearchBarView"
     x:DataType="vm:MainPageViewModel">
@@ -49,7 +50,7 @@
 
                 <Label
                     Grid.Column="1"
-                    Text="Qidirish"
+                    Text="{x:Static language:AppResource.Search}"
                     FontSize="17"
                     FontFamily="{StaticResource FontSFRegular}"
                     TextColor="#96979B"

@@ -16,9 +16,7 @@ public partial class ProductReviews : BasePage
 
         Loaded += ProductReviews_Loaded;
         viewModel.ImagePreviewRequested += ViewModel_ImagePreviewRequested;
-
-        Shell.SetTabBarIsVisible(this, false);
-    }
+}
 
     private void ProductReviews_Loaded(object? sender, EventArgs e)
     {

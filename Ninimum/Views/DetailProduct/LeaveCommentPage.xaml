@@ -2,12 +2,15 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     xmlns:main_components="clr-namespace:Ninimum.Views.Main.Components"
     xmlns:models="clr-namespace:Ninimum.Models.Main"
     xmlns:local="clr-namespace:Ninimum.Views.DetailProduct"
     x:Class="Ninimum.Views.DetailProduct.LeaveCommentPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     x:Name="ThisPage"
     BackgroundColor="White">
 
@@ -37,7 +40,7 @@
 
                 <!-- Rating title -->
                 <Label
-                    Text="Yulduzchalar orqali baho qo’ying"
+                    Text="{x:Static language:AppResource.RateWithStars}"
                     FontSize="22"
                     FontFamily="{StaticResource FontSFMedium}"
                     TextColor="#222222" />
@@ -78,7 +81,7 @@
 
                 <!-- Comment title -->
                 <Label
-                    Text="Mahsulot bo’yicha fikringizni yozing"
+                    Text="{x:Static language:AppResource.WriteYourReviewOfTheProduct}"
                     FontSize="22"
                     FontFamily="{StaticResource FontSFMedium}"
                     TextColor="#222222" />
@@ -94,7 +97,7 @@
                         x:Name="CommentEditor"
                         HeightRequest="130"
                         BackgroundColor="Transparent"
-                        Placeholder="Sharh yozing"
+                        Placeholder="{x:Static language:AppResource.WriteAReview}"
                         FontFamily="{StaticResource FontSFRegular}"
                         FontSize="15"
                         TextColor="#333333"
@@ -103,7 +106,7 @@
 
                 <!-- Photo title -->
                 <Label
-                    Text="Mahsulot bo’yicha fotosurat joylang"
+                    Text="{x:Static language:AppResource.AddProductPhotos}"
                     FontSize="22"
                     FontFamily="{StaticResource FontSFMedium}"
                     TextColor="#222222" />
@@ -161,7 +164,7 @@
                                     VerticalOptions="Center"
                                     Spacing="7">
                                     <Label Text="+" FontSize="24" TextColor="#7CB518" VerticalTextAlignment="Center" />
-                                    <Label Text="Kamera" FontSize="14" TextColor="#555555" VerticalTextAlignment="Center" />
+                                    <Label Text="{x:Static language:AppResource.Camera}" FontSize="14" TextColor="#555555" VerticalTextAlignment="Center" />
                                 </HorizontalStackLayout>
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnTakePhotoTapped" />
@@ -181,7 +184,7 @@
                                     VerticalOptions="Center"
                                     Spacing="7">
                                     <Label Text="+" FontSize="24" TextColor="#7CB518" VerticalTextAlignment="Center" />
-                                    <Label Text="Galereya" FontSize="14" TextColor="#555555" VerticalTextAlignment="Center" />
+                                    <Label Text="{x:Static language:AppResource.Gallery}" FontSize="14" TextColor="#555555" VerticalTextAlignment="Center" />
                                 </HorizontalStackLayout>
                                 <Border.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="OnPickPhotoTapped" />

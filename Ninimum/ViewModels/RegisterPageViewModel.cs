@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Api.Services;
@@ -115,64 +116,64 @@ public partial class RegisterPageViewModel : ObservableObject
         if (string.IsNullOrWhiteSpace(FirstName))
         {
             await AlertService.ShowAlertAsync(
-                "Ogohlantirish",
-                "Ismni kiriting.");
+                AppResource.Warning,
+                AppResource.PleaseEnterFirstName);
             return;
         }
 
         if (string.IsNullOrWhiteSpace(LastName))
         {
             await AlertService.ShowAlertAsync(
-                "Ogohlantirish",
-                "Familiyani kiriting.");
+                AppResource.Warning,
+                AppResource.PleaseEnterLastName);
             return;
         }
 
         if (string.IsNullOrWhiteSpace(PhoneNumber))
         {
             await AlertService.ShowAlertAsync(
-                "Ogohlantirish",
-                "Telefon raqam topilmadi. Iltimos, ro'yxatdan o'tishni qaytadan boshlang.");
+                AppResource.Warning,
+                AppResource.PhoneNumberNotFoundPleaseRestartRegistration);
             return;
         }
 
-        if (string.IsNullOrWhiteSpace(Address) || Address == "Manzil")
+        if (string.IsNullOrWhiteSpace(Address) || Address == AppResource.Address)
         {
             await AlertService.ShowAlertAsync(
-                "Ogohlantirish",
-                "Iltimos, manzilingizni tanlang.");
+                AppResource.Warning,
+                AppResource.PleaseSelectYourAddress);
             return;
         }
 
         if (string.IsNullOrWhiteSpace(Password))
         {
             await AlertService.ShowAlertAsync(
-                "Ogohlantirish",
-                "Parolni kiriting.");
+                AppResource.Warning,
+                AppResource.PleaseEnterPassword);
             return;
         }
 
         if (string.IsNullOrWhiteSpace(ConfirmPassword))
         {
             await AlertService.ShowAlertAsync(
-                "Ogohlantirish",
-                "Parolni tasdiqlang.");
+                AppResource.Warning,
+                AppResource.PleaseConfirmPassword);
             return;
         }
 
         if (!IsAgreementChecked)
         {
             await AlertService.ShowAlertAsync(
-                "Ogohlantirish",
-                "Iltimos, tasdiqlash belgisini tanlang.");
+                AppResource.Warning,
+                AppResource.PleaseSelectTheConfirmationCheckbox);
             return;
         }
 
         if (Password != ConfirmPassword)
         {
             await AlertService.ShowAlertAsync(
-                "Ogohlantirish",
-                "Parol bir xil emas.");
+                AppResource.Warning,
+                AppResource.PasswordsDoNotMatch);
             return;
         }
 
@@ -197,8 +198,8 @@ public partial class RegisterPageViewModel : ObservableObject
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
                 await AlertService.ShowAlertAsync(
-                    "Xatolik",
-                    response.resultMsg ?? "Ro'yxatdan o'tib bo'lmadi.");
+                    AppResource.Error,
+                    response.resultMsg ?? AppResource.CouldNotRegister);
                 return;
             }
 
@@ -207,13 +208,13 @@ public partial class RegisterPageViewModel : ObservableObject
             if (!loggedIn)
             {
                 await AlertService.ShowAlertAsync(
-                    "Ma'lumot",
-                    "Ro'yxatdan o'tish muvaffaqiyatli, ammo avtomatik kirib bo'lmadi. Iltimos, kirish sahifasidan qayta urinib ko'ring.");
+                    AppResource.InformationAscii,
+                    AppResource.RegistrationWasSuccessfulButAutomaticSignInFailed);
             }
         }
         catch (Exception ex)
         {
-            await AlertService.ShowAlertAsync("Xatolik", ex.Message);
+            await AlertService.ShowAlertAsync(AppResource.Error, ex.Message);
         }
         finally
         {

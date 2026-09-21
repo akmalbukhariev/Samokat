@@ -1,0 +1,1447 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="Accessories" xml:space="preserve">
+    <value>Аксессуары</value>
+  </data>
+  <data name="AccountDeleted" xml:space="preserve">
+    <value>Аккаунт удален</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>Активен</value>
+  </data>
+  <data name="ActiveTariff" xml:space="preserve">
+    <value>Активный тариф: {0}</value>
+  </data>
+  <data name="Add" xml:space="preserve">
+    <value>+ Добавить</value>
+  </data>
+  <data name="Add_4ebad9" xml:space="preserve">
+    <value>Добавить</value>
+  </data>
+  <data name="AddChild" xml:space="preserve">
+    <value>Добавить ребенка</value>
+  </data>
+  <data name="AddNewCard" xml:space="preserve">
+    <value>Добавить новую карту</value>
+  </data>
+  <data name="AddProductPhotos" xml:space="preserve">
+    <value>Добавьте фотографии товара</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+  <data name="AddressNotFound" xml:space="preserve">
+    <value>Адрес не найден</value>
+  </data>
+  <data name="AddToCart" xml:space="preserve">
+    <value>В корзину</value>
+  </data>
+  <data name="AfterReceivingTheSMSSignInWithThis" xml:space="preserve">
+    <value>После получения SMS войдите, используя этот номер телефона и отправленный временный пароль.</value>
+  </data>
+  <data name="AfterTheAccountIsDeletedItCannotBe" xml:space="preserve">
+    <value>После удаления аккаунт нельзя будет восстановить через приложение. Продолжить?</value>
+  </data>
+  <data name="Age" xml:space="preserve">
+    <value>Возраст</value>
+  </data>
+  <data name="AllAppFeaturesAreAvailableOnlyToRegistered" xml:space="preserve">
+    <value>Все возможности приложения доступны только
+зарегистрированным пользователям.</value>
+  </data>
+  <data name="AllowCameraAccessToTakeAPhoto" xml:space="preserve">
+    <value>Разрешите приложению доступ к камере, чтобы сделать фото.</value>
+  </data>
+  <data name="AllowGalleryAccessToSelectPhotos" xml:space="preserve">
+    <value>Разрешите доступ к галерее, чтобы выбрать фотографии.</value>
+  </data>
+  <data name="Amount" xml:space="preserve">
+    <value>Сумма</value>
+  </data>
+  <data name="AnErrorOccurred" xml:space="preserve">
+    <value>Произошла ошибка</value>
+  </data>
+  <data name="AnErrorOccurredWhileChangingThePrimaryCard" xml:space="preserve">
+    <value>Произошла ошибка при изменении основной карты</value>
+  </data>
+  <data name="ANewTemporaryPasswordWillBeSentBy" xml:space="preserve">
+    <value>Новый временный пароль будет отправлен по SMS на зарегистрированный номер телефона.</value>
+  </data>
+  <data name="Appearance" xml:space="preserve">
+    <value>Оформление</value>
+  </data>
+  <data name="AreYouSure" xml:space="preserve">
+    <value>Вы уверены?</value>
+  </data>
+  <data name="AskAboutTheProduct" xml:space="preserve">
+    <value>Задать вопрос о товаре</value>
+  </data>
+  <data name="AskAQuestion" xml:space="preserve">
+    <value>Задать вопрос</value>
+  </data>
+  <data name="ATemporaryPasswordWasSentToYourPhone" xml:space="preserve">
+    <value>Временный пароль отправлен на ваш номер телефона по SMS.</value>
+  </data>
+  <data name="AttentionAfterVerificationYouWillNeedToSign" xml:space="preserve">
+    <value>Внимание! После подтверждения в целях безопасности необходимо снова войти в аккаунт с новым номером.</value>
+  </data>
+  <data name="Authorization" xml:space="preserve">
+    <value>Авторизация</value>
+  </data>
+  <data name="AVerificationCodeWasSentToYourPhone" xml:space="preserve">
+    <value>На ваш номер телефона отправлен код подтверждения по SMS.
+Введите код в поля ниже.</value>
+  </data>
+  <data name="AwaitingResponse" xml:space="preserve">
+    <value>Ожидается ответ</value>
+  </data>
+  <data name="BabyBottles" xml:space="preserve">
+    <value>Бутылочки для кормления</value>
+  </data>
+  <data name="BeforeDeletingYourAccountWeWouldLikeTo" xml:space="preserve">
+    <value>Перед удалением аккаунта мы хотели бы узнать, почему вы уходите. Ваш отзыв поможет нам улучшить сервис.</value>
+  </data>
+  <data name="BeingPrepared" xml:space="preserve">
+    <value>Собирается</value>
+  </data>
+  <data name="Boy" xml:space="preserve">
+    <value>Мальчик</value>
+  </data>
+  <data name="BrieflyDescribeTheReason" xml:space="preserve">
+    <value>Кратко укажите причину</value>
+  </data>
+  <data name="Buy" xml:space="preserve">
+    <value>Купить</value>
+  </data>
+  <data name="BuyNow" xml:space="preserve">
+    <value>Купить сейчас</value>
+  </data>
+  <data name="ByCard" xml:space="preserve">
+    <value>Картой</value>
+  </data>
+  <data name="Camera" xml:space="preserve">
+    <value>Камера</value>
+  </data>
+  <data name="CameraCaptureIsNotAvailableOnThisDevice" xml:space="preserve">
+    <value>На этом устройстве съемка с камеры недоступна.</value>
+  </data>
+  <data name="CameraPermission" xml:space="preserve">
+    <value>Разрешение камеры</value>
+  </data>
+  <data name="CameraPermissionWasNotGranted" xml:space="preserve">
+    <value>Разрешение на доступ к камере не предоставлено.</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отменить</value>
+  </data>
+  <data name="CancellationReason" xml:space="preserve">
+    <value>Причина отмены</value>
+  </data>
+  <data name="CancelOrder" xml:space="preserve">
+    <value>Отменить заказ</value>
+  </data>
+  <data name="Card" xml:space="preserve">
+    <value>Карта</value>
+  </data>
+  <data name="CardDetailsAreStoredSecurelyAndAreNot" xml:space="preserve">
+    <value>Данные карты хранятся безопасно и не передаются третьим лицам.</value>
+  </data>
+  <data name="CardDetailsWereNotDeleted" xml:space="preserve">
+    <value>Не удалось удалить данные карты</value>
+  </data>
+  <data name="CardNumber" xml:space="preserve">
+    <value>Номер карты</value>
+  </data>
+  <data name="CardSaved" xml:space="preserve">
+    <value>Карта сохранена.</value>
+  </data>
+  <data name="CardsCouldNotBeLoaded" xml:space="preserve">
+    <value>Не удалось загрузить карты</value>
+  </data>
+  <data name="Cart" xml:space="preserve">
+    <value>Корзина</value>
+  </data>
+  <data name="CartProductCount" xml:space="preserve">
+    <value>Товаров в корзине: {0}</value>
+  </data>
+  <data name="Change" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="ChangePassword" xml:space="preserve">
+    <value>Изменить пароль</value>
+  </data>
+  <data name="ChangePhoneNumber" xml:space="preserve">
+    <value>Изменить номер телефона</value>
+  </data>
+  <data name="ChangePhoneNumber_ec3e8b" xml:space="preserve">
+    <value>Изменить номер телефона</value>
+  </data>
+  <data name="ChangeTariff" xml:space="preserve">
+    <value>Изменить тариф</value>
+  </data>
+  <data name="CheckingOrderStatus" xml:space="preserve">
+    <value>Проверка статуса заказа...</value>
+  </data>
+  <data name="Checkout" xml:space="preserve">
+    <value>Оформление</value>
+  </data>
+  <data name="Children" xml:space="preserve">
+    <value>Для детей</value>
+  </data>
+  <data name="ChildrenInformationOptional" xml:space="preserve">
+    <value>Информация о детях (необязательно)</value>
+  </data>
+  <data name="ChooseAPhotoForTheReview" xml:space="preserve">
+    <value>Выберите фото для отзыва</value>
+  </data>
+  <data name="ChooseATariffPlanAndGetSpecialDiscounts" xml:space="preserve">
+    <value>Выберите тарифный план и получайте специальные скидки.</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="Code" xml:space="preserve">
+    <value>Код</value>
+  </data>
+  <data name="CommonCancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="CommonClose" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="CommonError" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="CommonInformation" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="CommonNo" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="CommonResend" xml:space="preserve">
+    <value>Отправить снова</value>
+  </data>
+  <data name="CommonSuccess" xml:space="preserve">
+    <value>Успешно</value>
+  </data>
+  <data name="CommonWarning" xml:space="preserve">
+    <value>Предупреждение</value>
+  </data>
+  <data name="CommonYes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="Completed" xml:space="preserve">
+    <value>Завершенные</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Подтвердить</value>
+  </data>
+  <data name="Confirm_d235a9" xml:space="preserve">
+    <value>Подтверждаю</value>
+  </data>
+  <data name="ConfirmAddress" xml:space="preserve">
+    <value>Подтвердить адрес</value>
+  </data>
+  <data name="ConnectingToServer" xml:space="preserve">
+    <value>Подключение к серверу...</value>
+  </data>
+  <data name="Continue" xml:space="preserve">
+    <value>Продолжить</value>
+  </data>
+  <data name="Cookies" xml:space="preserve">
+    <value>Печенье</value>
+  </data>
+  <data name="CouldNotAddTheProductToTheCart" xml:space="preserve">
+    <value>Не удалось добавить товар в корзину.</value>
+  </data>
+  <data name="CouldNotCancelTheOrder" xml:space="preserve">
+    <value>Не удалось отменить заказ.</value>
+  </data>
+  <data name="CouldNotCancelTheOrder_f52d7e" xml:space="preserve">
+    <value>Не удалось отменить заказ.
+{0}</value>
+  </data>
+  <data name="CouldNotCancelTheUnpaidOrder" xml:space="preserve">
+    <value>Не удалось отменить неоплаченный заказ.</value>
+  </data>
+  <data name="CouldNotChangeThePassword" xml:space="preserve">
+    <value>Не удалось изменить пароль.</value>
+  </data>
+  <data name="CouldNotChangeThePhoneNumber" xml:space="preserve">
+    <value>Не удалось изменить номер телефона.</value>
+  </data>
+  <data name="CouldNotChangeTheRegionPleaseTryAgain" xml:space="preserve">
+    <value>Не удалось изменить регион. Попробуйте еще раз.</value>
+  </data>
+  <data name="CouldNotCheckReviewEligibility" xml:space="preserve">
+    <value>Не удалось проверить возможность оставить отзыв.</value>
+  </data>
+  <data name="CouldNotCheckThePaymentStatus" xml:space="preserve">
+    <value>Не удалось проверить статус оплаты.</value>
+  </data>
+  <data name="CouldNotDeleteOrderHistory" xml:space="preserve">
+    <value>Не удалось удалить заказ из истории.</value>
+  </data>
+  <data name="CouldNotDeleteTheAccountPleaseTryAgain" xml:space="preserve">
+    <value>Не удалось удалить аккаунт. Попробуйте еще раз.</value>
+  </data>
+  <data name="CouldNotDetermineYourCurrentLocation" xml:space="preserve">
+    <value>Не удалось определить текущее местоположение.</value>
+  </data>
+  <data name="CouldNotGetThePaymePaymentURL" xml:space="preserve">
+    <value>Не удалось получить ссылку для оплаты Payme.</value>
+  </data>
+  <data name="CouldNotLoadCardDetails" xml:space="preserve">
+    <value>Не удалось получить данные карты</value>
+  </data>
+  <data name="CouldNotLoadTariffs" xml:space="preserve">
+    <value>Не удалось загрузить тарифы.</value>
+  </data>
+  <data name="CouldNotLoadTheReview" xml:space="preserve">
+    <value>Не удалось загрузить отзыв: {0}</value>
+  </data>
+  <data name="CouldNotOpenTheCheckoutPage" xml:space="preserve">
+    <value>Не удалось открыть страницу оформления заказа.</value>
+  </data>
+  <data name="CouldNotOpenThePaymePaymentPage" xml:space="preserve">
+    <value>Не удалось открыть страницу оплаты Payme</value>
+  </data>
+  <data name="CouldNotRegister" xml:space="preserve">
+    <value>Не удалось зарегистрироваться.</value>
+  </data>
+  <data name="CouldNotSaveTheCard" xml:space="preserve">
+    <value>Не удалось сохранить карту.</value>
+  </data>
+  <data name="CouldNotSaveTheReview" xml:space="preserve">
+    <value>Не удалось сохранить отзыв.</value>
+  </data>
+  <data name="CouldNotSearchForTheAddressPleaseTry" xml:space="preserve">
+    <value>Не удалось найти адрес. Попробуйте еще раз.</value>
+  </data>
+  <data name="CouldNotSelectAPhoto" xml:space="preserve">
+    <value>Не удалось выбрать фото: {0}</value>
+  </data>
+  <data name="CouldNotSendTheQuestion" xml:space="preserve">
+    <value>Не удалось отправить вопрос.</value>
+  </data>
+  <data name="CouldNotSendTheQuestion_a01d00" xml:space="preserve">
+    <value>Не удалось отправить вопрос.
+{0}</value>
+  </data>
+  <data name="CouldNotSendTheTemporaryPassword" xml:space="preserve">
+    <value>Не удалось отправить временный пароль.</value>
+  </data>
+  <data name="CouldNotStartTariffPayment" xml:space="preserve">
+    <value>Не удалось начать оплату тарифа.</value>
+  </data>
+  <data name="CouldNotTakeAPhoto" xml:space="preserve">
+    <value>Не удалось сделать фото: {0}</value>
+  </data>
+  <data name="CouldNotVerifyThePhoneNumber" xml:space="preserve">
+    <value>Не удалось проверить номер телефона.</value>
+  </data>
+  <data name="CreateANewPasswordForSecurityPleaseEnter" xml:space="preserve">
+    <value>Создайте новый пароль для безопасности. Введите новый пароль дважды.</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>Текущие</value>
+  </data>
+  <data name="CurrentPassword" xml:space="preserve">
+    <value>Текущий пароль</value>
+  </data>
+  <data name="CurrentTariff" xml:space="preserve">
+    <value>Текущий тариф</value>
+  </data>
+  <data name="CurrentTariffMessage" xml:space="preserve">
+    <value>{0} — ваш текущий тариф.</value>
+  </data>
+  <data name="CustomerPhotos" xml:space="preserve">
+    <value>Фото покупателей</value>
+  </data>
+  <data name="CustomersCanLeaveTheFirstReviewForThis" xml:space="preserve">
+    <value>Покупатели могут оставить первый отзыв об этом товаре.</value>
+  </data>
+  <data name="Date" xml:space="preserve">
+    <value>Дата</value>
+  </data>
+  <data name="DateOfBirth" xml:space="preserve">
+    <value>Дата рождения</value>
+  </data>
+  <data name="DateOfBirth_b85a8f" xml:space="preserve">
+    <value>Дата рождения</value>
+  </data>
+  <data name="DaysRemaining" xml:space="preserve">
+    <value>Осталось дней: {0}</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Удалить</value>
+  </data>
+  <data name="DeleteAccount" xml:space="preserve">
+    <value>Удалить аккаунт</value>
+  </data>
+  <data name="DeleteAccount_fa848a" xml:space="preserve">
+    <value>Удалить аккаунт</value>
+  </data>
+  <data name="DeleteCard" xml:space="preserve">
+    <value>Удалить карту</value>
+  </data>
+  <data name="DeleteCard_a27c4e" xml:space="preserve">
+    <value>Удалить карту</value>
+  </data>
+  <data name="DeleteFromOrderHistory" xml:space="preserve">
+    <value>Удалить из истории заказов</value>
+  </data>
+  <data name="Delivered" xml:space="preserve">
+    <value>Доставлен</value>
+  </data>
+  <data name="Delivery" xml:space="preserve">
+    <value>Доставка:</value>
+  </data>
+  <data name="Delivery_199c42" xml:space="preserve">
+    <value>Доставка</value>
+  </data>
+  <data name="DeliveryAddress" xml:space="preserve">
+    <value>Адрес доставки</value>
+  </data>
+  <data name="DeliveryIsNotAvailableHereYetChooseAnother" xml:space="preserve">
+    <value>Доставка сюда пока недоступна.
+Выберите другой адрес или ближайший
+пункт выдачи заказов.</value>
+  </data>
+  <data name="DeliveryWithinOneHour" xml:space="preserve">
+    <value>Доставка в течение 1 часа</value>
+  </data>
+  <data name="DeliveryWithinTheDay" xml:space="preserve">
+    <value>Доставка в течение дня</value>
+  </data>
+  <data name="DeliveryWithinThreeHours" xml:space="preserve">
+    <value>Доставка в течение 3 часов</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Описание</value>
+  </data>
+  <data name="Diapers" xml:space="preserve">
+    <value>Подгузники</value>
+  </data>
+  <data name="DiscountsFromOurPartners" xml:space="preserve">
+    <value>Скидки на услуги партнеров</value>
+  </data>
+  <data name="DoNotCancel" xml:space="preserve">
+    <value>Не отменять</value>
+  </data>
+  <data name="DoYouWantToDeleteCard" xml:space="preserve">
+    <value>Удалить карту {0}?</value>
+  </data>
+  <data name="DoYouWantToSwitchFromTo" xml:space="preserve">
+    <value>Перейти с тарифа {0} на {1}? </value>
+  </data>
+  <data name="DryFormula" xml:space="preserve">
+    <value>Сухие смеси</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Изменить</value>
+  </data>
+  <data name="EditChildInformation" xml:space="preserve">
+    <value>Редактировать данные ребенка</value>
+  </data>
+  <data name="EditReview" xml:space="preserve">
+    <value>Редактировать отзыв</value>
+  </data>
+  <data name="EnglishLanguage" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="EnterADistrictStreetHouseOrLandmarkIn" xml:space="preserve">
+    <value>Введите район, улицу, дом или ориентир в Кашкадарьинской области.</value>
+  </data>
+  <data name="EnterANewPassword" xml:space="preserve">
+    <value>Введите новый пароль.</value>
+  </data>
+  <data name="EnterAValidExpiryMonth" xml:space="preserve">
+    <value>Введите корректный месяц окончания срока действия.</value>
+  </data>
+  <data name="EnterAValidExpiryYear" xml:space="preserve">
+    <value>Введите корректный год окончания срока действия.</value>
+  </data>
+  <data name="EnteringAnotherPersonSInformationMayViolateThe" xml:space="preserve">
+    <value>Ввод данных другого лица может привести к нарушению закона.</value>
+  </data>
+  <data name="EnterPhoneNumber" xml:space="preserve">
+    <value>Введите номер телефона</value>
+  </data>
+  <data name="EnterReasonTitle" xml:space="preserve">
+    <value>Введите причину</value>
+  </data>
+  <data name="EnterTheFullCardNumber" xml:space="preserve">
+    <value>Введите номер карты полностью.</value>
+  </data>
+  <data name="EnterTheReason" xml:space="preserve">
+    <value>Укажите причину</value>
+  </data>
+  <data name="EnterYourNewPhoneNumberTheNewNumber" xml:space="preserve">
+    <value>Введите новый номер телефона. Новый номер будет подтвержден кодом из SMS.</value>
+  </data>
+  <data name="EnterYourPhoneNumberFirst" xml:space="preserve">
+    <value>Сначала введите номер телефона.</value>
+  </data>
+  <data name="EnterYourQuestion" xml:space="preserve">
+    <value>Введите ваш вопрос...</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="Expiry" xml:space="preserve">
+    <value>Срок действия</value>
+  </data>
+  <data name="FastDelivery" xml:space="preserve">
+    <value>Быстрая доставка</value>
+  </data>
+  <data name="Favorites" xml:space="preserve">
+    <value>Избранное</value>
+  </data>
+  <data name="FavoritesTitle" xml:space="preserve">
+    <value>Избранное</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Фильтр</value>
+  </data>
+  <data name="FirstName" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="FirstName_231ae8" xml:space="preserve">
+    <value>Имя</value>
+  </data>
+  <data name="ForgotYourPassword" xml:space="preserve">
+    <value>Забыли пароль?</value>
+  </data>
+  <data name="ForMothers" xml:space="preserve">
+    <value>Для мам</value>
+  </data>
+  <data name="ForNowAnAddressCanOnlyBeSelected" xml:space="preserve">
+    <value>Пока адрес можно выбрать только в Кашкадарьинской области. Карта останется в пределах Кашкадарьи.</value>
+  </data>
+  <data name="Free" xml:space="preserve">
+    <value>Бесплатно</value>
+  </data>
+  <data name="FreeDelivery" xml:space="preserve">
+    <value>Бесплатная доставка</value>
+  </data>
+  <data name="FreeMin" xml:space="preserve">
+    <value>бесплатно ∙ мин</value>
+  </data>
+  <data name="From" xml:space="preserve">
+    <value>от</value>
+  </data>
+  <data name="Gallery" xml:space="preserve">
+    <value>Галерея</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Пол</value>
+  </data>
+  <data name="Girl" xml:space="preserve">
+    <value>Девочка</value>
+  </data>
+  <data name="GotIt" xml:space="preserve">
+    <value>Понятно</value>
+  </data>
+  <data name="HaveAQuestionAboutTheProduct" xml:space="preserve">
+    <value>Есть вопрос о товаре?</value>
+  </data>
+  <data name="HideProducts" xml:space="preserve">
+    <value>Скрыть товары: {0}</value>
+  </data>
+  <data name="HighestPriceFirst" xml:space="preserve">
+    <value>Сначала дороже</value>
+  </data>
+  <data name="HighestRatedFirst" xml:space="preserve">
+    <value>Сначала с высокой оценкой</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Главная</value>
+  </data>
+  <data name="IAgreeToSaveThisCardForFuture" xml:space="preserve">
+    <value>Я согласен сохранить эту карту для будущих покупок</value>
+  </data>
+  <data name="IConfirmThatAllEnteredInformationIsCorrect" xml:space="preserve">
+    <value>Подтверждаю правильность всех введенных данных</value>
+  </data>
+  <data name="IConfirmThatTheEnteredPhoneNumberBelongs" xml:space="preserve">
+    <value>Подтверждаю, что указанный номер телефона принадлежит мне</value>
+  </data>
+  <data name="ICouldNotFindTheProductsOrOffers" xml:space="preserve">
+    <value>Я не нашел нужные товары или предложения</value>
+  </data>
+  <data name="IEncounteredTechnicalIssues" xml:space="preserve">
+    <value>Я столкнулся с техническими проблемами</value>
+  </data>
+  <data name="IfYouGoBackThisUnpaidOrderWill" xml:space="preserve">
+    <value>Если вы вернетесь назад, этот неоплаченный заказ будет отменен. Продолжить?</value>
+  </data>
+  <data name="IfYouHaveNotRegisteredYet" xml:space="preserve">
+    <value>Если вы еще не зарегистрированы</value>
+  </data>
+  <data name="IncorrectCode" xml:space="preserve">
+    <value>Неверный код</value>
+  </data>
+  <data name="IncorrectPassword" xml:space="preserve">
+    <value>Неверный пароль</value>
+  </data>
+  <data name="Information" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="InformationAscii" xml:space="preserve">
+    <value>Информация</value>
+  </data>
+  <data name="INoLongerUseTheApp" xml:space="preserve">
+    <value>Я больше не пользуюсь приложением</value>
+  </data>
+  <data name="InvalidPhoneNumberExample901234567" xml:space="preserve">
+    <value>Неверный номер телефона. Например: 901234567</value>
+  </data>
+  <data name="IPreferAnotherServiceOrApp" xml:space="preserve">
+    <value>Я предпочитаю другой сервис или приложение</value>
+  </data>
+  <data name="IsThisTheCorrectDeliveryAddress" xml:space="preserve">
+    <value>Это правильный адрес доставки?</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="Language_802fc1" xml:space="preserve">
+    <value>Язык:</value>
+  </data>
+  <data name="LastName" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
+  <data name="LastName_f40b4b" xml:space="preserve">
+    <value>Фамилия</value>
+  </data>
+  <data name="LeaveAReview" xml:space="preserve">
+    <value>Оставить отзыв</value>
+  </data>
+  <data name="Light" xml:space="preserve">
+    <value>Светлая</value>
+  </data>
+  <data name="LoadingPaymentPage" xml:space="preserve">
+    <value>Загрузка страницы оплаты...</value>
+  </data>
+  <data name="Location" xml:space="preserve">
+    <value>Местоположение</value>
+  </data>
+  <data name="LocationPermission" xml:space="preserve">
+    <value>Разрешение на геолокацию</value>
+  </data>
+  <data name="LocationPermissionMessage" xml:space="preserve">
+    <value>Разрешите приложению доступ к геолокации, чтобы использовать текущее местоположение.</value>
+  </data>
+  <data name="LowestPriceFirst" xml:space="preserve">
+    <value>Сначала дешевле</value>
+  </data>
+  <data name="LowestRatedFirst" xml:space="preserve">
+    <value>Сначала с низкой оценкой</value>
+  </data>
+  <data name="Map" xml:space="preserve">
+    <value>Карта</value>
+  </data>
+  <data name="MessagePermissionRequired" xml:space="preserve">
+    <value>Требуется полный доступ к фотографиям. Откройте настройки и разрешите доступ ко всем фотографиям.</value>
+  </data>
+  <data name="Messages" xml:space="preserve">
+    <value>Сообщения</value>
+  </data>
+  <data name="MyChildren" xml:space="preserve">
+    <value>Мои дети</value>
+  </data>
+  <data name="MyLocation" xml:space="preserve">
+    <value>Мое местоположение</value>
+  </data>
+  <data name="MyTariff" xml:space="preserve">
+    <value>Мой тариф</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Название</value>
+  </data>
+  <data name="NewestFirst" xml:space="preserve">
+    <value>Сначала новые</value>
+  </data>
+  <data name="NewPassword" xml:space="preserve">
+    <value>Новый пароль</value>
+  </data>
+  <data name="NewPhoneNumber" xml:space="preserve">
+    <value>Новый номер телефона</value>
+  </data>
+  <data name="NinimumResponse" xml:space="preserve">
+    <value>Ответ Ninimum</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="NoAscii" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+  <data name="NoCardSelected" xml:space="preserve">
+    <value>Карта не выбрана</value>
+  </data>
+  <data name="NoConnectionToTheServerReconnecting" xml:space="preserve">
+    <value>Нет соединения с сервером. Повторное подключение...</value>
+  </data>
+  <data name="NoCurrentOrders" xml:space="preserve">
+    <value>Нет текущих заказов</value>
+  </data>
+  <data name="NoInternetConnection" xml:space="preserve">
+    <value>Нет подключения к интернету</value>
+  </data>
+  <data name="NoQuestions" xml:space="preserve">
+    <value>Нет вопросов</value>
+  </data>
+  <data name="NoQuestionsYet" xml:space="preserve">
+    <value>Пока нет вопросов</value>
+  </data>
+  <data name="NoRecentSearchesYet" xml:space="preserve">
+    <value>Пока нет недавних поисков</value>
+  </data>
+  <data name="NoReviewsYet" xml:space="preserve">
+    <value>Пока нет отзывов</value>
+  </data>
+  <data name="NoTariff" xml:space="preserve">
+    <value>Нет тарифа</value>
+  </data>
+  <data name="NotificationClicked" xml:space="preserve">
+    <value>Уведомление выбрано</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Уведомления</value>
+  </data>
+  <data name="NoUserWasFoundWithThisPhoneNumber" xml:space="preserve">
+    <value>Пользователь с таким номером телефона не найден.</value>
+  </data>
+  <data name="Number" xml:space="preserve">
+    <value>Номер</value>
+  </data>
+  <data name="NumberOfProducts" xml:space="preserve">
+    <value>Количество товаров:</value>
+  </data>
+  <data name="Nutrition" xml:space="preserve">
+    <value>Питание</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="OldestFirst" xml:space="preserve">
+    <value>Сначала старые</value>
+  </data>
+  <data name="OnboardingBabyBigText" xml:space="preserve">
+    <value>Малыш</value>
+  </data>
+  <data name="OnboardingBabyDescription" xml:space="preserve">
+    <value>Находите самые необходимые товары для детей в нашем приложении.</value>
+  </data>
+  <data name="OnboardingBabyTitle" xml:space="preserve">
+    <value>Находите самые
+нужные товары
+для детей
+в нашем
+приложении</value>
+  </data>
+  <data name="OnboardingDiscountDescription" xml:space="preserve">
+    <value>Вы можете постоянно отслеживать скидки в приложении.</value>
+  </data>
+  <data name="OnboardingDiscountTitle" xml:space="preserve">
+    <value>Постоянные
+скидки
+ждут вас</value>
+  </data>
+  <data name="OnboardingOfferDescription" xml:space="preserve">
+    <value>Специальные скидочные предложения для пользователей приложения.</value>
+  </data>
+  <data name="OnboardingOfferTitle" xml:space="preserve">
+    <value>Специальные
+скидочные
+предложения
+для пользователей
+приложения</value>
+  </data>
+  <data name="OnboardingOnlineBigText" xml:space="preserve">
+    <value>Онлайн</value>
+  </data>
+  <data name="OnboardingOnlineDescription" xml:space="preserve">
+    <value>Заказывайте необходимые товары для дома онлайн.</value>
+  </data>
+  <data name="OnboardingOnlineTitle" xml:space="preserve">
+    <value>Заказывайте
+необходимые товары
+для дома
+онлайн</value>
+  </data>
+  <data name="OnTheWay" xml:space="preserve">
+    <value>В пути</value>
+  </data>
+  <data name="OpenSettings" xml:space="preserve">
+    <value>Открыть настройки</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Заказ №{0}</value>
+  </data>
+  <data name="OrderCancelled" xml:space="preserve">
+    <value>Заказ отменен</value>
+  </data>
+  <data name="OrderCancelledSuccessfully" xml:space="preserve">
+    <value>Заказ успешно отменен</value>
+  </data>
+  <data name="OrderConfirmed" xml:space="preserve">
+    <value>Заказ подтвержден</value>
+  </data>
+  <data name="OrderCouldNotBeCreated" xml:space="preserve">
+    <value>Не удалось создать заказ.</value>
+  </data>
+  <data name="OrderDelivered" xml:space="preserve">
+    <value>Заказ №{0} доставлен</value>
+  </data>
+  <data name="OrderDetails" xml:space="preserve">
+    <value>Детали заказа</value>
+  </data>
+  <data name="OrderIDWasNotReceived" xml:space="preserve">
+    <value>Не удалось получить ID заказа.</value>
+  </data>
+  <data name="OrderInformationWasNotFound" xml:space="preserve">
+    <value>Информация о заказе не найдена.</value>
+  </data>
+  <data name="OrderInformationWasNotFound_80654d" xml:space="preserve">
+    <value>Информация о заказе не найдена.</value>
+  </data>
+  <data name="OrderIsBeingPrepared" xml:space="preserve">
+    <value>Заказ №{0} готовится</value>
+  </data>
+  <data name="OrderIsOnTheWay" xml:space="preserve">
+    <value>Заказ №{0} в пути</value>
+  </data>
+  <data name="OrderReceived" xml:space="preserve">
+    <value>Заказ принят</value>
+  </data>
+  <data name="OrderReceived_7a2c1d" xml:space="preserve">
+    <value>Заказ №{0} принят</value>
+  </data>
+  <data name="Orders" xml:space="preserve">
+    <value>Заказы</value>
+  </data>
+  <data name="Orders_8b489f" xml:space="preserve">
+    <value>Заказы</value>
+  </data>
+  <data name="OrderStatus" xml:space="preserve">
+    <value>Статус заказа</value>
+  </data>
+  <data name="OtherReason" xml:space="preserve">
+    <value>Другая причина</value>
+  </data>
+  <data name="OtherReasonIsSelectedPleaseBrieflyDescribeThe" xml:space="preserve">
+    <value>Выбрана «Другая причина». Кратко опишите причину.</value>
+  </data>
+  <data name="OurPartnersArePharmaciesAndRetailStoresYou" xml:space="preserve">
+    <value>* Наши партнеры — аптеки и магазины. У них вы можете получать специальные скидки и бесплатные услуги.</value>
+  </data>
+  <data name="OutForDelivery" xml:space="preserve">
+    <value>Доставляется</value>
+  </data>
+  <data name="Pacifiers" xml:space="preserve">
+    <value>Соски</value>
+  </data>
+  <data name="Paid1Day" xml:space="preserve">
+    <value>платно ∙ 1 день</value>
+  </data>
+  <data name="PartnerServices" xml:space="preserve">
+    <value>Услуги партнеров *</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="PasswordMustContainAtLeast6Characters" xml:space="preserve">
+    <value>Пароль должен содержать не менее 6 символов.</value>
+  </data>
+  <data name="PasswordsDoNotMatch" xml:space="preserve">
+    <value>Пароли не совпадают.</value>
+  </data>
+  <data name="PasswordsDoNotMatch_aadae6" xml:space="preserve">
+    <value>Пароли не совпадают.</value>
+  </data>
+  <data name="PasswordUpdatedSuccessfully" xml:space="preserve">
+    <value>Пароль успешно обновлен.</value>
+  </data>
+  <data name="Payment" xml:space="preserve">
+    <value>Оплата</value>
+  </data>
+  <data name="PaymentCards" xml:space="preserve">
+    <value>Платежные карты</value>
+  </data>
+  <data name="PaymentCards_6551a6" xml:space="preserve">
+    <value>Платежные карты</value>
+  </data>
+  <data name="PaymentCardsLoading" xml:space="preserve">
+    <value>Загрузка карт...</value>
+  </data>
+  <data name="PaymentMethod" xml:space="preserve">
+    <value>Способ оплаты</value>
+  </data>
+  <data name="PaymentNotCompleted" xml:space="preserve">
+    <value>Оплата не завершена</value>
+  </data>
+  <data name="PaymentPageWasClosed" xml:space="preserve">
+    <value>Страница оплаты закрыта</value>
+  </data>
+  <data name="PaymentWasSuccessfulYourOrderWillBePrepared" xml:space="preserve">
+    <value>Оплата прошла успешно. Ваш заказ скоро будет подготовлен.</value>
+  </data>
+  <data name="Permission" xml:space="preserve">
+    <value>Разрешение</value>
+  </data>
+  <data name="PermissionRequired" xml:space="preserve">
+    <value>Требуется разрешение</value>
+  </data>
+  <data name="PerMonth" xml:space="preserve">
+    <value>в месяц</value>
+  </data>
+  <data name="PersonalHygiene" xml:space="preserve">
+    <value>Личная гигиена</value>
+  </data>
+  <data name="PhoneNumber" xml:space="preserve">
+    <value>Номер телефона</value>
+  </data>
+  <data name="PhoneNumberNotFoundPleaseRestartRegistration" xml:space="preserve">
+    <value>Номер телефона не найден. Начните регистрацию заново.</value>
+  </data>
+  <data name="PhoneNumberNotFoundPleaseReturnToThe" xml:space="preserve">
+    <value>Номер телефона не найден. Вернитесь на страницу входа.</value>
+  </data>
+  <data name="PiecesCount" xml:space="preserve">
+    <value>{0} шт.</value>
+  </data>
+  <data name="PlaceOrder" xml:space="preserve">
+    <value>Оформить заказ</value>
+  </data>
+  <data name="PleaseConfirmPassword" xml:space="preserve">
+    <value>Подтвердите пароль.</value>
+  </data>
+  <data name="PleaseEnterAQuestion" xml:space="preserve">
+    <value>Пожалуйста, введите вопрос</value>
+  </data>
+  <data name="PleaseEnterFirstName" xml:space="preserve">
+    <value>Введите имя.</value>
+  </data>
+  <data name="PleaseEnterLastName" xml:space="preserve">
+    <value>Введите фамилию.</value>
+  </data>
+  <data name="PleaseEnterPassword" xml:space="preserve">
+    <value>Введите пароль.</value>
+  </data>
+  <data name="PleaseEnterTheCancellationReason" xml:space="preserve">
+    <value>Пожалуйста, укажите причину отмены.</value>
+  </data>
+  <data name="PleaseEnterYourPhoneNumber" xml:space="preserve">
+    <value>Пожалуйста, введите номер телефона</value>
+  </data>
+  <data name="PleaseRateTheProductWithStars" xml:space="preserve">
+    <value>Пожалуйста, поставьте оценку звездами.</value>
+  </data>
+  <data name="PleaseSelectADeliveryAddress" xml:space="preserve">
+    <value>Пожалуйста, выберите адрес доставки.</value>
+  </data>
+  <data name="PleaseSelectAtLeastOneProduct" xml:space="preserve">
+    <value>Пожалуйста, выберите хотя бы один товар.</value>
+  </data>
+  <data name="PleaseSelectTheConfirmationCheckbox" xml:space="preserve">
+    <value>Пожалуйста, установите флажок подтверждения.</value>
+  </data>
+  <data name="PleaseSelectYourAddress" xml:space="preserve">
+    <value>Пожалуйста, выберите адрес.</value>
+  </data>
+  <data name="PleaseWaitAMoment" xml:space="preserve">
+    <value>Пожалуйста, немного подождите</value>
+  </data>
+  <data name="PleaseWriteAReview" xml:space="preserve">
+    <value>Пожалуйста, напишите отзыв.</value>
+  </data>
+  <data name="PlusTomorrow" xml:space="preserve">
+    <value>+ Завтра</value>
+  </data>
+  <data name="Porridges" xml:space="preserve">
+    <value>Каши</value>
+  </data>
+  <data name="Preparing" xml:space="preserve">
+    <value>Готовится</value>
+  </data>
+  <data name="Price" xml:space="preserve">
+    <value>Цена</value>
+  </data>
+  <data name="Price_c09bde" xml:space="preserve">
+    <value>Цена</value>
+  </data>
+  <data name="PricesAreTooHighForMe" xml:space="preserve">
+    <value>Цены для меня слишком высокие</value>
+  </data>
+  <data name="PrimaryCardWasNotChanged" xml:space="preserve">
+    <value>Основная карта не изменена</value>
+  </data>
+  <data name="ProductDetails" xml:space="preserve">
+    <value>Подробности о товаре</value>
+  </data>
+  <data name="ProductInformationWasNotFound" xml:space="preserve">
+    <value>Информация о товаре не найдена.</value>
+  </data>
+  <data name="ProductQuestions" xml:space="preserve">
+    <value>Вопросы о товаре</value>
+  </data>
+  <data name="ProductReviews" xml:space="preserve">
+    <value>Отзывы о товаре</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Товары</value>
+  </data>
+  <data name="Products_48d782" xml:space="preserve">
+    <value>Товаров: {0}</value>
+  </data>
+  <data name="ProductsTotal" xml:space="preserve">
+    <value>Стоимость товаров:</value>
+  </data>
+  <data name="ProductsYouAddToTheCartWillAppear" xml:space="preserve">
+    <value>Товары, добавленные в корзину, появятся здесь.</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профиль</value>
+  </data>
+  <data name="PurchaseInformationWasNotFound" xml:space="preserve">
+    <value>Информация о покупке не найдена.</value>
+  </data>
+  <data name="PureesAndYogurt" xml:space="preserve">
+    <value>Пюре и йогурты</value>
+  </data>
+  <data name="QashqadaryoDistrictStreetHouseOrNearbyLandmark" xml:space="preserve">
+    <value>Кашкадарья: район, улица, дом или ближайший ориентир</value>
+  </data>
+  <data name="QashqadaryoRegion" xml:space="preserve">
+    <value>Кашкадарьинская область</value>
+  </data>
+  <data name="Questions" xml:space="preserve">
+    <value>Вопросов: {0}</value>
+  </data>
+  <data name="QuestionsAndAnswers" xml:space="preserve">
+    <value>Вопросы и ответы</value>
+  </data>
+  <data name="RateWithStars" xml:space="preserve">
+    <value>Поставьте оценку звездами</value>
+  </data>
+  <data name="Received" xml:space="preserve">
+    <value>Принят</value>
+  </data>
+  <data name="RecentSearches" xml:space="preserve">
+    <value>Недавние поиски</value>
+  </data>
+  <data name="Region" xml:space="preserve">
+    <value>Регион</value>
+  </data>
+  <data name="Region_0f2171" xml:space="preserve">
+    <value>Регион</value>
+  </data>
+  <data name="Region_2bb95f" xml:space="preserve">
+    <value>Регион:</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Регистрация</value>
+  </data>
+  <data name="RegistrationWasSuccessfulButAutomaticSignInFailed" xml:space="preserve">
+    <value>Регистрация прошла успешно, но автоматический вход не выполнен. Попробуйте войти со страницы входа.</value>
+  </data>
+  <data name="RepeatNewPassword" xml:space="preserve">
+    <value>Повторите новый пароль</value>
+  </data>
+  <data name="RepeatPassword" xml:space="preserve">
+    <value>Повторите пароль</value>
+  </data>
+  <data name="RepeatPassword_b7aca1" xml:space="preserve">
+    <value>Повторите пароль</value>
+  </data>
+  <data name="Resend" xml:space="preserve">
+    <value>Отправить снова</value>
+  </data>
+  <data name="ResetPassword" xml:space="preserve">
+    <value>Восстановить пароль</value>
+  </data>
+  <data name="Reviews" xml:space="preserve">
+    <value>Отзывы</value>
+  </data>
+  <data name="ReviewsCannotBeLeftAtTheMoment" xml:space="preserve">
+    <value>Сейчас оставить отзыв нельзя.</value>
+  </data>
+  <data name="ReviewsCount" xml:space="preserve">
+    <value>Отзывов: {0}</value>
+  </data>
+  <data name="ReviewSent" xml:space="preserve">
+    <value>Ваш отзыв отправлен.</value>
+  </data>
+  <data name="ReviewUpdated" xml:space="preserve">
+    <value>Ваш отзыв обновлён.</value>
+  </data>
+  <data name="RussianLanguage" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="SampleDeliveryAddress" xml:space="preserve">
+    <value>Кашкадарьинская область, г. Шахрисабз, ориентир: школа №25</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="SaveCard" xml:space="preserve">
+    <value>Сохранить карту</value>
+  </data>
+  <data name="SaveProductsYouLikeWithTheHeartIcon" xml:space="preserve">
+    <value>Сохраняйте понравившиеся товары с помощью значка сердца. Они появятся здесь.</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="SearchForAProduct" xml:space="preserve">
+    <value>Найдите товар</value>
+  </data>
+  <data name="SearchTitle" xml:space="preserve">
+    <value>Поиск</value>
+  </data>
+  <data name="SelectAtLeastOneReasonForDeletingThe" xml:space="preserve">
+    <value>Выберите хотя бы одну причину удаления аккаунта.</value>
+  </data>
+  <data name="SelectedCartProducts" xml:space="preserve">
+    <value>Выбрано товаров в корзине: {0}</value>
+  </data>
+  <data name="SelectOneOrMoreReasons" xml:space="preserve">
+    <value>  Выберите одну или несколько причин.</value>
+  </data>
+  <data name="SelectReason" xml:space="preserve">
+    <value>Выберите причину</value>
+  </data>
+  <data name="Send" xml:space="preserve">
+    <value>Отправить</value>
+  </data>
+  <data name="SendQuestion" xml:space="preserve">
+    <value>Отправить вопрос</value>
+  </data>
+  <data name="SendTemporaryPassword" xml:space="preserve">
+    <value>Отправить временный пароль</value>
+  </data>
+  <data name="SetAsPrimaryCard" xml:space="preserve">
+    <value>Сделать основной картой</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Настройки</value>
+  </data>
+  <data name="SignIn" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="SignInToLeaveAReview" xml:space="preserve">
+    <value>Войдите в аккаунт, чтобы оставить отзыв.</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Выйти из профиля</value>
+  </data>
+  <data name="SimilarProducts" xml:space="preserve">
+    <value>Похожие товары</value>
+  </data>
+  <data name="Skip" xml:space="preserve">
+    <value>Пропустить</value>
+  </data>
+  <data name="SMSWasNotSent" xml:space="preserve">
+    <value>SMS не отправлено</value>
+  </data>
+  <data name="Sort" xml:space="preserve">
+    <value>Сортировка</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Начать</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Статус</value>
+  </data>
+  <data name="StockAvailable" xml:space="preserve">
+    <value>В наличии: {0} шт.</value>
+  </data>
+  <data name="SubscribeToATariff" xml:space="preserve">
+    <value>Подключить тариф</value>
+  </data>
+  <data name="SubscribeToATariff_1c0091" xml:space="preserve">
+    <value>Подключить тариф</value>
+  </data>
+  <data name="SubscriptionDate" xml:space="preserve">
+    <value>Дата подключения</value>
+  </data>
+  <data name="SubscriptionEndDate" xml:space="preserve">
+    <value>Дата окончания подписки</value>
+  </data>
+  <data name="Success" xml:space="preserve">
+    <value>Успешно</value>
+  </data>
+  <data name="TakeAPhotoForTheReview" xml:space="preserve">
+    <value>Сделать фото для отзыва</value>
+  </data>
+  <data name="Tariff" xml:space="preserve">
+    <value>Тариф</value>
+  </data>
+  <data name="TariffEndDate" xml:space="preserve">
+    <value>Дата окончания тарифа</value>
+  </data>
+  <data name="TariffHistory" xml:space="preserve">
+    <value>История тарифов</value>
+  </data>
+  <data name="TariffPlan" xml:space="preserve">
+    <value>Тарифный план</value>
+  </data>
+  <data name="Tariffs" xml:space="preserve">
+    <value>Тарифы</value>
+  </data>
+  <data name="Text0Products" xml:space="preserve">
+    <value>0 товаров</value>
+  </data>
+  <data name="Text0UZS" xml:space="preserve">
+    <value>0 сум</value>
+  </data>
+  <data name="Text3Photos" xml:space="preserve">
+    <value>Фото: {0}/3</value>
+  </data>
+  <data name="Text5YearsOld" xml:space="preserve">
+    <value>5 лет</value>
+  </data>
+  <data name="ThankYouForYourFeedbackAfterTheAccount" xml:space="preserve">
+    <value>Спасибо за ваш отзыв. После удаления аккаунта вы больше не сможете войти с этим аккаунтом.</value>
+  </data>
+  <data name="ThankYouForYourFeedbackYourAccountWas" xml:space="preserve">
+    <value>Спасибо за отзыв. Ваш аккаунт успешно удален.</value>
+  </data>
+  <data name="TheAmountPaidForTheCancelledOrderWill" xml:space="preserve">
+    <value>Оплата за отмененный заказ будет возвращена на ваш счет в течение 3 дней.</value>
+  </data>
+  <data name="TheAppIsDifficultToUse" xml:space="preserve">
+    <value>Приложением сложно пользоваться</value>
+  </data>
+  <data name="TheCurrentPasswordIsIncorrect" xml:space="preserve">
+    <value>Текущий пароль неверен.</value>
+  </data>
+  <data name="TheNewPasswordAndRepeatedPasswordDoNot" xml:space="preserve">
+    <value>Новый пароль и его повтор не совпадают.</value>
+  </data>
+  <data name="TheNewPasswordMustBeDifferentFromThe" xml:space="preserve">
+    <value>Новый пароль должен отличаться от текущего.</value>
+  </data>
+  <data name="TheNewPasswordMustContainAtLeast6" xml:space="preserve">
+    <value>Новый пароль должен содержать не менее 6 символов.</value>
+  </data>
+  <data name="TheNewPhoneNumberMustBeDifferentFrom" xml:space="preserve">
+    <value>Новый номер телефона должен отличаться от текущего.</value>
+  </data>
+  <data name="TheNewTariffWillBecomeActiveImmediatelyAfter" xml:space="preserve">
+    <value>Новый тариф активируется сразу после подтверждения оплаты.</value>
+  </data>
+  <data name="TheOrderAmountIsInvalid" xml:space="preserve">
+    <value>Сумма заказа указана неверно.</value>
+  </data>
+  <data name="TheProductPriceIsInvalid" xml:space="preserve">
+    <value>Цена товара указана неверно.</value>
+  </data>
+  <data name="TheQuestionMustContainAtLeast3Characters" xml:space="preserve">
+    <value>Вопрос должен содержать не менее 3 символов.</value>
+  </data>
+  <data name="TheReviewMustNotExceed2000Characters" xml:space="preserve">
+    <value>Отзыв не должен превышать 2000 символов.</value>
+  </data>
+  <data name="TheReviewToEditWasNotFound" xml:space="preserve">
+    <value>Отзыв для редактирования не найден.</value>
+  </data>
+  <data name="TheServiceDidNotProvideTheValueI" xml:space="preserve">
+    <value>Сервис не принес ожидаемой пользы</value>
+  </data>
+  <data name="TheSMSCodeIsIncorrect" xml:space="preserve">
+    <value>Неверный код из SMS.</value>
+  </data>
+  <data name="TheSMSCodeWasNotSentPleaseTry" xml:space="preserve">
+    <value>Код SMS не отправлен. Попробуйте еще раз.</value>
+  </data>
+  <data name="ThisOrderWillBeRemovedFromOrderHistory" xml:space="preserve">
+    <value>Этот заказ будет удален из истории и его нельзя будет восстановить. Удалить?</value>
+  </data>
+  <data name="ThisPhoneNumberIsAlreadyRegistered" xml:space="preserve">
+    <value>Этот номер телефона уже зарегистрирован</value>
+  </data>
+  <data name="ThisPhoneNumberIsAlreadyRegistered_dcab50" xml:space="preserve">
+    <value>Этот номер телефона уже зарегистрирован.</value>
+  </data>
+  <data name="To" xml:space="preserve">
+    <value>до</value>
+  </data>
+  <data name="ToChangeYourPasswordEnterYourCurrentPassword" xml:space="preserve">
+    <value>Чтобы изменить пароль, сначала введите текущий пароль, затем дважды новый пароль.</value>
+  </data>
+  <data name="Tomorrow" xml:space="preserve">
+    <value>Завтра</value>
+  </data>
+  <data name="TotalPayment" xml:space="preserve">
+    <value>Итого к оплате:</value>
+  </data>
+  <data name="ToUseAllFeaturesOfThisAppPlease" xml:space="preserve">
+    <value>Чтобы пользоваться всеми возможностями приложения, убедитесь, что вводимые данные указаны правильно.</value>
+  </data>
+  <data name="ToUseThisYouNeedToSubscribeTo" xml:space="preserve">
+    <value>Для этого необходимо подключить тарифный план.</value>
+  </data>
+  <data name="UntilTariffEnds" xml:space="preserve">
+    <value>До окончания тарифа</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>Пользователь</value>
+  </data>
+  <data name="UserNotFound" xml:space="preserve">
+    <value>Пользователь не найден</value>
+  </data>
+  <data name="Uzbek" xml:space="preserve">
+    <value>Узбекский</value>
+  </data>
+  <data name="UzbekLanguage" xml:space="preserve">
+    <value>O'zbekcha</value>
+  </data>
+  <data name="UZS" xml:space="preserve">
+    <value>сум</value>
+  </data>
+  <data name="UZS_02854f" xml:space="preserve">
+    <value>{0:N0} сум</value>
+  </data>
+  <data name="UZS_b3b773" xml:space="preserve">
+    <value> сум</value>
+  </data>
+  <data name="UZSAvailableForPurchase" xml:space="preserve">
+    <value> сум доступно для покупки.</value>
+  </data>
+  <data name="Verified" xml:space="preserve">
+    <value>Подтверждено</value>
+  </data>
+  <data name="VerifiedPurchase" xml:space="preserve">
+    <value>Подтвержденная покупка</value>
+  </data>
+  <data name="View2Products" xml:space="preserve">
+    <value>Показать 2 товара</value>
+  </data>
+  <data name="ViewFull" xml:space="preserve">
+    <value>Показать полностью</value>
+  </data>
+  <data name="ViewProducts" xml:space="preserve">
+    <value>Показать товары: {0}</value>
+  </data>
+  <data name="Warning" xml:space="preserve">
+    <value>Предупреждение</value>
+  </data>
+  <data name="WhereShouldTheOrderBeDelivered" xml:space="preserve">
+    <value>Куда доставить заказ?</value>
+  </data>
+  <data name="WhyDoYouWantToDeleteYourAccount" xml:space="preserve">
+    <value>Почему вы хотите удалить аккаунт?</value>
+  </data>
+  <data name="Wipes" xml:space="preserve">
+    <value>Салфетки</value>
+  </data>
+  <data name="WithoutSubscription" xml:space="preserve">
+    <value>Без подписки</value>
+  </data>
+  <data name="WithPhotosOnly" xml:space="preserve">
+    <value>Только с фото</value>
+  </data>
+  <data name="WithSubscription" xml:space="preserve">
+    <value>С подпиской</value>
+  </data>
+  <data name="WriteAReview" xml:space="preserve">
+    <value>Напишите отзыв</value>
+  </data>
+  <data name="WriteYourQuestionAboutTheProduct" xml:space="preserve">
+    <value>Напишите вопрос о товаре</value>
+  </data>
+  <data name="WriteYourReviewOfTheProduct" xml:space="preserve">
+    <value>Напишите отзыв о товаре</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="YouAlreadyLeftAReviewForThisProduct" xml:space="preserve">
+    <value>Вы уже оставили отзыв об этом товаре. При желании его можно изменить.</value>
+  </data>
+  <data name="YouAreCancellingTheOrder" xml:space="preserve">
+    <value>Вы отменяете заказ</value>
+  </data>
+  <data name="YouCanAskASpecificQuestionAboutThe" xml:space="preserve">
+    <value>Вы можете задать конкретный вопрос о характеристиках, составе, размере или использовании товара.</value>
+  </data>
+  <data name="YouCanAskTheFirstQuestionAboutThis" xml:space="preserve">
+    <value>Вы можете задать первый вопрос об этом товаре.</value>
+  </data>
+  <data name="YouCanUseThePlatformWithThisPhone" xml:space="preserve">
+    <value>Вы сможете пользоваться платформой с помощью этого номера телефона. Важно указать его правильно. Вводя номер телефона, вы соглашаетесь с условиями публичной оферты.</value>
+  </data>
+  <data name="YouDoNotHaveAnActiveTariffPlease" xml:space="preserve">
+    <value>У вас нет активного тарифа. Пожалуйста, подключите тариф.</value>
+  </data>
+  <data name="YouDoNotNeedToHavePurchasedThe" xml:space="preserve">
+    <value>Чтобы задать вопрос, необязательно ранее покупать товар.</value>
+  </data>
+  <data name="YouNeedToHavePurchasedThisProductAt" xml:space="preserve">
+    <value>Чтобы оставить отзыв, необходимо хотя бы один раз приобрести этот товар.</value>
+  </data>
+  <data name="YouPurchasedThisProductShareYourExperienceWith" xml:space="preserve">
+    <value>Вы покупали этот товар. Поделитесь своим опытом с другими.</value>
+  </data>
+  <data name="YourCartIsEmpty" xml:space="preserve">
+    <value>Ваша корзина пока пуста</value>
+  </data>
+  <data name="YourCurrentPhoneNumber" xml:space="preserve">
+    <value>Ваш текущий номер телефона</value>
+  </data>
+  <data name="YourDataIsProtected" xml:space="preserve">
+    <value>🔒 Ваши данные защищены</value>
+  </data>
+  <data name="YourFavoritesListIsEmpty" xml:space="preserve">
+    <value>Список избранного пока пуст</value>
+  </data>
+  <data name="YourOrderIsBeingDelivered" xml:space="preserve">
+    <value>Ваш заказ доставляется.</value>
+  </data>
+  <data name="YourOrderStatusIsBeingChecked" xml:space="preserve">
+    <value>Статус вашего заказа проверяется.</value>
+  </data>
+  <data name="YourOrderWasDeliveredSuccessfully" xml:space="preserve">
+    <value>Ваш заказ успешно доставлен.</value>
+  </data>
+  <data name="YourPasswordHasBeenChanged" xml:space="preserve">
+    <value>Ваш пароль изменен.</value>
+  </data>
+  <data name="YourPhoneNumberHasBeenChangedForSecurity" xml:space="preserve">
+    <value>Номер телефона изменен. В целях безопасности необходимо войти снова.</value>
+  </data>
+  <data name="YourProductsAreBeingPreparedForDelivery" xml:space="preserve">
+    <value>Ваши товары готовятся к доставке.</value>
+  </data>
+  <data name="YourQuestionWasSentTheAnswerWillAppear" xml:space="preserve">
+    <value>Ваш вопрос отправлен. Ответ появится на этой странице после публикации.</value>
+  </data>
+  <data name="CancelTariff" xml:space="preserve">
+    <value>Отменить тариф</value>
+  </data>
+  <data name="CancelTariffConfirmation" xml:space="preserve">
+    <value>Вы хотите отменить активный тариф? Преимущества тарифа прекратятся сразу после отмены. После подтверждения возврата средства будут возвращены на ваш счёт через 24 часа.</value>
+  </data>
+  <data name="CouldNotCancelTariff" xml:space="preserve">
+    <value>Не удалось отменить тариф.</value>
+  </data>
+  <data name="TariffCancelledSuccessfully" xml:space="preserve">
+    <value>Тариф успешно отменен.</value>
+  </data>
+</root>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<ContentView x:Class="NinimumDelivery.Components.LoadingView"
+             xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Name="Root">
+    <Grid IsVisible="{Binding IsLoading, Source={x:Reference Root}}"
+          BackgroundColor="#66FFFFFF" ZIndex="999">
+        <Border BackgroundColor="White" Padding="20" Stroke="#ECECEC" StrokeShape="RoundRectangle 18"
+                HorizontalOptions="Center" VerticalOptions="Center">
+            <ActivityIndicator IsRunning="True" Color="{StaticResource PrimaryColor}" WidthRequest="36" HeightRequest="36" />
+        </Border>
+    </Grid>
+</ContentView>

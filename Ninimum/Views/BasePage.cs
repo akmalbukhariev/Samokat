@@ -17,9 +17,6 @@ namespace Ninimum.Views
         protected BasePage()
         {
             BackgroundColor = Colors.White;
-            Shell.SetNavBarIsVisible(this, false);
-            Shell.SetTabBarIsVisible(this, false);
-
             statusBarService = AppService.Get<IStatusBarService>();
             statusBarService.SetStatusBarColor(Colors.White.ToArgbHex(), false);
 
@@ -33,6 +30,21 @@ namespace Ninimum.Views
         {
             base.OnAppearing();
             EnsureConnectionStatusView();
+            RefreshShellLayout();
+        }
+
+        private void RefreshShellLayout()
+        {
+            // Shell can keep the previous page's bottom inset after navigating back
+            // from a page where the tab bar is hidden. Re-measure the current page
+            // and Shell whenever a BasePage becomes visible again so the content
+            // sits directly above the real tab bar instead of leaving a stale gap.
+            Dispatcher.Dispatch(() =>
+            {
+                Content?.InvalidateMeasure();
+                InvalidateMeasure();
+                Shell.Current?.InvalidateMeasure();
+            });
         }
 
         private void OnBasePageLoaded(object? sender, EventArgs e)

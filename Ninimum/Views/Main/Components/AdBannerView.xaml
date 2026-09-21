@@ -2,6 +2,7 @@
 <ContentView
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:models="clr-namespace:Ninimum.Models.Main"
     x:Class="Ninimum.Views.Main.Components.AdBannerView"
     x:Name="RootView">
@@ -59,7 +60,7 @@
                                             <TapGestureRecognizer Tapped="OnPurchaseTapped" />
                                         </Border.GestureRecognizers>
                                         <Grid Padding="14,6">
-                                            <Label Text="Sotib olish"
+                                            <Label Text="{x:Static language:AppResource.Buy}"
                                                    TextColor="#252B33"
                                                    FontSize="17"
                                                    FontFamily="{StaticResource FontSFBold}"

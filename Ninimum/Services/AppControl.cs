@@ -8,6 +8,7 @@ using Models.Responses;
 using Ninimum.Models.Startup;
 using Ninimum.Views.LoginRegister;
 using Utils;
+using Ninimum.Resources.Languages;
 
 namespace Ninimum.Services
 {
@@ -295,7 +296,7 @@ namespace Ninimum.Services
         public string GetUzbCurrency(decimal? price)
         {
             var uz = new CultureInfo("uz-UZ");
-            return string.Format(uz, "{0:N0} so'm", price);
+            return string.Format(uz, AppResource.UZS_02854f, price);
         }
 
 #region Check url image
@@ -410,10 +411,10 @@ namespace Ninimum.Services
         private async Task AskUserToGrantFullPhotoAccess()
         {
             bool openSettings = await Shell.Current.DisplayAlert(
-                "",//AppResource.PermissionRequired,
-                "",//AppResource.MessagePermissionRequired,
-                "",//AppResource.OpenSettings,
-                "");//AppResource.Cancel);
+                AppResource.PermissionRequired,
+                AppResource.MessagePermissionRequired,
+                AppResource.OpenSettings,
+                AppResource.Cancel);
 
             if (openSettings)
             {

@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using Api.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -68,7 +69,7 @@ public partial class OrdersPageViewModel : ObservableObject
                     PaymentStatus = order.paymentStatus,
                     ProductCount = order.productCount,
                     TotalPriceValue = order.totalPrice,
-                    TotalPrice = $"{FormatPrice(order.totalPrice)} so’m",
+                    TotalPrice = string.Format(AppResource.UZS_02854f, order.totalPrice).Replace(",", " "),
                     OrderDate = FormatDate(order.orderedAt)
                 };
 
@@ -200,7 +201,7 @@ public partial class OrdersPageViewModel : ObservableObject
         if (!order.CanCancel)
             return;
 
-        string productName = order.Products.FirstOrDefault()?.ProductName ?? "Buyurtma";
+        string productName = order.Products.FirstOrDefault()?.ProductName ?? AppResource.Orders_8b489f;
 
         if (order.Products.Count > 1)
             productName = $"{productName} +{order.Products.Count - 1}";
@@ -222,10 +223,10 @@ public partial class OrdersPageViewModel : ObservableObject
             return;
 
         bool confirmed = await AlertService.ShowConfirmationAsync(
-            "Buyurtmalar tarixidan o‘chirish",
-            "Bu buyurtma buyurtmalar tarixidan o‘chiriladi va uni qayta tiklab bo‘lmaydi. O‘chirmoqchimisiz?",
-            "O‘chirish",
-            "Yopish");
+            AppResource.DeleteFromOrderHistory,
+            AppResource.ThisOrderWillBeRemovedFromOrderHistory,
+            AppResource.Delete,
+            AppResource.Close);
 
         if (!confirmed)
             return;
@@ -244,9 +245,9 @@ public partial class OrdersPageViewModel : ObservableObject
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
                 await AlertService.ShowAlertAsync(
-                    "Xatolik",
-                    "Buyurtmalar tarixini o‘chirib bo‘lmadi.",
-                    "Yopish");
+                    AppResource.Error,
+                    AppResource.CouldNotDeleteOrderHistory,
+                    AppResource.Close);
 
                 return;
             }
@@ -260,9 +261,9 @@ public partial class OrdersPageViewModel : ObservableObject
             Debug.WriteLine($"[ERROR] DeleteCompletedOrder => {ex}");
 
             await AlertService.ShowAlertAsync(
-                "Xatolik",
-                "Buyurtmalar tarixini o‘chirib bo‘lmadi.",
-                "Yopish");
+                AppResource.Error,
+                AppResource.CouldNotDeleteOrderHistory,
+                AppResource.Close);
         }
         finally
         {

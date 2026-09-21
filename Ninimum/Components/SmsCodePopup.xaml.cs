@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using System.Windows.Input;
 using Ninimum.Services;
 
@@ -312,7 +313,7 @@ public partial class SmsCodePopup : ContentView
         HiddenOtpEntry.Text = string.Empty;
         HiddenOtpEntry.Unfocus();
 
-        lblTimer.Text = "Qayta yuborish";
+        lblTimer.Text = AppResource.Resend;
         lblTimer.TextColor = Color.FromArgb("#FD473C");
         lblTimer.InputTransparent = false;
         lblTimer.Opacity = 1;

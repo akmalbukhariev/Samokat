@@ -2,9 +2,12 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     x:Class="Ninimum.Views.LoginRegister.LoginPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     BackgroundColor="White"
     x:Name="RootPage">
     
@@ -39,7 +42,7 @@
                 </VerticalStackLayout>
 
                 <Label
-                    Text="Ushbu ilovaning to’liq imkoniyatlari faqat&#10;ro’yxatdan o’tgan foydalanuvchilarga amal qiladi"
+                    Text="{x:Static language:AppResource.AllAppFeaturesAreAvailableOnlyToRegistered}"
                     HorizontalTextAlignment="Center"
                     TextColor="#96979B"
                     FontFamily="{StaticResource FontSFRegular}"
@@ -47,7 +50,7 @@
 
                 <VerticalStackLayout Spacing="14">
                     <components:InputView
-                        Title="Telefon raqam"
+                        Title="{x:Static language:AppResource.PhoneNumber}"
                         LeftIcon="ic_phone.png"
                         Keyboard="Telephone"
                         ClearButtonVisibility="WhileEditing"
@@ -64,7 +67,7 @@
                 </VerticalStackLayout>
 
                 <Label
-                    Text="Paroldni unutdingizmi?"
+                    Text="{x:Static language:AppResource.ForgotYourPassword}"
                     TextColor="#FD473C"
                     FontFamily="{StaticResource FontSFRegular}"
                     
@@ -78,14 +81,14 @@
 
                 <components:CustomActionButton
                     x:Name="btnLogin"
-                    ButtonText="Kirish"
+                    ButtonText="{x:Static language:AppResource.SignIn}"
                     ButtonBackgroundColor="#FD473C"
                     ButtonTextColor="White"
                     ButtonImageSource="right.png"
                     TapCommand="{Binding LoginCommand}" />
 
                 <Label
-                    Text="Siz avval ro’yxatdan o’tmagan bo’lsangiz"
+                    Text="{x:Static language:AppResource.IfYouHaveNotRegisteredYet}"
                     HorizontalTextAlignment="Center"
                     TextColor="#96979B"
                     FontFamily="{StaticResource FontSFRegular}"
@@ -93,7 +96,7 @@
 
                 <components:CustomActionButton
                     x:Name="btnRegister"
-                    ButtonText="Ro’yxatdan o’tish"
+                    ButtonText="{x:Static language:AppResource.Register}"
                     ButtonBackgroundColor="#7CB518"
                     ButtonTextColor="White"
                     TapCommand="{Binding RegisterCommand}" />

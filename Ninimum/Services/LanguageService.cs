@@ -1,4 +1,4 @@
-﻿ 
+ 
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -7,6 +7,7 @@ using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using Utils;
+using Ninimum.Resources.Languages;
 
 namespace Ninimum.Services
 {
@@ -43,7 +44,7 @@ namespace Ninimum.Services
             Thread.CurrentThread.CurrentCulture = culture;
             Thread.CurrentThread.CurrentUICulture = culture;
 
-            //AppResource.Culture = culture;
+            AppResource.Culture = culture;
 
             _appStore.Set(LanguageKey, cultureCode);
         }
@@ -55,7 +56,7 @@ namespace Ninimum.Services
 
         public string GetString(string key)
         {
-            return ""; //AppResource.ResourceManager.GetString(key, CultureInfo.CurrentUICulture) ?? key;
+            return AppResource.ResourceManager.GetString(key, CultureInfo.CurrentUICulture) ?? key;
         }
     }
 }

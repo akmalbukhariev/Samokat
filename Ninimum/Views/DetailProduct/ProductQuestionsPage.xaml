@@ -2,13 +2,16 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
-    x:Class="Ninimum.Views.DetailProduct.ProductQuestionsPage">
+    x:Class="Ninimum.Views.DetailProduct.ProductQuestionsPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,*,Auto">
         <components:PageHeaderView
-            Title="Mahsulot savollari"
+            Title="{x:Static language:AppResource.ProductQuestions}"
             ShowRightIcon="False"
             BackCommand="{Binding BackCommand}" />
 
@@ -39,7 +42,7 @@
 
                         <Grid ColumnDefinitions="*,Auto">
                             <Label
-                                Text="Savol va javoblar"
+                                Text="{x:Static language:AppResource.QuestionsAndAnswers}"
                                 TextColor="#22292F"
                                 FontSize="19"
                                 FontFamily="{StaticResource FontSFMedium}" />
@@ -60,13 +63,13 @@
                         Spacing="8"
                         HorizontalOptions="Center">
                         <Label
-                            Text="Hali savollar yo'q"
+                            Text="{x:Static language:AppResource.NoQuestionsYet}"
                             TextColor="#22292F"
                             FontSize="20"
                             FontFamily="{StaticResource FontSFMedium}"
                             HorizontalTextAlignment="Center" />
                         <Label
-                            Text="Ushbu mahsulot bo'yicha birinchi savolni siz berishingiz mumkin."
+                            Text="{x:Static language:AppResource.YouCanAskTheFirstQuestionAboutThis}"
                             TextColor="#96979B"
                             FontSize="16"
                             FontFamily="{StaticResource FontSFRegular}"
@@ -128,7 +131,7 @@
                                 <VerticalStackLayout Spacing="6">
                                     <Grid ColumnDefinitions="*,Auto">
                                         <Label
-                                            Text="Ninimum javobi"
+                                            Text="{x:Static language:AppResource.NinimumResponse}"
                                             TextColor="#7CB518"
                                             FontSize="15"
                                             FontFamily="{StaticResource FontSFBold}" />
@@ -150,7 +153,7 @@
 
                             <Label
                                 IsVisible="{Binding IsWaiting}"
-                                Text="Javob kutilmoqda"
+                                Text="{x:Static language:AppResource.AwaitingResponse}"
                                 TextColor="#96979B"
                                 FontSize="15"
                                 FontFamily="{StaticResource FontSFRegular}"
@@ -172,12 +175,12 @@
             StrokeShape="RoundRectangle 10">
             <VerticalStackLayout Spacing="10">
                 <Label
-                    Text="Mahsulot haqida savolingiz bormi?"
+                    Text="{x:Static language:AppResource.HaveAQuestionAboutTheProduct}"
                     TextColor="#4F535A"
                     FontSize="15"
                     FontFamily="{StaticResource FontSFRegular}" />
                 <Button
-                    Text="Savol berish"
+                    Text="{x:Static language:AppResource.AskAQuestion}"
                     Command="{Binding AskQuestionCommand}"
                     HeightRequest="52"
                     CornerRadius="8"

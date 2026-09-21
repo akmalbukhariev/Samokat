@@ -8,4 +8,5 @@ public partial class TariffItem : ObservableObject
     [ObservableProperty] private  string startDate = "";
     [ObservableProperty] private  string endDate = "";
     [ObservableProperty] private  string price = "";
+    [ObservableProperty] private bool isActive;
 }

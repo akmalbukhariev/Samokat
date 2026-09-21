@@ -88,4 +88,16 @@
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="3.119.2" />
 	</ItemGroup>
 
+	<ItemGroup>
+		<EmbeddedResource Update="Resources\Languages\AppResource.resx">
+			<Generator>ResXFileCodeGenerator</Generator>
+			<LastGenOutput>AppResource.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+		<Compile Update="Resources\Languages\AppResource.Designer.cs">
+			<DesignTime>True</DesignTime>
+			<AutoGen>True</AutoGen>
+			<DependentUpon>AppResource.resx</DependentUpon>
+		</Compile>
+	</ItemGroup>
+
 </Project>

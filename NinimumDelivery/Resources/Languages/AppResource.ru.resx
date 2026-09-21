@@ -1,0 +1,228 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Вход курьера</value>
+  </data>
+  <data name="LoginSubtitle" xml:space="preserve">
+    <value>Войдите по ID курьера и паролю, выданным Ninimum.</value>
+  </data>
+  <data name="WorkerId" xml:space="preserve">
+    <value>ID курьера</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Неверный ID курьера или пароль.</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Ошибка</value>
+  </data>
+  <data name="OK" xml:space="preserve">
+    <value>ОК</value>
+  </data>
+  <data name="Deliveries" xml:space="preserve">
+    <value>Доставки</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>История</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профиль</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Здравствуйте, {0}</value>
+  </data>
+  <data name="TodaySummary" xml:space="preserve">
+    <value>Сегодня</value>
+  </data>
+  <data name="Available" xml:space="preserve">
+    <value>Доступные</value>
+  </data>
+  <data name="Active" xml:space="preserve">
+    <value>В работе</value>
+  </data>
+  <data name="CompletedToday" xml:space="preserve">
+    <value>Доставлено сегодня</value>
+  </data>
+  <data name="AvailableOrders" xml:space="preserve">
+    <value>Доступные доставки</value>
+  </data>
+  <data name="MyDeliveries" xml:space="preserve">
+    <value>Мои активные доставки</value>
+  </data>
+  <data name="NoAvailableOrders" xml:space="preserve">
+    <value>Сейчас нет доступных доставок.</value>
+  </data>
+  <data name="NoActiveOrders" xml:space="preserve">
+    <value>У вас нет активных доставок.</value>
+  </data>
+  <data name="NoHistory" xml:space="preserve">
+    <value>История доставок пуста.</value>
+  </data>
+  <data name="ProductsCount" xml:space="preserve">
+    <value>Товаров: {0}</value>
+  </data>
+  <data name="View" xml:space="preserve">
+    <value>Открыть</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>Ожидает</value>
+  </data>
+  <data name="Accepted" xml:space="preserve">
+    <value>Принято</value>
+  </data>
+  <data name="OnTheWay" xml:space="preserve">
+    <value>В пути</value>
+  </data>
+  <data name="Delivered" xml:space="preserve">
+    <value>Доставлено</value>
+  </data>
+  <data name="Failed" xml:space="preserve">
+    <value>Не доставлено</value>
+  </data>
+  <data name="Cancelled" xml:space="preserve">
+    <value>Отменено</value>
+  </data>
+  <data name="DeliveryDetail" xml:space="preserve">
+    <value>Детали доставки</value>
+  </data>
+  <data name="Customer" xml:space="preserve">
+    <value>Клиент</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Адрес</value>
+  </data>
+  <data name="Phone" xml:space="preserve">
+    <value>Телефон</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Заказ</value>
+  </data>
+  <data name="Total" xml:space="preserve">
+    <value>Итого</value>
+  </data>
+  <data name="Products" xml:space="preserve">
+    <value>Товары</value>
+  </data>
+  <data name="ClaimDelivery" xml:space="preserve">
+    <value>Принять доставку</value>
+  </data>
+  <data name="ClaimConfirmTitle" xml:space="preserve">
+    <value>Принять эту доставку?</value>
+  </data>
+  <data name="ClaimConfirmMessage" xml:space="preserve">
+    <value>После принятия станет доступен номер клиента, а доставка будет назначена вам.</value>
+  </data>
+  <data name="Accept" xml:space="preserve">
+    <value>Принять</value>
+  </data>
+  <data name="Close" xml:space="preserve">
+    <value>Закрыть</value>
+  </data>
+  <data name="StartDelivery" xml:space="preserve">
+    <value>Начать доставку</value>
+  </data>
+  <data name="MarkDelivered" xml:space="preserve">
+    <value>Доставлено</value>
+  </data>
+  <data name="CannotDeliver" xml:space="preserve">
+    <value>Не удалось доставить</value>
+  </data>
+  <data name="CallCustomer" xml:space="preserve">
+    <value>Позвонить клиенту</value>
+  </data>
+  <data name="OpenMap" xml:space="preserve">
+    <value>Открыть карту</value>
+  </data>
+  <data name="PaymentPaid" xml:space="preserve">
+    <value>Оплачено</value>
+  </data>
+  <data name="StatusUpdated" xml:space="preserve">
+    <value>Статус доставки обновлён.</value>
+  </data>
+  <data name="ActionFailed" xml:space="preserve">
+    <value>Не удалось выполнить действие. Попробуйте ещё раз.</value>
+  </data>
+  <data name="DeliveryCompletedConfirmTitle" xml:space="preserve">
+    <value>Подтвердить доставку</value>
+  </data>
+  <data name="DeliveryCompletedConfirmMessage" xml:space="preserve">
+    <value>Подтверждайте только после передачи заказа клиенту.</value>
+  </data>
+  <data name="Confirm" xml:space="preserve">
+    <value>Подтвердить</value>
+  </data>
+  <data name="Online" xml:space="preserve">
+    <value>Онлайн</value>
+  </data>
+  <data name="Offline" xml:space="preserve">
+    <value>Офлайн</value>
+  </data>
+  <data name="Availability" xml:space="preserve">
+    <value>Статус работы</value>
+  </data>
+  <data name="Vehicle" xml:space="preserve">
+    <value>Транспорт</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="Uzbek" xml:space="preserve">
+    <value>Узбекский</value>
+  </data>
+  <data name="Russian" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="English" xml:space="preserve">
+    <value>Английский</value>
+  </data>
+  <data name="Logout" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="LogoutConfirmTitle" xml:space="preserve">
+    <value>Выйти из аккаунта?</value>
+  </data>
+  <data name="LogoutConfirmMessage" xml:space="preserve">
+    <value>Чтобы продолжить доставки, потребуется снова войти.</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="ConnectionError" xml:space="preserve">
+    <value>Не удалось подключиться к серверу Ninimum.</value>
+  </data>
+  <data name="NotAssignedPhone" xml:space="preserve">
+    <value>Будет доступен после принятия доставки</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="DeliveryFailedTitle" xml:space="preserve">
+    <value>Проблема с доставкой</value>
+  </data>
+  <data name="DeliveryFailedMessage" xml:space="preserve">
+    <value>Отметить доставку как недоставленную? Администратор сможет проверить и назначить повторную попытку.</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Да</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>Нет</value>
+  </data>
+</root>

@@ -63,6 +63,7 @@ namespace Api.Services
         private const string GET_TARIFF_LIST = $"{BASE_URL}tariff/getTariffList";
         private const string CREATE_TARIFF_CHECKOUT = $"{BASE_URL}subscription/payme/createCheckoutUrl";
         private const string GET_TARIFF_PAYMENT_STATUS = $"{BASE_URL}subscription/getPaymentStatus";
+        private const string CANCEL_SUBSCRIPTION = $"{BASE_URL}subscription/cancelSubscription";
         private const string DELETE_ORDER_HISTORY = $"{BASE_URL}order/deleteOrderHistory";
         #endregion
 
@@ -1086,6 +1087,38 @@ namespace Api.Services
 
                 response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
                 response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public async Task<Response> CancelSubscription(CancelSubscriptionRequest data)
+        {
+            var response = new Response();
+
+            try
+            {
+                var receivedData = await PutAsync(CANCEL_SUBSCRIPTION, data);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<Response>(receivedData);
+                    if (result != null)
+                        return result;
+                }
+
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
+            }
+            catch (JsonException jsonEx)
+            {
+                response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
+                response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
             }
             catch (Exception ex)
             {

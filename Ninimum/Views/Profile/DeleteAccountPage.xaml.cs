@@ -1,3 +1,4 @@
+using Ninimum.Resources.Languages;
 using Api.Services;
 using Models.Requests;
 using Ninimum.Services;
@@ -94,26 +95,26 @@ public partial class DeleteAccountPage : BasePage
             if (string.IsNullOrWhiteSpace(reasons))
             {
                 await DisplayAlert(
-                    "Sababni tanlang",
-                    "Akkauntni o‘chirish sabablaridan kamida bittasini tanlang.",
-                    "OK");
+                    AppResource.SelectReason,
+                    AppResource.SelectAtLeastOneReasonForDeletingThe,
+                    AppResource.Ok);
                 return;
             }
 
             if (CbOther.IsChecked && string.IsNullOrWhiteSpace(OtherEntry.Text))
             {
                 await DisplayAlert(
-                    "Sababni kiriting",
-                    "“Boshqa sabab” tanlangan. Iltimos, sababni qisqacha yozing.",
-                    "OK");
+                    AppResource.EnterReasonTitle,
+                    AppResource.OtherReasonIsSelectedPleaseBrieflyDescribeThe,
+                    AppResource.Ok);
                 return;
             }
 
             bool confirmed = await DisplayAlert(
-                "Akkauntni o‘chirish",
-                "Akkaunt o‘chirilgandan so‘ng uni ilova orqali qayta tiklab bo‘lmaydi. Davom etmoqchimisiz?",
-                "O‘chirish",
-                "Bekor qilish");
+                AppResource.DeleteAccount,
+                AppResource.AfterTheAccountIsDeletedItCannotBe,
+                AppResource.Delete,
+                AppResource.Cancel);
 
             if (!confirmed)
                 return;
@@ -133,16 +134,16 @@ public partial class DeleteAccountPage : BasePage
                 if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
                 {
                     await DisplayAlert(
-                        "Xatolik",
-                        response.resultMsg ?? "Akkauntni o‘chirib bo‘lmadi. Iltimos, qayta urinib ko‘ring.",
-                        "Yopish");
+                        AppResource.Error,
+                        response.resultMsg ?? AppResource.CouldNotDeleteTheAccountPleaseTryAgain,
+                        AppResource.Close);
                     return;
                 }
 
                 await DisplayAlert(
-                    "Akkaunt o‘chirildi",
-                    "Fikringiz uchun rahmat. Akkauntingiz muvaffaqiyatli o‘chirildi.",
-                    "OK");
+                    AppResource.AccountDeleted,
+                    AppResource.ThankYouForYourFeedbackYourAccountWas,
+                    AppResource.Ok);
 
                 await appControl.StartGuestMode(clearSavedLogin: true);
             }
@@ -152,9 +153,9 @@ public partial class DeleteAccountPage : BasePage
                 loading.ShowLoading = false;
 
                 await DisplayAlert(
-                    "Xatolik",
-                    "Akkauntni o‘chirib bo‘lmadi. Iltimos, qayta urinib ko‘ring.",
-                    "Yopish");
+                    AppResource.Error,
+                    AppResource.CouldNotDeleteTheAccountPleaseTryAgain,
+                    AppResource.Close);
             }
             finally
             {

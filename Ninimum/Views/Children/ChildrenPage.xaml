@@ -2,10 +2,13 @@
 <page:BasePage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:language="clr-namespace:Ninimum.Resources.Languages"
     xmlns:page="clr-namespace:Ninimum.Views"
     xmlns:components="clr-namespace:Ninimum.Components"
     xmlns:models="clr-namespace:Ninimum.Models"
     x:Class="Ninimum.Views.Children.ChildrenPage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
     BackgroundColor="White">
 
     <Grid RowDefinitions="Auto,*,Auto"
@@ -13,7 +16,7 @@
 
         <components:PageHeaderView
             Grid.Row="0"
-            Title="Farzandlar" />
+            Title="{x:Static language:AppResource.Children}" />
 
         <CollectionView
             Grid.Row="1"
@@ -36,7 +39,7 @@
                               RowDefinitions="Auto,Auto,Auto,Auto,Auto">
 
                             <HorizontalStackLayout Grid.Row="0" Spacing="12">
-                                <Label Text="Ismi"
+                                <Label Text="{x:Static language:AppResource.FirstName}"
                                        TextColor="#9C9CA3"
                                        FontSize="17"
                                        FontFamily="{StaticResource FontSFRegular}" />
@@ -47,7 +50,7 @@
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout Grid.Row="1" Spacing="12" Margin="0,16,0,0">
-                                <Label Text="Familiyasi"
+                                <Label Text="{x:Static language:AppResource.LastName}"
                                        TextColor="#9C9CA3"
                                        FontSize="17"
                                        FontFamily="{StaticResource FontSFRegular}" />
@@ -58,7 +61,7 @@
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout Grid.Row="2" Spacing="12" Margin="0,16,0,0">
-                                <Label Text="Tug‘ilgan kuni"
+                                <Label Text="{x:Static language:AppResource.DateOfBirth_b85a8f}"
                                        TextColor="#9C9CA3"
                                        FontSize="17"
                                        FontFamily="{StaticResource FontSFRegular}" />
@@ -69,7 +72,7 @@
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout Grid.Row="3" Spacing="12" Margin="0,16,0,0">
-                                <Label Text="Yoshi"
+                                <Label Text="{x:Static language:AppResource.Age}"
                                        TextColor="#9C9CA3"
                                        FontSize="17"
                                        FontFamily="{StaticResource FontSFRegular}" />
@@ -80,7 +83,7 @@
                             </HorizontalStackLayout>
 
                             <HorizontalStackLayout Grid.Row="4" Spacing="12" Margin="0,16,0,0">
-                                <Label Text="Jinsi"
+                                <Label Text="{x:Static language:AppResource.Gender}"
                                        TextColor="#9C9CA3"
                                        FontSize="17"
                                        FontFamily="{StaticResource FontSFRegular}" />
@@ -124,7 +127,7 @@
 
         <Button
             Grid.Row="2"
-            Text="Farzand qo‘shish"
+            Text="{x:Static language:AppResource.AddChild}"
             BackgroundColor="#FF403B"
             TextColor="White"
             FontSize="18"
