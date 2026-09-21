@@ -1,0 +1,184 @@
+[project]
+project=NinimumDelivery.csproj
+language=C#
+lastDtbSucceeded
+
+[sliceDimensions]
+TargetFramework=net10.0-ios
+
+[properties]
+AssemblyName=NinimumDelivery
+BaseIntermediateOutputPath=obj/
+BaseOutputPath=bin/
+MaxSupportedLangVersion=14.0
+OutputType=Exe
+ProjectAssetsFile=<PATH>obj/project.assets.json
+RootNamespace=NinimumDelivery
+TargetFramework=net10.0-ios
+TargetFrameworkIdentifier=.NETCoreApp
+TargetFrameworkVersion=v10.0
+TargetPath=<PATH>bin/Debug/net10.0-ios/iossimulator-x64/NinimumDelivery.dll
+TargetRefPath=<PATH>obj/Debug/net10.0-ios/iossimulator-x64/ref/NinimumDelivery.dll
+TemporaryDependencyNodeTargetIdentifier=net10.0-ios
+
+[commandLineArguments]
+/noconfig
+/unsafe-
+/checked-
+/nowarn:1701,1702,1701,1702,8002
+/fullpaths
+/nostdlib+
+/errorreport:prompt
+/warn:10
+/define:__IOS__;__MOBILE__;__UNIFIED__;TRACE;DEBUG;NET;NET10_0;NETCOREAPP;IOS;IOS26_5;NET5_0_OR_GREATER;NET6_0_OR_GREATER;NET7_0_OR_GREATER;NET8_0_OR_GREATER;NET9_0_OR_GREATER;NET10_0_OR_GREATER;NETCOREAPP1_0_OR_GREATER;NETCOREAPP1_1_OR_GREATER;NETCOREAPP2_0_OR_GREATER;NETCOREAPP2_1_OR_GREATER;NETCOREAPP2_2_OR_GREATER;NETCOREAPP3_0_OR_GREATER;NETCOREAPP3_1_OR_GREATER;IOS10_0_OR_GREATER;IOS10_1_OR_GREATER;IOS10_2_OR_GREATER;IOS11_0_OR_GREATER;IOS11_1_OR_GREATER;IOS11_2_OR_GREATER;IOS11_3_OR_GREATER;IOS11_4_OR_GREATER;IOS12_0_OR_GREATER;IOS12_1_OR_GREATER;IOS12_2_OR_GREATER;IOS12_3_OR_GREATER;IOS12_4_OR_GREATER;IOS13_0_OR_GREATER;IOS13_1_OR_GREATER;IOS13_2_OR_GREATER;IOS13_3_OR_GREATER;IOS13_4_OR_GREATER;IOS13_5_OR_GREATER;IOS13_6_OR_GREATER;IOS14_0_OR_GREATER;IOS14_1_OR_GREATER;IOS14_2_OR_GREATER;IOS14_3_OR_GREATER;IOS14_4_OR_GREATER;IOS14_5_OR_GREATER;IOS15_0_OR_GREATER;IOS15_2_OR_GREATER;IOS15_4_OR_GREATER;IOS16_0_OR_GREATER;IOS16_1_OR_GREATER;IOS16_2_OR_GREATER;IOS16_4_OR_GREATER;IOS17_0_OR_GREATER;IOS17_2_OR_GREATER;IOS17_4_OR_GREATER;IOS17_5_OR_GREATER;IOS18_0_OR_GREATER;IOS18_1_OR_GREATER;IOS18_2_OR_GREATER;IOS18_3_OR_GREATER;IOS18_4_OR_GREATER;IOS18_5_OR_GREATER;IOS26_0_OR_GREATER;IOS26_1_OR_GREATER;IOS26_2_OR_GREATER;IOS26_4_OR_GREATER;IOS26_5_OR_GREATER
+/highentropyva+
+/nullable:enable
+/features:"InterceptorsNamespaces=;Microsoft.Extensions.Validation.Generated;Microsoft.Maui.Controls.Generated"
+/debug+
+/debug:portable
+/filealign:512
+/optimize-
+/out:obj/Debug/net10.0-ios/iossimulator-x64/NinimumDelivery.dll
+/refout:obj/Debug/net10.0-ios/iossimulator-x64/refint/NinimumDelivery.dll
+/target:exe
+/warnaserror-
+/utf8output
+/deterministic+
+/langversion:14.0
+/warnaserror+:NU1605,SYSLIB0011
+
+[sourceFiles]
+Components/LoadingView.xaml.cs
+Converters/ZeroToTrueConverter.cs
+Models/
+ ApiResponse.cs
+ DeliveryDashboard.cs
+ DeliveryJob.cs
+ DeliveryProduct.cs
+ DeliveryWorker.cs
+obj/Debug/net10.0-ios/iossimulator-x64/
+ .NETCoreApp,Version=v10.0.AssemblyAttributes.cs
+ NinimumDelivery.AssemblyInfo.cs
+ NinimumDelivery.GlobalUsings.g.cs
+ NinimumDelivery.nfloat.g.cs
+Resources/Languages/AppResource.Designer.cs
+Services/
+ AlertService.cs
+ AppConstants.cs
+ AppServices.cs
+ AppState.cs
+ AppStoreService.cs
+ DeliveryApiService.cs
+ LanguageService.cs
+ViewModels/
+ DeliveriesViewModel.cs
+ DeliveryDetailViewModel.cs
+ HistoryViewModel.cs
+ LoginViewModel.cs
+ ProfileViewModel.cs
+Views/
+ DeliveriesPage.xaml.cs
+ DeliveryDetailPage.xaml.cs
+ HistoryPage.xaml.cs
+ LoginPage.xaml.cs
+ ProfilePage.xaml.cs
+App.xaml.cs
+AppShell.xaml.cs
+MauiProgram.cs
+
+[frameworkPacks]
+Microsoft.NETCore.App.Ref
+
+[metadataReferences]
+<DOTNET>/packs/Microsoft.iOS.Ref.net10.0_26.5/26.5.10318/ref/net10.0/Microsoft.iOS.dll
+<NUGET>/
+ communitytoolkit.mvvm/8.4.0/lib/net8.0/CommunityToolkit.Mvvm.dll
+ microsoft.extensions.configuration.abstractions/10.0.0/lib/net10.0/Microsoft.Extensions.Configuration.Abstractions.dll
+ microsoft.extensions.configuration/10.0.0/lib/net10.0/Microsoft.Extensions.Configuration.dll
+ microsoft.extensions.dependencyinjection.abstractions/10.0.0/lib/net10.0/Microsoft.Extensions.DependencyInjection.Abstractions.dll
+ microsoft.extensions.dependencyinjection/10.0.0/lib/net10.0/Microsoft.Extensions.DependencyInjection.dll
+ microsoft.extensions.diagnostics.abstractions/10.0.0/lib/net10.0/Microsoft.Extensions.Diagnostics.Abstractions.dll
+ microsoft.extensions.fileproviders.abstractions/10.0.0/lib/net10.0/Microsoft.Extensions.FileProviders.Abstractions.dll
+ microsoft.extensions.hosting.abstractions/10.0.0/lib/net10.0/Microsoft.Extensions.Hosting.Abstractions.dll
+ microsoft.extensions.logging.abstractions/10.0.0/lib/net10.0/Microsoft.Extensions.Logging.Abstractions.dll
+ microsoft.extensions.logging.debug/9.0.8/lib/net9.0/Microsoft.Extensions.Logging.Debug.dll
+ microsoft.extensions.logging/10.0.0/lib/net10.0/Microsoft.Extensions.Logging.dll
+ microsoft.extensions.options/10.0.0/lib/net10.0/Microsoft.Extensions.Options.dll
+ microsoft.extensions.primitives/10.0.0/lib/net10.0/Microsoft.Extensions.Primitives.dll
+ microsoft.maui.controls.core/10.0.20/lib/net10.0-ios26.0/Microsoft.Maui.Controls.dll
+ microsoft.maui.controls.xaml/10.0.20/lib/net10.0-ios26.0/Microsoft.Maui.Controls.Xaml.dll
+ microsoft.maui.core/10.0.20/lib/net10.0-ios26.0/Microsoft.Maui.dll
+ microsoft.maui.essentials/10.0.20/lib/net10.0-ios26.0/Microsoft.Maui.Essentials.dll
+ microsoft.maui.graphics/10.0.20/lib/net10.0-ios26.0/Microsoft.Maui.Graphics.dll
+ newtonsoft.json/13.0.4/lib/net6.0/Newtonsoft.Json.dll
+ restsharp/114.0.0/lib/net10.0/RestSharp.dll
+
+[sdkAnalyzerPacks]
+Microsoft.NET.ILLink.Tasks
+
+[analyzerReferences]
+<NETSDK>/Sdks/Microsoft.NET.Sdk/analyzers/
+ Microsoft.CodeAnalysis.CSharp.NetAnalyzers.dll
+ Microsoft.CodeAnalysis.NetAnalyzers.dll
+<NUGET>/
+ communitytoolkit.mvvm/8.4.0/analyzers/dotnet/roslyn4.12/cs/
+  CommunityToolkit.Mvvm.CodeFixers.dll
+  CommunityToolkit.Mvvm.SourceGenerators.dll
+ microsoft.extensions.logging.abstractions/10.0.0/analyzers/dotnet/roslyn4.4/cs/Microsoft.Extensions.Logging.Generators.dll
+ microsoft.extensions.options/10.0.0/analyzers/dotnet/roslyn4.4/cs/Microsoft.Extensions.Options.SourceGeneration.dll
+ microsoft.maui.controls.build.tasks/10.0.20/buildTransitive/netstandard2.0/
+  Microsoft.Maui.Controls.BindingSourceGen.dll
+  Microsoft.Maui.Controls.SourceGen.dll
+
+[sdkAnalyzerConfigPolicy]
+Microsoft.NET.Sdk/analyzers
+
+[analyzerConfigFiles]
+obj/Debug/net10.0-ios/iossimulator-x64/NinimumDelivery.GeneratedMSBuildEditorConfig.editorconfig
+
+[additionalFiles]
+Components/LoadingView.xaml
+Resources/Styles/
+ Colors.xaml
+ Styles.xaml
+Views/
+ DeliveriesPage.xaml
+ DeliveryDetailPage.xaml
+ HistoryPage.xaml
+ LoginPage.xaml
+ ProfilePage.xaml
+App.xaml
+AppShell.xaml
+
+[embeddedResources]
+Resources/Languages/
+ AppResource.resx
+  @Generator=ResXFileCodeGenerator
+  @LastGenOutput=AppResource.Designer.cs
+ AppResource.ru.resx
+ AppResource.uz.resx
+
+[projectReferences]
+
+[capabilities]
+Apple
+CrossPlatformExecutable
+HotReloadWebSockets
+IOSApplication
+LaunchProfiles
+LaunchProfilesGroupByPlatformFilters
+Maui
+MauiAssets
+MauiCore
+MauiEssentials
+MauiSingleProject
+Microsoft.Maui.Core.Version.10.0.20
+Microsoft.Maui.Workload.Version.10.0.20
+Mobile
+Msix
+NativeAOT
+Pack
+RuntimeEnvironmentVariableSupport
+SingleTargetBuildForStartupProjects
+SupportsHotReload
+UseMaui

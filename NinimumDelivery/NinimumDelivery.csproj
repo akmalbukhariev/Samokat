@@ -7,7 +7,7 @@
     <SingleProject>true</SingleProject>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <ApplicationTitle>Ninimum Go</ApplicationTitle>
+    <ApplicationTitle>Ninimum Delivery</ApplicationTitle>
     <ApplicationId>com.ninimum.delivery</ApplicationId>
     <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
     <ApplicationVersion>1</ApplicationVersion>

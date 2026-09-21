@@ -1,0 +1,6 @@
+Entry underline fix
+
+Applied the same global native-control styling used by the main Ninimum app.
+- Android: removes native underline/tint from Entry, Picker, DatePicker, TimePicker, Editor.
+- iOS: removes native border/background from the same controls.
+- The current Delivery project contains two Entry controls, both on LoginPage; the global mapping also covers future Entry controls automatically.
