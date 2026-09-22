@@ -32,7 +32,6 @@
                 <Setter Property="FontFamily" Value="{StaticResource FontSFMedium}" />
             </Style>
 
-
             <Style x:Key="ConnectorDotStyle" TargetType="BoxView">
                 <Setter Property="WidthRequest" Value="5" />
                 <Setter Property="HeightRequest" Value="5" />
@@ -41,6 +40,7 @@
                 <Setter Property="HorizontalOptions" Value="Center" />
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
+            
             <Style x:Key="StepIconStyle" TargetType="Image">
                 <Setter Property="WidthRequest" Value="22" />
                 <Setter Property="HeightRequest" Value="22" />

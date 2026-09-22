@@ -131,6 +131,31 @@ public partial class OrdersPageViewModel : ObservableObject
         }
     }
 
+    public async Task RefreshActiveOrderStatusesAsync()
+    {
+        if (IsLoading || ActiveOrders.Count == 0)
+            return;
+
+        var orders = ActiveOrders.ToList();
+        bool completedStateChanged = false;
+
+        foreach (var order in orders)
+        {
+            if (order.IsLoading)
+                continue;
+
+            bool wasCompleted = IsCompleted(order.Status);
+            await LoadOrderProcessAsync(order);
+
+            if (wasCompleted != IsCompleted(order.Status))
+                completedStateChanged = true;
+        }
+
+        // When a courier finishes a delivery, move the order to the Completed tab.
+        if (completedStateChanged)
+            await LoadOrdersAsync();
+    }
+
     private async Task LoadOrderProcessAsync(OrderItemModel order)
     {
         try

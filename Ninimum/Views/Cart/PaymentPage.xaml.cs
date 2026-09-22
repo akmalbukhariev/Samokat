@@ -4,6 +4,7 @@ using Models.Requests;
 using Models.Responses;
 using Ninimum.Services;
 using Ninimum.Views.Main;
+using Ninimum.Views.Formalization;
 using Ninimum.Views.MyTariff;
 using System.Diagnostics;
 using System.Windows.Input;
@@ -43,6 +44,18 @@ public partial class PaymentPage : BasePage, IQueryAttributable
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+        // PaymentPage is a transient checkout page. Always start a new query
+        // with clean state so an old completed Payme session can never be reused.
+        paymentStatusCts?.Cancel();
+        paymentReturnHandled = false;
+        Interlocked.Exchange(ref paymentFinished, 0);
+        Interlocked.Exchange(ref backFlowRunning, 0);
+
+        orderId = 0;
+        subscriptionId = 0;
+        paymentType = "ORDER";
+        paymentUrl = string.Empty;
+
         if (query.TryGetValue("PaymentUrl", out var paymentUrlValue))
             paymentUrl = paymentUrlValue?.ToString() ?? string.Empty;
 
@@ -289,17 +302,33 @@ public partial class PaymentPage : BasePage, IQueryAttributable
         Debug.WriteLine(
             $"PAYMENT FINISHED => type={paymentType}, orderId={orderId}, subscriptionId={subscriptionId}, status={paymentStatus}");
 
+        // The checkout changed both Orders and Cart state. Force those tabs to
+        // refresh the next time the user opens them.
+        PageDataRefreshState.MarkDirty(PageDataRefreshState.Orders);
+        PageDataRefreshState.MarkDirty(PageDataRefreshState.Cart);
+        FormalizationNavigationStore.Clear();
+
         await MainThread.InvokeOnMainThreadAsync(async () =>
         {
-            // Reset the Shell stack before leaving Payme. Otherwise the old
-            // PaymentPage remains under the destination and Back can reopen
-            // the Payme WebView after the payment has already completed.
+            // IMPORTANT: Shell tabs keep their own navigation stacks. Merely
+            // switching to Home leaves PaymentPage inside the Cart tab stack,
+            // which is why opening Savatcha later showed the old Payme page.
+            // Pop the current checkout stack back to its tab root first.
+            PaymeWebView.Source = null;
+
+            try
+            {
+                await Shell.Current.Navigation.PopToRootAsync(false);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[WARN] Could not pop checkout stack to root => {ex.Message}");
+            }
+
             await AppNavigatorService.NavigateHome(false);
 
             if (paymentType == "TARIFF")
             {
-                // Show the activated tariff as the completion screen. Home is
-                // directly underneath it, so Back returns to MainPage.
                 await AppNavigatorService.NavigateTo(nameof(MyTariffPage));
             }
         });
@@ -315,7 +344,12 @@ public partial class PaymentPage : BasePage, IQueryAttributable
             paymentStatusCts?.Cancel();
 
             if (Volatile.Read(ref paymentFinished) == 1)
+            {
+                // Safety net for an already-completed PaymentPage that somehow
+                // remained in a Shell tab stack from an older app session.
+                await CloseFinishedPaymentPageAsync();
                 return;
+            }
 
             if (paymentType != "ORDER" || orderId <= 0)
             {
@@ -334,8 +368,7 @@ public partial class PaymentPage : BasePage, IQueryAttributable
             if (currentStatus.Equals("FAILED", StringComparison.OrdinalIgnoreCase) ||
                 currentStatus.Equals("CANCELLED", StringComparison.OrdinalIgnoreCase))
             {
-                Interlocked.Exchange(ref paymentFinished, 1);
-                await AppNavigatorService.NavigateTo("..");
+                await FinishPaymentAsync(currentStatus);
                 return;
             }
 
@@ -393,6 +426,30 @@ public partial class PaymentPage : BasePage, IQueryAttributable
         }
     }
 
+    private async Task CloseFinishedPaymentPageAsync()
+    {
+        paymentStatusCts?.Cancel();
+        FormalizationNavigationStore.Clear();
+        PageDataRefreshState.MarkDirty(PageDataRefreshState.Cart);
+        PageDataRefreshState.MarkDirty(PageDataRefreshState.Orders);
+
+        await MainThread.InvokeOnMainThreadAsync(async () =>
+        {
+            PaymeWebView.Source = null;
+
+            try
+            {
+                await Shell.Current.Navigation.PopToRootAsync(false);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"[WARN] Could not close finished PaymentPage => {ex.Message}");
+            }
+
+            await AppNavigatorService.NavigateHome(false);
+        });
+    }
+
     private async Task<string> GetCurrentOrderPaymentStatusAsync()
     {
         var response = await apiService.GetOrderPaymentStatus(new OrderStatusRequest
@@ -414,6 +471,16 @@ public partial class PaymentPage : BasePage, IQueryAttributable
             LoadingLayout.IsVisible = show;
             ActivityIndicator.IsRunning = show;
         });
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        // A finished checkout must never become visible again when the user
+        // taps the Cart tab. This also repairs stacks created by older builds.
+        if (Volatile.Read(ref paymentFinished) == 1)
+            _ = CloseFinishedPaymentPageAsync();
     }
 
     protected override void OnDisappearing()
