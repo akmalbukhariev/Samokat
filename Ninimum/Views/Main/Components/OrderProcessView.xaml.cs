@@ -1,10 +1,17 @@
-using Ninimum.Resources.Languages;
+using Microsoft.Maui.Graphics;
 using Utils;
 
 namespace Ninimum.Views.Main.Components;
 
 public partial class OrderProcessView : ContentView
 {
+    private static readonly Color ActiveColor = Color.FromArgb("#33CC66");
+    private static readonly Color ActiveTextColor = Colors.White;
+    private static readonly Color CompletedTextColor = Color.FromArgb("#D7F0E1");
+    private static readonly Color InactiveNodeColor = Colors.White;
+    private static readonly Color InactiveBorderColor = Color.FromArgb("#D5DBE3");
+    private static readonly Color InactiveTextColor = Color.FromArgb("#C8D1DB");
+
     public OrderProcessView()
     {
         InitializeComponent();
@@ -14,7 +21,6 @@ public partial class OrderProcessView : ContentView
         UpdateExpandState();
         UpdateOrderInfo();
     }
-
 
     public static readonly BindableProperty OrderNumberProperty =
         BindableProperty.Create(
@@ -30,7 +36,6 @@ public partial class OrderProcessView : ContentView
         set => SetValue(OrderNumberProperty, value);
     }
 
-
     public static readonly BindableProperty OrderStatusProperty =
         BindableProperty.Create(
             nameof(OrderStatus),
@@ -45,13 +50,12 @@ public partial class OrderProcessView : ContentView
         set => SetValue(OrderStatusProperty, value);
     }
 
-
     public static readonly BindableProperty CurrentStepProperty =
         BindableProperty.Create(
             nameof(CurrentStep),
             typeof(OrderProcessStep),
             typeof(OrderProcessView),
-            OrderProcessStep.OrderReceived,
+            OrderProcessStep.PaymentCompleted,
             propertyChanged: OnStepChanged);
 
     public OrderProcessStep CurrentStep
@@ -59,7 +63,6 @@ public partial class OrderProcessView : ContentView
         get => (OrderProcessStep)GetValue(CurrentStepProperty);
         set => SetValue(CurrentStepProperty, value);
     }
-
 
     public static readonly BindableProperty IsExpandedProperty =
         BindableProperty.Create(
@@ -75,7 +78,6 @@ public partial class OrderProcessView : ContentView
         set => SetValue(IsExpandedProperty, value);
     }
 
-
     public static readonly BindableProperty InternalToggleEnabledProperty =
         BindableProperty.Create(
             nameof(InternalToggleEnabled),
@@ -88,7 +90,6 @@ public partial class OrderProcessView : ContentView
         get => (bool)GetValue(InternalToggleEnabledProperty);
         set => SetValue(InternalToggleEnabledProperty, value);
     }
-
 
     public static readonly BindableProperty IsLoadingProperty =
         BindableProperty.Create(
@@ -103,11 +104,7 @@ public partial class OrderProcessView : ContentView
         set => SetValue(IsLoadingProperty, value);
     }
 
-
-    private static void OnOrderStatusChanged(
-        BindableObject bindable,
-        object oldValue,
-        object newValue)
+    private static void OnOrderStatusChanged(BindableObject bindable, object oldValue, object newValue)
     {
         if (bindable is not OrderProcessView view)
             return;
@@ -116,197 +113,133 @@ public partial class OrderProcessView : ContentView
         view.UpdateOrderInfo();
     }
 
-
-    private static void OnOrderInfoChanged(
-        BindableObject bindable,
-        object oldValue,
-        object newValue)
+    private static void OnOrderInfoChanged(BindableObject bindable, object oldValue, object newValue)
     {
         if (bindable is OrderProcessView view)
             view.UpdateOrderInfo();
     }
 
-
-    private static void OnStepChanged(
-        BindableObject bindable,
-        object oldValue,
-        object newValue)
+    private static void OnStepChanged(BindableObject bindable, object oldValue, object newValue)
     {
         if (bindable is OrderProcessView view)
             view.UpdateProgress();
     }
 
-
-    private static void OnExpandedChanged(
-        BindableObject bindable,
-        object oldValue,
-        object newValue)
+    private static void OnExpandedChanged(BindableObject bindable, object oldValue, object newValue)
     {
         if (bindable is OrderProcessView view)
             view.UpdateExpandState();
     }
-
 
     private void ConvertStatusToStep()
     {
         switch (OrderStatus?.ToUpperInvariant())
         {
             case "PENDING":
+                CurrentStep = OrderProcessStep.PaymentCompleted;
+                break;
             case "CONFIRMED":
-                CurrentStep = OrderProcessStep.OrderReceived;
+                CurrentStep = OrderProcessStep.ProductPreparing;
                 break;
-
             case "PREPARING":
-                CurrentStep = OrderProcessStep.Preparing;
+                CurrentStep = OrderProcessStep.DeliveryPreparing;
                 break;
-
             case "ON_THE_WAY":
-            case "DELIVERED":
                 CurrentStep = OrderProcessStep.OutForDelivery;
                 break;
-
+            case "DELIVERED":
+                CurrentStep = OrderProcessStep.Delivered;
+                break;
             default:
-                CurrentStep = OrderProcessStep.OrderReceived;
+                CurrentStep = OrderProcessStep.PaymentCompleted;
                 break;
         }
     }
 
-
     private void UpdateOrderInfo()
     {
-        string number =
-            string.IsNullOrWhiteSpace(OrderNumber)
-                ? string.Empty
-                : OrderNumber;
+        var orderPrefix = string.IsNullOrWhiteSpace(OrderNumber) ? "" : $"#{OrderNumber} ";
 
         switch (OrderStatus?.ToUpperInvariant())
         {
             case "PENDING":
-                TitleLabel.Text =
-                    string.Format(AppResource.OrderReceived_7a2c1d, number);
-
-                SubtitleLabel.Text =
-                    AppResource.YourOrderStatusIsBeingChecked;
+                TitleLabel.Text = "To'lov qabul qilindi";
+                SubtitleLabel.Text = $"{orderPrefix}buyurtma uchun to'lov muvaffaqiyatli qabul qilindi.";
                 break;
-
-
             case "CONFIRMED":
-                TitleLabel.Text =
-                    string.Format(AppResource.OrderReceived_7a2c1d, number);
-
-                SubtitleLabel.Text =
-                    AppResource.PaymentWasSuccessfulYourOrderWillBePrepared;
+                TitleLabel.Text = "Mahsulot tayyorlanmoqda";
+                SubtitleLabel.Text = $"{orderPrefix}buyurtma yig'ilish jarayonida.";
                 break;
-
-
             case "PREPARING":
-                TitleLabel.Text =
-                    string.Format(AppResource.OrderIsBeingPrepared, number);
-
-                SubtitleLabel.Text =
-                    AppResource.YourProductsAreBeingPreparedForDelivery;
+                TitleLabel.Text = "Yetkazishga tayyorlanmoqda";
+                SubtitleLabel.Text = $"{orderPrefix}buyurtma kuryerga topshirish uchun tayyorlanmoqda.";
                 break;
-
-
             case "ON_THE_WAY":
-                TitleLabel.Text =
-                    string.Format(AppResource.OrderIsOnTheWay, number);
-
-                SubtitleLabel.Text =
-                    AppResource.YourOrderIsBeingDelivered;
+                TitleLabel.Text = "Bugun yetib boradi";
+                SubtitleLabel.Text = $"{orderPrefix}buyurtma hozir yo'lda.";
                 break;
-
-
             case "DELIVERED":
-                TitleLabel.Text =
-                    string.Format(AppResource.OrderDelivered, number);
-
-                SubtitleLabel.Text =
-                    AppResource.YourOrderWasDeliveredSuccessfully;
+                TitleLabel.Text = "Buyurtma yetkazildi";
+                SubtitleLabel.Text = $"{orderPrefix}buyurtma muvaffaqiyatli yetkazildi.";
                 break;
-
-
+            case "CANCELLED":
+                TitleLabel.Text = "Buyurtma bekor qilindi";
+                SubtitleLabel.Text = $"{orderPrefix}buyurtma bekor qilindi.";
+                break;
             default:
-                TitleLabel.Text =
-                    string.Format(AppResource.Order, number);
-
-                SubtitleLabel.Text =
-                    string.Empty;
+                TitleLabel.Text = "Buyurtma holati";
+                SubtitleLabel.Text = string.IsNullOrWhiteSpace(OrderNumber) ? string.Empty : $"Buyurtma raqami: {orderPrefix.Trim()}";
                 break;
         }
     }
-
 
     private void UpdateProgress()
     {
-        Step1Circle.Source = "ic_empty_circle.png";
-        Step2Circle.Source = "ic_empty_circle.png";
-        Step3Circle.Source = "ic_empty_circle.png";
+        var stepIndex = (int)CurrentStep;
 
-        Line1.Source = "ic_dot_line.png";
-        Line2.Source = "ic_dot_line.png";
+        UpdateNode(Step1Node, Step1Icon, Step1Label, 1, stepIndex, "order_step_payment_active.png", "order_step_payment_inactive.png");
+        UpdateNode(Step2Node, Step2Icon, Step2Label, 2, stepIndex, "order_step_product_active.png", "order_step_product_inactive.png");
+        UpdateNode(Step3Node, Step3Icon, Step3Label, 3, stepIndex, "order_step_ready_active.png", "order_step_ready_inactive.png");
+        UpdateNode(Step4Node, Step4Icon, Step4Label, 4, stepIndex, "order_step_delivery_active.png", "order_step_delivery_inactive.png");
+        UpdateNode(Step5Node, Step5Icon, Step5Label, 5, stepIndex, "order_step_delivered_active.png", "order_step_delivered_inactive.png");
 
-
-        switch (CurrentStep)
-        {
-            case OrderProcessStep.OrderReceived:
-
-                Step1Circle.Source =
-                    "ic_fill_circle.png";
-
-                break;
-
-
-            case OrderProcessStep.Preparing:
-
-                Step1Circle.Source =
-                    "ic_fill_circle.png";
-
-                Step2Circle.Source =
-                    "ic_fill_circle.png";
-
-                Line1.Source =
-                    "ic_solid_line.png";
-
-                break;
-
-
-            case OrderProcessStep.OutForDelivery:
-
-                Step1Circle.Source =
-                    "ic_fill_circle.png";
-
-                Step2Circle.Source =
-                    "ic_fill_circle.png";
-
-                Step3Circle.Source =
-                    "ic_fill_circle.png";
-
-                Line1.Source =
-                    "ic_solid_line.png";
-
-                Line2.Source =
-                    "ic_solid_line.png";
-
-                break;
-        }
+        UpdateConnector(Connector1Solid, Connector1Dots, stepIndex >= 2);
+        UpdateConnector(Connector2Solid, Connector2Dots, stepIndex >= 3);
+        UpdateConnector(Connector3Solid, Connector3Dots, stepIndex >= 4);
+        UpdateConnector(Connector4Solid, Connector4Dots, stepIndex >= 5);
     }
 
+    private static void UpdateConnector(BoxView solidLine, Grid dots, bool isCompleted)
+    {
+        solidLine.IsVisible = isCompleted;
+        dots.IsVisible = !isCompleted;
+        dots.Opacity = 1;
+    }
+
+    private static void UpdateNode(Border node, Image icon, Label label, int nodeIndex, int currentStepIndex, string activeSource, string inactiveSource)
+    {
+        var isCompleted = nodeIndex < currentStepIndex;
+        var isCurrent = nodeIndex == currentStepIndex;
+        var isActive = isCompleted || isCurrent;
+
+        node.BackgroundColor = isActive ? ActiveColor : InactiveNodeColor;
+        node.Stroke = isActive ? ActiveColor : InactiveBorderColor;
+        node.StrokeThickness = isActive ? 0 : 1;
+
+        icon.Source = isActive ? activeSource : inactiveSource;
+
+        label.TextColor = isCurrent ? ActiveTextColor : isCompleted ? CompletedTextColor : InactiveTextColor;
+        label.FontAttributes = isCurrent ? FontAttributes.Bold : FontAttributes.None;
+        label.Opacity = isCompleted || isCurrent ? 1 : 0.9;
+    }
 
     private void UpdateExpandState()
     {
         ProgressContainer.IsVisible = IsExpanded;
-
-        ToggleImage.Source =
-            IsExpanded
-                ? "ic_arrow_up.png"
-                : "ic_arrow_down.png";
+        ToggleImage.Source = IsExpanded ? "ic_arrow_up.png" : "ic_arrow_down.png";
     }
 
-
-    private void OnToggleTapped(
-        object sender,
-        TappedEventArgs e)
+    private void OnToggleTapped(object sender, TappedEventArgs e)
     {
         if (!InternalToggleEnabled)
             return;
