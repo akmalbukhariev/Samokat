@@ -70,26 +70,19 @@
                                     </Border>
                                 </VerticalStackLayout>
 
-                                <!-- Keep banner product art inside a small intentional card.
-                                     Product images commonly have a white source background;
-                                     constraining it here prevents that background from covering
-                                     the right half of the banner. -->
+                                <!-- Product artwork sits directly on the banner gradient.
+                                     Transparent PNGs keep their transparency, so there is no
+                                     white card/background around the product image. -->
                                 <Grid Grid.Column="1"
-                                      HorizontalOptions="Center"
-                                      VerticalOptions="Center">
-                                    <Border WidthRequest="122"
-                                            HeightRequest="150"
-                                            Padding="7"
-                                            BackgroundColor="#F8FFFFFF"
-                                            StrokeThickness="0"
-                                            StrokeShape="RoundRectangle 18"
-                                            HorizontalOptions="Center"
-                                            VerticalOptions="Center">
-                                        <Image Source="{Binding Image}"
-                                               Aspect="AspectFit"
-                                               HorizontalOptions="Fill"
-                                               VerticalOptions="Fill" />
-                                    </Border>
+                                      HorizontalOptions="Fill"
+                                      VerticalOptions="Fill">
+                                    <Image Source="{Binding Image}"
+                                           WidthRequest="145"
+                                           HeightRequest="165"
+                                           Aspect="AspectFit"
+                                           BackgroundColor="Transparent"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
                                 </Grid>
                             </Grid>
                         </Border>

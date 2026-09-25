@@ -251,7 +251,7 @@ public partial class MainProductCardView : ContentView
         bool hasSingleImage = count == 1;
 
         ImageCarousel.IsVisible = hasCarousel;
-        //SingleImage.IsVisible = hasSingleImage;
+        SingleImage.IsVisible = hasSingleImage;
 
         if (hasCarousel)
         {

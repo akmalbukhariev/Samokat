@@ -22,6 +22,19 @@
 
                 <Grid>
 
+                    <!-- Single image mode -->
+                    <Image
+                        x:Name="SingleImage"
+                        Source="{Binding MainImageSource, Source={x:Reference RootView}}"
+                        Aspect="AspectFill"
+                        IsVisible="False">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer
+                                Tapped="Product_Tapped"
+                                NumberOfTapsRequired="1" />
+                        </Image.GestureRecognizers>
+                    </Image>
+
                     <CarouselView
                         x:Name="ImageCarousel"
                         ItemsSource="{Binding ImagesSource, Source={x:Reference RootView}}"
