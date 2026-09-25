@@ -1,3 +1,4 @@
+using System.Globalization;
 using Microsoft.Maui.Graphics;
 using Utils;
 
@@ -16,6 +17,7 @@ public partial class OrderProcessView : ContentView
     {
         InitializeComponent();
 
+        ApplyLocalizedText();
         ConvertStatusToStep();
         UpdateProgress();
         UpdateExpandState();
@@ -156,9 +158,119 @@ public partial class OrderProcessView : ContentView
         }
     }
 
+    private void ApplyLocalizedText()
+    {
+        var language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLowerInvariant();
+
+        switch (language)
+        {
+            case "ru":
+                Step1Label.Text = "Оплачено";
+                Step2Label.Text = "Товар\nготовится";
+                Step3Label.Text = "Готов к\nдоставке";
+                Step4Label.Text = "Доставляется";
+                Step5Label.Text = "Доставлено";
+                LoadingLabel.Text = "Загружается статус заказа...";
+                break;
+
+            case "en":
+                Step1Label.Text = "Paid";
+                Step2Label.Text = "Product\npreparing";
+                Step3Label.Text = "Ready for\ndelivery";
+                Step4Label.Text = "Out for\ndelivery";
+                Step5Label.Text = "Delivered";
+                LoadingLabel.Text = "Loading order status...";
+                break;
+
+            default:
+                Step1Label.Text = "To'lov\nqilindi";
+                Step2Label.Text = "Mahsulot\ntayyorlanmoqda";
+                Step3Label.Text = "Yetkazishga\ntayyor";
+                Step4Label.Text = "Yetkazil\nmoqda";
+                Step5Label.Text = "Yetkazildi";
+                LoadingLabel.Text = "Buyurtma holati yuklanmoqda...";
+                break;
+        }
+    }
+
     private void UpdateOrderInfo()
     {
         var orderPrefix = string.IsNullOrWhiteSpace(OrderNumber) ? "" : $"#{OrderNumber} ";
+        var language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLowerInvariant();
+
+        if (language == "ru")
+        {
+            switch (OrderStatus?.ToUpperInvariant())
+            {
+                case "PENDING":
+                    TitleLabel.Text = "Оплата принята";
+                    SubtitleLabel.Text = $"{orderPrefix}оплата за заказ успешно принята.";
+                    break;
+                case "CONFIRMED":
+                    TitleLabel.Text = "Товар готовится";
+                    SubtitleLabel.Text = $"{orderPrefix}заказ комплектуется.";
+                    break;
+                case "PREPARING":
+                    TitleLabel.Text = "Готов к доставке";
+                    SubtitleLabel.Text = $"{orderPrefix}заказ готов к передаче курьеру.";
+                    break;
+                case "ON_THE_WAY":
+                    TitleLabel.Text = "Доставим сегодня";
+                    SubtitleLabel.Text = $"{orderPrefix}заказ уже в пути.";
+                    break;
+                case "DELIVERED":
+                    TitleLabel.Text = "Заказ доставлен";
+                    SubtitleLabel.Text = $"{orderPrefix}заказ успешно доставлен.";
+                    break;
+                case "CANCELLED":
+                    TitleLabel.Text = "Заказ отменён";
+                    SubtitleLabel.Text = $"{orderPrefix}заказ отменён.";
+                    break;
+                default:
+                    TitleLabel.Text = "Статус заказа";
+                    SubtitleLabel.Text = string.IsNullOrWhiteSpace(OrderNumber) ? string.Empty : $"Номер заказа: {orderPrefix.Trim()}";
+                    break;
+            }
+
+            return;
+        }
+
+        if (language == "en")
+        {
+            switch (OrderStatus?.ToUpperInvariant())
+            {
+                case "PENDING":
+                    TitleLabel.Text = "Payment received";
+                    SubtitleLabel.Text = $"{orderPrefix}payment for the order was received successfully.";
+                    break;
+                case "CONFIRMED":
+                    TitleLabel.Text = "Product is being prepared";
+                    SubtitleLabel.Text = $"{orderPrefix}order is being prepared.";
+                    break;
+                case "PREPARING":
+                    TitleLabel.Text = "Ready for delivery";
+                    SubtitleLabel.Text = $"{orderPrefix}order is ready to be handed to the courier.";
+                    break;
+                case "ON_THE_WAY":
+                    TitleLabel.Text = "Arriving today";
+                    SubtitleLabel.Text = $"{orderPrefix}order is now on the way.";
+                    break;
+                case "DELIVERED":
+                    TitleLabel.Text = "Order delivered";
+                    SubtitleLabel.Text = $"{orderPrefix}order was delivered successfully.";
+                    break;
+                case "CANCELLED":
+                    TitleLabel.Text = "Order cancelled";
+                    SubtitleLabel.Text = $"{orderPrefix}order was cancelled.";
+                    break;
+                default:
+                    TitleLabel.Text = "Order status";
+                    SubtitleLabel.Text = string.IsNullOrWhiteSpace(OrderNumber) ? string.Empty : $"Order number: {orderPrefix.Trim()}";
+                    break;
+            }
+
+            return;
+        }
 
         switch (OrderStatus?.ToUpperInvariant())
         {
@@ -171,8 +283,8 @@ public partial class OrderProcessView : ContentView
                 SubtitleLabel.Text = $"{orderPrefix}buyurtma yig'ilish jarayonida.";
                 break;
             case "PREPARING":
-                TitleLabel.Text = "Yetkazishga tayyorlanmoqda";
-                SubtitleLabel.Text = $"{orderPrefix}buyurtma kuryerga topshirish uchun tayyorlanmoqda.";
+                TitleLabel.Text = "Yetkazishga tayyor";
+                SubtitleLabel.Text = $"{orderPrefix}buyurtma kuryerga topshirishga tayyor.";
                 break;
             case "ON_THE_WAY":
                 TitleLabel.Text = "Bugun yetib boradi";

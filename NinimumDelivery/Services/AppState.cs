@@ -71,9 +71,9 @@ public class AppState
         SetRoot(AppServices.GetRequired<LoginPage>());
     }
 
-    public async Task RefreshWorkerAsync()
+    public async Task RefreshWorkerAsync(CancellationToken cancellationToken = default)
     {
-        var response = await api.Me();
+        var response = await api.Me(cancellationToken);
         if (response?.resultCode == "100" && response.resultData != null)
         {
             Worker = response.resultData;

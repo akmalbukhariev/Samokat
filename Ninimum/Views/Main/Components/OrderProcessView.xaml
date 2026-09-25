@@ -159,11 +159,11 @@
                     </Grid>
 
                     <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*,*" ColumnSpacing="6">
-                        <Label x:Name="Step1Label" Grid.Column="0" Style="{StaticResource StepTextStyle}" Text="To'lov&#10;qilindi" />
-                        <Label x:Name="Step2Label" Grid.Column="1" Style="{StaticResource StepTextStyle}" Text="Mahsulot&#10;tayyorlanmoqda" />
-                        <Label x:Name="Step3Label" Grid.Column="2" Style="{StaticResource StepTextStyle}" Text="Yetkazishga&#10;tayyor" />
-                        <Label x:Name="Step4Label" Grid.Column="3" Style="{StaticResource StepTextStyle}" Text="Yetkazil&#10;moqda" />
-                        <Label x:Name="Step5Label" Grid.Column="4" Style="{StaticResource StepTextStyle}" Text="Yetkazildi" />
+                        <Label x:Name="Step1Label" Grid.Column="0" Style="{StaticResource StepTextStyle}" Text="" />
+                        <Label x:Name="Step2Label" Grid.Column="1" Style="{StaticResource StepTextStyle}" Text="" />
+                        <Label x:Name="Step3Label" Grid.Column="2" Style="{StaticResource StepTextStyle}" Text="" />
+                        <Label x:Name="Step4Label" Grid.Column="3" Style="{StaticResource StepTextStyle}" Text="" />
+                        <Label x:Name="Step5Label" Grid.Column="4" Style="{StaticResource StepTextStyle}" Text="" />
                     </Grid>
                 </Grid>
             </VerticalStackLayout>
@@ -192,7 +192,8 @@
                         VerticalOptions="Center" />
 
                     <Label
-                        Text="Buyurtma holati yuklanmoqda..."
+                        x:Name="LoadingLabel"
+                        Text=""
                         TextColor="#22292F"
                         FontSize="14"
                         VerticalOptions="Center"

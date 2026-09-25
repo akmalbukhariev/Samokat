@@ -71,6 +71,8 @@ public partial class CancelOrderPage : BasePage, INotifyPropertyChanged, IQueryA
         this.apiService = apiService;
         this.appControl = appControl;
 
+        ApplyPopupLanguage();
+
         CancelOrderCommand = new Command(OnCancelOrder);
         DoNotCancelCommand = new Command(OnDoNotCancel);
 
@@ -98,8 +100,19 @@ public partial class CancelOrderPage : BasePage, INotifyPropertyChanged, IQueryA
             OrderAmount = orderAmountValue?.ToString() ?? string.Empty;
     }
 
+    private void ApplyPopupLanguage()
+    {
+        CancelOrderPopup.QuestionTitle = $"{AppResource.YouAreCancellingTheOrder}\n{AppResource.AreYouSure}";
+        CancelOrderPopup.YesText = AppResource.Confirm;
+        CancelOrderPopup.NoText = AppResource.DoNotCancel;
+        CancelOrderPopup.SuccessTitle = AppResource.OrderCancelledSuccessfully;
+        CancelOrderPopup.SuccessMessage = AppResource.OrderCancelled;
+        CancelOrderPopup.OkText = AppResource.Ok;
+    }
+
     private async void OnCancelOrder()
     {
+        ApplyPopupLanguage();
         if (orderId <= 0)
         {
             await DisplayAlert(AppResource.Error, AppResource.OrderInformationWasNotFound, AppResource.Ok);

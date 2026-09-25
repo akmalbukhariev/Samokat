@@ -156,12 +156,6 @@
 
         <components:QuestionPopupView
                 x:Name="CancelOrderPopup"
-                QuestionTitle="Siz buyurtmani bekor qilyapsiz&#10;Ishonchingiz komilmi?"
-                YesText="Tasdiqlayman"
-                NoText="Bekor qilmayman"
-                SuccessTitle="Buyurtma muvaffaqiyatli bekor qilindi"
-                SuccessMessage="Buyurtma bekor qilindi. Buyurtmalar ro‘yxatida uning holatini ko‘rishingiz mumkin."
-                OkText="Tushunarli"
                 IsVisible="False"
                 ZIndex="99" />
     </Grid>

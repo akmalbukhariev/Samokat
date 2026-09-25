@@ -2,12 +2,38 @@
 <ContentView x:Class="NinimumDelivery.Components.LoadingView"
              xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Name="Root">
+             x:Name="Root"
+             HorizontalOptions="Fill"
+             VerticalOptions="Fill">
+
     <Grid IsVisible="{Binding IsLoading, Source={x:Reference Root}}"
-          BackgroundColor="#66FFFFFF" ZIndex="999">
-        <Border BackgroundColor="White" Padding="20" Stroke="#ECECEC" StrokeShape="RoundRectangle 18"
-                HorizontalOptions="Center" VerticalOptions="Center">
-            <ActivityIndicator IsRunning="True" Color="{StaticResource PrimaryColor}" WidthRequest="36" HeightRequest="36" />
+          BackgroundColor="#66FFFFFF"
+          InputTransparent="False"
+          ZIndex="999">
+
+        <!--
+            This transparent button deliberately consumes taps while loading.
+            The old overlay was visual only, so buttons underneath could still
+            be pressed on some Android devices.
+        -->
+        <Button BackgroundColor="Transparent"
+                BorderWidth="0"
+                Opacity="0.01"
+                HorizontalOptions="Fill"
+                VerticalOptions="Fill"
+                InputTransparent="False" />
+
+        <Border BackgroundColor="White"
+                Padding="20"
+                Stroke="#ECECEC"
+                StrokeShape="RoundRectangle 18"
+                HorizontalOptions="Center"
+                VerticalOptions="Center"
+                InputTransparent="False">
+            <ActivityIndicator IsRunning="{Binding IsLoading, Source={x:Reference Root}}"
+                               Color="{StaticResource PrimaryColor}"
+                               WidthRequest="36"
+                               HeightRequest="36" />
         </Border>
     </Grid>
 </ContentView>

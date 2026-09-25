@@ -7,6 +7,9 @@ namespace NinimumDelivery;
 
 public partial class App : Application
 {
+    public static event EventHandler? AppStopped;
+    public static event EventHandler? AppResumed;
+
     public App(LanguageService languageService)
     {
         InitializeComponent();
@@ -26,7 +29,12 @@ public partial class App : Application
         else
             rootPage = AppServices.GetRequired<LoginPage>();
 
-        return new Window(rootPage);
+        var window = new Window(rootPage);
+
+        window.Stopped += (_, _) => AppStopped?.Invoke(this, EventArgs.Empty);
+        window.Resumed += (_, _) => AppResumed?.Invoke(this, EventArgs.Empty);
+
+        return window;
     }
 
     private void Setting()

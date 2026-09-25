@@ -310,12 +310,6 @@
         
         <components:QuestionPopupView
                 x:Name="logOutPopup"
-                QuestionTitle="Siz profildan chiqayapsiz.&#10;Ishonchingiz komilmi?"
-                YesText="Ha, chiqaman"
-                NoText="Yo’q, chiqmayman"
-                SuccessTitle=""
-                SuccessMessage=""
-                OkText=""
                 IsVisible="False"
                 ZIndex="99" />
         <BoxView

@@ -17,11 +17,12 @@ public class DeliveryApiService
         token = store.Get<string>(AppConstants.TokenKey, string.Empty);
     }
 
-    private async Task<RestResponse> Execute(RestRequest request, bool useToken = true)
+    private async Task<RestResponse> Execute(RestRequest request, bool useToken = true, CancellationToken cancellationToken = default)
     {
         if (useToken && !string.IsNullOrWhiteSpace(token))
             request.AddHeader("Authorization", $"Bearer {token}");
-        return await client.ExecuteAsync(request);
+
+        return await client.ExecuteAsync(request, cancellationToken);
     }
 
     private static T? Parse<T>(RestResponse response) where T : class =>
@@ -43,11 +44,11 @@ public class DeliveryApiService
         return Parse<ApiResponse<DeliveryWorker>>(res);
     }
 
-    public Task<ApiResponse<DeliveryWorker>?> Me() => Get<DeliveryWorker>("delivery-app/me");
-    public Task<ApiResponse<DeliveryDashboard>?> Dashboard() => Get<DeliveryDashboard>("delivery-app/dashboard");
-    public Task<ApiResponse<List<DeliveryJob>>?> Available() => Get<List<DeliveryJob>>("delivery-app/available");
-    public Task<ApiResponse<List<DeliveryJob>>?> Active() => Get<List<DeliveryJob>>("delivery-app/active");
-    public Task<ApiResponse<List<DeliveryJob>>?> History() => Get<List<DeliveryJob>>("delivery-app/history");
+    public Task<ApiResponse<DeliveryWorker>?> Me(CancellationToken cancellationToken = default) => Get<DeliveryWorker>("delivery-app/me", cancellationToken);
+    public Task<ApiResponse<DeliveryDashboard>?> Dashboard(CancellationToken cancellationToken = default) => Get<DeliveryDashboard>("delivery-app/dashboard", cancellationToken);
+    public Task<ApiResponse<List<DeliveryJob>>?> Available(CancellationToken cancellationToken = default) => Get<List<DeliveryJob>>("delivery-app/available", cancellationToken);
+    public Task<ApiResponse<List<DeliveryJob>>?> Active(CancellationToken cancellationToken = default) => Get<List<DeliveryJob>>("delivery-app/active", cancellationToken);
+    public Task<ApiResponse<List<DeliveryJob>>?> History(CancellationToken cancellationToken = default) => Get<List<DeliveryJob>>("delivery-app/history", cancellationToken);
 
     public async Task<ApiResponse<DeliveryJob>?> Detail(long jobId)
     {
@@ -73,10 +74,10 @@ public class DeliveryApiService
         return Parse<ApiResponse>(await Execute(req));
     }
 
-    private async Task<ApiResponse<T>?> Get<T>(string path)
+    private async Task<ApiResponse<T>?> Get<T>(string path, CancellationToken cancellationToken = default)
     {
         var req = new RestRequest(path, Method.Get);
-        return Parse<ApiResponse<T>>(await Execute(req));
+        return Parse<ApiResponse<T>>(await Execute(req, cancellationToken: cancellationToken));
     }
 
     public void Logout()

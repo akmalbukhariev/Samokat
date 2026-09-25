@@ -192,6 +192,8 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         DeleteAccountCommand = new Command(OnDeleteAccountClicked);
         LogoutCommand = new Command(OnLogoutClicked);
 
+        ApplyLogoutPopupLanguage();
+
         logOutPopup.Confirmed += OnLogoutConfirmed;
         logOutPopup.Closed += (s, e) =>
         {
@@ -234,8 +236,16 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         await LoadCurrentTariffAsync();
     }
 
+    private void ApplyLogoutPopupLanguage()
+    {
+        logOutPopup.QuestionTitle = $"{AppResource.SignOut}\n{AppResource.AreYouSure}";
+        logOutPopup.YesText = AppResource.SignOut;
+        logOutPopup.NoText = AppResource.Cancel;
+    }
+
     private void OnLogoutClicked()
     {
+        ApplyLogoutPopupLanguage();
         appControl.ShowTabBar(false);
         logOutPopup.ShowConfirm();
     }
