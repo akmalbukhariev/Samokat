@@ -15,12 +15,15 @@ public partial class ProductQuestionsPage : BasePage
         BindingContext = viewModel;
 }
 
-    protected override async void OnAppearing()
+    protected override async void OnNavigatedTo(NavigatedToEventArgs args)
     {
-        base.OnAppearing();
+        base.OnNavigatedTo(args);
 
         if (viewModel.ProductId <= 0)
+        {
+            viewModel.IsLoading = false;
             return;
+        }
 
         bool needsRefresh = PageDataRefreshState.ConsumeDirty(
             PageDataRefreshState.ProductQuestions(viewModel.ProductId));

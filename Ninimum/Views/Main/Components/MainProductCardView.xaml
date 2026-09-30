@@ -6,16 +6,19 @@
     xmlns:models="clr-namespace:Ninimum.Models.Main"
     x:Class="Ninimum.Views.Main.Components.MainProductCardView"
     xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-    x:Name="RootView">
+    x:Name="RootView"
+    BackgroundColor="White">
  
+    <Grid RowDefinitions="Auto,1" VerticalOptions="Start">
+    <Border Stroke="#E0E0E0" StrokeThickness="0.5" BackgroundColor="White" Padding="8">
     <VerticalStackLayout 
         x:Name="mainStack" 
-        Spacing="8">
+        Spacing="6">
 
         <!-- Product image area -->
-        <Grid HeightRequest="220">
+        <Grid HeightRequest="160">
             <Border
-                BackgroundColor="#E9EEF2"
+                BackgroundColor="White"
                 StrokeThickness="0"
                 StrokeShape="RoundRectangle 20"
                 Padding="0">
@@ -26,7 +29,7 @@
                     <Image
                         x:Name="SingleImage"
                         Source="{Binding MainImageSource, Source={x:Reference RootView}}"
-                        Aspect="AspectFill"
+                        Aspect="AspectFit"
                         IsVisible="False">
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer
@@ -51,7 +54,7 @@
 
                                     <Image
                                         Source="{Binding ImageSource}"
-                                        Aspect="AspectFill" />
+                                        Aspect="AspectFit" />
                                 </Grid>
                             </DataTemplate>
                         </CarouselView.ItemTemplate>
@@ -157,8 +160,7 @@
             FontSize="14"
             LineBreakMode="TailTruncation"
             FontFamily="{StaticResource FontSFRegular}"
-            MaxLines="2"
-            HeightRequest="42">
+            MaxLines="2">
             <Label.GestureRecognizers>
                 <TapGestureRecognizer
                     Tapped="Product_Tapped"
@@ -173,18 +175,16 @@
                     Tapped="Product_Tapped"
                     NumberOfTapsRequired="1" />
             </HorizontalStackLayout.GestureRecognizers>    
-            <Image 
-                Source="star.png"
-                WidthRequest="16"
-                HeightRequest="16"
-                VerticalOptions="Center" />
-
-            <Label
-                Text="{Binding RatingText, Source={x:Reference RootView}}"
-                TextColor="#9C9C9C"
-                FontSize="13"
-                FontFamily="{StaticResource FontSFRegular}"
-                VerticalOptions="Center" />
+            <HorizontalStackLayout
+                Spacing="2"
+                VerticalOptions="Center"
+                BindableLayout.ItemsSource="{Binding Stars, Source={x:Reference RootView}}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate x:DataType="x:String">
+                        <Image Source="{Binding .}" WidthRequest="14" HeightRequest="14" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </HorizontalStackLayout>
 
             <Label
                 Text="{Binding ReviewCountText, Source={x:Reference RootView}}"
@@ -245,4 +245,12 @@
         </Border>
 
     </VerticalStackLayout>
+    </Border>
+    <!-- Draw a full bottom divider even when there is no following product row. -->
+    <BoxView Grid.Row="1"
+             HeightRequest="1"
+             Color="#E0E0E0"
+             HorizontalOptions="Fill"
+             InputTransparent="True" />
+    </Grid>
 </ContentView>

@@ -1,3 +1,4 @@
+using Ninimum.Views.MyTariff;
 using System.Collections.Specialized;
 using Microsoft.Maui.Controls.Shapes;
 using Ninimum.Models;
@@ -260,6 +261,16 @@ public partial class DetailProductPage : BasePage
            $"{nameof(ProductReviews)}" +
            $"?productId={viewModel.ProductId}" +
            $"&title={Uri.EscapeDataString(viewModel.ProductTitle)}");
+        });
+    }
+
+    private async void SubscriptionPricePanel_Tapped(object sender, TappedEventArgs e)
+    {
+        await ClickGuard.RunAsync(SubscriptionPricePanel, async () =>
+        {
+            await SubscriptionPricePanel.ScaleToAsync(0.9, 100, Easing.CubicOut);
+            await SubscriptionPricePanel.ScaleToAsync(1.0, 100, Easing.CubicIn);
+            await AppNavigatorService.NavigateTo(nameof(TariffsPage));
         });
     }
 

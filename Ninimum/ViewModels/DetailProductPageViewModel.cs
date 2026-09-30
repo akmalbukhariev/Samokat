@@ -156,7 +156,40 @@ public partial class DetailProductPageViewModel : ObservableObject
 
     private async void CartClicked(MainProductCardItem product)
     {
-        //await AppNavigatorService.NavigateTo(nameof(FormalizationPage));
+        if (product == null || product.IsCartLoading)
+            return;
+
+        product.IsCartLoading = true;
+        try
+        {
+            if (!await appControl.EnsureAuthenticatedAsync())
+                return;
+
+            Response response = await apiService.AddCartProduct(
+                new AddCartRequest
+                {
+                    user_id = appControl.CurrentUserId,
+                    product_id = product.ProductId,
+                    quantity = 1
+                });
+
+            if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
+            {
+                await AlertService.ShowAlertAsync(AppResource.Error, response.resultMsg);
+                return;
+            }
+
+            ShowCartView = true;
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Cart);
+        }
+        catch
+        {
+            await AlertService.ShowAlertAsync(AppResource.Error, AppResource.CouldNotAddTheProductToTheCart);
+        }
+        finally
+        {
+            product.IsCartLoading = false;
+        }
     }
 
     partial void OnProductIdChanged(long value)

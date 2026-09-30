@@ -12,10 +12,10 @@
     x:Name="ThisPage"
     BackgroundColor="White">
 
-    <Grid>
+    <Grid RowDefinitions="*,1">
         <Grid
             Padding="20,0,20,0"
-            RowDefinitions="Auto,Auto,*,0,Auto,Auto">
+            RowDefinitions="Auto,Auto,*,0,Auto">
             
             <!-- Header -->
             <components:PageHeaderView
@@ -205,6 +205,7 @@
 
             <!-- Fixed bottom bar -->
             <Grid
+                Margin="0,0,0,12"
                 Grid.Row="4"
                 IsVisible="{Binding HasCartItems}"
                 Padding="8,0"
@@ -246,15 +247,18 @@
                     Command="{Binding CheckoutCommand}"/>
             </Grid>
 
-            <BoxView
-                IsVisible="{Binding HasCartItems}"
-                HeightRequest="1"
-                BackgroundColor="LightGray"
-                HorizontalOptions="Fill"
-                Grid.Row="5"/>
         </Grid>
 
+        <BoxView
+            Grid.Row="1"
+            HeightRequest="1"
+            BackgroundColor="LightGray"
+            HorizontalOptions="Fill"
+            VerticalOptions="End"
+            InputTransparent="True" />
+
         <components:LoadingView
+                Grid.RowSpan="2"
                 x:Name="loading"
                 ShowLoading="{Binding IsLoading}"/>
     </Grid>

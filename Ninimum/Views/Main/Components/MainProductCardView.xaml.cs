@@ -204,6 +204,11 @@ public partial class MainProductCardView : ContentView
 
     public string RatingText => Rating.ToString("0.0");
 
+    // Match the five filled/gray stars used on the product detail page.
+    public IReadOnlyList<string> Stars => Enumerable.Range(0, 5)
+        .Select(index => index < Math.Round(Rating) ? "star.png" : "star_gray.png")
+        .ToArray();
+
     public string ReviewCountText => $"({ReviewCount})";
 
     private static void OnImagesSourceChanged(BindableObject bindable, object oldValue, object newValue)
@@ -235,6 +240,7 @@ public partial class MainProductCardView : ContentView
     {
         var view = (MainProductCardView)bindable;
         view.OnPropertyChanged(nameof(RatingText));
+        view.OnPropertyChanged(nameof(Stars));
     }
 
     private static void OnReviewCountChanged(BindableObject bindable, object oldValue, object newValue)

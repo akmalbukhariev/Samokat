@@ -22,7 +22,7 @@ public partial class ProductQuestionsViewModel : ObservableObject
 
     [ObservableProperty] private long productId;
     [ObservableProperty] private string title = string.Empty;
-    [ObservableProperty] private bool isLoading;
+    [ObservableProperty] private bool isLoading = true;
     [ObservableProperty] private bool isRefreshing;
     [ObservableProperty] private ObservableCollection<ProductQuestionItem> questions = new();
 

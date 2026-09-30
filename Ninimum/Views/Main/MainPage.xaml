@@ -11,7 +11,7 @@
     Shell.TabBarIsVisible="True"
     BackgroundColor="White">
 
-    <Grid RowDefinitions="Auto,*, Auto">
+    <Grid RowDefinitions="Auto,*,1">
 
         <!-- FIXED HEADER -->
         <components:MainHeaderView Grid.Row="0"/>
@@ -51,12 +51,16 @@
                     </VerticalStackLayout>
                 </CollectionView.Header>
 
+                <CollectionView.Footer>
+                    <Grid HeightRequest="8" BackgroundColor="Transparent" InputTransparent="True" />
+                </CollectionView.Footer>
+
                 <!-- PRODUCTS -->
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout
                         Orientation="Vertical"
-                        VerticalItemSpacing="10"
-                        HorizontalItemSpacing="10"
+                        VerticalItemSpacing="0"
+                        HorizontalItemSpacing="0"
                         Span="2" />
                 </CollectionView.ItemsLayout>
 
@@ -97,7 +101,7 @@
             x:Name="likeView" 
             ShowLiked="{Binding IsLikedViewLiked}"
             IsVisible="{Binding ShowLikedView}"
-            Grid.Row="2"/>
+            Grid.Row="0"/>
         
         <main_components:CustomCartView
             Grid.RowSpan="3"
@@ -115,6 +119,8 @@
             HeightRequest="1"
             BackgroundColor="LightGray"
             HorizontalOptions="Fill"
+            VerticalOptions="End"
+            InputTransparent="True"
             Grid.Row="2"/>
     </Grid>
 </page:BasePage>

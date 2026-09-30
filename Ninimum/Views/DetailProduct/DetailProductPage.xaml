@@ -265,10 +265,14 @@
 
                         <!-- Price block -->
                         <Border
+                            x:Name="SubscriptionPricePanel"
                             Stroke="#FD473C"
                             StrokeThickness="1"
                             BackgroundColor="Transparent"
                             Padding="0">
+                            <Border.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="SubscriptionPricePanel_Tapped" />
+                            </Border.GestureRecognizers>
                             <Border.StrokeShape>
                                 <RoundRectangle CornerRadius="8" />
                             </Border.StrokeShape>    
@@ -478,7 +482,8 @@
                                     <main_components:MainProductCardView
                                         WidthRequest="170"
                                         HeightRequest="365"
-                                        IsCartTextVisible="False" 
+                                        IsCartTextVisible="True"
+                                        IsCartLoading="{Binding IsCartLoading}"
                                         IsIndicatorVisible="False"
                                         ImagesSource="{Binding Images}"
                                         Price="{Binding Price}"
