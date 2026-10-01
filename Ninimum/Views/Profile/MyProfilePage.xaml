@@ -89,6 +89,15 @@
                         <Image Grid.Column="4" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
+                    <Grid ColumnDefinitions="32,10,*,Auto,24">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding FavoritesCommand}" />
+                        </Grid.GestureRecognizers>
+                        <Image Source="ic_favorite.png" WidthRequest="24" HeightRequest="24" />
+                        <Label Grid.Column="2" Text="{x:Static language:AppResource.Favorites}" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Image Grid.Column="4" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
+                    </Grid>
+
                     <Grid IsVisible="False" ColumnDefinitions="32,10,*,Auto,24">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding ReviewCommand}" />

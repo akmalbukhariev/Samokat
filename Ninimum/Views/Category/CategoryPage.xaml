@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+ xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+ xmlns:page="clr-namespace:Ninimum.Views"
+ xmlns:components="clr-namespace:Ninimum.Components"
+ xmlns:text="clr-namespace:Ninimum.Resources.Languages"
+ xmlns:models="clr-namespace:Ninimum.Models"
+ xmlns:dto="clr-namespace:Ninimum.Models.Dto"
+ xmlns:local="clr-namespace:Ninimum.Views.Category"
+ x:Class="Ninimum.Views.Category.CategoryPage"
+ Shell.NavBarIsVisible="False" Shell.TabBarIsVisible="True" BackgroundColor="White">
+ <Grid RowDefinitions="Auto,*,1">
+  <components:PageHeaderView Title="{x:Static text:CatalogText.Title}" ShowBack="False" />
+  <Grid Grid.Row="1" ColumnDefinitions="110,*" ColumnSpacing="0">
+   <CollectionView x:Name="CategoryList" ItemsSource="{Binding Categories}" SelectionMode="None"
+                   BackgroundColor="#F3F4F6" VerticalScrollBarVisibility="Never">
+    <CollectionView.ItemTemplate>
+     <DataTemplate x:DataType="models:CategoryItem">
+      <Grid Padding="10,20" MinimumHeightRequest="66" BackgroundColor="#F3F4F6">
+       <Grid.Triggers>
+        <DataTrigger TargetType="Grid" Binding="{Binding IsSelected}" Value="True">
+         <Setter Property="BackgroundColor" Value="White" />
+        </DataTrigger>
+       </Grid.Triggers>
+       <Grid.GestureRecognizers><TapGestureRecognizer Tapped="Category_Tapped" /></Grid.GestureRecognizers>
+       <Label Text="{Binding categoryName}" FontSize="14" FontFamily="{StaticResource FontSFMedium}"
+              TextColor="#22292F" VerticalOptions="Center" LineBreakMode="WordWrap">
+        <Label.Triggers>
+         <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
+          <Setter Property="TextColor" Value="#FD473C" />
+          <Setter Property="FontFamily" Value="{StaticResource FontSFBold}" />
+         </DataTrigger>
+        </Label.Triggers>
+       </Label>
+      </Grid>
+     </DataTemplate>
+    </CollectionView.ItemTemplate>
+   </CollectionView>
+   <RefreshView Grid.Column="1" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}">
+    <CollectionView x:Name="ProductList" ItemsSource="{Binding Products}" SelectionMode="None"
+      RemainingItemsThreshold="4" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
+     <CollectionView.ItemsLayout><GridItemsLayout Span="2" Orientation="Vertical" HorizontalItemSpacing="0" VerticalItemSpacing="12" /></CollectionView.ItemsLayout>
+     <CollectionView.Header>
+      <VerticalStackLayout Padding="12,16" Spacing="12">
+       <Label Text="{Binding SelectedCategory.categoryName}" FontSize="20" TextColor="#22292F" FontFamily="{StaticResource FontSFBold}" />
+       <FlexLayout Wrap="Wrap" BindableLayout.ItemsSource="{Binding Children}">
+        <BindableLayout.ItemTemplate>
+         <DataTemplate x:DataType="models:CategoryItem">
+          <VerticalStackLayout WidthRequest="94" Padding="4" Spacing="6">
+           <VerticalStackLayout.GestureRecognizers><TapGestureRecognizer Tapped="Category_Tapped" /></VerticalStackLayout.GestureRecognizers>
+           <Image Source="{Binding Image}" HeightRequest="70" Aspect="AspectFit" />
+           <Label Text="{Binding categoryName}" FontSize="13" TextColor="#22292F" HorizontalTextAlignment="Center" MaxLines="3" />
+          </VerticalStackLayout>
+         </DataTemplate>
+        </BindableLayout.ItemTemplate>
+       </FlexLayout>
+       <VerticalStackLayout IsVisible="{Binding HasError}" Spacing="8">
+        <Label Text="{x:Static text:CatalogText.LoadError}" TextColor="#666666" FontSize="14" />
+        <Button Text="{x:Static text:CatalogText.Retry}" Command="{Binding RetryCommand}" BackgroundColor="#FD473C" TextColor="White" />
+       </VerticalStackLayout>
+       <Label IsVisible="{Binding IsEmpty}" Text="{Binding EmptyText}" TextColor="#777777" FontSize="14" Margin="0,20" />
+      </VerticalStackLayout>
+     </CollectionView.Header>
+     <CollectionView.ItemTemplate>
+      <DataTemplate x:DataType="dto:ProductDto">
+       <VerticalStackLayout Padding="8,0,8,12" Spacing="6">
+        <VerticalStackLayout.GestureRecognizers><TapGestureRecognizer Tapped="Product_Tapped" /></VerticalStackLayout.GestureRecognizers>
+        <Image Source="{Binding CatalogImage}" HeightRequest="100" Aspect="AspectFit" />
+        <Label Text="{Binding name}" FontSize="14" MaxLines="2" LineBreakMode="TailTruncation" TextColor="#22292F" HorizontalTextAlignment="Center" />
+        <Label Text="{Binding CatalogPrice}" FontSize="13" TextColor="#FD473C" FontFamily="{StaticResource FontSFBold}" HorizontalTextAlignment="Center" />
+       </VerticalStackLayout>
+      </DataTemplate>
+     </CollectionView.ItemTemplate>
+     <CollectionView.Footer><Grid HeightRequest="12" /></CollectionView.Footer>
+    </CollectionView>
+   </RefreshView>
+   <ActivityIndicator Grid.Column="1" IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}"
+                      Color="#FD473C" HorizontalOptions="Center" VerticalOptions="Center" InputTransparent="True" />
+  </Grid>
+  <BoxView Grid.Row="2" HeightRequest="1" BackgroundColor="LightGray" InputTransparent="True" />
+ </Grid>
+</page:BasePage>

@@ -19,6 +19,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
 {
     #region Commands
     public ICommand OrderCommand { get; }
+    public ICommand FavoritesCommand { get; }
     public ICommand ReviewCommand { get; }
     public ICommand PaymentCardCommand { get; }
     public ICommand MessageCommand { get; }
@@ -169,6 +170,11 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         this.languageService = languageService;
 
         OrderCommand = new Command(OnOrderClicked);
+        FavoritesCommand = new Command(async () => await RunProfileActionAsync(async () =>
+        {
+            AppVibrationService.Like();
+            await AppNavigatorService.NavigateTo(nameof(Ninimum.Views.FavoriteProduct.FavoritePage));
+        }));
         ReviewCommand = new Command(OnReviewClicked);
         PaymentCardCommand = new Command(OnPaymentCardClicked);
         MessageCommand = new Command(OnMessageClicked);

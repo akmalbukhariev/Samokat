@@ -1445,4 +1445,9 @@ buyurtma qiling</value>
   <data name="TariffCancelledSuccessfully" xml:space="preserve">
     <value>Tarif muvaffaqiyatli bekor qilindi.</value>
   </data>
+  <data name="CatalogTitle" xml:space="preserve"><value>Kategoriyalar</value></data>
+  <data name="CatalogEmptyCategories" xml:space="preserve"><value>Hozircha kategoriyalar yo‘q</value></data>
+  <data name="CatalogEmptyProducts" xml:space="preserve"><value>Bu kategoriyada hozircha mahsulotlar yo‘q</value></data>
+  <data name="CatalogLoadError" xml:space="preserve"><value>Katalogni yuklab bo‘lmadi. Qayta urinib ko‘ring.</value></data>
+  <data name="CatalogRetry" xml:space="preserve"><value>Qayta urinish</value></data>
 </root>

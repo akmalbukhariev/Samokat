@@ -97,6 +97,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<OnboardingPage>();
 		builder.Services.AddTransient<LoginPage>();
 		builder.Services.AddTransient<MainPage>();
+		builder.Services.AddTransient<Ninimum.Views.Category.CategoryPage>();
+		builder.Services.AddTransient<CategoryPageViewModel>();
 		builder.Services.AddTransient<MenuPage>();
 		builder.Services.AddTransient<SearchPage>();
 		builder.Services.AddTransient<DetailProductPage>();

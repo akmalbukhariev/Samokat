@@ -11,24 +11,8 @@
     Shell.TabBarIsVisible="False"
     BackgroundColor="White">
 
-    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*"
-          Padding="0,10,0,0">
-
-        <components:PageHeaderView
-            Grid.Row="0"
-            Title="{x:Static language:AppResource.Tariffs}" />
-
-        <CarouselView
-            x:Name="TariffCarousel"
-            Grid.Row="1"
-            ItemsSource="{Binding Tariffs}"
-            PeekAreaInsets="42"
-            PositionChanged="OnTariffPositionChanged"
-            Margin="0,24,0,0"
-            HeightRequest="585">
-
-            <CarouselView.ItemTemplate>
-                <DataTemplate x:DataType="models:TariffPlan">
+    <page:BasePage.Resources>
+        <DataTemplate x:Key="TariffCardTemplate" x:DataType="models:TariffPlan">
 
                     <Grid Padding="8,0">
 
@@ -184,7 +168,35 @@
                         </Border>
                     </Grid>
                 </DataTemplate>
-            </CarouselView.ItemTemplate>
+    </page:BasePage.Resources>
+
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,*"
+          Padding="0,10,0,0">
+
+        <components:PageHeaderView
+            Grid.Row="0"
+            Title="{x:Static language:AppResource.Tariffs}" />
+
+        <ContentView
+            x:Name="SingleTariff"
+            Grid.Row="1"
+            IsVisible="False"
+            Margin="0,24,0,0"
+            HeightRequest="585" />
+
+        <CarouselView
+            x:Name="TariffCarousel"
+            Grid.Row="1"
+            IsVisible="False"
+            Loop="False"
+            ItemTemplate="{StaticResource TariffCardTemplate}"
+            ItemsSource="{Binding Tariffs}"
+            PeekAreaInsets="42"
+            PositionChanged="OnTariffPositionChanged"
+            Margin="0,24,0,0"
+            HeightRequest="585">
+
+
         </CarouselView>
 
         <HorizontalStackLayout

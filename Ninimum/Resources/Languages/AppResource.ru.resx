@@ -1444,4 +1444,9 @@
   <data name="TariffCancelledSuccessfully" xml:space="preserve">
     <value>Тариф успешно отменен.</value>
   </data>
+  <data name="CatalogTitle" xml:space="preserve"><value>Категории</value></data>
+  <data name="CatalogEmptyCategories" xml:space="preserve"><value>Категорий пока нет</value></data>
+  <data name="CatalogEmptyProducts" xml:space="preserve"><value>В этой категории пока нет товаров</value></data>
+  <data name="CatalogLoadError" xml:space="preserve"><value>Не удалось загрузить каталог. Попробуйте ещё раз.</value></data>
+  <data name="CatalogRetry" xml:space="preserve"><value>Повторить</value></data>
 </root>

@@ -565,6 +565,51 @@ namespace Ninimum.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No categories yet.
+        /// </summary>
+        internal static string CatalogEmptyCategories {
+            get {
+                return ResourceManager.GetString("CatalogEmptyCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No products in this category yet.
+        /// </summary>
+        internal static string CatalogEmptyProducts {
+            get {
+                return ResourceManager.GetString("CatalogEmptyProducts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not load the catalog. Please try again..
+        /// </summary>
+        internal static string CatalogLoadError {
+            get {
+                return ResourceManager.GetString("CatalogLoadError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Try again.
+        /// </summary>
+        internal static string CatalogRetry {
+            get {
+                return ResourceManager.GetString("CatalogRetry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Categories.
+        /// </summary>
+        internal static string CatalogTitle {
+            get {
+                return ResourceManager.GetString("CatalogTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change.
         /// </summary>
         internal static string Change {

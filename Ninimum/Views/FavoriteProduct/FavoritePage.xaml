@@ -10,7 +10,7 @@
     xmlns:local="clr-namespace:Ninimum.Views.FavoriteProduct"
     x:Class="Ninimum.Views.FavoriteProduct.FavoritePage"
     Shell.NavBarIsVisible="False"
-    Shell.TabBarIsVisible="True"
+    Shell.TabBarIsVisible="False"
     x:Name="ThisPage"
     BackgroundColor="White">
 
@@ -18,7 +18,7 @@
         <components:PageHeaderView
             Grid.Row="0"
             Title="{x:Static language:AppResource.FavoritesTitle}"
-            ShowBack="false"/>
+            ShowBack="true"/>
         
         <RefreshView 
             IsRefreshing="{Binding IsRefreshing}"

@@ -21,6 +21,8 @@ public partial class App : Application
 {
     public App()
     {
+        // Keep the storefront's light palette regardless of the device appearance.
+        UserAppTheme = AppTheme.Light;
         InitializeComponent();
         
         RegisterRoutes();
@@ -60,6 +62,7 @@ public partial class App : Application
         #region Main pages
         Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
         Routing.RegisterRoute(nameof(MenuPage), typeof(MenuPage));
+        Routing.RegisterRoute(nameof(Ninimum.Views.FavoriteProduct.FavoritePage), typeof(Ninimum.Views.FavoriteProduct.FavoritePage));
         Routing.RegisterRoute(nameof(SearchPage), typeof(SearchPage));
         Routing.RegisterRoute(nameof(DetailProductPage), typeof(DetailProductPage));
         Routing.RegisterRoute(nameof(ProductReviews), typeof(ProductReviews));

@@ -5,6 +5,11 @@ namespace Ninimum.Models.Dto
 {
     public class ProductDto
     {
+        [Newtonsoft.Json.JsonIgnore]
+        public string CatalogImage => images?.OrderBy(x => x.sort_order ?? 0)
+            .Select(x => x.image_url).FirstOrDefault(x => !string.IsNullOrWhiteSpace(x)) ?? "no_image.png";
+        [Newtonsoft.Json.JsonIgnore]
+        public string CatalogPrice => (price ?? 0).ToString("N0").Replace(",", " ") + " so’m";
         public long? id { get; set; }
         public long? category_id { get; set; }
 

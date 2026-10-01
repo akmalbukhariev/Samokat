@@ -7,7 +7,7 @@
     xmlns:local="clr-namespace:Ninimum"
     xmlns:view="clr-namespace:Ninimum.Views.Children"
     xmlns:main="clr-namespace:Ninimum.Views.Main"
-    xmlns:favorite="clr-namespace:Ninimum.Views.FavoriteProduct"
+    xmlns:category="clr-namespace:Ninimum.Views.Category"
     xmlns:cart="clr-namespace:Ninimum.Views.Cart"
     xmlns:profile="clr-namespace:Ninimum.Views.Profile"
     Shell.FlyoutBehavior="Disabled"
@@ -32,14 +32,14 @@
                               Shell.NavBarIsVisible="False" />
           </Tab>
 
-          <Tab Title="{x:Static language:AppResource.Favorites}" Appearing="Tab_Appearing">
+          <Tab Route="CategoryTab" Title="{x:Static language:CatalogText.Title}" Appearing="Tab_Appearing">
                <Tab.Icon>
                     <OnPlatform x:TypeArguments="FileImageSource">
-                         <On Platform="Android" Value="ic_favorite.png" />
-                         <On Platform="iOS" Value="ic_favorite.png" />
+                         <On Platform="Android" Value="ic_categories.png" />
+                         <On Platform="iOS" Value="ic_categories.png" />
                     </OnPlatform>
                </Tab.Icon>
-               <ShellContent ContentTemplate="{DataTemplate favorite:FavoritePage}"
+               <ShellContent Route="CategoryRoot" ContentTemplate="{DataTemplate category:CategoryPage}"
                               Shell.NavBarIsVisible="False" />
           </Tab>
 

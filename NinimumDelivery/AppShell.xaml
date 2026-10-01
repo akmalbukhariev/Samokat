@@ -4,6 +4,8 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
        xmlns:views="clr-namespace:NinimumDelivery.Views"
        xmlns:lang="clr-namespace:NinimumDelivery.Resources.Languages"
+       BackgroundColor="White"
+       Shell.BackgroundColor="White"
        FlyoutBehavior="Disabled"
        Shell.NavBarIsVisible="False"
        Shell.TabBarBackgroundColor="White"

@@ -12,6 +12,8 @@ public partial class App : Application
 
     public App(LanguageService languageService)
     {
+        // The delivery UI uses a fixed light palette, independent of the device theme.
+        UserAppTheme = AppTheme.Light;
         InitializeComponent();
         languageService.Init();
         Routing.RegisterRoute(nameof(DeliveryDetailPage), typeof(DeliveryDetailPage));

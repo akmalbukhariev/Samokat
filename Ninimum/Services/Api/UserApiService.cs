@@ -73,6 +73,20 @@ namespace Api.Services
 
         }
 
+        public async Task<Response<List<CategoryItem>>> GetCategories()
+        {
+            try
+            {
+                var json = await GetAsync("product/getProductCategoryList", false);
+                return JsonConvert.DeserializeObject<Response<List<CategoryItem>>>(json)
+                    ?? new Response<List<CategoryItem>>();
+            }
+            catch
+            {
+                return new Response<List<CategoryItem>>();
+            }
+        }
+
         public async Task<RegionListResponse> GetRegions()
         {
             var response = new RegionListResponse();

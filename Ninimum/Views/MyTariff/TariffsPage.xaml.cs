@@ -14,6 +14,11 @@ public partial class TariffsPage : BasePage
 {
     private readonly UserApiService apiService;
     private readonly AppControl appControl;
+    // Enable this when the other plans are ready to be offered in the app.
+    private const bool ShowOtherTariffs = false;
+    private static bool IsVisibleTariff(string? name) => ShowOtherTariffs ||
+        string.Equals(name?.Trim(), "Silver", StringComparison.OrdinalIgnoreCase);
+
     private bool isBuying;
     private long activeTariffId;
 
@@ -22,6 +27,7 @@ public partial class TariffsPage : BasePage
     public TariffsPage(UserApiService apiService, AppControl appControl)
     {
         InitializeComponent();
+        SingleTariff.Content = (View)((DataTemplate)Resources["TariffCardTemplate"]).CreateContent();
         this.apiService = apiService;
         this.appControl = appControl;
         BindingContext = this;
@@ -73,10 +79,13 @@ public partial class TariffsPage : BasePage
             for (int i = 0; i < response.resultData.Count; i++)
             {
                 var item = response.resultData[i];
+                if (!IsVisibleTariff(item.tariffName))
+                    continue;
+
                 bool isCurrent = activeTariffId > 0 && item.tariffId == activeTariffId;
 
                 if (isCurrent)
-                    activeIndex = i;
+                    activeIndex = Tariffs.Count;
 
                 Tariffs.Add(new TariffPlan
                 {
@@ -98,9 +107,17 @@ public partial class TariffsPage : BasePage
                 });
             }
 
+            // A single plan is a regular view, so no carousel scrolling or looping is possible.
+            SingleTariff.IsVisible = Tariffs.Count == 1;
+            SingleTariff.BindingContext = Tariffs.Count == 1 ? Tariffs[0] : null;
+            TariffCarousel.IsVisible = Tariffs.Count > 1;
+            TariffCarousel.IsSwipeEnabled = Tariffs.Count > 1;
+            if (Tariffs.Count == 0)
+                await DisplayAlert(AppResource.Error, AppResource.CouldNotLoadTariffs, AppResource.Close);
+
             int position = activeIndex >= 0 ? activeIndex : (Tariffs.Count > 0 ? 0 : -1);
 
-            if (position >= 0)
+            if (Tariffs.Count > 1 && position >= 0)
                 TariffCarousel.Position = position;
 
             UpdateCustomIndicator(position);
@@ -221,6 +238,7 @@ public partial class TariffsPage : BasePage
     private void UpdateCustomIndicator(int position)
     {
         CustomIndicatorLayout.Children.Clear();
+        CustomIndicatorLayout.IsVisible = Tariffs.Count > 1;
 
         for (int i = 0; i < Tariffs.Count; i++)
         {
