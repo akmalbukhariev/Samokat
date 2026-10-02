@@ -306,6 +306,14 @@ public partial class PaymentPage : BasePage, IQueryAttributable
         // refresh the next time the user opens them.
         PageDataRefreshState.MarkDirty(PageDataRefreshState.Orders);
         PageDataRefreshState.MarkDirty(PageDataRefreshState.Cart);
+
+        if (paymentType == "ORDER" && paymentStatus.Equals("PAID", StringComparison.OrdinalIgnoreCase))
+        {
+            // A successful order changes product stock. Refresh product surfaces
+            // so sold-out products disappear and remaining quantities are current.
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Main);
+            PageDataRefreshState.MarkDirty(PageDataRefreshState.Favorites);
+        }
         FormalizationNavigationStore.Clear();
 
         await MainThread.InvokeOnMainThreadAsync(async () =>
