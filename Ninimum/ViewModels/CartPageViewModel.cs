@@ -169,6 +169,7 @@ public partial class CartPageViewModel : ObservableObject
 
         await LoadActiveSubscriptionAsync();
         await LoadCartProductsAsync(isRefresh: true);
+        AppService.GetRequired<CartBadgeService>().RequestRefresh();
     }
 
     [RelayCommand]
@@ -203,6 +204,7 @@ public partial class CartPageViewModel : ObservableObject
 
                 if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
                 {
+                    PageDataRefreshState.MarkDirty(PageDataRefreshState.Cart);
                     CartProducts.Remove(item);
                     loadedCartIds.Remove(item.CartId);
                     offset = Math.Max(0, offset - 1);

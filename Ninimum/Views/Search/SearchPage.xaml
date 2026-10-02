@@ -20,9 +20,10 @@
             RowDefinitions="Auto,Auto,*"
             RowSpacing="24">
 
-            <components:PageHeaderView Title="{x:Static language:AppResource.SearchTitle}"/>
+            <components:PageHeaderView x:Name="SearchHeader" Title="{x:Static language:AppResource.SearchTitle}"/>
     
             <components:InputView
+                x:Name="SearchInput"
                 Grid.Row="1"
                 Title="{x:Static language:AppResource.SearchForAProduct}"
                 LeftIcon="ic_serach.png"

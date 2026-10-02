@@ -11,6 +11,8 @@ public static class PageDataRefreshState
 {
     private static readonly ConcurrentDictionary<string, byte> DirtyKeys = new();
 
+    public static event Action<string>? MarkedDirty;
+
     public const string Main = "Main";
     public const string Favorites = "Favorites";
     public const string Cart = "Cart";
@@ -23,7 +25,10 @@ public static class PageDataRefreshState
     public static void MarkDirty(string key)
     {
         if (!string.IsNullOrWhiteSpace(key))
+        {
             DirtyKeys[key] = 1;
+            MarkedDirty?.Invoke(key);
+        }
     }
 
     public static bool ConsumeDirty(string key)

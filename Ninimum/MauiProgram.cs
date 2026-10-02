@@ -56,6 +56,11 @@ public static class MauiProgram
 #if DEBUG
 		builder.Logging.AddDebug();
 #endif
+#if ANDROID
+        builder.ConfigureMauiHandlers(handlers => handlers.AddHandler<AppShell, Ninimum.Platforms.Android.StoreShellRenderer>());
+#elif IOS
+        builder.ConfigureMauiHandlers(handlers => handlers.AddHandler<AppShell, Ninimum.Platforms.iOS.StoreShellRenderer>());
+#endif
 		RegisterSingleton(builder);
 		RegisterTransient(builder);
 
@@ -67,6 +72,7 @@ public static class MauiProgram
 
 	private static void RegisterSingleton(MauiAppBuilder builder)
 	{
+		builder.Services.AddSingleton<CartBadgeService>();
 		builder.Services.AddSingleton<AppStoreService>();
 		builder.Services.AddSingleton<AppControl>();
 		builder.Services.AddSingleton<LanguageService>();
@@ -101,6 +107,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<CategoryPageViewModel>();
 		builder.Services.AddTransient<MenuPage>();
 		builder.Services.AddTransient<SearchPage>();
+		builder.Services.AddTransient<SearchTabPage>();
 		builder.Services.AddTransient<DetailProductPage>();
 		builder.Services.AddTransient<ProductReviews>();
 		builder.Services.AddTransient<LeaveCommentPage>();

@@ -631,6 +631,7 @@ public partial class ImagePreviewView : ContentView
             }
 
             case GestureStatus.Running:
+            {
                 if (!_isPinching)
                     return;
 
@@ -641,6 +642,7 @@ public partial class ImagePreviewView : ContentView
                 double focusY = e.ScaleOrigin.Y * GetViewportHeight();
                 UpdatePinch(incrementalScale, focusX, focusY);
                 break;
+            }
 
             case GestureStatus.Completed:
             case GestureStatus.Canceled:

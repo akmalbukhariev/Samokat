@@ -323,6 +323,15 @@ public partial class InputView : ContentView
             PART_Entry.Focus();
     }
 
+    public async Task FocusEntryAndShowKeyboardAsync(CancellationToken cancellationToken)
+    {
+        if (IsReadOnly || cancellationToken.IsCancellationRequested)
+            return;
+
+        PART_Entry.Focus();
+        await Microsoft.Maui.SoftInputExtensions.ShowSoftInputAsync(PART_Entry, cancellationToken);
+    }
+
     private static void OnTextChanged(BindableObject bindable, object oldValue, object newValue)
     {
         var view = (InputView)bindable;

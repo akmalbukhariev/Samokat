@@ -8,6 +8,7 @@
     xmlns:view="clr-namespace:Ninimum.Views.Children"
     xmlns:main="clr-namespace:Ninimum.Views.Main"
     xmlns:category="clr-namespace:Ninimum.Views.Category"
+    xmlns:search="clr-namespace:Ninimum.Views.Search"
     xmlns:cart="clr-namespace:Ninimum.Views.Cart"
     xmlns:profile="clr-namespace:Ninimum.Views.Profile"
     Shell.FlyoutBehavior="Disabled"
@@ -43,7 +44,12 @@
                               Shell.NavBarIsVisible="False" />
           </Tab>
 
-          <Tab Title="{x:Static language:AppResource.Cart}" Appearing="Tab_Appearing">
+          <Tab Route="SearchTab" Title="{x:Static language:AppResource.SearchTitle}" Icon="ic_serach.png" Appearing="Tab_Appearing">
+               <ShellContent Route="SearchRoot" ContentTemplate="{DataTemplate search:SearchTabPage}"
+                             Shell.NavBarIsVisible="False" />
+          </Tab>
+
+          <Tab Route="CartTab" Title="{x:Static language:AppResource.Cart}" Appearing="Tab_Appearing">
                <Tab.Icon>
                     <OnPlatform x:TypeArguments="FileImageSource">
                          <On Platform="Android" Value="ic_basket.png" />
