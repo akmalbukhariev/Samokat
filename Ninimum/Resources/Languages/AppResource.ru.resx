@@ -1449,4 +1449,7 @@
   <data name="CatalogEmptyProducts" xml:space="preserve"><value>В этой категории пока нет товаров</value></data>
   <data name="CatalogLoadError" xml:space="preserve"><value>Не удалось загрузить каталог. Попробуйте ещё раз.</value></data>
   <data name="CatalogRetry" xml:space="preserve"><value>Повторить</value></data>
+  <data name="CheckoutOutOfStock" xml:space="preserve"><value>Извините, этот товар закончился.</value></data>
+  <data name="CheckoutInsufficientStock" xml:space="preserve"><value>На складе осталось только {0} шт. Уменьшите количество.</value></data>
+  <data name="CheckoutStockCheckFailed" xml:space="preserve"><value>Не удалось проверить наличие товара. Пожалуйста, попробуйте ещё раз.</value></data>
 </root>

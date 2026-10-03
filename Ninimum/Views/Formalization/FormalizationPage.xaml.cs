@@ -149,7 +149,11 @@ public partial class FormalizationPage : BasePage
     private void OnToggleProductsTapped(object sender, TappedEventArgs e)
     {
         productsExpanded = !productsExpanded;
+        UpdateProductsToggleUI();
+    }
 
+    private void UpdateProductsToggleUI()
+    {
         ProductDetailsCollectionView.IsVisible = productsExpanded;
         ProductDetailsCollectionView.HeightRequest = productsExpanded
             ? Products.Count * 85
@@ -174,6 +178,9 @@ public partial class FormalizationPage : BasePage
         });
     }
 
+    private static string CheckoutStockMessage(string key) =>
+        AppResource.ResourceManager.GetString(key, AppResource.Culture) ?? key;
+
     private async void OnCreateOrderClicked(object sender, EventArgs e)
     {
         await ClickGuard.RunAsync((VisualElement)sender, async () =>
@@ -192,6 +199,60 @@ public partial class FormalizationPage : BasePage
                         AppResource.Ok);
 
                     return;
+                }
+
+                // Always use fresh server stock before creating an order or opening Payme.
+                // Group identical products so combined quantities cannot exceed stock.
+                IsLoading = true;
+                foreach (var group in data.Products.GroupBy(x => x.ProductId))
+                {
+                    var detail = await apiService.GetProductDetail(new ProductDetailRequest
+                    {
+                        user_id = appControl.CurrentUserId,
+                        product_id = checked((int)group.Key)
+                    });
+
+                    if (detail.resultCode != ApiResult.SUCCESS.GetCodeToString())
+                    {
+                        await Shell.Current.DisplayAlert(
+                            AppResource.Error,
+                            CheckoutStockMessage("CheckoutStockCheckFailed"),
+                            AppResource.Ok);
+                        return;
+                    }
+
+                    var product = detail.resultData;
+                    if (product == null || product.stock_quantity == 0)
+                    {
+                        PageDataRefreshState.MarkDirty(PageDataRefreshState.Cart);
+                        PageDataRefreshState.MarkDirty(PageDataRefreshState.Main);
+                        PageDataRefreshState.MarkDirty(PageDataRefreshState.DetailProduct(group.Key));
+                        await Shell.Current.DisplayAlert(
+                            AppResource.Error,
+                            $"{group.First().Name}: {CheckoutStockMessage("CheckoutOutOfStock")}",
+                            AppResource.Ok);
+                        return;
+                    }
+
+                    if (!product.stock_quantity.HasValue || product.stock_quantity.Value < 0)
+                    {
+                        await Shell.Current.DisplayAlert(
+                            AppResource.Error,
+                            CheckoutStockMessage("CheckoutStockCheckFailed"),
+                            AppResource.Ok);
+                        return;
+                    }
+
+                    if (group.Any(x => x.Quantity <= 0) ||
+                        group.Sum(x => (long)x.Quantity) > product.stock_quantity.Value)
+                    {
+                        PageDataRefreshState.MarkDirty(PageDataRefreshState.DetailProduct(group.Key));
+                        await Shell.Current.DisplayAlert(
+                            AppResource.Error,
+                            $"{group.First().Name}: {string.Format(CheckoutStockMessage("CheckoutInsufficientStock"), product.stock_quantity.Value)}",
+                            AppResource.Ok);
+                        return;
+                    }
                 }
 
                 int totalPrice = (int)data.Products.Sum(x => x.Price * x.Quantity);
@@ -248,7 +309,11 @@ public partial class FormalizationPage : BasePage
                 {
                     await Shell.Current.DisplayAlert(
                         AppResource.Error,
-                        createOrderResponse.resultMsg ?? AppResource.OrderCouldNotBeCreated,
+                        createOrderResponse.resultCode == "STOCK_UNAVAILABLE"
+                            ? (createOrderResponse.availableQuantity > 0
+                                ? string.Format(CheckoutStockMessage("CheckoutInsufficientStock"), createOrderResponse.availableQuantity)
+                                : CheckoutStockMessage("CheckoutOutOfStock"))
+                            : createOrderResponse.resultMsg ?? AppResource.OrderCouldNotBeCreated,
                         AppResource.Ok);
 
                     return;
@@ -367,6 +432,8 @@ public partial class FormalizationPage : BasePage
 
     private void UpdateSummaryUI()
     {
+        UpdateProductsToggleUI();
+
         int productsPrice = GetProductsPrice();
         int total = productsPrice + DeliveryPrice;
 

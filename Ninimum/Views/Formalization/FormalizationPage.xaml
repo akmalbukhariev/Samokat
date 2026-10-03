@@ -133,7 +133,6 @@
 
                             <Label
                                 x:Name="ProductsToggleLabel"
-                                Text="{x:Static language:AppResource.View2Products}"
                                 FontSize="17"
                                 TextColor="#22292F"
                                 FontFamily="{StaticResource FontSFMedium}" />

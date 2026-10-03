@@ -673,6 +673,33 @@ namespace Ninimum.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only {0} units remain in stock. Please reduce the quantity..
+        /// </summary>
+        internal static string CheckoutInsufficientStock {
+            get {
+                return ResourceManager.GetString("CheckoutInsufficientStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sorry, this product is out of stock..
+        /// </summary>
+        internal static string CheckoutOutOfStock {
+            get {
+                return ResourceManager.GetString("CheckoutOutOfStock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not check product availability. Please try again..
+        /// </summary>
+        internal static string CheckoutStockCheckFailed {
+            get {
+                return ResourceManager.GetString("CheckoutStockCheckFailed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Children.
         /// </summary>
         internal static string Children {
