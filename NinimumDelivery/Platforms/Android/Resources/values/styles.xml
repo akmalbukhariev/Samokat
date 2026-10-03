@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <style name="Delivery.MainTheme" parent="Maui.MainTheme.NoActionBar">
+    <item name="bottomNavigationViewStyle">@style/Delivery.BottomNavigation</item>
+    <item name="bottomNavigationStyle">@style/Delivery.BottomNavigation</item>
+  </style>
+  <style name="Delivery.BottomNavigation" parent="Widget.MaterialComponents.BottomNavigationView">
+    <item name="itemTextAppearanceActive">@style/TextAppearance.MaterialComponents.Caption</item>
+    <item name="itemTextAppearanceInactive">@style/TextAppearance.MaterialComponents.Caption</item>
+  </style>
+</resources>

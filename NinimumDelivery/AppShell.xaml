@@ -13,13 +13,13 @@
        Shell.TabBarTitleColor="#FF4545"
        Shell.TabBarUnselectedColor="#8D8D8D">
     <TabBar>
-        <Tab Title="{x:Static lang:AppResource.Deliveries}">
+        <Tab Title="{x:Static lang:AppResource.Deliveries}" Icon="delivery_tab.png">
             <ShellContent ContentTemplate="{DataTemplate views:DeliveriesPage}" />
         </Tab>
-        <Tab Title="{x:Static lang:AppResource.History}">
+        <Tab Title="{x:Static lang:AppResource.History}" Icon="history_tab.png">
             <ShellContent ContentTemplate="{DataTemplate views:HistoryPage}" />
         </Tab>
-        <Tab Title="{x:Static lang:AppResource.Profile}">
+        <Tab Title="{x:Static lang:AppResource.Profile}" Icon="profile_tab.png">
             <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" />
         </Tab>
     </TabBar>

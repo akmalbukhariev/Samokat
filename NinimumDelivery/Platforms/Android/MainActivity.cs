@@ -19,6 +19,7 @@ public class MainActivity : MauiAppCompatActivity
 {
     protected override void OnCreate(Bundle? savedInstanceState)
     {
+        SetTheme(Resource.Style.Delivery_MainTheme);
         base.OnCreate(savedInstanceState);
     }
 }

@@ -62,6 +62,18 @@ public class DeliveryApiService
         return Parse<ApiResponse>(await Execute(req));
     }
 
+    public async Task<ApiResponse?> ClaimBatch(IEnumerable<long> jobIds)
+    {
+        var req = new RestRequest("delivery-app/claim-batch", Method.Put).AddJsonBody(new { jobIds = jobIds.ToArray() });
+        return Parse<ApiResponse>(await Execute(req));
+    }
+
+    public async Task<ApiResponse?> StartBatch(IEnumerable<long> jobIds)
+    {
+        var req = new RestRequest("delivery-app/start-batch", Method.Put).AddJsonBody(new { jobIds = jobIds.ToArray() });
+        return Parse<ApiResponse>(await Execute(req));
+    }
+
     public async Task<ApiResponse?> UpdateStatus(long jobId, string status, string? note = null)
     {
         var req = new RestRequest("delivery-app/status", Method.Put).AddJsonBody(new { jobId, status, note });

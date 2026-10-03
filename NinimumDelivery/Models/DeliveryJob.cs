@@ -6,6 +6,9 @@ namespace NinimumDelivery.Models;
 
 public partial class DeliveryJob : ObservableObject
 {
+    [ObservableProperty] private bool isSelected;
+    [ObservableProperty] private int routeOrder;
+    [ObservableProperty] private double? distanceFromPreviousKm;
     public long jobId { get; set; }
     public long orderId { get; set; }
     public string orderNumber { get; set; } = string.Empty;
@@ -44,4 +47,15 @@ public partial class DeliveryJob : ObservableObject
     public bool IsAccepted => jobStatus == "ACCEPTED";
     public bool IsOnTheWay => jobStatus == "ON_THE_WAY";
     public bool IsActive => IsAccepted || IsOnTheWay;
+    public bool HasRouteOrder => RouteOrder > 0;
+    public string RouteOrderText => RouteOrder > 0 ? RouteOrder.ToString() : string.Empty;
+    public string RouteDistanceText => DistanceFromPreviousKm.HasValue ? $"{DistanceFromPreviousKm.Value:0.0} km" : string.Empty;
+
+    partial void OnRouteOrderChanged(int value)
+    {
+        OnPropertyChanged(nameof(HasRouteOrder));
+        OnPropertyChanged(nameof(RouteOrderText));
+    }
+
+    partial void OnDistanceFromPreviousKmChanged(double? value) => OnPropertyChanged(nameof(RouteDistanceText));
 }

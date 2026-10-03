@@ -16,12 +16,11 @@ public static class MauiProgram
 #if DEBUG
         builder.Logging.AddDebug();
 #endif
-        builder.ConfigureMauiHandlers(handlers =>
-        {
-    #if ANDROID
-            //handlers.AddHandler<Shell, NinimumDelivery.Platforms.Android.CustomShellRenderer>();
-    #endif
-        });
+#if ANDROID
+        builder.ConfigureMauiHandlers(handlers => handlers.AddHandler<AppShell, NinimumDelivery.Platforms.Android.DeliveryShellRenderer>());
+#elif IOS
+        builder.ConfigureMauiHandlers(handlers => handlers.AddHandler<AppShell, NinimumDelivery.Platforms.iOS.DeliveryShellRenderer>());
+#endif
         builder.Services.AddSingleton<AppStoreService>();
         builder.Services.AddSingleton<LanguageService>();
         builder.Services.AddSingleton<DeliveryApiService>();
