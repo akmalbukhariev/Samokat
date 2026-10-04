@@ -34,7 +34,12 @@ public partial class App : Application
         var window = new Window(rootPage);
 
         window.Stopped += (_, _) => AppStopped?.Invoke(this, EventArgs.Empty);
-        window.Resumed += (_, _) => AppResumed?.Invoke(this, EventArgs.Empty);
+        window.Resumed += async (_, _) =>
+        {
+            AppResumed?.Invoke(this, EventArgs.Empty);
+            try { if (appState.IsLoggedIn()) await appState.RefreshWorkerAsync(); }
+            catch (Exception ex) { System.Diagnostics.Debug.WriteLine(ex); }
+        };
 
         return window;
     }

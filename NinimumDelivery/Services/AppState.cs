@@ -13,6 +13,13 @@ public class AppState
     {
         this.api = api;
         this.store = store;
+        api.SessionReplaced += () => MainThread.BeginInvokeOnMainThread(async () =>
+        {
+            Logout();
+            var message = NinimumDelivery.Resources.Languages.AppResource.ResourceManager.GetString(
+                "SessionReplaced", NinimumDelivery.Resources.Languages.AppResource.Culture);
+            await AlertService.Show(NinimumDelivery.Resources.Languages.AppResource.Error, message ?? "Please sign in again.");
+        });
     }
 
     public bool IsLoggedIn()

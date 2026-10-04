@@ -225,4 +225,5 @@
   <data name="No" xml:space="preserve">
     <value>Нет</value>
   </data>
+  <data name="SessionReplaced" xml:space="preserve"><value>В этот аккаунт вошли на другом устройстве. Пожалуйста, войдите снова.</value></data>
 </root>

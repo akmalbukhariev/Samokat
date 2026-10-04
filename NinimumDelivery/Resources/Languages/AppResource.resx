@@ -225,4 +225,5 @@
   <data name="No" xml:space="preserve">
     <value>No</value>
   </data>
+  <data name="SessionReplaced" xml:space="preserve"><value>This account was signed in on another device. Please sign in again.</value></data>
 </root>

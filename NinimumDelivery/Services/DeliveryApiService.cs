@@ -9,6 +9,7 @@ public class DeliveryApiService
     private readonly RestClient client;
     private readonly AppStoreService store;
     private string token = string.Empty;
+    public event Action? SessionReplaced;
 
     public DeliveryApiService(RestClient client, AppStoreService store)
     {
@@ -22,7 +23,27 @@ public class DeliveryApiService
         if (useToken && !string.IsNullOrWhiteSpace(token))
             request.AddHeader("Authorization", $"Bearer {token}");
 
-        return await client.ExecuteAsync(request, cancellationToken);
+        var requestToken = token;
+        var response = await client.ExecuteAsync(request, cancellationToken);
+        // Ignore late responses from a session that has already been replaced locally.
+        if (useToken && !string.IsNullOrWhiteSpace(requestToken) && requestToken == token &&
+            response.StatusCode == System.Net.HttpStatusCode.Unauthorized &&
+            IsSessionReplaced(response.Content))
+        {
+            Logout();
+            SessionReplaced?.Invoke();
+        }
+        return response;
+    }
+
+    private static bool IsSessionReplaced(string? content)
+    {
+        if (string.IsNullOrWhiteSpace(content)) return false;
+        try
+        {
+            return Newtonsoft.Json.Linq.JObject.Parse(content)["resultCode"]?.ToString() == "SESSION_REPLACED";
+        }
+        catch (JsonException) { return false; }
     }
 
     private static T? Parse<T>(RestResponse response) where T : class =>

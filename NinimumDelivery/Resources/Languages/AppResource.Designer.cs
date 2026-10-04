@@ -610,6 +610,15 @@ namespace NinimumDelivery.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This account was signed in on another device. Please sign in again..
+        /// </summary>
+        internal static string SessionReplaced {
+            get {
+                return ResourceManager.GetString("SessionReplaced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start delivery.
         /// </summary>
         internal static string StartDelivery {

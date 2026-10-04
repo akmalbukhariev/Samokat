@@ -225,4 +225,5 @@
   <data name="No" xml:space="preserve">
     <value>Yo‘q</value>
   </data>
+  <data name="SessionReplaced" xml:space="preserve"><value>Bu hisobga boshqa qurilmadan kirildi. Iltimos, qayta kiring.</value></data>
 </root>

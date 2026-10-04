@@ -41,21 +41,22 @@ public partial class DeliveriesViewModel : ObservableObject
     {
         var version = Interlocked.Increment(ref loadVersion);
         var currentCancellation = new CancellationTokenSource(TimeSpan.FromSeconds(20));
+        // Capture before publishing; only this reload owns disposal of this source.
+        var cancellationToken = currentCancellation.Token;
         var previousCancellation = Interlocked.Exchange(ref loadCancellation, currentCancellation);
 
         if (previousCancellation != null)
         {
             try { previousCancellation.Cancel(); }
             catch (ObjectDisposedException) { }
-            previousCancellation.Dispose();
         }
 
         IsLoading = true;
         try
         {
-            var cancellationToken = currentCancellation.Token;
             await state.RefreshWorkerAsync(cancellationToken);
             cancellationToken.ThrowIfCancellationRequested();
+            if (!state.IsLoggedIn() || version != Volatile.Read(ref loadVersion)) return;
 
             OnPropertyChanged(nameof(WorkerName));
             OnPropertyChanged(nameof(WorkerGreeting));
@@ -98,12 +99,10 @@ public partial class DeliveriesViewModel : ObservableObject
         catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Deliveries] Load failed: {ex}"); }
         finally
         {
+            Interlocked.CompareExchange(ref loadCancellation, null, currentCancellation);
+            currentCancellation.Dispose();
             if (version == Volatile.Read(ref loadVersion))
-            {
-                Interlocked.CompareExchange(ref loadCancellation, null, currentCancellation);
-                currentCancellation.Dispose();
                 IsLoading = false;
-            }
         }
     }
 
@@ -134,7 +133,6 @@ public partial class DeliveriesViewModel : ObservableObject
         {
             try { cancellation.Cancel(); }
             catch (ObjectDisposedException) { }
-            cancellation.Dispose();
         }
         IsLoading = false;
     }
