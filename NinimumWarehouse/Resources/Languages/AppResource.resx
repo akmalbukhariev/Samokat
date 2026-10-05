@@ -1,0 +1,327 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name="AppName" xml:space="preserve">
+    <value>NinimumStock</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="LoginSubtitle" xml:space="preserve">
+    <value>Prepare warehouse orders in one place</value>
+  </data>
+  <data name="LoginHint" xml:space="preserve">
+    <value>Use the login and password provided by your administrator.</value>
+  </data>
+  <data name="WorkerId" xml:space="preserve">
+    <value>Worker login</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Sign in</value>
+  </data>
+  <data name="LoginRequired" xml:space="preserve">
+    <value>Enter your login and password.</value>
+  </data>
+  <data name="Queue" xml:space="preserve">
+    <value>Queue</value>
+  </data>
+  <data name="MyOrders" xml:space="preserve">
+    <value>My orders</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profile</value>
+  </data>
+  <data name="QueueSubtitle" xml:space="preserve">
+    <value>Choose an order to start preparing.</value>
+  </data>
+  <data name="MyOrdersSubtitle" xml:space="preserve">
+    <value>Your orders in preparation are here.</value>
+  </data>
+  <data name="HistorySubtitle" xml:space="preserve">
+    <value>Your checked and packed orders.</value>
+  </data>
+  <data name="EmptyQueueTitle" xml:space="preserve">
+    <value>No orders yet</value>
+  </data>
+  <data name="EmptyQueueMessage" xml:space="preserve">
+    <value>New paid orders will appear here.</value>
+  </data>
+  <data name="EmptyMineTitle" xml:space="preserve">
+    <value>No orders in progress</value>
+  </data>
+  <data name="EmptyMineMessage" xml:space="preserve">
+    <value>Choose an order from the queue to get started.</value>
+  </data>
+  <data name="EmptyHistoryTitle" xml:space="preserve">
+    <value>History is empty</value>
+  </data>
+  <data name="EmptyHistoryMessage" xml:space="preserve">
+    <value>Orders you mark ready will appear here.</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Order</value>
+  </data>
+  <data name="OpenOrder" xml:space="preserve">
+    <value>Open order</value>
+  </data>
+  <data name="QuantityFormat" xml:space="preserve">
+    <value>{0} product units</value>
+  </data>
+  <data name="TotalFormat" xml:space="preserve">
+    <value>Total: {0}</value>
+  </data>
+  <data name="PageFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Previous page</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Next page</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Loading…</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>Please wait…</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Message</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>OK</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Try again</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>Waiting</value>
+  </data>
+  <data name="Picking" xml:space="preserve">
+    <value>Preparing</value>
+  </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>Problem reported</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Ready</value>
+  </data>
+  <data name="UnknownStatus" xml:space="preserve">
+    <value>Status updated</value>
+  </data>
+  <data name="ItemsTitle" xml:space="preserve">
+    <value>Check products</value>
+  </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1} units checked</value>
+  </data>
+  <data name="ProductProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
+  <data name="Checked" xml:space="preserve">
+    <value>Checked</value>
+  </data>
+  <data name="ToCheck" xml:space="preserve">
+    <value>To check</value>
+  </data>
+  <data name="Barcode" xml:space="preserve">
+    <value>Barcode</value>
+  </data>
+  <data name="NoBarcode" xml:space="preserve">
+    <value>No barcode</value>
+  </data>
+  <data name="CheckedQuantity" xml:space="preserve">
+    <value>Total checked quantity</value>
+  </data>
+  <data name="QuantityHelp" xml:space="preserve">
+    <value>Count the products you have and enter the total.</value>
+  </data>
+  <data name="ScanToCheck" xml:space="preserve">
+    <value>Scan and check</value>
+  </data>
+  <data name="EnterCodeInstead" xml:space="preserve">
+    <value>Enter barcode manually</value>
+  </data>
+  <data name="BarcodePlaceholder" xml:space="preserve">
+    <value>Barcode on the package</value>
+  </data>
+  <data name="ConfirmCode" xml:space="preserve">
+    <value>Check barcode</value>
+  </data>
+  <data name="ManualCheckHint" xml:space="preserve">
+    <value>No barcode is available. Check the product and record a reason.</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>Reason</value>
+  </data>
+  <data name="ReasonPlaceholder" xml:space="preserve">
+    <value>For example, the package has no barcode</value>
+  </data>
+  <data name="ConfirmManually" xml:space="preserve">
+    <value>Confirm manually</value>
+  </data>
+  <data name="StartPreparing" xml:space="preserve">
+    <value>Start preparing</value>
+  </data>
+  <data name="OtherWorker" xml:space="preserve">
+    <value>Another worker is preparing this order.</value>
+  </data>
+  <data name="OrderUnavailable" xml:space="preserve">
+    <value>This order is no longer awaiting preparation. Its payment or delivery status has changed.</value>
+  </data>
+  <data name="PackingHint" xml:space="preserve">
+    <value>Check every product, then pack the order.</value>
+  </data>
+  <data name="PackedReady" xml:space="preserve">
+    <value>Packed — ready</value>
+  </data>
+  <data name="ReadyQuestion" xml:space="preserve">
+    <value>Is the order ready?</value>
+  </data>
+  <data name="ReadyConfirmation" xml:space="preserve">
+    <value>Confirm all items are checked and packed.</value>
+  </data>
+  <data name="YesReady" xml:space="preserve">
+    <value>Yes, ready</value>
+  </data>
+  <data name="ReadyMessage" xml:space="preserve">
+    <value>The order is ready for a courier.</value>
+  </data>
+  <data name="ReportProblem" xml:space="preserve">
+    <value>Report a problem</value>
+  </data>
+  <data name="Problem" xml:space="preserve">
+    <value>Problem</value>
+  </data>
+  <data name="ProblemPrompt" xml:space="preserve">
+    <value>Describe the problem</value>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>Problem resolved — continue</value>
+  </data>
+  <data name="ProblemHint" xml:space="preserve">
+    <value>Resolve the problem before marking the order ready.</value>
+  </data>
+  <data name="ScanTitle" xml:space="preserve">
+    <value>Scan barcode</value>
+  </data>
+  <data name="ScanHint" xml:space="preserve">
+    <value>Point the camera at the barcode on the package.</value>
+  </data>
+  <data name="Torch" xml:space="preserve">
+    <value>Turn on torch</value>
+  </data>
+  <data name="TorchOff" xml:space="preserve">
+    <value>Turn off torch</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Sign out</value>
+  </data>
+  <data name="SignOutQuestion" xml:space="preserve">
+    <value>Sign out of your account?</value>
+  </data>
+  <data name="SignOutMessage" xml:space="preserve">
+    <value>You will need your login and password to sign in again.</value>
+  </data>
+  <data name="Worker" xml:space="preserve">
+    <value>Warehouse worker</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>App language</value>
+  </data>
+  <data name="LanguageUz" xml:space="preserve">
+    <value>O‘zbekcha</value>
+  </data>
+  <data name="LanguageRu" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="LanguageEn" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="ProfileHint" xml:space="preserve">
+    <value>All order actions are recorded under your account.</value>
+  </data>
+  <data name="SingleSessionHint" xml:space="preserve">
+    <value>Your account can be used on one device at a time.</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Incorrect login or password.</value>
+  </data>
+  <data name="SignInAgain" xml:space="preserve">
+    <value>Sign in again</value>
+  </data>
+  <data name="SessionEnded" xml:space="preserve">
+    <value>Your account was opened on another device or the session expired. Sign in again.</value>
+  </data>
+  <data name="PreparationDisabled" xml:space="preserve">
+    <value>The warehouse app is not enabled yet. Contact your administrator.</value>
+  </data>
+  <data name="AlreadyClaimed" xml:space="preserve">
+    <value>Another worker is preparing this order. Refresh the list.</value>
+  </data>
+  <data name="UnavailableError" xml:space="preserve">
+    <value>This order was cancelled, refunded, or handed to a courier.</value>
+  </data>
+  <data name="BarcodeMismatch" xml:space="preserve">
+    <value>The barcode does not match this product.</value>
+  </data>
+  <data name="TooMany" xml:space="preserve">
+    <value>Quantity cannot exceed the ordered amount.</value>
+  </data>
+  <data name="Incomplete" xml:space="preserve">
+    <value>Some products have not been checked. Scan each product or enter its barcode and confirm the quantity. For products without a barcode, enter a reason and confirm manually. Only then mark the order as packed and ready.</value>
+  </data>
+  <data name="InvalidState" xml:space="preserve">
+    <value>The order status has changed. Refresh the page.</value>
+  </data>
+  <data name="InvalidInput" xml:space="preserve">
+    <value>Check the details. Quantity must be a positive whole number.</value>
+  </data>
+  <data name="ReasonRequired" xml:space="preserve">
+    <value>Enter a reason for manual confirmation.</value>
+  </data>
+  <data name="BarcodeRequired" xml:space="preserve">
+    <value>Enter the barcode on the package.</value>
+  </data>
+  <data name="CameraPermission" xml:space="preserve">
+    <value>Allow camera access in phone settings or enter the barcode.</value>
+  </data>
+  <data name="ConnectionError" xml:space="preserve">
+    <value>Could not reach the server. Check your connection and refresh.</value>
+  </data>
+  <data name="ActionFailed" xml:space="preserve">
+    <value>The action failed. Refresh and try again.</value>
+  </data>
+  <data name="Attention" xml:space="preserve">
+    <value>Please check</value>
+  </data>
+  <data name="QuantityInvalid" xml:space="preserve">
+    <value>Enter a whole number greater than zero for the checked quantity.</value>
+  </data>
+</root>

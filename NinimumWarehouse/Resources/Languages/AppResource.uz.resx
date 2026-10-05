@@ -1,0 +1,327 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name="AppName" xml:space="preserve">
+    <value>NinimumStock</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Xush kelibsiz</value>
+  </data>
+  <data name="LoginSubtitle" xml:space="preserve">
+    <value>Ombor buyurtmalarini bir joyda tayyorlang</value>
+  </data>
+  <data name="LoginHint" xml:space="preserve">
+    <value>Administrator bergan login va parol bilan kiring.</value>
+  </data>
+  <data name="WorkerId" xml:space="preserve">
+    <value>Xodim logini</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Parol</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Kirish</value>
+  </data>
+  <data name="LoginRequired" xml:space="preserve">
+    <value>Login va parolni kiriting.</value>
+  </data>
+  <data name="Queue" xml:space="preserve">
+    <value>Navbat</value>
+  </data>
+  <data name="MyOrders" xml:space="preserve">
+    <value>Mening buyurtmalarim</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>Tarix</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Profil</value>
+  </data>
+  <data name="QueueSubtitle" xml:space="preserve">
+    <value>Tayyorlashni boshlash uchun buyurtmani tanlang.</value>
+  </data>
+  <data name="MyOrdersSubtitle" xml:space="preserve">
+    <value>Siz tayyorlayotgan buyurtmalar shu yerda.</value>
+  </data>
+  <data name="HistorySubtitle" xml:space="preserve">
+    <value>Tekshirilgan va qadoqlangan buyurtmalaringiz.</value>
+  </data>
+  <data name="EmptyQueueTitle" xml:space="preserve">
+    <value>Hozircha buyurtma yo‘q</value>
+  </data>
+  <data name="EmptyQueueMessage" xml:space="preserve">
+    <value>Yangi to‘langan buyurtmalar shu yerda paydo bo‘ladi.</value>
+  </data>
+  <data name="EmptyMineTitle" xml:space="preserve">
+    <value>Hali ish boshlanmadi</value>
+  </data>
+  <data name="EmptyMineMessage" xml:space="preserve">
+    <value>Navbatdan buyurtma tanlab, tayyorlashni boshlang.</value>
+  </data>
+  <data name="EmptyHistoryTitle" xml:space="preserve">
+    <value>Tarix hali bo‘sh</value>
+  </data>
+  <data name="EmptyHistoryMessage" xml:space="preserve">
+    <value>Tayyor deb belgilagan buyurtmalaringiz shu yerda ko‘rinadi.</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Buyurtma</value>
+  </data>
+  <data name="OpenOrder" xml:space="preserve">
+    <value>Buyurtmani ochish</value>
+  </data>
+  <data name="QuantityFormat" xml:space="preserve">
+    <value>{0} dona mahsulot</value>
+  </data>
+  <data name="TotalFormat" xml:space="preserve">
+    <value>Jami: {0}</value>
+  </data>
+  <data name="PageFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Oldingi sahifa</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Keyingi sahifa</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Yangilash</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Orqaga</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Yuklanmoqda…</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>Iltimos, kuting…</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Xabar</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Tushunarli</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Bekor qilish</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Qayta urinish</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>Navbatda</value>
+  </data>
+  <data name="Picking" xml:space="preserve">
+    <value>Tayyorlanmoqda</value>
+  </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>Muammo bor</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Tayyor</value>
+  </data>
+  <data name="UnknownStatus" xml:space="preserve">
+    <value>Holat yangilandi</value>
+  </data>
+  <data name="ItemsTitle" xml:space="preserve">
+    <value>Mahsulotlarni tekshirish</value>
+  </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>{0} / {1} dona tekshirildi</value>
+  </data>
+  <data name="ProductProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
+  <data name="Checked" xml:space="preserve">
+    <value>Tekshirildi</value>
+  </data>
+  <data name="ToCheck" xml:space="preserve">
+    <value>Tekshirish kerak</value>
+  </data>
+  <data name="Barcode" xml:space="preserve">
+    <value>Shtrix-kod</value>
+  </data>
+  <data name="NoBarcode" xml:space="preserve">
+    <value>Shtrix-kod yo‘q</value>
+  </data>
+  <data name="CheckedQuantity" xml:space="preserve">
+    <value>Tekshirilgan jami son</value>
+  </data>
+  <data name="QuantityHelp" xml:space="preserve">
+    <value>Qo‘lingizdagi mahsulotlarni sanab, jami sonini kiriting.</value>
+  </data>
+  <data name="ScanToCheck" xml:space="preserve">
+    <value>Skanerlash va tekshirish</value>
+  </data>
+  <data name="EnterCodeInstead" xml:space="preserve">
+    <value>Kodni qo‘lda kiritish</value>
+  </data>
+  <data name="BarcodePlaceholder" xml:space="preserve">
+    <value>Qadoqdagi shtrix-kod</value>
+  </data>
+  <data name="ConfirmCode" xml:space="preserve">
+    <value>Kodni tekshirish</value>
+  </data>
+  <data name="ManualCheckHint" xml:space="preserve">
+    <value>Shtrix-kod yo‘q. Mahsulotni tekshirib, sababini yozing.</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>Sabab</value>
+  </data>
+  <data name="ReasonPlaceholder" xml:space="preserve">
+    <value>Masalan, qadoqda shtrix-kod yo‘q</value>
+  </data>
+  <data name="ConfirmManually" xml:space="preserve">
+    <value>Qo‘lda tasdiqlash</value>
+  </data>
+  <data name="StartPreparing" xml:space="preserve">
+    <value>Tayyorlashni boshlash</value>
+  </data>
+  <data name="OtherWorker" xml:space="preserve">
+    <value>Bu buyurtmani boshqa xodim tayyorlamoqda.</value>
+  </data>
+  <data name="OrderUnavailable" xml:space="preserve">
+    <value>Bu buyurtma endi tayyorlash navbatida emas. To‘lov yoki yetkazish holati o‘zgargan.</value>
+  </data>
+  <data name="PackingHint" xml:space="preserve">
+    <value>Barcha mahsulotlarni tekshiring, so‘ng buyurtmani qadoqlang.</value>
+  </data>
+  <data name="PackedReady" xml:space="preserve">
+    <value>Qadoqlandi — tayyor</value>
+  </data>
+  <data name="ReadyQuestion" xml:space="preserve">
+    <value>Buyurtma tayyormi?</value>
+  </data>
+  <data name="ReadyConfirmation" xml:space="preserve">
+    <value>Barcha mahsulotlar tekshirilib, qadoqlanganini tasdiqlang.</value>
+  </data>
+  <data name="YesReady" xml:space="preserve">
+    <value>Ha, tayyor</value>
+  </data>
+  <data name="ReadyMessage" xml:space="preserve">
+    <value>Buyurtma kuryer uchun tayyor.</value>
+  </data>
+  <data name="ReportProblem" xml:space="preserve">
+    <value>Muammo haqida xabar</value>
+  </data>
+  <data name="Problem" xml:space="preserve">
+    <value>Muammo</value>
+  </data>
+  <data name="ProblemPrompt" xml:space="preserve">
+    <value>Muammoni yozing</value>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>Muammo hal bo‘ldi — davom etish</value>
+  </data>
+  <data name="ProblemHint" xml:space="preserve">
+    <value>Muammo hal bo‘lmaguncha buyurtmani tayyor deb belgilab bo‘lmaydi.</value>
+  </data>
+  <data name="ScanTitle" xml:space="preserve">
+    <value>Shtrix-kodni skanerlash</value>
+  </data>
+  <data name="ScanHint" xml:space="preserve">
+    <value>Qadoqdagi shtrix-kodni kameraga qarating.</value>
+  </data>
+  <data name="Torch" xml:space="preserve">
+    <value>Chiroqni yoqish</value>
+  </data>
+  <data name="TorchOff" xml:space="preserve">
+    <value>Chiroqni o‘chirish</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Chiqish</value>
+  </data>
+  <data name="SignOutQuestion" xml:space="preserve">
+    <value>Hisobdan chiqasizmi?</value>
+  </data>
+  <data name="SignOutMessage" xml:space="preserve">
+    <value>Qayta kirish uchun login va parol kerak bo‘ladi.</value>
+  </data>
+  <data name="Worker" xml:space="preserve">
+    <value>Ombor xodimi</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Ilova tili</value>
+  </data>
+  <data name="LanguageUz" xml:space="preserve">
+    <value>O‘zbekcha</value>
+  </data>
+  <data name="LanguageRu" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="LanguageEn" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="ProfileHint" xml:space="preserve">
+    <value>Buyurtmalardagi barcha amallar hisobingiz bilan qayd etiladi.</value>
+  </data>
+  <data name="SingleSessionHint" xml:space="preserve">
+    <value>Hisobingiz bir vaqtda bitta qurilmada ishlaydi.</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Login yoki parol noto‘g‘ri.</value>
+  </data>
+  <data name="SignInAgain" xml:space="preserve">
+    <value>Qayta kiring</value>
+  </data>
+  <data name="SessionEnded" xml:space="preserve">
+    <value>Hisob boshqa qurilmada ochilgan yoki kirish muddati tugagan. Qayta kiring.</value>
+  </data>
+  <data name="PreparationDisabled" xml:space="preserve">
+    <value>Ombor ilovasi hali yoqilmagan. Administratorga murojaat qiling.</value>
+  </data>
+  <data name="AlreadyClaimed" xml:space="preserve">
+    <value>Bu buyurtmani boshqa xodim tayyorlamoqda. Ro‘yxatni yangilang.</value>
+  </data>
+  <data name="UnavailableError" xml:space="preserve">
+    <value>Buyurtma bekor qilingan, to‘lov qaytarilgan yoki kuryerga berilgan. Uni tayyorlab bo‘lmaydi.</value>
+  </data>
+  <data name="BarcodeMismatch" xml:space="preserve">
+    <value>Shtrix-kod bu mahsulotga mos kelmaydi.</value>
+  </data>
+  <data name="TooMany" xml:space="preserve">
+    <value>Miqdor buyurtmadagi sondan oshmasligi kerak.</value>
+  </data>
+  <data name="Incomplete" xml:space="preserve">
+    <value>Ayrim mahsulotlar hali tekshirilmagan. Har bir mahsulotni skanerlang yoki shtrix-kodini kiriting va sonini tasdiqlang. Shtrix-kodi yo‘q mahsulot uchun sabab yozib, qo‘lda tasdiqlang. Shundan keyin buyurtmani qadoqlangan va tayyor deb belgilang.</value>
+  </data>
+  <data name="InvalidState" xml:space="preserve">
+    <value>Buyurtma holati o‘zgargan. Sahifani yangilang.</value>
+  </data>
+  <data name="InvalidInput" xml:space="preserve">
+    <value>Ma’lumotlarni tekshiring. Miqdor musbat butun son bo‘lishi kerak.</value>
+  </data>
+  <data name="ReasonRequired" xml:space="preserve">
+    <value>Tasdiqlash sababini yozing.</value>
+  </data>
+  <data name="BarcodeRequired" xml:space="preserve">
+    <value>Qadoqdagi shtrix-kodni kiriting.</value>
+  </data>
+  <data name="CameraPermission" xml:space="preserve">
+    <value>Kamera uchun ruxsat kerak. Telefon sozlamalaridan ruxsat bering yoki kodni kiriting.</value>
+  </data>
+  <data name="ConnectionError" xml:space="preserve">
+    <value>Server bilan bog‘lanib bo‘lmadi. Internetni tekshiring va sahifani yangilang.</value>
+  </data>
+  <data name="ActionFailed" xml:space="preserve">
+    <value>Amal bajarilmadi. Sahifani yangilang va qayta urinib ko‘ring.</value>
+  </data>
+  <data name="Attention" xml:space="preserve">
+    <value>Iltimos, tekshiring</value>
+  </data>
+  <data name="QuantityInvalid" xml:space="preserve">
+    <value>Tekshirilgan mahsulotlar soniga noldan katta butun son kiriting.</value>
+  </data>
+</root>

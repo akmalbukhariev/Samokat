@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:lang="clr-namespace:NinimumWarehouse.Resources.Languages" xmlns:services="clr-namespace:NinimumWarehouse.Services" xmlns:vm="clr-namespace:NinimumWarehouse.ViewModels" xmlns:components="clr-namespace:NinimumWarehouse.Components" x:Class="NinimumWarehouse.Views.ProfilePage" x:DataType="vm:ProfileViewModel" Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="*,Auto">
+        <ScrollView>
+            <VerticalStackLayout Padding="24" Spacing="22" IsEnabled="{Binding IsAvailable}">
+                <Label Text="{x:Static lang:AppResource.Profile}" Style="{StaticResource PageTitle}"/>
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="14">
+                        <Border WidthRequest="72" HeightRequest="72" StrokeThickness="0" StrokeShape="RoundRectangle 22" BackgroundColor="{StaticResource PrimarySoft}" HorizontalOptions="Center">
+                            <Image Source="warehouse_brand.png" WidthRequest="40" HeightRequest="40"/>
+                        </Border>
+                        <Label Text="{Binding WorkerName}" Style="{StaticResource SectionTitle}" HorizontalTextAlignment="Center"/>
+                        <Label Text="{x:Static lang:AppResource.Worker}" Style="{StaticResource MutedLabel}" HorizontalTextAlignment="Center"/>
+                        <BoxView HeightRequest="1" BackgroundColor="{StaticResource BorderColor}"/>
+                        <Grid ColumnDefinitions="*,Auto">
+                            <Label Text="{x:Static lang:AppResource.WorkerId}" Style="{StaticResource MutedLabel}"/>
+                            <Label Grid.Column="1" Text="{Binding WorkerCode}" FontAttributes="Bold"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{x:Static lang:AppResource.Language}" Style="{StaticResource FieldLabel}"/>
+                    <Border Style="{StaticResource InputBorder}">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <Image Source="language.png" WidthRequest="22" HeightRequest="22"/>
+                            <Picker x:Name="LanguagePicker" Grid.Column="1" ItemsSource="{x:Static services:LanguageService.Options}" Title="{x:Static lang:AppResource.Language}" SelectedIndexChanged="OnLanguageChanged"/>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+                <Label Text="{x:Static lang:AppResource.ProfileHint}" Style="{StaticResource MutedLabel}"/>
+                <Border BackgroundColor="{StaticResource SurfaceColor}" Padding="16" StrokeThickness="0" StrokeShape="RoundRectangle 14">
+                    <Label Text="{x:Static lang:AppResource.SingleSessionHint}" Style="{StaticResource MutedLabel}"/>
+                </Border>
+                <Border BackgroundColor="{StaticResource ErrorSoft}" Padding="14" StrokeThickness="0" StrokeShape="RoundRectangle 12" IsVisible="{Binding HasError}">
+                    <Label Text="{Binding ErrorMessage}" TextColor="{StaticResource ErrorColor}"/>
+                </Border>
+                <Button Text="{x:Static lang:AppResource.SignOut}" Command="{Binding LogoutCommand}" Style="{StaticResource SecondaryButton}"/>
+            </VerticalStackLayout>
+        </ScrollView>
+        <BoxView Grid.Row="1" HeightRequest="1" BackgroundColor="{StaticResource BorderColor}"/>
+        <components:LoadingView Grid.RowSpan="2" IsLoading="{Binding IsBusy}"/>
+    </Grid>
+</ContentPage>

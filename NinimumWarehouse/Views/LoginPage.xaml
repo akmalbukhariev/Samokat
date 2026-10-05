@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:lang="clr-namespace:NinimumWarehouse.Resources.Languages" xmlns:services="clr-namespace:NinimumWarehouse.Services" xmlns:vm="clr-namespace:NinimumWarehouse.ViewModels" xmlns:components="clr-namespace:NinimumWarehouse.Components" x:Class="NinimumWarehouse.Views.LoginPage" x:DataType="vm:LoginViewModel" NavigationPage.HasNavigationBar="False">
+    <Grid>
+        <ScrollView>
+            <VerticalStackLayout Padding="28,36" Spacing="22" MaximumWidthRequest="520" HorizontalOptions="Fill" IsEnabled="{Binding IsAvailable}">
+                <Border HeightRequest="82" WidthRequest="82" BackgroundColor="{StaticResource PrimarySoft}" StrokeThickness="0" StrokeShape="RoundRectangle 24" HorizontalOptions="Center">
+                    <Image Source="warehouse_brand.png" HeightRequest="48" WidthRequest="48" HorizontalOptions="Center" VerticalOptions="Center"/>
+                </Border>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{x:Static lang:AppResource.AppName}" Style="{StaticResource PageTitle}" HorizontalTextAlignment="Center"/>
+                    <Label Text="{x:Static lang:AppResource.LoginSubtitle}" Style="{StaticResource MutedLabel}" HorizontalTextAlignment="Center"/>
+                </VerticalStackLayout>
+                <Border Style="{StaticResource InputBorder}">
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                        <Image Source="language.png" WidthRequest="22" HeightRequest="22"/>
+                        <Picker x:Name="LanguagePicker" Grid.Column="1" Title="{x:Static lang:AppResource.Language}" ItemsSource="{x:Static services:LanguageService.Options}" SelectedIndexChanged="OnLanguageChanged"/>
+                    </Grid>
+                </Border>
+                <Label Text="{x:Static lang:AppResource.LoginTitle}" Style="{StaticResource SectionTitle}" Margin="0,8,0,0"/>
+                <Border BackgroundColor="{StaticResource ErrorSoft}" StrokeThickness="0" Padding="14" StrokeShape="RoundRectangle 12" IsVisible="{Binding HasError}">
+                    <Label Text="{Binding ErrorMessage}" TextColor="{StaticResource ErrorColor}"/>
+                </Border>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{x:Static lang:AppResource.WorkerId}" Style="{StaticResource FieldLabel}"/>
+                    <Border Style="{StaticResource InputBorder}">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <Image Source="profile_tab.png" WidthRequest="22" HeightRequest="22"/>
+                            <Entry Grid.Column="1" Text="{Binding WorkerId}" Placeholder="{x:Static lang:AppResource.WorkerId}" ReturnType="Next" Completed="OnWorkerIdCompleted" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False"/>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="{x:Static lang:AppResource.Password}" Style="{StaticResource FieldLabel}"/>
+                    <Border Style="{StaticResource InputBorder}">
+                        <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                            <Image Source="lock.png" WidthRequest="22" HeightRequest="22"/>
+                            <Entry x:Name="PasswordEntry" Grid.Column="1" Text="{Binding Password}" Placeholder="{x:Static lang:AppResource.Password}" IsPassword="True" ReturnType="Go" ReturnCommand="{Binding LoginCommand}"/>
+                        </Grid>
+                    </Border>
+                </VerticalStackLayout>
+                <Button Text="{x:Static lang:AppResource.Login}" Command="{Binding LoginCommand}" Style="{StaticResource PrimaryButton}"/>
+                <Label Text="{x:Static lang:AppResource.LoginHint}" Style="{StaticResource MutedLabel}" HorizontalTextAlignment="Center"/>
+            </VerticalStackLayout>
+        </ScrollView>
+        <components:LoadingView IsLoading="{Binding IsBusy}"/>
+    </Grid>
+</ContentPage>

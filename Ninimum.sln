@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ninimum", "Ninimum\Ninimum.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinimumDelivery", "NinimumDelivery\NinimumDelivery.csproj", "{1263BF31-9A83-498A-AD1E-293E82F0B2E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NinimumWarehouse", "NinimumWarehouse\NinimumWarehouse.csproj", "{2EC82A93-7E50-48F9-96CF-FE5982D8BA9E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,18 @@ Global
 		{1263BF31-9A83-498A-AD1E-293E82F0B2E9}.Release|x64.Build.0 = Release|Any CPU
 		{1263BF31-9A83-498A-AD1E-293E82F0B2E9}.Release|x86.ActiveCfg = Release|Any CPU
 		{1263BF31-9A83-498A-AD1E-293E82F0B2E9}.Release|x86.Build.0 = Release|Any CPU
+		{2EC82A93-7E50-48F9-96CF-FE5982D8BA9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EC82A93-7E50-48F9-96CF-FE5982D8BA9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EC82A93-7E50-48F9-96CF-FE5982D8BA9E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{2EC82A93-7E50-48F9-96CF-FE5982D8BA9E}.Debug|x64.Build.0 = Debug|Any CPU
+		{2EC82A93-7E50-48F9-96CF-FE5982D8BA9E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2EC82A93-7E50-48F9-96CF-FE5982D8BA9E}.Debug|x86.Build.0 = Debug|Any CPU
+		{2EC82A93-7E50-48F9-96CF-FE5982D8BA9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EC82A93-7E50-48F9-96CF-FE5982D8BA9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EC82A93-7E50-48F9-96CF-FE5982D8BA9E}.Release|x64.ActiveCfg = Release|Any CPU
+		{2EC82A93-7E50-48F9-96CF-FE5982D8BA9E}.Release|x64.Build.0 = Release|Any CPU
+		{2EC82A93-7E50-48F9-96CF-FE5982D8BA9E}.Release|x86.ActiveCfg = Release|Any CPU
+		{2EC82A93-7E50-48F9-96CF-FE5982D8BA9E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

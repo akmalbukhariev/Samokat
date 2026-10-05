@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:lang="clr-namespace:NinimumWarehouse.Resources.Languages" xmlns:zxing="clr-namespace:ZXing.Net.Maui.Controls;assembly=ZXing.Net.MAUI.Controls" x:Class="NinimumWarehouse.Views.ScanPage" BackgroundColor="White">
+    <Grid RowDefinitions="Auto,Auto,*,Auto" Padding="24" RowSpacing="18">
+        <Label Text="{x:Static lang:AppResource.ScanTitle}" Style="{StaticResource SectionTitle}"/>
+        <Label Grid.Row="1" Text="{x:Static lang:AppResource.ScanHint}" Style="{StaticResource MutedLabel}"/>
+        <Border Grid.Row="2" Stroke="{StaticResource BorderColor}" StrokeShape="RoundRectangle 20" BackgroundColor="{StaticResource SurfaceColor}" MinimumHeightRequest="240">
+            <zxing:CameraBarcodeReaderView x:Name="Reader" IsDetecting="True" BarcodesDetected="OnBarcodesDetected"/>
+        </Border>
+        <VerticalStackLayout Grid.Row="3" Spacing="10">
+            <Button x:Name="TorchButton" Text="{x:Static lang:AppResource.Torch}" Style="{StaticResource SecondaryButton}" Clicked="OnTorchClicked"/>
+            <Button Text="{x:Static lang:AppResource.Cancel}" Style="{StaticResource TextButton}" Clicked="OnCancelClicked"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>

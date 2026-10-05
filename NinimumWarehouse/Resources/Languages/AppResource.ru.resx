@@ -1,0 +1,327 @@
+<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms</value>
+  </resheader>
+  <data name="AppName" xml:space="preserve">
+    <value>NinimumStock</value>
+  </data>
+  <data name="LoginTitle" xml:space="preserve">
+    <value>Добро пожаловать</value>
+  </data>
+  <data name="LoginSubtitle" xml:space="preserve">
+    <value>Собирайте складские заказы в одном месте</value>
+  </data>
+  <data name="LoginHint" xml:space="preserve">
+    <value>Войдите с логином и паролем, выданными администратором.</value>
+  </data>
+  <data name="WorkerId" xml:space="preserve">
+    <value>Логин сотрудника</value>
+  </data>
+  <data name="Password" xml:space="preserve">
+    <value>Пароль</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="LoginRequired" xml:space="preserve">
+    <value>Введите логин и пароль.</value>
+  </data>
+  <data name="Queue" xml:space="preserve">
+    <value>Очередь</value>
+  </data>
+  <data name="MyOrders" xml:space="preserve">
+    <value>Мои заказы</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>История</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>Профиль</value>
+  </data>
+  <data name="QueueSubtitle" xml:space="preserve">
+    <value>Выберите заказ, чтобы начать сборку.</value>
+  </data>
+  <data name="MyOrdersSubtitle" xml:space="preserve">
+    <value>Здесь заказы, которые вы собираете.</value>
+  </data>
+  <data name="HistorySubtitle" xml:space="preserve">
+    <value>Ваши проверенные и упакованные заказы.</value>
+  </data>
+  <data name="EmptyQueueTitle" xml:space="preserve">
+    <value>Пока нет заказов</value>
+  </data>
+  <data name="EmptyQueueMessage" xml:space="preserve">
+    <value>Здесь появятся новые оплаченные заказы.</value>
+  </data>
+  <data name="EmptyMineTitle" xml:space="preserve">
+    <value>Вы ещё не начали сборку</value>
+  </data>
+  <data name="EmptyMineMessage" xml:space="preserve">
+    <value>Выберите заказ в очереди и начните сборку.</value>
+  </data>
+  <data name="EmptyHistoryTitle" xml:space="preserve">
+    <value>История пока пуста</value>
+  </data>
+  <data name="EmptyHistoryMessage" xml:space="preserve">
+    <value>Здесь появятся заказы, которые вы отметили готовыми.</value>
+  </data>
+  <data name="Order" xml:space="preserve">
+    <value>Заказ</value>
+  </data>
+  <data name="OpenOrder" xml:space="preserve">
+    <value>Открыть заказ</value>
+  </data>
+  <data name="QuantityFormat" xml:space="preserve">
+    <value>{0} шт. товаров</value>
+  </data>
+  <data name="TotalFormat" xml:space="preserve">
+    <value>Всего: {0}</value>
+  </data>
+  <data name="PageFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
+  <data name="Previous" xml:space="preserve">
+    <value>Предыдущая страница</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Следующая страница</value>
+  </data>
+  <data name="Refresh" xml:space="preserve">
+    <value>Обновить</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Назад</value>
+  </data>
+  <data name="Loading" xml:space="preserve">
+    <value>Загрузка…</value>
+  </data>
+  <data name="PleaseWait" xml:space="preserve">
+    <value>Пожалуйста, подождите…</value>
+  </data>
+  <data name="Error" xml:space="preserve">
+    <value>Сообщение</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Понятно</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Отмена</value>
+  </data>
+  <data name="TryAgain" xml:space="preserve">
+    <value>Повторить</value>
+  </data>
+  <data name="Waiting" xml:space="preserve">
+    <value>В очереди</value>
+  </data>
+  <data name="Picking" xml:space="preserve">
+    <value>Собирается</value>
+  </data>
+  <data name="Blocked" xml:space="preserve">
+    <value>Есть проблема</value>
+  </data>
+  <data name="Ready" xml:space="preserve">
+    <value>Готов</value>
+  </data>
+  <data name="UnknownStatus" xml:space="preserve">
+    <value>Статус обновлён</value>
+  </data>
+  <data name="ItemsTitle" xml:space="preserve">
+    <value>Проверка товаров</value>
+  </data>
+  <data name="ProgressFormat" xml:space="preserve">
+    <value>Проверено {0} / {1} шт.</value>
+  </data>
+  <data name="ProductProgressFormat" xml:space="preserve">
+    <value>{0} / {1}</value>
+  </data>
+  <data name="Checked" xml:space="preserve">
+    <value>Проверено</value>
+  </data>
+  <data name="ToCheck" xml:space="preserve">
+    <value>Нужно проверить</value>
+  </data>
+  <data name="Barcode" xml:space="preserve">
+    <value>Штрихкод</value>
+  </data>
+  <data name="NoBarcode" xml:space="preserve">
+    <value>Нет штрихкода</value>
+  </data>
+  <data name="CheckedQuantity" xml:space="preserve">
+    <value>Всего проверено</value>
+  </data>
+  <data name="QuantityHelp" xml:space="preserve">
+    <value>Пересчитайте товары и введите общее количество.</value>
+  </data>
+  <data name="ScanToCheck" xml:space="preserve">
+    <value>Сканировать и проверить</value>
+  </data>
+  <data name="EnterCodeInstead" xml:space="preserve">
+    <value>Ввести код вручную</value>
+  </data>
+  <data name="BarcodePlaceholder" xml:space="preserve">
+    <value>Штрихкод с упаковки</value>
+  </data>
+  <data name="ConfirmCode" xml:space="preserve">
+    <value>Проверить код</value>
+  </data>
+  <data name="ManualCheckHint" xml:space="preserve">
+    <value>Нет штрихкода. Проверьте товар и укажите причину.</value>
+  </data>
+  <data name="Reason" xml:space="preserve">
+    <value>Причина</value>
+  </data>
+  <data name="ReasonPlaceholder" xml:space="preserve">
+    <value>Например, на упаковке нет штрихкода</value>
+  </data>
+  <data name="ConfirmManually" xml:space="preserve">
+    <value>Подтвердить вручную</value>
+  </data>
+  <data name="StartPreparing" xml:space="preserve">
+    <value>Начать сборку</value>
+  </data>
+  <data name="OtherWorker" xml:space="preserve">
+    <value>Этот заказ собирает другой сотрудник.</value>
+  </data>
+  <data name="OrderUnavailable" xml:space="preserve">
+    <value>Этот заказ больше не в очереди сборки. Статус оплаты или доставки изменился.</value>
+  </data>
+  <data name="PackingHint" xml:space="preserve">
+    <value>Проверьте все товары, затем упакуйте заказ.</value>
+  </data>
+  <data name="PackedReady" xml:space="preserve">
+    <value>Упакован — готов</value>
+  </data>
+  <data name="ReadyQuestion" xml:space="preserve">
+    <value>Заказ готов?</value>
+  </data>
+  <data name="ReadyConfirmation" xml:space="preserve">
+    <value>Подтвердите, что все товары проверены и упакованы.</value>
+  </data>
+  <data name="YesReady" xml:space="preserve">
+    <value>Да, готов</value>
+  </data>
+  <data name="ReadyMessage" xml:space="preserve">
+    <value>Заказ готов для курьера.</value>
+  </data>
+  <data name="ReportProblem" xml:space="preserve">
+    <value>Сообщить о проблеме</value>
+  </data>
+  <data name="Problem" xml:space="preserve">
+    <value>Проблема</value>
+  </data>
+  <data name="ProblemPrompt" xml:space="preserve">
+    <value>Опишите проблему</value>
+  </data>
+  <data name="Resume" xml:space="preserve">
+    <value>Проблема решена — продолжить</value>
+  </data>
+  <data name="ProblemHint" xml:space="preserve">
+    <value>Заказ нельзя отметить готовым, пока проблема не решена.</value>
+  </data>
+  <data name="ScanTitle" xml:space="preserve">
+    <value>Сканирование штрихкода</value>
+  </data>
+  <data name="ScanHint" xml:space="preserve">
+    <value>Наведите камеру на штрихкод упаковки.</value>
+  </data>
+  <data name="Torch" xml:space="preserve">
+    <value>Включить фонарик</value>
+  </data>
+  <data name="TorchOff" xml:space="preserve">
+    <value>Выключить фонарик</value>
+  </data>
+  <data name="SignOut" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="SignOutQuestion" xml:space="preserve">
+    <value>Выйти из аккаунта?</value>
+  </data>
+  <data name="SignOutMessage" xml:space="preserve">
+    <value>Для повторного входа понадобятся логин и пароль.</value>
+  </data>
+  <data name="Worker" xml:space="preserve">
+    <value>Сотрудник склада</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Язык приложения</value>
+  </data>
+  <data name="LanguageUz" xml:space="preserve">
+    <value>O‘zbekcha</value>
+  </data>
+  <data name="LanguageRu" xml:space="preserve">
+    <value>Русский</value>
+  </data>
+  <data name="LanguageEn" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="ProfileHint" xml:space="preserve">
+    <value>Все действия с заказами записываются от вашего имени.</value>
+  </data>
+  <data name="SingleSessionHint" xml:space="preserve">
+    <value>Аккаунт работает только на одном устройстве одновременно.</value>
+  </data>
+  <data name="LoginFailed" xml:space="preserve">
+    <value>Неверный логин или пароль.</value>
+  </data>
+  <data name="SignInAgain" xml:space="preserve">
+    <value>Войдите снова</value>
+  </data>
+  <data name="SessionEnded" xml:space="preserve">
+    <value>Аккаунт открыт на другом устройстве или сеанс истёк. Войдите снова.</value>
+  </data>
+  <data name="PreparationDisabled" xml:space="preserve">
+    <value>Приложение склада ещё не включено. Обратитесь к администратору.</value>
+  </data>
+  <data name="AlreadyClaimed" xml:space="preserve">
+    <value>Этот заказ собирает другой сотрудник. Обновите список.</value>
+  </data>
+  <data name="UnavailableError" xml:space="preserve">
+    <value>Заказ отменён, оплата возвращена или заказ уже передан курьеру.</value>
+  </data>
+  <data name="BarcodeMismatch" xml:space="preserve">
+    <value>Штрихкод не соответствует этому товару.</value>
+  </data>
+  <data name="TooMany" xml:space="preserve">
+    <value>Количество не должно превышать заказанное.</value>
+  </data>
+  <data name="Incomplete" xml:space="preserve">
+    <value>Некоторые товары ещё не проверены. Отсканируйте каждый товар или введите его штрихкод и подтвердите количество. Для товара без штрихкода укажите причину и подтвердите вручную. Затем отметьте заказ как упакованный и готовый.</value>
+  </data>
+  <data name="InvalidState" xml:space="preserve">
+    <value>Статус заказа изменился. Обновите страницу.</value>
+  </data>
+  <data name="InvalidInput" xml:space="preserve">
+    <value>Проверьте данные. Количество должно быть положительным целым числом.</value>
+  </data>
+  <data name="ReasonRequired" xml:space="preserve">
+    <value>Укажите причину подтверждения.</value>
+  </data>
+  <data name="BarcodeRequired" xml:space="preserve">
+    <value>Введите штрихкод с упаковки.</value>
+  </data>
+  <data name="CameraPermission" xml:space="preserve">
+    <value>Разрешите доступ к камере в настройках телефона или введите код.</value>
+  </data>
+  <data name="ConnectionError" xml:space="preserve">
+    <value>Нет связи с сервером. Проверьте интернет и обновите страницу.</value>
+  </data>
+  <data name="ActionFailed" xml:space="preserve">
+    <value>Действие не выполнено. Обновите страницу и повторите.</value>
+  </data>
+  <data name="Attention" xml:space="preserve">
+    <value>Пожалуйста, проверьте</value>
+  </data>
+  <data name="QuantityInvalid" xml:space="preserve">
+    <value>Введите целое число больше нуля для проверенного количества.</value>
+  </data>
+</root>

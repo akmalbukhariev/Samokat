@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:lang="clr-namespace:NinimumWarehouse.Resources.Languages" x:Class="NinimumWarehouse.AppShell" FlyoutBehavior="Disabled" Shell.NavBarIsVisible="False">
+    <TabBar x:Name="MainTabs">
+        <Tab Title="{x:Static lang:AppResource.Queue}" Icon="queue_tab.png"><ShellContent x:Name="QueueContent"/></Tab>
+        <Tab Title="{x:Static lang:AppResource.MyOrders}" Icon="mine_tab.png"><ShellContent x:Name="MineContent"/></Tab>
+        <Tab Title="{x:Static lang:AppResource.History}" Icon="history_tab.png"><ShellContent x:Name="HistoryContent"/></Tab>
+        <Tab x:Name="ProfileTab" Title="{x:Static lang:AppResource.Profile}" Icon="profile_tab.png"><ShellContent x:Name="ProfileContent"/></Tab>
+    </TabBar>
+</Shell>

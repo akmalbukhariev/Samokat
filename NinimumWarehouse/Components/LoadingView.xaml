@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:lang="clr-namespace:NinimumWarehouse.Resources.Languages" x:Class="NinimumWarehouse.Components.LoadingView" x:Name="Root" IsVisible="{Binding IsLoading, Source={x:Reference Root}}">
+    <Grid BackgroundColor="#CCFFFFFF" InputTransparent="False">
+        <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center" Spacing="12">
+            <ActivityIndicator IsRunning="{Binding IsLoading, Source={x:Reference Root}}" Color="{StaticResource PrimaryColor}" HeightRequest="40" WidthRequest="40"/>
+            <Label Text="{x:Static lang:AppResource.PleaseWait}" Style="{StaticResource MutedLabel}"/>
+        </VerticalStackLayout>
+    </Grid>
+</ContentView>

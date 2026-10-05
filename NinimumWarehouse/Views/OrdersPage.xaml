@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:lang="clr-namespace:NinimumWarehouse.Resources.Languages" xmlns:vm="clr-namespace:NinimumWarehouse.ViewModels" x:Class="NinimumWarehouse.Views.OrdersPage" x:DataType="vm:OrdersViewModel" x:Name="Page" Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="Auto,Auto,*,Auto,Auto">
+        <VerticalStackLayout Padding="24,24,24,14" Spacing="10">
+            <Grid ColumnDefinitions="*,Auto">
+                <Label Text="{Binding Title}" Style="{StaticResource PageTitle}"/>
+                <ImageButton Grid.Column="1" Source="refresh.png" Style="{StaticResource IconButton}" Command="{Binding RefreshCommand}" SemanticProperties.Description="{x:Static lang:AppResource.Refresh}" IsEnabled="{Binding IsAvailable}"/>
+            </Grid>
+            <Label Text="{Binding Subtitle}" Style="{StaticResource MutedLabel}"/>
+            <Grid ColumnDefinitions="*,Auto" Margin="0,2,0,0">
+                <Label Text="{Binding TotalText}" Style="{StaticResource FieldLabel}"/>
+                <ActivityIndicator Grid.Column="1" IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="{StaticResource PrimaryColor}" WidthRequest="20" HeightRequest="20"/>
+            </Grid>
+        </VerticalStackLayout>
+        <Border Grid.Row="1" Margin="24,0,24,12" BackgroundColor="{StaticResource ErrorSoft}" StrokeThickness="0" Padding="14" StrokeShape="RoundRectangle 12" IsVisible="{Binding HasError}">
+            <VerticalStackLayout>
+                <Label Text="{Binding ErrorMessage}" TextColor="{StaticResource ErrorColor}"/>
+                <Button Text="{x:Static lang:AppResource.TryAgain}" Command="{Binding RefreshCommand}" Style="{StaticResource TextButton}"/>
+            </VerticalStackLayout>
+        </Border>
+        <RefreshView Grid.Row="2" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="{StaticResource PrimaryColor}">
+            <CollectionView ItemsSource="{Binding Orders}" SelectionMode="None" ItemSizingStrategy="MeasureAllItems">
+                <CollectionView.EmptyView>
+                    <VerticalStackLayout Padding="32,52" Spacing="14" HorizontalOptions="Center">
+                        <Border BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" StrokeShape="RoundRectangle 24" WidthRequest="88" HeightRequest="88" HorizontalOptions="Center">
+                            <Image Source="queue_tab.png" WidthRequest="42" HeightRequest="42"/>
+                        </Border>
+                        <Label Text="{Binding EmptyTitle}" Style="{StaticResource SectionTitle}" HorizontalTextAlignment="Center"/>
+                        <Label Text="{Binding EmptyMessage}" Style="{StaticResource MutedLabel}" HorizontalTextAlignment="Center"/>
+                    </VerticalStackLayout>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:OrderCardViewModel">
+                        <Border Margin="24,0,24,14" Style="{StaticResource Card}">
+                            <VerticalStackLayout Spacing="14">
+                                <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                                    <Border WidthRequest="44" HeightRequest="44" BackgroundColor="{StaticResource PrimarySoft}" StrokeThickness="0" StrokeShape="RoundRectangle 12">
+                                        <Image Source="warehouse_brand.png" WidthRequest="26" HeightRequest="26"/>
+                                    </Border>
+                                    <VerticalStackLayout Grid.Column="1" Spacing="4">
+                                        <Label Text="{x:Static lang:AppResource.Order}" Style="{StaticResource MutedLabel}"/>
+                                        <Label Text="{Binding Number}" FontSize="16" FontAttributes="Bold" LineBreakMode="WordWrap" MaxLines="2"/>
+                                    </VerticalStackLayout>
+                                </Grid>
+                                <FlexLayout Direction="Row" Wrap="Wrap" AlignItems="Center" JustifyContent="SpaceBetween">
+                                    <Label Text="{Binding QuantityText}" Style="{StaticResource MutedLabel}" Margin="0,0,8,8"/>
+                                    <Border Padding="10,6" Margin="0,0,0,8" StrokeThickness="0" StrokeShape="RoundRectangle 10" BackgroundColor="{Binding Status, Converter={StaticResource StatusColor}, ConverterParameter=background}">
+                                        <Label Text="{Binding StatusText}" Style="{StaticResource BadgeLabel}" TextColor="{Binding Status, Converter={StaticResource StatusColor}}"/>
+                                    </Border>
+                                </FlexLayout>
+                                <Label Text="{Binding Note}" TextColor="{StaticResource WarningColor}" IsVisible="{Binding HasNote}"/>
+                                <Button Text="{x:Static lang:AppResource.OpenOrder}" Style="{StaticResource SecondaryButton}" Command="{Binding OpenCommand}" CommandParameter="{Binding .}"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+        <Grid Grid.Row="3" Margin="24,8,24,14" ColumnDefinitions="Auto,*,Auto" IsVisible="{Binding ShowPagination}">
+            <ImageButton Source="back.png" Style="{StaticResource IconButton}" Command="{Binding PreviousCommand}" IsEnabled="{Binding CanPrevious}" SemanticProperties.Description="{x:Static lang:AppResource.Previous}"/>
+            <Label Grid.Column="1" Text="{Binding PageText}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" Style="{StaticResource MutedLabel}"/>
+            <ImageButton Grid.Column="2" Source="next.png" Style="{StaticResource IconButton}" Command="{Binding NextCommand}" IsEnabled="{Binding CanNext}" SemanticProperties.Description="{x:Static lang:AppResource.Next}"/>
+        </Grid>
+        <BoxView Grid.Row="4" HeightRequest="1" BackgroundColor="{StaticResource BorderColor}" HorizontalOptions="Fill"/>
+    </Grid>
+</ContentPage>
