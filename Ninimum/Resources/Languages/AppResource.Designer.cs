@@ -3742,7 +3742,7 @@ namespace Ninimum.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The amount paid for the cancelled order will be returned to your account within 3 days..
+        ///   Looks up a localized string similar to Your order has been cancelled. Your payment will be returned to your card within 24 hours..
         /// </summary>
         internal static string TheAmountPaidForTheCancelledOrderWill {
             get {

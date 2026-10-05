@@ -147,17 +147,20 @@ public partial class CancelOrderPage : BasePage, INotifyPropertyChanged, IQueryA
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
                 CancelOrderPopup.IsVisible = false;
-                await DisplayAlert(AppResource.Error, response.resultMsg ?? AppResource.CouldNotCancelTheOrder, AppResource.Ok);
+                await DisplayAlert(AppResource.Error, AppResource.CouldNotCancelTheOrder, AppResource.Ok);
                 return;
             }
 
             cancellationSucceeded = true;
-            CancelOrderPopup.ShowSuccess();
+            CancelOrderPopup.IsVisible = false;
+            await DisplayAlert(AppResource.OrderCancelledSuccessfully, AppResource.TheAmountPaidForTheCancelledOrderWill, AppResource.Ok);
+            cancellationSucceeded = false;
+            await Shell.Current.GoToAsync("..");
         }
         catch (Exception ex)
         {
             CancelOrderPopup.IsVisible = false;
-            await DisplayAlert(AppResource.Error, string.Format(AppResource.CouldNotCancelTheOrder_f52d7e, ex.Message), AppResource.Ok);
+            await DisplayAlert(AppResource.Error, AppResource.CouldNotCancelTheOrder, AppResource.Ok);
         }
         finally
         {

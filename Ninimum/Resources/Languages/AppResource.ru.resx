@@ -1223,7 +1223,7 @@
     <value>Спасибо за отзыв. Ваш аккаунт успешно удален.</value>
   </data>
   <data name="TheAmountPaidForTheCancelledOrderWill" xml:space="preserve">
-    <value>Оплата за отмененный заказ будет возвращена на ваш счет в течение 3 дней.</value>
+    <value>Заказ отменён. Оплаченная сумма будет возвращена на вашу карту в течение 24 часов.</value>
   </data>
   <data name="TheAppIsDifficultToUse" xml:space="preserve">
     <value>Приложением сложно пользоваться</value>

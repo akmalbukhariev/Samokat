@@ -1224,7 +1224,7 @@ buyurtma qiling</value>
     <value>Fikringiz uchun rahmat. Akkauntingiz muvaffaqiyatli o‘chirildi.</value>
   </data>
   <data name="TheAmountPaidForTheCancelledOrderWill" xml:space="preserve">
-    <value>Bekor qilingan buyurtma uchun to’langan mablag’ hisob raqamingizga 3 kun muddatda qaytariladi</value>
+    <value>Buyurtmangiz bekor qilindi. To‘langan mablag‘ingiz 24 soat ichida kartangizga qaytariladi.</value>
   </data>
   <data name="TheAppIsDifficultToUse" xml:space="preserve">
     <value>Ilovadan foydalanish qiyin</value>

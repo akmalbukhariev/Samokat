@@ -1221,7 +1221,7 @@ online</value>
     <value>Thank you for your feedback. Your account was deleted successfully.</value>
   </data>
   <data name="TheAmountPaidForTheCancelledOrderWill" xml:space="preserve">
-    <value>The amount paid for the cancelled order will be returned to your account within 3 days.</value>
+    <value>Your order has been cancelled. Your payment will be returned to your card within 24 hours.</value>
   </data>
   <data name="TheAppIsDifficultToUse" xml:space="preserve">
     <value>The app is difficult to use</value>
