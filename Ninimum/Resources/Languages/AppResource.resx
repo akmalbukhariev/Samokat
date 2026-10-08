@@ -463,7 +463,7 @@ pickup point.</value>
     <value>English</value>
   </data>
   <data name="EnterADistrictStreetHouseOrLandmarkIn" xml:space="preserve">
-    <value>Enter a district, street, house, or landmark in Qashqadaryo region.</value>
+    <value>Enter a district, street, house, or landmark in Shahrisabz city.</value>
   </data>
   <data name="EnterANewPassword" xml:space="preserve">
     <value>Enter a new password.</value>
@@ -529,7 +529,7 @@ pickup point.</value>
     <value>For mothers</value>
   </data>
   <data name="ForNowAnAddressCanOnlyBeSelected" xml:space="preserve">
-    <value>For now, an address can only be selected within Qashqadaryo region. The map will remain within Qashqadaryo.</value>
+    <value>For now, an address can only be selected within Shahrisabz city. The map will remain within Shahrisabz.</value>
   </data>
   <data name="Free" xml:space="preserve">
     <value>Free</value>
@@ -1023,7 +1023,7 @@ online</value>
     <value>Purees and yogurt</value>
   </data>
   <data name="QashqadaryoDistrictStreetHouseOrNearbyLandmark" xml:space="preserve">
-    <value>Qashqadaryo: district, street, house, or nearby landmark</value>
+    <value>Shahrisabz: district, street, house, or nearby landmark</value>
   </data>
   <data name="QashqadaryoRegion" xml:space="preserve">
     <value>Qashqadaryo region</value>

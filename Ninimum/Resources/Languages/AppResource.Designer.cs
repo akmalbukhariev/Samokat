@@ -1492,7 +1492,7 @@ namespace Ninimum.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter a district, street, house, or landmark in Qashqadaryo region..
+        ///   Looks up a localized string similar to Enter a district, street, house, or landmark in Shahrisabz city..
         /// </summary>
         internal static string EnterADistrictStreetHouseOrLandmarkIn {
             get {
@@ -1690,7 +1690,7 @@ namespace Ninimum.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to For now, an address can only be selected within Qashqadaryo region. The map will remain within Qashqadaryo..
+        ///   Looks up a localized string similar to For now, an address can only be selected within Shahrisabz city. The map will remain within Shahrisabz..
         /// </summary>
         internal static string ForNowAnAddressCanOnlyBeSelected {
             get {
@@ -3139,7 +3139,7 @@ namespace Ninimum.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Qashqadaryo: district, street, house, or nearby landmark.
+        ///   Looks up a localized string similar to Shahrisabz: district, street, house, or nearby landmark.
         /// </summary>
         internal static string QashqadaryoDistrictStreetHouseOrNearbyLandmark {
             get {

@@ -424,7 +424,7 @@ namespace Api.Services
             }
         }
 
-        public async Task<SelectedAddressModel?> SearchAddressInQashqadaryoAsync(string query)
+        public async Task<SelectedAddressModel?> SearchAddressInShahrisabzAsync(string query)
         {
             if (string.IsNullOrWhiteSpace(query))
                 return null;
@@ -432,19 +432,10 @@ namespace Api.Services
             try
             {
                 const string apiKey = "bb9a670d-13db-4cec-8fc9-a03c8b2b4ece";
-                const string bbox = "64.10,37.85~67.85,39.70";
+                const string bbox = "66.7500,39.0000~66.9500,39.1500";
 
                 string trimmedQuery = query.Trim();
-                string lowerQuery = trimmedQuery.ToLowerInvariant();
-
-                bool alreadyHasRegionContext =
-                    lowerQuery.Contains("qashqadaryo") ||
-                    lowerQuery.Contains("kashkadarya") ||
-                    lowerQuery.Contains("uzbekistan");
-
-                string searchText = alreadyHasRegionContext
-                    ? trimmedQuery
-                    : $"{trimmedQuery}, Qashqadaryo, Uzbekistan";
+                string searchText = $"{trimmedQuery}, Shahrisabz, Qashqadaryo, Uzbekistan";
 
                 string encodedSearchText = Uri.EscapeDataString(searchText);
 

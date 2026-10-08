@@ -14,20 +14,18 @@ namespace Ninimum.Views.LoginRegister;
 
 public partial class AddressPage : BasePage, INotifyPropertyChanged
 {
-    // The map is intentionally limited to Qashqadaryo for the first Ninimum delivery area.
-    // Shahrisabz is the default focus when no previously saved address is available.
     private const double ShahrisabzLatitude = 39.0578;
     private const double ShahrisabzLongitude = 66.8342;
-    private const double DefaultMapRadiusKm = 5;
+    private const double DefaultMapRadiusKm = 3;
     private const double AddressMapRadiusKm = 1;
-    private const double MaxMapRadiusKm = 90;
+    private const double MaxMapRadiusKm = 5;
 
-    // A practical bounding box around Qashqadaryo viloyati.
-    // It keeps the user from accidentally moving the map to another country/region.
-    private const double QashqadaryoMinLatitude = 37.85;
-    private const double QashqadaryoMaxLatitude = 39.70;
-    private const double QashqadaryoMinLongitude = 64.10;
-    private const double QashqadaryoMaxLongitude = 67.85;
+    // The existing Shahrisabz delivery area is also the address selection boundary.
+    private const double ShahrisabzMinLatitude = 39.0000;
+    private const double ShahrisabzMaxLatitude = 39.1500;
+    private const double ShahrisabzMinLongitude = 66.7500;
+    private const double ShahrisabzMaxLongitude = 66.9500;
+    private bool isMapInitialized;
 
     private double latitude;
     private double longitude;
@@ -76,18 +74,25 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
 
         Loaded += AddressPage_Loaded;
         Unloaded += AddressPage_Unloaded;
-        map.PropertyChanged += Map_PropertyChanged;
+        map.MoveToRegion(MapSpan.FromCenterAndRadius(
+            new Location(ShahrisabzLatitude, ShahrisabzLongitude),
+            Distance.FromKilometers(DefaultMapRadiusKm)));
 
         ShowMapMode(false);
     }
 
     private async void AddressPage_Loaded(object sender, EventArgs e)
     {
+        isMapInitialized = false;
+        map.PropertyChanged -= Map_PropertyChanged;
         await InitializeMapAsync();
+        isMapInitialized = true;
+        map.PropertyChanged += Map_PropertyChanged;
     }
 
     private void AddressPage_Unloaded(object sender, EventArgs e)
     {
+        isMapInitialized = false;
         map.PropertyChanged -= Map_PropertyChanged;
         mapMoveCts?.Cancel();
     }
@@ -100,7 +105,7 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         //    open exactly where the user's current saved/selected address is.
         if (navigationData?.Latitude is double initialLatitude &&
             navigationData.Longitude is double initialLongitude &&
-            IsInsideQashqadaryo(initialLatitude, initialLongitude))
+            IsInsideShahrisabz(initialLatitude, initialLongitude))
         {
             await MoveMapToAsync(
                 initialLatitude,
@@ -111,12 +116,12 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         }
 
         // 2. Older users may have address text but no usable coordinates. Try to resolve the
-        //    existing address inside Qashqadaryo before falling back to Shahrisabz.
+        //    existing address inside Shahrisabz before falling back to Shahrisabz.
         if (!string.IsNullOrWhiteSpace(navigationData?.AddressText))
         {
-            var resolved = await apiService.SearchAddressInQashqadaryoAsync(navigationData.AddressText);
+            var resolved = await apiService.SearchAddressInShahrisabzAsync(navigationData.AddressText);
 
-            if (resolved != null && IsInsideQashqadaryo(resolved.Latitude, resolved.Longitude))
+            if (resolved != null && IsInsideShahrisabz(resolved.Latitude, resolved.Longitude))
             {
                 await MoveMapToAsync(
                     resolved.Latitude,
@@ -199,9 +204,9 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         {
             IsBusy = true;
 
-            var result = await apiService.SearchAddressInQashqadaryoAsync(query);
+            var result = await apiService.SearchAddressInShahrisabzAsync(query);
 
-            if (result == null || !IsInsideQashqadaryo(result.Latitude, result.Longitude))
+            if (result == null || !IsInsideShahrisabz(result.Latitude, result.Longitude))
             {
                 await AlertService.ShowAlertAsync(
                     AppResource.AddressNotFound,
@@ -348,7 +353,7 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
 
     private async void Map_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName != nameof(map.VisibleRegion) || map.VisibleRegion == null)
+        if (!isMapInitialized || e.PropertyName != nameof(map.VisibleRegion) || map.VisibleRegion == null)
             return;
 
         if (isUpdatingMapProgrammatically)
@@ -359,17 +364,17 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         double radiusKm = map.VisibleRegion.Radius.Kilometers;
 
         // Keep both panning and excessive zoom-out inside the intended service region.
-        if (!IsInsideQashqadaryo(centerLatitude, centerLongitude) || radiusKm > MaxMapRadiusKm)
+        if (!IsInsideShahrisabz(centerLatitude, centerLongitude) || radiusKm > MaxMapRadiusKm)
         {
             double clampedLatitude = Math.Clamp(
                 centerLatitude,
-                QashqadaryoMinLatitude,
-                QashqadaryoMaxLatitude);
+                ShahrisabzMinLatitude,
+                ShahrisabzMaxLatitude);
 
             double clampedLongitude = Math.Clamp(
                 centerLongitude,
-                QashqadaryoMinLongitude,
-                QashqadaryoMaxLongitude);
+                ShahrisabzMinLongitude,
+                ShahrisabzMaxLongitude);
 
             double clampedRadiusKm = Math.Min(
                 Math.Max(radiusKm, AddressMapRadiusKm),
@@ -436,7 +441,7 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
                 return;
             }
 
-            if (!IsInsideQashqadaryo(location.Latitude, location.Longitude))
+            if (!IsInsideShahrisabz(location.Latitude, location.Longitude))
             {
                 await AlertService.ShowAlertAsync(
                     AppResource.QashqadaryoRegion,
@@ -475,7 +480,7 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         double radiusKm,
         string? knownAddress = null)
     {
-        if (!IsInsideQashqadaryo(targetLatitude, targetLongitude))
+        if (!IsInsideShahrisabz(targetLatitude, targetLongitude))
         {
             targetLatitude = ShahrisabzLatitude;
             targetLongitude = ShahrisabzLongitude;
@@ -556,27 +561,17 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         PickupButton.IsVisible = true;
     }
 
-    private static bool IsInsideQashqadaryo(double lat, double lon)
+    private static bool IsInsideShahrisabz(double lat, double lon)
     {
-        return lat >= QashqadaryoMinLatitude &&
-               lat <= QashqadaryoMaxLatitude &&
-               lon >= QashqadaryoMinLongitude &&
-               lon <= QashqadaryoMaxLongitude;
+        return lat >= ShahrisabzMinLatitude &&
+               lat <= ShahrisabzMaxLatitude &&
+               lon >= ShahrisabzMinLongitude &&
+               lon <= ShahrisabzMaxLongitude;
     }
 
     private bool CheckDeliveryAvailability(double lat, double lon)
     {
-        // Current first delivery zone: Shahrisabz and its nearby area.
-        // The map itself can be explored throughout Qashqadaryo.
-        const double minLat = 39.0000;
-        const double maxLat = 39.1500;
-        const double minLon = 66.7500;
-        const double maxLon = 66.9500;
-
-        return lat >= minLat &&
-               lat <= maxLat &&
-               lon >= minLon &&
-               lon <= maxLon;
+        return IsInsideShahrisabz(lat, lon);
     }
 
     private void OnConfirmAddress()
@@ -589,7 +584,11 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
 
     private async void PickupButton_Clicked(object sender, EventArgs e)
     {
-        if (string.IsNullOrWhiteSpace(AddressText))
+        if (hasPendingAddressSearch && !await SearchTypedAddressAsync())
+            return;
+
+        if (!isMapInitialized || !IsInsideShahrisabz(latitude, longitude) ||
+            string.IsNullOrWhiteSpace(AddressText))
         {
             await AlertService.ShowAlertAsync(
                 AppResource.Address,
