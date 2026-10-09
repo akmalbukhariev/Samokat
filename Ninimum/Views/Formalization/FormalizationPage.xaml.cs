@@ -267,12 +267,24 @@ public partial class FormalizationPage : BasePage
                     return;
                 }
 
-                long addressId = 1;
+                if (string.IsNullOrWhiteSpace(data.AddressText) ||
+                    data.AddressLatitude is not double addressLatitude ||
+                    data.AddressLongitude is not double addressLongitude ||
+                    !double.IsFinite(addressLatitude) || !double.IsFinite(addressLongitude) ||
+                    addressLatitude < 39.0000 || addressLatitude > 39.1500 ||
+                    addressLongitude < 66.7500 || addressLongitude > 66.9500)
+                {
+                    await Shell.Current.DisplayAlert(AppResource.Address,
+                        AppResource.PleaseSelectADeliveryAddress, AppResource.Ok);
+                    return;
+                }
 
                 var createOrderRequest = new CreateOrderRequest
                 {
                     userId = data.UserId,
-                    addressId = addressId,
+                    deliveryAddress = data.AddressText.Trim(),
+                    deliveryLatitude = addressLatitude,
+                    deliveryLongitude = addressLongitude,
                     totalPrice = totalPrice,
                     tariffSubscriptionId = data.TariffSubscriptionId,
 

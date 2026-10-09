@@ -167,7 +167,7 @@ public partial class DeliveriesViewModel : ObservableObject
     [RelayCommand]
     private async Task OpenRouteMap()
     {
-        var stops = ActiveJobs.Where(HasCoordinates).OrderBy(x => x.RouteOrder).ToList();
+        var stops = ActiveJobs.Where(x => x.IsActive && HasCoordinates(x)).OrderBy(x => x.RouteOrder).ToList();
         if (stops.Count == 0)
         {
             await AlertService.Show("Xarita", "Buyurtmalarda koordinata mavjud emas.");
@@ -211,7 +211,7 @@ public partial class DeliveriesViewModel : ObservableObject
             job.DistanceFromPreviousKm = null;
         }
 
-        var located = ActiveJobs.Where(HasCoordinates).ToList();
+        var located = ActiveJobs.Where(x => x.IsActive && HasCoordinates(x)).ToList();
         if (located.Count == 0) return;
 
         (double lat, double lon)? origin = await TryGetCourierLocationAsync();

@@ -217,7 +217,7 @@
     <value>Проблема с доставкой</value>
   </data>
   <data name="DeliveryFailedMessage" xml:space="preserve">
-    <value>Отметить доставку как недоставленную? Администратор сможет проверить и назначить повторную попытку.</value>
+    <value>Начать возврат заказа? Затем выберите причину. Возврат оплаты проверяется отдельно.</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Да</value>
@@ -226,4 +226,9 @@
     <value>Нет</value>
   </data>
   <data name="SessionReplaced" xml:space="preserve"><value>В этот аккаунт вошли на другом устройстве. Пожалуйста, войдите снова.</value></data>
+  <data name="OrderReturning" xml:space="preserve"><value>Возвращается</value></data>
+  <data name="ReturnReasonTitle" xml:space="preserve"><value>Причина недоставки</value></data>
+  <data name="ReturnNoCustomer" xml:space="preserve"><value>Клиент отсутствует</value></data>
+  <data name="ReturnAddress" xml:space="preserve"><value>Адрес не найден</value></data>
+  <data name="ReturnRefused" xml:space="preserve"><value>Клиент отказался</value></data>
 </root>

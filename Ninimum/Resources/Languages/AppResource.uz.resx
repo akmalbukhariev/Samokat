@@ -1453,4 +1453,8 @@ buyurtma qiling</value>
   <data name="CheckoutOutOfStock" xml:space="preserve"><value>Uzr, bu mahsulot qolmagan.</value></data>
   <data name="CheckoutInsufficientStock" xml:space="preserve"><value>Omborda faqat {0} dona qolgan. Miqdorni kamaytiring.</value></data>
   <data name="CheckoutStockCheckFailed" xml:space="preserve"><value>Mahsulot mavjudligini tekshirib bo‘lmadi. Iltimos, qayta urinib ko‘ring.</value></data>
+  <data name="OrderReady" xml:space="preserve">
+    <value>Yetkazishga tayyor</value>
+  </data>
+  <data name="OrderReturning" xml:space="preserve"><value>Qaytarilmoqda</value></data>
 </root>

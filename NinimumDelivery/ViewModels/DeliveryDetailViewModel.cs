@@ -60,7 +60,13 @@ public partial class DeliveryDetailViewModel : ObservableObject
     private async Task Fail()
     {
         if (!await AlertService.Confirm(AppResource.DeliveryFailedTitle, AppResource.DeliveryFailedMessage, AppResource.Yes, AppResource.No)) return;
-        await RunAction(() => api.UpdateStatus(jobId, "FAILED", "Courier could not complete delivery"), reload: true);
+        var page = Application.Current?.Windows.FirstOrDefault()?.Page;
+        if (page == null || IsLoading) return;
+        string Text(string key) => AppResource.ResourceManager.GetString(key, AppResource.Culture) ?? key;
+        var reasons = new[] { Text("ReturnNoCustomer"), Text("ReturnAddress"), Text("ReturnRefused") };
+        var reason = await page.DisplayActionSheetAsync(Text("ReturnReasonTitle"), AppResource.Close, null, reasons);
+        if (!reasons.Contains(reason)) return;
+        await RunAction(() => api.UpdateStatus(jobId, "FAILED", reason), reload: true);
     }
 
     [RelayCommand]

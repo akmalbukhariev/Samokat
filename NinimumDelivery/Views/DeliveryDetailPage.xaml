@@ -38,6 +38,7 @@
                     <Button Grid.Column="1" Text="{x:Static lang:AppResource.OpenMap}" Command="{Binding MapCommand}" Style="{StaticResource SecondaryButton}" />
                 </Grid>
 
+                <Label Text="{Binding Job.note}" Style="{StaticResource MutedLabel}" />
                 <Label Text="{x:Static lang:AppResource.Products}" Style="{StaticResource SectionTitle}" />
                 <VerticalStackLayout BindableLayout.ItemsSource="{Binding Job.products}" Spacing="10">
                     <BindableLayout.ItemTemplate>

@@ -6,7 +6,11 @@ public class CreateOrderRequest
 
     public long userId { get; set; }
 
-    public long addressId { get; set; }
+    public long? addressId { get; set; }
+
+    public string deliveryAddress { get; set; } = string.Empty;
+    public double? deliveryLatitude { get; set; }
+    public double? deliveryLongitude { get; set; }
 
     public int totalPrice { get; set; }
 

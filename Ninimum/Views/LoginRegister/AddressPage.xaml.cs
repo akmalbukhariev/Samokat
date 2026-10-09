@@ -391,6 +391,7 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
 
         latitude = centerLatitude;
         longitude = centerLongitude;
+        SetAddressTextFromMap(string.Empty);
 
         if (!isMapMoving)
         {
@@ -490,6 +491,7 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
 
         latitude = targetLatitude;
         longitude = targetLongitude;
+        SetAddressTextFromMap(string.Empty);
 
         await MoveMapOnlyAsync(targetLatitude, targetLongitude, radiusKm);
 
@@ -535,10 +537,12 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
                 targetLatitude,
                 targetLongitude);
 
-            if (!string.IsNullOrWhiteSpace(resolvedAddress))
+            // Ignore a response for a point the user has already moved away from.
+            if (latitude == targetLatitude && longitude == targetLongitude && !hasPendingAddressSearch)
+            {
                 SetAddressTextFromMap(resolvedAddress);
-
-            UpdateDeliveryState();
+                UpdateDeliveryState();
+            }
         }
         finally
         {

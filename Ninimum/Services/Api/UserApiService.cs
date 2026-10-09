@@ -401,7 +401,7 @@ namespace Api.Services
                 var url =
                     $"https://geocode-maps.yandex.ru/v1/?" +
                     $"apikey={apiKey}" +
-                    $"&geocode={longitude},{latitude}" +
+                    "&geocode=" + Ninimum.Utils.MapCoordinates.ForGeocoder(latitude, longitude) +
                     $"&lang=en_US" +
                     $"&format=json";
 

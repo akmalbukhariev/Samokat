@@ -286,7 +286,7 @@ namespace NinimumDelivery.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mark this delivery as not delivered? The admin can review it and arrange another attempt..
+        ///   Looks up a localized string similar to Mark this order as returning? Choose a reason next. Payment refund is handled separately..
         /// </summary>
         internal static string DeliveryFailedMessage {
             get {
@@ -538,6 +538,15 @@ namespace NinimumDelivery.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Returning.
+        /// </summary>
+        internal static string OrderReturning {
+            get {
+                return ResourceManager.GetString("OrderReturning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         internal static string Password {
@@ -597,6 +606,42 @@ namespace NinimumDelivery.Resources.Languages {
         internal static string Refresh {
             get {
                 return ResourceManager.GetString("Refresh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address not found.
+        /// </summary>
+        internal static string ReturnAddress {
+            get {
+                return ResourceManager.GetString("ReturnAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer unavailable.
+        /// </summary>
+        internal static string ReturnNoCustomer {
+            get {
+                return ResourceManager.GetString("ReturnNoCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Why could you not deliver?.
+        /// </summary>
+        internal static string ReturnReasonTitle {
+            get {
+                return ResourceManager.GetString("ReturnReasonTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Customer refused.
+        /// </summary>
+        internal static string ReturnRefused {
+            get {
+                return ResourceManager.GetString("ReturnRefused", resourceCulture);
             }
         }
         

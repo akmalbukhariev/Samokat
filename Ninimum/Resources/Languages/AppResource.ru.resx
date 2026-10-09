@@ -1452,4 +1452,8 @@
   <data name="CheckoutOutOfStock" xml:space="preserve"><value>Извините, этот товар закончился.</value></data>
   <data name="CheckoutInsufficientStock" xml:space="preserve"><value>На складе осталось только {0} шт. Уменьшите количество.</value></data>
   <data name="CheckoutStockCheckFailed" xml:space="preserve"><value>Не удалось проверить наличие товара. Пожалуйста, попробуйте ещё раз.</value></data>
+  <data name="OrderReady" xml:space="preserve">
+    <value>Готов к доставке</value>
+  </data>
+  <data name="OrderReturning" xml:space="preserve"><value>Возвращается</value></data>
 </root>

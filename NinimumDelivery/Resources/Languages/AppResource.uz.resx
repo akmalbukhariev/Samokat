@@ -217,7 +217,7 @@
     <value>Yetkazishda muammo</value>
   </data>
   <data name="DeliveryFailedMessage" xml:space="preserve">
-    <value>Yetkazmani yetkazilmadi deb belgilaysizmi? Admin holatni ko‘rib, qayta yetkazishni tashkil qilishi mumkin.</value>
+    <value>Buyurtmani qaytarilmoqda deb belgilaysizmi? Keyin sababni tanlang. Pul qaytarilishi alohida tekshiriladi.</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Ha</value>
@@ -226,4 +226,9 @@
     <value>Yo‘q</value>
   </data>
   <data name="SessionReplaced" xml:space="preserve"><value>Bu hisobga boshqa qurilmadan kirildi. Iltimos, qayta kiring.</value></data>
+  <data name="OrderReturning" xml:space="preserve"><value>Qaytarilmoqda</value></data>
+  <data name="ReturnReasonTitle" xml:space="preserve"><value>Yetkazib bo‘lmaslik sababi</value></data>
+  <data name="ReturnNoCustomer" xml:space="preserve"><value>Mijoz yo‘q</value></data>
+  <data name="ReturnAddress" xml:space="preserve"><value>Manzil topilmadi</value></data>
+  <data name="ReturnRefused" xml:space="preserve"><value>Mijoz rad etdi</value></data>
 </root>

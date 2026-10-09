@@ -1450,4 +1450,8 @@ online</value>
   <data name="CheckoutOutOfStock" xml:space="preserve"><value>Sorry, this product is out of stock.</value></data>
   <data name="CheckoutInsufficientStock" xml:space="preserve"><value>Only {0} units remain in stock. Please reduce the quantity.</value></data>
   <data name="CheckoutStockCheckFailed" xml:space="preserve"><value>Could not check product availability. Please try again.</value></data>
+  <data name="OrderReady" xml:space="preserve">
+    <value>Ready for delivery</value>
+  </data>
+  <data name="OrderReturning" xml:space="preserve"><value>Returning</value></data>
 </root>

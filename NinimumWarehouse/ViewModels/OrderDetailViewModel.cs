@@ -62,7 +62,7 @@ public sealed class OrderDetailViewModel : ViewModelBase
     public string? Note => order?.Note;
     public bool HasNote => !string.IsNullOrWhiteSpace(Note);
     public bool HasOrder => order is not null;
-    public bool Available => order?.Payment == "PAID" && order.OrderStatus is "CONFIRMED" or "PREPARING";
+    public bool Available => order?.Payment == "PAID" && order.OrderStatus is "CONFIRMED" or "PREPARING" or "READY";
     private bool Owned => order?.Worker == Api.WorkerCode;
     public bool Unavailable => HasOrder && !Available;
     public bool OtherWorker => HasOrder && !Owned && Status is "PICKING" or "BLOCKED";

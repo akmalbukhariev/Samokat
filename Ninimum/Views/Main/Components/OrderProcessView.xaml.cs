@@ -141,9 +141,12 @@ public partial class OrderProcessView : ContentView
                 CurrentStep = OrderProcessStep.PaymentCompleted;
                 break;
             case "CONFIRMED":
-                CurrentStep = OrderProcessStep.ProductPreparing;
+                CurrentStep = OrderProcessStep.PaymentCompleted;
                 break;
             case "PREPARING":
+                CurrentStep = OrderProcessStep.ProductPreparing;
+                break;
+            case "READY":
                 CurrentStep = OrderProcessStep.DeliveryPreparing;
                 break;
             case "ON_THE_WAY":
@@ -197,6 +200,13 @@ public partial class OrderProcessView : ContentView
     {
         var orderPrefix = string.IsNullOrWhiteSpace(OrderNumber) ? "" : $"#{OrderNumber} ";
         var language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLowerInvariant();
+        ProgressContainer.IsVisible = IsExpanded && OrderStatus?.ToUpperInvariant() != "RETURNING";
+        if (OrderStatus?.ToUpperInvariant() == "RETURNING")
+        {
+            TitleLabel.Text = language == "ru" ? "Заказ возвращается" : language == "en" ? "Order returning" : "Buyurtma qaytarilmoqda";
+            SubtitleLabel.Text = language == "ru" ? "Доставка не выполнена. Возврат рассматривается." : language == "en" ? "Delivery could not be completed. The return is being reviewed." : "Buyurtma yetkazilmadi. Qaytarish ko‘rib chiqilmoqda.";
+            return;
+        }
 
         if (language == "ru")
         {
@@ -207,10 +217,14 @@ public partial class OrderProcessView : ContentView
                     SubtitleLabel.Text = $"{orderPrefix}оплата за заказ успешно принята.";
                     break;
                 case "CONFIRMED":
+                    TitleLabel.Text = "Заказ подтверждён";
+                    SubtitleLabel.Text = $"{orderPrefix}заказ ожидает подготовки на складе.";
+                    break;
+                case "PREPARING":
                     TitleLabel.Text = "Товар готовится";
                     SubtitleLabel.Text = $"{orderPrefix}заказ комплектуется.";
                     break;
-                case "PREPARING":
+                case "READY":
                     TitleLabel.Text = "Готов к доставке";
                     SubtitleLabel.Text = $"{orderPrefix}заказ готов к передаче курьеру.";
                     break;
@@ -244,10 +258,14 @@ public partial class OrderProcessView : ContentView
                     SubtitleLabel.Text = $"{orderPrefix}payment for the order was received successfully.";
                     break;
                 case "CONFIRMED":
+                    TitleLabel.Text = "Order confirmed";
+                    SubtitleLabel.Text = $"{orderPrefix}order is waiting for warehouse preparation.";
+                    break;
+                case "PREPARING":
                     TitleLabel.Text = "Product is being prepared";
                     SubtitleLabel.Text = $"{orderPrefix}order is being prepared.";
                     break;
-                case "PREPARING":
+                case "READY":
                     TitleLabel.Text = "Ready for delivery";
                     SubtitleLabel.Text = $"{orderPrefix}order is ready to be handed to the courier.";
                     break;
@@ -279,10 +297,14 @@ public partial class OrderProcessView : ContentView
                 SubtitleLabel.Text = $"{orderPrefix}buyurtma uchun to'lov muvaffaqiyatli qabul qilindi.";
                 break;
             case "CONFIRMED":
+                TitleLabel.Text = "Buyurtma tasdiqlandi";
+                SubtitleLabel.Text = $"{orderPrefix}buyurtma omborda tayyorlashni kutmoqda.";
+                break;
+            case "PREPARING":
                 TitleLabel.Text = "Mahsulot tayyorlanmoqda";
                 SubtitleLabel.Text = $"{orderPrefix}buyurtma yig'ilish jarayonida.";
                 break;
-            case "PREPARING":
+            case "READY":
                 TitleLabel.Text = "Yetkazishga tayyor";
                 SubtitleLabel.Text = $"{orderPrefix}buyurtma kuryerga topshirishga tayyor.";
                 break;
@@ -347,7 +369,7 @@ public partial class OrderProcessView : ContentView
 
     private void UpdateExpandState()
     {
-        ProgressContainer.IsVisible = IsExpanded;
+        ProgressContainer.IsVisible = IsExpanded && OrderStatus?.ToUpperInvariant() != "RETURNING";
         ToggleImage.Source = IsExpanded ? "ic_arrow_up.png" : "ic_arrow_down.png";
     }
 

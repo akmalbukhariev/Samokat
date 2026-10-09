@@ -217,7 +217,7 @@
     <value>Delivery problem</value>
   </data>
   <data name="DeliveryFailedMessage" xml:space="preserve">
-    <value>Mark this delivery as not delivered? The admin can review it and arrange another attempt.</value>
+    <value>Mark this order as returning? Choose a reason next. Payment refund is handled separately.</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
@@ -226,4 +226,9 @@
     <value>No</value>
   </data>
   <data name="SessionReplaced" xml:space="preserve"><value>This account was signed in on another device. Please sign in again.</value></data>
+  <data name="OrderReturning" xml:space="preserve"><value>Returning</value></data>
+  <data name="ReturnReasonTitle" xml:space="preserve"><value>Why could you not deliver?</value></data>
+  <data name="ReturnNoCustomer" xml:space="preserve"><value>Customer unavailable</value></data>
+  <data name="ReturnAddress" xml:space="preserve"><value>Address not found</value></data>
+  <data name="ReturnRefused" xml:space="preserve"><value>Customer refused</value></data>
 </root>

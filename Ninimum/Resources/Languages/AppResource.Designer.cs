@@ -2545,6 +2545,15 @@ namespace Ninimum.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ready for delivery.
+        /// </summary>
+        internal static string OrderReady {
+            get {
+                return ResourceManager.GetString("OrderReady", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Order received.
         /// </summary>
         internal static string OrderReceived {
@@ -2559,6 +2568,15 @@ namespace Ninimum.Resources.Languages {
         internal static string OrderReceived_7a2c1d {
             get {
                 return ResourceManager.GetString("OrderReceived_7a2c1d", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Returning.
+        /// </summary>
+        internal static string OrderReturning {
+            get {
+                return ResourceManager.GetString("OrderReturning", resourceCulture);
             }
         }
         
