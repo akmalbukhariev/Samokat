@@ -799,6 +799,105 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Checking returned products.
+        /// </summary>
+        public static string ReturnChecking {
+            get {
+                return ResourceManager.GetString("ReturnChecking", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm that all checked products are physically in the warehouse, undamaged and suitable for sale. Stock will be restored once. Payment refunds are handled separately..
+        /// </summary>
+        public static string ReturnConfirmation {
+            get {
+                return ResourceManager.GetString("ReturnConfirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received by warehouse.
+        /// </summary>
+        public static string Returned {
+            get {
+                return ResourceManager.GetString("Returned", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No returns awaiting receipt..
+        /// </summary>
+        public static string ReturnEmpty {
+            get {
+                return ResourceManager.GetString("ReturnEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check all products physically received. Confirm only complete, undamaged products suitable for sale..
+        /// </summary>
+        public static string ReturnHint {
+            get {
+                return ResourceManager.GetString("ReturnHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Receive returned products?.
+        /// </summary>
+        public static string ReturnQuestion {
+            get {
+                return ResourceManager.GetString("ReturnQuestion", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Received — restore stock.
+        /// </summary>
+        public static string ReturnReceive {
+            get {
+                return ResourceManager.GetString("ReturnReceive", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Returned products received and checked..
+        /// </summary>
+        public static string ReturnReceivedMessage {
+            get {
+                return ResourceManager.GetString("ReturnReceivedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Returns.
+        /// </summary>
+        public static string Returns {
+            get {
+                return ResourceManager.GetString("Returns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check returned products.
+        /// </summary>
+        public static string ReturnStart {
+            get {
+                return ResourceManager.GetString("ReturnStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Awaiting warehouse receipt.
+        /// </summary>
+        public static string ReturnWaiting {
+            get {
+                return ResourceManager.GetString("ReturnWaiting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Point the camera at the barcode on the package..
         /// </summary>
         public static string ScanHint {

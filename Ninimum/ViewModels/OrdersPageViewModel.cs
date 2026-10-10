@@ -318,7 +318,8 @@ public partial class OrdersPageViewModel : ObservableObject
 
     private bool IsCompleted(string status)
     {
-        return string.Equals(status, "DELIVERED", StringComparison.OrdinalIgnoreCase) ||
+        return string.Equals(status, "RETURNED", StringComparison.OrdinalIgnoreCase) ||
+               string.Equals(status, "DELIVERED", StringComparison.OrdinalIgnoreCase) ||
                string.Equals(status, "CANCELLED", StringComparison.OrdinalIgnoreCase);
     }
 

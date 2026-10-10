@@ -231,4 +231,5 @@
   <data name="ReturnNoCustomer" xml:space="preserve"><value>Customer unavailable</value></data>
   <data name="ReturnAddress" xml:space="preserve"><value>Address not found</value></data>
   <data name="ReturnRefused" xml:space="preserve"><value>Customer refused</value></data>
+  <data name="OrderReturned" xml:space="preserve"><value>Received by warehouse</value></data>
 </root>

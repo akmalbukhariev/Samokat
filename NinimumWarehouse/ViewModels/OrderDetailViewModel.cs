@@ -56,18 +56,26 @@ public sealed class OrderDetailViewModel : ViewModelBase
     private CancellationTokenSource? refreshCancellation;
     private Task? pendingRefresh;
     public ObservableCollection<OrderItemViewModel> Items { get; } = [];
-    public string Number => order?.Number ?? "";
+    public string Number => order is null ? "" : $"#{order.Id:D6}";
     public string Status => order?.Status ?? "WAITING";
     public string StatusText => LocalizedMessages.Status(Status);
     public string? Note => order?.Note;
-    public bool HasNote => !string.IsNullOrWhiteSpace(Note);
+    public bool HasNote => !IsReturn && !string.IsNullOrWhiteSpace(Note);
+    public bool IsReturnReceived => order?.OrderStatus == "RETURNED";
+    public string ReturnReceivedMessage => Text("ReturnReceivedMessage");
     public bool HasOrder => order is not null;
-    public bool Available => order?.Payment == "PAID" && order.OrderStatus is "CONFIRMED" or "PREPARING" or "READY";
+    public bool IsReturn => order?.OrderStatus is "RETURNING" or "RETURNED";
+    public string StartText => IsReturn ? Text("ReturnStart") : AppResource.StartPreparing;
+    public string FinishText => IsReturn ? Text("ReturnReceive") : AppResource.PackedReady;
+    public string ActionHint => IsReturn ? Text("ReturnHint") : AppResource.PackingHint;
+    private static string Text(string key) => AppResource.ResourceManager.GetString(key,AppResource.Culture) ?? key;
+    public bool CanReportProblem => CanCheck && !IsReturn;
+    public bool Available => IsReturn || order?.Payment == "PAID" && order.OrderStatus is "CONFIRMED" or "PREPARING" or "READY";
     private bool Owned => order?.Worker == Api.WorkerCode;
     public bool Unavailable => HasOrder && !Available;
-    public bool OtherWorker => HasOrder && !Owned && Status is "PICKING" or "BLOCKED";
-    public bool CanStart => Available && Status == "WAITING";
-    public bool CanCheck => Available && Owned && Status == "PICKING";
+    public bool OtherWorker => HasOrder && !Owned && Status is "PICKING" or "BLOCKED" or "RETURN_CHECKING";
+    public bool CanStart => Available && Status is "WAITING" or "RETURN_WAITING";
+    public bool CanCheck => Available && Owned && Status is "PICKING" or "RETURN_CHECKING";
     public bool CanResume => Available && Owned && Status == "BLOCKED";
     public bool IsReady => Available && Status == "READY";
     public bool ShowActions => CanStart || CanCheck || CanResume;
@@ -90,13 +98,13 @@ public sealed class OrderDetailViewModel : ViewModelBase
     {
         this.id=id;this.scan=scan;this.confirmReady=confirmReady;this.reportProblem=reportProblem;
         RefreshCommand = new AsyncRelayCommand(() => RefreshAsync(showErrors: true));
-        StartCommand = new AsyncRelayCommand(() => Act("claim"));
+        StartCommand = new AsyncRelayCommand(() => Act(IsReturn ? "return-claim" : "claim"));
         ResumeCommand = new AsyncRelayCommand(() => Act("resume"));
         ReadyCommand = new AsyncRelayCommand(() => RunAsync(async () =>
         {
             if (!CanCheck) throw new ApiException("WAREHOUSE_INVALID_STATE");
             if (!AllChecked) throw new ApiException("WAREHOUSE_INCOMPLETE");
-            if (await confirmReady()) Apply(await Api.Action(id,"ready"));
+            if (await confirmReady()) Apply(await Api.Action(id,IsReturn ? "return-receive" : "ready"));
         }));
         ProblemCommand = new AsyncRelayCommand(() => RunAsync(async () => { var reason=await reportProblem(); if (reason is null) return;
             if (string.IsNullOrWhiteSpace(reason)) throw new ApiException("REASON_REQUIRED");
@@ -145,7 +153,7 @@ public sealed class OrderDetailViewModel : ViewModelBase
             if (existingIndex < 0) Items.Insert(index, row);
             else if (existingIndex != index) Items.Move(existingIndex, index);
         }
-        Notify(nameof(Number),nameof(Status),nameof(StatusText),nameof(Note),nameof(HasNote),nameof(HasOrder),nameof(Unavailable),nameof(OtherWorker),nameof(CanStart),nameof(CanCheck),nameof(CanResume),nameof(IsReady),nameof(ShowActions),nameof(AllChecked),nameof(ProgressText),nameof(Progress));
+        Notify(nameof(IsReturnReceived),nameof(ReturnReceivedMessage),nameof(IsReturn),nameof(StartText),nameof(FinishText),nameof(ActionHint),nameof(CanReportProblem),nameof(Number),nameof(Status),nameof(StatusText),nameof(Note),nameof(HasNote),nameof(HasOrder),nameof(Unavailable),nameof(OtherWorker),nameof(CanStart),nameof(CanCheck),nameof(CanResume),nameof(IsReady),nameof(ShowActions),nameof(AllChecked),nameof(ProgressText),nameof(Progress));
         ReadyCommand.NotifyCanExecuteChanged();
     }
     private Task CheckAsync(OrderItemViewModel item,bool useCamera) => RunAsync(async () => {
@@ -157,6 +165,6 @@ public sealed class OrderDetailViewModel : ViewModelBase
         if(useCamera) { barcode = await scan(); if(barcode is null) return; }
         if(item.HasBarcode && string.IsNullOrWhiteSpace(barcode)) throw new ApiException("BARCODE_REQUIRED");
         if(!item.HasBarcode && string.IsNullOrWhiteSpace(item.Reason)) throw new ApiException("REASON_REQUIRED");
-        Apply(await Api.Action(id,"check",new {product_id=item.Id,quantity=qty,barcode,reason=item.Reason.Trim()}),item.Id);
+        Apply(await Api.Action(id,IsReturn ? "return-check" : "check",new {product_id=item.Id,quantity=qty,barcode,reason=item.Reason.Trim()}),item.Id);
     });
 }

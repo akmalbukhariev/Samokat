@@ -32,6 +32,9 @@
                         <Label Text="{x:Static lang:AppResource.ProblemHint}" Style="{StaticResource MutedLabel}"/>
                     </VerticalStackLayout>
                 </Border>
+                <Border Padding="18" StrokeThickness="0" StrokeShape="RoundRectangle 14" BackgroundColor="{StaticResource SuccessSoft}" IsVisible="{Binding IsReturnReceived}">
+                    <Label Text="{Binding ReturnReceivedMessage}" TextColor="{StaticResource SuccessColor}" FontAttributes="Bold"/>
+                </Border>
                 <Label Text="{x:Static lang:AppResource.ItemsTitle}" Style="{StaticResource SectionTitle}" IsVisible="{Binding HasOrder}"/>
                 <VerticalStackLayout Spacing="16" BindableLayout.ItemsSource="{Binding Items}">
                     <BindableLayout.ItemTemplate>
@@ -96,11 +99,11 @@
         </ScrollView>
         <Border Grid.Row="2" Padding="24,14,24,20" Stroke="{StaticResource BorderColor}" BackgroundColor="White" IsVisible="{Binding ShowActions}">
             <VerticalStackLayout Spacing="8" IsEnabled="{Binding IsAvailable}">
-                <Button Text="{x:Static lang:AppResource.StartPreparing}" Command="{Binding StartCommand}" Style="{StaticResource PrimaryButton}" IsVisible="{Binding CanStart}"/>
+                <Button Text="{Binding StartText}" Command="{Binding StartCommand}" Style="{StaticResource PrimaryButton}" IsVisible="{Binding CanStart}"/>
                 <VerticalStackLayout Spacing="8" IsVisible="{Binding CanCheck}">
-                    <Label Text="{x:Static lang:AppResource.PackingHint}" Style="{StaticResource MutedLabel}"/>
-                    <Button Text="{x:Static lang:AppResource.PackedReady}" Command="{Binding ReadyCommand}" Style="{StaticResource PrimaryButton}"/>
-                    <Button Text="{x:Static lang:AppResource.ReportProblem}" Command="{Binding ProblemCommand}" Style="{StaticResource TextButton}"/>
+                    <Label Text="{Binding ActionHint}" Style="{StaticResource MutedLabel}"/>
+                    <Button Text="{Binding FinishText}" Command="{Binding ReadyCommand}" Style="{StaticResource PrimaryButton}"/>
+                    <Button Text="{x:Static lang:AppResource.ReportProblem}" IsVisible="{Binding CanReportProblem}" Command="{Binding ProblemCommand}" Style="{StaticResource TextButton}"/>
                 </VerticalStackLayout>
                 <Button Text="{x:Static lang:AppResource.Resume}" Command="{Binding ResumeCommand}" Style="{StaticResource PrimaryButton}" IsVisible="{Binding CanResume}"/>
             </VerticalStackLayout>

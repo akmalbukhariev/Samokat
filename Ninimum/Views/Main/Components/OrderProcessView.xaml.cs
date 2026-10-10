@@ -200,7 +200,13 @@ public partial class OrderProcessView : ContentView
     {
         var orderPrefix = string.IsNullOrWhiteSpace(OrderNumber) ? "" : $"#{OrderNumber} ";
         var language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLowerInvariant();
-        ProgressContainer.IsVisible = IsExpanded && OrderStatus?.ToUpperInvariant() != "RETURNING";
+        ProgressContainer.IsVisible = IsExpanded && OrderStatus?.ToUpperInvariant() is not ("RETURNING" or "RETURNED");
+        if (OrderStatus?.ToUpperInvariant() == "RETURNED")
+        {
+            TitleLabel.Text = language == "ru" ? "Принято на склад" : language == "en" ? "Received by warehouse" : "Omborga qaytarildi";
+            SubtitleLabel.Text = language == "ru" ? "Возвращённые товары приняты на склад. Возврат оплаты выполняется отдельно." : language == "en" ? "Returned products have been received by the warehouse. Payment refunds are handled separately." : "Qaytgan mahsulotlar omborga qabul qilindi. Pulni qaytarish alohida bajariladi.";
+            return;
+        }
         if (OrderStatus?.ToUpperInvariant() == "RETURNING")
         {
             TitleLabel.Text = language == "ru" ? "Заказ возвращается" : language == "en" ? "Order returning" : "Buyurtma qaytarilmoqda";
@@ -369,7 +375,7 @@ public partial class OrderProcessView : ContentView
 
     private void UpdateExpandState()
     {
-        ProgressContainer.IsVisible = IsExpanded && OrderStatus?.ToUpperInvariant() != "RETURNING";
+        ProgressContainer.IsVisible = IsExpanded && OrderStatus?.ToUpperInvariant() is not ("RETURNING" or "RETURNED");
         ToggleImage.Source = IsExpanded ? "ic_arrow_up.png" : "ic_arrow_down.png";
     }
 

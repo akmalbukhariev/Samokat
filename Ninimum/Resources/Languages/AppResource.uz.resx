@@ -1457,4 +1457,5 @@ buyurtma qiling</value>
     <value>Yetkazishga tayyor</value>
   </data>
   <data name="OrderReturning" xml:space="preserve"><value>Qaytarilmoqda</value></data>
+  <data name="OrderReturned" xml:space="preserve"><value>Omborga qaytarildi</value></data>
 </root>

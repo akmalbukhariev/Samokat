@@ -17,7 +17,9 @@ public partial class OrderDetailPage : ContentPage
         base.OnDisappearing();
     }
     public Task RefreshAsync() => ViewModel.RefreshAsync();
-    private Task<bool> ConfirmReadyAsync() => DisplayAlertAsync(AppResource.ReadyQuestion,AppResource.ReadyConfirmation,AppResource.YesReady,AppResource.Cancel);
+    private Task<bool> ConfirmReadyAsync() => ViewModel.IsReturn
+        ? DisplayAlertAsync(AppResource.ResourceManager.GetString("ReturnQuestion",AppResource.Culture),AppResource.ResourceManager.GetString("ReturnConfirmation",AppResource.Culture),AppResource.Ok,AppResource.Cancel)
+        : DisplayAlertAsync(AppResource.ReadyQuestion,AppResource.ReadyConfirmation,AppResource.YesReady,AppResource.Cancel);
     private Task<string?> ReportProblemAsync() => DisplayPromptAsync(AppResource.Problem,AppResource.ProblemPrompt,AppResource.Ok,AppResource.Cancel,maxLength:AppConstants.MaxReasonLength);
     private async Task<string?> ScanAsync()
     {

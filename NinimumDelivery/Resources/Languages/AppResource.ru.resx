@@ -231,4 +231,5 @@
   <data name="ReturnNoCustomer" xml:space="preserve"><value>Клиент отсутствует</value></data>
   <data name="ReturnAddress" xml:space="preserve"><value>Адрес не найден</value></data>
   <data name="ReturnRefused" xml:space="preserve"><value>Клиент отказался</value></data>
+  <data name="OrderReturned" xml:space="preserve"><value>Принято на склад</value></data>
 </root>

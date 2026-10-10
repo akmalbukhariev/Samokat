@@ -324,4 +324,15 @@
   <data name="QuantityInvalid" xml:space="preserve">
     <value>Введите целое число больше нуля для проверенного количества.</value>
   </data>
+  <data name="Returns" xml:space="preserve"><value>Возвраты</value></data>
+  <data name="ReturnWaiting" xml:space="preserve"><value>Ожидает приёма на склад</value></data>
+  <data name="ReturnChecking" xml:space="preserve"><value>Проверка возвращённых товаров</value></data>
+  <data name="Returned" xml:space="preserve"><value>Принято на склад</value></data>
+  <data name="ReturnStart" xml:space="preserve"><value>Проверить возвращённые товары</value></data>
+  <data name="ReturnReceive" xml:space="preserve"><value>Принято — восстановить остаток</value></data>
+  <data name="ReturnHint" xml:space="preserve"><value>Проверьте все фактически полученные товары. Подтверждайте только полный возврат неповреждённых товаров, пригодных для продажи.</value></data>
+  <data name="ReturnQuestion" xml:space="preserve"><value>Принять возвращённые товары?</value></data>
+  <data name="ReturnConfirmation" xml:space="preserve"><value>Подтвердите, что все проверенные товары находятся на складе, не повреждены и пригодны для продажи. Остаток восстановится один раз. Возврат оплаты выполняется отдельно.</value></data>
+  <data name="ReturnEmpty" xml:space="preserve"><value>Нет возвратов, ожидающих приёма.</value></data>
+  <data name="ReturnReceivedMessage" xml:space="preserve"><value>Возвращённые товары приняты и проверены.</value></data>
 </root>

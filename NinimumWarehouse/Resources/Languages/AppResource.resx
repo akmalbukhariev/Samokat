@@ -324,4 +324,15 @@
   <data name="QuantityInvalid" xml:space="preserve">
     <value>Enter a whole number greater than zero for the checked quantity.</value>
   </data>
+  <data name="Returns" xml:space="preserve"><value>Returns</value></data>
+  <data name="ReturnWaiting" xml:space="preserve"><value>Awaiting warehouse receipt</value></data>
+  <data name="ReturnChecking" xml:space="preserve"><value>Checking returned products</value></data>
+  <data name="Returned" xml:space="preserve"><value>Received by warehouse</value></data>
+  <data name="ReturnStart" xml:space="preserve"><value>Check returned products</value></data>
+  <data name="ReturnReceive" xml:space="preserve"><value>Received — restore stock</value></data>
+  <data name="ReturnHint" xml:space="preserve"><value>Check all products physically received. Confirm only complete, undamaged products suitable for sale.</value></data>
+  <data name="ReturnQuestion" xml:space="preserve"><value>Receive returned products?</value></data>
+  <data name="ReturnConfirmation" xml:space="preserve"><value>Confirm that all checked products are physically in the warehouse, undamaged and suitable for sale. Stock will be restored once. Payment refunds are handled separately.</value></data>
+  <data name="ReturnEmpty" xml:space="preserve"><value>No returns awaiting receipt.</value></data>
+  <data name="ReturnReceivedMessage" xml:space="preserve"><value>Returned products received and checked.</value></data>
 </root>

@@ -3,6 +3,9 @@ namespace NinimumWarehouse.Services;
 public static class LocalizedMessages
 {
     public static string Status(string code) => code switch {
+        "RETURNING" or "RETURN_WAITING" => AppResource.ResourceManager.GetString("ReturnWaiting",AppResource.Culture) ?? "Return",
+        "RETURN_CHECKING" => AppResource.ResourceManager.GetString("ReturnChecking",AppResource.Culture) ?? "Checking return",
+        "RETURNED" => AppResource.ResourceManager.GetString("Returned",AppResource.Culture) ?? "Received",
         "WAITING" => AppResource.Waiting, "PICKING" => AppResource.Picking,
         "BLOCKED" => AppResource.Blocked, "READY" => AppResource.Ready, _ => AppResource.UnknownStatus };
     public static string Error(string code) => code switch {

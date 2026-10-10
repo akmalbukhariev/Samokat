@@ -231,4 +231,5 @@
   <data name="ReturnNoCustomer" xml:space="preserve"><value>Mijoz yo‘q</value></data>
   <data name="ReturnAddress" xml:space="preserve"><value>Manzil topilmadi</value></data>
   <data name="ReturnRefused" xml:space="preserve"><value>Mijoz rad etdi</value></data>
+  <data name="OrderReturned" xml:space="preserve"><value>Omborga qaytarildi</value></data>
 </root>

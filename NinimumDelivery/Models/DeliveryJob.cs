@@ -33,7 +33,7 @@ public partial class DeliveryJob : ObservableObject
     public string PriceText => $"{totalPrice:N0}".Replace(",", " ") + " so'm";
     public string DisplayPhone => string.IsNullOrWhiteSpace(customerPhone) ? AppResource.NotAssignedPhone : customerPhone;
     public string ProductCountText => string.Format(AppResource.ProductsCount, productCount);
-    public string StatusText => orderStatus == "RETURNING" ? (AppResource.ResourceManager.GetString("OrderReturning", AppResource.Culture) ?? "Returning") : jobStatus switch
+    public string StatusText => orderStatus == "RETURNED" ? (AppResource.ResourceManager.GetString("OrderReturned",AppResource.Culture) ?? "Received by warehouse") : orderStatus == "RETURNING" ? (AppResource.ResourceManager.GetString("OrderReturning", AppResource.Culture) ?? "Returning") : jobStatus switch
     {
         "WAITING_ASSIGNMENT" => AppResource.Waiting,
         "ACCEPTED" => AppResource.Accepted,

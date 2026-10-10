@@ -2572,6 +2572,15 @@ namespace Ninimum.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Received by warehouse.
+        /// </summary>
+        internal static string OrderReturned {
+            get {
+                return ResourceManager.GetString("OrderReturned", resourceCulture);
+            }
+        }
+
+        /// <summary>
         ///   Looks up a localized string similar to Returning.
         /// </summary>
         internal static string OrderReturning {

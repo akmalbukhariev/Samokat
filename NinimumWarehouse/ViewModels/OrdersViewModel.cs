@@ -9,7 +9,7 @@ public sealed class OrderCardViewModel(Order order, IAsyncRelayCommand<OrderCard
 {
     public IAsyncRelayCommand<OrderCardViewModel> OpenCommand => openCommand;
     public long Id => order.Id;
-    public string Number => order.Number;
+    public string Number => $"#{order.Id:D6}";
     public string Status => order.Status;
     public string StatusText => LocalizedMessages.Status(Status);
     public string QuantityText => string.Format(CultureInfo.CurrentCulture,AppResource.QuantityFormat,order.Quantity);
@@ -24,10 +24,11 @@ public sealed class OrdersViewModel : ViewModelBase
     private CancellationTokenSource? loadCancellation;
     private Task? pendingLoad;
     public ObservableCollection<OrderCardViewModel> Orders { get; } = [];
-    public string Title => view switch { AppConstants.MineView => AppResource.MyOrders, AppConstants.HistoryView => AppResource.History, _ => AppResource.Queue };
-    public string Subtitle => view switch { AppConstants.MineView => AppResource.MyOrdersSubtitle, AppConstants.HistoryView => AppResource.HistorySubtitle, _ => AppResource.QueueSubtitle };
-    public string EmptyTitle => view switch { AppConstants.MineView => AppResource.EmptyMineTitle, AppConstants.HistoryView => AppResource.EmptyHistoryTitle, _ => AppResource.EmptyQueueTitle };
-    public string EmptyMessage => view switch { AppConstants.MineView => AppResource.EmptyMineMessage, AppConstants.HistoryView => AppResource.EmptyHistoryMessage, _ => AppResource.EmptyQueueMessage };
+    private static string Text(string key) => AppResource.ResourceManager.GetString(key,AppResource.Culture) ?? key;
+    public string Title => view switch { "returns" => Text("Returns"), AppConstants.MineView => AppResource.MyOrders, AppConstants.HistoryView => AppResource.History, _ => AppResource.Queue };
+    public string Subtitle => view switch { "returns" => Text("ReturnHint"), AppConstants.MineView => AppResource.MyOrdersSubtitle, AppConstants.HistoryView => AppResource.HistorySubtitle, _ => AppResource.QueueSubtitle };
+    public string EmptyTitle => view switch { "returns" => Text("ReturnEmpty"), AppConstants.MineView => AppResource.EmptyMineTitle, AppConstants.HistoryView => AppResource.EmptyHistoryTitle, _ => AppResource.EmptyQueueTitle };
+    public string EmptyMessage => view switch { "returns" => "", AppConstants.MineView => AppResource.EmptyMineMessage, AppConstants.HistoryView => AppResource.EmptyHistoryMessage, _ => AppResource.EmptyQueueMessage };
     public string TotalText => string.Format(CultureInfo.CurrentCulture,AppResource.TotalFormat,total);
     public string PageText => string.Format(CultureInfo.CurrentCulture,AppResource.PageFormat,page,Math.Max(1,(int)Math.Ceiling((double)total/AppConstants.PageSize)));
     public bool ShowPagination => total > AppConstants.PageSize;

@@ -1456,4 +1456,5 @@
     <value>Готов к доставке</value>
   </data>
   <data name="OrderReturning" xml:space="preserve"><value>Возвращается</value></data>
+  <data name="OrderReturned" xml:space="preserve"><value>Принято на склад</value></data>
 </root>

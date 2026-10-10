@@ -4,6 +4,7 @@
         <Tab Title="{x:Static lang:AppResource.Queue}" Icon="queue_tab.png"><ShellContent x:Name="QueueContent"/></Tab>
         <Tab Title="{x:Static lang:AppResource.MyOrders}" Icon="mine_tab.png"><ShellContent x:Name="MineContent"/></Tab>
         <Tab Title="{x:Static lang:AppResource.History}" Icon="history_tab.png"><ShellContent x:Name="HistoryContent"/></Tab>
+        <Tab x:Name="ReturnsTab" Icon="returns_tab.png"><ShellContent x:Name="ReturnsContent"/></Tab>
         <Tab x:Name="ProfileTab" Title="{x:Static lang:AppResource.Profile}" Icon="profile_tab.png"><ShellContent x:Name="ProfileContent"/></Tab>
     </TabBar>
 </Shell>

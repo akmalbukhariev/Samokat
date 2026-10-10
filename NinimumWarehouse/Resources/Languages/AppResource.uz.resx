@@ -324,4 +324,15 @@
   <data name="QuantityInvalid" xml:space="preserve">
     <value>Tekshirilgan mahsulotlar soniga noldan katta butun son kiriting.</value>
   </data>
+  <data name="Returns" xml:space="preserve"><value>Qaytarishlar</value></data>
+  <data name="ReturnWaiting" xml:space="preserve"><value>Omborga qabul qilish kutilmoqda</value></data>
+  <data name="ReturnChecking" xml:space="preserve"><value>Qaytgan mahsulotlar tekshirilmoqda</value></data>
+  <data name="Returned" xml:space="preserve"><value>Omborga qaytarildi</value></data>
+  <data name="ReturnStart" xml:space="preserve"><value>Qaytgan mahsulotlarni tekshirish</value></data>
+  <data name="ReturnReceive" xml:space="preserve"><value>Qabul qilindi — zaxiraga qo‘shish</value></data>
+  <data name="ReturnHint" xml:space="preserve"><value>Jismonan qabul qilingan barcha mahsulotlarni tekshiring. Faqat to‘liq, shikastlanmagan va sotishga yaroqli mahsulotlarni tasdiqlang.</value></data>
+  <data name="ReturnQuestion" xml:space="preserve"><value>Qaytgan mahsulotlar qabul qilinsinmi?</value></data>
+  <data name="ReturnConfirmation" xml:space="preserve"><value>Barcha tekshirilgan mahsulotlar omborda, shikastlanmagan va sotishga yaroqli ekanini tasdiqlang. Zaxira bir marta tiklanadi. Pulni qaytarish alohida bajariladi.</value></data>
+  <data name="ReturnEmpty" xml:space="preserve"><value>Qabul qilishni kutayotgan qaytarishlar yo‘q.</value></data>
+  <data name="ReturnReceivedMessage" xml:space="preserve"><value>Qaytgan mahsulotlar qabul qilindi va tekshirildi.</value></data>
 </root>

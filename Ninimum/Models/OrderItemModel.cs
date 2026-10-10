@@ -25,6 +25,7 @@ public partial class OrderItemModel : ObservableObject
                 "PREPARING" => AppResource.BeingPrepared,
                 "READY" => AppResource.ResourceManager.GetString("OrderReady", AppResource.Culture) ?? "Ready",
                 "ON_THE_WAY" => AppResource.OutForDelivery,
+                "RETURNED" => AppResource.ResourceManager.GetString("OrderReturned", AppResource.Culture) ?? "Received by warehouse",
                 "RETURNING" => AppResource.ResourceManager.GetString("OrderReturning", AppResource.Culture) ?? "Returning",
                 "DELIVERED" => AppResource.Delivered,
                 "CANCELLED" => AppResource.OrderCancelled,
