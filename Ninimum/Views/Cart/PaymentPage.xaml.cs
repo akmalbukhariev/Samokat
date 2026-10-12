@@ -401,18 +401,17 @@ public partial class PaymentPage : BasePage, IQueryAttributable
 
             if (cancelResponse.resultCode == ApiResult.SUCCESS.GetCodeToString())
             {
-                Interlocked.Exchange(ref paymentFinished, 1);
-                PageDataRefreshState.MarkDirty(PageDataRefreshState.Orders);
-                await AppNavigatorService.NavigateTo("..");
+                await FinishPaymentAsync("CANCELLED");
                 return;
             }
 
             // The payment callback may have completed while the user was confirming.
             currentStatus = await GetCurrentOrderPaymentStatusAsync();
 
-            if (currentStatus.Equals("PAID", StringComparison.OrdinalIgnoreCase))
+            if (currentStatus.Equals("PAID", StringComparison.OrdinalIgnoreCase) ||
+                currentStatus.Equals("CANCELLED", StringComparison.OrdinalIgnoreCase))
             {
-                await FinishPaymentAsync("PAID");
+                await FinishPaymentAsync(currentStatus);
                 return;
             }
 
