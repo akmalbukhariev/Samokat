@@ -545,13 +545,112 @@ namespace NinimumDelivery.Resources.Languages {
                 return ResourceManager.GetString("OrderReturned", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Returning.
         /// </summary>
         internal static string OrderReturning {
             get {
                 return ResourceManager.GetString("OrderReturning", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A partial return is already recorded. Refresh the order..
+        /// </summary>
+        internal static string PARTIAL_RETURN_ALREADY_SAVED {
+            get {
+                return ResourceManager.GetString("PARTIAL_RETURN_ALREADY_SAVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return at least one item, but fewer than the entire order. Quantities cannot exceed purchased quantities. For a full return, use Cannot deliver..
+        /// </summary>
+        internal static string PARTIAL_RETURN_INVALID {
+            get {
+                return ResourceManager.GetString("PARTIAL_RETURN_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The delivery changed. Refresh and use an order that is on the way..
+        /// </summary>
+        internal static string PARTIAL_RETURN_UNAVAILABLE {
+            get {
+                return ResourceManager.GetString("PARTIAL_RETURN_UNAVAILABLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount owed for returned goods.
+        /// </summary>
+        internal static string PartialRefundTitle {
+            get {
+                return ResourceManager.GetString("PartialRefundTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The remaining items will be marked delivered. Returned goods await warehouse receipt; no money is refunded by this action..
+        /// </summary>
+        internal static string PartialReturnConfirm {
+            get {
+                return ResourceManager.GetString("PartialReturnConfirm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Continue with reason and photo.
+        /// </summary>
+        internal static string PartialReturnContinue {
+            get {
+                return ResourceManager.GetString("PartialReturnContinue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter only quantities the customer is returning. Leave kept items at 0..
+        /// </summary>
+        internal static string PartialReturnHint {
+            get {
+                return ResourceManager.GetString("PartialReturnHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delivered · partial return pending.
+        /// </summary>
+        internal static string PartialReturnPending {
+            get {
+                return ResourceManager.GetString("PartialReturnPending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Returned quantity.
+        /// </summary>
+        internal static string PartialReturnQuantity {
+            get {
+                return ResourceManager.GetString("PartialReturnQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delivered · partial return received.
+        /// </summary>
+        internal static string PartialReturnReceived {
+            get {
+                return ResourceManager.GetString("PartialReturnReceived", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Partial return.
+        /// </summary>
+        internal static string PartialReturnTitle {
+            get {
+                return ResourceManager.GetString("PartialReturnTitle", resourceCulture);
             }
         }
         
@@ -619,6 +718,42 @@ namespace NinimumDelivery.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Return evidence is already saved. Refresh the order..
+        /// </summary>
+        internal static string RETURN_PHOTO_ALREADY_SAVED {
+            get {
+                return ResourceManager.GetString("RETURN_PHOTO_ALREADY_SAVED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a valid JPEG or PNG photo..
+        /// </summary>
+        internal static string RETURN_PHOTO_INVALID {
+            get {
+                return ResourceManager.GetString("RETURN_PHOTO_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a return photo..
+        /// </summary>
+        internal static string RETURN_PHOTO_REQUIRED {
+            get {
+                return ResourceManager.GetString("RETURN_PHOTO_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose a photo no larger than 10 MB..
+        /// </summary>
+        internal static string RETURN_PHOTO_TOO_LARGE {
+            get {
+                return ResourceManager.GetString("RETURN_PHOTO_TOO_LARGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address not found.
         /// </summary>
         internal static string ReturnAddress {
@@ -633,6 +768,60 @@ namespace NinimumDelivery.Resources.Languages {
         internal static string ReturnNoCustomer {
             get {
                 return ResourceManager.GetString("ReturnNoCustomer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Take photo.
+        /// </summary>
+        internal static string ReturnPhotoCamera {
+            get {
+                return ResourceManager.GetString("ReturnPhotoCamera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Could not open the photo. Please try again..
+        /// </summary>
+        internal static string ReturnPhotoError {
+            get {
+                return ResourceManager.GetString("ReturnPhotoError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose photo.
+        /// </summary>
+        internal static string ReturnPhotoGallery {
+            get {
+                return ResourceManager.GetString("ReturnPhotoGallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Allow camera or photo access to attach return evidence..
+        /// </summary>
+        internal static string ReturnPhotoPermission {
+            get {
+                return ResourceManager.GetString("ReturnPhotoPermission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a photo of the returned goods or delivery problem.
+        /// </summary>
+        internal static string ReturnPhotoRequired {
+            get {
+                return ResourceManager.GetString("ReturnPhotoRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return photo.
+        /// </summary>
+        internal static string ReturnPhotoTitle {
+            get {
+                return ResourceManager.GetString("ReturnPhotoTitle", resourceCulture);
             }
         }
         

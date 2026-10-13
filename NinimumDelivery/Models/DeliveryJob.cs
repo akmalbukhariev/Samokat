@@ -27,13 +27,22 @@ public partial class DeliveryJob : ObservableObject
     public string? onTheWayAt { get; set; }
     public string? deliveredAt { get; set; }
     public string? note { get; set; }
+    public string? returnPhoto { get; set; }
+    public string? partialReturnStatus { get; set; }
+    public PartialReturnInfo? partialReturn { get; set; }
+    public bool HasPartialReturn => partialReturn != null;
+    public string PartialReturnText => partialReturn == null ? "" : string.Join("\n",partialReturn.items.Select(p=>$"{p.productName}: {p.quantity}"));
+    public string PartialRefundText => partialReturn == null ? "" : $"{partialReturn.refundAmount:N2} so‘m";
+    public bool HasReturnPhoto => !string.IsNullOrWhiteSpace(returnPhoto);
+    public ImageSource? ReturnPhotoSource => HasReturnPhoto
+        ? ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(returnPhoto!.Split(',')[1]))) : null;
     public ObservableCollection<DeliveryProduct> products { get; set; } = new();
 
     public string DisplayOrderNumber => string.IsNullOrWhiteSpace(orderNumber) ? $"#{orderId:D6}" : $"#{orderId:D6}";
     public string PriceText => $"{totalPrice:N0}".Replace(",", " ") + " so'm";
     public string DisplayPhone => string.IsNullOrWhiteSpace(customerPhone) ? AppResource.NotAssignedPhone : customerPhone;
     public string ProductCountText => string.Format(AppResource.ProductsCount, productCount);
-    public string StatusText => orderStatus == "RETURNED" ? (AppResource.ResourceManager.GetString("OrderReturned",AppResource.Culture) ?? "Received by warehouse") : orderStatus == "RETURNING" ? (AppResource.ResourceManager.GetString("OrderReturning", AppResource.Culture) ?? "Returning") : jobStatus switch
+    public string StatusText => partialReturnStatus != null ? (AppResource.ResourceManager.GetString(partialReturnStatus=="RECEIVED"?"PartialReturnReceived":"PartialReturnPending",AppResource.Culture) ?? "Delivered with partial return") : orderStatus == "RETURNED" ? (AppResource.ResourceManager.GetString("OrderReturned",AppResource.Culture) ?? "Received by warehouse") : orderStatus == "RETURNING" ? (AppResource.ResourceManager.GetString("OrderReturning", AppResource.Culture) ?? "Returning") : jobStatus switch
     {
         "WAITING_ASSIGNMENT" => AppResource.Waiting,
         "ACCEPTED" => AppResource.Accepted,

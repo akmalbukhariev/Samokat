@@ -335,4 +335,7 @@
   <data name="ReturnConfirmation" xml:space="preserve"><value>Подтвердите, что все проверенные товары находятся на складе, не повреждены и пригодны для продажи. Остаток восстановится один раз. Возврат оплаты выполняется отдельно.</value></data>
   <data name="ReturnEmpty" xml:space="preserve"><value>Нет возвратов, ожидающих приёма.</value></data>
   <data name="ReturnReceivedMessage" xml:space="preserve"><value>Возвращённые товары приняты и проверены.</value></data>
+  <data name="ReturnPhotoTitle" xml:space="preserve"><value>Фото возврата</value></data>
+  <data name="PartialReturnPending" xml:space="preserve"><value>Доставлено · ожидается частичный возврат</value></data>
+  <data name="PartialReturnReceived" xml:space="preserve"><value>Доставлено · частичный возврат принят</value></data>
 </root>

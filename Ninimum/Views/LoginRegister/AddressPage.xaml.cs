@@ -628,6 +628,8 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
 
             if (formalizationData != null)
             {
+                FormalizationNavigationStore.SaveAddress(formalizationData.UserId, selectedAddress);
+                formalizationData.AddressId = null;
                 formalizationData.AddressText = selectedAddress.Address;
                 formalizationData.AddressLatitude = selectedAddress.Latitude;
                 formalizationData.AddressLongitude = selectedAddress.Longitude;

@@ -7,6 +7,8 @@ public class OrderListResponse : Response<List<OrderListData>>
 
 public class OrderListData
 {
+    public string? partialReturnStatus { get; set; }
+    public decimal? partialRefundAmount { get; set; }
     public long orderId { get; set; }
     public long userId { get; set; }
     public string orderNumber { get; set; } = string.Empty;

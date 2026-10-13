@@ -12,6 +12,7 @@ public partial class HistoryViewModel : ObservableObject
     private readonly DeliveryApiService api;
     public ObservableCollection<DeliveryJob> Jobs { get; } = new();
     [ObservableProperty] private bool isLoading;
+    [ObservableProperty] private bool isRefreshing;
     public HistoryViewModel(DeliveryApiService api) => this.api = api;
 
     [RelayCommand]
@@ -21,12 +22,24 @@ public partial class HistoryViewModel : ObservableObject
         try
         {
             IsLoading = true;
-            var response = await api.History();
-            Jobs.Clear();
+            using var timeout = new CancellationTokenSource(TimeSpan.FromSeconds(20));
+            var response = await api.History(timeout.Token);
+            timeout.Token.ThrowIfCancellationRequested();
             if (response?.resultCode == "100" && response.resultData != null)
+            {
+                Jobs.Clear();
                 foreach (var item in response.resultData) Jobs.Add(item);
+            }
         }
-        finally { IsLoading = false; }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"[History] Load failed: {ex}");
+        }
+        finally
+        {
+            IsLoading = false;
+            IsRefreshing = false;
+        }
     }
 
     [RelayCommand]

@@ -142,7 +142,7 @@ public partial class MainPageViewModel : ObservableObject
             var request = new ProductListRequest
             {
                 user_id = appControl.CurrentUserId,
-                category_id = 1,
+                category_id = null,
                 pageSize = PageSize,
                 offset = offset
             };

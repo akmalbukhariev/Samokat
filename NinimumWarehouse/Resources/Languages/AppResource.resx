@@ -335,4 +335,7 @@
   <data name="ReturnConfirmation" xml:space="preserve"><value>Confirm that all checked products are physically in the warehouse, undamaged and suitable for sale. Stock will be restored once. Payment refunds are handled separately.</value></data>
   <data name="ReturnEmpty" xml:space="preserve"><value>No returns awaiting receipt.</value></data>
   <data name="ReturnReceivedMessage" xml:space="preserve"><value>Returned products received and checked.</value></data>
+  <data name="ReturnPhotoTitle" xml:space="preserve"><value>Return photo</value></data>
+  <data name="PartialReturnPending" xml:space="preserve"><value>Delivered · partial return pending</value></data>
+  <data name="PartialReturnReceived" xml:space="preserve"><value>Delivered · partial return received</value></data>
 </root>

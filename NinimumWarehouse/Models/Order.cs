@@ -15,6 +15,9 @@ public class Order
     [JsonPropertyName("payment_status")] public string Payment { get; set; } = "";
     [JsonPropertyName("order_status")] public string OrderStatus { get; set; } = "";
     public string? Note { get; set; }
+    [JsonPropertyName("return_photo")] public string? ReturnPhoto { get; set; }
+    [JsonPropertyName("return_reason")] public string? ReturnReason { get; set; }
+    [JsonPropertyName("partial_return_status")] public string? PartialReturnStatus { get; set; }
     public int Quantity { get; set; }
     public List<OrderItem> Items { get; set; } = [];
 }

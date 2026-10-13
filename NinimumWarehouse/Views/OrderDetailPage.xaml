@@ -36,6 +36,11 @@
                     <Label Text="{Binding ReturnReceivedMessage}" TextColor="{StaticResource SuccessColor}" FontAttributes="Bold"/>
                 </Border>
                 <Label Text="{x:Static lang:AppResource.ItemsTitle}" Style="{StaticResource SectionTitle}" IsVisible="{Binding HasOrder}"/>
+                <Label Text="{Binding ReturnReason}" Style="{StaticResource MutedLabel}" IsVisible="{Binding HasReturnReason}"/>
+                <VerticalStackLayout IsVisible="{Binding HasReturnPhoto}" Spacing="8">
+                    <Label Text="{Binding ReturnPhotoTitle}" Style="{StaticResource SectionTitle}"/>
+                    <Image Source="{Binding ReturnPhotoSource}" Aspect="AspectFit" HeightRequest="240"/>
+                </VerticalStackLayout>
                 <VerticalStackLayout Spacing="16" BindableLayout.ItemsSource="{Binding Items}">
                     <BindableLayout.ItemTemplate>
                         <DataTemplate x:DataType="vm:OrderItemViewModel">

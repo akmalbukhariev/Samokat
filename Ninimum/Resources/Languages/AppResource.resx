@@ -1455,4 +1455,6 @@ online</value>
   </data>
   <data name="OrderReturning" xml:space="preserve"><value>Returning</value></data>
   <data name="OrderReturned" xml:space="preserve"><value>Received by warehouse</value></data>
+  <data name="PartialReturnPending" xml:space="preserve"><value>Delivered · partial return pending</value></data>
+  <data name="PartialReturnReceived" xml:space="preserve"><value>Delivered · partial return received</value></data>
 </root>

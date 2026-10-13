@@ -67,6 +67,7 @@ public partial class OrdersPageViewModel : ObservableObject
                     OrderNumber = order.orderNumber,
                     Status = order.status,
                     PaymentStatus = order.paymentStatus,
+                    PartialReturnStatus = order.partialReturnStatus,
                     ProductCount = order.productCount,
                     TotalPriceValue = order.totalPrice,
                     TotalPrice = string.Format(AppResource.UZS_02854f, order.totalPrice).Replace(",", " "),
@@ -169,6 +170,7 @@ public partial class OrdersPageViewModel : ObservableObject
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString() || response.resultData == null)
                 return;
 
+            order.PartialReturnStatus = response.resultData.partialReturnStatus;
             order.Status = response.resultData.status ?? order.Status;
 
             Debug.WriteLine($"ORDER PROCESS => orderId={order.OrderId}, status={order.Status}");

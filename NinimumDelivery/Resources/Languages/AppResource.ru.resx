@@ -232,4 +232,25 @@
   <data name="ReturnAddress" xml:space="preserve"><value>Адрес не найден</value></data>
   <data name="ReturnRefused" xml:space="preserve"><value>Клиент отказался</value></data>
   <data name="OrderReturned" xml:space="preserve"><value>Принято на склад</value></data>
+  <data name="ReturnPhotoTitle" xml:space="preserve"><value>Фото возврата</value></data>
+  <data name="ReturnPhotoCamera" xml:space="preserve"><value>Сделать фото</value></data>
+  <data name="ReturnPhotoGallery" xml:space="preserve"><value>Выбрать фото</value></data>
+  <data name="ReturnPhotoRequired" xml:space="preserve"><value>Добавьте фото возвращаемого товара или проблемы доставки</value></data>
+  <data name="ReturnPhotoPermission" xml:space="preserve"><value>Разрешите доступ к камере или фото для подтверждения возврата.</value></data>
+  <data name="ReturnPhotoError" xml:space="preserve"><value>Не удалось открыть фото. Попробуйте ещё раз.</value></data>
+  <data name="RETURN_PHOTO_REQUIRED" xml:space="preserve"><value>Добавьте фото возврата.</value></data>
+  <data name="RETURN_PHOTO_TOO_LARGE" xml:space="preserve"><value>Выберите фото не больше 10 МБ.</value></data>
+  <data name="RETURN_PHOTO_INVALID" xml:space="preserve"><value>Выберите фото в формате JPEG или PNG.</value></data>
+  <data name="RETURN_PHOTO_ALREADY_SAVED" xml:space="preserve"><value>Подтверждение возврата уже сохранено. Обновите заказ.</value></data>
+  <data name="PartialReturnTitle" xml:space="preserve"><value>Частичный возврат</value></data>
+  <data name="PartialReturnHint" xml:space="preserve"><value>Укажите только возвращаемое количество. Для оставленных клиентом товаров оставьте 0.</value></data>
+  <data name="PartialReturnQuantity" xml:space="preserve"><value>Возвращаемое количество</value></data>
+  <data name="PartialReturnContinue" xml:space="preserve"><value>Перейти к причине и фото</value></data>
+  <data name="PartialReturnConfirm" xml:space="preserve"><value>Остальные товары будут отмечены доставленными. Возврат ожидает приёмки складом. Это действие не возвращает деньги.</value></data>
+  <data name="PartialRefundTitle" xml:space="preserve"><value>Сумма к возврату за товары</value></data>
+  <data name="PartialReturnPending" xml:space="preserve"><value>Доставлено · ожидается частичный возврат</value></data>
+  <data name="PartialReturnReceived" xml:space="preserve"><value>Доставлено · частичный возврат принят</value></data>
+  <data name="PARTIAL_RETURN_INVALID" xml:space="preserve"><value>Верните хотя бы одну единицу, но не весь заказ. Количество не должно превышать купленное. Для полного возврата используйте Не удалось доставить.</value></data>
+  <data name="PARTIAL_RETURN_UNAVAILABLE" xml:space="preserve"><value>Доставка изменилась. Обновите и выберите заказ в пути.</value></data>
+  <data name="PARTIAL_RETURN_ALREADY_SAVED" xml:space="preserve"><value>Частичный возврат уже записан. Обновите заказ.</value></data>
 </root>

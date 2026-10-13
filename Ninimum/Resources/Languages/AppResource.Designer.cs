@@ -2579,7 +2579,7 @@ namespace Ninimum.Resources.Languages {
                 return ResourceManager.GetString("OrderReturned", resourceCulture);
             }
         }
-
+        
         /// <summary>
         ///   Looks up a localized string similar to Returning.
         /// </summary>
@@ -2667,6 +2667,24 @@ namespace Ninimum.Resources.Languages {
         internal static string Paid1Day {
             get {
                 return ResourceManager.GetString("Paid1Day", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delivered · partial return pending.
+        /// </summary>
+        internal static string PartialReturnPending {
+            get {
+                return ResourceManager.GetString("PartialReturnPending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delivered · partial return received.
+        /// </summary>
+        internal static string PartialReturnReceived {
+            get {
+                return ResourceManager.GetString("PartialReturnReceived", resourceCulture);
             }
         }
         

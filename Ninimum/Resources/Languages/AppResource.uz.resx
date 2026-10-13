@@ -1458,4 +1458,6 @@ buyurtma qiling</value>
   </data>
   <data name="OrderReturning" xml:space="preserve"><value>Qaytarilmoqda</value></data>
   <data name="OrderReturned" xml:space="preserve"><value>Omborga qaytarildi</value></data>
+  <data name="PartialReturnPending" xml:space="preserve"><value>Yetkazildi · qisman qaytarish kutilmoqda</value></data>
+  <data name="PartialReturnReceived" xml:space="preserve"><value>Yetkazildi · qisman qaytarish qabul qilindi</value></data>
 </root>

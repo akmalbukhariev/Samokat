@@ -60,11 +60,17 @@ public sealed class OrderDetailViewModel : ViewModelBase
     public string Status => order?.Status ?? "WAITING";
     public string StatusText => LocalizedMessages.Status(Status);
     public string? Note => order?.Note;
+    public string? ReturnReason => order?.ReturnReason;
+    public bool HasReturnReason => IsReturn && !string.IsNullOrWhiteSpace(ReturnReason);
+    public bool HasReturnPhoto => IsReturn && !string.IsNullOrWhiteSpace(order?.ReturnPhoto);
+    public string ReturnPhotoTitle => Text("ReturnPhotoTitle");
+    public ImageSource? ReturnPhotoSource => HasReturnPhoto
+        ? ImageSource.FromStream(() => new MemoryStream(Convert.FromBase64String(order!.ReturnPhoto!.Split(',')[1]))) : null;
     public bool HasNote => !IsReturn && !string.IsNullOrWhiteSpace(Note);
-    public bool IsReturnReceived => order?.OrderStatus == "RETURNED";
+    public bool IsReturnReceived => order?.OrderStatus == "RETURNED" || order?.PartialReturnStatus == "RECEIVED";
     public string ReturnReceivedMessage => Text("ReturnReceivedMessage");
     public bool HasOrder => order is not null;
-    public bool IsReturn => order?.OrderStatus is "RETURNING" or "RETURNED";
+    public bool IsReturn => order?.PartialReturnStatus!=null || order?.OrderStatus is "RETURNING" or "RETURNED";
     public string StartText => IsReturn ? Text("ReturnStart") : AppResource.StartPreparing;
     public string FinishText => IsReturn ? Text("ReturnReceive") : AppResource.PackedReady;
     public string ActionHint => IsReturn ? Text("ReturnHint") : AppResource.PackingHint;
@@ -153,7 +159,7 @@ public sealed class OrderDetailViewModel : ViewModelBase
             if (existingIndex < 0) Items.Insert(index, row);
             else if (existingIndex != index) Items.Move(existingIndex, index);
         }
-        Notify(nameof(IsReturnReceived),nameof(ReturnReceivedMessage),nameof(IsReturn),nameof(StartText),nameof(FinishText),nameof(ActionHint),nameof(CanReportProblem),nameof(Number),nameof(Status),nameof(StatusText),nameof(Note),nameof(HasNote),nameof(HasOrder),nameof(Unavailable),nameof(OtherWorker),nameof(CanStart),nameof(CanCheck),nameof(CanResume),nameof(IsReady),nameof(ShowActions),nameof(AllChecked),nameof(ProgressText),nameof(Progress));
+        Notify(nameof(ReturnReason),nameof(HasReturnReason),nameof(HasReturnPhoto),nameof(ReturnPhotoSource),nameof(ReturnPhotoTitle),nameof(IsReturnReceived),nameof(ReturnReceivedMessage),nameof(IsReturn),nameof(StartText),nameof(FinishText),nameof(ActionHint),nameof(CanReportProblem),nameof(Number),nameof(Status),nameof(StatusText),nameof(Note),nameof(HasNote),nameof(HasOrder),nameof(Unavailable),nameof(OtherWorker),nameof(CanStart),nameof(CanCheck),nameof(CanResume),nameof(IsReady),nameof(ShowActions),nameof(AllChecked),nameof(ProgressText),nameof(Progress));
         ReadyCommand.NotifyCanExecuteChanged();
     }
     private Task CheckAsync(OrderItemViewModel item,bool useCamera) => RunAsync(async () => {

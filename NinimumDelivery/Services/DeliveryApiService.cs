@@ -95,9 +95,9 @@ public class DeliveryApiService
         return Parse<ApiResponse>(await Execute(req));
     }
 
-    public async Task<ApiResponse?> UpdateStatus(long jobId, string status, string? note = null)
+    public async Task<ApiResponse?> UpdateStatus(long jobId, string status, string? note = null, string? photoBase64 = null, List<ReturnQuantity>? returnItems = null)
     {
-        var req = new RestRequest("delivery-app/status", Method.Put).AddJsonBody(new { jobId, status, note });
+        var req = new RestRequest("delivery-app/status", Method.Put).AddJsonBody(new { jobId, status, note, photoBase64, returnItems });
         return Parse<ApiResponse>(await Execute(req));
     }
 

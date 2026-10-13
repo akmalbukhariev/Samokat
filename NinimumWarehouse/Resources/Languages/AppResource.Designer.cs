@@ -556,6 +556,24 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delivered · partial return pending.
+        /// </summary>
+        public static string PartialReturnPending {
+            get {
+                return ResourceManager.GetString("PartialReturnPending", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delivered · partial return received.
+        /// </summary>
+        public static string PartialReturnReceived {
+            get {
+                return ResourceManager.GetString("PartialReturnReceived", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -840,6 +858,15 @@ namespace NinimumWarehouse.Resources.Languages {
         public static string ReturnHint {
             get {
                 return ResourceManager.GetString("ReturnHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Return photo.
+        /// </summary>
+        public static string ReturnPhotoTitle {
+            get {
+                return ResourceManager.GetString("ReturnPhotoTitle", resourceCulture);
             }
         }
         

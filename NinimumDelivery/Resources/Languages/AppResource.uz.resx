@@ -232,4 +232,25 @@
   <data name="ReturnAddress" xml:space="preserve"><value>Manzil topilmadi</value></data>
   <data name="ReturnRefused" xml:space="preserve"><value>Mijoz rad etdi</value></data>
   <data name="OrderReturned" xml:space="preserve"><value>Omborga qaytarildi</value></data>
+  <data name="ReturnPhotoTitle" xml:space="preserve"><value>Qaytarish rasmi</value></data>
+  <data name="ReturnPhotoCamera" xml:space="preserve"><value>Rasmga olish</value></data>
+  <data name="ReturnPhotoGallery" xml:space="preserve"><value>Rasm tanlash</value></data>
+  <data name="ReturnPhotoRequired" xml:space="preserve"><value>Qaytarilayotgan tovar yoki yetkazish muammosi rasmini qo‘shing</value></data>
+  <data name="ReturnPhotoPermission" xml:space="preserve"><value>Rasm qo‘shish uchun kamera yoki rasmlarga kirishga ruxsat bering.</value></data>
+  <data name="ReturnPhotoError" xml:space="preserve"><value>Rasmni ochib bo‘lmadi. Qayta urinib ko‘ring.</value></data>
+  <data name="RETURN_PHOTO_REQUIRED" xml:space="preserve"><value>Qaytarish rasmini qo‘shing.</value></data>
+  <data name="RETURN_PHOTO_TOO_LARGE" xml:space="preserve"><value>10 MB dan kichik rasm tanlang.</value></data>
+  <data name="RETURN_PHOTO_INVALID" xml:space="preserve"><value>JPEG yoki PNG formatidagi rasm tanlang.</value></data>
+  <data name="RETURN_PHOTO_ALREADY_SAVED" xml:space="preserve"><value>Qaytarish dalili saqlangan. Buyurtmani yangilang.</value></data>
+  <data name="PartialReturnTitle" xml:space="preserve"><value>Qisman qaytarish</value></data>
+  <data name="PartialReturnHint" xml:space="preserve"><value>Faqat qaytarilayotgan mahsulot sonini kiriting. Mijoz olgan mahsulotlar uchun 0 qoldiring.</value></data>
+  <data name="PartialReturnQuantity" xml:space="preserve"><value>Qaytarilayotgan son</value></data>
+  <data name="PartialReturnContinue" xml:space="preserve"><value>Sabab va rasmga o‘tish</value></data>
+  <data name="PartialReturnConfirm" xml:space="preserve"><value>Qolgan tovarlar yetkazildi deb belgilanadi. Qaytgan tovarlar ombor qabulini kutadi. Bu amal pulni qaytarmaydi.</value></data>
+  <data name="PartialRefundTitle" xml:space="preserve"><value>Tovar uchun qaytarilishi kerak bo‘lgan summa</value></data>
+  <data name="PartialReturnPending" xml:space="preserve"><value>Yetkazildi · qisman qaytarish kutilmoqda</value></data>
+  <data name="PartialReturnReceived" xml:space="preserve"><value>Yetkazildi · qisman qaytarish qabul qilindi</value></data>
+  <data name="PARTIAL_RETURN_INVALID" xml:space="preserve"><value>Kamida 1 dona, lekin butun buyurtmadan kamroq qaytaring. Son xarid qilingan sondan oshmasin. To‘liq qaytarish uchun Yetkazib bo‘lmadi tugmasini ishlating.</value></data>
+  <data name="PARTIAL_RETURN_UNAVAILABLE" xml:space="preserve"><value>Yetkazma o‘zgargan. Yangilang va yo‘ldagi buyurtmani tanlang.</value></data>
+  <data name="PARTIAL_RETURN_ALREADY_SAVED" xml:space="preserve"><value>Qisman qaytarish saqlangan. Buyurtmani yangilang.</value></data>
 </root>

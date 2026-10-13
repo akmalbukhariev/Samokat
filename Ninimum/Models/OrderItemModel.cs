@@ -11,6 +11,8 @@ public partial class OrderItemModel : ObservableObject
     public string PaymentStatus { get; set; } = string.Empty;
     public decimal TotalPriceValue { get; set; }
     public int ProductCount { get; set; }
+    [ObservableProperty] private string? partialReturnStatus;
+    partial void OnPartialReturnStatusChanged(string? value) => OnPropertyChanged(nameof(StatusText));
 
     public string DisplayOrderNumber => $"#{OrderId:D6}";
 
@@ -18,6 +20,7 @@ public partial class OrderItemModel : ObservableObject
     {
         get
         {
+            if(PartialReturnStatus!=null) return AppResource.ResourceManager.GetString(PartialReturnStatus=="RECEIVED"?"PartialReturnReceived":"PartialReturnPending",AppResource.Culture) ?? "Delivered with partial return";
             return Status?.ToUpperInvariant() switch
             {
                 "PENDING" => AppResource.OrderReceived,

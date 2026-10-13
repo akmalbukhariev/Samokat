@@ -1,10 +1,39 @@
 using Ninimum.Resources.Languages;
+using Ninimum.Models;
+using Ninimum.Services;
 
 namespace Ninimum.Views.Formalization;
 
 public static class FormalizationNavigationStore
 {
-    public static FormalizationData? Data { get; set; }
+    private static FormalizationData? data;
+    public static FormalizationData? Data
+    {
+        get => data;
+        set
+        {
+            if (value != null && value.UserId > 0)
+            {
+                var saved = new AppStoreService().Get<SelectedAddressModel>(AddressKey(value.UserId));
+                if (saved != null)
+                {
+                    value.AddressId = null;
+                    value.AddressText = saved.Address;
+                    value.AddressLatitude = saved.Latitude;
+                    value.AddressLongitude = saved.Longitude;
+                }
+            }
+            data = value;
+        }
+    }
+
+    private static string AddressKey(long userId) => $"checkout_address_{userId}";
+
+    public static void SaveAddress(long userId, SelectedAddressModel address)
+    {
+        if (userId > 0)
+            new AppStoreService().Set(AddressKey(userId), address);
+    }
 
     public static void Clear()
     {

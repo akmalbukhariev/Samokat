@@ -14,12 +14,14 @@
         <ScrollView Grid.Row="1">
             <VerticalStackLayout Padding="20,4,20,24" Spacing="16">
                 <Border Padding="18" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" StrokeShape="RoundRectangle 18">
-                    <Grid RowDefinitions="Auto,Auto,Auto" ColumnDefinitions="*,Auto" RowSpacing="8">
-                        <Label Text="{Binding Job.DisplayOrderNumber}" FontSize="22" FontAttributes="Bold" />
-                        <Border Grid.Column="1" Padding="10,5" BackgroundColor="{StaticResource PrimarySoft}" StrokeThickness="0" StrokeShape="RoundRectangle 12"><Label Text="{Binding Job.StatusText}" TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold" FontSize="12" /></Border>
-                        <Label Grid.Row="1" Text="{x:Static lang:AppResource.PaymentPaid}" TextColor="{StaticResource SuccessColor}" FontAttributes="Bold" />
-                        <Label Grid.Row="1" Grid.Column="1" Text="{Binding Job.PriceText}" FontSize="20" FontAttributes="Bold" />
-                        <Label Grid.Row="2" Grid.ColumnSpan="2" Text="{Binding Job.ProductCountText}" Style="{StaticResource MutedLabel}" />
+                    <Grid RowDefinitions="Auto,Auto,Auto,Auto" RowSpacing="8">
+                        <Label Text="{Binding Job.DisplayOrderNumber}" FontSize="22" FontAttributes="Bold" LineBreakMode="NoWrap" />
+                        <Border Grid.Row="1" Padding="10,5" BackgroundColor="{StaticResource PrimarySoft}" StrokeThickness="0" StrokeShape="RoundRectangle 12"><Label Text="{Binding Job.StatusText}" TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold" FontSize="12" /></Border>
+                        <Grid Grid.Row="2" ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                            <Label Text="{x:Static lang:AppResource.PaymentPaid}" TextColor="{StaticResource SuccessColor}" FontAttributes="Bold" VerticalOptions="Center" />
+                            <Label Grid.Column="1" Text="{Binding Job.PriceText}" FontSize="20" FontAttributes="Bold" />
+                        </Grid>
+                        <Label Grid.Row="3" Text="{Binding Job.ProductCountText}" Style="{StaticResource MutedLabel}" />
                     </Grid>
                 </Border>
 
@@ -39,6 +41,16 @@
                 </Grid>
 
                 <Label Text="{Binding Job.note}" Style="{StaticResource MutedLabel}" />
+                <VerticalStackLayout IsVisible="{Binding Job.HasPartialReturn}" Spacing="8">
+                    <Label Text="{Binding PartialReturnTitle}" Style="{StaticResource SectionTitle}"/>
+                    <Label Text="{Binding Job.PartialReturnText}"/>
+                    <Label Text="{Binding PartialRefundTitle}"/>
+                    <Label Text="{Binding Job.PartialRefundText}" FontAttributes="Bold"/>
+                </VerticalStackLayout>
+                <VerticalStackLayout IsVisible="{Binding Job.HasReturnPhoto}" Spacing="8">
+                    <Label Text="{Binding ReturnPhotoTitle}" Style="{StaticResource SectionTitle}" />
+                    <Image Source="{Binding Job.ReturnPhotoSource}" Aspect="AspectFit" HeightRequest="240" />
+                </VerticalStackLayout>
                 <Label Text="{x:Static lang:AppResource.Products}" Style="{StaticResource SectionTitle}" />
                 <VerticalStackLayout BindableLayout.ItemsSource="{Binding Job.products}" Spacing="10">
                     <BindableLayout.ItemTemplate>
@@ -62,6 +74,7 @@
             <Button Text="{x:Static lang:AppResource.ClaimDelivery}" Command="{Binding ClaimCommand}" Style="{StaticResource PrimaryButton}" IsVisible="{Binding ShowClaim}" />
             <Button Text="{x:Static lang:AppResource.StartDelivery}" Command="{Binding StartDeliveryCommand}" Style="{StaticResource PrimaryButton}" IsVisible="{Binding ShowStart}" />
             <Button Text="{x:Static lang:AppResource.MarkDelivered}" Command="{Binding CompleteCommand}" Style="{StaticResource PrimaryButton}" IsVisible="{Binding ShowComplete}" />
+            <Button Text="{Binding PartialReturnTitle}" Command="{Binding PartialReturnCommand}" Style="{StaticResource SecondaryButton}" IsVisible="{Binding ShowPartialReturn}" />
             <Button Text="{x:Static lang:AppResource.CannotDeliver}" Command="{Binding FailCommand}" BackgroundColor="Transparent" TextColor="{StaticResource MutedColor}" IsVisible="{Binding ShowFailure}" />
         </VerticalStackLayout>
         <components:LoadingView Grid.RowSpan="3" IsLoading="{Binding IsLoading}" />
