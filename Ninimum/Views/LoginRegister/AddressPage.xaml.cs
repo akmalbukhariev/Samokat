@@ -72,11 +72,10 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         ConfirmAddressCommand = new Command(OnConfirmAddress);
         BindingContext = this;
 
-        Loaded += AddressPage_Loaded;
-        Unloaded += AddressPage_Unloaded;
-        map.MoveToRegion(MapSpan.FromCenterAndRadius(
-            new Location(ShahrisabzLatitude, ShahrisabzLongitude),
-            Distance.FromKilometers(DefaultMapRadiusKm)));
+        // Initialize when the map itself is attached. A constructor-time city move
+        // can be applied late by the native map and overwrite the saved position.
+        map.Loaded += AddressPage_Loaded;
+        map.Unloaded += AddressPage_Unloaded;
 
         ShowMapMode(false);
     }
@@ -85,9 +84,18 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
     {
         isMapInitialized = false;
         map.PropertyChanged -= Map_PropertyChanged;
-        await InitializeMapAsync();
-        isMapInitialized = true;
-        map.PropertyChanged += Map_PropertyChanged;
+        try
+        {
+            await InitializeMapAsync();
+            isMapInitialized = true;
+            map.PropertyChanged += Map_PropertyChanged;
+        }
+        catch (Exception ex)
+        {
+            System.Diagnostics.Debug.WriteLine($"Address map initialization failed: {ex}");
+            PickupButton.IsEnabled = false;
+            await AlertService.ShowAlertAsync(AppResource.Address, AppResource.PleaseSelectADeliveryAddress);
+        }
     }
 
     private void AddressPage_Unloaded(object sender, EventArgs e)
@@ -396,7 +404,7 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         if (!isMapMoving)
         {
             isMapMoving = true;
-            await CenterPin.TranslateTo(0, -55, 100, Easing.CubicOut);
+            await CenterPin.TranslateTo(0, -10, 100, Easing.CubicOut);
         }
 
         mapMoveCts?.Cancel();
@@ -408,7 +416,7 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
             await Task.Delay(700, token);
 
             isMapMoving = false;
-            await CenterPin.TranslateTo(0, -45, 100, Easing.CubicOut);
+            await CenterPin.TranslateTo(0, 0, 100, Easing.CubicOut);
 
             await RefreshAddressForCoordinatesAsync(latitude, longitude);
             await ShowMapMode(true);
@@ -481,6 +489,7 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         double radiusKm,
         string? knownAddress = null)
     {
+        mapMoveCts?.Cancel();
         if (!IsInsideShahrisabz(targetLatitude, targetLongitude))
         {
             targetLatitude = ShahrisabzLatitude;
@@ -514,12 +523,34 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
         {
             isUpdatingMapProgrammatically = true;
 
-            map.MoveToRegion(
-                MapSpan.FromCenterAndRadius(
-                    new Location(targetLatitude, targetLongitude),
-                    Distance.FromKilometers(Math.Min(radiusKm, MaxMapRadiusKm))));
+            var region = MapSpan.FromCenterAndRadius(
+                new Location(targetLatitude, targetLongitude),
+                Distance.FromKilometers(Math.Min(radiusKm, MaxMapRadiusKm)));
+#if ANDROID
+            // Loaded does not mean GoogleMap is ready. Wait for both the native
+            // map and its measured viewport, then move without camera animation.
+            var deadline = DateTime.UtcNow.AddSeconds(5);
+            while ((map.Handler is not Microsoft.Maui.Maps.Handlers.MapHandler ready ||
+                    ready.Map == null || ready.PlatformView.Width <= 0 || ready.PlatformView.Height <= 0)
+                   && DateTime.UtcNow < deadline)
+                await Task.Delay(50);
 
+            if (map.Handler is not Microsoft.Maui.Maps.Handlers.MapHandler handler || handler.Map == null ||
+                handler.PlatformView.Width <= 0 || handler.PlatformView.Height <= 0)
+                throw new InvalidOperationException("Native map is not ready");
+
+            var bounds = new Android.Gms.Maps.Model.LatLngBounds(
+                new Android.Gms.Maps.Model.LatLng(targetLatitude - region.LatitudeDegrees / 2,
+                    targetLongitude - region.LongitudeDegrees / 2),
+                new Android.Gms.Maps.Model.LatLng(targetLatitude + region.LatitudeDegrees / 2,
+                    targetLongitude + region.LongitudeDegrees / 2));
+            handler.Map.StopAnimation();
+            handler.Map.MoveCamera(Android.Gms.Maps.CameraUpdateFactory.NewLatLngBounds(
+                bounds, handler.PlatformView.Width, handler.PlatformView.Height, 0));
+#else
+            map.MoveToRegion(region);
             await Task.Delay(350);
+#endif
         }
         finally
         {
@@ -590,6 +621,21 @@ public partial class AddressPage : BasePage, INotifyPropertyChanged
     {
         if (hasPendingAddressSearch && !await SearchTypedAddressAsync())
             return;
+
+        // Saving uses the visible center, so it cannot retain coordinates from an
+        // earlier viewport while the native map is still completing a move.
+        if (map.VisibleRegion != null && !isUpdatingMapProgrammatically)
+        {
+            var center = map.VisibleRegion.Center;
+            if (Math.Abs(latitude - center.Latitude) > 0.00001 ||
+                Math.Abs(longitude - center.Longitude) > 0.00001)
+            {
+                latitude = center.Latitude;
+                longitude = center.Longitude;
+                SetAddressTextFromMap(string.Empty);
+                await RefreshAddressForCoordinatesAsync(latitude, longitude);
+            }
+        }
 
         if (!isMapInitialized || !IsInsideShahrisabz(latitude, longitude) ||
             string.IsNullOrWhiteSpace(AddressText))

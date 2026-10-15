@@ -43,7 +43,7 @@
                 x:Name="CenterPin"
                 HorizontalOptions="Center"
                 VerticalOptions="Center"
-                TranslationY="-45">
+                TranslationY="0">
 
                 <BoxView
                     WidthRequest="3"

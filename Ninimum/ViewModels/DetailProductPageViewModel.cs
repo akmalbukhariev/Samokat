@@ -62,7 +62,11 @@ public partial class DetailProductPageViewModel : ObservableObject
 
     [ObservableProperty] private string regularDeliveryText = AppResource.Paid1Day;
 
-    [ObservableProperty] private string description = ".......";
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasDescription))]
+    private string description = string.Empty;
+
+    public bool HasDescription => !string.IsNullOrWhiteSpace(Description);
 
     [ObservableProperty] private int quantity = 1;
     [ObservableProperty] private string finalPrice = AppResource.Text0UZS;

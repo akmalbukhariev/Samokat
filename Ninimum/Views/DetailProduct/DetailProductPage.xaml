@@ -424,7 +424,7 @@
                     </Border>
 
                     <!-- Description -->
-                    <VerticalStackLayout Spacing="5">
+                    <VerticalStackLayout Spacing="5" IsVisible="{Binding HasDescription}">
                         <Label
                             Text="{x:Static language:AppResource.Description}"
                             TextColor="#22292F"

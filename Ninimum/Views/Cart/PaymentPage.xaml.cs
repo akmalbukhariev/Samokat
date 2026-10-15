@@ -382,7 +382,12 @@ public partial class PaymentPage : BasePage, IQueryAttributable
 
             bool shouldLeave = await Shell.Current.DisplayAlert(
                 AppResource.PaymentNotCompleted,
-                AppResource.IfYouGoBackThisUnpaidOrderWill,
+                System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName switch
+                {
+                    "uz" => "To‘lov oynasidan chiqasizmi? To‘lanmagan buyurtmani bekor qilishga urinamiz. Payme to‘lovni qayta ishlayotgan bo‘lsa, buyurtma holatini tarixdan tekshiring.",
+                    "ru" => "Выйти из окна оплаты? Мы попробуем отменить неоплаченный заказ. Если Payme обрабатывает платёж, проверьте статус заказа в истории.",
+                    _ => "Leave the payment page? We will try to cancel the unpaid order. If Payme is processing payment, check the order status in history."
+                },
                 AppResource.Yes,
                 AppResource.NoAscii);
 
@@ -397,7 +402,7 @@ public partial class PaymentPage : BasePage, IQueryAttributable
                 orderId = orderId,
                 userId = appControl.CurrentUserId,
                 reason = AppResource.PaymentPageWasClosed
-            });
+            }).WaitAsync(TimeSpan.FromSeconds(15));
 
             if (cancelResponse.resultCode == ApiResult.SUCCESS.GetCodeToString())
             {
@@ -415,22 +420,32 @@ public partial class PaymentPage : BasePage, IQueryAttributable
                 return;
             }
 
-            await AlertService.ShowAlertAsync(
-                AppResource.Error,
-                cancelResponse.resultMsg ?? AppResource.CouldNotCancelTheUnpaidOrder);
-
-            StartPaymentStatusChecking();
+            await LeaveUnconfirmedPaymentAsync();
         }
         catch (Exception ex)
         {
             Debug.WriteLine($"[ERROR] HandleBackAsync => {ex}");
-            await AlertService.ShowAlertAsync(AppResource.Error, AppResource.CouldNotCheckThePaymentStatus);
-            StartPaymentStatusChecking();
+            await LeaveUnconfirmedPaymentAsync();
         }
         finally
         {
             Interlocked.Exchange(ref backFlowRunning, 0);
         }
+    }
+
+    private async Task LeaveUnconfirmedPaymentAsync()
+    {
+        var language = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+        var message = language switch
+        {
+            "uz" => "To‘lov yoki bekor qilish hali tasdiqlanmadi. To‘lov oynasi yopiladi. Buyurtma tarixda saqlanadi; qayta to‘lashdan oldin uning holatini tekshiring.",
+            "ru" => "Оплата или отмена ещё не подтверждена. Окно оплаты будет закрыто. Заказ сохранён в истории; проверьте его статус перед повторной оплатой.",
+            _ => "Payment or cancellation is not confirmed yet. The payment page will close. Your order remains in history; check its status before paying again."
+        };
+        await AlertService.ShowAlertAsync(AppResource.PaymentNotCompleted, message);
+        // Close the UI without reporting a cancellation that the server has not confirmed.
+        Interlocked.Exchange(ref paymentFinished, 1);
+        await CloseFinishedPaymentPageAsync();
     }
 
     private async Task CloseFinishedPaymentPageAsync()
@@ -463,7 +478,7 @@ public partial class PaymentPage : BasePage, IQueryAttributable
         {
             orderId = orderId,
             userId = appControl.CurrentUserId
-        });
+        }).WaitAsync(TimeSpan.FromSeconds(15));
 
         if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             return string.Empty;
