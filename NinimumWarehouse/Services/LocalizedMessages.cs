@@ -11,6 +11,7 @@ public static class LocalizedMessages
         "WAITING" => AppResource.Waiting, "PICKING" => AppResource.Picking,
         "BLOCKED" => AppResource.Blocked, "READY" => AppResource.Ready, _ => AppResource.UnknownStatus };
     public static string Error(string code) => code switch {
+        "LOGIN_LOCKED_15_MINUTES" => System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName switch {"uz"=>"15 daqiqa bloklandi. Keyinroq qayta urinib ko‘ring.","ru"=>"Вход заблокирован на 15 минут. Повторите позже.",_=>"Login is locked for 15 minutes. Try again later."},
         "WAREHOUSE_LOGIN_FAILED" => AppResource.LoginFailed,
         "WAREHOUSE_SESSION_REPLACED" or "SESSION" => AppResource.SessionEnded,
         "WAREHOUSE_PREPARATION_DISABLED" => AppResource.PreparationDisabled,

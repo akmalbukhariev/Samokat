@@ -77,6 +77,7 @@ public partial class ProductQuestionsViewModel : ObservableObject
                     Questions.Add(new ProductQuestionItem
                     {
                         Id = question.id ?? 0,
+                        IsComplaint = question.kind == "COMPLAINT",
                         CustomerName = string.IsNullOrWhiteSpace(question.customer_name)
                             ? AppResource.User
                             : question.customer_name.Trim(),

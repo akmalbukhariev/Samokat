@@ -20,6 +20,7 @@ public partial class DeliveriesViewModel : ObservableObject
 
     [ObservableProperty] private DeliveryDashboard dashboard = new();
     [ObservableProperty] private bool isLoading;
+    [ObservableProperty] private string offerNotice = string.Empty;
 
     public string WorkerName => state.Worker?.fullName ?? string.Empty;
     public string WorkerGreeting => string.Format(AppResource.Hello, WorkerName);
@@ -104,6 +105,35 @@ public partial class DeliveriesViewModel : ObservableObject
             if (version == Volatile.Read(ref loadVersion))
                 IsLoading = false;
         }
+    }
+
+    public async Task RefreshOffersAsync()
+    {
+        if (IsLoading || HasSelectedAvailableJobs || ClaimSelectedCommand.IsRunning || StartRouteCommand.IsRunning || !state.IsLoggedIn()) return;
+        try
+        {
+            int version=Volatile.Read(ref loadVersion);
+            using var timeout=new CancellationTokenSource(TimeSpan.FromSeconds(12));
+            var response = await api.Available(timeout.Token);
+            if (version!=Volatile.Read(ref loadVersion)||!state.IsLoggedIn()||response?.resultCode != "100" || response.resultData == null || IsLoading || HasSelectedAvailableJobs) return;
+            var previous = AvailableJobs.Select(j => j.jobId).ToHashSet();
+            var incoming = response.resultData;
+            bool added = incoming.Any(j => !previous.Contains(j.jobId));
+            foreach (var old in AvailableJobs) old.PropertyChanged -= OnAvailableJobPropertyChanged;
+            AvailableJobs.Clear();
+            foreach (var job in incoming) { job.PropertyChanged += OnAvailableJobPropertyChanged; AvailableJobs.Add(job); }
+            Dashboard.availableCount = AvailableJobs.Count;
+            OnPropertyChanged(nameof(Dashboard));
+            NotifySelectionState();
+            if (added)
+            {
+                string language = System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+                OfferNotice = language == "ru" ? "Новое предложение доставки. Примите до окончания срока." : language == "uz" ? "Yangi yetkazish taklifi. Muddat tugashidan oldin qabul qiling." : "New delivery offer. Accept before the deadline.";
+                try { Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(200)); } catch { }
+            }
+            else if (AvailableJobs.Count == 0) OfferNotice = string.Empty;
+        }
+        catch (Exception ex) { System.Diagnostics.Debug.WriteLine($"[Offers] Refresh failed: {ex.GetType().Name}"); }
     }
 
     private void OnAvailableJobPropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)

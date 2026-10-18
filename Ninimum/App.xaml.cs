@@ -40,9 +40,10 @@ public partial class App : Application
         var connectionMonitor = AppService.Get<ConnectionMonitorService>();
 
         window.Activated += (_, _) => connectionMonitor?.Start();
-        window.Resumed += (_, _) =>
+        window.Resumed += async (_, _) =>
         {
             connectionMonitor?.Start();
+            await AppService.GetRequired<AppAvailabilityService>().EnsureAvailableAsync();
             AppService.GetRequired<CartBadgeService>().RequestRefresh();
         };
         window.Stopped += (_, _) => connectionMonitor?.Stop();

@@ -111,6 +111,7 @@
                                         HorizontalTextAlignment="Center"
                                         VerticalTextAlignment="Center" />
                                 </Border>
+                                <Label Text="{Binding KindLabel}" IsVisible="{Binding IsComplaint}" FontSize="13" TextColor="#FD473C"/>
                                 <Label
                                     Grid.Column="1"
                                     Text="{Binding Question}"

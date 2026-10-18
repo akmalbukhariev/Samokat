@@ -57,9 +57,13 @@ public class AppState
         return true;
     }
 
+    public bool LastLoginLocked { get; private set; }
+
     public async Task<bool> LoginAsync(string workerId, string password)
     {
+        LastLoginLocked=false;
         var response = await api.Login(workerId, password);
+        LastLoginLocked=response?.resultCode=="253";
         if (response?.resultCode != "100" || response.resultData == null)
             return false;
 

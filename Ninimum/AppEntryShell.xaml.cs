@@ -33,6 +33,7 @@ public partial class AppEntryShell : Shell
 
     private async Task InitializeSessionAsync()
     {
+        await AppService.GetRequired<AppAvailabilityService>().EnsureAvailableAsync();
         bool hasCompletedOnboarding = appStoreService.Get(AppKeys.HasCompletedOnboarding, false);
         if (!hasCompletedOnboarding)
         {

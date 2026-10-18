@@ -66,6 +66,10 @@ public partial class DetailProductPageViewModel : ObservableObject
     [NotifyPropertyChangedFor(nameof(HasDescription))]
     private string description = string.Empty;
 
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(HasProductMetadata))]
+    private string productMetadata = string.Empty;
+    public bool HasProductMetadata => !string.IsNullOrWhiteSpace(ProductMetadata);
     public bool HasDescription => !string.IsNullOrWhiteSpace(Description);
 
     [ObservableProperty] private int quantity = 1;
@@ -292,6 +296,13 @@ public partial class DetailProductPageViewModel : ObservableObject
 
             ProductTitle = product.name ?? "";
             Description = product.description ?? "";
+            var language=System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            var metadata=new List<string>();
+            if(!string.IsNullOrWhiteSpace(product.ingredients))metadata.Add((language=="uz"?"Tarkib: ":language=="ru"?"Состав: ":"Ingredients: ")+product.ingredients);
+            if(!string.IsNullOrWhiteSpace(product.age_range))metadata.Add((language=="uz"?"Yosh: ":language=="ru"?"Возраст: ":"Age: ")+product.age_range);
+            if(!string.IsNullOrWhiteSpace(product.storage_temperature))metadata.Add((language=="uz"?"Saqlash harorati: ":language=="ru"?"Температура хранения: ":"Storage temperature: ")+product.storage_temperature);
+            if(product.shelf_life_days.HasValue)metadata.Add((language=="uz"?"Saqlash muddati (kun): ":language=="ru"?"Срок хранения (дни): ":"Shelf life (days): ")+product.shelf_life_days.Value);
+            ProductMetadata=string.Join(Environment.NewLine,metadata);
             ProductLiked = product.liked;
             StockText = string.Format(AppResource.StockAvailable, product.stock_quantity ?? 0);
             Rating = (product.average_rating ?? 0).ToString("0.0");

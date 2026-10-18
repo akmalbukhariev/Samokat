@@ -16,10 +16,12 @@
 
     <Grid RowDefinitions="Auto,Auto,*">
 
+        <VerticalStackLayout Grid.Row="0">
         <components:PageHeaderView
-            Grid.Row="0"
             ShowBack="true"
             Title="{x:Static language:AppResource.Orders}" />
+            <Button x:Name="RecurringButton" Clicked="RecurringClicked" BackgroundColor="Transparent" TextColor="#FD473C"/>
+        </VerticalStackLayout>
 
         <!-- Tabs -->
         <Grid

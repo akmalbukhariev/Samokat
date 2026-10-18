@@ -15,6 +15,10 @@ namespace Ninimum.Models.Dto
 
         public string name { get; set; }
         public string short_description { get; set; }
+        public string? storage_temperature { get; set; }
+        public string? ingredients { get; set; }
+        public string? age_range { get; set; }
+        public int? shelf_life_days { get; set; }
         public string description { get; set; }
 
         public string sku { get; set; }

@@ -13,6 +13,7 @@ public class CreateOrderRequest
     public double? deliveryLongitude { get; set; }
 
     public int totalPrice { get; set; }
+    public int? quotedTotal {get;set;}
 
     public long? tariffSubscriptionId { get; set; }
 

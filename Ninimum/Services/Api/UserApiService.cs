@@ -805,8 +805,8 @@ namespace Api.Services
 
             try
             {
-                // Product questions are public, just like the review list.
-                var receivedData = await PostAsync(GET_PRODUCT_QUESTION_LIST, data, useToken: false);
+                // Public questions plus this authenticated customer’s private complaints.
+                var receivedData = await PostAsync(GET_PRODUCT_QUESTION_LIST, data, useToken: !string.IsNullOrWhiteSpace(await GetTokenAsync()));
 
                 if (!string.IsNullOrWhiteSpace(receivedData))
                     return JsonConvert.DeserializeObject<ProductQuestionListResponse>(receivedData) ?? response;
@@ -1291,6 +1291,20 @@ namespace Api.Services
             }
 
             return response;
+        }
+
+        public async Task<Newtonsoft.Json.Linq.JObject> RecurringRequest(string action, object? body = null)
+        {
+            var json=await PostAsync("order/recurring/"+action,body??new {});
+            var result=Newtonsoft.Json.Linq.JObject.Parse(json);
+            if(result["resultCode"]?.ToString()!="100")throw new InvalidOperationException(result["resultMsg"]?.ToString()??"Request failed");
+            return result;
+        }
+
+        public async Task<Response<CheckoutQuoteData>?> GetCheckoutQuote(CreateOrderRequest request)
+        {
+            var json=await PostAsync("order/quote",request);
+            return JsonConvert.DeserializeObject<Response<CheckoutQuoteData>>(json);
         }
 
         public async Task<CreateOrderResponse> CreateOrder(CreateOrderRequest data)

@@ -75,6 +75,7 @@ public static class MauiProgram
 		builder.Services.AddSingleton<CartBadgeService>();
 		builder.Services.AddSingleton<AppStoreService>();
 		builder.Services.AddSingleton<AppControl>();
+		builder.Services.AddSingleton<AppAvailabilityService>();
 		builder.Services.AddSingleton<LanguageService>();
 		builder.Services.AddSingleton<ConnectionMonitorService>();
 		builder.Services.AddSingleton<UserApiService>();

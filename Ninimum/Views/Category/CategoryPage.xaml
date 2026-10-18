@@ -23,7 +23,7 @@
         </DataTrigger>
        </Grid.Triggers>
        <Grid.GestureRecognizers><TapGestureRecognizer Tapped="Category_Tapped" /></Grid.GestureRecognizers>
-       <Label Text="{Binding categoryName}" FontSize="14" FontFamily="{StaticResource FontSFMedium}"
+       <Label Text="{Binding DisplayName}" FontSize="14" FontFamily="{StaticResource FontSFMedium}"
               TextColor="#22292F" VerticalOptions="Center" LineBreakMode="WordWrap">
         <Label.Triggers>
          <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="True">
@@ -42,14 +42,16 @@
      <CollectionView.ItemsLayout><GridItemsLayout Span="2" Orientation="Vertical" HorizontalItemSpacing="0" VerticalItemSpacing="12" /></CollectionView.ItemsLayout>
      <CollectionView.Header>
       <VerticalStackLayout Padding="12,16" Spacing="12">
-       <Label Text="{Binding SelectedCategory.categoryName}" FontSize="20" TextColor="#22292F" FontFamily="{StaticResource FontSFBold}" />
+       <Label Text="{Binding SelectedCategory.DisplayName}" FontSize="20" TextColor="#22292F" FontFamily="{StaticResource FontSFBold}" />
+       <Image Source="{Binding SelectedCategory.Image}" IsVisible="{Binding SelectedCategory.HasImage, FallbackValue=False}"
+              HeightRequest="96" WidthRequest="96" Aspect="AspectFit" HorizontalOptions="Start" />
        <FlexLayout Wrap="Wrap" BindableLayout.ItemsSource="{Binding Children}">
         <BindableLayout.ItemTemplate>
          <DataTemplate x:DataType="models:CategoryItem">
           <VerticalStackLayout WidthRequest="94" Padding="4" Spacing="6">
            <VerticalStackLayout.GestureRecognizers><TapGestureRecognizer Tapped="Category_Tapped" /></VerticalStackLayout.GestureRecognizers>
            <Image Source="{Binding Image}" HeightRequest="70" Aspect="AspectFit" />
-           <Label Text="{Binding categoryName}" FontSize="13" TextColor="#22292F" HorizontalTextAlignment="Center" MaxLines="3" />
+           <Label Text="{Binding DisplayName}" FontSize="13" TextColor="#22292F" HorizontalTextAlignment="Center" MaxLines="3" />
           </VerticalStackLayout>
          </DataTemplate>
         </BindableLayout.ItemTemplate>

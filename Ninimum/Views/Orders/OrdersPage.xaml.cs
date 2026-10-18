@@ -7,16 +7,24 @@ namespace Ninimum.Views.Orders;
 public partial class OrdersPage : BasePage
 {
     private readonly OrdersPageViewModel viewModel;
+    private readonly Api.Services.UserApiService recurringApi;
     private IDispatcherTimer? statusRefreshTimer;
     private bool isRefreshingStatuses;
 
-    public OrdersPage(OrdersPageViewModel vm, AppControl appControl)
+    public OrdersPage(OrdersPageViewModel vm, AppControl appControl, Api.Services.UserApiService recurringApi)
     {
         InitializeComponent();
 
         viewModel = vm;
+        this.recurringApi=recurringApi;
+        RecurringButton.Text=System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName switch {"ru"=>"Повторные заказы","uz"=>"Takroriy buyurtmalar",_=>"Recurring orders"};
         this.appControl = appControl;
         BindingContext = vm;
+    }
+
+    private async void RecurringClicked(object sender,EventArgs e)
+    {
+        await Navigation.PushAsync(new RecurringOrdersPage(recurringApi));
     }
 
     protected override async void OnAppearing()

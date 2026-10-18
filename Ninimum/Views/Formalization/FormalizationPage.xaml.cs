@@ -74,7 +74,25 @@ public partial class FormalizationPage : BasePage
         if (data != null)
             AddressLabel.Text = data.AddressText;
 
+        try { await RefreshQuoteAsync(); } catch { /* Checkout retries and requires a successful fresh quote. */ }
         await LoadPaymentCardsAsync();
+    }
+
+    private async Task<CheckoutQuoteData> RefreshQuoteAsync()
+    {
+        var data=FormalizationNavigationStore.Data??throw new InvalidOperationException();
+        var response=await apiService.GetCheckoutQuote(new CreateOrderRequest {
+            userId=data.UserId,tariffSubscriptionId=data.TariffSubscriptionId,
+            products=data.Products.Select(p=>new CreateOrderProductRequest{productId=p.ProductId,quantity=p.Quantity}).ToList()
+        });
+        var quote=response?.resultData;
+        if(response?.resultCode!="100"||quote==null||quote.total<=0||quote.products.Count!=data.Products.Count)throw new InvalidOperationException(AppResource.OrderCouldNotBeCreated);
+        for(int i=0;i<data.Products.Count;i++){
+            if(quote.products[i].productId!=data.Products[i].ProductId||quote.products[i].quantity!=data.Products[i].Quantity)throw new InvalidOperationException();
+            data.Products[i].Price=quote.products[i].price;
+        }
+        LoadData();
+        return quote;
     }
 
     private async Task LoadPaymentCardsAsync()
@@ -201,6 +219,14 @@ public partial class FormalizationPage : BasePage
                     return;
                 }
 
+                var displayedTotal=data.Products.Sum(p=>p.Price*p.Quantity);
+                var checkoutQuote=await RefreshQuoteAsync();
+                if(checkoutQuote.total!=displayedTotal) {
+                    var lang=System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+                    await Shell.Current.DisplayAlert(AppResource.Error,lang=="ru"?"Цена обновилась. Проверьте сумму и подтвердите заказ снова.":lang=="uz"?"Narx yangilandi. Summani tekshiring va buyurtmani qayta tasdiqlang.":"The price changed. Review the total and confirm again.",AppResource.Ok);
+                    return;
+                }
+
                 // Always use fresh server stock before creating an order or opening Payme.
                 // Group identical products so combined quantities cannot exceed stock.
                 IsLoading = true;
@@ -286,6 +312,7 @@ public partial class FormalizationPage : BasePage
                     deliveryLatitude = addressLatitude,
                     deliveryLongitude = addressLongitude,
                     totalPrice = totalPrice,
+                    quotedTotal = checkoutQuote.total,
                     tariffSubscriptionId = data.TariffSubscriptionId,
 
                     products = data.Products

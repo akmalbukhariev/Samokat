@@ -45,6 +45,8 @@
                         LineBreakMode="WordWrap" />
                 </VerticalStackLayout>
 
+                <HorizontalStackLayout Spacing="10"><CheckBox IsChecked="{Binding IsComplaint}"/><Label Text="{Binding ComplaintLabel}" VerticalOptions="Center"/></HorizontalStackLayout>
+                <Label Text="{Binding ComplaintPrivacy}" IsVisible="{Binding IsComplaint}" FontSize="13" TextColor="#777777"/>
                 <Border
                     Padding="14"
                     BackgroundColor="#F7F8FB"

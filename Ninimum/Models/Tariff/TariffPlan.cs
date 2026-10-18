@@ -9,9 +9,11 @@ public partial class TariffPlan : ObservableObject
     [ObservableProperty] private string name = string.Empty;
     [ObservableProperty] private string price = string.Empty;
     [ObservableProperty] private int durationMonth = 1;
-    [ObservableProperty] private string description = string.Empty;
+    [ObservableProperty, NotifyPropertyChangedFor(nameof(HasDescription))] private string description = string.Empty;
+    public bool HasDescription => !string.IsNullOrWhiteSpace(Description);
     [ObservableProperty] private Color color = Colors.Green;
     [ObservableProperty] private string deliveryText = string.Empty;
+    [ObservableProperty] private string speedText = string.Empty;
     [ObservableProperty] private string partnerIcon = "ic_check_circle.png";
     [ObservableProperty] private Color partnerIconColor = Color.FromArgb("#16D14E");
 

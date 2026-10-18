@@ -423,6 +423,7 @@
                         </Grid>
                     </Border>
 
+                    <Label Text="{Binding ProductMetadata}" IsVisible="{Binding HasProductMetadata}" TextColor="#555555" FontSize="14" Margin="0,12"/>
                     <!-- Description -->
                     <VerticalStackLayout Spacing="5" IsVisible="{Binding HasDescription}">
                         <Label

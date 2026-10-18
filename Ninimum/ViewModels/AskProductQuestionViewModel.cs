@@ -21,6 +21,9 @@ public partial class AskProductQuestionViewModel : ObservableObject
     [ObservableProperty] private string title = string.Empty;
     [ObservableProperty] private string questionText = string.Empty;
     [ObservableProperty] private bool isLoading;
+    [ObservableProperty] private bool isComplaint;
+    public string ComplaintLabel => System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName switch { "uz"=>"Bu shikoyat", "ru"=>"Это жалоба", _=>"This is a complaint" };
+    public string ComplaintPrivacy => System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName switch { "uz"=>"Shikoyat va javob faqat sizga va administratorga ko‘rinadi.", "ru"=>"Жалоба и ответ видны только вам и администратору.", _=>"Your complaint and its answer are visible only to you and the administrator." };
 
     public string CharacterCountText => $"{QuestionText?.Length ?? 0} / {MaxQuestionLength}";
     public bool CanSubmit => !IsLoading && !string.IsNullOrWhiteSpace(QuestionText) && QuestionText.Trim().Length >= 3;
@@ -83,6 +86,7 @@ public partial class AskProductQuestionViewModel : ObservableObject
             var response = await apiService.AddProductQuestion(new AddProductQuestionRequest
             {
                 product_id = ProductId,
+                kind = IsComplaint ? "COMPLAINT" : "QUESTION",
                 question = question
             });
 

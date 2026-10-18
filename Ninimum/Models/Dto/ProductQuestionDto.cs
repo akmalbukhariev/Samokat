@@ -6,6 +6,7 @@ public class ProductQuestionDto
     public long? product_id { get; set; }
     public long? user_id { get; set; }
     public string? customer_name { get; set; }
+    public string? kind { get; set; }
     public string? question { get; set; }
     public string? answer { get; set; }
     public string? status { get; set; }

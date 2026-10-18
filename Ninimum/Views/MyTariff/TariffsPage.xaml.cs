@@ -12,6 +12,13 @@ namespace Ninimum.Views.MyTariff;
 
 public partial class TariffsPage : BasePage
 {
+    private static string LocalBenefit(string uz,string ru,string en)=>System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName switch {"uz"=>uz,"ru"=>ru,_=>en};
+    private static string BenefitDescription(global::Models.Responses.TariffData item) {
+        var parts=new List<string>();if(!string.IsNullOrWhiteSpace(item.description))parts.Add(item.description);
+        if(item.useProductRules)foreach(var rule in item.productBenefits)parts.Add($"{rule.product_name}: {rule.discount_percent}%");
+        if(item.recurringOrderDays is >0)parts.Add(LocalBenefit($"Davriy buyurtma: har {item.recurringOrderDays} kunda (rozilik bilan)",$"Регулярный заказ: каждые {item.recurringOrderDays} дней (с согласия)",$"Recurring order: every {item.recurringOrderDays} days (with consent)"));
+        return string.Join(Environment.NewLine,parts);
+    }
     private readonly UserApiService apiService;
     private readonly AppControl appControl;
     // Enable this when the other plans are ready to be offered in the app.
@@ -93,9 +100,10 @@ public partial class TariffsPage : BasePage
                     Name = item.tariffName,
                     Price = FormatPrice(item.price),
                     DurationMonth = Math.Max(1, item.durationMonth),
-                    Description = item.description ?? string.Empty,
+                    Description = BenefitDescription(item),
                     Color = GetTariffColor(i),
-                    DeliveryText = GetDeliveryText(item.tariffName, i),
+                    DeliveryText = item.freeDelivery ? AppResource.FreeDelivery : LocalBenefit("Standart yetkazish","Стандартная доставка","Standard delivery"),
+                    SpeedText = GetDeliveryText(item.tariffName, i),
                     PartnerIcon = i == 0 ? "ic_uncheck_circle.png" : "ic_check_circle.png",
                     IsCurrent = isCurrent,
                     CanPurchase = !isCurrent,

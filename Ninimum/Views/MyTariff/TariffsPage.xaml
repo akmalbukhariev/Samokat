@@ -75,9 +75,9 @@
                                             Margin="0,0,0,8" />
                                     </Grid>
                                    
+                                    <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
                                     <VerticalStackLayout
-                                        Grid.Row="1"
-                                        Spacing="15"
+                                        Spacing="12"
                                         Margin="0,0,0,0">
 
                                         <Grid ColumnDefinitions="32,*" ColumnSpacing="14">
@@ -90,7 +90,7 @@
 
                                             <Label
                                                 Grid.Column="1"
-                                                Text="{x:Static language:AppResource.FreeDelivery}"
+                                                Text="{Binding DeliveryText}"
                                                 TextColor="#20262E"
                                                 FontSize="17"
                                                 FontFamily="{StaticResource FontSFRegular}" />
@@ -106,7 +106,7 @@
 
                                             <Label
                                                 Grid.Column="1"
-                                                Text="{Binding DeliveryText}"
+                                                Text="{Binding SpeedText}"
                                                 TextColor="#20262E"
                                                 FontSize="17"
                                                 FontFamily="{StaticResource FontSFRegular}"
@@ -147,7 +147,25 @@
                                                 LineBreakMode="WordWrap" />
                                         </Grid>
 
+                                        <Grid ColumnDefinitions="32,*" ColumnSpacing="14" IsVisible="{Binding HasDescription}">
+                                            <Image
+                                                Source="ic_check_circle.png"
+                                                WidthRequest="22"
+                                                HeightRequest="22"
+                                                VerticalOptions="Start"
+                                                Margin="0,3,0,0" />
+
+                                            <Label
+                                                Grid.Column="1"
+                                                Text="{Binding Description}"
+                                                TextColor="#20262E"
+                                                FontSize="17"
+                                                FontFamily="{StaticResource FontSFRegular}"
+                                                LineBreakMode="WordWrap" />
+                                        </Grid>
+
                                     </VerticalStackLayout>
+                                    </ScrollView>
 
                                     <Button
                                         Grid.Row="2"

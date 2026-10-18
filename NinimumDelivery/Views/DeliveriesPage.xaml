@@ -13,6 +13,7 @@
                 <VerticalStackLayout Padding="22,24,22,32" Spacing="18">
                     <Label Text="Ninimum Delivery" Style="{StaticResource PageTitle}" />
                     <Label Text="{Binding WorkerGreeting}" Style="{StaticResource MutedLabel}" />
+                    <Label Text="{Binding OfferNotice}" TextColor="{StaticResource PrimaryColor}" FontAttributes="Bold"/>
 
                     <Grid ColumnDefinitions="*,*,*" ColumnSpacing="10">
                         <Border Grid.Column="0" Padding="12" BackgroundColor="{StaticResource PrimarySoft}" StrokeThickness="0" StrokeShape="RoundRectangle 16">

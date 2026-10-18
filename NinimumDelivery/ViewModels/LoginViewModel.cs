@@ -29,7 +29,7 @@ public partial class LoginViewModel : ObservableObject
         {
             IsLoading = true;
             if (!await state.LoginAsync(id, Password))
-                await AlertService.Show(AppResource.Error, AppResource.LoginFailed);
+                await AlertService.Show(AppResource.Error, state.LastLoginLocked ? System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName switch {"uz"=>"15 daqiqa bloklandi. Keyinroq qayta urinib ko‘ring.","ru"=>"Вход заблокирован на 15 минут. Повторите позже.",_=>"Login is locked for 15 minutes. Try again later."} : AppResource.LoginFailed);
         }
         catch
         {
