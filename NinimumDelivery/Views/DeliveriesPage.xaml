@@ -51,7 +51,10 @@
                                             <Label Text="{Binding ProductCountText}" Style="{StaticResource MutedLabel}" />
                                             <Label Grid.Column="1" Text="{Binding PriceText}" FontAttributes="Bold" />
                                         </Grid>
-                                        <Button Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" Text="{x:Static lang:AppResource.View}" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenCommand}" CommandParameter="{Binding .}" Style="{StaticResource SecondaryButton}" />
+                                        <Grid Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" ColumnDefinitions="*,Auto" ColumnSpacing="8">
+                                            <Button Text="{x:Static lang:AppResource.View}" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.OpenCommand}" CommandParameter="{Binding .}" Style="{StaticResource SecondaryButton}" />
+                                            <Button Grid.Column="1" Text="Rad etish" IsVisible="{Binding dispatchOffer}" Command="{Binding Source={RelativeSource AncestorType={x:Type ContentPage}}, Path=BindingContext.DeclineCommand}" CommandParameter="{Binding .}" Style="{StaticResource SecondaryButton}" TextColor="#D93025" />
+                                        </Grid>
                                     </Grid>
                                 </Border>
                             </DataTemplate>

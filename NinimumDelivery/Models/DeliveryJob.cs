@@ -20,6 +20,7 @@ public partial class DeliveryJob : ObservableObject
     public string jobStatus { get; set; } = string.Empty;
     public string orderStatus { get; set; } = string.Empty;
     public string paymentStatus { get; set; } = string.Empty;
+    public bool dispatchOffer { get; set; }
     public decimal totalPrice { get; set; }
     public int productCount { get; set; }
     public string? createdAt { get; set; }

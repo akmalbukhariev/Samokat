@@ -111,15 +111,15 @@
                                         HorizontalTextAlignment="Center"
                                         VerticalTextAlignment="Center" />
                                 </Border>
-                                <Label Text="{Binding KindLabel}" IsVisible="{Binding IsComplaint}" FontSize="13" TextColor="#FD473C"/>
-                                <Label
-                                    Grid.Column="1"
-                                    Text="{Binding Question}"
-                                    TextColor="#22292F"
-                                    FontSize="17"
-                                    FontFamily="{StaticResource FontSFRegular}"
-                                    LineBreakMode="WordWrap"
-                                    VerticalTextAlignment="Center" />
+                                <VerticalStackLayout Grid.Column="1" Spacing="2" VerticalOptions="Center">
+                                    <Label Text="{Binding KindLabel}" IsVisible="{Binding IsComplaint}" FontSize="13" TextColor="#FD473C"/>
+                                    <Label
+                                        Text="{Binding Question}"
+                                        TextColor="#22292F"
+                                        FontSize="17"
+                                        FontFamily="{StaticResource FontSFRegular}"
+                                        LineBreakMode="WordWrap" />
+                                </VerticalStackLayout>
                             </Grid>
 
                             <Border

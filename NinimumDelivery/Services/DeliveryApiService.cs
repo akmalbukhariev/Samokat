@@ -83,6 +83,12 @@ public class DeliveryApiService
         return Parse<ApiResponse>(await Execute(req));
     }
 
+    public async Task<ApiResponse?> Decline(long jobId)
+    {
+        var req = new RestRequest("delivery-app/decline", Method.Put).AddJsonBody(new { jobId });
+        return Parse<ApiResponse>(await Execute(req));
+    }
+
     public async Task<ApiResponse?> ClaimBatch(IEnumerable<long> jobIds)
     {
         var req = new RestRequest("delivery-app/claim-batch", Method.Put).AddJsonBody(new { jobIds = jobIds.ToArray() });

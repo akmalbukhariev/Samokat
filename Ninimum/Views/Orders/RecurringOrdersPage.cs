@@ -49,7 +49,9 @@ public sealed class RecurringOrdersPage : ContentPage
    });box.Add(pay);
   }
   box.Add(new Label{Text=r["last_note"]?.ToString(),TextColor=Colors.Gray});
-  if(r["status"]?.ToString()=="ACTIVE"){long id=r["id"]!.Value<long>();var stop=new Button{Text=L("To‘xtatish","Приостановить","Pause")};stop.Clicked+=async(_,_)=>await Run(async()=>{await api.RecurringRequest($"{id}/pause");await LoadRules();});box.Add(stop);}rules.Add(box);
+  if(r["status"]?.ToString()=="ACTIVE"){long id=r["id"]!.Value<long>();var stop=new Button{Text=L("To‘xtatish","Приостановить","Pause")};stop.Clicked+=async(_,_)=>await Run(async()=>{await api.RecurringRequest($"{id}/pause");await LoadRules();});box.Add(stop);}
+  else if(r["status"]?.ToString() is "PAUSED" or "NEEDS_REVIEW"){long id=r["id"]!.Value<long>();var resume=new Button{Text=L("Davom ettirish","Возобновить","Resume")};resume.Clicked+=async(_,_)=>await Run(async()=>{await api.RecurringRequest($"{id}/resume");await LoadRules();});box.Add(resume);}
+  rules.Add(box);
  }}
  private async Task Run(Func<Task> action){if(busy)return;busy=true;inspect.IsEnabled=save.IsEnabled=false;try{await action();}catch(Exception ex){await DisplayAlertAsync(L("Xabar","Сообщение","Notice"),ex.Message,"OK");}finally{busy=false;inspect.IsEnabled=save.IsEnabled=true;}}
 }

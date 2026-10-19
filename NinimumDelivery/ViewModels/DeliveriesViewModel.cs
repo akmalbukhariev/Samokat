@@ -182,6 +182,15 @@ public partial class DeliveriesViewModel : ObservableObject
         await RunBatchAction(() => api.ClaimBatch(selected));
     }
 
+    [RelayCommand]
+    private async Task Decline(DeliveryJob job)
+    {
+        var confirm = await AlertService.Confirm("Taklifni rad etish", $"{job.DisplayOrderNumber} buyurtmasini rad etasizmi? U boshqa kuryerga taklif qilinadi.", "Rad etish", "Yo‘q");
+        if (!confirm) return;
+
+        await RunBatchAction(() => api.Decline(job.jobId));
+    }
+
     [RelayCommand(CanExecute = nameof(HasAcceptedJobs))]
     private async Task StartRoute()
     {
