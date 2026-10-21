@@ -20,7 +20,7 @@
                     <Label x:Name="StartTitleLabel" Style="{StaticResource SectionTitle}"/>
                     <Label x:Name="StartHintLabel" Style="{StaticResource MutedLabel}"/>
                     <Button x:Name="ScanBinButton" Command="{Binding ScanBinCommand}" Style="{StaticResource PrimaryButton}"/>
-                    <Button Text="{x:Static lang:AppResource.EnterCodeInstead}" Command="{Binding ToggleCodeCommand}" Style="{StaticResource TextButton}"/>
+                    <Button x:Name="ManualBinButton" Text="{x:Static lang:AppResource.EnterCodeInstead}" Command="{Binding ToggleCodeCommand}" Style="{StaticResource TextButton}"/>
                     <VerticalStackLayout Spacing="10" IsVisible="{Binding ShowCodeInput}">
                         <Border Style="{StaticResource InputBorder}">
                             <Entry x:Name="BinEntry" Text="{Binding BinInput}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" ReturnType="Go" ReturnCommand="{Binding StartTypedCommand}"/>

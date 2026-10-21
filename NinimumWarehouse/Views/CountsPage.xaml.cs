@@ -3,10 +3,12 @@ using NinimumWarehouse.ViewModels;
 namespace NinimumWarehouse.Views;
 public partial class CountsPage : ContentPage
 {
+    private readonly WarehouseApi api;
     private CountsViewModel ViewModel => (CountsViewModel)BindingContext;
     public CountsPage(WarehouseApi api)
     {
         InitializeComponent();
+        this.api = api;
         BindingContext = new CountsViewModel(api, ScanAsync, (id, bin) => Navigation.PushAsync(new CountDetailPage(api, id, bin)));
         ErrorDialogs.Attach(this, ViewModel);
         TitleLabel.Text = CountsViewModel.Text("Counts");
@@ -19,7 +21,14 @@ public partial class CountsPage : ContentPage
         OpenTitleLabel.Text = CountsViewModel.Text("CountsOpen");
         EmptyLabel.Text = CountsViewModel.Text("CountsEmpty");
     }
-    protected override async void OnAppearing() { base.OnAppearing(); await ViewModel.RefreshAsync(); }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await WarehouseRules.RefreshAsync(api);
+        ManualBinButton.IsVisible = WarehouseRules.ManualCodeAllowed;
+        if (!WarehouseRules.ManualCodeAllowed) ViewModel.ShowCodeInput = false;
+        await ViewModel.RefreshAsync();
+    }
     protected override void OnDisappearing() { ViewModel.StopLoading(); base.OnDisappearing(); }
     private async Task<string?> ScanAsync()
     {

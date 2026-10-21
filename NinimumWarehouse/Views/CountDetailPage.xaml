@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:lang="clr-namespace:NinimumWarehouse.Resources.Languages" xmlns:vm="clr-namespace:NinimumWarehouse.ViewModels" xmlns:components="clr-namespace:NinimumWarehouse.Components" x:Class="NinimumWarehouse.Views.CountDetailPage" x:DataType="vm:CountDetailViewModel" Shell.NavBarIsVisible="False" Shell.TabBarIsVisible="False">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:lang="clr-namespace:NinimumWarehouse.Resources.Languages" xmlns:vm="clr-namespace:NinimumWarehouse.ViewModels" xmlns:components="clr-namespace:NinimumWarehouse.Components" xmlns:services="clr-namespace:NinimumWarehouse.Services" x:Class="NinimumWarehouse.Views.CountDetailPage" x:DataType="vm:CountDetailViewModel" Shell.NavBarIsVisible="False" Shell.TabBarIsVisible="False">
     <Grid RowDefinitions="Auto,*,Auto">
         <Grid Padding="14,12,14,10" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
             <ImageButton Source="back.png" Style="{StaticResource IconButton}" Clicked="OnBackClicked" SemanticProperties.Description="{x:Static lang:AppResource.Back}"/>
@@ -26,7 +26,7 @@
                                     </Grid>
                                     <VerticalStackLayout Spacing="10" IsVisible="{Binding NeedsScan}">
                                         <Button Text="{x:Static lang:AppResource.ScanToCheck}" Command="{Binding ScanCommand}" Style="{StaticResource PrimaryButton}"/>
-                                        <Button Text="{x:Static lang:AppResource.EnterCodeInstead}" Command="{Binding ToggleCodeCommand}" Style="{StaticResource TextButton}"/>
+                                        <Button Text="{x:Static lang:AppResource.EnterCodeInstead}" Command="{Binding ToggleCodeCommand}" Style="{StaticResource TextButton}" IsVisible="{x:Static services:WarehouseRules.ManualCodeAllowed}"/>
                                         <VerticalStackLayout Spacing="10" IsVisible="{Binding ShowCodeInput}">
                                             <Border Style="{StaticResource InputBorder}">
                                                 <Entry Text="{Binding BarcodeInput}" Placeholder="{x:Static lang:AppResource.BarcodePlaceholder}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" ReturnType="Go" ReturnCommand="{Binding ConfirmCodeCommand}"/>
