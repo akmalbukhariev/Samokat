@@ -313,7 +313,7 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Count.
+        ///   Looks up a localized string similar to Inventory.
         /// </summary>
         public static string CountsTab {
             get {
@@ -484,6 +484,15 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A photo is required. Tap &quot;Take a photo&quot;..
+        /// </summary>
+        public static string Error_INVENTORY_PHOTO_REQUIRED {
+            get {
+                return ResourceManager.GetString("Error_INVENTORY_PHOTO_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stock in this bin is reserved for an order. Count it after the order is packed..
         /// </summary>
         public static string Error_INVENTORY_RESERVED_STOCK {
@@ -507,6 +516,33 @@ namespace NinimumWarehouse.Resources.Languages {
         public static string Error_INVENTORY_VARIANCE_REASON_REQUIRED {
             get {
                 return ResourceManager.GetString("Error_INVENTORY_VARIANCE_REASON_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The photo is unreadable or too large. Take it again..
+        /// </summary>
+        public static string Error_PHOTO_INVALID {
+            get {
+                return ResourceManager.GetString("Error_PHOTO_INVALID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This batch doesn’t have that much free stock..
+        /// </summary>
+        public static string Error_WAREHOUSE_INSUFFICIENT_STOCK {
+            get {
+                return ResourceManager.GetString("Error_WAREHOUSE_INSUFFICIENT_STOCK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Someone else must approve this..
+        /// </summary>
+        public static string Error_WAREHOUSE_SEPARATE_APPROVER_REQUIRED {
+            get {
+                return ResourceManager.GetString("Error_WAREHOUSE_SEPARATE_APPROVER_REQUIRED", resourceCulture);
             }
         }
         
@@ -1249,6 +1285,159 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Batch: {0} · Expiry: {1} · Free: {2}.
+        /// </summary>
+        public static string StockBatchFormat {
+            get {
+                return ResourceManager.GetString("StockBatchFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bin {0}: {1} batches.
+        /// </summary>
+        public static string StockBinFormat {
+            get {
+                return ResourceManager.GetString("StockBinFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment.
+        /// </summary>
+        public static string StockComment {
+            get {
+                return ResourceManager.GetString("StockComment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To which bin.
+        /// </summary>
+        public static string StockDestinationBin {
+            get {
+                return ResourceManager.GetString("StockDestinationBin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Photo added.
+        /// </summary>
+        public static string StockPhotoAdded {
+            get {
+                return ResourceManager.GetString("StockPhotoAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Quantity.
+        /// </summary>
+        public static string StockQuantity {
+            get {
+                return ResourceManager.GetString("StockQuantity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reason type.
+        /// </summary>
+        public static string StockReasonType {
+            get {
+                return ResourceManager.GetString("StockReasonType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan destination bin.
+        /// </summary>
+        public static string StockScanDestination {
+            get {
+                return ResourceManager.GetString("StockScanDestination", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1. From which bin.
+        /// </summary>
+        public static string StockSourceBin {
+            get {
+                return ResourceManager.GetString("StockSourceBin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Take a photo.
+        /// </summary>
+        public static string StockTakePhoto {
+            get {
+                return ResourceManager.GetString("StockTakePhoto", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transfer.
+        /// </summary>
+        public static string StockTransfer {
+            get {
+                return ResourceManager.GetString("StockTransfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The stock was moved..
+        /// </summary>
+        public static string StockTransferDone {
+            get {
+                return ResourceManager.GetString("StockTransferDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transfer from the warehouse app.
+        /// </summary>
+        public static string StockTransferReason {
+            get {
+                return ResourceManager.GetString("StockTransferReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Move.
+        /// </summary>
+        public static string StockTransferSubmit {
+            get {
+                return ResourceManager.GetString("StockTransferSubmit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Write-off.
+        /// </summary>
+        public static string StockWriteOff {
+            get {
+                return ResourceManager.GetString("StockWriteOff", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sent. The owner approves it in web admin..
+        /// </summary>
+        public static string StockWriteOffDone {
+            get {
+                return ResourceManager.GetString("StockWriteOffDone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit write-off.
+        /// </summary>
+        public static string StockWriteOffSubmit {
+            get {
+                return ResourceManager.GetString("StockWriteOffSubmit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To check.
         /// </summary>
         public static string ToCheck {
@@ -1344,6 +1533,69 @@ namespace NinimumWarehouse.Resources.Languages {
         public static string WorkerId {
             get {
                 return ResourceManager.GetString("WorkerId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Damaged in delivery.
+        /// </summary>
+        public static string WriteOff_DELIVERY_DAMAGE {
+            get {
+                return ResourceManager.GetString("WriteOff_DELIVERY_DAMAGE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expired.
+        /// </summary>
+        public static string WriteOff_EXPIRED {
+            get {
+                return ResourceManager.GetString("WriteOff_EXPIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internal use.
+        /// </summary>
+        public static string WriteOff_INTERNAL {
+            get {
+                return ResourceManager.GetString("WriteOff_INTERNAL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Lost.
+        /// </summary>
+        public static string WriteOff_LOST {
+            get {
+                return ResourceManager.GetString("WriteOff_LOST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other.
+        /// </summary>
+        public static string WriteOff_OTHER {
+            get {
+                return ResourceManager.GetString("WriteOff_OTHER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sample.
+        /// </summary>
+        public static string WriteOff_SAMPLE {
+            get {
+                return ResourceManager.GetString("WriteOff_SAMPLE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Damaged in the warehouse.
+        /// </summary>
+        public static string WriteOff_WAREHOUSE_DAMAGE {
+            get {
+                return ResourceManager.GetString("WriteOff_WAREHOUSE_DAMAGE", resourceCulture);
             }
         }
         

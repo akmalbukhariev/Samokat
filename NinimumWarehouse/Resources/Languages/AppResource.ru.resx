@@ -338,7 +338,7 @@
   <data name="ReturnPhotoTitle" xml:space="preserve"><value>Фото возврата</value></data>
   <data name="PartialReturnPending" xml:space="preserve"><value>Доставлено · ожидается частичный возврат</value></data>
   <data name="PartialReturnReceived" xml:space="preserve"><value>Доставлено · частичный возврат принят</value></data>
-  <data name="CountsTab" xml:space="preserve"><value>Пересчёт</value></data>
+  <data name="CountsTab" xml:space="preserve"><value>Инвентарь</value></data>
   <data name="Counts" xml:space="preserve"><value>Пересчёт (инвентаризация)</value></data>
   <data name="CountsSubtitle" xml:space="preserve"><value>Пересчитайте товары в ячейке. Результат подтверждает владелец в веб-админке.</value></data>
   <data name="InventoryDisabled" xml:space="preserve"><value>Партионный учёт ещё не включён. Пересчёт недоступен.</value></data>
@@ -364,4 +364,32 @@
   <data name="Error_INVENTORY_STOCK_CHANGED" xml:space="preserve"><value>Остаток изменился. Начните пересчёт заново.</value></data>
   <data name="Error_INVENTORY_NOT_ENABLED" xml:space="preserve"><value>Партионный учёт ещё не включён.</value></data>
   <data name="Error_INVENTORY_BIN_EMPTY" xml:space="preserve"><value>В этой ячейке нет остатков партий. Проверьте код ячейки.</value></data>
+  <data name="StockTransfer" xml:space="preserve"><value>Перемещение</value></data>
+  <data name="StockWriteOff" xml:space="preserve"><value>Списание</value></data>
+  <data name="StockSourceBin" xml:space="preserve"><value>1. Из какой ячейки</value></data>
+  <data name="StockBinFormat" xml:space="preserve"><value>Ячейка {0}: партий {1}</value></data>
+  <data name="StockBatchFormat" xml:space="preserve"><value>Партия: {0} · Срок: {1} · Свободно: {2}</value></data>
+  <data name="StockQuantity" xml:space="preserve"><value>Количество</value></data>
+  <data name="StockDestinationBin" xml:space="preserve"><value>В какую ячейку</value></data>
+  <data name="StockScanDestination" xml:space="preserve"><value>Сканировать целевую ячейку</value></data>
+  <data name="StockReasonType" xml:space="preserve"><value>Тип причины</value></data>
+  <data name="StockTakePhoto" xml:space="preserve"><value>Сделать фото</value></data>
+  <data name="StockPhotoAdded" xml:space="preserve"><value>Фото добавлено</value></data>
+  <data name="StockComment" xml:space="preserve"><value>Комментарий</value></data>
+  <data name="StockTransferSubmit" xml:space="preserve"><value>Переместить</value></data>
+  <data name="StockWriteOffSubmit" xml:space="preserve"><value>Отправить списание</value></data>
+  <data name="StockTransferReason" xml:space="preserve"><value>Перемещение из складского приложения</value></data>
+  <data name="StockTransferDone" xml:space="preserve"><value>Товар перемещён.</value></data>
+  <data name="StockWriteOffDone" xml:space="preserve"><value>Отправлено. Владелец проведёт его в веб-админке.</value></data>
+  <data name="WriteOff_EXPIRED" xml:space="preserve"><value>Просрочен</value></data>
+  <data name="WriteOff_WAREHOUSE_DAMAGE" xml:space="preserve"><value>Повреждён на складе</value></data>
+  <data name="WriteOff_DELIVERY_DAMAGE" xml:space="preserve"><value>Повреждён при доставке</value></data>
+  <data name="WriteOff_LOST" xml:space="preserve"><value>Утерян</value></data>
+  <data name="WriteOff_SAMPLE" xml:space="preserve"><value>Образец</value></data>
+  <data name="WriteOff_INTERNAL" xml:space="preserve"><value>Внутренние нужды</value></data>
+  <data name="WriteOff_OTHER" xml:space="preserve"><value>Другое</value></data>
+  <data name="Error_INVENTORY_PHOTO_REQUIRED" xml:space="preserve"><value>Фото обязательно. Нажмите «Сделать фото».</value></data>
+  <data name="Error_WAREHOUSE_INSUFFICIENT_STOCK" xml:space="preserve"><value>В партии нет столько свободного товара.</value></data>
+  <data name="Error_PHOTO_INVALID" xml:space="preserve"><value>Фото не читается или слишком большое. Сделайте ещё раз.</value></data>
+  <data name="Error_WAREHOUSE_SEPARATE_APPROVER_REQUIRED" xml:space="preserve"><value>Это должен провести другой сотрудник.</value></data>
 </root>

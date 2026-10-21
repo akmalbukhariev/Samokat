@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:lang="clr-namespace:NinimumWarehouse.Resources.Languages" xmlns:vm="clr-namespace:NinimumWarehouse.ViewModels" xmlns:components="clr-namespace:NinimumWarehouse.Components" x:Class="NinimumWarehouse.Views.StockMovePage" x:DataType="vm:StockMoveViewModel" Shell.NavBarIsVisible="False" Shell.TabBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid Padding="14,12,14,10" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+            <ImageButton Source="back.png" Style="{StaticResource IconButton}" Clicked="OnBackClicked" SemanticProperties.Description="{x:Static lang:AppResource.Back}"/>
+            <Label Grid.Column="1" Text="{Binding Title}" Style="{StaticResource SectionTitle}" VerticalTextAlignment="Center"/>
+        </Grid>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24,4,24,24" Spacing="16" IsEnabled="{Binding IsAvailable}">
+                <Border BackgroundColor="{StaticResource ErrorSoft}" StrokeThickness="0" Padding="14" StrokeShape="RoundRectangle 12" IsVisible="{Binding HasError}">
+                    <Label Text="{Binding ErrorMessage}" TextColor="{StaticResource ErrorColor}"/>
+                </Border>
+                <!-- 1. Source bin -->
+                <Border Style="{StaticResource Card}">
+                    <VerticalStackLayout Spacing="10">
+                        <Label x:Name="SourceTitle" Style="{StaticResource FieldLabel}"/>
+                        <Label Text="{Binding SourceText}" FontAttributes="Bold" IsVisible="{Binding HasSource}"/>
+                        <Button x:Name="ScanSourceButton" Command="{Binding ScanSourceCommand}" Style="{StaticResource PrimaryButton}"/>
+                        <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10" IsVisible="{Binding ManualCodeAllowed}">
+                            <Border Style="{StaticResource InputBorder}"><Entry x:Name="SourceEntry" Text="{Binding SourceInput}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" ReturnType="Go" ReturnCommand="{Binding LoadSourceCommand}"/></Border>
+                            <Button Grid.Column="1" Text="{x:Static lang:AppResource.ConfirmCode}" Command="{Binding LoadSourceCommand}" Style="{StaticResource SecondaryButton}"/>
+                        </Grid>
+                    </VerticalStackLayout>
+                </Border>
+                <!-- 2. Batch -->
+                <VerticalStackLayout Spacing="10" BindableLayout.ItemsSource="{Binding Batches}" IsVisible="{Binding HasSource}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="vm:BatchOptionViewModel">
+                            <Border Style="{StaticResource Card}">
+                                <Border.Triggers><DataTrigger TargetType="Border" Binding="{Binding Selected}" Value="True"><Setter Property="Stroke" Value="{StaticResource PrimaryColor}"/><Setter Property="StrokeThickness" Value="2"/></DataTrigger></Border.Triggers>
+                                <Border.GestureRecognizers><TapGestureRecognizer Command="{Binding SelectCommand}" CommandParameter="{Binding .}"/></Border.GestureRecognizers>
+                                <VerticalStackLayout Spacing="4">
+                                    <Label Text="{Binding Name}" FontSize="16" FontAttributes="Bold"/>
+                                    <Label Text="{Binding Details}" Style="{StaticResource MutedLabel}"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+                <!-- 3. Quantity and details -->
+                <Border Style="{StaticResource Card}" IsVisible="{Binding HasBatch}">
+                    <VerticalStackLayout Spacing="12">
+                        <Grid ColumnDefinitions="*,100" ColumnSpacing="12">
+                            <Label x:Name="QuantityLabel" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                            <Border Grid.Column="1" Style="{StaticResource InputBorder}" Padding="8,6"><Entry Text="{Binding QuantityInput}" Keyboard="Numeric" HorizontalTextAlignment="Center"/></Border>
+                        </Grid>
+                        <!-- Transfer: product scan and destination -->
+                        <VerticalStackLayout Spacing="10" IsVisible="{Binding NeedsProductScan}">
+                            <Button Text="{x:Static lang:AppResource.ScanToCheck}" Command="{Binding ScanProductCommand}" Style="{StaticResource PrimaryButton}"/>
+                            <Grid ColumnDefinitions="*,Auto" ColumnSpacing="10" IsVisible="{Binding ManualCodeAllowed}">
+                                <Border Style="{StaticResource InputBorder}"><Entry Text="{Binding BarcodeInput}" Placeholder="{x:Static lang:AppResource.BarcodePlaceholder}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False"/></Border>
+                                <Button Grid.Column="1" Text="{x:Static lang:AppResource.ConfirmCode}" Command="{Binding ConfirmBarcodeCommand}" Style="{StaticResource SecondaryButton}"/>
+                            </Grid>
+                        </VerticalStackLayout>
+                        <Label Text="{x:Static lang:AppResource.Checked}" TextColor="{StaticResource SuccessColor}" FontAttributes="Bold" IsVisible="{Binding ProductScanned}"/>
+                        <VerticalStackLayout Spacing="8" IsVisible="{Binding NoBarcode}">
+                            <Label Text="{x:Static lang:AppResource.ManualCheckHint}" Style="{StaticResource MutedLabel}"/>
+                            <Border Style="{StaticResource InputBorder}"><Editor Text="{Binding OverrideReason}" Placeholder="{x:Static lang:AppResource.ReasonPlaceholder}" MinimumHeightRequest="60" MaxLength="500"/></Border>
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Spacing="8" IsVisible="{Binding IsTransfer}">
+                            <Label x:Name="DestinationLabel" Style="{StaticResource FieldLabel}"/>
+                            <Button x:Name="ScanDestinationButton" Command="{Binding ScanDestinationCommand}" Style="{StaticResource SecondaryButton}"/>
+                            <Border Style="{StaticResource InputBorder}" IsVisible="{Binding ManualCodeAllowed}"><Entry x:Name="DestinationEntry" Text="{Binding DestinationInput}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False"/></Border>
+                            <Label Text="{Binding DestinationInput}" FontAttributes="Bold"/>
+                        </VerticalStackLayout>
+                        <!-- Write-off: reason and photo -->
+                        <VerticalStackLayout Spacing="8" IsVisible="{Binding IsWriteOff}">
+                            <Label x:Name="ReasonLabel" Style="{StaticResource FieldLabel}"/>
+                            <Border Style="{StaticResource InputBorder}"><Picker x:Name="ReasonPicker" ItemsSource="{Binding ReasonLabels}" SelectedIndex="{Binding ReasonIndex}"/></Border>
+                            <Button x:Name="PhotoButton" Command="{Binding PhotoCommand}" Style="{StaticResource SecondaryButton}"/>
+                            <Label x:Name="PhotoAddedLabel" TextColor="{StaticResource SuccessColor}" FontAttributes="Bold" IsVisible="{Binding HasPhoto}"/>
+                        </VerticalStackLayout>
+                        <Label x:Name="CommentLabel" Style="{StaticResource FieldLabel}"/>
+                        <Border Style="{StaticResource InputBorder}"><Editor Text="{Binding Comment}" Placeholder="{x:Static lang:AppResource.ReasonPlaceholder}" MinimumHeightRequest="60" MaxLength="400"/></Border>
+                    </VerticalStackLayout>
+                </Border>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Border Grid.Row="2" Padding="24,14,24,20" Stroke="{StaticResource BorderColor}" BackgroundColor="White" IsVisible="{Binding HasBatch}">
+            <Button x:Name="SubmitButton" Command="{Binding SubmitCommand}" Style="{StaticResource PrimaryButton}" IsEnabled="{Binding IsAvailable}"/>
+        </Border>
+        <components:LoadingView Grid.RowSpan="3" IsLoading="{Binding IsBusy}"/>
+    </Grid>
+</ContentPage>

@@ -338,7 +338,7 @@
   <data name="ReturnPhotoTitle" xml:space="preserve"><value>Return photo</value></data>
   <data name="PartialReturnPending" xml:space="preserve"><value>Delivered · partial return pending</value></data>
   <data name="PartialReturnReceived" xml:space="preserve"><value>Delivered · partial return received</value></data>
-  <data name="CountsTab" xml:space="preserve"><value>Count</value></data>
+  <data name="CountsTab" xml:space="preserve"><value>Inventory</value></data>
   <data name="Counts" xml:space="preserve"><value>Stock count</value></data>
   <data name="CountsSubtitle" xml:space="preserve"><value>Count the products in a bin. The owner approves the result in web admin.</value></data>
   <data name="InventoryDisabled" xml:space="preserve"><value>Batch inventory is not turned on yet. Counting is not available.</value></data>
@@ -364,4 +364,32 @@
   <data name="Error_INVENTORY_STOCK_CHANGED" xml:space="preserve"><value>Stock changed. Start the count again.</value></data>
   <data name="Error_INVENTORY_NOT_ENABLED" xml:space="preserve"><value>Batch inventory is not turned on yet.</value></data>
   <data name="Error_INVENTORY_BIN_EMPTY" xml:space="preserve"><value>This bin has no batch stock. Check the bin code.</value></data>
+  <data name="StockTransfer" xml:space="preserve"><value>Transfer</value></data>
+  <data name="StockWriteOff" xml:space="preserve"><value>Write-off</value></data>
+  <data name="StockSourceBin" xml:space="preserve"><value>1. From which bin</value></data>
+  <data name="StockBinFormat" xml:space="preserve"><value>Bin {0}: {1} batches</value></data>
+  <data name="StockBatchFormat" xml:space="preserve"><value>Batch: {0} · Expiry: {1} · Free: {2}</value></data>
+  <data name="StockQuantity" xml:space="preserve"><value>Quantity</value></data>
+  <data name="StockDestinationBin" xml:space="preserve"><value>To which bin</value></data>
+  <data name="StockScanDestination" xml:space="preserve"><value>Scan destination bin</value></data>
+  <data name="StockReasonType" xml:space="preserve"><value>Reason type</value></data>
+  <data name="StockTakePhoto" xml:space="preserve"><value>Take a photo</value></data>
+  <data name="StockPhotoAdded" xml:space="preserve"><value>Photo added</value></data>
+  <data name="StockComment" xml:space="preserve"><value>Comment</value></data>
+  <data name="StockTransferSubmit" xml:space="preserve"><value>Move</value></data>
+  <data name="StockWriteOffSubmit" xml:space="preserve"><value>Submit write-off</value></data>
+  <data name="StockTransferReason" xml:space="preserve"><value>Transfer from the warehouse app</value></data>
+  <data name="StockTransferDone" xml:space="preserve"><value>The stock was moved.</value></data>
+  <data name="StockWriteOffDone" xml:space="preserve"><value>Sent. The owner approves it in web admin.</value></data>
+  <data name="WriteOff_EXPIRED" xml:space="preserve"><value>Expired</value></data>
+  <data name="WriteOff_WAREHOUSE_DAMAGE" xml:space="preserve"><value>Damaged in the warehouse</value></data>
+  <data name="WriteOff_DELIVERY_DAMAGE" xml:space="preserve"><value>Damaged in delivery</value></data>
+  <data name="WriteOff_LOST" xml:space="preserve"><value>Lost</value></data>
+  <data name="WriteOff_SAMPLE" xml:space="preserve"><value>Sample</value></data>
+  <data name="WriteOff_INTERNAL" xml:space="preserve"><value>Internal use</value></data>
+  <data name="WriteOff_OTHER" xml:space="preserve"><value>Other</value></data>
+  <data name="Error_INVENTORY_PHOTO_REQUIRED" xml:space="preserve"><value>A photo is required. Tap "Take a photo".</value></data>
+  <data name="Error_WAREHOUSE_INSUFFICIENT_STOCK" xml:space="preserve"><value>This batch doesn’t have that much free stock.</value></data>
+  <data name="Error_PHOTO_INVALID" xml:space="preserve"><value>The photo is unreadable or too large. Take it again.</value></data>
+  <data name="Error_WAREHOUSE_SEPARATE_APPROVER_REQUIRED" xml:space="preserve"><value>Someone else must approve this.</value></data>
 </root>

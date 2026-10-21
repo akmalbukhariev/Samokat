@@ -338,7 +338,7 @@
   <data name="ReturnPhotoTitle" xml:space="preserve"><value>Qaytarish rasmi</value></data>
   <data name="PartialReturnPending" xml:space="preserve"><value>Yetkazildi · qisman qaytarish kutilmoqda</value></data>
   <data name="PartialReturnReceived" xml:space="preserve"><value>Yetkazildi · qisman qaytarish qabul qilindi</value></data>
-  <data name="CountsTab" xml:space="preserve"><value>Sanash</value></data>
+  <data name="CountsTab" xml:space="preserve"><value>Inventar</value></data>
   <data name="Counts" xml:space="preserve"><value>Sanash (inventarizatsiya)</value></data>
   <data name="CountsSubtitle" xml:space="preserve"><value>Manzildagi mahsulotlarni sanang. Natijani egasi veb-admin panelda tasdiqlaydi.</value></data>
   <data name="InventoryDisabled" xml:space="preserve"><value>Partiya hisobi hali yoqilmagan. Sanash mavjud emas.</value></data>
@@ -364,4 +364,32 @@
   <data name="Error_INVENTORY_STOCK_CHANGED" xml:space="preserve"><value>Qoldiq o‘zgardi. Sanashni qaytadan boshlang.</value></data>
   <data name="Error_INVENTORY_NOT_ENABLED" xml:space="preserve"><value>Partiya hisobi hali yoqilmagan.</value></data>
   <data name="Error_INVENTORY_BIN_EMPTY" xml:space="preserve"><value>Bu manzilda partiya qoldig‘i yo‘q. Manzil kodini tekshiring.</value></data>
+  <data name="StockTransfer" xml:space="preserve"><value>Ko‘chirish</value></data>
+  <data name="StockWriteOff" xml:space="preserve"><value>Hisobdan chiqarish</value></data>
+  <data name="StockSourceBin" xml:space="preserve"><value>1. Qaysi manzildan</value></data>
+  <data name="StockBinFormat" xml:space="preserve"><value>Manzil {0}: {1} ta partiya</value></data>
+  <data name="StockBatchFormat" xml:space="preserve"><value>Partiya: {0} · Muddat: {1} · Erkin: {2}</value></data>
+  <data name="StockQuantity" xml:space="preserve"><value>Soni</value></data>
+  <data name="StockDestinationBin" xml:space="preserve"><value>Qaysi manzilga</value></data>
+  <data name="StockScanDestination" xml:space="preserve"><value>Qabul manzilini skanerlash</value></data>
+  <data name="StockReasonType" xml:space="preserve"><value>Sabab turi</value></data>
+  <data name="StockTakePhoto" xml:space="preserve"><value>Rasmga olish</value></data>
+  <data name="StockPhotoAdded" xml:space="preserve"><value>Rasm qo‘shildi</value></data>
+  <data name="StockComment" xml:space="preserve"><value>Izoh</value></data>
+  <data name="StockTransferSubmit" xml:space="preserve"><value>Ko‘chirish</value></data>
+  <data name="StockWriteOffSubmit" xml:space="preserve"><value>Hisobdan chiqarishni yuborish</value></data>
+  <data name="StockTransferReason" xml:space="preserve"><value>Ombor ilovasidan ko‘chirish</value></data>
+  <data name="StockTransferDone" xml:space="preserve"><value>Mahsulot ko‘chirildi.</value></data>
+  <data name="StockWriteOffDone" xml:space="preserve"><value>Yuborildi. Egasi uni veb-admin panelda tasdiqlaydi.</value></data>
+  <data name="WriteOff_EXPIRED" xml:space="preserve"><value>Muddati o‘tgan</value></data>
+  <data name="WriteOff_WAREHOUSE_DAMAGE" xml:space="preserve"><value>Omborda shikastlangan</value></data>
+  <data name="WriteOff_DELIVERY_DAMAGE" xml:space="preserve"><value>Yetkazishda shikastlangan</value></data>
+  <data name="WriteOff_LOST" xml:space="preserve"><value>Yo‘qolgan</value></data>
+  <data name="WriteOff_SAMPLE" xml:space="preserve"><value>Namuna</value></data>
+  <data name="WriteOff_INTERNAL" xml:space="preserve"><value>Ichki ehtiyoj</value></data>
+  <data name="WriteOff_OTHER" xml:space="preserve"><value>Boshqa</value></data>
+  <data name="Error_INVENTORY_PHOTO_REQUIRED" xml:space="preserve"><value>Rasm majburiy. "Rasmga olish" tugmasini bosing.</value></data>
+  <data name="Error_WAREHOUSE_INSUFFICIENT_STOCK" xml:space="preserve"><value>Bu partiyada shuncha erkin mahsulot yo‘q.</value></data>
+  <data name="Error_PHOTO_INVALID" xml:space="preserve"><value>Rasmni o‘qib bo‘lmadi yoki u juda katta. Qayta oling.</value></data>
+  <data name="Error_WAREHOUSE_SEPARATE_APPROVER_REQUIRED" xml:space="preserve"><value>Buni boshqa xodim tasdiqlashi kerak.</value></data>
 </root>

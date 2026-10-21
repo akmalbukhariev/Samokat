@@ -20,6 +20,8 @@ public partial class CountsPage : ContentPage
         BinEntry.Placeholder = CountsViewModel.Text("CountBinPlaceholder");
         OpenTitleLabel.Text = CountsViewModel.Text("CountsOpen");
         EmptyLabel.Text = CountsViewModel.Text("CountsEmpty");
+        TransferButton.Text = CountsViewModel.Text("StockTransfer");
+        WriteOffButton.Text = CountsViewModel.Text("StockWriteOff");
     }
     protected override async void OnAppearing()
     {
@@ -30,6 +32,8 @@ public partial class CountsPage : ContentPage
         await ViewModel.RefreshAsync();
     }
     protected override void OnDisappearing() { ViewModel.StopLoading(); base.OnDisappearing(); }
+    private async void OnTransferClicked(object? sender, EventArgs e) => await Navigation.PushAsync(new StockMovePage(api, true));
+    private async void OnWriteOffClicked(object? sender, EventArgs e) => await Navigation.PushAsync(new StockMovePage(api, false));
     private async Task<string?> ScanAsync()
     {
         if (await Permissions.RequestAsync<Permissions.Camera>() != PermissionStatus.Granted) throw new ApiException("CAMERA");

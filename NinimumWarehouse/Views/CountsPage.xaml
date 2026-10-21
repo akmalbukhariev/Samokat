@@ -15,6 +15,10 @@
             <Border Padding="16" StrokeThickness="0" StrokeShape="RoundRectangle 14" BackgroundColor="{StaticResource WarningSoft}" IsVisible="{Binding Disabled}">
                 <Label x:Name="DisabledLabel" TextColor="{StaticResource WarningColor}"/>
             </Border>
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="10" IsVisible="{Binding Enabled}">
+                <Button x:Name="TransferButton" Clicked="OnTransferClicked" Style="{StaticResource SecondaryButton}"/>
+                <Button Grid.Column="1" x:Name="WriteOffButton" Clicked="OnWriteOffClicked" Style="{StaticResource SecondaryButton}"/>
+            </Grid>
             <Border Style="{StaticResource Card}" IsVisible="{Binding Enabled}">
                 <VerticalStackLayout Spacing="10" IsEnabled="{Binding IsAvailable}">
                     <Label x:Name="StartTitleLabel" Style="{StaticResource SectionTitle}"/>

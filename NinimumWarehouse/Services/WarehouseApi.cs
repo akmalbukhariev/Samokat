@@ -76,6 +76,9 @@ public sealed class WarehouseApi
     public Task<CountDocumentPage> OpenCounts(CancellationToken ct = default) => Request<CountDocumentPage>("inventory/documents?kind=COUNT&status=DRAFT", ct: ct);
     public Task<CountDetail> Count(long id) => Request<CountDetail>($"inventory/documents/{id}");
     public Task<long> StartCount(string binCode, string reason) => Request<long>("inventory/documents", new { kind = "COUNT", source_code = binCode, reason });
+    public Task<BinInfo> Bin(string code) => Request<BinInfo>($"inventory/bin?code={Uri.EscapeDataString(code.Trim())}");
+    public Task<long> CreateDocument(object body) => Request<long>("inventory/documents", body);
+    public Task<object> ApproveDocument(long id, object proof) => Request<object>($"inventory/documents/{id}/approve", proof);
     public Task<CountDetail> SubmitCount(long id, object counts, string varianceReason, string overrideReason) =>
         Request<CountDetail>($"inventory/documents/{id}/count", new { counts, variance_reason = varianceReason, scan_override_reason = overrideReason });
 }

@@ -44,3 +44,26 @@ public class CountLine
         JsonValueKind.String when DateTime.TryParse(Expiry.GetString(),CultureInfo.InvariantCulture,DateTimeStyles.None,out var d) => d.ToString("dd.MM.yyyy",CultureInfo.InvariantCulture),
         _ => "—" };
 }
+public class BinInfo
+{
+    public BinLocation Location { get; set; } = new();
+    public List<BatchRow> Batches { get; set; } = [];
+}
+public class BinLocation
+{
+    public long Id { get; set; }
+    public string Code { get; set; } = "";
+    public string? Name { get; set; }
+}
+public class BatchRow
+{
+    public long Id { get; set; }
+    [JsonPropertyName("product_name")] public string ProductName { get; set; } = "";
+    public string? Barcode { get; set; }
+    [JsonPropertyName("batch_number")] public string? BatchNumber { get; set; }
+    [JsonPropertyName("expiry_date")] public JsonElement Expiry { get; set; }
+    [JsonPropertyName("available_quantity")] public long Available { get; set; }
+    [JsonPropertyName("physical_quantity")] public long Physical { get; set; }
+    [JsonPropertyName("count_document")] public long? CountDocument { get; set; }
+    public string ExpiryText => new CountLine { Expiry = Expiry }.ExpiryText;
+}
