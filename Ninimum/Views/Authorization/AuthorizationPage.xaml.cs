@@ -75,6 +75,13 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
                 return;
             }
 
+            PhoneNumber = appControl.NormalizePhoneNumber(PhoneNumber);
+            if (!appControl.IsUzbekPhoneNumber(PhoneNumber))
+            {
+                await AlertService.ShowAlertAsync(AppResource.Error, AppResource.InvalidPhoneNumberExample901234567);
+                return;
+            }
+
             bool canUsePhoneNumber = await CheckPhoneNumber();
 
             if (!canUsePhoneNumber)

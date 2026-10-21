@@ -27,5 +27,7 @@ public static class LocalizedMessages
         "REASON_REQUIRED" => AppResource.ReasonRequired,
         "BARCODE_REQUIRED" => AppResource.BarcodeRequired,
         "CAMERA" => AppResource.CameraPermission, "NETWORK" => AppResource.ConnectionError,
+        // Newer codes (inventory counts) live in the resource files as Error_<code>.
+        _ when AppResource.ResourceManager.GetString("Error_"+code,AppResource.Culture) is { } text => text,
         _ => AppResource.ActionFailed };
 }

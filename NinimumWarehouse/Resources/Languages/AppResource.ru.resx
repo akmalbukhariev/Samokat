@@ -338,4 +338,30 @@
   <data name="ReturnPhotoTitle" xml:space="preserve"><value>Фото возврата</value></data>
   <data name="PartialReturnPending" xml:space="preserve"><value>Доставлено · ожидается частичный возврат</value></data>
   <data name="PartialReturnReceived" xml:space="preserve"><value>Доставлено · частичный возврат принят</value></data>
+  <data name="CountsTab" xml:space="preserve"><value>Пересчёт</value></data>
+  <data name="Counts" xml:space="preserve"><value>Пересчёт (инвентаризация)</value></data>
+  <data name="CountsSubtitle" xml:space="preserve"><value>Пересчитайте товары в ячейке. Результат подтверждает владелец в веб-админке.</value></data>
+  <data name="InventoryDisabled" xml:space="preserve"><value>Партионный учёт ещё не включён. Пересчёт недоступен.</value></data>
+  <data name="CountStart" xml:space="preserve"><value>Новый пересчёт</value></data>
+  <data name="CountStartHint" xml:space="preserve"><value>Отсканируйте этикетку ячейки. До окончания пересчёта товар из неё не берётся.</value></data>
+  <data name="CountScanBin" xml:space="preserve"><value>Сканировать ячейку</value></data>
+  <data name="CountBinPlaceholder" xml:space="preserve"><value>Код ячейки, например A-01</value></data>
+  <data name="CountsOpen" xml:space="preserve"><value>Открытые пересчёты</value></data>
+  <data name="CountsEmpty" xml:space="preserve"><value>Открытых пересчётов нет.</value></data>
+  <data name="CountOpen" xml:space="preserve"><value>Открыть пересчёт</value></data>
+  <data name="CountDefaultReason" xml:space="preserve"><value>Пересчёт из складского приложения</value></data>
+  <data name="CountBatchFormat" xml:space="preserve"><value>Партия: {0} · Срок: {1}</value></data>
+  <data name="CountHint" xml:space="preserve"><value>Введите фактическое количество по каждой партии и отсканируйте штрихкод товара. Учётное количество не показывается.</value></data>
+  <data name="CountNoBarcodeReason" xml:space="preserve"><value>Комментарий для товаров без штрихкода</value></data>
+  <data name="CountVarianceReason" xml:space="preserve"><value>Пересчёт отличается от учёта. Укажите причину.</value></data>
+  <data name="CountSubmit" xml:space="preserve"><value>Отправить пересчёт</value></data>
+  <data name="CountSubmittedTitle" xml:space="preserve"><value>Отправлено</value></data>
+  <data name="CountSubmitted" xml:space="preserve"><value>Пересчёт отправлен. Владелец подтвердит его в веб-админке.</value></data>
+  <data name="Error_INVENTORY_BIN_MISMATCH" xml:space="preserve"><value>Такая ячейка не найдена. Проверьте этикетку.</value></data>
+  <data name="Error_INVENTORY_BIN_LOCKED" xml:space="preserve"><value>Эта ячейка уже пересчитывается. Откройте её в списке открытых пересчётов.</value></data>
+  <data name="Error_INVENTORY_RESERVED_STOCK" xml:space="preserve"><value>Товар в этой ячейке зарезервирован под заказ. Пересчитайте после сборки.</value></data>
+  <data name="Error_INVENTORY_VARIANCE_REASON_REQUIRED" xml:space="preserve"><value>Пересчёт отличается от учёта. Укажите причину ниже и отправьте снова.</value></data>
+  <data name="Error_INVENTORY_STOCK_CHANGED" xml:space="preserve"><value>Остаток изменился. Начните пересчёт заново.</value></data>
+  <data name="Error_INVENTORY_NOT_ENABLED" xml:space="preserve"><value>Партионный учёт ещё не включён.</value></data>
+  <data name="Error_INVENTORY_BIN_EMPTY" xml:space="preserve"><value>В этой ячейке нет остатков партий. Проверьте код ячейки.</value></data>
 </root>

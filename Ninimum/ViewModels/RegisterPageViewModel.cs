@@ -185,7 +185,7 @@ public partial class RegisterPageViewModel : ObservableObject
             location_latitude = LocationLatitude,
             location_longitude = LocationLongitude,
             address = Address.Trim(),
-            phone_number = PhoneNumber.Trim(),
+            phone_number = appControl.NormalizePhoneNumber(PhoneNumber),
             password = Password
         };
 

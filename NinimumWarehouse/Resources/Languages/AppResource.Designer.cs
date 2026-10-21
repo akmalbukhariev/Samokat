@@ -214,6 +214,168 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Batch: {0} · Expiry: {1}.
+        /// </summary>
+        public static string CountBatchFormat {
+            get {
+                return ResourceManager.GetString("CountBatchFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bin code, e.g. A-01.
+        /// </summary>
+        public static string CountBinPlaceholder {
+            get {
+                return ResourceManager.GetString("CountBinPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Count from the warehouse app.
+        /// </summary>
+        public static string CountDefaultReason {
+            get {
+                return ResourceManager.GetString("CountDefaultReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the actual quantity for each batch and scan the product barcode. The system quantity is not shown..
+        /// </summary>
+        public static string CountHint {
+            get {
+                return ResourceManager.GetString("CountHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note for products without a barcode.
+        /// </summary>
+        public static string CountNoBarcodeReason {
+            get {
+                return ResourceManager.GetString("CountNoBarcodeReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open count.
+        /// </summary>
+        public static string CountOpen {
+            get {
+                return ResourceManager.GetString("CountOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stock count.
+        /// </summary>
+        public static string Counts {
+            get {
+                return ResourceManager.GetString("Counts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan bin.
+        /// </summary>
+        public static string CountScanBin {
+            get {
+                return ResourceManager.GetString("CountScanBin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No open counts..
+        /// </summary>
+        public static string CountsEmpty {
+            get {
+                return ResourceManager.GetString("CountsEmpty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open counts.
+        /// </summary>
+        public static string CountsOpen {
+            get {
+                return ResourceManager.GetString("CountsOpen", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Count the products in a bin. The owner approves the result in web admin..
+        /// </summary>
+        public static string CountsSubtitle {
+            get {
+                return ResourceManager.GetString("CountsSubtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Count.
+        /// </summary>
+        public static string CountsTab {
+            get {
+                return ResourceManager.GetString("CountsTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New count.
+        /// </summary>
+        public static string CountStart {
+            get {
+                return ResourceManager.GetString("CountStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan the bin label. Products are not taken from this bin until the count is finished..
+        /// </summary>
+        public static string CountStartHint {
+            get {
+                return ResourceManager.GetString("CountStartHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit count.
+        /// </summary>
+        public static string CountSubmit {
+            get {
+                return ResourceManager.GetString("CountSubmit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The count was sent. The owner approves it in web admin..
+        /// </summary>
+        public static string CountSubmitted {
+            get {
+                return ResourceManager.GetString("CountSubmitted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submitted.
+        /// </summary>
+        public static string CountSubmittedTitle {
+            get {
+                return ResourceManager.GetString("CountSubmittedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The count differs from the system. Enter the reason..
+        /// </summary>
+        public static string CountVarianceReason {
+            get {
+                return ResourceManager.GetString("CountVarianceReason", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Orders you mark ready will appear here..
         /// </summary>
         public static string EmptyHistoryMessage {
@@ -286,6 +448,69 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This bin has no batch stock. Check the bin code..
+        /// </summary>
+        public static string Error_INVENTORY_BIN_EMPTY {
+            get {
+                return ResourceManager.GetString("Error_INVENTORY_BIN_EMPTY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This bin is already being counted. Open it from the open counts list..
+        /// </summary>
+        public static string Error_INVENTORY_BIN_LOCKED {
+            get {
+                return ResourceManager.GetString("Error_INVENTORY_BIN_LOCKED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bin not found. Check the label..
+        /// </summary>
+        public static string Error_INVENTORY_BIN_MISMATCH {
+            get {
+                return ResourceManager.GetString("Error_INVENTORY_BIN_MISMATCH", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Batch inventory is not turned on yet..
+        /// </summary>
+        public static string Error_INVENTORY_NOT_ENABLED {
+            get {
+                return ResourceManager.GetString("Error_INVENTORY_NOT_ENABLED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stock in this bin is reserved for an order. Count it after the order is packed..
+        /// </summary>
+        public static string Error_INVENTORY_RESERVED_STOCK {
+            get {
+                return ResourceManager.GetString("Error_INVENTORY_RESERVED_STOCK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stock changed. Start the count again..
+        /// </summary>
+        public static string Error_INVENTORY_STOCK_CHANGED {
+            get {
+                return ResourceManager.GetString("Error_INVENTORY_STOCK_CHANGED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The count differs from the system. Enter the reason below and submit again..
+        /// </summary>
+        public static string Error_INVENTORY_VARIANCE_REASON_REQUIRED {
+            get {
+                return ResourceManager.GetString("Error_INVENTORY_VARIANCE_REASON_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to History.
         /// </summary>
         public static string History {
@@ -327,6 +552,15 @@ namespace NinimumWarehouse.Resources.Languages {
         public static string InvalidState {
             get {
                 return ResourceManager.GetString("InvalidState", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Batch inventory is not turned on yet. Counting is not available..
+        /// </summary>
+        public static string InventoryDisabled {
+            get {
+                return ResourceManager.GetString("InventoryDisabled", resourceCulture);
             }
         }
         

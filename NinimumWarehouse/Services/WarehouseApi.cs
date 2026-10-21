@@ -72,4 +72,10 @@ public sealed class WarehouseApi
     }
     public Task<Order> Detail(long id) => Request<Order>($"orders/{id}");
     public Task<Order> Action(long id, string action, object? body = null) => Request<Order>($"orders/{id}/{action}", body ?? new { });
+    public Task<InventoryStatus> InventoryStatus(CancellationToken ct = default) => Request<InventoryStatus>("inventory/status", ct: ct);
+    public Task<CountDocumentPage> OpenCounts(CancellationToken ct = default) => Request<CountDocumentPage>("inventory/documents?kind=COUNT&status=DRAFT", ct: ct);
+    public Task<CountDetail> Count(long id) => Request<CountDetail>($"inventory/documents/{id}");
+    public Task<long> StartCount(string binCode, string reason) => Request<long>("inventory/documents", new { kind = "COUNT", source_code = binCode, reason });
+    public Task<CountDetail> SubmitCount(long id, object counts, string varianceReason, string overrideReason) =>
+        Request<CountDetail>($"inventory/documents/{id}/count", new { counts, variance_reason = varianceReason, scan_override_reason = overrideReason });
 }

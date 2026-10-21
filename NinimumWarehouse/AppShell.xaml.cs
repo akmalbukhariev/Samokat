@@ -11,6 +11,8 @@ public partial class AppShell : Shell
         HistoryContent.ContentTemplate = new DataTemplate(() => new OrdersPage(api, AppConstants.HistoryView));
         ReturnsTab.Title = NinimumWarehouse.Resources.Languages.AppResource.ResourceManager.GetString("Returns",NinimumWarehouse.Resources.Languages.AppResource.Culture);
         ReturnsContent.ContentTemplate = new DataTemplate(() => new OrdersPage(api,"returns"));
+        CountsTab.Title = NinimumWarehouse.Resources.Languages.AppResource.ResourceManager.GetString("CountsTab",NinimumWarehouse.Resources.Languages.AppResource.Culture);
+        CountsContent.ContentTemplate = new DataTemplate(() => new CountsPage(api));
         ProfileContent.ContentTemplate = new DataTemplate(() => new ProfilePage(api));
         if (showProfile) MainTabs.CurrentItem = ProfileTab;
     }

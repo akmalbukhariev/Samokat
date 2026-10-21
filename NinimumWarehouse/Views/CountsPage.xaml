@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:lang="clr-namespace:NinimumWarehouse.Resources.Languages" xmlns:vm="clr-namespace:NinimumWarehouse.ViewModels" x:Class="NinimumWarehouse.Views.CountsPage" x:DataType="vm:CountsViewModel" Shell.NavBarIsVisible="False">
+    <Grid RowDefinitions="Auto,Auto,*">
+        <VerticalStackLayout Padding="24,24,24,14" Spacing="10">
+            <Grid ColumnDefinitions="*,Auto">
+                <Label x:Name="TitleLabel" Style="{StaticResource PageTitle}"/>
+                <ImageButton Grid.Column="1" Source="refresh.png" Style="{StaticResource IconButton}" Command="{Binding RefreshCommand}" SemanticProperties.Description="{x:Static lang:AppResource.Refresh}" IsEnabled="{Binding IsAvailable}"/>
+            </Grid>
+            <Label x:Name="SubtitleLabel" Style="{StaticResource MutedLabel}"/>
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="1" Padding="24,0,24,12" Spacing="12">
+            <Border BackgroundColor="{StaticResource ErrorSoft}" StrokeThickness="0" Padding="14" StrokeShape="RoundRectangle 12" IsVisible="{Binding HasError}">
+                <Label Text="{Binding ErrorMessage}" TextColor="{StaticResource ErrorColor}"/>
+            </Border>
+            <Border Padding="16" StrokeThickness="0" StrokeShape="RoundRectangle 14" BackgroundColor="{StaticResource WarningSoft}" IsVisible="{Binding Disabled}">
+                <Label x:Name="DisabledLabel" TextColor="{StaticResource WarningColor}"/>
+            </Border>
+            <Border Style="{StaticResource Card}" IsVisible="{Binding Enabled}">
+                <VerticalStackLayout Spacing="10" IsEnabled="{Binding IsAvailable}">
+                    <Label x:Name="StartTitleLabel" Style="{StaticResource SectionTitle}"/>
+                    <Label x:Name="StartHintLabel" Style="{StaticResource MutedLabel}"/>
+                    <Button x:Name="ScanBinButton" Command="{Binding ScanBinCommand}" Style="{StaticResource PrimaryButton}"/>
+                    <Button Text="{x:Static lang:AppResource.EnterCodeInstead}" Command="{Binding ToggleCodeCommand}" Style="{StaticResource TextButton}"/>
+                    <VerticalStackLayout Spacing="10" IsVisible="{Binding ShowCodeInput}">
+                        <Border Style="{StaticResource InputBorder}">
+                            <Entry x:Name="BinEntry" Text="{Binding BinInput}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" ReturnType="Go" ReturnCommand="{Binding StartTypedCommand}"/>
+                        </Border>
+                        <Button Text="{x:Static lang:AppResource.ConfirmCode}" Command="{Binding StartTypedCommand}" Style="{StaticResource SecondaryButton}"/>
+                    </VerticalStackLayout>
+                </VerticalStackLayout>
+            </Border>
+        </VerticalStackLayout>
+        <RefreshView Grid.Row="2" Command="{Binding RefreshCommand}" IsRefreshing="{Binding IsRefreshing}" RefreshColor="{StaticResource PrimaryColor}" IsVisible="{Binding Enabled}">
+            <CollectionView ItemsSource="{Binding Counts}" SelectionMode="None" ItemSizingStrategy="MeasureAllItems">
+                <CollectionView.Header>
+                    <Label x:Name="OpenTitleLabel" Style="{StaticResource SectionTitle}" Margin="24,4,24,12"/>
+                </CollectionView.Header>
+                <CollectionView.EmptyView>
+                    <Label x:Name="EmptyLabel" Style="{StaticResource MutedLabel}" Margin="24,0"/>
+                </CollectionView.EmptyView>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="vm:CountCardViewModel">
+                        <Border Margin="24,0,24,14" Style="{StaticResource Card}">
+                            <VerticalStackLayout Spacing="10">
+                                <Grid ColumnDefinitions="*,Auto">
+                                    <Label Text="{Binding Number}" FontSize="16" FontAttributes="Bold"/>
+                                    <Border Grid.Column="1" Padding="10,6" StrokeThickness="0" StrokeShape="RoundRectangle 10" BackgroundColor="{StaticResource PrimarySoft}">
+                                        <Label Text="{Binding Bin}" Style="{StaticResource BadgeLabel}" TextColor="{StaticResource PrimaryColor}"/>
+                                    </Border>
+                                </Grid>
+                                <Label Text="{Binding Details}" Style="{StaticResource MutedLabel}"/>
+                                <Button Text="{Binding OpenText}" Style="{StaticResource SecondaryButton}" Command="{Binding OpenCommand}" CommandParameter="{Binding .}"/>
+                            </VerticalStackLayout>
+                        </Border>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

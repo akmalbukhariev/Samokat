@@ -66,6 +66,8 @@ public partial class LoginPageViewModel : ObservableObject
                 return;
             }
 
+            PhoneNumber = appControl.NormalizePhoneNumber(PhoneNumber);
+
             if (string.IsNullOrWhiteSpace(Password))
             {
                 await AlertService.ShowAlertAsync(AppResource.Information, AppResource.PleaseEnterPassword);
@@ -182,7 +184,7 @@ public partial class LoginPageViewModel : ObservableObject
             nameof(ForgotPasswordPage),
             new Dictionary<string, object>
             {
-                ["PhoneNumber"] = PhoneNumber.Trim()
+                ["PhoneNumber"] = appControl.NormalizePhoneNumber(PhoneNumber)
             });
     }
 }

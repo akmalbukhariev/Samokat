@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:lang="clr-namespace:NinimumWarehouse.Resources.Languages" xmlns:vm="clr-namespace:NinimumWarehouse.ViewModels" xmlns:components="clr-namespace:NinimumWarehouse.Components" x:Class="NinimumWarehouse.Views.CountDetailPage" x:DataType="vm:CountDetailViewModel" Shell.NavBarIsVisible="False" Shell.TabBarIsVisible="False">
+    <Grid RowDefinitions="Auto,*,Auto">
+        <Grid Padding="14,12,14,10" ColumnDefinitions="Auto,*,Auto" ColumnSpacing="10">
+            <ImageButton Source="back.png" Style="{StaticResource IconButton}" Clicked="OnBackClicked" SemanticProperties.Description="{x:Static lang:AppResource.Back}"/>
+            <Label Grid.Column="1" Text="{Binding Title}" Style="{StaticResource SectionTitle}" VerticalTextAlignment="Center"/>
+        </Grid>
+        <ScrollView Grid.Row="1">
+            <VerticalStackLayout Padding="24,4,24,24" Spacing="16" IsEnabled="{Binding IsAvailable}">
+                <Border BackgroundColor="{StaticResource ErrorSoft}" StrokeThickness="0" Padding="14" StrokeShape="RoundRectangle 12" IsVisible="{Binding HasError}">
+                    <Label Text="{Binding ErrorMessage}" TextColor="{StaticResource ErrorColor}"/>
+                </Border>
+                <Label x:Name="HintLabel" Style="{StaticResource MutedLabel}" IsVisible="{Binding Loaded}"/>
+                <VerticalStackLayout Spacing="16" BindableLayout.ItemsSource="{Binding Lines}">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate x:DataType="vm:CountLineViewModel">
+                            <Border Style="{StaticResource Card}">
+                                <VerticalStackLayout Spacing="12">
+                                    <Label Text="{Binding Name}" FontSize="18" FontAttributes="Bold"/>
+                                    <Label Text="{Binding BatchText}" Style="{StaticResource MutedLabel}"/>
+                                    <Grid ColumnDefinitions="*,100" ColumnSpacing="12">
+                                        <Label Text="{x:Static lang:AppResource.CheckedQuantity}" Style="{StaticResource FieldLabel}" VerticalOptions="Center"/>
+                                        <Border Grid.Column="1" Style="{StaticResource InputBorder}" Padding="8,6">
+                                            <Entry Text="{Binding QuantityInput}" Keyboard="Numeric" HorizontalTextAlignment="Center" ReturnType="Done"/>
+                                        </Border>
+                                    </Grid>
+                                    <VerticalStackLayout Spacing="10" IsVisible="{Binding NeedsScan}">
+                                        <Button Text="{x:Static lang:AppResource.ScanToCheck}" Command="{Binding ScanCommand}" Style="{StaticResource PrimaryButton}"/>
+                                        <Button Text="{x:Static lang:AppResource.EnterCodeInstead}" Command="{Binding ToggleCodeCommand}" Style="{StaticResource TextButton}"/>
+                                        <VerticalStackLayout Spacing="10" IsVisible="{Binding ShowCodeInput}">
+                                            <Border Style="{StaticResource InputBorder}">
+                                                <Entry Text="{Binding BarcodeInput}" Placeholder="{x:Static lang:AppResource.BarcodePlaceholder}" IsSpellCheckEnabled="False" IsTextPredictionEnabled="False" ReturnType="Go" ReturnCommand="{Binding ConfirmCodeCommand}"/>
+                                            </Border>
+                                            <Button Text="{x:Static lang:AppResource.ConfirmCode}" Command="{Binding ConfirmCodeCommand}" Style="{StaticResource SecondaryButton}"/>
+                                        </VerticalStackLayout>
+                                    </VerticalStackLayout>
+                                    <Label Text="{x:Static lang:AppResource.Checked}" TextColor="{StaticResource SuccessColor}" FontAttributes="Bold" IsVisible="{Binding IsScanned}"/>
+                                    <Label Text="{x:Static lang:AppResource.NoBarcode}" Style="{StaticResource MutedLabel}" IsVisible="{Binding NoBarcode}"/>
+                                </VerticalStackLayout>
+                            </Border>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="8" IsVisible="{Binding HasNoBarcodeLines}">
+                    <Label x:Name="OverrideLabel" Style="{StaticResource FieldLabel}"/>
+                    <Border Style="{StaticResource InputBorder}">
+                        <Editor Text="{Binding OverrideReason}" Placeholder="{x:Static lang:AppResource.ReasonPlaceholder}" MinimumHeightRequest="72" MaxLength="500"/>
+                    </Border>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="8" IsVisible="{Binding VarianceRequired}">
+                    <Label x:Name="VarianceLabel" Style="{StaticResource FieldLabel}" TextColor="{StaticResource WarningColor}"/>
+                    <Border Style="{StaticResource InputBorder}">
+                        <Editor Text="{Binding VarianceReason}" Placeholder="{x:Static lang:AppResource.ReasonPlaceholder}" MinimumHeightRequest="84" MaxLength="500"/>
+                    </Border>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <Border Grid.Row="2" Padding="24,14,24,20" Stroke="{StaticResource BorderColor}" BackgroundColor="White" IsVisible="{Binding Loaded}">
+            <Button x:Name="SubmitButton" Command="{Binding SubmitCommand}" Style="{StaticResource PrimaryButton}" IsEnabled="{Binding IsAvailable}"/>
+        </Border>
+        <components:LoadingView Grid.RowSpan="3" IsLoading="{Binding IsBusy}"/>
+    </Grid>
+</ContentPage>

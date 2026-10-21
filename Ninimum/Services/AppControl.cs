@@ -123,6 +123,7 @@ namespace Ninimum.Services
 
         public async Task<bool> Login(string phoneNumber, string password)
         {
+            phoneNumber = NormalizePhoneNumber(phoneNumber);
             var request = new LoginUserRequest
             {
                 phone_number = phoneNumber,
@@ -279,6 +280,27 @@ namespace Ninimum.Services
                     Shell.SetTabBarIsVisible(page, show);
                 }
             });
+        }
+
+        /// <summary>M11: every phone the app sends uses one form (998XXXXXXXXX); the backend stores it as +998XXXXXXXXX.</summary>
+        public string NormalizePhoneNumber(string? value)
+        {
+            string digits = new string((value ?? string.Empty).Where(char.IsDigit).ToArray());
+            if (digits.StartsWith("00", StringComparison.Ordinal))
+                digits = digits[2..];
+
+            if (digits.Length == 9)
+                return "998" + digits;
+
+            if (digits.Length == 12 && digits.StartsWith("998", StringComparison.Ordinal))
+                return digits;
+
+            return (value ?? string.Empty).Trim();
+        }
+
+        public bool IsUzbekPhoneNumber(string? phoneNumber)
+        {
+            return phoneNumber != null && phoneNumber.Length == 12 && phoneNumber.StartsWith("998", StringComparison.Ordinal) && phoneNumber.All(char.IsDigit);
         }
 
         public bool IsValidUzbekistanPhoneNumber(string phoneNumber)

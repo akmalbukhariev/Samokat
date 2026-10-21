@@ -338,4 +338,30 @@
   <data name="ReturnPhotoTitle" xml:space="preserve"><value>Qaytarish rasmi</value></data>
   <data name="PartialReturnPending" xml:space="preserve"><value>Yetkazildi · qisman qaytarish kutilmoqda</value></data>
   <data name="PartialReturnReceived" xml:space="preserve"><value>Yetkazildi · qisman qaytarish qabul qilindi</value></data>
+  <data name="CountsTab" xml:space="preserve"><value>Sanash</value></data>
+  <data name="Counts" xml:space="preserve"><value>Sanash (inventarizatsiya)</value></data>
+  <data name="CountsSubtitle" xml:space="preserve"><value>Manzildagi mahsulotlarni sanang. Natijani egasi veb-admin panelda tasdiqlaydi.</value></data>
+  <data name="InventoryDisabled" xml:space="preserve"><value>Partiya hisobi hali yoqilmagan. Sanash mavjud emas.</value></data>
+  <data name="CountStart" xml:space="preserve"><value>Yangi sanash</value></data>
+  <data name="CountStartHint" xml:space="preserve"><value>Manzil yorlig‘ini skanerlang. Sanash tugaguncha bu manzildan mahsulot olinmaydi.</value></data>
+  <data name="CountScanBin" xml:space="preserve"><value>Manzilni skanerlash</value></data>
+  <data name="CountBinPlaceholder" xml:space="preserve"><value>Manzil kodi, masalan A-01</value></data>
+  <data name="CountsOpen" xml:space="preserve"><value>Ochiq sanashlar</value></data>
+  <data name="CountsEmpty" xml:space="preserve"><value>Ochiq sanash yo‘q.</value></data>
+  <data name="CountOpen" xml:space="preserve"><value>Sanashni ochish</value></data>
+  <data name="CountDefaultReason" xml:space="preserve"><value>Ombor ilovasidan sanash</value></data>
+  <data name="CountBatchFormat" xml:space="preserve"><value>Partiya: {0} · Muddat: {1}</value></data>
+  <data name="CountHint" xml:space="preserve"><value>Har bir partiyadagi haqiqiy sonni kiriting va mahsulot shtrix-kodini skanerlang. Tizimdagi son ko‘rsatilmaydi.</value></data>
+  <data name="CountNoBarcodeReason" xml:space="preserve"><value>Shtrix-kodsiz mahsulotlar uchun izoh</value></data>
+  <data name="CountVarianceReason" xml:space="preserve"><value>Sanalgan son tizimdagidan farq qiladi. Sababini yozing.</value></data>
+  <data name="CountSubmit" xml:space="preserve"><value>Sanashni yuborish</value></data>
+  <data name="CountSubmittedTitle" xml:space="preserve"><value>Yuborildi</value></data>
+  <data name="CountSubmitted" xml:space="preserve"><value>Sanash yuborildi. Egasi uni veb-admin panelda tasdiqlaydi.</value></data>
+  <data name="Error_INVENTORY_BIN_MISMATCH" xml:space="preserve"><value>Bunday manzil topilmadi. Yorliqni tekshiring.</value></data>
+  <data name="Error_INVENTORY_BIN_LOCKED" xml:space="preserve"><value>Bu manzil allaqachon sanalmoqda. Ochiq sanashlar ro‘yxatidan oching.</value></data>
+  <data name="Error_INVENTORY_RESERVED_STOCK" xml:space="preserve"><value>Bu manzildagi mahsulot buyurtma uchun band. Buyurtma tayyorlangandan keyin sanang.</value></data>
+  <data name="Error_INVENTORY_VARIANCE_REASON_REQUIRED" xml:space="preserve"><value>Sanalgan son tizimdagidan farq qiladi. Pastda sababini yozing va qayta yuboring.</value></data>
+  <data name="Error_INVENTORY_STOCK_CHANGED" xml:space="preserve"><value>Qoldiq o‘zgardi. Sanashni qaytadan boshlang.</value></data>
+  <data name="Error_INVENTORY_NOT_ENABLED" xml:space="preserve"><value>Partiya hisobi hali yoqilmagan.</value></data>
+  <data name="Error_INVENTORY_BIN_EMPTY" xml:space="preserve"><value>Bu manzilda partiya qoldig‘i yo‘q. Manzil kodini tekshiring.</value></data>
 </root>

@@ -338,4 +338,30 @@
   <data name="ReturnPhotoTitle" xml:space="preserve"><value>Return photo</value></data>
   <data name="PartialReturnPending" xml:space="preserve"><value>Delivered · partial return pending</value></data>
   <data name="PartialReturnReceived" xml:space="preserve"><value>Delivered · partial return received</value></data>
+  <data name="CountsTab" xml:space="preserve"><value>Count</value></data>
+  <data name="Counts" xml:space="preserve"><value>Stock count</value></data>
+  <data name="CountsSubtitle" xml:space="preserve"><value>Count the products in a bin. The owner approves the result in web admin.</value></data>
+  <data name="InventoryDisabled" xml:space="preserve"><value>Batch inventory is not turned on yet. Counting is not available.</value></data>
+  <data name="CountStart" xml:space="preserve"><value>New count</value></data>
+  <data name="CountStartHint" xml:space="preserve"><value>Scan the bin label. Products are not taken from this bin until the count is finished.</value></data>
+  <data name="CountScanBin" xml:space="preserve"><value>Scan bin</value></data>
+  <data name="CountBinPlaceholder" xml:space="preserve"><value>Bin code, e.g. A-01</value></data>
+  <data name="CountsOpen" xml:space="preserve"><value>Open counts</value></data>
+  <data name="CountsEmpty" xml:space="preserve"><value>No open counts.</value></data>
+  <data name="CountOpen" xml:space="preserve"><value>Open count</value></data>
+  <data name="CountDefaultReason" xml:space="preserve"><value>Count from the warehouse app</value></data>
+  <data name="CountBatchFormat" xml:space="preserve"><value>Batch: {0} · Expiry: {1}</value></data>
+  <data name="CountHint" xml:space="preserve"><value>Enter the actual quantity for each batch and scan the product barcode. The system quantity is not shown.</value></data>
+  <data name="CountNoBarcodeReason" xml:space="preserve"><value>Note for products without a barcode</value></data>
+  <data name="CountVarianceReason" xml:space="preserve"><value>The count differs from the system. Enter the reason.</value></data>
+  <data name="CountSubmit" xml:space="preserve"><value>Submit count</value></data>
+  <data name="CountSubmittedTitle" xml:space="preserve"><value>Submitted</value></data>
+  <data name="CountSubmitted" xml:space="preserve"><value>The count was sent. The owner approves it in web admin.</value></data>
+  <data name="Error_INVENTORY_BIN_MISMATCH" xml:space="preserve"><value>Bin not found. Check the label.</value></data>
+  <data name="Error_INVENTORY_BIN_LOCKED" xml:space="preserve"><value>This bin is already being counted. Open it from the open counts list.</value></data>
+  <data name="Error_INVENTORY_RESERVED_STOCK" xml:space="preserve"><value>Stock in this bin is reserved for an order. Count it after the order is packed.</value></data>
+  <data name="Error_INVENTORY_VARIANCE_REASON_REQUIRED" xml:space="preserve"><value>The count differs from the system. Enter the reason below and submit again.</value></data>
+  <data name="Error_INVENTORY_STOCK_CHANGED" xml:space="preserve"><value>Stock changed. Start the count again.</value></data>
+  <data name="Error_INVENTORY_NOT_ENABLED" xml:space="preserve"><value>Batch inventory is not turned on yet.</value></data>
+  <data name="Error_INVENTORY_BIN_EMPTY" xml:space="preserve"><value>This bin has no batch stock. Check the bin code.</value></data>
 </root>
