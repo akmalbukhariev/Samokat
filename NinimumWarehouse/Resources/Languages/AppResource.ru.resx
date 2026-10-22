@@ -363,6 +363,7 @@
   <data name="Error_INVENTORY_VARIANCE_REASON_REQUIRED" xml:space="preserve"><value>Пересчёт отличается от учёта. Укажите причину ниже и отправьте снова.</value></data>
   <data name="Error_INVENTORY_STOCK_CHANGED" xml:space="preserve"><value>Остаток изменился. Начните пересчёт заново.</value></data>
   <data name="Error_INVENTORY_NOT_ENABLED" xml:space="preserve"><value>Партионный учёт ещё не включён.</value></data>
+  <data name="Error_PERIOD_CLOSED" xml:space="preserve"><value>Эта дата в закрытом периоде. Обратитесь к владельцу.</value></data>
   <data name="Error_INVENTORY_BIN_EMPTY" xml:space="preserve"><value>В этой ячейке нет остатков партий. Проверьте код ячейки.</value></data>
   <data name="StockTransfer" xml:space="preserve"><value>Перемещение</value></data>
   <data name="StockWriteOff" xml:space="preserve"><value>Списание</value></data>

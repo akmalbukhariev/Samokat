@@ -363,6 +363,7 @@
   <data name="Error_INVENTORY_VARIANCE_REASON_REQUIRED" xml:space="preserve"><value>Sanalgan son tizimdagidan farq qiladi. Pastda sababini yozing va qayta yuboring.</value></data>
   <data name="Error_INVENTORY_STOCK_CHANGED" xml:space="preserve"><value>Qoldiq o‘zgardi. Sanashni qaytadan boshlang.</value></data>
   <data name="Error_INVENTORY_NOT_ENABLED" xml:space="preserve"><value>Partiya hisobi hali yoqilmagan.</value></data>
+  <data name="Error_PERIOD_CLOSED" xml:space="preserve"><value>Bu sana yopilgan davrga tushadi. Egasi bilan bog‘laning.</value></data>
   <data name="Error_INVENTORY_BIN_EMPTY" xml:space="preserve"><value>Bu manzilda partiya qoldig‘i yo‘q. Manzil kodini tekshiring.</value></data>
   <data name="StockTransfer" xml:space="preserve"><value>Ko‘chirish</value></data>
   <data name="StockWriteOff" xml:space="preserve"><value>Hisobdan chiqarish</value></data>

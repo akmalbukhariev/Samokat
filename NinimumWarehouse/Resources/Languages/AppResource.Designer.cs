@@ -520,6 +520,15 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This date is in a closed period. Contact the owner..
+        /// </summary>
+        public static string Error_PERIOD_CLOSED {
+            get {
+                return ResourceManager.GetString("Error_PERIOD_CLOSED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The photo is unreadable or too large. Take it again..
         /// </summary>
         public static string Error_PHOTO_INVALID {

@@ -363,6 +363,7 @@
   <data name="Error_INVENTORY_VARIANCE_REASON_REQUIRED" xml:space="preserve"><value>The count differs from the system. Enter the reason below and submit again.</value></data>
   <data name="Error_INVENTORY_STOCK_CHANGED" xml:space="preserve"><value>Stock changed. Start the count again.</value></data>
   <data name="Error_INVENTORY_NOT_ENABLED" xml:space="preserve"><value>Batch inventory is not turned on yet.</value></data>
+  <data name="Error_PERIOD_CLOSED" xml:space="preserve"><value>This date is in a closed period. Contact the owner.</value></data>
   <data name="Error_INVENTORY_BIN_EMPTY" xml:space="preserve"><value>This bin has no batch stock. Check the bin code.</value></data>
   <data name="StockTransfer" xml:space="preserve"><value>Transfer</value></data>
   <data name="StockWriteOff" xml:space="preserve"><value>Write-off</value></data>
