@@ -102,6 +102,9 @@
             { ApiResult.UNKNOWN_ERROR, "Unknown error occurred" }
         };
 
+        /// <summary>True for the English status texts above, which are never shown to customers as is.</summary>
+        public static bool IsClientMessage(string text) => _messages.ContainsValue(text);
+
         public static string GetMessage(this ApiResult result)
         {
             return _messages.TryGetValue(result, out var message)

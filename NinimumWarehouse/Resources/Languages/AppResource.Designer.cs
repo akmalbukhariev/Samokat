@@ -178,7 +178,7 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Total checked quantity.
+        ///   Looks up a localized string similar to Counted quantity.
         /// </summary>
         public static string CheckedQuantity {
             get {
@@ -970,7 +970,7 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Count the products you have and enter the total..
+        ///   Looks up a localized string similar to Scan each piece separately — the count adds up by itself..
         /// </summary>
         public static string QuantityHelp {
             get {

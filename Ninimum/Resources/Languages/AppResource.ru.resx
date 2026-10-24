@@ -1459,4 +1459,34 @@
   <data name="OrderReturned" xml:space="preserve"><value>Принято на склад</value></data>
   <data name="PartialReturnPending" xml:space="preserve"><value>Доставлено · ожидается частичный возврат</value></data>
   <data name="PartialReturnReceived" xml:space="preserve"><value>Доставлено · частичный возврат принят</value></data>
+  <data name="PaymeAppNotFound" xml:space="preserve">
+    <value>Приложение Payme не найдено. Продолжите оплату на этой странице.</value>
+  </data>
+  <data name="PaymentFailedTitle" xml:space="preserve">
+    <value>Оплата не прошла</value>
+  </data>
+  <data name="PaymentCancelledUnpaid" xml:space="preserve">
+    <value>Заказ отменён, так как не был оплачен. Деньги не списаны. Можно оформить новый заказ.</value>
+  </data>
+  <data name="PaymentFailedReason1" xml:space="preserve">
+    <value>Платёж не принят: проблема со счётом магазина. Деньги не списаны. Повторите позже.</value>
+  </data>
+  <data name="PaymentFailedReason2" xml:space="preserve">
+    <value>Карта или банк (HUMO, UZCARD и др.) не провели платёж. Проверьте баланс и статус карты или попробуйте другую карту.</value>
+  </data>
+  <data name="PaymentFailedReason3" xml:space="preserve">
+    <value>Ошибка в платёжной системе. Если деньги списались, они вернутся автоматически. Повторите попытку.</value>
+  </data>
+  <data name="PaymentFailedReason4" xml:space="preserve">
+    <value>Платёж не был подтверждён вовремя и отменён. Деньги не списаны. Повторите.</value>
+  </data>
+  <data name="PaymentFailedReason5" xml:space="preserve">
+    <value>Платёж отменён, деньги возвращены на карту.</value>
+  </data>
+  <data name="PaymentFailedUnknown" xml:space="preserve">
+    <value>Оплата не прошла. Деньги не списаны. Повторите или выберите другую карту.</value>
+  </data>
+  <data name="PaymentPendingHint" xml:space="preserve">
+    <value>Оплата ещё не подтверждена. Если Payme показал ошибку (например, карта не работает или банк не отвечает), попробуйте другую карту на этой странице. Если деньги списались, подтверждение придёт через несколько минут.</value>
+  </data>
 </root>

@@ -157,10 +157,10 @@
     <value>No barcode</value>
   </data>
   <data name="CheckedQuantity" xml:space="preserve">
-    <value>Total checked quantity</value>
+    <value>Counted quantity</value>
   </data>
   <data name="QuantityHelp" xml:space="preserve">
-    <value>Count the products you have and enter the total.</value>
+    <value>Scan each piece separately — the count adds up by itself.</value>
   </data>
   <data name="ScanToCheck" xml:space="preserve">
     <value>Scan and check</value>

@@ -214,7 +214,7 @@ public partial class RegisterPageViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await AlertService.ShowAlertAsync(AppResource.Error, ex.Message);
+            await AlertService.ShowAlertAsync(AppResource.Error, global::Utils.ServerMessage.Exception(ex));
         }
         finally
         {

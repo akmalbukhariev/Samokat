@@ -191,7 +191,7 @@ public partial class PaymentPage : BasePage, IQueryAttributable
                 orderPaymentStatus.Equals("FAILED", StringComparison.OrdinalIgnoreCase) ||
                 orderPaymentStatus.Equals("CANCELLED", StringComparison.OrdinalIgnoreCase))
             {
-                await FinishPaymentAsync(orderPaymentStatus);
+                await FinishPaymentAsync(orderPaymentStatus, orderResponse.resultData?.paymentReason);
                 return true;
             }
 
@@ -220,6 +220,14 @@ public partial class PaymentPage : BasePage, IQueryAttributable
 
         Debug.WriteLine($"PAYME NAVIGATING => {e.Url}");
 
+        // "Pay in the Payme app" links (intent://, payme://, Play Store) can't open inside the WebView.
+        if (IsExternalPaymentLink(e.Url))
+        {
+            e.Cancel = true;
+            _ = OpenExternalPaymentLinkAsync(e.Url);
+            return;
+        }
+
         if (e.Url.StartsWith(
                 "ninimum://payment-result",
                 StringComparison.OrdinalIgnoreCase))
@@ -241,6 +249,77 @@ public partial class PaymentPage : BasePage, IQueryAttributable
 
         ShowLoading(true);
     }
+
+    private static bool IsExternalPaymentLink(string url)
+    {
+        if (!Uri.TryCreate(url, UriKind.Absolute, out var uri))
+            return url.StartsWith("intent:", StringComparison.OrdinalIgnoreCase);
+        var scheme = uri.Scheme.ToLowerInvariant();
+        if (scheme is "http" or "https")
+            return uri.Host.Equals("play.google.com", StringComparison.OrdinalIgnoreCase);
+        return scheme is not ("about" or "data" or "javascript" or "blob" or "file" or "ninimum");
+    }
+
+    /// <summary>Opens the installed Payme app; without it the customer simply keeps paying on this page.</summary>
+    private async Task OpenExternalPaymentLinkAsync(string url)
+    {
+        ShowLoading(false);
+        try
+        {
+#if ANDROID
+            if (url.StartsWith("intent:", StringComparison.OrdinalIgnoreCase))
+            {
+                var intent = Android.Content.Intent.ParseUri(url, Android.Content.IntentUriType.Scheme);
+                // Never let a web page start an arbitrary component of another app.
+                intent.AddCategory(Android.Content.Intent.CategoryBrowsable);
+                intent.SetComponent(null);
+                intent.Selector = null;
+                intent.AddFlags(Android.Content.ActivityFlags.NewTask);
+                try
+                {
+                    Platform.CurrentActivity!.StartActivity(intent);
+                    return;
+                }
+                catch (Android.Content.ActivityNotFoundException)
+                {
+                    var fallback = intent.GetStringExtra("browser_fallback_url");
+                    if (!string.IsNullOrWhiteSpace(fallback) && fallback.StartsWith("https://", StringComparison.OrdinalIgnoreCase)
+                        && !fallback.Contains("play.google.com", StringComparison.OrdinalIgnoreCase))
+                    {
+                        PaymeWebView.Source = fallback;
+                        return;
+                    }
+                    await ShowPaymeAppMissingAsync();
+                    return;
+                }
+            }
+#endif
+            await Launcher.OpenAsync(new Uri(url));
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"[PAYME APP] could not open {url} => {ex.Message}");
+            await ShowPaymeAppMissingAsync();
+        }
+    }
+
+    private Task ShowPaymeAppMissingAsync() => MainThread.InvokeOnMainThreadAsync(() => DisplayAlert(
+        AppResource.Error,
+        AppResource.ResourceManager.GetString("PaymeAppNotFound", AppResource.Culture) ?? "Payme ilovasi topilmadi. To‘lovni shu sahifada davom ettiring.",
+        AppResource.Ok));
+
+    /// <summary>Back from the Payme app (return link or the app switcher): check the payment at once and keep watching.</summary>
+    private void OnReturnedToApp()
+    {
+        if (Volatile.Read(ref paymentFinished) == 1 || string.IsNullOrWhiteSpace(paymentUrl))
+            return;
+        paymentReturnHandled = false;
+        _ = CheckPaymentResultAsync();
+        if (paymentStatusCts == null || paymentStatusCts.IsCancellationRequested)
+            StartPaymentStatusChecking();
+    }
+
+    private void OnWindowResumed(object? sender, EventArgs e) => OnReturnedToApp();
 
     private void PaymeWebView_Navigated(object sender, WebNavigatedEventArgs e)
     {
@@ -274,6 +353,15 @@ public partial class PaymentPage : BasePage, IQueryAttributable
             Debug.WriteLine(
                 "PAYMENT RETURN CHECK => status is still pending");
 
+            // Payme may have shown its own error (card declined, bank not answering). Say plainly what to do.
+            if (Volatile.Read(ref paymentFinished) == 0)
+                await MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    PendingHintLabel.Text = Text("PaymentPendingHint",
+                        "To‘lov hali tasdiqlanmadi. Agar Payme’da xatolik chiqqan bo‘lsa (masalan, karta ishlamasa yoki bank javob bermasa), shu sahifada boshqa karta bilan qayta urinib ko‘ring. Pul yechilgan bo‘lsa, tasdiq bir necha daqiqada keladi.");
+                    PendingHint.IsVisible = true;
+                });
+
             /*
              * Do not show an error here.
              *
@@ -292,10 +380,37 @@ public partial class PaymentPage : BasePage, IQueryAttributable
         }
     }
 
-    private async Task FinishPaymentAsync(string paymentStatus)
+    private static string Text(string key, string uz) =>
+        AppResource.ResourceManager.GetString(key, AppResource.Culture) ?? uz;
+
+    /// <summary>Why a payment failed, in words the customer understands (Payme's cancel reason).</summary>
+    private static string FailureMessage(string status, int? reason)
+    {
+        if (status.Equals("CANCELLED", StringComparison.OrdinalIgnoreCase) && reason == null)
+            return Text("PaymentCancelledUnpaid", "Buyurtma to‘lanmagani uchun bekor qilindi. Pul yechilmadi. Yangi buyurtma berishingiz mumkin.");
+        return reason switch
+        {
+            1 => Text("PaymentFailedReason1", "To‘lov qabul qilinmadi: do‘kon hisobida muammo. Pul yechilmadi. Birozdan keyin qayta urinib ko‘ring."),
+            2 => Text("PaymentFailedReason2", "Karta yoki bank (HUMO, UZCARD va boshqalar) to‘lovni o‘tkazmadi. Kartadagi mablag‘ni va karta holatini tekshiring yoki boshqa karta bilan qayta urinib ko‘ring."),
+            3 => Text("PaymentFailedReason3", "To‘lov tizimida xatolik yuz berdi. Pul yechilgan bo‘lsa, u avtomatik qaytariladi. Qayta urinib ko‘ring."),
+            4 => Text("PaymentFailedReason4", "To‘lov o‘z vaqtida tasdiqlanmadi va bekor qilindi. Pul yechilmadi. Qayta urinib ko‘ring."),
+            5 => Text("PaymentFailedReason5", "To‘lov bekor qilindi va pul kartangizga qaytarildi."),
+            _ => Text("PaymentFailedUnknown", "To‘lov amalga oshmadi. Pul yechilmadi. Qayta urinib ko‘ring yoki boshqa karta tanlang."),
+        };
+    }
+
+    private async Task FinishPaymentAsync(string paymentStatus, int? paymentReason = null, bool explain = true)
     {
         if (Interlocked.Exchange(ref paymentFinished, 1) == 1)
             return;
+
+        // A failed payment must never end silently: tell the customer what happened before leaving the page.
+        if (explain && !paymentStatus.Equals("PAID", StringComparison.OrdinalIgnoreCase))
+        {
+            var message = FailureMessage(paymentStatus, paymentReason);
+            await MainThread.InvokeOnMainThreadAsync(() =>
+                DisplayAlert(Text("PaymentFailedTitle", "To‘lov amalga oshmadi"), message, AppResource.Ok));
+        }
 
         paymentStatusCts?.Cancel();
 
@@ -406,7 +521,7 @@ public partial class PaymentPage : BasePage, IQueryAttributable
 
             if (cancelResponse.resultCode == ApiResult.SUCCESS.GetCodeToString())
             {
-                await FinishPaymentAsync("CANCELLED");
+                await FinishPaymentAsync("CANCELLED", explain: false);
                 return;
             }
 
@@ -416,7 +531,7 @@ public partial class PaymentPage : BasePage, IQueryAttributable
             if (currentStatus.Equals("PAID", StringComparison.OrdinalIgnoreCase) ||
                 currentStatus.Equals("CANCELLED", StringComparison.OrdinalIgnoreCase))
             {
-                await FinishPaymentAsync(currentStatus);
+                await FinishPaymentAsync(currentStatus, explain: false);
                 return;
             }
 
@@ -499,6 +614,14 @@ public partial class PaymentPage : BasePage, IQueryAttributable
     {
         base.OnAppearing();
 
+        PaymentReturn.Returned -= OnReturnedToApp;
+        PaymentReturn.Returned += OnReturnedToApp;
+        if (Window != null)
+        {
+            Window.Resumed -= OnWindowResumed;
+            Window.Resumed += OnWindowResumed;
+        }
+
         // A finished checkout must never become visible again when the user
         // taps the Cart tab. This also repairs stacks created by older builds.
         if (Volatile.Read(ref paymentFinished) == 1)
@@ -509,6 +632,9 @@ public partial class PaymentPage : BasePage, IQueryAttributable
     {
         base.OnDisappearing();
 
+        PaymentReturn.Returned -= OnReturnedToApp;
+        if (Window != null)
+            Window.Resumed -= OnWindowResumed;
         paymentStatusCts?.Cancel();
     }
 

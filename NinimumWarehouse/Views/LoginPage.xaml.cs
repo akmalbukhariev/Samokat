@@ -14,7 +14,10 @@ public partial class LoginPage : ContentPage
     private void OnLanguageChanged(object? sender,EventArgs e)
     {
         if(initializing || LanguagePicker.SelectedIndex<0 || LanguagePicker.SelectedIndex==LanguageService.SelectedIndex) return;
-        LanguageService.Set(LanguagePicker.SelectedIndex); App.CurrentApp.ShowLogin(ViewModel.WorkerId,ViewModel.Password);
+        LanguageService.Set(LanguagePicker.SelectedIndex);
+        string worker = ViewModel.WorkerId, password = ViewModel.Password;
+        // Rebuild the screen only after the picker has closed; replacing it inside its callback crashes the app.
+        Dispatcher.DispatchDelayed(TimeSpan.FromMilliseconds(200), () => App.CurrentApp.ShowLogin(worker, password));
     }
     private void OnWorkerIdCompleted(object? sender,EventArgs e) => PasswordEntry.Focus();
 }

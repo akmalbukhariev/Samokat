@@ -10,7 +10,7 @@ public sealed class OrderItemViewModel : ObservableObject
 {
     private OrderItem item;
     private bool isEditable, showCodeInput;
-    private string quantityInput, barcodeInput = "", reason = "";
+    private string barcodeInput = "", reason = "";
     public long Id => item.Id;
     public string Name => item.Name;
     public string Image => ProductImageSource.Resolve(item.ImageUrl);
@@ -20,8 +20,9 @@ public sealed class OrderItemViewModel : ObservableObject
     public string ProgressText => string.Format(CultureInfo.CurrentCulture,AppResource.ProductProgressFormat,item.Checked,item.Required);
     public string CheckState => IsChecked ? AppResource.Checked : AppResource.ToCheck;
     public bool IsChecked => item.Checked == item.Required;
-    public bool IsEditable { get => isEditable; private set => SetProperty(ref isEditable,value); }
-    public string QuantityInput { get => quantityInput; set => SetProperty(ref quantityInput,value); }
+    public bool IsEditable { get => isEditable; private set { if(SetProperty(ref isEditable,value)) OnPropertyChanged(nameof(CanCheckMore)); } }
+    // Each scan counts one piece, so the worker never types a total; nothing is left to check once all pieces are counted.
+    public bool CanCheckMore => IsEditable && !IsChecked;
     public string BarcodeInput { get => barcodeInput; set => SetProperty(ref barcodeInput,value); }
     public string Reason { get => reason; set => SetProperty(ref reason,value); }
     public bool ShowCodeInput { get => showCodeInput; set => SetProperty(ref showCodeInput,value); }
@@ -31,7 +32,6 @@ public sealed class OrderItemViewModel : ObservableObject
     public OrderItemViewModel(OrderItem item,bool editable,Func<OrderItemViewModel,bool,Task> check)
     {
         this.item = item; isEditable = editable;
-        quantityInput = (item.Checked > 0 ? item.Checked : item.Required).ToString(CultureInfo.CurrentCulture);
         ScanCommand = new AsyncRelayCommand(() => check(this,true));
         ConfirmCommand = new AsyncRelayCommand(() => check(this,false));
         ToggleCodeCommand = new RelayCommand(() => ShowCodeInput = !ShowCodeInput);
@@ -42,8 +42,8 @@ public sealed class OrderItemViewModel : ObservableObject
         item = next; IsEditable = editable;
         // Avoid restarting a pending image download when only preparation progress changed.
         if (Image != previousImage) OnPropertyChanged(nameof(Image));
-        if(checkedThisItem) { QuantityInput = next.Checked.ToString(CultureInfo.CurrentCulture); BarcodeInput = ""; ShowCodeInput = false; }
-        foreach(var property in new[] { nameof(Name),nameof(Barcode),nameof(HasBarcode),nameof(NoBarcode),nameof(ProgressText),nameof(IsChecked),nameof(CheckState) }) OnPropertyChanged(property);
+        if(checkedThisItem) { BarcodeInput = ""; ShowCodeInput = false; }
+        foreach(var property in new[] { nameof(Name),nameof(Barcode),nameof(HasBarcode),nameof(NoBarcode),nameof(ProgressText),nameof(IsChecked),nameof(CheckState),nameof(CanCheckMore) }) OnPropertyChanged(property);
     }
 }
 public sealed class OrderDetailViewModel : ViewModelBase
@@ -164,9 +164,10 @@ public sealed class OrderDetailViewModel : ViewModelBase
     }
     private Task CheckAsync(OrderItemViewModel item,bool useCamera) => RunAsync(async () => {
         if (!CanCheck || !item.IsEditable) throw new ApiException("WAREHOUSE_INVALID_STATE");
-        if(!int.TryParse(item.QuantityInput,out var qty) || qty<=0) throw new ApiException("QUANTITY_INVALID");
-        var required = order!.Items.First(x => x.Id == item.Id).Required;
-        if (qty > required) throw new ApiException("WAREHOUSE_TOO_MANY");
+        var line = order!.Items.First(x => x.Id == item.Id);
+        // A scan adds one piece; a product without a barcode is confirmed in full with a reason.
+        var qty = item.HasBarcode ? line.Checked + 1 : line.Required;
+        if (qty > line.Required) throw new ApiException("WAREHOUSE_TOO_MANY");
         string? barcode = item.HasBarcode ? item.BarcodeInput.Trim() : "";
         if(useCamera) { barcode = await scan(); if(barcode is null) return; }
         if(item.HasBarcode && string.IsNullOrWhiteSpace(barcode)) throw new ApiException("BARCODE_REQUIRED");

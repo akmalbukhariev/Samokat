@@ -31,6 +31,24 @@
                 Navigating="PaymeWebView_Navigating"
                 Navigated="PaymeWebView_Navigated" />
 
+            <!-- Shown when the customer is back from Payme and nothing is confirmed yet -->
+            <Border
+                x:Name="PendingHint"
+                IsVisible="False"
+                VerticalOptions="End"
+                Margin="12"
+                Padding="14,12"
+                BackgroundColor="#FFF4E5"
+                Stroke="#F5C27A"
+                StrokeShape="RoundRectangle 12">
+                <Label
+                    x:Name="PendingHintLabel"
+                    TextColor="#5C3B00"
+                    FontSize="14"
+                    LineBreakMode="WordWrap"
+                    FontFamily="{StaticResource FontSFRegular}" />
+            </Border>
+
             <!-- Loading overlay -->
             <Grid
                 x:Name="LoadingLayout"

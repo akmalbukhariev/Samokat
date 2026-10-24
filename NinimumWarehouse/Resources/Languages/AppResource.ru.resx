@@ -157,10 +157,10 @@
     <value>Нет штрихкода</value>
   </data>
   <data name="CheckedQuantity" xml:space="preserve">
-    <value>Всего проверено</value>
+    <value>Посчитано</value>
   </data>
   <data name="QuantityHelp" xml:space="preserve">
-    <value>Пересчитайте товары и введите общее количество.</value>
+    <value>Сканируйте каждую единицу отдельно — количество считается само.</value>
   </data>
   <data name="ScanToCheck" xml:space="preserve">
     <value>Сканировать и проверить</value>

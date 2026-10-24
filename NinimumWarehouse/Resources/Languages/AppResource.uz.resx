@@ -157,10 +157,10 @@
     <value>Shtrix-kod yo‘q</value>
   </data>
   <data name="CheckedQuantity" xml:space="preserve">
-    <value>Tekshirilgan jami son</value>
+    <value>Sanalgan soni</value>
   </data>
   <data name="QuantityHelp" xml:space="preserve">
-    <value>Qo‘lingizdagi mahsulotlarni sanab, jami sonini kiriting.</value>
+    <value>Har bir donani alohida skanerlang — son o‘zi hisoblanadi.</value>
   </data>
   <data name="ScanToCheck" xml:space="preserve">
     <value>Skanerlash va tekshirish</value>

@@ -1457,4 +1457,34 @@ online</value>
   <data name="OrderReturned" xml:space="preserve"><value>Received by warehouse</value></data>
   <data name="PartialReturnPending" xml:space="preserve"><value>Delivered · partial return pending</value></data>
   <data name="PartialReturnReceived" xml:space="preserve"><value>Delivered · partial return received</value></data>
+  <data name="PaymeAppNotFound" xml:space="preserve">
+    <value>The Payme app was not found. Continue paying on this page.</value>
+  </data>
+  <data name="PaymentFailedTitle" xml:space="preserve">
+    <value>Payment failed</value>
+  </data>
+  <data name="PaymentCancelledUnpaid" xml:space="preserve">
+    <value>The order was cancelled because it wasn’t paid. No money was taken. You can place a new order.</value>
+  </data>
+  <data name="PaymentFailedReason1" xml:space="preserve">
+    <value>The payment wasn’t accepted: a problem with the shop’s account. No money was taken. Try again later.</value>
+  </data>
+  <data name="PaymentFailedReason2" xml:space="preserve">
+    <value>The card or bank (HUMO, UZCARD, etc.) declined the payment. Check the balance and card status, or try another card.</value>
+  </data>
+  <data name="PaymentFailedReason3" xml:space="preserve">
+    <value>A payment system error occurred. If money was taken, it will be returned automatically. Please try again.</value>
+  </data>
+  <data name="PaymentFailedReason4" xml:space="preserve">
+    <value>The payment wasn’t confirmed in time and was cancelled. No money was taken. Please try again.</value>
+  </data>
+  <data name="PaymentFailedReason5" xml:space="preserve">
+    <value>The payment was cancelled and the money returned to your card.</value>
+  </data>
+  <data name="PaymentFailedUnknown" xml:space="preserve">
+    <value>The payment didn’t go through. No money was taken. Try again or choose another card.</value>
+  </data>
+  <data name="PaymentPendingHint" xml:space="preserve">
+    <value>The payment isn’t confirmed yet. If Payme showed an error (for example the card doesn’t work or the bank isn’t answering), try another card on this page. If money was taken, confirmation arrives within a few minutes.</value>
+  </data>
 </root>

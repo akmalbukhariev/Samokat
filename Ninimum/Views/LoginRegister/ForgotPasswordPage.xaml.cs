@@ -99,7 +99,7 @@ public partial class ForgotPasswordPage : BasePage, INotifyPropertyChanged, IQue
             }
             catch (Exception ex)
             {
-                await AlertService.ShowAlertAsync(AppResource.Error, ex.Message);
+                await AlertService.ShowAlertAsync(AppResource.Error, global::Utils.ServerMessage.Exception(ex));
             }
             finally
             {

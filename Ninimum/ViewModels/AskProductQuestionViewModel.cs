@@ -102,7 +102,7 @@ public partial class AskProductQuestionViewModel : ObservableObject
         }
         catch (Exception ex)
         {
-            await AlertService.ShowAlertAsync(AppResource.Error, string.Format(AppResource.CouldNotSendTheQuestion_a01d00, ex.Message));
+            await AlertService.ShowAlertAsync(AppResource.Error, string.Format(AppResource.CouldNotSendTheQuestion_a01d00, global::Utils.ServerMessage.Exception(ex)));
         }
         finally
         {

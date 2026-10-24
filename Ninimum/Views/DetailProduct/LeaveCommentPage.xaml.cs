@@ -146,7 +146,7 @@ public partial class LeaveCommentPage : BasePage
         }
         catch (Exception ex)
         {
-            await DisplayAlert(AppResource.Error, string.Format(AppResource.CouldNotLoadTheReview, ex.Message), AppResource.Ok);
+            await DisplayAlert(AppResource.Error, string.Format(AppResource.CouldNotLoadTheReview, global::Utils.ServerMessage.Exception(ex)), AppResource.Ok);
         }
         finally
         {
@@ -229,7 +229,7 @@ public partial class LeaveCommentPage : BasePage
         }
         catch (Exception ex)
         {
-            await DisplayAlert(AppResource.Error, string.Format(AppResource.CouldNotTakeAPhoto, ex.Message), AppResource.Ok);
+            await DisplayAlert(AppResource.Error, string.Format(AppResource.CouldNotTakeAPhoto, global::Utils.ServerMessage.Exception(ex)), AppResource.Ok);
         }
         finally
         {
@@ -264,7 +264,7 @@ public partial class LeaveCommentPage : BasePage
         }
         catch (Exception ex)
         {
-            await DisplayAlert(AppResource.Error, string.Format(AppResource.CouldNotSelectAPhoto, ex.Message), AppResource.Ok);
+            await DisplayAlert(AppResource.Error, string.Format(AppResource.CouldNotSelectAPhoto, global::Utils.ServerMessage.Exception(ex)), AppResource.Ok);
         }
         finally
         {
@@ -375,7 +375,7 @@ public partial class LeaveCommentPage : BasePage
         }
         catch (Exception ex)
         {
-            await DisplayAlert(AppResource.Error, ex.Message, AppResource.Ok);
+            await DisplayAlert(AppResource.Error, global::Utils.ServerMessage.Exception(ex), AppResource.Ok);
         }
         finally
         {

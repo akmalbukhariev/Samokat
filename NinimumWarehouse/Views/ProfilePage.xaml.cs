@@ -14,6 +14,8 @@ public partial class ProfilePage : ContentPage
     private void OnLanguageChanged(object? sender,EventArgs e)
     {
         if(initializing || LanguagePicker.SelectedIndex<0 || LanguagePicker.SelectedIndex==LanguageService.SelectedIndex) return;
-        LanguageService.Set(LanguagePicker.SelectedIndex); App.CurrentApp.ShowHome(showProfile:true);
+        LanguageService.Set(LanguagePicker.SelectedIndex);
+        // Rebuild the screens only after the picker has closed; replacing them inside its callback crashes the app.
+        Dispatcher.DispatchDelayed(TimeSpan.FromMilliseconds(200), () => App.CurrentApp.ShowHome(showProfile:true));
     }
 }

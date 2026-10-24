@@ -1460,4 +1460,34 @@ buyurtma qiling</value>
   <data name="OrderReturned" xml:space="preserve"><value>Omborga qaytarildi</value></data>
   <data name="PartialReturnPending" xml:space="preserve"><value>Yetkazildi · qisman qaytarish kutilmoqda</value></data>
   <data name="PartialReturnReceived" xml:space="preserve"><value>Yetkazildi · qisman qaytarish qabul qilindi</value></data>
+  <data name="PaymeAppNotFound" xml:space="preserve">
+    <value>Payme ilovasi topilmadi. To‘lovni shu sahifada davom ettiring.</value>
+  </data>
+  <data name="PaymentFailedTitle" xml:space="preserve">
+    <value>To‘lov amalga oshmadi</value>
+  </data>
+  <data name="PaymentCancelledUnpaid" xml:space="preserve">
+    <value>Buyurtma to‘lanmagani uchun bekor qilindi. Pul yechilmadi. Yangi buyurtma berishingiz mumkin.</value>
+  </data>
+  <data name="PaymentFailedReason1" xml:space="preserve">
+    <value>To‘lov qabul qilinmadi: do‘kon hisobida muammo. Pul yechilmadi. Birozdan keyin qayta urinib ko‘ring.</value>
+  </data>
+  <data name="PaymentFailedReason2" xml:space="preserve">
+    <value>Karta yoki bank (HUMO, UZCARD va boshqalar) to‘lovni o‘tkazmadi. Kartadagi mablag‘ni va karta holatini tekshiring yoki boshqa karta bilan qayta urinib ko‘ring.</value>
+  </data>
+  <data name="PaymentFailedReason3" xml:space="preserve">
+    <value>To‘lov tizimida xatolik yuz berdi. Pul yechilgan bo‘lsa, u avtomatik qaytariladi. Qayta urinib ko‘ring.</value>
+  </data>
+  <data name="PaymentFailedReason4" xml:space="preserve">
+    <value>To‘lov o‘z vaqtida tasdiqlanmadi va bekor qilindi. Pul yechilmadi. Qayta urinib ko‘ring.</value>
+  </data>
+  <data name="PaymentFailedReason5" xml:space="preserve">
+    <value>To‘lov bekor qilindi va pul kartangizga qaytarildi.</value>
+  </data>
+  <data name="PaymentFailedUnknown" xml:space="preserve">
+    <value>To‘lov amalga oshmadi. Pul yechilmadi. Qayta urinib ko‘ring yoki boshqa karta tanlang.</value>
+  </data>
+  <data name="PaymentPendingHint" xml:space="preserve">
+    <value>To‘lov hali tasdiqlanmadi. Agar Payme’da xatolik chiqqan bo‘lsa (masalan, karta ishlamasa yoki bank javob bermasa), shu sahifada boshqa karta bilan qayta urinib ko‘ring. Pul yechilgan bo‘lsa, tasdiq bir necha daqiqada keladi.</value>
+  </data>
 </root>

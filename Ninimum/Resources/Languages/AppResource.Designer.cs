@@ -2743,11 +2743,29 @@ namespace Ninimum.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The Payme app was not found. Continue paying on this page..
+        /// </summary>
+        internal static string PaymeAppNotFound {
+            get {
+                return ResourceManager.GetString("PaymeAppNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payment.
         /// </summary>
         internal static string Payment {
             get {
                 return ResourceManager.GetString("Payment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The order was cancelled because it wasn’t paid. No money was taken. You can place a new order..
+        /// </summary>
+        internal static string PaymentCancelledUnpaid {
+            get {
+                return ResourceManager.GetString("PaymentCancelledUnpaid", resourceCulture);
             }
         }
         
@@ -2779,6 +2797,69 @@ namespace Ninimum.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The payment wasn’t accepted: a problem with the shop’s account. No money was taken. Try again later..
+        /// </summary>
+        internal static string PaymentFailedReason1 {
+            get {
+                return ResourceManager.GetString("PaymentFailedReason1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The card or bank (HUMO, UZCARD, etc.) declined the payment. Check the balance and card status, or try another card..
+        /// </summary>
+        internal static string PaymentFailedReason2 {
+            get {
+                return ResourceManager.GetString("PaymentFailedReason2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A payment system error occurred. If money was taken, it will be returned automatically. Please try again..
+        /// </summary>
+        internal static string PaymentFailedReason3 {
+            get {
+                return ResourceManager.GetString("PaymentFailedReason3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The payment wasn’t confirmed in time and was cancelled. No money was taken. Please try again..
+        /// </summary>
+        internal static string PaymentFailedReason4 {
+            get {
+                return ResourceManager.GetString("PaymentFailedReason4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The payment was cancelled and the money returned to your card..
+        /// </summary>
+        internal static string PaymentFailedReason5 {
+            get {
+                return ResourceManager.GetString("PaymentFailedReason5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Payment failed.
+        /// </summary>
+        internal static string PaymentFailedTitle {
+            get {
+                return ResourceManager.GetString("PaymentFailedTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The payment didn’t go through. No money was taken. Try again or choose another card..
+        /// </summary>
+        internal static string PaymentFailedUnknown {
+            get {
+                return ResourceManager.GetString("PaymentFailedUnknown", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Payment method.
         /// </summary>
         internal static string PaymentMethod {
@@ -2802,6 +2883,15 @@ namespace Ninimum.Resources.Languages {
         internal static string PaymentPageWasClosed {
             get {
                 return ResourceManager.GetString("PaymentPageWasClosed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The payment isn’t confirmed yet. If Payme showed an error (for example the card doesn’t work or the bank isn’t answering), try another card on this page. If money was taken, confirmation arrives within a few minutes..
+        /// </summary>
+        internal static string PaymentPendingHint {
+            get {
+                return ResourceManager.GetString("PaymentPendingHint", resourceCulture);
             }
         }
         
