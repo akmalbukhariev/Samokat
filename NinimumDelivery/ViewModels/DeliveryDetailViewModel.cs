@@ -41,7 +41,12 @@ public partial class DeliveryDetailViewModel : ObservableObject
             }
             else await AlertService.Show(AppResource.Error, response?.resultMsg ?? AppResource.ActionFailed);
         }
-        catch { await AlertService.Show(AppResource.Error, AppResource.ConnectionError); }
+        catch (Exception ex)
+        {
+            // Only a real network failure is "can't reach the server"; anything else is a general error (logged for diagnosis).
+            Console.WriteLine($"[NinimumDelivery] detail {id} failed: {ex}");
+            await AlertService.Show(AppResource.Error, ex is HttpRequestException or TaskCanceledException or System.Net.Sockets.SocketException ? AppResource.ConnectionError : AppResource.ActionFailed);
+        }
         finally { IsLoading = false; }
     }
 

@@ -8,6 +8,7 @@
     xmlns:main_components="clr-namespace:Ninimum.Views.Main.Components"
     xmlns:models="clr-namespace:Ninimum.Models.Main"
     xmlns:local="clr-namespace:Ninimum.Views.DetailProduct"
+    xmlns:cart="clr-namespace:Ninimum.Views.Cart"
     x:Class="Ninimum.Views.DetailProduct.DetailProductPage"
     Shell.NavBarIsVisible="False"
     Shell.TabBarIsVisible="False"
@@ -525,58 +526,11 @@
                     CharacterSpacing="0.24"
                     LineBreakMode="NoWrap" />
 
-                <!-- Counter container -->
-                <Border
-                    IsVisible="False"
+                <!-- How many to buy: the same control as in Savatcha; the price shows the total -->
+                <cart:QuantitySelectorView
                     Grid.Column="1"
-                    Padding="3"
-                    BackgroundColor="#F7F8FB"
-                    StrokeThickness="0"
-                    StrokeShape="RoundRectangle 8"
-                    VerticalOptions="Center">
-
-                    <Grid
-                        ColumnDefinitions="Auto,Auto,Auto"
-                        ColumnSpacing="14"
-                        VerticalOptions="Center">
-
-                        <!-- Minus button -->
-                        <Image
-                            Source="minus.png"
-                            Aspect="AspectFit"
-                            WidthRequest="24"
-                            HeightRequest="24">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Minus_Tapped" />
-                            </Image.GestureRecognizers>
-                        </Image>
-
-                        <!-- Count -->
-                        <Label
-                            Grid.Column="1"
-                            Text="{Binding Quantity}"
-                            MinimumWidthRequest="33"
-                            HorizontalTextAlignment="Center"
-                            VerticalTextAlignment="Center"
-                            VerticalOptions="Center"
-                            TextColor="#96979B"
-                            FontSize="18"
-                            FontFamily="{StaticResource FontSFMedium}"
-                            CharacterSpacing="0.18" />
-
-                        <!-- Plus button -->
-                        <Image
-                            Grid.Column="2"
-                            Source="plus.png"
-                            Aspect="AspectFit"
-                            WidthRequest="24"
-                            HeightRequest="24">
-                            <Image.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Plus_Tapped" />
-                            </Image.GestureRecognizers>
-                        </Image>
-                    </Grid>
-                </Border>
+                    VerticalOptions="Center"
+                    Quantity="{Binding Quantity, Mode=TwoWay}" />
 
             </Grid>
 

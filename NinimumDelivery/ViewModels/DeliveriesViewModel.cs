@@ -232,13 +232,11 @@ public partial class DeliveriesViewModel : ObservableObject
             IsLoading = true;
             var response = await action();
             if (response?.resultCode != "100")
-            {
                 await AlertService.Show(AppResource.Error, response?.resultMsg ?? AppResource.ActionFailed);
-                return;
-            }
         }
         catch { await AlertService.Show(AppResource.Error, AppResource.ConnectionError); }
         finally { IsLoading = false; }
+        // Reload after a failure too: the list may be out of date (for example another courier took a delivery).
         await ReloadAsync();
     }
 

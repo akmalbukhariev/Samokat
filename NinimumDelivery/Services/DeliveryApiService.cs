@@ -46,8 +46,10 @@ public class DeliveryApiService
         catch (JsonException) { return false; }
     }
 
+    // An empty (null) field from the server keeps the model's default instead of failing the whole screen.
+    private static readonly JsonSerializerSettings ReadSettings = new() { NullValueHandling = NullValueHandling.Ignore };
     private static T? Parse<T>(RestResponse response) where T : class =>
-        string.IsNullOrWhiteSpace(response.Content) ? null : JsonConvert.DeserializeObject<T>(response.Content);
+        string.IsNullOrWhiteSpace(response.Content) ? null : JsonConvert.DeserializeObject<T>(response.Content, ReadSettings);
 
     public async Task<ApiResponse<DeliveryWorker>?> Login(string workerId, string password)
     {

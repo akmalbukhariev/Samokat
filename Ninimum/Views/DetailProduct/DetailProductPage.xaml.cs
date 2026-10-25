@@ -300,16 +300,6 @@ public partial class DetailProductPage : BasePage
         });
     }
 
-    private void Minus_Tapped(object sender, TappedEventArgs e)
-    {
-        viewModel?.DecreaseQuantity();
-    }
-
-    private void Plus_Tapped(object sender, TappedEventArgs e)
-    {
-        viewModel?.IncreaseQuantity();
-    }
-
     private async void Purchase_Clicked(object sender, EventArgs e)
     {
         if (viewModel == null)

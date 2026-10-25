@@ -75,6 +75,15 @@ public partial class DetailProductPageViewModel : ObservableObject
     [ObservableProperty] private int quantity = 1;
     [ObservableProperty] private string finalPrice = AppResource.Text0UZS;
     private double FinalPriceValue = 0.0;
+    private int stockQuantity;
+
+    // The bottom price is the total for the chosen amount; the amount can't go above the stock.
+    partial void OnQuantityChanged(int value)
+    {
+        if (value < 1) { Quantity = 1; return; }
+        if (stockQuantity > 0 && value > stockQuantity) { Quantity = stockQuantity; return; }
+        FinalPrice = string.Format(AppResource.UZS_02854f, FinalPriceValue * value).Replace(",", " ");
+    }
     private bool hasActiveSubscription;
     private long? activeTariffSubscriptionId;
     #endregion
@@ -305,6 +314,7 @@ public partial class DetailProductPageViewModel : ObservableObject
             ProductMetadata=string.Join(Environment.NewLine,metadata);
             ProductLiked = product.liked;
             StockText = string.Format(AppResource.StockAvailable, product.stock_quantity ?? 0);
+            stockQuantity = product.stock_quantity ?? 0;
             Rating = (product.average_rating ?? 0).ToString("0.0");
             RatingStarCount = (int)Math.Round(product.average_rating ?? 0);
             Stars.Clear();
@@ -328,7 +338,8 @@ public partial class DetailProductPageViewModel : ObservableObject
                 ? subscriptionPriceValue
                 : regularPriceValue;
 
-            FinalPrice = string.Format(AppResource.UZS_02854f, FinalPriceValue).Replace(",", " ");
+            if (stockQuantity > 0 && Quantity > stockQuantity) Quantity = stockQuantity;
+            FinalPrice = string.Format(AppResource.UZS_02854f, FinalPriceValue * Quantity).Replace(",", " ");
             ProductImages.Clear();
 
             if (product.images != null && product.images.Count > 0)

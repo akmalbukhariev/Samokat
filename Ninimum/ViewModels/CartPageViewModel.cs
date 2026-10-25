@@ -24,6 +24,8 @@ public partial class CartPageViewModel : ObservableObject
     private bool hasMoreItems = true;
     private bool isRequestRunning = false;
     private readonly HashSet<int> loadedCartIds = new();
+    // Products start unchecked; the customer's own choices are kept while the app runs (reloads keep them).
+    private static readonly HashSet<int> checkedCartIds = new();
     private long? activeTariffSubscriptionId;
 
     private readonly UserApiService apiService;
@@ -132,7 +134,7 @@ public partial class CartPageViewModel : ObservableObject
                     PriceValue = (int)(product.price ?? 0),
                     SubscriptionPriceValue = (int)(product.subscription_price ?? 0),
 
-                    IsChecked = true,
+                    IsChecked = checkedCartIds.Contains(product.cart_id),
                     Quantity = product.quantity <= 0 ? 1 : product.quantity,
                     ParentChangedCommand = new RelayCommand(UpdateSummary)
                 });
@@ -320,6 +322,12 @@ public partial class CartPageViewModel : ObservableObject
     private void UpdateSummary()
     {
         HasCartItems = CartProducts.Count > 0;
+
+        foreach (var item in CartProducts)
+        {
+            if (item.IsChecked) checkedCartIds.Add(item.CartId);
+            else checkedCartIds.Remove(item.CartId);
+        }
 
         int selectedCount = CartProducts.Count(x => x.IsChecked);
 
