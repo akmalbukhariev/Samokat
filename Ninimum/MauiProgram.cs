@@ -57,6 +57,12 @@ public static class MauiProgram
 		builder.Logging.AddDebug();
 #endif
 #if ANDROID
+        // Every pull-to-refresh in the app gives a short "like" vibration when the user pulls (not on automatic reloads).
+        Microsoft.Maui.Handlers.RefreshViewHandler.Mapper.AppendToMapping("PullVibration", (handler, _) =>
+        {
+            handler.PlatformView.Refresh -= OnPullToRefresh;
+            handler.PlatformView.Refresh += OnPullToRefresh;
+        });
         builder.ConfigureMauiHandlers(handlers => handlers.AddHandler<AppShell, Ninimum.Platforms.Android.StoreShellRenderer>());
 #elif IOS
         builder.ConfigureMauiHandlers(handlers => handlers.AddHandler<AppShell, Ninimum.Platforms.iOS.StoreShellRenderer>());
@@ -69,6 +75,10 @@ public static class MauiProgram
 
 		return mauiApp;
 	}
+
+#if ANDROID
+	private static void OnPullToRefresh(object? sender, EventArgs e) => Ninimum.Services.AppVibrationService.Like();
+#endif
 
 	private static void RegisterSingleton(MauiAppBuilder builder)
 	{

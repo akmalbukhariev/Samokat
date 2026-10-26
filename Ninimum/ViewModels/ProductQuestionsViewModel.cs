@@ -107,7 +107,6 @@ public partial class ProductQuestionsViewModel : ObservableObject
 
     private async Task ManualRefreshAsync()
     {
-        AppVibrationService.Click();
 
         try
         {

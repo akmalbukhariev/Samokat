@@ -19,6 +19,10 @@ public partial class OrdersPageViewModel : ObservableObject
     private readonly AppControl appControl;
 
     [ObservableProperty] private bool isLoading;
+    [ObservableProperty] private bool isRefreshing;
+    // An order's products never change, so they are fetched once per app session.
+    private readonly Dictionary<long, List<OrderProductItemModel>> productCache = new();
+    private bool loadRunning;
     [ObservableProperty] private bool showActiveOrders = true;
     [ObservableProperty] private bool showCompletedOrders;
     [ObservableProperty] private string activeCountText = "0";
@@ -35,11 +39,21 @@ public partial class OrdersPageViewModel : ObservableObject
         this.appControl = appControl;
     }
 
+    [RelayCommand]
+    private async Task Refresh()
+    {
+        try { await LoadOrdersAsync(); }
+        finally { IsRefreshing = false; }
+    }
+
     public async Task LoadOrdersAsync()
     {
+        if (loadRunning) return;
+        loadRunning = true;
         try
         {
-            IsLoading = true;
+            // The spinner only covers an empty screen; later reloads keep the current list visible.
+            IsLoading = ActiveOrders.Count == 0 && CompletedOrders.Count == 0 && !IsRefreshing;
 
             var response = await apiService.GetOrderList(new OrderListRequest
             {
@@ -71,6 +85,12 @@ public partial class OrdersPageViewModel : ObservableObject
                     ProductCount = order.productCount,
                     TotalPriceValue = order.totalPrice,
                     TotalPrice = string.Format(AppResource.UZS_02854f, order.totalPrice).Replace(",", " "),
+                    DeliveryMethod = order.deliveryMethod,
+                    TaxiCompany = order.taxiCompany,
+                    TaxiDriverName = order.taxiDriverName,
+                    TaxiDriverPhone = order.taxiDriverPhone,
+                    TaxiCarNumber = order.taxiCarNumber,
+                    TaxiFare = order.taxiFare,
                     OrderDate = FormatDate(order.orderedAt)
                 };
 
@@ -83,11 +103,9 @@ public partial class OrdersPageViewModel : ObservableObject
             ActiveCountText = ActiveOrders.Count.ToString();
             CompletedCountText = CompletedOrders.Count.ToString();
 
-            foreach (var order in ActiveOrders)
-                await LoadOrderProductsAsync(order);
-
-            foreach (var order in CompletedOrders)
-                await LoadOrderProductsAsync(order);
+            // Show the list now; product rows fill in while the customer looks at it.
+            IsLoading = false;
+            await LoadProductsAsync(ActiveOrders.Concat(CompletedOrders).ToList());
         }
         catch (Exception ex)
         {
@@ -96,7 +114,31 @@ public partial class OrdersPageViewModel : ObservableObject
         finally
         {
             IsLoading = false;
+            loadRunning = false;
         }
+    }
+
+    /// <summary>Cached products at once; the rest 4 orders at a time instead of one after another.</summary>
+    private async Task LoadProductsAsync(List<OrderItemModel> orders)
+    {
+        var missing = new List<OrderItemModel>();
+        foreach (var order in orders)
+        {
+            if (productCache.TryGetValue(order.OrderId, out var cached))
+            {
+                order.Products.Clear();
+                foreach (var p in cached) order.Products.Add(p);
+            }
+            else missing.Add(order);
+        }
+
+        using var gate = new SemaphoreSlim(4);
+        await Task.WhenAll(missing.Select(async order =>
+        {
+            await gate.WaitAsync();
+            try { await LoadOrderProductsAsync(order); }
+            finally { gate.Release(); }
+        }));
     }
 
     private async Task LoadOrderProductsAsync(OrderItemModel order)
@@ -112,19 +154,21 @@ public partial class OrdersPageViewModel : ObservableObject
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString() || response.resultData == null)
                 return;
 
-            order.Products.Clear();
-
-            foreach (var product in response.resultData)
+            var products = response.resultData.Select(product => new OrderProductItemModel
             {
-                order.Products.Add(new OrderProductItemModel
-                {
-                    ProductId = product.productId,
-                    ProductName = product.productName,
-                    ProductImageUrl = product.productImageUrl,
-                    UnitPrice = product.unitPrice,
-                    Quantity = product.quantity
-                });
-            }
+                ProductId = product.productId,
+                ProductName = product.productName,
+                ProductImageUrl = product.productImageUrl,
+                UnitPrice = product.unitPrice,
+                Quantity = product.quantity
+            }).ToList();
+            productCache[order.OrderId] = products;
+
+            await MainThread.InvokeOnMainThreadAsync(() =>
+            {
+                order.Products.Clear();
+                foreach (var product in products) order.Products.Add(product);
+            });
         }
         catch (Exception ex)
         {
@@ -134,7 +178,7 @@ public partial class OrdersPageViewModel : ObservableObject
 
     public async Task RefreshActiveOrderStatusesAsync()
     {
-        if (IsLoading || ActiveOrders.Count == 0)
+        if (IsLoading || loadRunning || ActiveOrders.Count == 0)
             return;
 
         var orders = ActiveOrders.ToList();
@@ -172,6 +216,12 @@ public partial class OrdersPageViewModel : ObservableObject
 
             order.PartialReturnStatus = response.resultData.partialReturnStatus;
             order.Status = response.resultData.status ?? order.Status;
+            order.DeliveryMethod = response.resultData.deliveryMethod ?? order.DeliveryMethod;
+            order.TaxiCompany = response.resultData.taxiCompany;
+            order.TaxiDriverName = response.resultData.taxiDriverName;
+            order.TaxiDriverPhone = response.resultData.taxiDriverPhone;
+            order.TaxiCarNumber = response.resultData.taxiCarNumber;
+            order.TaxiFare = response.resultData.taxiFare;
 
             Debug.WriteLine($"ORDER PROCESS => orderId={order.OrderId}, status={order.Status}");
         }

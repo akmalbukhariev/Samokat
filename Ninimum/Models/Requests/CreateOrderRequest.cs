@@ -16,6 +16,8 @@ public class CreateOrderRequest
     public int? quotedTotal {get;set;}
 
     public long? tariffSubscriptionId { get; set; }
+    // "COURIER" (default) or "TAXI" (fast delivery; the customer pays the taxi driver).
+    public string deliveryMethod { get; set; } = "COURIER";
 
     public List<CreateOrderProductRequest> products { get; set; } = new();
 }

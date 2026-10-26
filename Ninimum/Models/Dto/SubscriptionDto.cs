@@ -10,4 +10,6 @@ public class SubscriptionDto
     public string startDate { get; set; } = string.Empty;
     public string endDate { get; set; } = string.Empty;
     public string subscriptionStatus { get; set; } = string.Empty;
+    // Cancelled by the customer: still valid until endDate.
+    public bool cancelled { get; set; }
 }

@@ -42,6 +42,7 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
 
             _hasActiveSubscription = value;
             OnPropertyChanged();
+            OnPropertyChanged(nameof(CanCancel));
         }
     }
 
@@ -62,6 +63,13 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
         get => _currentEndDate;
         set { _currentEndDate = value; OnPropertyChanged(); }
     }
+
+    // A cancelled tariff stays usable until its end date; the cancel button is then replaced by this note.
+    private bool _isCancelled;
+    private string _cancelledText = string.Empty;
+    public bool IsCancelled { get => _isCancelled; set { _isCancelled = value; OnPropertyChanged(); OnPropertyChanged(nameof(CanCancel)); } }
+    public bool CanCancel => HasActiveSubscription && !IsCancelled;
+    public string CancelledText { get => _cancelledText; set { _cancelledText = value; OnPropertyChanged(); } }
 
     public string CurrentRemainingText
     {
@@ -146,6 +154,10 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
                 CurrentEndDate = FormatDate(active.endDate);
                 CurrentRemainingText = GetRemainingDaysText(active.endDate);
                 CurrentPrice = FormatPrice(active.price);
+                IsCancelled = active.cancelled;
+                CancelledText = string.Format(
+                    AppResource.ResourceManager.GetString("TariffCancelledUntil", AppResource.Culture) ?? "Tarif bekor qilingan. {0} gacha amal qiladi.",
+                    CurrentEndDate);
             }
             else
             {
@@ -155,6 +167,8 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
                 CurrentEndDate = string.Empty;
                 CurrentRemainingText = string.Empty;
                 CurrentPrice = string.Empty;
+                IsCancelled = false;
+                CancelledText = string.Empty;
             }
 
             await LoadHistoryAsync(request, HasActiveSubscription ? active : null);
@@ -173,7 +187,7 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
 
     private async Task CancelTariffAsync()
     {
-        if (_isCancellingTariff || !HasActiveSubscription || _currentSubscriptionId <= 0)
+        if (_isCancellingTariff || !CanCancel || _currentSubscriptionId <= 0)
             return;
 
         bool confirmed = await DisplayAlert(

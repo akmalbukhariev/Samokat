@@ -89,7 +89,17 @@
                             FontFamily="{StaticResource FontSFBold}"
                             Command="{Binding JoinTariffCommand}" />
 
+                        <Label
+                            IsVisible="{Binding IsCancelled}"
+                            Text="{Binding CancelledText}"
+                            TextColor="#B45309"
+                            FontSize="16"
+                            HorizontalTextAlignment="Center"
+                            LineBreakMode="WordWrap"
+                            FontFamily="{StaticResource FontSFMedium}" />
+
                         <Button
+                            IsVisible="{Binding CanCancel}"
                             Text="{x:Static language:AppResource.CancelTariff}"
                             HeightRequest="54"
                             Margin="0,0,0,0"

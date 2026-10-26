@@ -9,7 +9,7 @@ public sealed class OrderCardViewModel(Order order, IAsyncRelayCommand<OrderCard
 {
     public IAsyncRelayCommand<OrderCardViewModel> OpenCommand => openCommand;
     public long Id => order.Id;
-    public string Number => $"#{order.Id:D6}";
+    public string Number => $"#{order.Id:D6}{order.TaxiMark}";
     public string Status => order.Status;
     public string StatusText => LocalizedMessages.Status(Status);
     public string QuantityText => string.Format(CultureInfo.CurrentCulture,AppResource.QuantityFormat,order.Quantity);

@@ -232,7 +232,6 @@ public partial class MainPageViewModel : ObservableObject
 
     private async Task RefreshAsync()
     {
-        AppVibrationService.Click();
 
         await LoadBannersAsync();
         await LoadProductsAsync(isRefresh: true);

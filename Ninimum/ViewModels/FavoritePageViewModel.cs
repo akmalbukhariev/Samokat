@@ -179,7 +179,6 @@ public partial class FavoritePageViewModel : ObservableObject
 
     private async Task RefreshAsync()
     {
-        AppVibrationService.Click();
         
         await LoadProductsAsync(isRefresh: true);
     }

@@ -1437,13 +1437,13 @@ buyurtma qiling</value>
     <value>Tarifni bekor qilish</value>
   </data>
   <data name="CancelTariffConfirmation" xml:space="preserve">
-    <value>Faol tarifni bekor qilmoqchimisiz? Tarif imtiyozlari bekor qilingandan so‘ng darhol to‘xtaydi. Pulni qaytarish tasdiqlangach, mablag‘ingiz 24 soatdan keyin hisobingizga qaytariladi.</value>
+    <value>Faol tarifni bekor qilmoqchimisiz? Tarif to‘langan muddat oxirigacha ishlaydi, keyin qayta uzaytirilmaydi. Pul qaytarilmaydi.</value>
   </data>
   <data name="CouldNotCancelTariff" xml:space="preserve">
     <value>Tarifni bekor qilib bo‘lmadi.</value>
   </data>
   <data name="TariffCancelledSuccessfully" xml:space="preserve">
-    <value>Tarif muvaffaqiyatli bekor qilindi.</value>
+    <value>Tarif bekor qilindi. U to‘langan muddat oxirigacha amal qiladi.</value>
   </data>
   <data name="CatalogTitle" xml:space="preserve"><value>Kategoriyalar</value></data>
   <data name="CatalogEmptyCategories" xml:space="preserve"><value>Hozircha kategoriyalar yo‘q</value></data>
@@ -1489,5 +1489,8 @@ buyurtma qiling</value>
   </data>
   <data name="PaymentPendingHint" xml:space="preserve">
     <value>To‘lov hali tasdiqlanmadi. Agar Payme’da xatolik chiqqan bo‘lsa (masalan, karta ishlamasa yoki bank javob bermasa), shu sahifada boshqa karta bilan qayta urinib ko‘ring. Pul yechilgan bo‘lsa, tasdiq bir necha daqiqada keladi.</value>
+  </data>
+  <data name="TariffCancelledUntil" xml:space="preserve">
+    <value>Tarif bekor qilingan. {0} gacha amal qiladi.</value>
   </data>
 </root>

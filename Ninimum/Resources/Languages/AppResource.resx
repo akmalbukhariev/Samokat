@@ -1434,13 +1434,13 @@ online</value>
     <value>Cancel tariff</value>
   </data>
   <data name="CancelTariffConfirmation" xml:space="preserve">
-    <value>Would you like to cancel your active tariff? Tariff benefits will stop immediately after cancellation. Once the refund is approved, the funds will be returned to your account after 24 hours.</value>
+    <value>Cancel your active plan? It keeps working until the end of the paid period and won’t be renewed. No refund is made.</value>
   </data>
   <data name="CouldNotCancelTariff" xml:space="preserve">
     <value>Could not cancel the tariff.</value>
   </data>
   <data name="TariffCancelledSuccessfully" xml:space="preserve">
-    <value>Tariff cancelled successfully.</value>
+    <value>Your plan is cancelled. It stays active until the end of the paid period.</value>
   </data>
   <data name="CatalogTitle" xml:space="preserve"><value>Categories</value></data>
   <data name="CatalogEmptyCategories" xml:space="preserve"><value>No categories yet</value></data>
@@ -1486,5 +1486,8 @@ online</value>
   </data>
   <data name="PaymentPendingHint" xml:space="preserve">
     <value>The payment isn’t confirmed yet. If Payme showed an error (for example the card doesn’t work or the bank isn’t answering), try another card on this page. If money was taken, confirmation arrives within a few minutes.</value>
+  </data>
+  <data name="TariffCancelledUntil" xml:space="preserve">
+    <value>Plan cancelled. Active until {0}.</value>
   </data>
 </root>

@@ -1436,13 +1436,13 @@
     <value>Отменить тариф</value>
   </data>
   <data name="CancelTariffConfirmation" xml:space="preserve">
-    <value>Вы хотите отменить активный тариф? Преимущества тарифа прекратятся сразу после отмены. После подтверждения возврата средства будут возвращены на ваш счёт через 24 часа.</value>
+    <value>Отменить активный тариф? Тариф будет действовать до конца оплаченного срока и больше не продлится. Деньги не возвращаются.</value>
   </data>
   <data name="CouldNotCancelTariff" xml:space="preserve">
     <value>Не удалось отменить тариф.</value>
   </data>
   <data name="TariffCancelledSuccessfully" xml:space="preserve">
-    <value>Тариф успешно отменен.</value>
+    <value>Тариф отменён. Он действует до конца оплаченного срока.</value>
   </data>
   <data name="CatalogTitle" xml:space="preserve"><value>Категории</value></data>
   <data name="CatalogEmptyCategories" xml:space="preserve"><value>Категорий пока нет</value></data>
@@ -1488,5 +1488,8 @@
   </data>
   <data name="PaymentPendingHint" xml:space="preserve">
     <value>Оплата ещё не подтверждена. Если Payme показал ошибку (например, карта не работает или банк не отвечает), попробуйте другую карту на этой странице. Если деньги списались, подтверждение придёт через несколько минут.</value>
+  </data>
+  <data name="TariffCancelledUntil" xml:space="preserve">
+    <value>Тариф отменён. Действует до {0}.</value>
   </data>
 </root>

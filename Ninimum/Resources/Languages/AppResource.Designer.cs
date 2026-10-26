@@ -484,7 +484,7 @@ namespace Ninimum.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Would you like to cancel your active tariff? Tariff benefits will stop immediately after cancellation. Once the refund is approved, the funds will be returned to your account after 24 hours..
+        ///   Looks up a localized string similar to Cancel your active plan? It keeps working until the end of the paid period and won’t be renewed. No refund is made..
         /// </summary>
         internal static string CancelTariffConfirmation {
             get {
@@ -3778,11 +3778,20 @@ namespace Ninimum.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tariff cancelled successfully..
+        ///   Looks up a localized string similar to Your plan is cancelled. It stays active until the end of the paid period..
         /// </summary>
         internal static string TariffCancelledSuccessfully {
             get {
                 return ResourceManager.GetString("TariffCancelledSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Plan cancelled. Active until {0}..
+        /// </summary>
+        internal static string TariffCancelledUntil {
+            get {
+                return ResourceManager.GetString("TariffCancelledUntil", resourceCulture);
             }
         }
         

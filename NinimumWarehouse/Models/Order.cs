@@ -14,6 +14,9 @@ public class Order
     [JsonPropertyName("worker_code")] public string? Worker { get; set; }
     [JsonPropertyName("payment_status")] public string Payment { get; set; } = "";
     [JsonPropertyName("order_status")] public string OrderStatus { get; set; } = "";
+    // "TAXI": fast delivery by an outside taxi — pack it first.
+    [JsonPropertyName("delivery_method")] public string? DeliveryMethod { get; set; }
+    public string TaxiMark => DeliveryMethod == "TAXI" ? "  🚕 TAKSI" : "";
     public string? Note { get; set; }
     [JsonPropertyName("return_photo")] public string? ReturnPhoto { get; set; }
     [JsonPropertyName("return_reason")] public string? ReturnReason { get; set; }

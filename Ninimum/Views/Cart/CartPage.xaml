@@ -138,52 +138,27 @@
 
                             <VerticalStackLayout Spacing="18">
 
-                                <VerticalStackLayout Spacing="10">
+                                <VerticalStackLayout Spacing="8">
                                     <Label
-                                        Text="{Binding SummaryTopText}"
+                                        Text="{Binding SummaryTitle}"
                                         TextColor="#22292F"
                                         FontSize="18"
-                                        FontFamily="{StaticResource FontSFMedium}" />
-
-                                    <Label>
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span
-                                                    Text="{Binding TotalTariffPrice}"
-                                                    FontSize="28"
-                                                    FontFamily="{StaticResource FontSFBold}"
-                                                    TextColor="#22292F" />
-                                                <Span
-                                                    Text="{x:Static language:AppResource.UZSAvailableForPurchase}"
-                                                    FontSize="18"
-                                                    FontFamily="{StaticResource FontSFRegular}"
-                                                    TextColor="#22292F" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-
-                                    <Label
-                                        IsVisible="{Binding HasActiveSubscription}"
-                                        Text="{Binding ActiveTariffText}"
-                                        TextColor="#16A34A"
-                                        FontSize="17"
                                         FontFamily="{StaticResource FontSFMedium}"
                                         LineBreakMode="WordWrap" />
 
                                     <Label
-                                        IsVisible="{Binding HasActiveSubscription, Converter={StaticResource InverseBoolConverter}}"
-                                        Text="{x:Static language:AppResource.ToUseThisYouNeedToSubscribeTo}"
+                                        IsVisible="{Binding HasSummaryPrice}"
+                                        Text="{Binding SummaryPrice}"
                                         TextColor="#22292F"
-                                        FontSize="17"
-                                        FontFamily="{StaticResource FontSFRegular}"
-                                        LineBreakMode="WordWrap" />
+                                        FontSize="28"
+                                        FontFamily="{StaticResource FontSFBold}" />
 
                                     <Label
-                                        IsVisible="{Binding HasActiveSubscription, Converter={StaticResource InverseBoolConverter}}"
-                                        Text="{x:Static language:AppResource.ChooseATariffPlanAndGetSpecialDiscounts}"
-                                        TextColor="#22292F"
+                                        IsVisible="{Binding HasSummarySaving}"
+                                        Text="{Binding SummarySaving}"
+                                        TextColor="#16A34A"
                                         FontSize="17"
-                                        FontFamily="{StaticResource FontSFRegular}"
+                                        FontFamily="{StaticResource FontSFMedium}"
                                         LineBreakMode="WordWrap" />
                                 </VerticalStackLayout>
 

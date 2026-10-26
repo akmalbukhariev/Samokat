@@ -78,8 +78,61 @@ public partial class FormalizationPage : BasePage
         await LoadPaymentCardsAsync();
     }
 
+    // Delivery method chosen on this page; taxi only when the server says it's within working hours.
+    private string deliveryMethod = "COURIER";
+    private bool taxiAvailable;
+
+    private static string L(string uz, string ru, string en)
+    {
+        var lang = (AppResource.Culture ?? System.Globalization.CultureInfo.CurrentUICulture).TwoLetterISOLanguageName;
+        return lang == "ru" ? ru : lang == "en" ? en : uz;
+    }
+
+    private void ShowDeliveryMethod()
+    {
+        DeliveryMethodTitle.Text = L("Yetkazish usuli", "Способ доставки", "Delivery method");
+        CourierTitle.Text = L("Kuryer orqali", "Курьером", "By courier");
+        CourierHint.Text = L("Bepul. Kuryer navbat bo‘yicha olib boradi.", "Бесплатно. Курьер доставит в порядке очереди.", "Free. A courier delivers in turn.");
+        TaxiTitle.Text = L("Tezkor — taksi orqali", "Срочно — на такси", "Fast — by taxi");
+        TaxiHint.Text = taxiAvailable
+            ? L("Taksi haqini haydovchiga o‘zingiz to‘laysiz. Mahsulotlar uchun to‘lov o‘zgarmaydi.", "Стоимость такси вы оплачиваете водителю сами. Оплата за товары не меняется.", "You pay the taxi fare to the driver yourself. The price of the products doesn’t change.")
+            : L("Faqat ish vaqtida mavjud.", "Доступно только в рабочее время.", "Available only during working hours.");
+        if (!taxiAvailable && deliveryMethod == "TAXI") deliveryMethod = "COURIER";
+        bool taxi = deliveryMethod == "TAXI";
+        CourierCheck.Source = taxi ? "ic_uncheck.png" : "ic_check.png";
+        TaxiCheck.Source = taxi ? "ic_check.png" : "ic_uncheck.png";
+        CourierOption.Stroke = taxi ? Color.FromArgb("#DADBDD") : Color.FromArgb("#7CB518");
+        TaxiOption.Stroke = taxi ? Color.FromArgb("#FFB300") : Color.FromArgb("#DADBDD");
+        TaxiOption.Opacity = taxiAvailable ? 1 : 0.5;
+        ShowDeliveryPrice();
+    }
+
+    // Courier: "Bepul" in green. Taxi: Ninimum charges nothing, but the customer pays the driver — say so in orange.
+    private void ShowDeliveryPrice()
+    {
+        if (deliveryMethod == "TAXI")
+        {
+            DeliveryPriceLabel.Text = L("Taksi haqi haydovchiga", "Такси — оплата водителю", "Taxi fare to the driver");
+            DeliveryPriceLabel.TextColor = Color.FromArgb("#B45309");
+        }
+        else
+        {
+            DeliveryPriceLabel.Text = DeliveryPrice == 0 ? AppResource.Free : FormatSom(DeliveryPrice);
+            DeliveryPriceLabel.TextColor = Color.FromArgb("#7CB518");
+        }
+    }
+
+    private void OnCourierTapped(object? sender, TappedEventArgs e) { deliveryMethod = "COURIER"; AppVibrationService.Click(); ShowDeliveryMethod(); }
+
+    private void OnTaxiTapped(object? sender, TappedEventArgs e)
+    {
+        if (!taxiAvailable) return;
+        deliveryMethod = "TAXI"; AppVibrationService.Click(); ShowDeliveryMethod();
+    }
+
     private async Task<CheckoutQuoteData> RefreshQuoteAsync()
     {
+        ShowDeliveryMethod();
         var data=FormalizationNavigationStore.Data??throw new InvalidOperationException();
         var response=await apiService.GetCheckoutQuote(new CreateOrderRequest {
             userId=data.UserId,tariffSubscriptionId=data.TariffSubscriptionId,
@@ -87,6 +140,7 @@ public partial class FormalizationPage : BasePage
         });
         var quote=response?.resultData;
         if(response?.resultCode!="100"||quote==null||quote.total<=0||quote.products.Count!=data.Products.Count)throw new InvalidOperationException(AppResource.OrderCouldNotBeCreated);
+        taxiAvailable=quote.taxi_available;ShowDeliveryMethod();
         for(int i=0;i<data.Products.Count;i++){
             if(quote.products[i].productId!=data.Products[i].ProductId||quote.products[i].quantity!=data.Products[i].Quantity)throw new InvalidOperationException();
             data.Products[i].Price=quote.products[i].price;
@@ -314,6 +368,7 @@ public partial class FormalizationPage : BasePage
                     totalPrice = totalPrice,
                     quotedTotal = checkoutQuote.total,
                     tariffSubscriptionId = data.TariffSubscriptionId,
+                    deliveryMethod = deliveryMethod,
 
                     products = data.Products
                         .Select(x => new CreateOrderProductRequest
@@ -478,7 +533,7 @@ public partial class FormalizationPage : BasePage
 
         ProductsCountLabel.Text = string.Format(AppResource.PiecesCount, Products.Count);
         ProductsPriceLabel.Text = FormatSom(productsPrice);
-        DeliveryPriceLabel.Text = DeliveryPrice == 0 ? AppResource.Free : FormatSom(DeliveryPrice);
+        ShowDeliveryPrice();
         TotalPriceLabel.Text = FormatSom(total);
     }
 

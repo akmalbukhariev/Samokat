@@ -198,7 +198,7 @@ public partial class OrderProcessView : ContentView
 
     private void UpdateOrderInfo()
     {
-        var orderPrefix = string.IsNullOrWhiteSpace(OrderNumber) ? "" : $"#{OrderNumber} ";
+        var orderPrefix = string.IsNullOrWhiteSpace(OrderNumber) ? "" : $"#{OrderNumber.TrimStart('#')} ";
         var language = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLowerInvariant();
         ProgressContainer.IsVisible = IsExpanded && OrderStatus?.ToUpperInvariant() is not ("RETURNING" or "RETURNED");
         if (OrderStatus?.ToUpperInvariant() == "RETURNED")

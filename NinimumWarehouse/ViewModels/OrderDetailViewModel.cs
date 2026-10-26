@@ -56,7 +56,7 @@ public sealed class OrderDetailViewModel : ViewModelBase
     private CancellationTokenSource? refreshCancellation;
     private Task? pendingRefresh;
     public ObservableCollection<OrderItemViewModel> Items { get; } = [];
-    public string Number => order is null ? "" : $"#{order.Id:D6}";
+    public string Number => order is null ? "" : $"#{order.Id:D6}{order.TaxiMark}";
     public string Status => order?.Status ?? "WAITING";
     public string StatusText => LocalizedMessages.Status(Status);
     public string? Note => order?.Note;

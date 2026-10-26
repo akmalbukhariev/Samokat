@@ -47,6 +47,13 @@ public partial class CartPageViewModel : ObservableObject
     [ObservableProperty] private string totalTariffPrice = "0";
     [ObservableProperty] private bool hasActiveSubscription;
     [ObservableProperty] private string activeTariffText = string.Empty;
+    // Friendly summary box: what is being bought, the price, and the money saved (or that could be saved).
+    [ObservableProperty] private string summaryTitle = string.Empty;
+    [ObservableProperty] private string summaryPrice = string.Empty;
+    [ObservableProperty] private string summarySaving = string.Empty;
+    [ObservableProperty] private bool hasSummaryPrice;
+    [ObservableProperty] private bool hasSummarySaving;
+    private string activeTariffName = string.Empty;
 
     [ObservableProperty] private IAsyncRelayCommand loadMoreCommand;
     [ObservableProperty] private IAsyncRelayCommand refreshCommand;
@@ -167,7 +174,6 @@ public partial class CartPageViewModel : ObservableObject
 
     private async Task RefreshAsync()
     {
-        AppVibrationService.Click();
 
         await LoadActiveSubscriptionAsync();
         await LoadCartProductsAsync(isRefresh: true);
@@ -299,6 +305,7 @@ public partial class CartPageViewModel : ObservableObject
             ActiveTariffText = HasActiveSubscription
                 ? string.Format(AppResource.ActiveTariff, subscription!.tariffName)
                 : string.Empty;
+            activeTariffName = HasActiveSubscription ? subscription!.tariffName ?? string.Empty : string.Empty;
         }
         catch (Exception ex)
         {
@@ -348,6 +355,7 @@ public partial class CartPageViewModel : ObservableObject
             .Sum(x => GetEffectivePrice(x) * x.Quantity);
 
         BottomTotalPrice = string.Format(AppResource.UZS_02854f, effectiveTotal);
+        UpdateFriendlySummary(selectedCount, effectiveTotal, regularTotal - tariffTotal);
         BottomSelectedCountText = string.Format(AppResource.Products_48d782, selectedCount);
 
         SelectAllIcon = CartProducts.Any() && CartProducts.All(x => x.IsChecked)
@@ -355,6 +363,42 @@ public partial class CartPageViewModel : ObservableObject
             : "ic_uncheck.png";
 
         OnPropertyChanged(nameof(CartCountText));
+    }
+
+    private static string L(string uz, string ru, string en)
+    {
+        var lang = (AppResource.Culture ?? System.Globalization.CultureInfo.CurrentUICulture).TwoLetterISOLanguageName;
+        return lang == "ru" ? ru : lang == "en" ? en : uz;
+    }
+
+    private void UpdateFriendlySummary(int selectedCount, int total, int saving)
+    {
+        HasSummaryPrice = selectedCount > 0;
+        if (selectedCount == 0)
+        {
+            SummaryTitle = L("Xarid qilish uchun mahsulotlarni belgilang", "Отметьте товары, которые хотите купить", "Tick the products you want to buy");
+            SummarySaving = string.Empty;
+            HasSummarySaving = false;
+            return;
+        }
+
+        SummaryTitle = selectedCount == 1
+            ? L("Siz 1 ta mahsulot xarid qilyapsiz", "Вы покупаете 1 товар", "You are buying 1 product")
+            : L($"Siz {selectedCount} ta mahsulot xarid qilyapsiz", $"Вы покупаете {selectedCount} товара(ов)", $"You are buying {selectedCount} products");
+        SummaryPrice = string.Format(AppResource.UZS_02854f, total).Replace(",", " ");
+
+        string money = FormatPrice(saving);
+        if (saving <= 0)
+        {
+            SummarySaving = HasActiveSubscription
+                ? L($"{activeTariffName} tarifingiz faol", $"Ваш тариф {activeTariffName} активен", $"Your {activeTariffName} plan is active")
+                : string.Empty;
+        }
+        else if (HasActiveSubscription)
+            SummarySaving = L($"🎉 {activeTariffName} tarifi bilan {money} so‘m tejayapsiz", $"🎉 С тарифом {activeTariffName} вы экономите {money} сум", $"🎉 You save {money} so‘m with your {activeTariffName} plan");
+        else
+            SummarySaving = L($"Tarifga obuna bo‘lsangiz, {money} so‘m tejaysiz", $"С подпиской на тариф вы сэкономите {money} сум", $"Subscribe to a plan and save {money} so‘m");
+        HasSummarySaving = !string.IsNullOrEmpty(SummarySaving);
     }
 
     private string FormatPrice(double value)

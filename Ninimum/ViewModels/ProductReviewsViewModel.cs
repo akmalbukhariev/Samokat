@@ -226,7 +226,6 @@ public partial class ProductReviewsViewModel : ObservableObject
 
     private async Task ManualRefreshAsync()
     {
-        AppVibrationService.Click();
 
         try
         {

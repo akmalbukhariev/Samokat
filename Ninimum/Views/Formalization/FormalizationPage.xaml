@@ -187,6 +187,35 @@
                     </VerticalStackLayout>
                 </Border> 
 
+                <!-- Delivery method: free courier, or fast taxi paid to the driver by the customer -->
+                <Label
+                    x:Name="DeliveryMethodTitle"
+                    FontSize="22"
+                    TextColor="#22292F"
+                    FontFamily="{StaticResource FontSFMedium}" />
+
+                <Border x:Name="CourierOption" Padding="14" StrokeThickness="1.5" Stroke="#7CB518" StrokeShape="RoundRectangle 14" BackgroundColor="White">
+                    <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnCourierTapped" /></Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                        <Image x:Name="CourierCheck" Source="ic_check.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                            <Label x:Name="CourierTitle" FontSize="17" TextColor="#22292F" FontFamily="{StaticResource FontSFMedium}" />
+                            <Label x:Name="CourierHint" FontSize="14" TextColor="#96979B" LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
+                <Border x:Name="TaxiOption" Padding="14" StrokeThickness="1.5" Stroke="#DADBDD" StrokeShape="RoundRectangle 14" BackgroundColor="White">
+                    <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnTaxiTapped" /></Border.GestureRecognizers>
+                    <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                        <Image x:Name="TaxiCheck" Source="ic_uncheck.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
+                        <VerticalStackLayout Grid.Column="1" Spacing="2">
+                            <Label x:Name="TaxiTitle" FontSize="17" TextColor="#22292F" FontFamily="{StaticResource FontSFMedium}" />
+                            <Label x:Name="TaxiHint" FontSize="14" TextColor="#96979B" LineBreakMode="WordWrap" />
+                        </VerticalStackLayout>
+                    </Grid>
+                </Border>
+
                 <!-- Payment -->
                 <Label
                     IsVisible="False"
