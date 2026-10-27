@@ -19,6 +19,7 @@ public partial class CartProductItemModel : ObservableObject
 
     public int PriceValue { get; set; }
     public int SubscriptionPriceValue { get; set; }
+    public int StockQuantity { get; set; }
 
     [ObservableProperty] private bool isChecked;
     

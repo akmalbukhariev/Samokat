@@ -185,7 +185,7 @@
                 <CollectionView
                     x:Name="MainCollectionView"
                     ItemsSource="{Binding Products}"
-                    RemainingItemsThreshold="2"
+                    RemainingItemsThreshold="6"
                     RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
                     SelectionMode="None"
                     Margin="10,10,10,0">

@@ -11,7 +11,9 @@
     xmlns:search="clr-namespace:Ninimum.Views.Search"
     xmlns:cart="clr-namespace:Ninimum.Views.Cart"
     xmlns:profile="clr-namespace:Ninimum.Views.Profile"
+    xmlns:favorite="clr-namespace:Ninimum.Views.FavoriteProduct"
     Shell.FlyoutBehavior="Disabled"
+    Shell.TabBarIsVisible="False"
     BackgroundColor="White"
     Shell.BackgroundColor="White"
     Shell.TabBarBackgroundColor="White"
@@ -44,8 +46,9 @@
                               Shell.NavBarIsVisible="False" />
           </Tab>
 
-          <Tab Route="SearchTab" Title="{x:Static language:AppResource.SearchTitle}" Icon="ic_serach.png" Appearing="Tab_Appearing">
-               <ShellContent Route="SearchRoot" ContentTemplate="{DataTemplate search:SearchTabPage}"
+          <!-- The visible bar is Components/AppTabBar (6 buttons, Search opens SearchPage); Android's bar allows only 5. -->
+          <Tab Route="FavoritesTab" Title="{x:Static language:AppResource.Favorites}" Icon="ic_favorite.png" Appearing="Tab_Appearing">
+               <ShellContent Route="FavoritesRoot" ContentTemplate="{DataTemplate favorite:FavoritePage}"
                              Shell.NavBarIsVisible="False" />
           </Tab>
 
@@ -60,7 +63,7 @@
                               Shell.NavBarIsVisible="False" />
           </Tab>
 
-          <Tab Title="{x:Static language:AppResource.Profile}" Appearing="Tab_Appearing">
+          <Tab Route="ProfileTab" Title="{x:Static language:AppResource.Profile}" Appearing="Tab_Appearing">
                <Tab.Icon>
                     <OnPlatform x:TypeArguments="FileImageSource">
                          <On Platform="Android" Value="ic_user.png" />

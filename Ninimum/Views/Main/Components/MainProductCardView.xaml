@@ -25,7 +25,8 @@
 
                 <Grid>
 
-                    <!-- Single image mode -->
+                    <!-- One picture per card: a CarouselView inside every card made list scrolling stutter;
+                         all photos are on the product page. -->
                     <Image
                         x:Name="SingleImage"
                         Source="{Binding MainImageSource, Source={x:Reference RootView}}"
@@ -38,27 +39,6 @@
                         </Image.GestureRecognizers>
                     </Image>
 
-                    <CarouselView
-                        x:Name="ImageCarousel"
-                        ItemsSource="{Binding ImagesSource, Source={x:Reference RootView}}"
-                        PositionChanged="OnCarouselPositionChanged">
-
-                        <CarouselView.ItemTemplate>
-                            <DataTemplate x:DataType="models:MainProductImageItem">
-                                <Grid>
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                            Tapped="Product_Tapped"
-                                            NumberOfTapsRequired="1" />
-                                    </Grid.GestureRecognizers>
-
-                                    <Image
-                                        Source="{Binding ImageSource}"
-                                        Aspect="AspectFit" />
-                                </Grid>
-                            </DataTemplate>
-                        </CarouselView.ItemTemplate>
-                    </CarouselView>
 
                     <!-- Favorite button -->
                     <Border

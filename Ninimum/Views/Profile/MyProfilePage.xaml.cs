@@ -1,3 +1,4 @@
+using Ninimum.Components;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
@@ -165,6 +166,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     public MyProfilePage(AppControl appControl, UserApiService apiService, LanguageService languageService)
     {
         InitializeComponent();
+        AppTabBar.Attach(this, AppTabBar.TabKind.Profile);
         this.appControl = appControl;
         this.apiService = apiService;
         this.languageService = languageService;

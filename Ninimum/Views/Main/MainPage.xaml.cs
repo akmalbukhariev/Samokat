@@ -1,3 +1,4 @@
+using Ninimum.Components;
 using System.ComponentModel;
 using Ninimum.ViewModels;
 using Ninimum.Views.Search;
@@ -14,11 +15,13 @@ public partial class MainPage : BasePage
     public MainPage(MainPageViewModel vm)
     {
         InitializeComponent();
+        AppTabBar.Attach(this, AppTabBar.TabKind.Home);
 
         viewModel = vm;
         BindingContext = viewModel;
 InlineSearchBarView.MenuClicked += LeftMenuClicked;
         InlineSearchBarView.SearchClicked += SearchClicked;
+        StickySearchBarView.SearchClicked += SearchClicked;
         viewModel.PropertyChanged += ViewModel_PropertyChanged;
     }
     

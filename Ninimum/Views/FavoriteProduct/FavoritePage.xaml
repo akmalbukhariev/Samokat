@@ -10,7 +10,6 @@
     xmlns:local="clr-namespace:Ninimum.Views.FavoriteProduct"
     x:Class="Ninimum.Views.FavoriteProduct.FavoritePage"
     Shell.NavBarIsVisible="False"
-    Shell.TabBarIsVisible="False"
     x:Name="ThisPage"
     BackgroundColor="White">
 
@@ -18,19 +17,19 @@
         <components:PageHeaderView
             Grid.Row="0"
             Title="{x:Static language:AppResource.FavoritesTitle}"
-            ShowBack="true"/>
+            ShowBack="false"/>
         
         <RefreshView 
             IsRefreshing="{Binding IsRefreshing}"
             Command="{Binding RefreshCommand}"
-            Margin="10,5,10,0"
+            Margin="0,5,0,0"
             Grid.Row="2">
         <CollectionView
                 ItemsSource="{Binding Products}"
-                RemainingItemsThreshold="1"
+                RemainingItemsThreshold="6"
                 RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
                 SelectionMode="None"
-                Margin="10,10,10,0">
+                Margin="4,10,4,0">
 
                 <!-- PRODUCTS -->
                 <CollectionView.ItemsLayout>

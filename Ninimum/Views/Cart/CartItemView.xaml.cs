@@ -90,6 +90,15 @@ public partial class CartItemView : ContentView
         set => SetValue(CheckIconSourceProperty, value);
     }
 
+    public static readonly BindableProperty MaxQuantityProperty =
+        BindableProperty.Create(nameof(MaxQuantity), typeof(int), typeof(CartItemView), 0);
+
+    public int MaxQuantity
+    {
+        get => (int)GetValue(MaxQuantityProperty);
+        set => SetValue(MaxQuantityProperty, value);
+    }
+
     public static readonly BindableProperty QuantityProperty =
         BindableProperty.Create(
             nameof(Quantity),

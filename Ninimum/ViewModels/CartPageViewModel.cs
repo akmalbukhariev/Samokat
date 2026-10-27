@@ -53,6 +53,12 @@ public partial class CartPageViewModel : ObservableObject
     [ObservableProperty] private string summarySaving = string.Empty;
     [ObservableProperty] private bool hasSummaryPrice;
     [ObservableProperty] private bool hasSummarySaving;
+    // Price without a tariff vs with a tariff, shown when the tariff makes the cart cheaper.
+    [ObservableProperty] private bool hasPriceCompare;
+    [ObservableProperty] private string compareRegularLabel = string.Empty;
+    [ObservableProperty] private string compareRegularPrice = string.Empty;
+    [ObservableProperty] private string compareTariffLabel = string.Empty;
+    [ObservableProperty] private string compareTariffPrice = string.Empty;
     private string activeTariffName = string.Empty;
 
     [ObservableProperty] private IAsyncRelayCommand loadMoreCommand;
@@ -140,6 +146,7 @@ public partial class CartPageViewModel : ObservableObject
 
                     PriceValue = (int)(product.price ?? 0),
                     SubscriptionPriceValue = (int)(product.subscription_price ?? 0),
+                    StockQuantity = product.stock_quantity ?? 0,
 
                     IsChecked = checkedCartIds.Contains(product.cart_id),
                     Quantity = product.quantity <= 0 ? 1 : product.quantity,
@@ -355,7 +362,7 @@ public partial class CartPageViewModel : ObservableObject
             .Sum(x => GetEffectivePrice(x) * x.Quantity);
 
         BottomTotalPrice = string.Format(AppResource.UZS_02854f, effectiveTotal);
-        UpdateFriendlySummary(selectedCount, effectiveTotal, regularTotal - tariffTotal);
+        UpdateFriendlySummary(selectedCount, effectiveTotal, regularTotal, tariffTotal);
         BottomSelectedCountText = string.Format(AppResource.Products_48d782, selectedCount);
 
         SelectAllIcon = CartProducts.Any() && CartProducts.All(x => x.IsChecked)
@@ -371,9 +378,17 @@ public partial class CartPageViewModel : ObservableObject
         return lang == "ru" ? ru : lang == "en" ? en : uz;
     }
 
-    private void UpdateFriendlySummary(int selectedCount, int total, int saving)
+    private void UpdateFriendlySummary(int selectedCount, int total, int regularTotal, int tariffTotal)
     {
+        int saving = regularTotal - tariffTotal;
         HasSummaryPrice = selectedCount > 0;
+        HasPriceCompare = selectedCount > 0 && saving > 0;
+        CompareRegularLabel = L("Tarifsiz narx", "Цена без тарифа", "Price without a plan");
+        CompareRegularPrice = FormatPrice(regularTotal) + " " + L("so‘m", "сум", "so‘m");
+        CompareTariffLabel = HasActiveSubscription
+            ? L($"{activeTariffName} tarifi bilan", $"С тарифом {activeTariffName}", $"With your {activeTariffName} plan")
+            : L("Tarif bilan narx", "Цена с тарифом", "Price with a plan");
+        CompareTariffPrice = FormatPrice(tariffTotal) + " " + L("so‘m", "сум", "so‘m");
         if (selectedCount == 0)
         {
             SummaryTitle = L("Xarid qilish uchun mahsulotlarni belgilang", "Отметьте товары, которые хотите купить", "Tick the products you want to buy");

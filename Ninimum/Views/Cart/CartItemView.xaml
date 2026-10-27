@@ -115,6 +115,7 @@
 
                 <local:QuantitySelectorView
                     Quantity="{Binding Quantity, Source={x:Reference RootView}, Mode=TwoWay}"
+                    MaxQuantity="{Binding MaxQuantity, Source={x:Reference RootView}}"
                     QuantityChangedCommand="{Binding QuantityChangedCommand, Source={x:Reference RootView}}" />
             </VerticalStackLayout>
         </Grid>

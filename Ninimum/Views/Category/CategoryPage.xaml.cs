@@ -1,3 +1,4 @@
+using Ninimum.Components;
 using Ninimum.Models;
 using Ninimum.Models.Dto;
 using Ninimum.Services;
@@ -11,6 +12,7 @@ public partial class CategoryPage : BasePage
     public CategoryPage(CategoryPageViewModel model)
     {
         InitializeComponent();
+        AppTabBar.Attach(this, AppTabBar.TabKind.Catalog);
         this.model = model;
         BindingContext = model;
     }

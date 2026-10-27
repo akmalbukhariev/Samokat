@@ -10,7 +10,6 @@ namespace Ninimum.Views.Main.Components;
 
 public partial class MainProductCardView : ContentView
 {
-    private int _currentPosition;
 
     public MainProductCardView()
     {
@@ -221,7 +220,6 @@ public partial class MainProductCardView : ContentView
         if (newValue is INotifyCollectionChanged newCollection)
             newCollection.CollectionChanged += view.OnImagesCollectionChanged;
 
-        view._currentPosition = 0;
         view.UpdateImageMode();
         view.UpdateCustomIndicator(0);
     }
@@ -230,7 +228,6 @@ public partial class MainProductCardView : ContentView
     {
         MainThread.BeginInvokeOnMainThread(() =>
         {
-            _currentPosition = 0;
             UpdateImageMode();
             UpdateCustomIndicator(0);
         });
@@ -251,67 +248,15 @@ public partial class MainProductCardView : ContentView
 
     private void UpdateImageMode()
     {
-        int count = ImagesSource?.Count ?? 0;
-
-        bool hasCarousel = count > 1;
-        bool hasSingleImage = count == 1;
-
-        ImageCarousel.IsVisible = hasCarousel;
-        SingleImage.IsVisible = hasSingleImage;
-
-        if (hasCarousel)
-        {
-            ImageCarousel.ItemsSource = ImagesSource;
-            ImageCarousel.Position = 0;
-            MainImageSource = string.Empty;
-        }
-        else if (hasSingleImage && ImagesSource?[0] is MainProductImageItem item)
-        {
-            MainImageSource = item.ImageSource;
-        }
-        else
-        {
-            MainImageSource = string.Empty;
-        }
-    }
-
-    private void OnCarouselPositionChanged(object? sender, PositionChangedEventArgs e)
-    {
-        _currentPosition = e.CurrentPosition;
-        UpdateCustomIndicator(_currentPosition);
+        bool hasImage = (ImagesSource?.Count ?? 0) > 0 && ImagesSource![0] is MainProductImageItem;
+        SingleImage.IsVisible = hasImage;
+        MainImageSource = hasImage ? ((MainProductImageItem)ImagesSource![0]!).ImageSource : string.Empty;
     }
 
     private void UpdateCustomIndicator(int position)
     {
+        // The card shows only the first picture, so there are no image dots to draw.
         CustomIndicatorLayout.Children.Clear();
-
-        int count = ImagesSource?.Count ?? 0;
-
-        if (count <= 1)
-            return;
-
-        for (int i = 0; i < count; i++)
-        {
-            bool isSelected = i == position;
-
-            var indicator = new Border
-            {
-                StrokeThickness = 0,
-                BackgroundColor = isSelected
-                    ? Color.FromArgb("#95C11F")
-                    : Color.FromArgb("#E5E5E5"),
-                WidthRequest = isSelected ? 18 : 10,
-                HeightRequest = 7,
-                StrokeShape = new RoundRectangle
-                {
-                    CornerRadius = new CornerRadius(5)
-                },
-                VerticalOptions = LayoutOptions.Center,
-                HorizontalOptions = LayoutOptions.Center
-            };
-
-            CustomIndicatorLayout.Children.Add(indicator);
-        }
     }
 
     private static void LikedChanged(BindableObject bindable, object oldValue, object newValue)

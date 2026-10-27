@@ -1,3 +1,4 @@
+using Ninimum.Components;
 using Microsoft.Maui.Controls.Shapes;
 using Models.Requests;
 using Ninimum.Models;
@@ -16,6 +17,7 @@ public partial class CartPage : BasePage
     public CartPage(CartPageViewModel vm, AppControl appControl)
     {
         InitializeComponent();
+        AppTabBar.Attach(this, AppTabBar.TabKind.Cart);
         viewModel = vm;
         this.appControl = appControl;
         BindingContext = vm;

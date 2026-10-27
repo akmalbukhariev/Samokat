@@ -76,6 +76,7 @@ public partial class DetailProductPageViewModel : ObservableObject
     [ObservableProperty] private string finalPrice = AppResource.Text0UZS;
     private double FinalPriceValue = 0.0;
     private int stockQuantity;
+    [ObservableProperty] private int maxQuantity;
 
     // The bottom price is the total for the chosen amount; the amount can't go above the stock.
     partial void OnQuantityChanged(int value)
@@ -315,6 +316,7 @@ public partial class DetailProductPageViewModel : ObservableObject
             ProductLiked = product.liked;
             StockText = string.Format(AppResource.StockAvailable, product.stock_quantity ?? 0);
             stockQuantity = product.stock_quantity ?? 0;
+            MaxQuantity = stockQuantity;
             Rating = (product.average_rating ?? 0).ToString("0.0");
             RatingStarCount = (int)Math.Round(product.average_rating ?? 0);
             Stars.Clear();

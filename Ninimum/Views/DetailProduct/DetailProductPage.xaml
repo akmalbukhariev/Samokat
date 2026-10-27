@@ -530,7 +530,8 @@
                 <cart:QuantitySelectorView
                     Grid.Column="1"
                     VerticalOptions="Center"
-                    Quantity="{Binding Quantity, Mode=TwoWay}" />
+                    Quantity="{Binding Quantity, Mode=TwoWay}"
+                    MaxQuantity="{Binding MaxQuantity}" />
 
             </Grid>
 

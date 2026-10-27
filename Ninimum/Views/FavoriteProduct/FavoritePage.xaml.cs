@@ -1,3 +1,4 @@
+using Ninimum.Components;
 
 using System.ComponentModel;
 using Ninimum.ViewModels;
@@ -13,6 +14,7 @@ public partial class FavoritePage : BasePage
     public FavoritePage(FavoritePageViewModel vm, AppControl appControl)
     {
         InitializeComponent();
+        AppTabBar.Attach(this, AppTabBar.TabKind.Favorites);
         viewModel = vm;
         this.appControl = appControl;
         BindingContext = vm;

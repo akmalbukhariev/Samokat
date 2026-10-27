@@ -20,20 +20,20 @@
         <RefreshView
             IsRefreshing="{Binding IsRefreshing}"
             Command="{Binding RefreshCommand}"
-            Margin="10,5,10,0"
+            Margin="0,5,0,0"
             Grid.Row="1">
             <CollectionView
                 x:Name="MainCollectionView"
                 ItemsSource="{Binding Products}"
-                RemainingItemsThreshold="1"
+                RemainingItemsThreshold="6"
                 RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}"
                 SelectionMode="None"
                 Scrolled="MainCollectionView_Scrolled"
-                Margin="10,10,10,0">
+                Margin="4,10,4,0">
 
                 <!-- HEADER INSIDE SCROLL -->
                 <CollectionView.Header>
-                    <VerticalStackLayout Spacing="20">
+                    <VerticalStackLayout Spacing="20" Padding="4,0">
 
                         <!-- THIS scrolls -->
                         <components:SearchBarView x:Name="InlineSearchBarView"/>
@@ -89,11 +89,11 @@
             Grid.Row="1"
             IsVisible="False"
             BackgroundColor="White"
-            Padding="10"
+            Padding="8,10"
             VerticalOptions="Start"
             ZIndex="10">
 
-            <components:SearchBarView />
+            <components:SearchBarView x:Name="StickySearchBarView" />
         </Grid>
         
         <main_components:CustomLikedView

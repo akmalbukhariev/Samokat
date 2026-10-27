@@ -121,6 +121,7 @@
                                 SubscriptionPrice="{Binding SubscriptionPrice}"
                                 IsChecked="{Binding IsChecked, Mode=TwoWay}"
                                 Quantity="{Binding Quantity, Mode=TwoWay}"
+                                MaxQuantity="{Binding StockQuantity}"
                                 QuantityChangedCommand="{Binding QuantityChangedCommand}"
                                 ToggleCheckedCommand="{Binding ToggleCheckedCommand}" />
                         </DataTemplate>
@@ -152,6 +153,20 @@
                                         TextColor="#22292F"
                                         FontSize="28"
                                         FontFamily="{StaticResource FontSFBold}" />
+
+                                    <Border
+                                        IsVisible="{Binding HasPriceCompare}"
+                                        BackgroundColor="#F7F8FA"
+                                        StrokeThickness="0"
+                                        StrokeShape="RoundRectangle 12"
+                                        Padding="12,10">
+                                        <Grid ColumnDefinitions="*,Auto" RowDefinitions="Auto,Auto" RowSpacing="6" ColumnSpacing="8">
+                                            <Label Text="{Binding CompareRegularLabel}" TextColor="#6B7280" FontSize="15" FontFamily="{StaticResource FontSFRegular}" VerticalOptions="Center" />
+                                            <Label Grid.Column="1" Text="{Binding CompareRegularPrice}" TextColor="#6B7280" FontSize="15" FontFamily="{StaticResource FontSFMedium}" TextDecorations="Strikethrough" VerticalOptions="Center" />
+                                            <Label Grid.Row="1" Text="{Binding CompareTariffLabel}" TextColor="#16A34A" FontSize="15" FontFamily="{StaticResource FontSFMedium}" VerticalOptions="Center" LineBreakMode="TailTruncation" />
+                                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding CompareTariffPrice}" TextColor="#16A34A" FontSize="16" FontFamily="{StaticResource FontSFBold}" VerticalOptions="Center" />
+                                        </Grid>
+                                    </Border>
 
                                     <Label
                                         IsVisible="{Binding HasSummarySaving}"

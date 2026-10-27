@@ -275,7 +275,8 @@ namespace Ninimum.Services
             {
                 var page = Shell.Current?.CurrentPage;
 
-                if (page != null)
+                // Tab root pages carry their own AppTabBar; the Shell bar stays hidden there.
+                if (page != null && !Ninimum.Components.AppTabBar.SetVisible(page, show))
                 {
                     Shell.SetTabBarIsVisible(page, show);
                 }
