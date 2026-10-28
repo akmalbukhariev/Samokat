@@ -1,9 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:lang="clr-namespace:NinimumWarehouse.Resources.Languages" xmlns:services="clr-namespace:NinimumWarehouse.Services" xmlns:vm="clr-namespace:NinimumWarehouse.ViewModels" xmlns:components="clr-namespace:NinimumWarehouse.Components" x:Class="NinimumWarehouse.Views.ProfilePage" x:DataType="vm:ProfileViewModel" Shell.NavBarIsVisible="False">
     <Grid RowDefinitions="*,Auto">
         <ScrollView>
             <VerticalStackLayout Padding="24" Spacing="22" IsEnabled="{Binding IsAvailable}">
-                <Label Text="{x:Static lang:AppResource.Profile}" Style="{StaticResource PageTitle}"/>
+                <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                    <Label Text="{x:Static lang:AppResource.Profile}" Style="{StaticResource PageTitle}" VerticalOptions="Center"/>
+                    <Button Grid.Column="1" Text="{x:Static lang:AppResource.SignOut}" Command="{Binding LogoutCommand}" Style="{StaticResource SecondaryButton}" VerticalOptions="Center"/>
+                </Grid>
                 <Border Style="{StaticResource Card}">
                     <VerticalStackLayout Spacing="14">
                         <Border WidthRequest="72" HeightRequest="72" StrokeThickness="0" StrokeShape="RoundRectangle 22" BackgroundColor="{StaticResource PrimarySoft}" HorizontalOptions="Center">
@@ -34,7 +37,6 @@
                 <Border BackgroundColor="{StaticResource ErrorSoft}" Padding="14" StrokeThickness="0" StrokeShape="RoundRectangle 12" IsVisible="{Binding HasError}">
                     <Label Text="{Binding ErrorMessage}" TextColor="{StaticResource ErrorColor}"/>
                 </Border>
-                <Button Text="{x:Static lang:AppResource.SignOut}" Command="{Binding LogoutCommand}" Style="{StaticResource SecondaryButton}"/>
             </VerticalStackLayout>
         </ScrollView>
         <BoxView Grid.Row="1" HeightRequest="1" BackgroundColor="{StaticResource BorderColor}"/>

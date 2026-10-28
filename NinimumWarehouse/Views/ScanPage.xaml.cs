@@ -1,10 +1,12 @@
 using NinimumWarehouse.Resources.Languages;
+using NinimumWarehouse.Services;
 using ZXing.Net.Maui;
 namespace NinimumWarehouse.Views;
 public partial class ScanPage : ContentPage
 {
     private readonly TaskCompletionSource<string?> result = new(TaskCreationOptions.RunContinuationsAsynchronously);
     private int completed;
+    private IDisposable? hardware;
     public Task<string?> Result => result.Task;
     public ScanPage()
     {
@@ -20,10 +22,13 @@ public partial class ScanPage : ContentPage
         if(Interlocked.CompareExchange(ref completed,1,0)!=0) return;
         Reader.IsDetecting=false; await Navigation.PopModalAsync(); result.TrySetResult(value);
     }
+    // The scan button of the PDA works here too, next to the camera.
+    protected override void OnAppearing() { base.OnAppearing(); hardware ??= HardwareScanner.Listen(code => FinishAsync(code)); }
     private void OnTorchClicked(object? sender,EventArgs e) { Reader.IsTorchOn=!Reader.IsTorchOn; TorchButton.Text=Reader.IsTorchOn?AppResource.TorchOff:AppResource.Torch; }
     private async void OnCancelClicked(object? sender,EventArgs e) => await FinishAsync(null);
     protected override void OnDisappearing()
     {
+        hardware?.Dispose(); hardware=null;
         Reader.IsDetecting=false; Reader.IsTorchOn=false; Reader.Handler?.DisconnectHandler();
         // Native Android back also closes this modal and must complete the pending scan.
         if(Interlocked.CompareExchange(ref completed,1,0)==0) result.TrySetResult(null);

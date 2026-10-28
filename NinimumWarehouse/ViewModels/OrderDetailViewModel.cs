@@ -162,6 +162,16 @@ public sealed class OrderDetailViewModel : ViewModelBase
         Notify(nameof(ReturnReason),nameof(HasReturnReason),nameof(HasReturnPhoto),nameof(ReturnPhotoSource),nameof(ReturnPhotoTitle),nameof(IsReturnReceived),nameof(ReturnReceivedMessage),nameof(IsReturn),nameof(StartText),nameof(FinishText),nameof(ActionHint),nameof(CanReportProblem),nameof(Number),nameof(Status),nameof(StatusText),nameof(Note),nameof(HasNote),nameof(HasOrder),nameof(Unavailable),nameof(OtherWorker),nameof(CanStart),nameof(CanCheck),nameof(CanResume),nameof(IsReady),nameof(ShowActions),nameof(AllChecked),nameof(ProgressText),nameof(Progress));
         ReadyCommand.NotifyCanExecuteChanged();
     }
+    // Built-in scanner: the code picks the matching line (or the only line still waiting) and counts one piece.
+    public Task ScannedAsync(string code)
+    {
+        var waiting = Items.Where(x => x.HasBarcode && x.CanCheckMore).ToList();
+        var item = waiting.FirstOrDefault(x => string.Equals(x.Barcode.Trim(), code, StringComparison.OrdinalIgnoreCase))
+            ?? (waiting.Count == 1 ? waiting[0] : null);
+        if (item is null) return RunAsync(() => throw new ApiException(waiting.Count == 0 ? "WAREHOUSE_INVALID_STATE" : "BARCODE_NOT_IN_ORDER"));
+        item.BarcodeInput = code;
+        return CheckAsync(item,false);
+    }
     private Task CheckAsync(OrderItemViewModel item,bool useCamera) => RunAsync(async () => {
         if (!CanCheck || !item.IsEditable) throw new ApiException("WAREHOUSE_INVALID_STATE");
         var line = order!.Items.First(x => x.Id == item.Id);

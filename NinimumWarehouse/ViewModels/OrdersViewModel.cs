@@ -1,4 +1,4 @@
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Globalization;
 using CommunityToolkit.Mvvm.Input;
 using NinimumWarehouse.Models;
@@ -23,6 +23,7 @@ public sealed class OrdersViewModel : ViewModelBase
     private bool isRefreshing;
     private CancellationTokenSource? loadCancellation;
     private Task? pendingLoad;
+    private HashSet<long>? seenIds; // queue ids already shown; a new paid order buzzes the phone once
     public ObservableCollection<OrderCardViewModel> Orders { get; } = [];
     private static string Text(string key) => AppResource.ResourceManager.GetString(key,AppResource.Culture) ?? key;
     public string Title => view switch { "returns" => Text("Returns"), AppConstants.MineView => AppResource.MyOrders, AppConstants.HistoryView => AppResource.History, _ => AppResource.Queue };
@@ -65,6 +66,11 @@ public sealed class OrdersViewModel : ViewModelBase
                     page = Math.Max(1,(int)Math.Ceiling((double)result.Total/AppConstants.PageSize));
                     result = await Api.Request<OrderPage>($"orders?view={view}&page={page}",ct:cts.Token);
                     cts.Token.ThrowIfCancellationRequested();
+                }
+                if(view == AppConstants.QueueView) {
+                    var ids = result.Items.Select(x => x.Id).ToHashSet();
+                    if(seenIds is not null && ids.Any(id => !seenIds.Contains(id))) { try { Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(400)); } catch { } }
+                    seenIds = [..(seenIds ?? []), ..ids];
                 }
                 total = result.Total; Orders.Clear();
                 foreach(var order in result.Items) Orders.Add(new OrderCardViewModel(order, OpenCommand));

@@ -232,7 +232,7 @@
     <value>Shtrix-kodni skanerlash</value>
   </data>
   <data name="ScanHint" xml:space="preserve">
-    <value>Qadoqdagi shtrix-kodni kameraga qarating.</value>
+    <value>Shtrix-kodni kameraga qarating yoki qurilmadagi skaner tugmasini bosing.</value>
   </data>
   <data name="Torch" xml:space="preserve">
     <value>Chiroqni yoqish</value>
@@ -393,4 +393,5 @@
   <data name="Error_WAREHOUSE_INSUFFICIENT_STOCK" xml:space="preserve"><value>Bu partiyada shuncha erkin mahsulot yo‘q.</value></data>
   <data name="Error_PHOTO_INVALID" xml:space="preserve"><value>Rasmni o‘qib bo‘lmadi yoki u juda katta. Qayta oling.</value></data>
   <data name="Error_WAREHOUSE_SEPARATE_APPROVER_REQUIRED" xml:space="preserve"><value>Buni boshqa xodim tasdiqlashi kerak.</value></data>
+  <data name="Error_BARCODE_NOT_IN_ORDER" xml:space="preserve"><value>Bu shtrix-kod ushbu buyurtmada yo‘q.</value></data>
 </root>

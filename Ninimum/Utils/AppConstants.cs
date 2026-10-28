@@ -5,10 +5,11 @@ namespace Utils
     {
 #region Domen
         //public const string SERVER_DOMAIN = "http://127.0.0.1:8085";
-        public const string SERVER_DOMAIN = "95.182.118.233:8083";
+        // HTTPS domain since 2026-10-28; the old address 95.182.118.233:8083 still works for older app versions.
+        public const string SERVER_DOMAIN = "ninimum.uz";
         //public const string SERVER_DOMAIN = "192.168.219.105:8083";
-        public const string BASE_USER_URL = $"http://{SERVER_DOMAIN}/ninimum/api/v1/";
-        public const string HEALTH_URL = $"http://{SERVER_DOMAIN}/actuator/health";
+        public const string BASE_USER_URL = $"https://{SERVER_DOMAIN}/ninimum/api/v1/";
+        public const string HEALTH_URL = $"https://{SERVER_DOMAIN}/actuator/health";
 #endregion
 
         public static readonly string App_Url_PlayMarket = "";

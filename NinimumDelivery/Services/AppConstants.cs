@@ -2,10 +2,10 @@ namespace NinimumDelivery.Services;
 
 public static class AppConstants
 {
-    // Local Mac backend for development. For Ubuntu release, switch Server to 95.182.118.233 and remove :8083.
-    //public const string Server = "192.168.219.105";
-    public const string Server = "95.182.118.233";
-    public const string BaseUrl = $"http://{Server}:8083/ninimum/api/v1/";
+    // HTTPS domain since 2026-10-28 (old address http://95.182.118.233:8083 still works for older versions).
+    // Local Mac backend for development: http://192.168.219.105:8083/ninimum/api/v1/
+    public const string Server = "ninimum.uz";
+    public const string BaseUrl = $"https://{Server}/ninimum/api/v1/";
     public const string TokenKey = "delivery_auth_token";
     public const string LoggedInKey = "delivery_logged_in";
     public const string WorkerKey = "delivery_worker";

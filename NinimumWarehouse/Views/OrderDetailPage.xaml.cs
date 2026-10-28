@@ -5,14 +5,22 @@ namespace NinimumWarehouse.Views;
 public partial class OrderDetailPage : ContentPage
 {
     private OrderDetailViewModel ViewModel => (OrderDetailViewModel)BindingContext;
+    private IDisposable? hardware;
     public OrderDetailPage(WarehouseApi api,long id)
     {
         InitializeComponent(); BindingContext = new OrderDetailViewModel(api,id,ScanAsync,ConfirmReadyAsync,ReportProblemAsync);
         ErrorDialogs.Attach(this, (OrderDetailViewModel)BindingContext);
     }
-    protected override async void OnAppearing() { base.OnAppearing(); await ViewModel.RefreshAsync(); }
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        // PDA scan button on the packing screen: the scanned code finds its product line.
+        hardware ??= HardwareScanner.Listen(ViewModel.ScannedAsync);
+        await ViewModel.RefreshAsync();
+    }
     protected override void OnDisappearing()
     {
+        hardware?.Dispose(); hardware = null;
         ViewModel.StopRefresh();
         base.OnDisappearing();
     }

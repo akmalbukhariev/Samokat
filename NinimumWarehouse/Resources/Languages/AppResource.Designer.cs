@@ -448,6 +448,15 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This barcode is not in this order..
+        /// </summary>
+        public static string Error_BARCODE_NOT_IN_ORDER {
+            get {
+                return ResourceManager.GetString("Error_BARCODE_NOT_IN_ORDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This bin has no batch stock. Check the bin code..
         /// </summary>
         public static string Error_INVENTORY_BIN_EMPTY {
@@ -1204,7 +1213,7 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Point the camera at the barcode on the package..
+        ///   Looks up a localized string similar to Point the camera at the barcode, or press the scan button on the device..
         /// </summary>
         public static string ScanHint {
             get {

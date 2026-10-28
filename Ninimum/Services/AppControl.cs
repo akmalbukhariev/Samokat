@@ -325,9 +325,13 @@ namespace Ninimum.Services
 #region Check url image
         private readonly string[] AllowedBases =
         {
-            $"http://{AppConstants.SERVER_DOMAIN}/uploads-user/profile-pictures/",
-            $"http://{AppConstants.SERVER_DOMAIN}/uploads-company/profile-pictures/",
-            $"http://{AppConstants.SERVER_DOMAIN}/uploads-company/poster-pictures/"
+            $"https://{AppConstants.SERVER_DOMAIN}/uploads-user/profile-pictures/",
+            $"https://{AppConstants.SERVER_DOMAIN}/uploads-company/profile-pictures/",
+            $"https://{AppConstants.SERVER_DOMAIN}/uploads-company/poster-pictures/",
+            // Links saved before the move to https://ninimum.uz
+            "http://95.182.118.233:8083/uploads-user/profile-pictures/",
+            "http://95.182.118.233:8083/uploads-company/profile-pictures/",
+            "http://95.182.118.233:8083/uploads-company/poster-pictures/"
         };
 
         public string GetImageUrlOrFallback(string? imageUrl, string fallback = "no_image.png")

@@ -232,7 +232,7 @@
     <value>Сканирование штрихкода</value>
   </data>
   <data name="ScanHint" xml:space="preserve">
-    <value>Наведите камеру на штрихкод упаковки.</value>
+    <value>Наведите камеру на штрихкод или нажмите кнопку сканера на устройстве.</value>
   </data>
   <data name="Torch" xml:space="preserve">
     <value>Включить фонарик</value>
@@ -393,4 +393,5 @@
   <data name="Error_WAREHOUSE_INSUFFICIENT_STOCK" xml:space="preserve"><value>В партии нет столько свободного товара.</value></data>
   <data name="Error_PHOTO_INVALID" xml:space="preserve"><value>Фото не читается или слишком большое. Сделайте ещё раз.</value></data>
   <data name="Error_WAREHOUSE_SEPARATE_APPROVER_REQUIRED" xml:space="preserve"><value>Это должен провести другой сотрудник.</value></data>
+  <data name="Error_BARCODE_NOT_IN_ORDER" xml:space="preserve"><value>Этого штрихкода нет в заказе.</value></data>
 </root>
