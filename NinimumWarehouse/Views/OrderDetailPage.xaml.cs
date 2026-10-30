@@ -16,10 +16,12 @@ public partial class OrderDetailPage : ContentPage
         base.OnAppearing();
         // PDA scan button on the packing screen: the scanned code finds its product line.
         hardware ??= HardwareScanner.Listen(ViewModel.ScannedAsync);
+        Catcher.Start();
         await ViewModel.RefreshAsync();
     }
     protected override void OnDisappearing()
     {
+        Catcher.Stop();
         hardware?.Dispose(); hardware = null;
         ViewModel.StopRefresh();
         base.OnDisappearing();

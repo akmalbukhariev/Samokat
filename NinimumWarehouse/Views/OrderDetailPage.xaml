@@ -58,15 +58,13 @@
                                             <Label Text="{Binding ProgressText}" FontAttributes="Bold"/>
                                         </Border>
                                     </Grid>
-                                    <VerticalStackLayout Spacing="4">
-                                        <Label Text="{x:Static lang:AppResource.Barcode}" Style="{StaticResource MutedLabel}"/>
-                                        <Label Text="{Binding Barcode}" FontSize="14" LineBreakMode="WordWrap"/>
-                                    </VerticalStackLayout>
+                                    <Label Text="{Binding Picks}" FontAttributes="Bold" LineBreakMode="WordWrap" IsVisible="{Binding HasPicks}"/>
                                     <VerticalStackLayout Spacing="12" IsVisible="{Binding CanCheckMore}">
                                         <BoxView HeightRequest="1" BackgroundColor="{StaticResource BorderColor}"/>
                                         <VerticalStackLayout Spacing="10" IsVisible="{Binding HasBarcode}">
                                             <Label Text="{x:Static lang:AppResource.QuantityHelp}" Style="{StaticResource MutedLabel}"/>
-                                            <Button Text="{x:Static lang:AppResource.ScanToCheck}" Command="{Binding ScanCommand}" Style="{StaticResource PrimaryButton}"/>
+                                            <!-- Camera button hidden while the PDA scanner is being tested; set IsVisible back to bring it back. -->
+                                            <Button Text="{x:Static lang:AppResource.ScanToCheck}" Command="{Binding ScanCommand}" Style="{StaticResource PrimaryButton}" IsVisible="False"/>
                                             <Button Text="{x:Static lang:AppResource.EnterCodeInstead}" Command="{Binding ToggleCodeCommand}" Style="{StaticResource TextButton}" IsVisible="{x:Static services:WarehouseRules.ManualCodeAllowed}"/>
                                             <VerticalStackLayout Spacing="10" IsVisible="{Binding ShowCodeInput}">
                                                 <Border Style="{StaticResource InputBorder}">
@@ -105,6 +103,7 @@
                 <Button Text="{x:Static lang:AppResource.Resume}" Command="{Binding ResumeCommand}" Style="{StaticResource PrimaryButton}" IsVisible="{Binding CanResume}"/>
             </VerticalStackLayout>
         </Border>
+        <components:ScanCatcher x:Name="Catcher"/>
         <components:LoadingView Grid.RowSpan="3" IsLoading="{Binding IsBusy}"/>
     </Grid>
 </ContentPage>

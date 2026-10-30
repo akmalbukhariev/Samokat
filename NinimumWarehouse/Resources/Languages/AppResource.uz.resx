@@ -394,4 +394,5 @@
   <data name="Error_PHOTO_INVALID" xml:space="preserve"><value>Rasmni o‘qib bo‘lmadi yoki u juda katta. Qayta oling.</value></data>
   <data name="Error_WAREHOUSE_SEPARATE_APPROVER_REQUIRED" xml:space="preserve"><value>Buni boshqa xodim tasdiqlashi kerak.</value></data>
   <data name="Error_BARCODE_NOT_IN_ORDER" xml:space="preserve"><value>Bu shtrix-kod ushbu buyurtmada yo‘q.</value></data>
+  <data name="PickLine" xml:space="preserve"><value>Javon {0} · Partiya {1} · Muddat {2} · {3} dona</value></data>
 </root>

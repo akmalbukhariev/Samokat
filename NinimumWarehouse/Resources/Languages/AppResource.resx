@@ -394,4 +394,5 @@
   <data name="Error_PHOTO_INVALID" xml:space="preserve"><value>The photo is unreadable or too large. Take it again.</value></data>
   <data name="Error_WAREHOUSE_SEPARATE_APPROVER_REQUIRED" xml:space="preserve"><value>Someone else must approve this.</value></data>
   <data name="Error_BARCODE_NOT_IN_ORDER" xml:space="preserve"><value>This barcode is not in this order.</value></data>
+  <data name="PickLine" xml:space="preserve"><value>Bin {0} · Batch {1} · Expiry {2} · {3} pcs</value></data>
 </root>

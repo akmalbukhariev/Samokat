@@ -10,7 +10,7 @@ public sealed class OrderItemViewModel : ObservableObject
 {
     private OrderItem item;
     private bool isEditable, showCodeInput;
-    private string barcodeInput = "", reason = "";
+    private string barcodeInput = "", reason = "", picks = "";
     public long Id => item.Id;
     public string Name => item.Name;
     public string Image => ProductImageSource.Resolve(item.ImageUrl);
@@ -24,6 +24,8 @@ public sealed class OrderItemViewModel : ObservableObject
     // Each scan counts one piece, so the worker never types a total; nothing is left to check once all pieces are counted.
     public bool CanCheckMore => IsEditable && !IsChecked;
     public string BarcodeInput { get => barcodeInput; set => SetProperty(ref barcodeInput,value); }
+    public string Picks { get => picks; set { if(SetProperty(ref picks,value)) OnPropertyChanged(nameof(HasPicks)); } }
+    public bool HasPicks => !string.IsNullOrEmpty(Picks);
     public string Reason { get => reason; set => SetProperty(ref reason,value); }
     public bool ShowCodeInput { get => showCodeInput; set => SetProperty(ref showCodeInput,value); }
     public IAsyncRelayCommand ScanCommand { get; }
@@ -139,13 +141,20 @@ public sealed class OrderDetailViewModel : ViewModelBase
         }
     }, showErrors);
     private Task Act(string action) => RunAsync(async () => Apply(await Api.Action(id,action)));
+    // TZ v12 B6: shelf, batch and expiry the server reserved, so the picker takes the same batch.
+    private static string PickText(Order next,long product)
+    {
+        var format = AppResource.ResourceManager.GetString("PickLine",AppResource.Culture) ?? "{0} · {1} · {2} · {3}";
+        return string.Join("\n",next.Picks.Where(x => x.ProductId == product && x.Held > 0)
+            .Select(x => string.Format(CultureInfo.CurrentCulture,format,x.Location,string.IsNullOrWhiteSpace(x.Batch) ? "—" : x.Batch,x.Expiry ?? "—",x.Held)));
+    }
     private void Apply(Order next,long? checkedItem=null)
     {
         order = next;
         var existing = Items.ToDictionary(x => x.Id);
         var updated = next.Items.Select(x => {
-            if(existing.TryGetValue(x.Id,out var row)) { row.Update(x,CanCheck,x.Id==checkedItem); return row; }
-            return new OrderItemViewModel(x,CanCheck,CheckAsync);
+            if(existing.TryGetValue(x.Id,out var row)) { row.Update(x,CanCheck,x.Id==checkedItem); row.Picks = PickText(next,x.Id); return row; }
+            return new OrderItemViewModel(x,CanCheck,CheckAsync) { Picks = PickText(next,x.Id) };
         }).ToList();
         // Keep existing product views attached while their asynchronous images load.
         // Clearing/re-adding every row disconnects MAUI's native Image handler mid-download.

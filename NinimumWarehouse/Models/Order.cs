@@ -23,6 +23,16 @@ public class Order
     [JsonPropertyName("partial_return_status")] public string? PartialReturnStatus { get; set; }
     public int Quantity { get; set; }
     public List<OrderItem> Items { get; set; } = [];
+    [JsonPropertyName("batch_allocations")] public List<BatchPick> Picks { get; set; } = [];
+}
+// Where the server reserved this order's goods: the picker takes them from exactly this shelf and batch.
+public class BatchPick
+{
+    [JsonPropertyName("product_id")] public long ProductId { get; set; }
+    [JsonPropertyName("location_code")] public string? Location { get; set; }
+    [JsonPropertyName("batch_number")] public string? Batch { get; set; }
+    [JsonPropertyName("expiry_text")] public string? Expiry { get; set; }
+    [JsonPropertyName("held_quantity")] public long Held { get; set; }
 }
 public class OrderItem
 {

@@ -531,7 +531,7 @@ public partial class FormalizationPage : BasePage
         int productsPrice = GetProductsPrice();
         int total = productsPrice + DeliveryPrice;
 
-        ProductsCountLabel.Text = string.Format(AppResource.PiecesCount, Products.Count);
+        ProductsCountLabel.Text = string.Format(AppResource.PiecesCount, Products.Sum(x => x.Quantity));
         ProductsPriceLabel.Text = FormatSom(productsPrice);
         ShowDeliveryPrice();
         TotalPriceLabel.Text = FormatSom(total);

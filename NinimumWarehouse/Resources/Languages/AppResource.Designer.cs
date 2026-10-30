@@ -880,6 +880,15 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bin {0} · Batch {1} · Expiry {2} · {3} pcs.
+        /// </summary>
+        public static string PickLine {
+            get {
+                return ResourceManager.GetString("PickLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please wait….
         /// </summary>
         public static string PleaseWait {
