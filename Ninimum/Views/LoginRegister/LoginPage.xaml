@@ -51,13 +51,15 @@
                 <VerticalStackLayout Spacing="14">
                     <components:InputView
                         Title="{x:Static language:AppResource.PhoneNumber}"
+                        IsRequired="True"
                         LeftIcon="ic_phone.png"
                         Keyboard="Telephone"
                         ClearButtonVisibility="WhileEditing"
                         Text="{Binding PhoneNumber}" />
 
                     <components:InputView
-                        Placeholder="*****"
+                        Title="{x:Static language:AppResource.Password}"
+                        IsRequired="True"
                         LeftIcon="ic_lock.png"
                         IsPassword="True"
                         EnablePasswordToggle="True"

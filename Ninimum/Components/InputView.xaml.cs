@@ -70,7 +70,27 @@ public partial class InputView : ContentView
             nameof(Placeholder),
             typeof(string),
             typeof(InputView),
-            string.Empty);
+            string.Empty,
+            propertyChanged: OnVisualPropertyChanged);
+
+    // Mandatory field: "*" follows the title (or the placeholder on fields without a title).
+    public static readonly BindableProperty IsRequiredProperty =
+        BindableProperty.Create(
+            nameof(IsRequired),
+            typeof(bool),
+            typeof(InputView),
+            false,
+            propertyChanged: OnVisualPropertyChanged);
+
+    public bool IsRequired
+    {
+        get => (bool)GetValue(IsRequiredProperty);
+        set => SetValue(IsRequiredProperty, value);
+    }
+
+    public string TitleText => IsRequired && HasTitle ? $"{Title} *" : Title;
+
+    public string PlaceholderText => IsRequired && !string.IsNullOrWhiteSpace(Placeholder) ? $"{Placeholder} *" : Placeholder;
 
     public static readonly BindableProperty LeftIconProperty =
         BindableProperty.Create(
@@ -358,6 +378,8 @@ public partial class InputView : ContentView
         OnPropertyChanged(nameof(HasRightIcon));
         OnPropertyChanged(nameof(HasTitle));
         OnPropertyChanged(nameof(IsTitleVisible));
+        OnPropertyChanged(nameof(TitleText));
+        OnPropertyChanged(nameof(PlaceholderText));
         OnPropertyChanged(nameof(CurrentIsPassword));
         OnPropertyChanged(nameof(CurrentRightIcon));
     }

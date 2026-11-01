@@ -10,7 +10,8 @@ namespace Api.Services
     public class ApiService
     {
         private readonly RestClient _client;
-        protected string token = string.Empty;
+        // Shared: long-lived services hold their own instance, and must follow sign-in and sign-out.
+        protected static string token = string.Empty;
         public ApiService(RestClient client)
         {
             _client = client;
@@ -21,7 +22,7 @@ namespace Api.Services
         /// </summary>
         public async Task SetTokenAsync(string token)
         {
-            this.token = token;
+            ApiService.token = token;
 
             try
             {

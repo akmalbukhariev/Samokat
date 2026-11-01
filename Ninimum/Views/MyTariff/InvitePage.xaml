@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<page:BasePage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:page="clr-namespace:Ninimum.Views"
+    xmlns:components="clr-namespace:Ninimum.Components"
+    x:Class="Ninimum.Views.MyTariff.InvitePage"
+    Shell.NavBarIsVisible="False"
+    Shell.TabBarIsVisible="False"
+    BackgroundColor="White">
+
+    <Grid RowDefinitions="Auto,*">
+
+        <components:PageHeaderView Grid.Row="0" Title="{Binding PageTitle}" />
+
+        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
+            <VerticalStackLayout Padding="20,24,20,24" Spacing="20">
+
+                <Label
+                    Text="{Binding TariffText}"
+                    IsVisible="{Binding HasTariff}"
+                    FontFamily="{StaticResource FontSFMedium}"
+                    FontSize="17"
+                    TextColor="#16A34A"
+                    HorizontalTextAlignment="Center" />
+
+                <Label
+                    Text="{Binding Explanation}"
+                    FontFamily="{StaticResource FontSFRegular}"
+                    FontSize="17"
+                    TextColor="#22292F"
+                    LineBreakMode="WordWrap" />
+
+                <Border
+                    Padding="16"
+                    BackgroundColor="White"
+                    Stroke="#F78A08"
+                    StrokeThickness="1"
+                    StrokeShape="RoundRectangle 10">
+                    <VerticalStackLayout Spacing="14">
+                        <Label
+                            Text="{Binding CodeTitle}"
+                            FontFamily="{StaticResource FontSFRegular}"
+                            FontSize="17"
+                            TextColor="#96979B"
+                            HorizontalTextAlignment="Center" />
+                        <Label
+                            Text="{Binding Code}"
+                            FontFamily="{StaticResource FontSFBold}"
+                            FontSize="30"
+                            TextColor="#22292F"
+                            HorizontalTextAlignment="Center" />
+                        <Button
+                            Text="{Binding ShareText}"
+                            IsEnabled="{Binding HasCode}"
+                            HeightRequest="54"
+                            CornerRadius="12"
+                            BackgroundColor="#FF4A3F"
+                            TextColor="White"
+                            FontSize="17"
+                            FontFamily="{StaticResource FontSFBold}"
+                            Clicked="OnShareClicked" />
+                        <Button
+                            Text="{Binding CopyText}"
+                            IsEnabled="{Binding HasCode}"
+                            HeightRequest="48"
+                            CornerRadius="12"
+                            BackgroundColor="White"
+                            BorderColor="#FF4A3F"
+                            BorderWidth="1"
+                            TextColor="#FF4A3F"
+                            FontSize="16"
+                            FontFamily="{StaticResource FontSFMedium}"
+                            Clicked="OnCopyClicked" />
+                    </VerticalStackLayout>
+                </Border>
+
+                <VerticalStackLayout Spacing="10">
+                    <Label
+                        Text="{Binding ProgressText}"
+                        FontFamily="{StaticResource FontSFMedium}"
+                        FontSize="18"
+                        TextColor="#22292F"
+                        HorizontalTextAlignment="Center" />
+                    <ProgressBar Progress="{Binding Progress}" ProgressColor="#16A34A" />
+                </VerticalStackLayout>
+
+            </VerticalStackLayout>
+        </ScrollView>
+
+        <components:LoadingView x:Name="loading" Grid.RowSpan="2" />
+    </Grid>
+</page:BasePage>

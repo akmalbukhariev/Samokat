@@ -126,7 +126,7 @@
                             <Entry
                                 x:Name="AddressEntry"
                                 Text="{Binding AddressText}"
-                                Placeholder="{x:Static language:AppResource.WhereShouldTheOrderBeDelivered}"
+                                Placeholder="{Binding Source={x:Static language:AppResource.WhereShouldTheOrderBeDelivered}, StringFormat='{0} *'}"
                                 FontSize="17"
                                 TextColor="#22292F"
                                 PlaceholderColor="#8F8F99"

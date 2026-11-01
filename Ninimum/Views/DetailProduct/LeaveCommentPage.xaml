@@ -40,7 +40,7 @@
 
                 <!-- Rating title -->
                 <Label
-                    Text="{x:Static language:AppResource.RateWithStars}"
+                    Text="{Binding Source={x:Static language:AppResource.RateWithStars}, StringFormat='{0} *'}"
                     FontSize="22"
                     FontFamily="{StaticResource FontSFMedium}"
                     TextColor="#222222" />
@@ -81,7 +81,7 @@
 
                 <!-- Comment title -->
                 <Label
-                    Text="{x:Static language:AppResource.WriteYourReviewOfTheProduct}"
+                    Text="{Binding Source={x:Static language:AppResource.WriteYourReviewOfTheProduct}, StringFormat='{0} *'}"
                     FontSize="22"
                     FontFamily="{StaticResource FontSFMedium}"
                     TextColor="#222222" />

@@ -33,6 +33,7 @@
                 <!-- Input -->
                 <components:InputView
                     Title="{x:Static language:AppResource.PhoneNumber}"
+                    IsRequired="True"
                     LeftIcon="ic_phone.png"
                     Keyboard="Telephone"
                     Text="{Binding PhoneNumber}" 

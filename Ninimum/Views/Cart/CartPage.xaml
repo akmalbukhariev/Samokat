@@ -179,7 +179,7 @@
 
                                 <Button
                                     IsVisible="{Binding HasActiveSubscription, Converter={StaticResource InverseBoolConverter}}"
-                                    Text="{x:Static language:AppResource.SubscribeToATariff}"
+                                    Text="{Binding JoinTariffText}"
                                     HeightRequest="64"
                                     CornerRadius="16"
                                     BackgroundColor="#FF4A3F"

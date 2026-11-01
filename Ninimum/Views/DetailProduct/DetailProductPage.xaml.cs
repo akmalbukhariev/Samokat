@@ -270,7 +270,7 @@ public partial class DetailProductPage : BasePage
         {
             await SubscriptionPricePanel.ScaleToAsync(0.9, 100, Easing.CubicOut);
             await SubscriptionPricePanel.ScaleToAsync(1.0, 100, Easing.CubicIn);
-            await AppNavigatorService.NavigateTo(nameof(TariffsPage));
+            await PromoMode.OpenTariffs();
         });
     }
 

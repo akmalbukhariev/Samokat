@@ -55,6 +55,7 @@
 
                 <components:InputView
                     Title="{x:Static language:AppResource.NewPhoneNumber}"
+                    IsRequired="True"
                     Placeholder="90 123 45 67"
                     LeftIcon="ic_phone.png"
                     Keyboard="Telephone"

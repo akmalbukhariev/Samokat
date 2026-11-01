@@ -30,6 +30,9 @@ public partial class CartPage : BasePage
         if (!await appControl.EnsureAuthenticatedAsync(true))
             return;
 
+        // The badge can lag behind the list if an add-to-cart finished after its last count.
+        IPlatformApplication.Current?.Services.GetService<CartBadgeService>()?.RequestRefresh();
+
         bool needsRefresh = PageDataRefreshState.ConsumeDirty(PageDataRefreshState.Cart);
 
         if (_hasLoaded && !needsRefresh)

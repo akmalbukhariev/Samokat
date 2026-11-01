@@ -224,7 +224,16 @@
                         <Image Grid.Column="1" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
-                    <Grid ColumnDefinitions="*,Auto,24">
+                    <Grid ColumnDefinitions="*,24" IsVisible="{Binding ShowInvite}">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding InviteCommand}" />
+                        </Grid.GestureRecognizers>
+
+                        <Label Text="{Binding InviteTitle}" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Image Grid.Column="1" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
+                    </Grid>
+
+                    <Grid ColumnDefinitions="*,Auto,24" IsVisible="{Binding ShowMyTariff}">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding MyTariffCommand}" />
                         </Grid.GestureRecognizers>

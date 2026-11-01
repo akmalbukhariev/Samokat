@@ -52,6 +52,14 @@ public partial class RegisterPageViewModel : ObservableObject
 
     [ObservableProperty]
     private bool isAgreementChecked = false;
+
+    [ObservableProperty]
+    private string referralCode = string.Empty;
+
+    [ObservableProperty]
+    private bool showReferralCode;
+
+    public string ReferralCodeTitle => PromoMode.L("Promo kod (ixtiyoriy)", "Промокод (необязательно)", "Promo code (optional)");
     #endregion
 
     [ObservableProperty]
@@ -76,6 +84,7 @@ public partial class RegisterPageViewModel : ObservableObject
                 });
 
         AddressTapCommand = new Command(AdressTapped);
+        _ = LoadPromoModeAsync();
 
         /*FirstName = "Akmal";
         LastName = "Karimov";
@@ -104,6 +113,19 @@ public partial class RegisterPageViewModel : ObservableObject
         });*/
     }
 
+    private async Task LoadPromoModeAsync()
+    {
+        try
+        {
+            await PromoMode.RefreshAsync();
+            ShowReferralCode = PromoMode.Enabled;
+        }
+        catch
+        {
+            ShowReferralCode = false;
+        }
+    }
+
     [RelayCommand]
     private void AddChild()
     {
@@ -118,14 +140,6 @@ public partial class RegisterPageViewModel : ObservableObject
             await AlertService.ShowAlertAsync(
                 AppResource.Warning,
                 AppResource.PleaseEnterFirstName);
-            return;
-        }
-
-        if (string.IsNullOrWhiteSpace(LastName))
-        {
-            await AlertService.ShowAlertAsync(
-                AppResource.Warning,
-                AppResource.PleaseEnterLastName);
             return;
         }
 
@@ -186,7 +200,8 @@ public partial class RegisterPageViewModel : ObservableObject
             location_longitude = LocationLongitude,
             address = Address.Trim(),
             phone_number = appControl.NormalizePhoneNumber(PhoneNumber),
-            password = Password
+            password = Password,
+            referral_code = ShowReferralCode && !string.IsNullOrWhiteSpace(ReferralCode) ? ReferralCode.Trim() : null
         };
 
         try
@@ -211,6 +226,10 @@ public partial class RegisterPageViewModel : ObservableObject
                     AppResource.InformationAscii,
                     AppResource.RegistrationWasSuccessfulButAutomaticSignInFailed);
             }
+            else
+            {
+                await ShowFreeMonthAsync();
+            }
         }
         catch (Exception ex)
         {
@@ -220,6 +239,27 @@ public partial class RegisterPageViewModel : ObservableObject
         {
             IsLoading = false;
         }
+    }
+
+    // The free month is given at registration, so tell the new customer straight away.
+    private async Task ShowFreeMonthAsync()
+    {
+        if (!PromoMode.Enabled)
+            return;
+
+        var response = await apiService.GetActiveSubscription(new ActiveSubscriptionRequest { userId = appControl.userDto.id ?? 0 });
+        var tariff = response.resultData;
+        if (response.resultCode != ApiResult.SUCCESS.GetCodeToString() || tariff == null ||
+            !string.Equals(tariff.subscriptionStatus, "ACTIVE", StringComparison.OrdinalIgnoreCase))
+            return;
+
+        string day = PromoMode.Day(tariff.endDate);
+        await AlertService.ShowAlertAsync(
+            PromoMode.L("Tabriklaymiz!", "Поздравляем!", "Congratulations!"),
+            PromoMode.L(
+                $"Sizga {tariff.tariffName} tarifi 1 oy bepul berildi. {day} gacha tarif narxida xarid qiling.",
+                $"Вам бесплатно подключён тариф {tariff.tariffName} на 1 месяц. Покупайте по цене тарифа до {day}.",
+                $"You have the {tariff.tariffName} plan free for 1 month. Buy at plan prices until {day}."));
     }
 
     [RelayCommand]

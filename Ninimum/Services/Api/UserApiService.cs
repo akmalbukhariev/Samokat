@@ -63,6 +63,8 @@ namespace Api.Services
         private const string GET_ACTIVE_SUBSCRIPTION = $"{BASE_URL}subscription/getActiveSubscription";
         private const string GET_SUBSCRIPTION_LIST = $"{BASE_URL}subscription/getSubscriptionList";
         private const string GET_TARIFF_LIST = $"{BASE_URL}tariff/getTariffList";
+        private const string GET_REFERRAL_SETTINGS = $"{BASE_URL}referral/settings";
+        private const string GET_REFERRAL = $"{BASE_URL}referral/me";
         private const string CREATE_TARIFF_CHECKOUT = $"{BASE_URL}subscription/payme/createCheckoutUrl";
         private const string GET_TARIFF_PAYMENT_STATUS = $"{BASE_URL}subscription/getPaymentStatus";
         private const string CANCEL_SUBSCRIPTION = $"{BASE_URL}subscription/cancelSubscription";
@@ -1040,6 +1042,38 @@ namespace Api.Services
             {
                 response.resultCode = ApiResult.JSON_PARSING_ERROR.GetCodeToString();
                 response.resultMsg = $"JSON Parsing Error: {jsonEx.Message}";
+            }
+            catch (Exception ex)
+            {
+                response.resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString();
+                response.resultMsg = $"API: {ex.Message}";
+            }
+
+            return response;
+        }
+
+        public Task<ReferralResponse> GetReferralSettings() => GetReferralAsync(GET_REFERRAL_SETTINGS, false);
+
+        public Task<ReferralResponse> GetReferral() => GetReferralAsync(GET_REFERRAL, true);
+
+        private async Task<ReferralResponse> GetReferralAsync(string endpoint, bool useToken)
+        {
+            var response = new ReferralResponse();
+
+            try
+            {
+                var receivedData = await GetAsync(endpoint, useToken);
+
+                if (!string.IsNullOrWhiteSpace(receivedData))
+                {
+                    var result = JsonConvert.DeserializeObject<ReferralResponse>(receivedData);
+                    if (result != null)
+                    {
+                        return result;
+                    }
+                }
+
+                response.resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage();
             }
             catch (Exception ex)
             {

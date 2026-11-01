@@ -100,6 +100,7 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
     public string HistoryArrowIcon => IsHistoryVisible ? "ic_arrow_up.png" : "ic_arrow_down.png";
 
     public ICommand ToggleHistoryCommand { get; }
+    public bool CanChangeTariff => !PromoMode.Enabled;
     public ICommand JoinTariffCommand { get; }
     public ICommand CancelTariffCommand { get; }
 
@@ -111,7 +112,7 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
         this.appControl = appControl;
 
         ToggleHistoryCommand = new Command(() => IsHistoryVisible = !IsHistoryVisible);
-        JoinTariffCommand = new Command(async () => await AppNavigatorService.NavigateTo(nameof(TariffsPage)));
+        JoinTariffCommand = new Command(async () => await PromoMode.OpenTariffs());
         CancelTariffCommand = new Command(async () => await CancelTariffAsync());
 
         BindingContext = this;
@@ -124,6 +125,8 @@ public partial class MyTariffPage : BasePage, INotifyPropertyChanged
         if (!await appControl.EnsureAuthenticatedAsync(true))
             return;
 
+        await PromoMode.RefreshAsync();
+        OnPropertyChanged(nameof(CanChangeTariff));
         await LoadTariffAsync();
     }
 

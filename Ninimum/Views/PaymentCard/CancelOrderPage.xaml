@@ -98,7 +98,7 @@
             <VerticalStackLayout Grid.Row="3" Margin="0,32,0,0" Spacing="12">
 
                 <Label
-                    Text="{x:Static language:AppResource.CancellationReason}"
+                    Text="{Binding Source={x:Static language:AppResource.CancellationReason}, StringFormat='{0} *'}"
                     FontFamily="{StaticResource FontSFMedium}"
                     FontSize="22"
                     TextColor="#22292F" />

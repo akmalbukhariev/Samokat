@@ -45,6 +45,7 @@ public partial class CartPageViewModel : ObservableObject
     [ObservableProperty] private string bottomSelectedCountText = AppResource.Text0Products;
     [ObservableProperty] private string totalRegularPrice = "0";
     [ObservableProperty] private string totalTariffPrice = "0";
+    [ObservableProperty] private string joinTariffText = AppResource.SubscribeToATariff;
     [ObservableProperty] private bool hasActiveSubscription;
     [ObservableProperty] private string activeTariffText = string.Empty;
     // Friendly summary box: what is being bought, the price, and the money saved (or that could be saved).
@@ -243,7 +244,7 @@ public partial class CartPageViewModel : ObservableObject
     private async Task JoinTariff()
     {
         AppVibrationService.Click();
-        await AppNavigatorService.NavigateTo(nameof(TariffsPage));
+        await PromoMode.OpenTariffs();
     }
 
     [RelayCommand]
@@ -294,6 +295,10 @@ public partial class CartPageViewModel : ObservableObject
     {
         try
         {
+            await PromoMode.RefreshAsync();
+            JoinTariffText = PromoMode.Enabled
+                ? L($"{PromoMode.FriendsNeeded} ta do‘stni taklif qiling", $"Пригласить друзей: {PromoMode.FriendsNeeded}", $"Invite {PromoMode.FriendsNeeded} friends")
+                : AppResource.SubscribeToATariff;
             ActiveSubscriptionResponse response = await apiService.GetActiveSubscription(new ActiveSubscriptionRequest
             {
                 userId = appControl.userDto.id ?? 0
@@ -411,6 +416,8 @@ public partial class CartPageViewModel : ObservableObject
         }
         else if (HasActiveSubscription)
             SummarySaving = L($"🎉 {activeTariffName} tarifi bilan {money} so‘m tejayapsiz", $"🎉 С тарифом {activeTariffName} вы экономите {money} сум", $"🎉 You save {money} so‘m with your {activeTariffName} plan");
+        else if (PromoMode.Enabled)
+            SummarySaving = L($"Do‘stlaringizni taklif qilsangiz, {money} so‘m tejaysiz", $"Пригласите друзей и сэкономьте {money} сум", $"Invite friends and save {money} so‘m");
         else
             SummarySaving = L($"Tarifga obuna bo‘lsangiz, {money} so‘m tejaysiz", $"С подпиской на тариф вы сэкономите {money} сум", $"Subscribe to a plan and save {money} so‘m");
         HasSummarySaving = !string.IsNullOrEmpty(SummarySaving);

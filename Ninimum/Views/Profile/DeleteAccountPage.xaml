@@ -38,6 +38,7 @@
                             <Span
                                 Text="{x:Static language:AppResource.WhyDoYouWantToDeleteYourAccount}"
                                 FontFamily="{StaticResource FontSFBold}" />
+                            <Span Text=" * " FontFamily="{StaticResource FontSFBold}" />
                             <Span Text="{x:Static language:AppResource.SelectOneOrMoreReasons}" />
                         </FormattedString>
                     </Label.FormattedText>
@@ -194,7 +195,7 @@
                             x:Name="OtherEntry"
                             IsVisible="False"
                             MaxLength="80"
-                            Placeholder="{x:Static language:AppResource.BrieflyDescribeTheReason}"
+                            Placeholder="{Binding Source={x:Static language:AppResource.BrieflyDescribeTheReason}, StringFormat='{0} *'}"
                             BackgroundColor="Transparent"
                             TextColor="#22292F"
                             PlaceholderColor="#96979B"

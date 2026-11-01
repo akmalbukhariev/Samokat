@@ -31,6 +31,7 @@
 
                 <components:InputView
                     Title="{x:Static language:AppResource.FirstName_231ae8}"
+                    IsRequired="True"
                     LeftIcon="ic_user.png"
                     Text="{Binding FirstName}"
                     ClearButtonVisibility="WhileEditing" />
@@ -51,6 +52,7 @@
 
                 <components:InputView
                     Title="{x:Static language:AppResource.Address}"
+                    IsRequired="True"
                     LeftIcon="ic_location.png"
                     IsReadOnly="True"
                     Text="{Binding Address}"
@@ -58,6 +60,7 @@
 
                 <components:InputView
                     Title="{x:Static language:AppResource.Password}"
+                    IsRequired="True"
                     LeftIcon="ic_lock.png"
                     IsPassword="True"
                     EnablePasswordToggle="True"
@@ -67,12 +70,20 @@
 
                 <components:InputView
                     Title="{x:Static language:AppResource.RepeatPassword_b7aca1}"
+                    IsRequired="True"
                     LeftIcon="ic_lock.png"
                     IsPassword="True"
                     EnablePasswordToggle="True"
                     PasswordHideIcon="ic_eye_off.png"
                     PasswordShowIcon="ic_eye_on.png"
                     Text="{Binding ConfirmPassword}" />
+
+                <components:InputView
+                    Title="{Binding ReferralCodeTitle}"
+                    LeftIcon="ic_user.png"
+                    Text="{Binding ReferralCode}"
+                    ClearButtonVisibility="WhileEditing"
+                    IsVisible="{Binding ShowReferralCode}" />
 
                 <Label
                     Text="{x:Static language:AppResource.ChildrenInformationOptional}"

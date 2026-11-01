@@ -13,6 +13,8 @@ public class RegisterUserRequest
     public string phone_number { get; set; }
 
     public string password { get; set; }
+
+    public string? referral_code { get; set; }
 }
 
 public class RegisterChildRequest

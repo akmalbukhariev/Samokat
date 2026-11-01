@@ -547,6 +547,24 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to This product has no barcode saved in the system. Add it in web admin, or confirm by hand with a reason..
+        /// </summary>
+        public static string Error_SCAN_PRODUCT_NO_BARCODE {
+            get {
+                return ResourceManager.GetString("Error_SCAN_PRODUCT_NO_BARCODE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tap the button below first, then scan..
+        /// </summary>
+        public static string Error_SCAN_START_FIRST {
+            get {
+                return ResourceManager.GetString("Error_SCAN_START_FIRST", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This batch doesn’t have that much free stock..
         /// </summary>
         public static string Error_WAREHOUSE_INSUFFICIENT_STOCK {

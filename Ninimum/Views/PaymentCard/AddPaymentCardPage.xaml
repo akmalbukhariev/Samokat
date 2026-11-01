@@ -44,7 +44,7 @@
 
                         <VerticalStackLayout Spacing="4">
                             <Label
-                                Text="{x:Static language:AppResource.CardNumber}"
+                                Text="{Binding Source={x:Static language:AppResource.CardNumber}, StringFormat='{0} *'}"
                                 FontFamily="{StaticResource FontSFRegular}"
                                 FontSize="15"
                                 TextColor="White" />
@@ -77,7 +77,7 @@
 
                                 <VerticalStackLayout Spacing="4">
                                     <Label
-                                        Text="{x:Static language:AppResource.Expiry}"
+                                        Text="{Binding Source={x:Static language:AppResource.Expiry}, StringFormat='{0} *'}"
                                         FontFamily="{StaticResource FontSFRegular}"
                                         FontSize="15"
                                         TextColor="White" />

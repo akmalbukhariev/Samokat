@@ -174,10 +174,15 @@ public sealed class OrderDetailViewModel : ViewModelBase
     // Built-in scanner: the code picks the matching line (or the only line still waiting) and counts one piece.
     public Task ScannedAsync(string code)
     {
+        // Scans count only after the order is started; say so instead of the "status changed" message.
+        if (CanStart || CanResume) return RunAsync(() => throw new ApiException("SCAN_START_FIRST"));
         var waiting = Items.Where(x => x.HasBarcode && x.CanCheckMore).ToList();
         var item = waiting.FirstOrDefault(x => string.Equals(x.Barcode.Trim(), code, StringComparison.OrdinalIgnoreCase))
             ?? (waiting.Count == 1 ? waiting[0] : null);
-        if (item is null) return RunAsync(() => throw new ApiException(waiting.Count == 0 ? "WAREHOUSE_INVALID_STATE" : "BARCODE_NOT_IN_ORDER"));
+        if (item is null) return RunAsync(() => throw new ApiException(
+            !CanCheck ? "WAREHOUSE_INVALID_STATE"
+            : Items.Any(x => x.NoBarcode && x.CanCheckMore) ? "SCAN_PRODUCT_NO_BARCODE"
+            : waiting.Count == 0 ? "WAREHOUSE_TOO_MANY" : "BARCODE_NOT_IN_ORDER"));
         item.BarcodeInput = code;
         return CheckAsync(item,false);
     }

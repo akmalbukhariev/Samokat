@@ -35,6 +35,12 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
     public ICommand ChangePhoneCommand { get; }
     public ICommand ChangePasswordCommand { get; }
     public ICommand MyTariffCommand { get; }
+    public ICommand InviteCommand { get; }
+
+    // Promo period: the tariff menu is hidden for everyone; the invite menu takes its place.
+    public bool ShowInvite { get; private set; }
+    public bool ShowMyTariff { get; private set; } = true;
+    public string InviteTitle => PromoMode.InviteTitle;
     public ICommand ChildrenCommand { get; }
     public ICommand DeleteAccountCommand { get; }
     public ICommand LogoutCommand { get; }
@@ -196,6 +202,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         ChangePhoneCommand = new Command(OnChangePhoneClicked);
         ChangePasswordCommand = new Command(OnChangePasswordClicked);
         MyTariffCommand = new Command(OnMyTariffClicked);
+        InviteCommand = new Command(OnInviteClicked);
         ChildrenCommand = new Command(OnChildrenClicked);
         DeleteAccountCommand = new Command(OnDeleteAccountClicked);
         LogoutCommand = new Command(OnLogoutClicked);
@@ -496,6 +503,24 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         });
     }
 
+    private async void OnInviteClicked()
+    {
+        await RunProfileActionAsync(async () =>
+        {
+            AppVibrationService.Like();
+            await AppNavigatorService.NavigateTo(nameof(InvitePage));
+        });
+    }
+
+    private void ShowPromoRows()
+    {
+        ShowInvite = PromoMode.Enabled;
+        ShowMyTariff = !PromoMode.Enabled;
+        OnPropertyChanged(nameof(ShowInvite));
+        OnPropertyChanged(nameof(ShowMyTariff));
+        OnPropertyChanged(nameof(InviteTitle));
+    }
+
     private async Task LoadCurrentTariffAsync()
     {
         try
@@ -512,10 +537,13 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
                 string.Equals(subscription.subscriptionStatus, "ACTIVE", StringComparison.OrdinalIgnoreCase);
 
             CurrentTariffName = isActive ? subscription!.tariffName : AppResource.NoTariff;
+            await PromoMode.RefreshAsync();
+            ShowPromoRows();
         }
         catch
         {
             CurrentTariffName = AppResource.NoTariff;
+            ShowPromoRows();
         }
     }
 

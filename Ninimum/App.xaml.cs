@@ -85,6 +85,7 @@ public partial class App : Application
         Routing.RegisterRoute(nameof(OrdersPage), typeof(OrdersPage));
         Routing.RegisterRoute(nameof(MyTariffPage), typeof(MyTariffPage));
         Routing.RegisterRoute(nameof(TariffsPage), typeof(TariffsPage));
+        Routing.RegisterRoute(nameof(InvitePage), typeof(InvitePage));
         Routing.RegisterRoute(nameof(DeleteAccountPage), typeof(DeleteAccountPage));
         #endregion
     }

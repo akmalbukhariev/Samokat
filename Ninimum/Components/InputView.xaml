@@ -41,7 +41,7 @@
                 <!-- Title -->
                 <Label
                     Grid.Column="0"
-                    Text="{Binding Title, Source={x:Reference ThisView}}"
+                    Text="{Binding TitleText, Source={x:Reference ThisView}}"
                     FontFamily="{StaticResource FontSFRegular}"
                     FontSize="17"
                     TextColor="{StaticResource InputPlaceholderColor}"
@@ -65,7 +65,7 @@
                     Grid.Column="2"
                     Text="{Binding Text, Source={x:Reference ThisView}, Mode=TwoWay}"
                     FontFamily="{StaticResource FontSFRegular}"
-                    Placeholder="{Binding Placeholder, Source={x:Reference ThisView}}"
+                    Placeholder="{Binding PlaceholderText, Source={x:Reference ThisView}}"
                     FontSize="17"
                     TextColor="{StaticResource InputTextColor}"
                     PlaceholderColor="{StaticResource InputPlaceholderColor}"

@@ -55,7 +55,7 @@
                     StrokeShape="RoundRectangle 10">
                     <Editor
                         Text="{Binding QuestionText}"
-                        Placeholder="{x:Static language:AppResource.EnterYourQuestion}"
+                        Placeholder="{Binding Source={x:Static language:AppResource.EnterYourQuestion}, StringFormat='{0} *'}"
                         PlaceholderColor="#A3A5AA"
                         TextColor="#22292F"
                         FontSize="17"

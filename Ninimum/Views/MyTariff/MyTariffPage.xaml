@@ -79,6 +79,7 @@
 
                         <!-- Active users can open TariffsPage and switch to another plan. -->
                         <Button
+                            IsVisible="{Binding CanChangeTariff}"
                             Text="{x:Static language:AppResource.ChangeTariff}"
                             HeightRequest="54"
                             Margin="0,6,0,0"
