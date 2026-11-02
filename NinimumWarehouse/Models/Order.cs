@@ -40,6 +40,7 @@ public class OrderItem
     [JsonPropertyName("product_name")] public string Name { get; set; } = "";
     [JsonPropertyName("product_image_url")] public string? ImageUrl { get; set; }
     public string? Barcode { get; set; }
+    [JsonPropertyName("storage_location")] public string? StorageLocation { get; set; }
     [JsonPropertyName("required_quantity")] public int Required { get; set; }
     [JsonPropertyName("checked_quantity")] public int Checked { get; set; }
 }

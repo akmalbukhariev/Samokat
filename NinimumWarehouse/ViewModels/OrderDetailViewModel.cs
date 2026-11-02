@@ -26,6 +26,9 @@ public sealed class OrderItemViewModel : ObservableObject
     public string BarcodeInput { get => barcodeInput; set => SetProperty(ref barcodeInput,value); }
     public string Picks { get => picks; set { if(SetProperty(ref picks,value)) OnPropertyChanged(nameof(HasPicks)); } }
     public bool HasPicks => !string.IsNullOrEmpty(Picks);
+    // Free-text place from web admin, e.g. "1-stol, 2-ustun, 3-qator".
+    public string LocationText => string.Format(CultureInfo.CurrentCulture,AppResource.ResourceManager.GetString("StorageLocationLine",AppResource.Culture) ?? "{0}",item.StorageLocation);
+    public bool HasLocation => !string.IsNullOrWhiteSpace(item.StorageLocation);
     public string Reason { get => reason; set => SetProperty(ref reason,value); }
     public bool ShowCodeInput { get => showCodeInput; set => SetProperty(ref showCodeInput,value); }
     public IAsyncRelayCommand ScanCommand { get; }
@@ -45,7 +48,7 @@ public sealed class OrderItemViewModel : ObservableObject
         // Avoid restarting a pending image download when only preparation progress changed.
         if (Image != previousImage) OnPropertyChanged(nameof(Image));
         if(checkedThisItem) { BarcodeInput = ""; ShowCodeInput = false; }
-        foreach(var property in new[] { nameof(Name),nameof(Barcode),nameof(HasBarcode),nameof(NoBarcode),nameof(ProgressText),nameof(IsChecked),nameof(CheckState),nameof(CanCheckMore) }) OnPropertyChanged(property);
+        foreach(var property in new[] { nameof(Name),nameof(LocationText),nameof(HasLocation),nameof(Barcode),nameof(HasBarcode),nameof(NoBarcode),nameof(ProgressText),nameof(IsChecked),nameof(CheckState),nameof(CanCheckMore) }) OnPropertyChanged(property);
     }
 }
 public sealed class OrderDetailViewModel : ViewModelBase

@@ -168,7 +168,8 @@
                     Spacing="28"
                     IsVisible="{Binding IsSettingsExpanded}">
 
-                    <Grid ColumnDefinitions="*,Auto,24">
+                    <!-- "Hudud" hidden for now (owner 2026-11-02); Shahrisabz is the only region. -->
+                    <Grid ColumnDefinitions="*,Auto,24" IsVisible="False">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding RegionCommand}" />
                         </Grid.GestureRecognizers>

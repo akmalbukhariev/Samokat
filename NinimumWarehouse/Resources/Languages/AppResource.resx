@@ -396,5 +396,6 @@
   <data name="Error_BARCODE_NOT_IN_ORDER" xml:space="preserve"><value>This barcode is not in this order.</value></data>
   <data name="Error_SCAN_START_FIRST" xml:space="preserve"><value>Tap the button below first, then scan.</value></data>
   <data name="Error_SCAN_PRODUCT_NO_BARCODE" xml:space="preserve"><value>This product has no barcode saved in the system. Add it in web admin, or confirm by hand with a reason.</value></data>
+  <data name="StorageLocationLine" xml:space="preserve"><value>📍 Location: {0}</value></data>
   <data name="PickLine" xml:space="preserve"><value>Bin {0} · Batch {1} · Expiry {2} · {3} pcs</value></data>
 </root>

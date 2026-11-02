@@ -1483,6 +1483,15 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 📍 Location: {0}.
+        /// </summary>
+        public static string StorageLocationLine {
+            get {
+                return ResourceManager.GetString("StorageLocationLine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to To check.
         /// </summary>
         public static string ToCheck {
