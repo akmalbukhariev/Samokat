@@ -253,4 +253,6 @@
   <data name="PARTIAL_RETURN_INVALID" xml:space="preserve"><value>Return at least one item, but fewer than the entire order. Quantities cannot exceed purchased quantities. For a full return, use Cannot deliver.</value></data>
   <data name="PARTIAL_RETURN_UNAVAILABLE" xml:space="preserve"><value>The delivery changed. Refresh and use an order that is on the way.</value></data>
   <data name="PARTIAL_RETURN_ALREADY_SAVED" xml:space="preserve"><value>A partial return is already recorded. Refresh the order.</value></data>
+  <data name="PushTitle" xml:space="preserve"><value>Notifications</value></data>
+  <data name="PushHint" xml:space="preserve"><value>New orders and changes</value></data>
 </root>

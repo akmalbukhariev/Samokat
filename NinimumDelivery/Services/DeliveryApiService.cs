@@ -121,6 +121,13 @@ public class DeliveryApiService
         return Parse<ApiResponse<T>>(await Execute(req, cancellationToken: cancellationToken));
     }
 
+    // Push notifications: this phone's address for the signed-in courier, or removed on sign-out.
+    public async Task SavePushToken(string pushToken, bool remove = false)
+    {
+        var req = new RestRequest(remove ? "delivery-app/push/token/remove" : "delivery-app/push/token", Method.Post).AddJsonBody(new { token = pushToken });
+        await Execute(req);
+    }
+
     public void Logout()
     {
         token = string.Empty;

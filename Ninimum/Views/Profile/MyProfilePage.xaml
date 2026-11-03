@@ -134,6 +134,13 @@
                         <Image Grid.Column="4" Source="ic_arrow_right.png" WidthRequest="16" HeightRequest="16" />
                     </Grid>
 
+                    <!-- Push notifications on/off (on by default). -->
+                    <Grid ColumnDefinitions="32,10,*,Auto">
+                        <Image Source="ic_notification1.png" WidthRequest="24" HeightRequest="24" />
+                        <Label Grid.Column="2" Text="{x:Static language:AppResource.Notifications}" Style="{StaticResource ProfileMenuTextStyle}" />
+                        <Switch Grid.Column="3" x:Name="PushSwitch" Toggled="OnPushToggled" OnColor="#16A34A" VerticalOptions="Center" />
+                    </Grid>
+
                     <Grid ColumnDefinitions="32,10,*,Auto,24" IsVisible="False">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding NotificationCommand}" />

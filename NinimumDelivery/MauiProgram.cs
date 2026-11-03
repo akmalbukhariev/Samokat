@@ -1,3 +1,4 @@
+using Microsoft.Maui.LifecycleEvents;
 using Microsoft.Extensions.Logging;
 using NinimumDelivery.Services;
 using NinimumDelivery.ViewModels;
@@ -11,6 +12,11 @@ public static class MauiProgram
     public static MauiApp CreateMauiApp()
     {
         var builder = MauiApp.CreateBuilder();
+
+#if ANDROID
+		builder.ConfigureLifecycleEvents(events => events.AddAndroid(android => android.OnCreate((activity, _) =>
+			Plugin.Firebase.Core.Platforms.Android.CrossFirebase.Initialize(activity))));
+#endif
         builder.UseMauiApp<App>();
 
 #if DEBUG

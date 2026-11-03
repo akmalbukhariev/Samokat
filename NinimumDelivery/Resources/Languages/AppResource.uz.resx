@@ -253,4 +253,6 @@
   <data name="PARTIAL_RETURN_INVALID" xml:space="preserve"><value>Kamida 1 dona, lekin butun buyurtmadan kamroq qaytaring. Son xarid qilingan sondan oshmasin. To‘liq qaytarish uchun Yetkazib bo‘lmadi tugmasini ishlating.</value></data>
   <data name="PARTIAL_RETURN_UNAVAILABLE" xml:space="preserve"><value>Yetkazma o‘zgargan. Yangilang va yo‘ldagi buyurtmani tanlang.</value></data>
   <data name="PARTIAL_RETURN_ALREADY_SAVED" xml:space="preserve"><value>Qisman qaytarish saqlangan. Buyurtmani yangilang.</value></data>
+  <data name="PushTitle" xml:space="preserve"><value>Bildirishnomalar</value></data>
+  <data name="PushHint" xml:space="preserve"><value>Yangi buyurtmalar va o‘zgarishlar</value></data>
 </root>

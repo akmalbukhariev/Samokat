@@ -23,6 +23,12 @@
                         <Switch Grid.Column="1" IsToggled="{Binding Worker.online, Mode=OneWay}" Toggled="OnlineSwitch_Toggled" OnColor="{StaticResource SuccessColor}" />
                     </Grid>
                 </Border>
+                <Border Padding="18" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" StrokeShape="RoundRectangle 18">
+                    <Grid ColumnDefinitions="*,Auto">
+                        <VerticalStackLayout><Label x:Name="PushTitle" FontAttributes="Bold"/><Label x:Name="PushHint" Style="{StaticResource MutedLabel}"/></VerticalStackLayout>
+                        <Switch x:Name="PushSwitch" Grid.Column="1" Toggled="OnPushToggled" OnColor="{StaticResource SuccessColor}" />
+                    </Grid>
+                </Border>
                 <Label Text="{x:Static lang:AppResource.Language}" Style="{StaticResource SectionTitle}" />
                 <Grid ColumnDefinitions="*,*,*" ColumnSpacing="8">
                     <Button Text="O‘zbekcha" Command="{Binding SetLanguageCommand}" CommandParameter="uz" Style="{StaticResource SecondaryButton}" />

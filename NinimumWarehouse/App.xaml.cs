@@ -24,7 +24,7 @@ public partial class App : Application
         window.Created += async (_, _) => {
             await api.RestoreAsync();
             if (api.SignedIn) {
-                try { api.SetWorker(await api.Request<Models.Worker>("me")); ShowHome(); }
+                try { api.SetWorker(await api.Request<Models.Worker>("me")); ShowHome(); _ = api.RegisterPush(); }
                 catch { ShowLogin(); }
             } else ShowLogin();
         };

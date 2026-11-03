@@ -1,3 +1,4 @@
+using Microsoft.Maui.LifecycleEvents;
 using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
 using Ninimum.Services;
@@ -37,6 +38,11 @@ public static class MauiProgram
 	public static MauiApp CreateMauiApp()
 	{
 		var builder = MauiApp.CreateBuilder();
+
+#if ANDROID
+		builder.ConfigureLifecycleEvents(events => events.AddAndroid(android => android.OnCreate((activity, _) =>
+			Plugin.Firebase.Core.Platforms.Android.CrossFirebase.Initialize(activity))));
+#endif
 		builder
 			.UseMauiApp<App>()
 			.UseAcrylicView()

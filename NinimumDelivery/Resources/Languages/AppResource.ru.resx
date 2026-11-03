@@ -253,4 +253,6 @@
   <data name="PARTIAL_RETURN_INVALID" xml:space="preserve"><value>Верните хотя бы одну единицу, но не весь заказ. Количество не должно превышать купленное. Для полного возврата используйте Не удалось доставить.</value></data>
   <data name="PARTIAL_RETURN_UNAVAILABLE" xml:space="preserve"><value>Доставка изменилась. Обновите и выберите заказ в пути.</value></data>
   <data name="PARTIAL_RETURN_ALREADY_SAVED" xml:space="preserve"><value>Частичный возврат уже записан. Обновите заказ.</value></data>
+  <data name="PushTitle" xml:space="preserve"><value>Уведомления</value></data>
+  <data name="PushHint" xml:space="preserve"><value>Новые заказы и изменения</value></data>
 </root>

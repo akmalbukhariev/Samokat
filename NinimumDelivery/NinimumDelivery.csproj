@@ -59,4 +59,12 @@
       <DependentUpon>AppResource.resx</DependentUpon>
     </Compile>
   </ItemGroup>
+	<ItemGroup Condition="'$(TargetFramework)' == 'net10.0-android'">
+		<!-- Push notifications (Firebase project ninimum-d7828) -->
+		<PackageReference Include="Plugin.Firebase.CloudMessaging" Version="3.1.2" />
+		<GoogleServicesJson Include="Platforms/Android/google-services.json" />
+	</ItemGroup>
+	<Target Name="CopyGoogleServicesJson" AfterTargets="Build" Condition="'$(TargetFramework)' == 'net10.0-android'">
+		<Copy SourceFiles="Platforms/Android/google-services.json" DestinationFolder="$(IntermediateOutputPath)assets" SkipUnchangedFiles="true" />
+	</Target>
 </Project>

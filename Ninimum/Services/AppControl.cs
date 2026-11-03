@@ -165,6 +165,7 @@ namespace Ninimum.Services
             await Task.Delay(100);
             
             SetRootPage(new AppShell());
+            _ = PushRegistration.RegisterAsync(token => apiService.PostAsync("push/token", new { token }), token => apiService.PostAsync("push/token/remove", new { token }));
         }
 
         public async Task StartGuestMode(bool clearSavedLogin = false)
@@ -175,6 +176,7 @@ namespace Ninimum.Services
 
             if (clearSavedLogin)
             {
+                await PushRegistration.UnregisterAsync();
                 storeService.Remove(AppKeys.IsLoggedIn);
                 storeService.Remove(AppKeys.PhoneNumber);
                 storeService.Remove(AppKeys.Password);
@@ -212,6 +214,7 @@ namespace Ninimum.Services
         {
             IsBlocked = isBlocked;
 
+            await PushRegistration.UnregisterAsync();
             Response response = await apiService.LogOut();
             if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
             {

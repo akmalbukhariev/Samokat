@@ -997,6 +997,24 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New orders and changes.
+        /// </summary>
+        public static string PushHint {
+            get {
+                return ResourceManager.GetString("PushHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        public static string PushTitle {
+            get {
+                return ResourceManager.GetString("PushTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} product units.
         /// </summary>
         public static string QuantityFormat {

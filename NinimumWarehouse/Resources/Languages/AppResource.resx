@@ -398,4 +398,6 @@
   <data name="Error_SCAN_PRODUCT_NO_BARCODE" xml:space="preserve"><value>This product has no barcode saved in the system. Add it in web admin, or confirm by hand with a reason.</value></data>
   <data name="StorageLocationLine" xml:space="preserve"><value>📍 Location: {0}</value></data>
   <data name="PickLine" xml:space="preserve"><value>Bin {0} · Batch {1} · Expiry {2} · {3} pcs</value></data>
+  <data name="PushTitle" xml:space="preserve"><value>Notifications</value></data>
+  <data name="PushHint" xml:space="preserve"><value>New orders and changes</value></data>
 </root>

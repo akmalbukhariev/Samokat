@@ -51,9 +51,12 @@ public sealed class WarehouseApi
         if (string.IsNullOrWhiteSpace(worker.Token)) throw new ApiException("WAREHOUSE_LOGIN_FAILED");
         await SecureStorage.Default.SetAsync(AppConstants.TokenKey, worker.Token);
         token = worker.Token; SetWorker(worker);
+        _ = RegisterPush();
     }
+    public Task RegisterPush() => PushRegistration.RegisterAsync(t => Request<object>("push/token", new { token = t }), t => Request<object>("push/token/remove", new { token = t }));
     public async Task Logout()
     {
+        await PushRegistration.UnregisterAsync();
         try { await Request<object>("logout", new { }); } catch { }
         Clear();
     }

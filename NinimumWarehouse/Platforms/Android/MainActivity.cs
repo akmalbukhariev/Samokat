@@ -19,6 +19,7 @@ public class MainActivity : MauiAppCompatActivity
         AndroidX.AppCompat.App.AppCompatDelegate.DefaultNightMode =
             AndroidX.AppCompat.App.AppCompatDelegate.ModeNightNo;
         base.OnCreate(savedInstanceState);
+        SetUpPush();
         if (Window is not null)
         {
             if (!OperatingSystem.IsAndroidVersionAtLeast(35))
@@ -72,5 +73,24 @@ public class MainActivity : MauiAppCompatActivity
             }
         }
         return base.DispatchKeyEvent(e);
+    }
+
+    // Push notifications: one high-importance channel, a white bell as the small icon.
+    private void SetUpPush()
+    {
+        if (OperatingSystem.IsAndroidVersionAtLeast(26))
+        {
+            var channel = new Android.App.NotificationChannel("ninimum_orders", "Buyurtmalar", Android.App.NotificationImportance.High);
+            channel.EnableVibration(true);
+            ((Android.App.NotificationManager)GetSystemService(NotificationService)!).CreateNotificationChannel(channel);
+        }
+        Plugin.Firebase.CloudMessaging.FirebaseCloudMessagingImplementation.ChannelId = "ninimum_orders";
+        Plugin.Firebase.CloudMessaging.FirebaseCloudMessagingImplementation.SmallIconRef = Resource.Drawable.ic_push;
+    }
+
+    protected override void OnNewIntent(Android.Content.Intent? intent)
+    {
+        base.OnNewIntent(intent);
+        Plugin.Firebase.CloudMessaging.FirebaseCloudMessagingImplementation.OnNewIntent(intent);
     }
 }

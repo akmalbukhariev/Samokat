@@ -14,6 +14,7 @@ public class MainActivity : MauiAppCompatActivity
     protected override void OnCreate(Bundle? savedInstanceState)
     {
         base.OnCreate(savedInstanceState);
+        SetUpPush();
 
         //Window?.SetSoftInputMode(SoftInput.AdjustPan);
     }
@@ -21,7 +22,21 @@ public class MainActivity : MauiAppCompatActivity
     protected override void OnNewIntent(Intent? intent)
     {
         base.OnNewIntent(intent);
+        Plugin.Firebase.CloudMessaging.FirebaseCloudMessagingImplementation.OnNewIntent(intent);
         if (intent?.Data?.Scheme == "ninimum" && intent.Data.Host == "payment-result")
             Ninimum.Services.PaymentReturn.Notify();
+    }
+
+    // Push notifications: one high-importance channel, a white bell as the small icon.
+    private void SetUpPush()
+    {
+        if (OperatingSystem.IsAndroidVersionAtLeast(26))
+        {
+            var channel = new Android.App.NotificationChannel("ninimum_orders", "Buyurtmalar", Android.App.NotificationImportance.High);
+            channel.EnableVibration(true);
+            ((Android.App.NotificationManager)GetSystemService(NotificationService)!).CreateNotificationChannel(channel);
+        }
+        Plugin.Firebase.CloudMessaging.FirebaseCloudMessagingImplementation.ChannelId = "ninimum_orders";
+        Plugin.Firebase.CloudMessaging.FirebaseCloudMessagingImplementation.SmallIconRef = Resource.Drawable.ic_push;
     }
 }

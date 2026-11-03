@@ -249,6 +249,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         RegionPopup.Refresh();
 
         await LoadCurrentTariffAsync();
+        pushReady = false; PushSwitch.IsToggled = PushRegistration.Enabled; pushReady = true;
     }
 
     private void ApplyLogoutPopupLanguage()
@@ -501,6 +502,14 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
             AppVibrationService.Like();
             await AppNavigatorService.NavigateTo(nameof(MyTariffPage));
         });
+    }
+
+    // Push notifications on/off for this phone (on by default).
+    private bool pushReady;
+    private async void OnPushToggled(object? sender, ToggledEventArgs e)
+    {
+        if (!pushReady) return;
+        await global::Ninimum.Services.PushRegistration.SetEnabledAsync(e.Value);
     }
 
     private async void OnInviteClicked()

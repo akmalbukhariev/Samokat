@@ -1,0 +1,67 @@
+{
+  "project_info": {
+    "project_number": "989837769063",
+    "project_id": "ninimum-d7828",
+    "storage_bucket": "ninimum-d7828.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989837769063:android:24c87edecfedab1a2c17c2",
+        "android_client_info": {
+          "package_name": "com.ninimum.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCokW36J8cON4gJLUVvGxUF-UHVe96HwWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989837769063:android:8a80b6730142bd002c17c2",
+        "android_client_info": {
+          "package_name": "com.ninimum.delivery"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCokW36J8cON4gJLUVvGxUF-UHVe96HwWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:989837769063:android:4bb194ffc8a15bcb2c17c2",
+        "android_client_info": {
+          "package_name": "com.ninimum.warehouse"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCokW36J8cON4gJLUVvGxUF-UHVe96HwWs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

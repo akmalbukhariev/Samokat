@@ -709,6 +709,24 @@ namespace NinimumDelivery.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New orders and changes.
+        /// </summary>
+        internal static string PushHint {
+            get {
+                return ResourceManager.GetString("PushHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        internal static string PushTitle {
+            get {
+                return ResourceManager.GetString("PushTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Refresh.
         /// </summary>
         internal static string Refresh {

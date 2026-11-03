@@ -30,6 +30,15 @@
                         </Grid>
                     </Border>
                 </VerticalStackLayout>
+                <Border Style="{StaticResource InputBorder}">
+                    <Grid ColumnDefinitions="*,Auto" ColumnSpacing="12">
+                        <VerticalStackLayout Spacing="2" VerticalOptions="Center">
+                            <Label x:Name="PushTitle" FontAttributes="Bold"/>
+                            <Label x:Name="PushHint" Style="{StaticResource MutedLabel}"/>
+                        </VerticalStackLayout>
+                        <Switch x:Name="PushSwitch" Grid.Column="1" Toggled="OnPushToggled" VerticalOptions="Center"/>
+                    </Grid>
+                </Border>
                 <Label Text="{x:Static lang:AppResource.ProfileHint}" Style="{StaticResource MutedLabel}"/>
                 <Border BackgroundColor="{StaticResource SurfaceColor}" Padding="16" StrokeThickness="0" StrokeShape="RoundRectangle 14">
                     <Label Text="{x:Static lang:AppResource.SingleSessionHint}" Style="{StaticResource MutedLabel}"/>

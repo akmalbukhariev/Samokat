@@ -54,6 +54,7 @@ public class AppState
         }
 
         Worker = store.Get<DeliveryWorker?>(AppConstants.WorkerKey, null);
+        _ = PushRegistration.RegisterAsync(t => api.SavePushToken(t), t => api.SavePushToken(t, true));
         return true;
     }
 
@@ -71,12 +72,14 @@ public class AppState
         store.Set(AppConstants.LoggedInKey, true);
         store.Set(AppConstants.WorkerKey, Worker);
         SetRoot(new AppShell());
+        _ = PushRegistration.RegisterAsync(t => api.SavePushToken(t), t => api.SavePushToken(t, true));
         return true;
     }
 
     public void Logout()
     {
         Worker = null;
+        _ = PushRegistration.UnregisterAsync();
         api.Logout();
         store.Remove(AppConstants.WorkerKey);
         SetRoot(AppServices.GetRequired<LoginPage>());
