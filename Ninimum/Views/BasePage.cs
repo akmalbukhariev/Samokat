@@ -33,6 +33,13 @@ namespace Ninimum.Views
             RefreshShellLayout();
         }
 
+        // Leaving a page always closes the keyboard; a page that needs it (search, SMS code) opens it again itself.
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            AppService.Get<IKeyboardHelper>()?.HideKeyboard();
+        }
+
         private void RefreshShellLayout()
         {
             // Shell can keep the previous page's bottom inset after navigating back

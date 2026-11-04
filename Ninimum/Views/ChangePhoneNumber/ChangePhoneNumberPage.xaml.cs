@@ -19,7 +19,6 @@ public partial class ChangePhoneNumberPage : BasePage, INotifyPropertyChanged
     private string _phoneNumber = string.Empty;
     private bool _isAgreementChecked = true;
     private bool _isLoading;
-    private string verificationCode = string.Empty;
     private string pendingPhoneNumber = string.Empty;
 
     public new event PropertyChangedEventHandler? PropertyChanged;
@@ -163,15 +162,14 @@ public partial class ChangePhoneNumberPage : BasePage, INotifyPropertyChanged
         {
             IsLoading = true;
 
-            string? code = await appControl.SendVerificationCode(pendingPhoneNumber);
+            string? problem = await appControl.SendVerificationCode(pendingPhoneNumber);
 
-            if (string.IsNullOrWhiteSpace(code))
+            if (problem is not null)
             {
-                await DisplayAlert(AppResource.Error, AppResource.TheSMSCodeWasNotSentPleaseTry, AppResource.Close);
+                await DisplayAlert(AppResource.Error, problem, AppResource.Close);
                 return;
             }
 
-            verificationCode = code;
             popupSms.Show();
         }
         finally
@@ -182,8 +180,7 @@ public partial class ChangePhoneNumberPage : BasePage, INotifyPropertyChanged
 
     private async void OnConfirmSmsCode(string code)
     {
-        if (string.IsNullOrWhiteSpace(code) ||
-            !string.Equals(code, verificationCode, StringComparison.Ordinal))
+        if (string.IsNullOrWhiteSpace(code))
         {
             await DisplayAlert(AppResource.Code, AppResource.TheSMSCodeIsIncorrect, AppResource.Close);
             return;
@@ -197,7 +194,8 @@ public partial class ChangePhoneNumberPage : BasePage, INotifyPropertyChanged
             var response = await apiService.ChangePhoneNumber(new ChangePhoneNumberRequest
             {
                 userId = appControl.CurrentUserId,
-                phoneNumber = pendingPhoneNumber
+                phoneNumber = pendingPhoneNumber,
+                smsCode = code.Trim()
             });
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())

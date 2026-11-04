@@ -56,6 +56,9 @@ public partial class RegisterPageViewModel : ObservableObject
     [ObservableProperty]
     private string referralCode = string.Empty;
 
+    // The SMS code typed on the phone number screen; the server checks it again at registration.
+    public string SmsCode { get; set; } = string.Empty;
+
     [ObservableProperty]
     private bool showReferralCode;
 
@@ -167,6 +170,15 @@ public partial class RegisterPageViewModel : ObservableObject
             return;
         }
 
+        // Same rule as changing the password.
+        if (Password.Length < 6)
+        {
+            await AlertService.ShowAlertAsync(
+                AppResource.Warning,
+                AppResource.PasswordMustContainAtLeast6Characters);
+            return;
+        }
+
         if (string.IsNullOrWhiteSpace(ConfirmPassword))
         {
             await AlertService.ShowAlertAsync(
@@ -201,14 +213,15 @@ public partial class RegisterPageViewModel : ObservableObject
             address = Address.Trim(),
             phone_number = appControl.NormalizePhoneNumber(PhoneNumber),
             password = Password,
-            referral_code = ShowReferralCode && !string.IsNullOrWhiteSpace(ReferralCode) ? ReferralCode.Trim() : null
+            referral_code = ShowReferralCode && !string.IsNullOrWhiteSpace(ReferralCode) ? ReferralCode.Trim() : null,
+            sms_code = SmsCode
         };
 
         try
         {
             IsLoading = true;
 
-            Response response = await apiService.RegisterUser(request);
+            RegisterUserResponse response = await apiService.RegisterUser(request);
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString())
             {
@@ -218,6 +231,7 @@ public partial class RegisterPageViewModel : ObservableObject
                 return;
             }
 
+            appControl.DeviceToken = response.resultData?.device_token ?? string.Empty;
             bool loggedIn = await appControl.Login(PhoneNumber.Trim(), Password);
 
             if (!loggedIn)

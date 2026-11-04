@@ -22,7 +22,13 @@ public partial class SearchPage : BasePage
 
         Loaded += SearchPage_Loaded;
         viewModel.PropertyChanged += ViewModel_PropertyChanged;
+
+        // A finished search (the keyboard's search/enter key) or scrolling the results closes the keyboard.
+        SearchInput.CompletedCommand = new Command(HideKeyboard);
+        MainCollectionView.Scrolled += (_, e) => { if (Math.Abs(e.VerticalDelta) > 4) HideKeyboard(); };
     }
+
+    private static void HideKeyboard() => Services.AppService.Get<Services.IKeyboardHelper>()?.HideKeyboard();
 
     protected override void OnAppearing()
     {

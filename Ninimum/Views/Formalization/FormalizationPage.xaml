@@ -187,14 +187,16 @@
                     </VerticalStackLayout>
                 </Border> 
 
-                <!-- Delivery method: free courier, or fast taxi paid to the driver by the customer -->
+                <!-- Delivery method: free courier, or fast taxi paid to the driver by the customer.
+                     Hidden for now (owner 2026-11-04): every order goes by courier. Set IsVisible back to offer taxi. -->
                 <Label
                     x:Name="DeliveryMethodTitle"
+                    IsVisible="False"
                     FontSize="22"
                     TextColor="#22292F"
                     FontFamily="{StaticResource FontSFMedium}" />
 
-                <Border x:Name="CourierOption" Padding="14" StrokeThickness="1.5" Stroke="#7CB518" StrokeShape="RoundRectangle 14" BackgroundColor="White">
+                <Border x:Name="CourierOption" IsVisible="False" Padding="14" StrokeThickness="1.5" Stroke="#7CB518" StrokeShape="RoundRectangle 14" BackgroundColor="White">
                     <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnCourierTapped" /></Border.GestureRecognizers>
                     <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
                         <Image x:Name="CourierCheck" Source="ic_check.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />
@@ -205,7 +207,7 @@
                     </Grid>
                 </Border>
 
-                <Border x:Name="TaxiOption" Padding="14" StrokeThickness="1.5" Stroke="#DADBDD" StrokeShape="RoundRectangle 14" BackgroundColor="White">
+                <Border x:Name="TaxiOption" IsVisible="False" Padding="14" StrokeThickness="1.5" Stroke="#DADBDD" StrokeShape="RoundRectangle 14" BackgroundColor="White">
                     <Border.GestureRecognizers><TapGestureRecognizer Tapped="OnTaxiTapped" /></Border.GestureRecognizers>
                     <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
                         <Image x:Name="TaxiCheck" Source="ic_uncheck.png" WidthRequest="24" HeightRequest="24" VerticalOptions="Center" />

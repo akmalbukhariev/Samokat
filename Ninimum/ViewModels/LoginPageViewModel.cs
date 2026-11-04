@@ -39,7 +39,6 @@ public partial class LoginPageViewModel : ObservableObject
 
     public Action? ShowSmsPopupAction { get; set; }
     public Action? HideSmsPopupAction { get; set; }
-    private string verificationCode = "";
 
     private readonly UserApiService apiService;
     private readonly AppControl appControl;
@@ -80,27 +79,21 @@ public partial class LoginPageViewModel : ObservableObject
 
             IsLoading = true;
 
-            var request = new LoginUserRequest
+            response = await apiService.Login(new LoginUserRequest
             {
                 phone_number = PhoneNumber,
-                password = Password
-            };
-
-            response = await apiService.Login(request);
+                password = Password,
+                device_token = appControl.DeviceToken
+            });
 
             if (response.resultCode == ApiResult.SUCCESS.GetCodeToString())
             {
-                string? code = await appControl.SendVerificationCode(PhoneNumber);
-
-                if (!string.IsNullOrEmpty(code))
-                {
-                    verificationCode = code;
-                    ShowSmsPopupAction?.Invoke();
-                }
-                else
-                {
-                    await AlertService.ShowAlertAsync(AppResource.Error, AppResource.SMSWasNotSent);
-                }
+                // This phone confirmed a code before: no SMS needed.
+                await appControl.InitLoginPage(response.resultData, PhoneNumber, Password);
+            }
+            else if (response.resultCode == "SMS_CODE_SENT")
+            {
+                ShowSmsPopupAction?.Invoke();
             }
             else
             {
@@ -126,9 +119,25 @@ public partial class LoginPageViewModel : ObservableObject
 
     private async void OnConfirmSmsCode(string code)
     {
-        if (string.IsNullOrWhiteSpace(code) || code != verificationCode)
+        if (string.IsNullOrWhiteSpace(code))
         {
             await AlertService.ShowAlertAsync(AppResource.Code, AppResource.IncorrectCode);
+            return;
+        }
+
+        try
+        {
+            IsLoading = true;
+            response = await apiService.Login(new LoginUserRequest { phone_number = PhoneNumber, password = Password, sms_code = code.Trim() });
+        }
+        finally
+        {
+            IsLoading = false;
+        }
+
+        if (response.resultCode != ApiResult.SUCCESS.GetCodeToString() || response.resultData == null)
+        {
+            await AlertService.ShowAlertAsync(AppResource.Code, response.resultMsg ?? AppResource.IncorrectCode);
             return;
         }
 
@@ -144,18 +153,12 @@ public partial class LoginPageViewModel : ObservableObject
 
         try
         {
-            verificationCode = string.Empty;
             IsLoading = true;
 
-            string? code = await appControl.SendVerificationCode(PhoneNumber.Trim());
-
-            if (string.IsNullOrWhiteSpace(code))
-            {
-                await AlertService.ShowAlertAsync(AppResource.Error, AppResource.SMSWasNotSent);
-                return;
-            }
-
-            verificationCode = code;
+            // Signing in again without a code makes the server send a new one (at most one a minute).
+            var resend = await apiService.Login(new LoginUserRequest { phone_number = PhoneNumber.Trim(), password = Password });
+            if (resend.resultCode != "SMS_CODE_SENT")
+                await AlertService.ShowAlertAsync(AppResource.Error, resend.resultMsg ?? AppResource.SMSWasNotSent);
         }
         catch (Exception ex)
         {

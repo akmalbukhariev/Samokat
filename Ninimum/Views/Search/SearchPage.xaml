@@ -25,6 +25,7 @@
             <components:InputView
                 x:Name="SearchInput"
                 Grid.Row="1"
+                ReturnType="Search"
                 Title="{x:Static language:AppResource.SearchForAProduct}"
                 LeftIcon="ic_serach.png"
                 LeftIconSize="26"

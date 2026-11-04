@@ -363,9 +363,9 @@ namespace Api.Services
             return response;
         }
 
-        public async Task<Response> RegisterUser(RegisterUserRequest data)
+        public async Task<RegisterUserResponse> RegisterUser(RegisterUserRequest data)
         {
-            var response = new Response();
+            var response = new RegisterUserResponse();
 
             try
             {
@@ -373,7 +373,7 @@ namespace Api.Services
 
                 if (!string.IsNullOrWhiteSpace(receivedData))
                 {
-                    var deserializedResponse = JsonConvert.DeserializeObject<Response>(receivedData);
+                    var deserializedResponse = JsonConvert.DeserializeObject<RegisterUserResponse>(receivedData);
                     if (deserializedResponse != null)
                     {
                         return deserializedResponse;
@@ -489,6 +489,19 @@ namespace Api.Services
                 Console.WriteLine($"Yandex address search error: {ex.Message}");
                 return null;
             }
+        }
+
+        // The server checks the typed SMS code; the app never sees the real one.
+        public async Task<Response> CheckSmsCode(string phoneNumber, string code)
+        {
+            try
+            {
+                var receivedData = await PostAsync("message/checkCode", new { phone_number = phoneNumber, code });
+                var result = string.IsNullOrWhiteSpace(receivedData) ? null : JsonConvert.DeserializeObject<Response>(receivedData);
+                if (result != null) return result;
+            }
+            catch (Exception ex) { Console.WriteLine($"[CheckSmsCode] {ex.Message}"); }
+            return new Response { resultCode = ApiResult.API_SERVICE_ERROR.GetCodeToString(), resultMsg = ApiResult.API_SERVICE_ERROR.GetMessage() };
         }
 
         public async Task<VerifyPhoneNumberResponse> VerifyNumber(VerifyPhoneNumberRequest data)

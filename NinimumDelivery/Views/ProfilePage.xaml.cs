@@ -9,6 +9,8 @@ public partial class ProfilePage : ContentPage
         InitializeComponent(); BindingContext = this.vm = vm;
         PushTitle.Text = global::NinimumDelivery.Resources.Languages.AppResource.ResourceManager.GetString("PushTitle", global::NinimumDelivery.Resources.Languages.AppResource.Culture);
         PushHint.Text = global::NinimumDelivery.Resources.Languages.AppResource.ResourceManager.GetString("PushHint", global::NinimumDelivery.Resources.Languages.AppResource.Culture);
+        global::NinimumDelivery.Services.RedSwitch.Apply(PushSwitch);
+        global::NinimumDelivery.Services.RedSwitch.Apply(OnlineSwitch);
         PushSwitch.IsToggled = global::NinimumDelivery.Services.PushRegistration.Enabled; pushReady = true;
     }
     protected override async void OnAppearing() { base.OnAppearing(); loading = true; await vm.LoadCommand.ExecuteAsync(null); loading = false; }

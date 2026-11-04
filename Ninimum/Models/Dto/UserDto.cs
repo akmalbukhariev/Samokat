@@ -3,6 +3,8 @@ namespace Models.Dto
     public class UserDto
     {
         public int? id { get; set; }
+        // Sent once after an SMS-confirmed sign-in or registration; kept on the phone.
+        public string? device_token { get; set; }
         public int? region_id { get; set; }
 
         public string first_name { get; set; }

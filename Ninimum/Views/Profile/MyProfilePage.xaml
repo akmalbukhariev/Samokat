@@ -135,10 +135,11 @@
                     </Grid>
 
                     <!-- Push notifications on/off (on by default). -->
+                    <!-- Same switch as the warehouse app (coloured in code, Services/RedSwitch). -->
                     <Grid ColumnDefinitions="32,10,*,Auto">
                         <Image Source="ic_notification1.png" WidthRequest="24" HeightRequest="24" />
                         <Label Grid.Column="2" Text="{x:Static language:AppResource.Notifications}" Style="{StaticResource ProfileMenuTextStyle}" />
-                        <Switch Grid.Column="3" x:Name="PushSwitch" Toggled="OnPushToggled" OnColor="#16A34A" VerticalOptions="Center" />
+                        <Switch Grid.Column="3" x:Name="PushSwitch" Style="{x:Null}" Toggled="OnPushToggled" VerticalOptions="Center" />
                     </Grid>
 
                     <Grid ColumnDefinitions="32,10,*,Auto,24" IsVisible="False">

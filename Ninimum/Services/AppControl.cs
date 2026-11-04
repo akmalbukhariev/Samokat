@@ -127,9 +127,12 @@ namespace Ninimum.Services
             var request = new LoginUserRequest
             {
                 phone_number = phoneNumber,
-                password = password
+                password = password,
+                device_token = DeviceToken
             };
 
+            // Without a valid key the server asks for an SMS code; the automatic sign-in then stops and the
+            // customer signs in on the login page.
             LoginUserResponse response = await apiService.Login(request);
 
             if (response.resultCode != ApiResult.SUCCESS.GetCodeToString() || response.resultData == null)
@@ -142,6 +145,7 @@ namespace Ninimum.Services
         public async Task InitLoginPage(UserDto userDto,string phoneNumber, string password)
         {
             this.userDto = userDto ?? new UserDto();
+            DeviceToken = this.userDto.device_token ?? string.Empty;
             SelectRegion(this.userDto.region_id ?? SelectedRegionId);
             IsLoggedIn = true;
             IsBlocked = false;
@@ -234,30 +238,29 @@ namespace Ninimum.Services
             SetRootPage(new AppShell());
         }
 
+        // Asks the server to SMS a code to a new number (registration, phone change). The code stays on the server.
+        // Returns null when sent, otherwise the message to show.
         public async Task<string?> SendVerificationCode(string phoneNumber)
         {
             try
             {
-                var data = new VerifyPhoneNumberRequest
-                {
-                    phone_number = phoneNumber
-                };
-
-                VerifyPhoneNumberResponse response =
-                    await apiService.VerifyNumber(data);
-
+                VerifyPhoneNumberResponse response = await apiService.VerifyNumber(new VerifyPhoneNumberRequest { phone_number = phoneNumber });
                 if (response?.resultCode == ApiResult.SUCCESS.GetCodeToString())
-                {
-                    return response.resultData.code;
-                }
-
-                return null;
+                    return null;
+                return response?.resultMsg ?? AppResource.SMSWasNotSent;
             }
             catch (Exception ex)
             {
                 Console.WriteLine(ex.Message);
-                return null;
+                return AppResource.SMSWasNotSent;
             }
+        }
+
+        // This phone's key from an earlier SMS-confirmed sign-in: lets the automatic sign-in skip the SMS.
+        public string DeviceToken
+        {
+            get => storeService.Get(AppKeys.DeviceToken, string.Empty);
+            set { if (!string.IsNullOrWhiteSpace(value)) storeService.Set(AppKeys.DeviceToken, value); }
         }
 
         public void SetRootPage(Page page)

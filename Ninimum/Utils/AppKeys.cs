@@ -8,6 +8,7 @@ namespace Utils
         public const string HasCompletedOnboarding = "has_completed_onboarding";
         public const string PhoneNumber = "phone_number";
         public const string Password = "password";
+        public const string DeviceToken = "device_token";
         public const string SearchHistoryKey = "search_history";
     }
 }

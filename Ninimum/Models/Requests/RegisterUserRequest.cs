@@ -15,6 +15,8 @@ public class RegisterUserRequest
     public string password { get; set; }
 
     public string? referral_code { get; set; }
+
+    public string? sms_code { get; set; }
 }
 
 public class RegisterChildRequest

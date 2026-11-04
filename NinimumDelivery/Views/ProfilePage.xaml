@@ -20,13 +20,13 @@
                 <Border Padding="18" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" StrokeShape="RoundRectangle 18">
                     <Grid ColumnDefinitions="*,Auto">
                         <VerticalStackLayout><Label Text="{x:Static lang:AppResource.Availability}" FontAttributes="Bold"/><Label Text="{x:Static lang:AppResource.Online}" Style="{StaticResource MutedLabel}"/></VerticalStackLayout>
-                        <Switch Grid.Column="1" IsToggled="{Binding Worker.online, Mode=OneWay}" Toggled="OnlineSwitch_Toggled" OnColor="{StaticResource SuccessColor}" />
+                        <Switch x:Name="OnlineSwitch" Grid.Column="1" IsToggled="{Binding Worker.online, Mode=OneWay}" Toggled="OnlineSwitch_Toggled" />
                     </Grid>
                 </Border>
                 <Border Padding="18" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" StrokeShape="RoundRectangle 18">
                     <Grid ColumnDefinitions="*,Auto">
                         <VerticalStackLayout><Label x:Name="PushTitle" FontAttributes="Bold"/><Label x:Name="PushHint" Style="{StaticResource MutedLabel}"/></VerticalStackLayout>
-                        <Switch x:Name="PushSwitch" Grid.Column="1" Toggled="OnPushToggled" OnColor="{StaticResource SuccessColor}" />
+                        <Switch x:Name="PushSwitch" Grid.Column="1" Toggled="OnPushToggled" />
                     </Grid>
                 </Border>
                 <Label Text="{x:Static lang:AppResource.Language}" Style="{StaticResource SectionTitle}" />

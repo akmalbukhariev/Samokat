@@ -202,6 +202,7 @@ public partial class MyProfilePage : BasePage, INotifyPropertyChanged
         ChangePhoneCommand = new Command(OnChangePhoneClicked);
         ChangePasswordCommand = new Command(OnChangePasswordClicked);
         MyTariffCommand = new Command(OnMyTariffClicked);
+        RedSwitch.Apply(PushSwitch);
         InviteCommand = new Command(OnInviteClicked);
         ChildrenCommand = new Command(OnChildrenClicked);
         DeleteAccountCommand = new Command(OnDeleteAccountClicked);

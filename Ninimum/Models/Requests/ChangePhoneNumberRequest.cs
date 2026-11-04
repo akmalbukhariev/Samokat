@@ -4,4 +4,5 @@ public class ChangePhoneNumberRequest
 {
     public long userId { get; set; }
     public string phoneNumber { get; set; } = string.Empty;
+    public string? smsCode { get; set; }
 }

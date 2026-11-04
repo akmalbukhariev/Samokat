@@ -33,7 +33,7 @@
 
                 <!-- HEADER INSIDE SCROLL -->
                 <CollectionView.Header>
-                    <VerticalStackLayout Spacing="20" Padding="4,0">
+                    <VerticalStackLayout Spacing="20" Padding="4,0,4,12">
 
                         <!-- THIS scrolls -->
                         <components:SearchBarView x:Name="InlineSearchBarView"/>

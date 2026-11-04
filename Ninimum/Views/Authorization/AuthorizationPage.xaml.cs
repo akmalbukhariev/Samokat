@@ -13,7 +13,6 @@ namespace Ninimum.Views.Authorization;
 
 public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
 {
-    private string verificationCode = "";
 
     private string _phoneNumber = "";
     public string PhoneNumber
@@ -88,43 +87,40 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
                 return;
 
             IsLoading = true;
-            string? code = await appControl.SendVerificationCode(PhoneNumber);
+            string? problem = await appControl.SendVerificationCode(PhoneNumber);
             IsLoading = false;
 
-            if (!string.IsNullOrEmpty(code))
-            {
-                verificationCode = code;
+            if (problem is null)
                 popupSms.Show();
-            }
             else
-            {
-                await AlertService.ShowAlertAsync(AppResource.Error, AppResource.SMSWasNotSent);
-            }
+                await AlertService.ShowAlertAsync(AppResource.Error, problem);
         });
     }
 
     private async void OnResendSms()
     {
-        verificationCode = string.Empty;
         IsLoading = true;
-        string? code = await appControl.SendVerificationCode(PhoneNumber);
+        string? problem = await appControl.SendVerificationCode(PhoneNumber);
         IsLoading = false;
 
-        if (!string.IsNullOrEmpty(code))
-        {
-            verificationCode = code;
-        }
-        else
-        {
-            await AlertService.ShowAlertAsync(AppResource.Error, AppResource.SMSWasNotSent);
-        }
+        if (problem is not null)
+            await AlertService.ShowAlertAsync(AppResource.Error, problem);
     }
 
     private async void OnConfirmSmsCode(string code)
     {
-        if (!CheckVerificationCode(code))
+        if (string.IsNullOrWhiteSpace(code))
         {
             await AlertService.ShowAlertAsync(AppResource.Code, AppResource.IncorrectCode);
+            return;
+        }
+
+        IsLoading = true;
+        var check = await apiService.CheckSmsCode(PhoneNumber.Trim(), code.Trim());
+        IsLoading = false;
+        if (check.resultCode != ApiResult.SUCCESS.GetCodeToString())
+        {
+            await AlertService.ShowAlertAsync(AppResource.Code, check.resultMsg ?? AppResource.IncorrectCode);
             return;
         }
 
@@ -134,18 +130,11 @@ public partial class AuthorizationPage : BasePage, INotifyPropertyChanged
             nameof(RegisterPage),
             new Dictionary<string, object>
             {
-                ["PhoneNumber"] = PhoneNumber.Trim()
+                ["PhoneNumber"] = PhoneNumber.Trim(),
+                ["SmsCode"] = code.Trim()
             });
     }
     
-    private bool CheckVerificationCode(string code)
-    {
-        if (string.IsNullOrEmpty(code))
-            return false;
-
-        return string.Equals(code, verificationCode);
-    }
-
     private async Task<bool> CheckPhoneNumber()
     {
         try

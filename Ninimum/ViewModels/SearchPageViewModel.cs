@@ -247,6 +247,9 @@ public partial class SearchPageViewModel : ObservableObject
         if (item == null)
             return;
 
+        // Picking a suggestion finishes the typing: close the keyboard so the results are visible.
+        AppService.Get<IKeyboardHelper>()?.HideKeyboard();
+
         SearchText = item.SearchedText;
 
         searchCts?.Cancel();

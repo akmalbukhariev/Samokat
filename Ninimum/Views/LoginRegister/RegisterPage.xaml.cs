@@ -18,5 +18,7 @@ public partial class RegisterPage : BasePage, IQueryAttributable
     {
         if (query.TryGetValue("PhoneNumber", out var phoneNumberValue))
             viewModel.PhoneNumber = phoneNumberValue?.ToString()?.Trim() ?? string.Empty;
+        if (query.TryGetValue("SmsCode", out var smsCodeValue))
+            viewModel.SmsCode = smsCodeValue?.ToString()?.Trim() ?? string.Empty;
     }
 }
