@@ -20,26 +20,29 @@ public static class PushRegistration
         sender = send; remover = remove;
         if (!Enabled) return;
 #if ANDROID
+        // Right after start-up Firebase may not be ready yet: try a few times.
+        for (int attempt = 0; attempt < 5; attempt++)
         try
         {
             if (!listening)
             {
-                listening = true;
                 CrossFirebaseCloudMessaging.Current.TokenChanged += async (_, e) =>
                 {
                     lastToken = e.Token;
                     if (Enabled && sender is not null && !string.IsNullOrWhiteSpace(e.Token)) await Safe(() => sender(e.Token));
                 };
+                listening = true;
             }
-            if (OperatingSystem.IsAndroidVersionAtLeast(33))
+            if (attempt == 0 && OperatingSystem.IsAndroidVersionAtLeast(33))
                 await MainThread.InvokeOnMainThreadAsync(() => Permissions.RequestAsync<Permissions.PostNotifications>());
             await CrossFirebaseCloudMessaging.Current.CheckIfValidAsync();
             var token = await CrossFirebaseCloudMessaging.Current.GetTokenAsync();
             if (string.IsNullOrWhiteSpace(token)) return;
             lastToken = token;
             await send(token);
+            return;
         }
-        catch (Exception ex) { Console.WriteLine($"[Push] {ex.Message}"); }
+        catch (Exception ex) { Console.WriteLine($"[Push] {ex.Message}"); await Task.Delay(3000); }
 #else
         await Task.CompletedTask;
 #endif

@@ -170,6 +170,8 @@ namespace Ninimum.Services
             
             SetRootPage(new AppShell());
             _ = PushRegistration.RegisterAsync(token => apiService.PostAsync("push/token", new { token }), token => apiService.PostAsync("push/token/remove", new { token }));
+            if (PushRegistration.PendingOrderId > 0)
+                Dispatcher.GetForCurrentThread()?.DispatchDelayed(TimeSpan.FromMilliseconds(600), async () => await PushRegistration.OpenPendingOrderAsync());
         }
 
         public async Task StartGuestMode(bool clearSavedLogin = false)

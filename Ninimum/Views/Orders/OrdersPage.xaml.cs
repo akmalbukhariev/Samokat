@@ -4,8 +4,18 @@ using Ninimum.Models;
 
 namespace Ninimum.Views.Orders;
 
-public partial class OrdersPage : BasePage
+public partial class OrdersPage : BasePage, IQueryAttributable
 {
+    private long openOrderId;
+    private bool openCompleted;
+
+    // From a push notification: OrdersPage?openOrderId=131 opens that order with its status.
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query.TryGetValue("openOrderId", out var value) && long.TryParse(value?.ToString(), out var id)) openOrderId = id;
+        openCompleted = query.TryGetValue("status", out var status) && status?.ToString() is "DELIVERED" or "CANCELLED";
+    }
+
     private readonly OrdersPageViewModel viewModel;
     private readonly Api.Services.UserApiService recurringApi;
     private IDispatcherTimer? statusRefreshTimer;
@@ -36,6 +46,13 @@ public partial class OrdersPage : BasePage
 
         await viewModel.LoadOrdersAsync();
         StartStatusRefresh();
+
+        if (openOrderId > 0)
+        {
+            long id = openOrderId; openOrderId = 0;
+            var (order, completed) = await viewModel.OpenOrderAsync(id, openCompleted);
+            if (order != null) (completed ? CompletedList : ActiveList).ScrollTo(order, position: ScrollToPosition.Start, animate: true);
+        }
     }
 
     protected override void OnDisappearing()

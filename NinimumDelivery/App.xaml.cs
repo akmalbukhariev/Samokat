@@ -27,7 +27,11 @@ public partial class App : Application
         Page rootPage;
 
         if (appState.IsLoggedIn())
+        {
             rootPage = new AppShell();
+            // Already signed in: tell the server this phone's push address (it was only sent at sign-in before).
+            appState.RegisterPush();
+        }
         else
             rootPage = AppServices.GetRequired<LoginPage>();
 

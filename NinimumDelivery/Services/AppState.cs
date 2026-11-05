@@ -54,11 +54,13 @@ public class AppState
         }
 
         Worker = store.Get<DeliveryWorker?>(AppConstants.WorkerKey, null);
-        _ = PushRegistration.RegisterAsync(t => api.SavePushToken(t), t => api.SavePushToken(t, true));
+        RegisterPush();
         return true;
     }
 
     public bool LastLoginLocked { get; private set; }
+
+    public void RegisterPush() => _ = PushRegistration.RegisterAsync(t => api.SavePushToken(t), t => api.SavePushToken(t, true));
 
     public async Task<bool> LoginAsync(string workerId, string password)
     {
@@ -72,7 +74,7 @@ public class AppState
         store.Set(AppConstants.LoggedInKey, true);
         store.Set(AppConstants.WorkerKey, Worker);
         SetRoot(new AppShell());
-        _ = PushRegistration.RegisterAsync(t => api.SavePushToken(t), t => api.SavePushToken(t, true));
+        RegisterPush();
         return true;
     }
 

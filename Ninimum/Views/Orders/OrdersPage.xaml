@@ -116,6 +116,7 @@
                 IsRefreshing="{Binding IsRefreshing}"
                 Command="{Binding RefreshCommand}">
                 <CollectionView
+                    x:Name="ActiveList"
                     ItemsSource="{Binding ActiveOrders}"
                     SelectionMode="None">
 
@@ -384,6 +385,7 @@
                 IsRefreshing="{Binding IsRefreshing}"
                 Command="{Binding RefreshCommand}">
                 <CollectionView
+                    x:Name="CompletedList"
                     ItemsSource="{Binding CompletedOrders}"
                     SelectionMode="None">
 

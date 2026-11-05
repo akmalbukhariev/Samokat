@@ -15,6 +15,9 @@ public class MainActivity : MauiAppCompatActivity
     {
         base.OnCreate(savedInstanceState);
         SetUpPush();
+        // A tap on a notification can start the app: hand that first intent to Firebase too.
+        Ninimum.Services.PushRegistration.ListenForTaps();
+        Plugin.Firebase.CloudMessaging.FirebaseCloudMessagingImplementation.OnNewIntent(Intent);
 
         //Window?.SetSoftInputMode(SoftInput.AdjustPan);
     }

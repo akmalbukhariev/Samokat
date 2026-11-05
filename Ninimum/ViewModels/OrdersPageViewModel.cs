@@ -348,6 +348,24 @@ public partial class OrdersPageViewModel : ObservableObject
             IsLoading = false;
         }
     }
+    // Opens one order with its status (from a push notification); returns it and whether it is in the completed tab.
+    // A delivered or cancelled order is looked for in the Tugallangan tab first.
+    public async Task<(OrderItemModel? order, bool completed)> OpenOrderAsync(long orderId, bool preferCompleted = false)
+    {
+        var done = CompletedOrders.FirstOrDefault(x => x.OrderId == orderId);
+        var open = ActiveOrders.FirstOrDefault(x => x.OrderId == orderId);
+        bool completed = preferCompleted ? done != null : open == null && done != null;
+        var order = completed ? done : open ?? done;
+        if (order == null)
+        {
+            if (preferCompleted) ShowCompleted();
+            return (null, preferCompleted);
+        }
+        if (completed) ShowCompleted(); else ShowActive();
+        if (!order.IsExpanded) await ToggleOrder(order);
+        return (order, completed);
+    }
+
     [RelayCommand]
     private void ShowActive()
     {

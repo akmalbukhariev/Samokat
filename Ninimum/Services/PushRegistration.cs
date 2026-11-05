@@ -20,26 +20,29 @@ public static class PushRegistration
         sender = send; remover = remove;
         if (!Enabled) return;
 #if ANDROID
+        // Right after start-up Firebase may not be ready yet: try a few times.
+        for (int attempt = 0; attempt < 5; attempt++)
         try
         {
             if (!listening)
             {
-                listening = true;
                 CrossFirebaseCloudMessaging.Current.TokenChanged += async (_, e) =>
                 {
                     lastToken = e.Token;
                     if (Enabled && sender is not null && !string.IsNullOrWhiteSpace(e.Token)) await Safe(() => sender(e.Token));
                 };
+                listening = true;
             }
-            if (OperatingSystem.IsAndroidVersionAtLeast(33))
+            if (attempt == 0 && OperatingSystem.IsAndroidVersionAtLeast(33))
                 await MainThread.InvokeOnMainThreadAsync(() => Permissions.RequestAsync<Permissions.PostNotifications>());
             await CrossFirebaseCloudMessaging.Current.CheckIfValidAsync();
             var token = await CrossFirebaseCloudMessaging.Current.GetTokenAsync();
             if (string.IsNullOrWhiteSpace(token)) return;
             lastToken = token;
             await send(token);
+            return;
         }
-        catch (Exception ex) { Console.WriteLine($"[Push] {ex.Message}"); }
+        catch (Exception ex) { Console.WriteLine($"[Push] {ex.Message}"); await Task.Delay(3000); }
 #else
         await Task.CompletedTask;
 #endif
@@ -65,6 +68,38 @@ public static class PushRegistration
     {
         var token = lastToken; lastToken = null;
         if (!string.IsNullOrWhiteSpace(token) && remover is not null) await Safe(() => remover(token));
+    }
+
+    // Tapping an order notification opens that order. Kept until the customer is signed in and the app is ready.
+    public static long PendingOrderId { get; private set; }
+    private static string pendingStatus = "";
+    private static bool tapsListening;
+
+    public static void ListenForTaps()
+    {
+#if ANDROID
+        if (tapsListening) return;
+        tapsListening = true;
+        CrossFirebaseCloudMessaging.Current.NotificationTapped += (_, e) =>
+        {
+            if (e.Notification?.Data != null && e.Notification.Data.TryGetValue("order_id", out var value) && long.TryParse(value, out var id))
+            {
+                PendingOrderId = id;
+                pendingStatus = e.Notification.Data.TryGetValue("status", out var status) ? status ?? "" : "";
+                MainThread.BeginInvokeOnMainThread(async () => await OpenPendingOrderAsync());
+            }
+        };
+#endif
+    }
+
+    public static async Task OpenPendingOrderAsync()
+    {
+        long id = PendingOrderId;
+        var app = AppService.Get<AppControl>();
+        if (id <= 0 || app is null || !app.IsAuthenticated || Shell.Current is null) return;
+        PendingOrderId = 0;
+        // Absolute route: Profil → Buyurtmalar every time, instead of stacking another Buyurtmalar page.
+        await Safe(() => AppNavigatorService.NavigateTo($"//ProfileTab/{nameof(Ninimum.Views.Orders.OrdersPage)}?openOrderId={id}&status={pendingStatus}"));
     }
 
     private static async Task Safe(Func<Task> call) { try { await call(); } catch (Exception ex) { Console.WriteLine($"[Push] {ex.Message}"); } }
