@@ -565,6 +565,15 @@ namespace NinimumWarehouse.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to A product was scanned more times than ordered. Put the extra piece back and press “Cancel one scan”..
+        /// </summary>
+        public static string Error_WAREHOUSE_EXTRA_SCAN {
+            get {
+                return ResourceManager.GetString("Error_WAREHOUSE_EXTRA_SCAN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This batch doesn’t have that much free stock..
         /// </summary>
         public static string Error_WAREHOUSE_INSUFFICIENT_STOCK {
@@ -579,6 +588,15 @@ namespace NinimumWarehouse.Resources.Languages {
         public static string Error_WAREHOUSE_SEPARATE_APPROVER_REQUIRED {
             get {
                 return ResourceManager.GetString("Error_WAREHOUSE_SEPARATE_APPROVER_REQUIRED", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Extra scan: {0}. Put the extra piece back, then cancel the scan..
+        /// </summary>
+        public static string ExtraScanText {
+            get {
+                return ResourceManager.GetString("ExtraScanText", resourceCulture);
             }
         }
         
@@ -1569,6 +1587,15 @@ namespace NinimumWarehouse.Resources.Languages {
         public static string UnavailableError {
             get {
                 return ResourceManager.GetString("UnavailableError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel one scan.
+        /// </summary>
+        public static string UndoExtraScan {
+            get {
+                return ResourceManager.GetString("UndoExtraScan", resourceCulture);
             }
         }
         

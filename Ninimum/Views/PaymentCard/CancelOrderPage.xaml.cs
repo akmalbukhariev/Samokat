@@ -125,6 +125,13 @@ public partial class CancelOrderPage : BasePage, INotifyPropertyChanged, IQueryA
             return;
         }
 
+        // TZ v13 item 7: same rule as the server — at least 10 letters ("iii" is not a reason).
+        if (CancelReason.Count(char.IsLetter) < 10)
+        {
+            await DisplayAlert(AppResource.Error, AppResource.CancelReasonTooShort, AppResource.Ok);
+            return;
+        }
+
         CancelOrderPopup.ShowConfirm();
     }
 

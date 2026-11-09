@@ -400,4 +400,13 @@
   <data name="PickLine" xml:space="preserve"><value>Bin {0} · Batch {1} · Expiry {2} · {3} pcs</value></data>
   <data name="PushTitle" xml:space="preserve"><value>Notifications</value></data>
   <data name="PushHint" xml:space="preserve"><value>New orders and changes</value></data>
+  <data name="ExtraScanText" xml:space="preserve">
+    <value>Extra scan: {0}. Put the extra piece back, then cancel the scan.</value>
+  </data>
+  <data name="UndoExtraScan" xml:space="preserve">
+    <value>Cancel one scan</value>
+  </data>
+  <data name="Error_WAREHOUSE_EXTRA_SCAN" xml:space="preserve">
+    <value>A product was scanned more times than ordered. Put the extra piece back and press “Cancel one scan”.</value>
+  </data>
 </root>

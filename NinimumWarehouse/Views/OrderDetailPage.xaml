@@ -55,9 +55,20 @@
                                             <Label Text="{Binding CheckState}" Style="{StaticResource MutedLabel}"/>
                                         </VerticalStackLayout>
                                         <Border Grid.Column="2" BackgroundColor="{StaticResource SurfaceColor}" StrokeThickness="0" StrokeShape="RoundRectangle 10" Padding="10,8" VerticalOptions="Start">
-                                            <Label Text="{Binding ProgressText}" FontAttributes="Bold"/>
+                                            <Label Text="{Binding ProgressText}" FontAttributes="Bold">
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding IsOver}" Value="True">
+                                                        <Setter Property="TextColor" Value="#E53935"/>
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
                                         </Border>
                                     </Grid>
+                                    <!-- TZ v13 item 11: an extra scan after the line is complete. -->
+                                    <VerticalStackLayout Spacing="8" IsVisible="{Binding IsOver}">
+                                        <Label Text="{Binding ExtraText}" TextColor="#E53935" FontAttributes="Bold" LineBreakMode="WordWrap"/>
+                                        <Button Text="{Binding UndoExtraText}" Command="{Binding UndoExtraCommand}" Style="{StaticResource SecondaryButton}"/>
+                                    </VerticalStackLayout>
                                     <Label Text="{Binding LocationText}" FontAttributes="Bold" FontSize="16" LineBreakMode="WordWrap" IsVisible="{Binding HasLocation}"/>
                                     <Label Text="{Binding Picks}" FontAttributes="Bold" LineBreakMode="WordWrap" IsVisible="{Binding HasPicks}"/>
                                     <VerticalStackLayout Spacing="12" IsVisible="{Binding CanCheckMore}">

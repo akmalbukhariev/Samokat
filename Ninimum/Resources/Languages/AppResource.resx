@@ -1490,4 +1490,7 @@ online</value>
   <data name="TariffCancelledUntil" xml:space="preserve">
     <value>Plan cancelled. Active until {0}.</value>
   </data>
+  <data name="CancelReasonTooShort" xml:space="preserve">
+    <value>Describe the reason more clearly (at least 10 letters).</value>
+  </data>
 </root>

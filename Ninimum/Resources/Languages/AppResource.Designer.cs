@@ -475,6 +475,15 @@ namespace Ninimum.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Describe the reason more clearly (at least 10 letters)..
+        /// </summary>
+        internal static string CancelReasonTooShort {
+            get {
+                return ResourceManager.GetString("CancelReasonTooShort", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel tariff.
         /// </summary>
         internal static string CancelTariff {

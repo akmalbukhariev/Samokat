@@ -1492,4 +1492,7 @@
   <data name="TariffCancelledUntil" xml:space="preserve">
     <value>Тариф отменён. Действует до {0}.</value>
   </data>
+  <data name="CancelReasonTooShort" xml:space="preserve">
+    <value>Опишите причину подробнее (не меньше 10 букв).</value>
+  </data>
 </root>

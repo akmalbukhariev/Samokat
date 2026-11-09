@@ -1493,4 +1493,7 @@ buyurtma qiling</value>
   <data name="TariffCancelledUntil" xml:space="preserve">
     <value>Tarif bekor qilingan. {0} gacha amal qiladi.</value>
   </data>
+  <data name="CancelReasonTooShort" xml:space="preserve">
+    <value>Sababni aniqroq yozing (kamida 10 ta harf).</value>
+  </data>
 </root>

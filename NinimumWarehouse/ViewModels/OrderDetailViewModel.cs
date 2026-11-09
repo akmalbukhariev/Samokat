@@ -17,7 +17,17 @@ public sealed class OrderItemViewModel : ObservableObject
     public string Barcode => string.IsNullOrWhiteSpace(item.Barcode) ? AppResource.NoBarcode : item.Barcode;
     public bool HasBarcode => !string.IsNullOrWhiteSpace(item.Barcode);
     public bool NoBarcode => !HasBarcode;
-    public string ProgressText => string.Format(CultureInfo.CurrentCulture,AppResource.ProductProgressFormat,item.Checked,item.Required);
+    public string ProgressText => string.Format(CultureInfo.CurrentCulture,AppResource.ProductProgressFormat,item.Checked+extra,item.Required);
+    // TZ v13 item 11: a scan after the line is complete is shown as "5/4" in red; the server never counts it,
+    // and the worker cancels it (after putting the extra piece back) before the order can be finished.
+    private int extra;
+    public int Extra { get => extra; private set { if(SetProperty(ref extra,value)) foreach(var p in new[]{nameof(ProgressText),nameof(IsOver),nameof(ExtraText)}) OnPropertyChanged(p); } }
+    public bool IsOver => extra > 0;
+    public string ExtraText => string.Format(CultureInfo.CurrentCulture,Text("ExtraScanText","Extra scan: {0}. Put the extra piece back."),extra);
+    public string UndoExtraText => Text("UndoExtraScan","Cancel one scan");
+    public IRelayCommand UndoExtraCommand { get; }
+    public void AddExtra() => Extra++;
+    private static string Text(string key,string fallback) => AppResource.ResourceManager.GetString(key,AppResource.Culture) ?? fallback;
     public string CheckState => IsChecked ? AppResource.Checked : AppResource.ToCheck;
     public bool IsChecked => item.Checked == item.Required;
     public bool IsEditable { get => isEditable; private set { if(SetProperty(ref isEditable,value)) OnPropertyChanged(nameof(CanCheckMore)); } }
@@ -40,6 +50,7 @@ public sealed class OrderItemViewModel : ObservableObject
         ScanCommand = new AsyncRelayCommand(() => check(this,true));
         ConfirmCommand = new AsyncRelayCommand(() => check(this,false));
         ToggleCodeCommand = new RelayCommand(() => ShowCodeInput = !ShowCodeInput);
+        UndoExtraCommand = new RelayCommand(() => { if (Extra > 0) Extra--; });
     }
     public void Update(OrderItem next,bool editable,bool checkedThisItem)
     {
@@ -115,6 +126,7 @@ public sealed class OrderDetailViewModel : ViewModelBase
         {
             if (!CanCheck) throw new ApiException("WAREHOUSE_INVALID_STATE");
             if (!AllChecked) throw new ApiException("WAREHOUSE_INCOMPLETE");
+            if (Items.Any(x => x.IsOver)) throw new ApiException("WAREHOUSE_EXTRA_SCAN");
             if (await confirmReady()) Apply(await Api.Action(id,IsReturn ? "return-receive" : "ready"));
         }));
         ProblemCommand = new AsyncRelayCommand(() => RunAsync(async () => { var reason=await reportProblem(); if (reason is null) return;
@@ -180,8 +192,12 @@ public sealed class OrderDetailViewModel : ViewModelBase
         // Scans count only after the order is started; say so instead of the "status changed" message.
         if (CanStart || CanResume) return RunAsync(() => throw new ApiException("SCAN_START_FIRST"));
         var waiting = Items.Where(x => x.HasBarcode && x.CanCheckMore).ToList();
-        var item = waiting.FirstOrDefault(x => string.Equals(x.Barcode.Trim(), code, StringComparison.OrdinalIgnoreCase))
-            ?? (waiting.Count == 1 ? waiting[0] : null);
+        var item = waiting.FirstOrDefault(x => string.Equals(x.Barcode.Trim(), code, StringComparison.OrdinalIgnoreCase));
+        // A product already fully counted was scanned again: show it as over the order, nothing goes to the server.
+        // Checked before the "only one line left" rule, so a 5th banana never counts as a strawberry.
+        var full = item is null ? Items.FirstOrDefault(x => x.HasBarcode && x.IsChecked && string.Equals(x.Barcode.Trim(), code, StringComparison.OrdinalIgnoreCase)) : null;
+        if (full is not null && CanCheck) { full.AddExtra(); try { Vibration.Default.Vibrate(TimeSpan.FromMilliseconds(400)); } catch { } return Task.CompletedTask; }
+        item ??= waiting.Count == 1 ? waiting[0] : null;
         if (item is null) return RunAsync(() => throw new ApiException(
             !CanCheck ? "WAREHOUSE_INVALID_STATE"
             : Items.Any(x => x.NoBarcode && x.CanCheckMore) ? "SCAN_PRODUCT_NO_BARCODE"

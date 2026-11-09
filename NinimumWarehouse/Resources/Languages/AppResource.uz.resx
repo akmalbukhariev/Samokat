@@ -400,4 +400,13 @@
   <data name="PickLine" xml:space="preserve"><value>Javon {0} · Partiya {1} · Muddat {2} · {3} dona</value></data>
   <data name="PushTitle" xml:space="preserve"><value>Bildirishnomalar</value></data>
   <data name="PushHint" xml:space="preserve"><value>Yangi buyurtmalar va o‘zgarishlar</value></data>
+  <data name="ExtraScanText" xml:space="preserve">
+    <value>Ortiqcha skan: {0} ta. Ortiqcha tovarni olib qo‘ying va skanni bekor qiling.</value>
+  </data>
+  <data name="UndoExtraScan" xml:space="preserve">
+    <value>Bitta skanni bekor qilish</value>
+  </data>
+  <data name="Error_WAREHOUSE_EXTRA_SCAN" xml:space="preserve">
+    <value>Tovar buyurtmadagidan ko‘p skanerlandi. Ortiqchasini olib qo‘ying va “Bitta skanni bekor qilish”ni bosing.</value>
+  </data>
 </root>
