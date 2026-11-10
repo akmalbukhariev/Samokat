@@ -20,7 +20,8 @@
         <components:PageHeaderView
             ShowBack="true"
             Title="{x:Static language:AppResource.Orders}" />
-            <Button x:Name="RecurringButton" Clicked="RecurringClicked" BackgroundColor="Transparent" TextColor="#FD473C"/>
+            <!-- Hidden for now (owner 2026-11-10); set IsVisible back to True to bring recurring orders back. -->
+            <Button x:Name="RecurringButton" Clicked="RecurringClicked" BackgroundColor="Transparent" TextColor="#FD473C" IsVisible="False"/>
         </VerticalStackLayout>
 
         <!-- Tabs -->
