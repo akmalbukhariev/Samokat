@@ -304,6 +304,42 @@ namespace NinimumDelivery.Resources.Languages {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Take a photo of the goods at the customer&apos;s door as you hand them over. The photo proves the delivery..
+        /// </summary>
+        internal static string DeliveryPhotoHint {
+            get {
+                return ResourceManager.GetString("DeliveryPhotoHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A photo of the goods is needed to mark the order delivered..
+        /// </summary>
+        internal static string DeliveryPhotoNeeded {
+            get {
+                return ResourceManager.GetString("DeliveryPhotoNeeded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The camera doesn&apos;t work on this phone. The order can&apos;t be marked delivered without a photo..
+        /// </summary>
+        internal static string DeliveryPhotoNoCamera {
+            get {
+                return ResourceManager.GetString("DeliveryPhotoNoCamera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Photograph the goods.
+        /// </summary>
+        internal static string DeliveryPhotoTitle {
+            get {
+                return ResourceManager.GetString("DeliveryPhotoTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to English.
         /// </summary>
         internal static string English {

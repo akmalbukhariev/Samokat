@@ -64,7 +64,42 @@ public partial class DeliveryDetailViewModel : ObservableObject
     private async Task Complete()
     {
         if (!await AlertService.Confirm(AppResource.DeliveryCompletedConfirmTitle, AppResource.DeliveryCompletedConfirmMessage, AppResource.Confirm, AppResource.Close)) return;
-        await RunAction(() => api.UpdateStatus(jobId, "DELIVERED"), reload: true);
+        // Courier GPS V1a: the goods are photographed at the door with the camera (no gallery), then "Yetkazildi" is sent.
+        if (returnInProgress || IsLoading) return;
+        returnInProgress = true;
+        try
+        {
+            if (!MediaPicker.Default.IsCaptureSupported) { await AlertService.Show(AppResource.Error, Text("DeliveryPhotoNoCamera")); return; }
+            await AlertService.Show(Text("DeliveryPhotoTitle"), Text("DeliveryPhotoHint"));
+            var photo = await MediaPicker.Default.CapturePhotoAsync(new MediaPickerOptions
+            {
+                Title = Text("DeliveryPhotoTitle"), MaximumWidth = 1024, MaximumHeight = 1024,
+                CompressionQuality = 80, RotateImage = true, PreserveMetaData = false
+            });
+            if (photo == null) { await AlertService.Show(AppResource.Error, Text("DeliveryPhotoNeeded")); return; }
+            var bytes = await ReadPhoto(photo);
+            if (bytes == null) return;
+            await RunAction(() => api.UpdateStatus(jobId, "DELIVERED", null, Convert.ToBase64String(bytes)), reload: true);
+        }
+        catch (PermissionException) { await AlertService.Show(AppResource.Error, Text("ReturnPhotoPermission")); }
+        catch { await AlertService.Show(AppResource.Error, Text("ReturnPhotoError")); }
+        finally { returnInProgress = false; }
+    }
+
+    /// <summary>Reads a picked photo (max 10 MB) or shows why it can't be used.</summary>
+    private async Task<byte[]?> ReadPhoto(FileResult photo)
+    {
+        using var input = await photo.OpenReadAsync();
+        using var bytes = new MemoryStream();
+        var buffer = new byte[81920];
+        int read;
+        while ((read = await input.ReadAsync(buffer)) > 0)
+        {
+            if (bytes.Length + read > 10 * 1024 * 1024) { await AlertService.Show(AppResource.Error, Text("RETURN_PHOTO_TOO_LARGE")); return null; }
+            await bytes.WriteAsync(buffer.AsMemory(0, read));
+        }
+        if (bytes.Length == 0) { await AlertService.Show(AppResource.Error, Text("RETURN_PHOTO_INVALID")); return null; }
+        return bytes.ToArray();
     }
 
     [RelayCommand]

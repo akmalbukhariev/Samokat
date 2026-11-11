@@ -81,7 +81,8 @@ public class DeliveryApiService
 
     public async Task<ApiResponse?> Claim(long jobId)
     {
-        var req = new RestRequest("delivery-app/claim", Method.Put).AddJsonBody(new { jobId });
+        var here = await CourierLocation.Current();
+        var req = new RestRequest("delivery-app/claim", Method.Put).AddJsonBody(new { jobId, here.latitude, here.longitude, here.accuracy, here.mock, here.locationError });
         return Parse<ApiResponse>(await Execute(req));
     }
 
@@ -93,19 +94,23 @@ public class DeliveryApiService
 
     public async Task<ApiResponse?> ClaimBatch(IEnumerable<long> jobIds)
     {
-        var req = new RestRequest("delivery-app/claim-batch", Method.Put).AddJsonBody(new { jobIds = jobIds.ToArray() });
+        var here = await CourierLocation.Current();
+        var req = new RestRequest("delivery-app/claim-batch", Method.Put).AddJsonBody(new { jobIds = jobIds.ToArray(), here.latitude, here.longitude, here.accuracy, here.mock, here.locationError });
         return Parse<ApiResponse>(await Execute(req));
     }
 
     public async Task<ApiResponse?> StartBatch(IEnumerable<long> jobIds)
     {
-        var req = new RestRequest("delivery-app/start-batch", Method.Put).AddJsonBody(new { jobIds = jobIds.ToArray() });
+        var here = await CourierLocation.Current();
+        var req = new RestRequest("delivery-app/start-batch", Method.Put).AddJsonBody(new { jobIds = jobIds.ToArray(), here.latitude, here.longitude, here.accuracy, here.mock, here.locationError });
         return Parse<ApiResponse>(await Execute(req));
     }
 
     public async Task<ApiResponse?> UpdateStatus(long jobId, string status, string? note = null, string? photoBase64 = null, List<ReturnQuantity>? returnItems = null)
     {
-        var req = new RestRequest("delivery-app/status", Method.Put).AddJsonBody(new { jobId, status, note, photoBase64, returnItems });
+        // Courier GPS V1a: every button press carries where the phone was.
+        var here = await CourierLocation.Current();
+        var req = new RestRequest("delivery-app/status", Method.Put).AddJsonBody(new { jobId, status, note, photoBase64, returnItems, here.latitude, here.longitude, here.accuracy, here.mock, here.locationError });
         return Parse<ApiResponse>(await Execute(req));
     }
 

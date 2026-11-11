@@ -119,6 +119,29 @@ public partial class OrdersPage : BasePage, IQueryAttributable
         await DisplayAlert(L("Xabar yuborildi", "Сообщение отправлено", "Message sent"), L("Operator tez orada siz bilan bog‘lanadi.", "Оператор скоро свяжется с вами.", "An operator will contact you soon."), Ninimum.Resources.Languages.AppResource.Ok);
     }
 
+    // Courier delivery "Mahsulotni oldim": closes the delivery checks in web admin.
+    private async void DeliveryReceived_Clicked(object sender, EventArgs e)
+    {
+        if (sender is not VisualElement { BindingContext: OrderItemModel order }) return;
+        if (!await DisplayAlert(L("Mahsulotni oldingizmi?", "Вы получили заказ?", "Did you receive the order?"), L("Barcha mahsulotlar sizga yetib kelganini tasdiqlaysiz.", "Вы подтверждаете, что получили все товары.", "You confirm that all products reached you."), L("Ha, oldim", "Да, получил", "Yes, received"), L("Yo‘q", "Нет", "No"))) return;
+        var response = await recurringApi.DeliveryReceived(order.OrderId);
+        if (response.resultCode != "100") { await DisplayAlert(Ninimum.Resources.Languages.AppResource.Error, response.resultMsg ?? Ninimum.Resources.Languages.AppResource.AnErrorOccurred, Ninimum.Resources.Languages.AppResource.Ok); return; }
+        AppVibrationService.Success();
+        order.DeliveryConfirm = "RECEIVED";
+    }
+
+    // Courier delivery "Muammo bor": the operator gets an alert in Muammolar and Telegram and calls back.
+    private async void DeliveryProblem_Clicked(object sender, EventArgs e)
+    {
+        if (sender is not VisualElement { BindingContext: OrderItemModel order }) return;
+        var reason = await DisplayPromptAsync(L("Muammo bor", "Есть проблема", "There is a problem"), L("Nima bo‘ldi? (masalan: mahsulot yetib kelmadi, biror narsa yetishmaydi)", "Что случилось? (например: заказ не пришёл, чего-то не хватает)", "What happened? (e.g. the order didn’t arrive, something is missing)"), L("Yuborish", "Отправить", "Send"), L("Bekor qilish", "Отмена", "Cancel"), maxLength: 500);
+        if (string.IsNullOrWhiteSpace(reason)) return;
+        var response = await recurringApi.DeliveryProblem(order.OrderId, reason.Trim());
+        if (response.resultCode != "100") { await DisplayAlert(Ninimum.Resources.Languages.AppResource.Error, response.resultMsg ?? Ninimum.Resources.Languages.AppResource.AnErrorOccurred, Ninimum.Resources.Languages.AppResource.Ok); return; }
+        order.DeliveryConfirm = "PROBLEM";
+        await DisplayAlert(L("Xabar yuborildi", "Сообщение отправлено", "Message sent"), L("Operator tez orada siz bilan bog‘lanadi.", "Оператор скоро свяжется с вами.", "An operator will contact you soon."), Ninimum.Resources.Languages.AppResource.Ok);
+    }
+
     // Tap the taxi box to call the driver once the taxi is booked.
     private void TaxiInfo_Tapped(object sender, TappedEventArgs e)
     {

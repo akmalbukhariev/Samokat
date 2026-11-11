@@ -34,6 +34,8 @@ public partial class ProfileViewModel : ObservableObject
             if (response?.resultCode == "100")
             {
                 Worker.online = online;
+                // Courier GPS V1b: tracking follows "Ishga tayyor".
+                _ = ShiftTracking.Sync(online);
                 OnPropertyChanged(nameof(Worker));
             }
         }

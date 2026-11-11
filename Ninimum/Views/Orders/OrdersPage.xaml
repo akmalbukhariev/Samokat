@@ -190,6 +190,21 @@
                                             </VerticalStackLayout>
                                         </Border>
 
+                                        <!-- Courier delivery: the customer confirms receipt or reports a problem -->
+                                        <Border
+                                            IsVisible="{Binding CanConfirmDelivery}"
+                                            Padding="12,10"
+                                            BackgroundColor="#ECFDF3"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 10">
+                                            <VerticalStackLayout Spacing="8">
+                                                <Label Text="Mahsulotni oldingizmi? Iltimos, tasdiqlang." FontSize="15" TextColor="#14532D" LineBreakMode="WordWrap" />
+                                                <Button Text="Mahsulotni oldim" Clicked="DeliveryReceived_Clicked" BackgroundColor="#16A34A" TextColor="White" CornerRadius="10" HeightRequest="44" FontSize="15" />
+                                                <Button Text="Muammo bor" Clicked="DeliveryProblem_Clicked" BackgroundColor="White" TextColor="#DC2626" BorderColor="#DC2626" BorderWidth="1" CornerRadius="10" HeightRequest="44" FontSize="15" />
+                                            </VerticalStackLayout>
+                                        </Border>
+                                        <Label IsVisible="{Binding HasDeliveryConfirmNote}" Text="{Binding DeliveryConfirmNote}" FontSize="14" TextColor="#374151" LineBreakMode="WordWrap" />
+
                                         <!-- Products -->
                                         <VerticalStackLayout
                                             BindableLayout.ItemsSource="{Binding Products}"
@@ -453,6 +468,21 @@
                                                 </VerticalStackLayout>
                                             </VerticalStackLayout>
                                         </Border>
+
+                                        <!-- Courier delivery: the customer confirms receipt or reports a problem -->
+                                        <Border
+                                            IsVisible="{Binding CanConfirmDelivery}"
+                                            Padding="12,10"
+                                            BackgroundColor="#ECFDF3"
+                                            StrokeThickness="0"
+                                            StrokeShape="RoundRectangle 10">
+                                            <VerticalStackLayout Spacing="8">
+                                                <Label Text="Mahsulotni oldingizmi? Iltimos, tasdiqlang." FontSize="15" TextColor="#14532D" LineBreakMode="WordWrap" />
+                                                <Button Text="Mahsulotni oldim" Clicked="DeliveryReceived_Clicked" BackgroundColor="#16A34A" TextColor="White" CornerRadius="10" HeightRequest="44" FontSize="15" />
+                                                <Button Text="Muammo bor" Clicked="DeliveryProblem_Clicked" BackgroundColor="White" TextColor="#DC2626" BorderColor="#DC2626" BorderWidth="1" CornerRadius="10" HeightRequest="44" FontSize="15" />
+                                            </VerticalStackLayout>
+                                        </Border>
+                                        <Label IsVisible="{Binding HasDeliveryConfirmNote}" Text="{Binding DeliveryConfirmNote}" FontSize="14" TextColor="#374151" LineBreakMode="WordWrap" />
 
                                         <VerticalStackLayout
                                             BindableLayout.ItemsSource="{Binding Products}"

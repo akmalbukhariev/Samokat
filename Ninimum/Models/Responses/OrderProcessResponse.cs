@@ -14,6 +14,8 @@ public class OrderProcessData
     public string? taxiDriverPhone { get; set; }
     public string? taxiCarNumber { get; set; }
     public decimal? taxiFare { get; set; }
+    /// <summary>Courier delivery: ASK (show the confirm buttons), RECEIVED, PROBLEM or null.</summary>
+    public string? deliveryConfirm { get; set; }
     public long orderId { get; set; }
     public string? orderNumber { get; set; }
     public string? status { get; set; }

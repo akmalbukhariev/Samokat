@@ -255,4 +255,16 @@
   <data name="PARTIAL_RETURN_ALREADY_SAVED" xml:space="preserve"><value>A partial return is already recorded. Refresh the order.</value></data>
   <data name="PushTitle" xml:space="preserve"><value>Notifications</value></data>
   <data name="PushHint" xml:space="preserve"><value>New orders and changes</value></data>
+  <data name="DeliveryPhotoTitle" xml:space="preserve">
+    <value>Photograph the goods</value>
+  </data>
+  <data name="DeliveryPhotoHint" xml:space="preserve">
+    <value>Take a photo of the goods at the customer's door as you hand them over. The photo proves the delivery.</value>
+  </data>
+  <data name="DeliveryPhotoNeeded" xml:space="preserve">
+    <value>A photo of the goods is needed to mark the order delivered.</value>
+  </data>
+  <data name="DeliveryPhotoNoCamera" xml:space="preserve">
+    <value>The camera doesn't work on this phone. The order can't be marked delivered without a photo.</value>
+  </data>
 </root>

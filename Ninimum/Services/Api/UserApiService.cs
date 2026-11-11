@@ -60,6 +60,8 @@ namespace Api.Services
         private const string CANCEL_UNPAID_ORDER = $"{BASE_URL}order/cancelUnpaidOrder";
         private const string TAXI_RECEIVED = $"{BASE_URL}order/taxi/received";
         private const string TAXI_PROBLEM = $"{BASE_URL}order/taxi/problem";
+        private const string DELIVERY_RECEIVED = $"{BASE_URL}order/delivery/received";
+        private const string DELIVERY_PROBLEM = $"{BASE_URL}order/delivery/problem";
         private const string GET_ACTIVE_SUBSCRIPTION = $"{BASE_URL}subscription/getActiveSubscription";
         private const string GET_SUBSCRIPTION_LIST = $"{BASE_URL}subscription/getSubscriptionList";
         private const string GET_TARIFF_LIST = $"{BASE_URL}tariff/getTariffList";
@@ -1594,6 +1596,9 @@ namespace Api.Services
         /// <summary>Taxi order on the way: "Mahsulotni oldim" (delivered) or "Muammo bor" (operator is alerted).</summary>
         public Task<Response> TaxiReceived(long orderId) => PostResponseAsync(TAXI_RECEIVED, new { orderId });
         public Task<Response> TaxiProblem(long orderId, string reason) => PostResponseAsync(TAXI_PROBLEM, new { orderId, reason });
+        // Courier delivery confirmation (Courier GPS V1a).
+        public Task<Response> DeliveryReceived(long orderId) => PostResponseAsync(DELIVERY_RECEIVED, new { orderId });
+        public Task<Response> DeliveryProblem(long orderId, string reason) => PostResponseAsync(DELIVERY_PROBLEM, new { orderId, reason });
 
         private async Task<Response> PostResponseAsync(string endpoint, object data)
         {

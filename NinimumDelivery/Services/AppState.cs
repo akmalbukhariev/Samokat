@@ -60,7 +60,12 @@ public class AppState
 
     public bool LastLoginLocked { get; private set; }
 
-    public void RegisterPush() => _ = PushRegistration.RegisterAsync(t => api.SavePushToken(t), t => api.SavePushToken(t, true));
+    public void RegisterPush()
+    {
+        _ = PushRegistration.RegisterAsync(t => api.SavePushToken(t), t => api.SavePushToken(t, true));
+        // Courier GPS V1b: back on shift after app start / sign-in if "Ishga tayyor" was on.
+        _ = ShiftTracking.Sync(Worker?.online == true);
+    }
 
     public async Task<bool> LoginAsync(string workerId, string password)
     {
@@ -82,6 +87,7 @@ public class AppState
     {
         Worker = null;
         _ = PushRegistration.UnregisterAsync();
+        _ = ShiftTracking.Sync(false);
         api.Logout();
         store.Remove(AppConstants.WorkerKey);
         SetRoot(AppServices.GetRequired<LoginPage>());
@@ -94,6 +100,7 @@ public class AppState
         {
             Worker = response.resultData;
             store.Set(AppConstants.WorkerKey, Worker);
+            _ = ShiftTracking.Sync(Worker.online);   // the server's "Ishga tayyor" wins (e.g. switched off by an admin)
         }
     }
 

@@ -91,6 +91,7 @@ public partial class OrdersPageViewModel : ObservableObject
                     TaxiDriverPhone = order.taxiDriverPhone,
                     TaxiCarNumber = order.taxiCarNumber,
                     TaxiFare = order.taxiFare,
+                    DeliveryConfirm = order.deliveryConfirm,
                     OrderDate = FormatDate(order.orderedAt)
                 };
 
@@ -222,6 +223,7 @@ public partial class OrdersPageViewModel : ObservableObject
             order.TaxiDriverPhone = response.resultData.taxiDriverPhone;
             order.TaxiCarNumber = response.resultData.taxiCarNumber;
             order.TaxiFare = response.resultData.taxiFare;
+            order.DeliveryConfirm = response.resultData.deliveryConfirm;
 
             Debug.WriteLine($"ORDER PROCESS => orderId={order.OrderId}, status={order.Status}");
         }

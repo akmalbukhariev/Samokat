@@ -255,4 +255,16 @@
   <data name="PARTIAL_RETURN_ALREADY_SAVED" xml:space="preserve"><value>Qisman qaytarish saqlangan. Buyurtmani yangilang.</value></data>
   <data name="PushTitle" xml:space="preserve"><value>Bildirishnomalar</value></data>
   <data name="PushHint" xml:space="preserve"><value>Yangi buyurtmalar va o‘zgarishlar</value></data>
+  <data name="DeliveryPhotoTitle" xml:space="preserve">
+    <value>Tovarni rasmga oling</value>
+  </data>
+  <data name="DeliveryPhotoHint" xml:space="preserve">
+    <value>Mijozga topshirayotgan tovarni eshik oldida rasmga oling. Rasm yetkazilganining isboti bo‘ladi.</value>
+  </data>
+  <data name="DeliveryPhotoNeeded" xml:space="preserve">
+    <value>«Yetkazildi» deb belgilash uchun tovarni rasmga olish kerak.</value>
+  </data>
+  <data name="DeliveryPhotoNoCamera" xml:space="preserve">
+    <value>Bu telefonda kamera ishlamayapti. Rasmsiz «Yetkazildi» deb belgilab bo‘lmaydi.</value>
+  </data>
 </root>

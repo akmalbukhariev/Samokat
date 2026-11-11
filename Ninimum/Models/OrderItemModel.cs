@@ -60,6 +60,22 @@ public partial class OrderItemModel : ObservableObject
     public bool HasTaxiPhone => IsTaxi && !string.IsNullOrWhiteSpace(TaxiDriverPhone);
     // Buttons "Mahsulotni oldim" / "Muammo bor" while the booked taxi is on the way.
     public bool CanConfirmTaxi => IsTaxi && string.Equals(Status, "ON_THE_WAY", StringComparison.OrdinalIgnoreCase);
+    // Courier delivery: after "Yetkazildi" the customer confirms receipt or reports a problem (Courier GPS V1a).
+    [ObservableProperty] private string? deliveryConfirm;
+    public bool CanConfirmDelivery => !IsTaxi && string.Equals(DeliveryConfirm, "ASK", StringComparison.OrdinalIgnoreCase);
+    public bool HasDeliveryConfirmNote => !IsTaxi && (string.Equals(DeliveryConfirm, "RECEIVED", StringComparison.OrdinalIgnoreCase) || string.Equals(DeliveryConfirm, "PROBLEM", StringComparison.OrdinalIgnoreCase));
+    public string DeliveryConfirmNote
+    {
+        get
+        {
+            var lang = (AppResource.Culture ?? System.Globalization.CultureInfo.CurrentUICulture).TwoLetterISOLanguageName;
+            string T(string uz, string ru, string en) => lang == "ru" ? ru : lang == "en" ? en : uz;
+            return string.Equals(DeliveryConfirm, "RECEIVED", StringComparison.OrdinalIgnoreCase)
+                ? T("✅ Siz mahsulotni olganingizni tasdiqladingiz.", "✅ Вы подтвердили получение.", "✅ You confirmed receipt.")
+                : T("⚠️ Muammo haqida xabaringiz yuborildi. Operator siz bilan bog‘lanadi.", "⚠️ Ваше сообщение о проблеме отправлено. Оператор свяжется с вами.", "⚠️ Your problem report was sent. An operator will contact you.");
+        }
+    }
+    partial void OnDeliveryConfirmChanged(string? value) { OnPropertyChanged(nameof(CanConfirmDelivery)); OnPropertyChanged(nameof(HasDeliveryConfirmNote)); OnPropertyChanged(nameof(DeliveryConfirmNote)); }
     public string TaxiText
     {
         get
@@ -81,7 +97,7 @@ public partial class OrderItemModel : ObservableObject
     partial void OnTaxiDriverPhoneChanged(string? value) => NotifyTaxi();
     partial void OnTaxiCarNumberChanged(string? value) => NotifyTaxi();
     partial void OnTaxiFareChanged(decimal? value) => NotifyTaxi();
-    private void NotifyTaxi() { OnPropertyChanged(nameof(IsTaxi)); OnPropertyChanged(nameof(TaxiText)); OnPropertyChanged(nameof(HasTaxiPhone)); OnPropertyChanged(nameof(CanConfirmTaxi)); }
+    private void NotifyTaxi() { OnPropertyChanged(nameof(IsTaxi)); OnPropertyChanged(nameof(TaxiText)); OnPropertyChanged(nameof(HasTaxiPhone)); OnPropertyChanged(nameof(CanConfirmTaxi)); OnPropertyChanged(nameof(CanConfirmDelivery)); OnPropertyChanged(nameof(HasDeliveryConfirmNote)); }
 
     partial void OnStatusChanged(string value)
     {

@@ -21,6 +21,8 @@ public class MainActivity : MauiAppCompatActivity
     {
         SetTheme(Resource.Style.Delivery_MainTheme);
         base.OnCreate(savedInstanceState);
+        // Courier GPS V1c: on a company phone set up as device owner, keep the app installed and GPS on.
+        NinimumDelivery.Platforms.Android.DeviceLock.Apply(this);
         SetUpPush();
     }
 
